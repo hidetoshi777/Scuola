@@ -1,6 +1,8 @@
 (function () {
   const TAU = Math.PI * 2;
   const SUN = normalize({ x: -1, y: 0, z: 0 });
+  const MAP_W = 1024;
+  const MAP_H = 512;
 
   const CITIES = [
     { id: "roma", name: "Roma", lat: 41.9, lon: 12.5 },
@@ -11,94 +13,7 @@
     { id: "sydney", name: "Sydney", lat: -33.9, lon: 151.2 },
   ];
 
-  const CONTINENTS = [
-    {
-      color: "#3f9a5c",
-      rings: [
-        [
-          [71, -8], [70, 20], [71, 28], [70, 52], [66, 40], [60, 30], [56, 10],
-          [54, 8], [51, 2], [48, -5], [43, -9], [36, -6], [36, -2], [38, 0],
-          [36, 15], [41, 16], [38, 24], [41, 29], [36, 36], [41, 41], [47, 39],
-          [45, 32], [48, 28], [54, 20], [60, 23], [69, 18], [71, -8],
-        ],
-      ],
-    },
-    {
-      color: "#3c8f55",
-      rings: [
-        [
-          [37, -6], [32, -10], [21, -17], [12, -16], [5, -8], [4, 7], [-5, 12],
-          [-18, 12], [-28, 15], [-35, 20], [-34, 28], [-26, 34], [-15, 40],
-          [0, 42], [12, 51], [12, 43], [30, 32], [32, 22], [37, 11], [37, -6],
-        ],
-      ],
-    },
-    {
-      color: "#4aa15f",
-      rings: [
-        [
-          [75, 70], [72, 100], [70, 140], [65, 170], [60, 165], [55, 140],
-          [50, 144], [42, 130], [35, 128], [22, 120], [8, 98], [8, 78],
-          [15, 74], [25, 68], [22, 56], [30, 48], [36, 54], [48, 50],
-          [55, 70], [62, 75], [70, 80], [75, 70],
-        ],
-        [
-          [22, 72], [8, 77], [6, 80], [15, 94], [22, 88], [25, 80], [22, 72],
-        ],
-        [
-          [1, 100], [-8, 115], [-10, 140], [0, 132], [5, 120], [6, 105], [1, 100],
-        ],
-      ],
-    },
-    {
-      color: "#3d9458",
-      rings: [
-        [
-          [70, -165], [68, -140], [60, -140], [55, -130], [50, -125], [48, -55],
-          [45, -64], [41, -70], [30, -81], [25, -80], [25, -97], [18, -92],
-          [15, -87], [8, -77], [12, -84], [16, -88], [21, -105], [32, -117],
-          [40, -124], [49, -126], [58, -137], [66, -168], [70, -165],
-        ],
-      ],
-    },
-    {
-      color: "#4aa560",
-      rings: [
-        [
-          [12, -72], [8, -77], [4, -76], [-5, -79], [-18, -70], [-42, -74],
-          [-52, -68], [-55, -68], [-50, -58], [-35, -54], [-23, -42], [-5, -35],
-          [4, -50], [11, -62], [12, -72],
-        ],
-      ],
-    },
-    {
-      color: "#4aad66",
-      rings: [
-        [
-          [-11, 113], [-12, 126], [-15, 129], [-26, 153], [-38, 148],
-          [-35, 138], [-32, 116], [-22, 114], [-16, 122], [-11, 113],
-        ],
-      ],
-    },
-    {
-      color: "#d7e7ea",
-      rings: [
-        [
-          [84, -40], [75, -18], [70, -22], [60, -44], [65, -52], [76, -68],
-          [83, -40],
-        ],
-      ],
-    },
-    {
-      color: "#e8f2f4",
-      rings: [
-        [
-          [-63, -60], [-70, -10], [-72, 40], [-70, 90], [-68, 140], [-72, 170],
-          [-76, 120], [-78, 40], [-75, -40], [-70, -80], [-63, -60],
-        ],
-      ],
-    },
-  ];
+  let mapData = null;
 
   function normalize(v) {
     const len = Math.hypot(v.x, v.y, v.z) || 1;
@@ -146,6 +61,160 @@
     return sunDot(p.nx, p.ny, p.nz) > 0.02;
   }
 
+  function lonToX(lon) {
+    return ((lon + 180) / 360) * MAP_W;
+  }
+
+  function latToY(lat) {
+    return ((90 - lat) / 180) * MAP_H;
+  }
+
+  function inBox(lat, lon, lat0, lat1, lon0, lon1) {
+    return lat >= lat0 && lat <= lat1 && lon >= lon0 && lon <= lon1;
+  }
+
+  function landColor(lat, lon) {
+    if (lat > 72 || lat < -60) {
+      return [232, 241, 247];
+    }
+    if (
+      inBox(lat, lon, 16, 30, -15, 32) ||
+      inBox(lat, lon, 17, 30, 38, 55) ||
+      inBox(lat, lon, 24, 38, -115, -105) ||
+      inBox(lat, lon, -28, -23, 122, 140)
+    ) {
+      return [210, 176, 106];
+    }
+    if (inBox(lat, lon, -10, 8, -75, -50) || inBox(lat, lon, -5, 8, 8, 30) || lat > 55) {
+      return [46, 122, 72];
+    }
+    return [62, 158, 86];
+  }
+
+  function buildMap() {
+    const canvas = document.createElement("canvas");
+    canvas.width = MAP_W;
+    canvas.height = MAP_H;
+    const ctx = canvas.getContext("2d");
+    const ocean = ctx.createLinearGradient(0, 0, 0, MAP_H);
+    ocean.addColorStop(0, "#8ec7ef");
+    ocean.addColorStop(0.18, "#1d6fb3");
+    ocean.addColorStop(0.5, "#0e4d8a");
+    ocean.addColorStop(0.82, "#1d6fb3");
+    ocean.addColorStop(1, "#c5e7f7");
+    ctx.fillStyle = ocean;
+    ctx.fillRect(0, 0, MAP_W, MAP_H);
+
+    const rings = window.TERRA_LAND || [];
+    ctx.fillStyle = "#3e9e56";
+    ctx.strokeStyle = "#2c7a43";
+    ctx.lineWidth = 0.7;
+    ctx.save();
+    ctx.beginPath();
+    ctx.rect(0, 0, MAP_W, MAP_H);
+    ctx.clip();
+    [-360, 0, 360].forEach((shift) => {
+      rings.forEach((ring) => {
+        ctx.beginPath();
+        ring.forEach(([lon, lat], i) => {
+          const x = lonToX(lon + shift);
+          const y = latToY(lat);
+          if (i === 0) {
+            ctx.moveTo(x, y);
+          } else {
+            ctx.lineTo(x, y);
+          }
+        });
+        ctx.closePath();
+        ctx.fill();
+      });
+    });
+    ctx.restore();
+
+    const img = ctx.getImageData(0, 0, MAP_W, MAP_H);
+    const data = img.data;
+    for (let y = 0; y < MAP_H; y += 1) {
+      const lat = 90 - (y / MAP_H) * 180;
+      for (let x = 0; x < MAP_W; x += 1) {
+        const i = (y * MAP_W + x) * 4;
+        const g = data[i + 1];
+        const b = data[i + 2];
+        if (g <= b + 8) {
+          continue;
+        }
+        const lon = (x / MAP_W) * 360 - 180;
+        const [r2, g2, b2] = landColor(lat, lon);
+        data[i] = r2;
+        data[i + 1] = g2;
+        data[i + 2] = b2;
+      }
+    }
+    ctx.putImageData(img, 0, 0);
+    mapData = ctx.getImageData(0, 0, MAP_W, MAP_H).data;
+  }
+
+  function sampleMap(lonDeg, latDeg) {
+    let lon = lonDeg;
+    while (lon < -180) lon += 360;
+    while (lon > 180) lon -= 360;
+    const x = lonToX(lon);
+    const y = Math.max(0, Math.min(MAP_H - 1.001, latToY(latDeg)));
+    const x0 = Math.floor(x);
+    const y0 = Math.floor(y);
+    const x1 = (x0 + 1) % MAP_W;
+    const y1 = Math.min(MAP_H - 1, y0 + 1);
+    const fx = x - x0;
+    const fy = y - y0;
+    const i00 = (y0 * MAP_W + (x0 + MAP_W) % MAP_W) * 4;
+    const i10 = (y0 * MAP_W + x1) * 4;
+    const i01 = (y1 * MAP_W + (x0 + MAP_W) % MAP_W) * 4;
+    const i11 = (y1 * MAP_W + x1) * 4;
+    const mix = (a, b, t) => a + (b - a) * t;
+    return [0, 1, 2].map((c) =>
+      mix(mix(mapData[i00 + c], mapData[i10 + c], fx), mix(mapData[i01 + c], mapData[i11 + c], fx), fy),
+    );
+  }
+
+  function renderGlobe(off, radius, rot, dpr) {
+    const size = Math.max(2, Math.round(radius * 2 * dpr));
+    if (off.width !== size || off.height !== size) {
+      off.width = size;
+      off.height = size;
+    }
+    const g = off.getContext("2d");
+    const img = g.createImageData(size, size);
+    const pix = img.data;
+    const r = size / 2;
+    const r2 = r * r;
+    for (let py = 0; py < size; py += 1) {
+      const sy = py - r;
+      const sy2 = sy * sy;
+      for (let px = 0; px < size; px += 1) {
+        const sx = px - r;
+        const d2 = sx * sx + sy2;
+        if (d2 > r2) {
+          continue;
+        }
+        const nz = Math.sqrt(Math.max(0, r2 - d2));
+        const nx = sx / r;
+        const ny = -sy / r;
+        const nzN = nz / r;
+        const lon = Math.atan2(nx, nzN) - rot;
+        const lat = Math.asin(Math.max(-1, Math.min(1, ny)));
+        const [mr, mg, mb] = sampleMap((lon * 180) / Math.PI, (lat * 180) / Math.PI);
+        const light = Math.max(0.07, Math.min(1.15, -nx * 0.9 + 0.38));
+        const night = light < 0.22;
+        const i = (py * size + px) * 4;
+        pix[i] = Math.min(255, mr * light + (night ? 8 : 0));
+        pix[i + 1] = Math.min(255, mg * light + (night ? 12 : 0));
+        pix[i + 2] = Math.min(255, mb * light + (night ? 28 : 0));
+        pix[i + 3] = 255;
+      }
+    }
+    g.putImageData(img, 0, 0);
+    return off;
+  }
+
   function create(canvas, options) {
     const opts = {
       autoRotate: true,
@@ -160,11 +229,16 @@
       ...options,
     };
     const ctx = canvas.getContext("2d");
+    const globeOff = document.createElement("canvas");
     let rot = opts.rotation ?? 0.4;
     let dragging = false;
     let lastX = 0;
     let raf = 0;
     let running = true;
+
+    if (!mapData) {
+      buildMap();
+    }
 
     const reduced = document.body.classList.contains("reduced-motion");
     if (reduced) {
@@ -186,6 +260,7 @@
       const cx = w / 2;
       const cy = h / 2;
       const radius = w * 0.38;
+      const dpr = Math.min(window.devicePixelRatio || 1, 2);
       ctx.clearRect(0, 0, w, h);
 
       ctx.save();
@@ -233,46 +308,15 @@
         ctx.fill();
       }
 
+      const globeDpr = Math.min(dpr, 2);
+      renderGlobe(globeOff, radius, rot, globeDpr);
+      ctx.save();
       ctx.beginPath();
       ctx.arc(0, 0, radius, 0, TAU);
-      ctx.fillStyle = "#124e8a";
-      ctx.fill();
-      ctx.save();
       ctx.clip();
-
-      CONTINENTS.forEach((continent) => {
-        continent.rings.forEach((ring) => {
-          const pts = ring.map(([lat, lon]) => project(lat, lon, rot, radius));
-          if (pts.filter((p) => p.z > 0).length < 3) {
-            return;
-          }
-          ctx.beginPath();
-          let started = false;
-          pts.forEach((p) => {
-            if (p.z <= -radius * 0.05) {
-              started = false;
-              return;
-            }
-            if (!started) {
-              ctx.moveTo(p.x, p.y);
-              started = true;
-            } else {
-              ctx.lineTo(p.x, p.y);
-            }
-          });
-          ctx.closePath();
-          ctx.fillStyle = continent.color;
-          ctx.fill();
-        });
-      });
-
-      const shade = ctx.createLinearGradient(-radius, 0, radius, 0);
-      shade.addColorStop(0, "rgba(255, 220, 150, 0.12)");
-      shade.addColorStop(0.42, "rgba(0, 0, 0, 0)");
-      shade.addColorStop(0.58, "rgba(4, 10, 28, 0.28)");
-      shade.addColorStop(1, "rgba(3, 8, 22, 0.72)");
-      ctx.fillStyle = shade;
-      ctx.fillRect(-radius, -radius, radius * 2, radius * 2);
+      ctx.imageSmoothingEnabled = true;
+      ctx.imageSmoothingQuality = "high";
+      ctx.drawImage(globeOff, -radius, -radius, radius * 2, radius * 2);
 
       if (opts.showCities) {
         opts.cities.forEach((city) => {
@@ -298,7 +342,6 @@
           }
         });
       }
-
       ctx.restore();
 
       ctx.beginPath();
@@ -308,7 +351,7 @@
       ctx.stroke();
 
       const rim = ctx.createRadialGradient(-radius * 0.35, -radius * 0.4, radius * 0.2, 0, 0, radius);
-      rim.addColorStop(0, "rgba(255,255,255,0.18)");
+      rim.addColorStop(0, "rgba(255,255,255,0.22)");
       rim.addColorStop(0.45, "rgba(255,255,255,0)");
       rim.addColorStop(1, "rgba(0,0,0,0.28)");
       ctx.fillStyle = rim;

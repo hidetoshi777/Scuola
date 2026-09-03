@@ -7,7 +7,7 @@ alwaysApply: true
 
 Dopo ogni nuova attività su questo repository:
 
-1. Apri una pull request e fai il merge su `main`.
+1. Apri una pull request e **fai tu il merge** su `main` (non aspettare l’utente).
 2. Pubblica su GitHub (`hidetoshi777/Scuola`) con `git push github main`.
 3. Il sito pubblico è sempre `https://hidetoshi777.github.io/Scuola/` (gioco: `https://hidetoshi777.github.io/Scuola/gioco.html`).
 
