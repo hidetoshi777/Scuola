@@ -1,0 +1,16 @@
+---
+description: Dopo ogni attività Scuola, merge su main e pubblicazione su GitHub Pages
+alwaysApply: true
+---
+
+# Pubblicazione Scuola
+
+Dopo ogni nuova attività su questo repository:
+
+1. Apri una pull request e fai il merge su `main`.
+2. Pubblica su GitHub (`hidetoshi777/Scuola`) con `git push github main`.
+3. Il sito pubblico è sempre `https://hidetoshi777.github.io/Scuola/` (gioco: `https://hidetoshi777.github.io/Scuola/gioco.html`).
+
+Se il push GitHub chiede login: `gh auth login --hostname github.com --git-protocol https --web --skip-ssh-key` e poi `gh auth setup-git`.
+
+Non indicare GitHub (il codice) come indirizzo per la classe: si usa GitHub Pages.
