@@ -370,6 +370,7 @@
     }
 
     resize();
+    canvas.style.cursor = opts.interactive ? "grab" : "default";
     canvas.addEventListener("pointerdown", onPointerDown);
     canvas.addEventListener("pointermove", onPointerMove);
     canvas.addEventListener("pointerup", onPointerUp);
@@ -398,6 +399,10 @@
       },
       setHighlight(id) {
         opts.highlight = id;
+      },
+      setInteractive(value) {
+        opts.interactive = value;
+        canvas.style.cursor = value ? "grab" : "default";
       },
       snapshot,
       destroy() {

@@ -252,6 +252,15 @@ document.addEventListener("DOMContentLoaded", () => {
     const item = prove[index];
     const city = Terra.CITIES.find((c) => c.id === item.city);
     const actualDay = Terra.isDay(city.lat, city.lon, item.rotation);
+    [...opzioni.querySelectorAll("button")].forEach((btn) => {
+      const isDayBtn = btn.textContent === "Giorno";
+      if (isDayBtn === actualDay) {
+        btn.classList.add("is-correct");
+      }
+      if (isDayBtn === saidDay && saidDay !== actualDay) {
+        btn.classList.add("is-wrong");
+      }
+    });
     settle(saidDay === actualDay, `${item.explain} In questa posizione a ${city.name} è ${actualDay ? "giorno" : "notte"}.`);
   }
 

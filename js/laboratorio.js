@@ -62,6 +62,7 @@ document.addEventListener("DOMContentLoaded", () => {
   });
   citta?.addEventListener("change", () => {
     globe.setHighlight(citta.value);
+    render(globe.snapshot());
   });
   ora?.addEventListener("input", () => {
     updatingSlider = true;
