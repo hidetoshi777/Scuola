@@ -1,22 +1,31 @@
 # Rotazione terrestre
 
-Sito interattivo per la **prima media** sul moto di rotazione della Terra.
+Sito per la **prima media**. GitHub mostra il **codice**; per **giocare** apri i file HTML nel browser.
 
-## Come aprirlo
+## Come si gioca (non su GitHub)
 
-Apri il file `index.html` nel browser, oppure avvia un piccolo server nella cartella del sito:
+1. Apri la cartella del progetto
+2. Doppio clic su `index.html` oppure su `gioco.html`
 
-```bash
-python3 -m http.server 8080
-```
+Si apre nel browser, come un sito. Non serve Python.
 
-Poi visita `http://localhost:8080`.
+- Home: `index.html`
+- Lezione: `imparare.html`
+- Laboratorio: `laboratorio.html`
+- Gioco: `gioco.html`
 
-## Pagine
+## Indirizzo pubblico (GitHub Pages)
 
-- **Home**: globo trascinabile e presentazione
-- **Imparare**: lezione su asse, durata, giorno e notte, differenza con la rivoluzione
-- **Laboratorio**: simulatore con città e orari
-- **Gioco**: 12 prove (quiz + osservazione del globo) e attestato stampabile
+Su GitHub, GitHub mostra sempre il testo dei file. Per avere un link da mandare alla classe:
 
-Pensato per uso in classe o a casa, con tema scuro (spazio) o chiaro (proiettore).
+1. **Settings** del repository
+2. **Pages**
+3. Source: **Deploy from a branch**
+4. Branch: **main**, cartella **/** (root)
+5. Save
+
+Dopo uno o due minuti il gioco sarà qui:
+
+`https://<tuo-utente>.github.io/Scuola/gioco.html`
+
+(sostituisci `<tuo-utente>` con il tuo nome GitHub)
