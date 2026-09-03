@@ -5,11 +5,18 @@ alwaysApply: true
 
 # Pubblicazione Scuola
 
-Dopo ogni nuova attività su questo repository:
+## Organizzazione
+
+- Ogni attività in una **sottocartella** propria (es. `rotazione-terrestre/`, `parti-invariabili/`).
+- **Non cancellare** i lavori esistenti: si aggiungono nuove cartelle.
+- **Niente link** tra un lavoro e l’altro nella navigazione dei siti.
+- Una homepage comune con tutti i link si potrà creare in seguito.
+
+## Dopo ogni nuova attività
 
 1. Apri una pull request e fai il merge su `main`.
 2. Pubblica su GitHub (`hidetoshi777/Scuola`) con `git push github main`.
-3. Il sito pubblico è sempre `https://hidetoshi777.github.io/Scuola/` (gioco: `https://hidetoshi777.github.io/Scuola/gioco.html`).
+3. Il sito pubblico è `https://hidetoshi777.github.io/Scuola/` seguito dal percorso della cartella (es. `/parti-invariabili/`).
 
 Se il push GitHub chiede login: `gh auth login --hostname github.com --git-protocol https --web --skip-ssh-key` e poi `gh auth setup-git`.
 
