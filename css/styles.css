@@ -311,6 +311,10 @@ h1 {
   min-height: 22rem;
 }
 
+[hidden] {
+  display: none !important;
+}
+
 .globe-stage canvas {
   width: min(100%, 28rem);
   height: auto;

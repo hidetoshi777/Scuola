@@ -150,6 +150,7 @@ document.addEventListener("DOMContentLoaded", () => {
     intro.hidden = true;
     partita.hidden = false;
     show();
+    partita.scrollIntoView({ block: "start" });
   }
 
   function show() {
@@ -162,6 +163,7 @@ document.addEventListener("DOMContentLoaded", () => {
     numProva.textContent = String(index + 1);
     punteggioEl.textContent = String(score);
     barra.style.width = `${(index / prove.length) * 100}%`;
+    domanda.scrollIntoView({ block: "start" });
 
     if (item.type === "quiz") {
       globoBox.hidden = true;
