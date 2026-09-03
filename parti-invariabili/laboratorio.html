@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <title>Laboratorio parti invariabili | Scuola</title>
+  <meta name="description" content="Laboratorio interattivo: classifica parole nelle quattro parti invariabili del discorso.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@500;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <div class="paper-bg" aria-hidden="true"></div>
+  <a class="skip-link visually-hidden" href="#contenuto">Salta al contenuto</a>
+  <header class="site-header">
+    <div class="wrap header-inner">
+      <a class="brand" href="index.html">
+        <span class="brand-mark" aria-hidden="true"></span>
+        Parti invariabili
+      </a>
+      <nav class="site-nav" aria-label="Principale">
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="imparare.html">Imparare</a></li>
+          <li><a href="laboratorio.html">Laboratorio</a></li>
+          <li><a class="gioco-link" href="gioco.html">Gioco</a></li>
+        </ul>
+      </nav>
+      <button type="button" class="theme-toggle" data-theme-toggle aria-pressed="false">Tema chiaro</button>
+    </div>
+  </header>
+  <main id="contenuto" class="wrap" tabindex="-1">
+    <p class="kicker">Laboratorio</p>
+    <h1>Classifica le parole</h1>
+    <p class="lead">Leggi la parola nel mazzo centrale e clicca la categoria giusta. Puoi usare anche i tasti <strong>1</strong>–<strong>4</strong> da sinistra a destra.</p>
+
+    <div class="lab-hud panel">
+      <p>Punteggio: <span id="lab-punteggio">0</span> / <span id="lab-totale">20</span></p>
+      <button class="btn btn-secondary" type="button" id="lab-reset">Ricomincia</button>
+    </div>
+
+    <div class="lab-layout">
+      <div class="mazzo panel" id="mazzo" aria-live="polite"></div>
+      <div class="bucket-grid" id="buckets"></div>
+    </div>
+    <p class="live" id="lab-feedback"></p>
+
+    <p class="inline-actions">
+      <a class="btn btn-primary" href="gioco.html">Ora prova il gioco</a>
+    </p>
+  </main>
+  <footer class="site-footer">
+    <div class="wrap">
+      <p>Laboratorio con 20 parole da classificare. Ogni errore mostra subito la risposta corretta.</p>
+    </div>
+  </footer>
+  <script src="js/data.js" defer></script>
+  <script src="js/common.js" defer></script>
+  <script src="js/laboratorio.js" defer></script>
+</body>
+</html>

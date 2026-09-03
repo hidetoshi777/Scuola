@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <title>Gioco: parti invariabili | Scuola</title>
+  <meta name="description" content="Sfida a quiz sulle parti invariabili del discorso per la prima superiore.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@500;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <div class="paper-bg" aria-hidden="true"></div>
+  <a class="skip-link visually-hidden" href="#contenuto">Salta al contenuto</a>
+  <header class="site-header">
+    <div class="wrap header-inner">
+      <a class="brand" href="index.html">
+        <span class="brand-mark" aria-hidden="true"></span>
+        Parti invariabili
+      </a>
+      <nav class="site-nav" aria-label="Principale">
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="imparare.html">Imparare</a></li>
+          <li><a href="laboratorio.html">Laboratorio</a></li>
+          <li><a class="gioco-link" href="gioco.html">Gioco</a></li>
+        </ul>
+      </nav>
+      <button type="button" class="theme-toggle" data-theme-toggle aria-pressed="false">Tema chiaro</button>
+    </div>
+  </header>
+  <main id="contenuto" class="wrap" tabindex="-1">
+    <p class="kicker">Sfida</p>
+    <h1>Parti invariabili: mettiti alla prova</h1>
+    <p class="lead">12 domande sulle quattro categorie. Alla fine puoi stampare un piccolo attestato.</p>
+
+    <section class="panel" id="intro-gioco">
+      <h2>Come si gioca</h2>
+      <ol>
+        <li>Leggi la domanda.</li>
+        <li>Scegli una risposta.</li>
+        <li>Dopo ogni prova vedi una spiegazione breve.</li>
+      </ol>
+      <div class="inline-actions">
+        <button class="btn btn-primary" type="button" id="inizia">Inizia la sfida</button>
+        <button class="btn btn-secondary" type="button" id="suono" aria-pressed="true">Suono: acceso</button>
+      </div>
+    </section>
+
+    <section class="panel" id="partita" hidden>
+      <div class="game-hud">
+        <p>Prova <span id="num-prova">1</span> di <span id="tot-prove">12</span></p>
+        <p>Punteggio: <span id="punteggio">0</span></p>
+      </div>
+      <div class="progress" aria-hidden="true"><span id="barra" style="width: 0%"></span></div>
+      <h2 id="domanda"></h2>
+      <div id="opzioni" class="quiz-options"></div>
+      <p class="live" id="feedback" aria-live="polite"></p>
+      <div class="inline-actions">
+        <button class="btn btn-primary" type="button" id="avanti" hidden>Prova successiva</button>
+      </div>
+    </section>
+  </main>
+
+  <dialog id="fine-dialogo" aria-labelledby="fine-titolo">
+    <form method="dialog">
+      <h2 id="fine-titolo">Sfida completata</h2>
+      <div class="stars-row" id="stelle" aria-hidden="true"></div>
+      <p id="fine-testo"></p>
+      <p><strong>Attestato:</strong> ha studiato le parti invariabili del discorso e superato la sfida.</p>
+      <div class="inline-actions">
+        <button class="btn btn-primary" value="replay" type="submit">Rigioca</button>
+        <button class="btn btn-secondary" value="print" type="button" id="stampa">Stampa attestato</button>
+        <button class="btn btn-secondary" value="close" type="submit">Chiudi</button>
+      </div>
+    </form>
+  </dialog>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <p>Gioco pensato per la classe prima della scuola secondaria di secondo grado.</p>
+    </div>
+  </footer>
+  <script src="js/data.js" defer></script>
+  <script src="js/common.js" defer></script>
+  <script src="js/gioco.js" defer></script>
+</body>
+</html>

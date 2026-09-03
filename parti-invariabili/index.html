@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <title>Parti invariabili del discorso | Scuola</title>
+  <meta name="description" content="Sito interattivo per la prima superiore sulle parti invariabili del discorso: avverbi, preposizioni, congiunzioni e interiezioni.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@500;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <div class="paper-bg" aria-hidden="true"></div>
+  <a class="skip-link visually-hidden" href="#contenuto">Salta al contenuto</a>
+  <header class="site-header">
+    <div class="wrap header-inner">
+      <a class="brand" href="index.html">
+        <span class="brand-mark" aria-hidden="true"></span>
+        Parti invariabili
+      </a>
+      <nav class="site-nav" aria-label="Principale">
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="imparare.html">Imparare</a></li>
+          <li><a href="laboratorio.html">Laboratorio</a></li>
+          <li><a class="gioco-link" href="gioco.html">Gioco</a></li>
+        </ul>
+      </nav>
+      <button type="button" class="theme-toggle" data-theme-toggle aria-pressed="false">Tema chiaro</button>
+    </div>
+  </header>
+  <main id="contenuto" class="wrap" tabindex="-1">
+    <section class="hero">
+      <div>
+        <p class="kicker">Italiano · Prima superiore</p>
+        <h1>Le parti invariabili del discorso</h1>
+        <p class="lead">Nomi, aggettivi e verbi <strong>cambiano forma</strong>. Avverbi, preposizioni, congiunzioni e interiezioni, invece, <strong>restano uguali</strong>. In questo percorso li impari a riconoscere con esempi, un laboratorio e una sfida finale.</p>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="imparare.html">Inizia a imparare</a>
+          <a class="btn btn-secondary" href="gioco.html">Vai al gioco</a>
+        </div>
+      </div>
+      <aside class="panel sentence-panel">
+        <h2 class="sentence-title">Tocca le parole evidenziate</h2>
+        <p class="sentence-demo" id="frase-demo" aria-label="Frase interattiva"></p>
+        <p class="live" id="info-parola">Clicca una parola colorata per scoprire di che tipo è.</p>
+      </aside>
+    </section>
+
+    <h2>Le quattro categorie</h2>
+    <div class="card-grid">
+      <article class="card tipo-avverbio">
+        <h3>Avverbi</h3>
+        <p>Modificano verbi, aggettivi o altri avverbi. Esempi: <em>bene</em>, <em>presto</em>, <em>molto</em>, <em>qui</em>.</p>
+        <a href="imparare.html#avverbio">Scopri di più</a>
+      </article>
+      <article class="card tipo-preposizione">
+        <h3>Preposizioni</h3>
+        <p>Collegano parole e introducono complementi. Esempi: <em>di</em>, <em>a</em>, <em>in</em>, <em>con</em>, <em>del</em>.</p>
+        <a href="imparare.html#preposizione">Scopri di più</a>
+      </article>
+      <article class="card tipo-congiunzione">
+        <h3>Congiunzioni</h3>
+        <p>Uniscono parole o frasi. Esempi: <em>e</em>, <em>ma</em>, <em>perché</em>, <em>se</em>, <em>quando</em>.</p>
+        <a href="imparare.html#congiunzione">Scopri di più</a>
+      </article>
+      <article class="card tipo-interiezione">
+        <h3>Interiezioni</h3>
+        <p>Esprimono emozioni o richiami. Esempi: <em>ah</em>, <em>oh</em>, <em>ehi</em>, <em>bravo</em>, <em>aiuto</em>.</p>
+        <a href="imparare.html#interiezione">Scopri di più</a>
+      </article>
+    </div>
+
+    <section class="panel" style="margin-top: 1.5rem;">
+      <h2>Ricorda</h2>
+      <div class="card-grid">
+        <div class="fact">
+          <span class="fact-num" aria-hidden="true">4</span>
+          <p>Le parti invariabili sono <strong>quattro</strong>: avverbi, preposizioni, congiunzioni, interiezioni.</p>
+        </div>
+        <div class="fact">
+          <span class="fact-num" aria-hidden="true">≠</span>
+          <p>Non vanno confuse con le parti <strong>variabili</strong> (nome, articolo, aggettivo, pronome, verbo).</p>
+        </div>
+        <div class="fact">
+          <span class="fact-num" aria-hidden="true">?</span>
+          <p>Per gli avverbi chiediti: <strong>come? quando? dove? quanto?</strong></p>
+        </div>
+      </div>
+    </section>
+  </main>
+  <footer class="site-footer">
+    <div class="wrap">
+      <p>Materiale didattico per la scuola secondaria di secondo grado, classe prima. Funziona anche offline, dopo aver scaricato il sito.</p>
+    </div>
+  </footer>
+  <script src="js/data.js" defer></script>
+  <script src="js/common.js" defer></script>
+  <script src="js/home.js" defer></script>
+</body>
+</html>

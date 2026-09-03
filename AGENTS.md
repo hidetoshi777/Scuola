@@ -1,15 +1,44 @@
 # Scuola
 
+Materiali didattici interattivi, ognuno in una **sottocartella autonoma**.
+
+## Organizzazione
+
+- Ogni attività vive in una propria cartella (es. `rotazione-terrestre/`, `parti-invariabili/`).
+- **Non cancellare** i lavori già pubblicati: si aggiungono e si ordinano nuove cartelle.
+- **Niente rimandi** tra un lavoro e l’altro (niente link incrociati nella navigazione).
+- Una homepage comune con i link si potrà fare in seguito, se servirà.
+
+Struttura tipica di ogni cartella:
+
+```
+nome-attivita/
+  index.html
+  imparare.html
+  laboratorio.html
+  gioco.html
+  css/
+  js/
+```
+
+## Pubblicazione (sempre così)
+
 Dopo ogni nuova attività:
 
 1. Apri una pull request e fai il **merge** su `main` (Origin).
 2. Pubblica su GitHub, così la classe ha l’indirizzo web.
 
-## Pubblicazione (sempre così)
-
 Repository GitHub: `https://github.com/hidetoshi777/Scuola`  
-Sito: `https://hidetoshi777.github.io/Scuola/`  
-Gioco: `https://hidetoshi777.github.io/Scuola/gioco.html`
+Sito base: `https://hidetoshi777.github.io/Scuola/`
+
+### Indirizzi attuali
+
+| Attività | Home | Gioco |
+|----------|------|-------|
+| Rotazione terrestre (prima media) | https://hidetoshi777.github.io/Scuola/rotazione-terrestre/ | https://hidetoshi777.github.io/Scuola/rotazione-terrestre/gioco.html |
+| Parti invariabili (prima superiore) | https://hidetoshi777.github.io/Scuola/parti-invariabili/ | https://hidetoshi777.github.io/Scuola/parti-invariabili/gioco.html |
+
+I vecchi link alla radice (`/gioco.html`, ecc.) reindirizzano ancora alla rotazione terrestre.
 
 Se `gh` non è già collegato:
 

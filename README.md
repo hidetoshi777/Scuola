@@ -1,17 +1,24 @@
-# Rotazione terrestre
+# Scuola
 
-Sito per la **prima media**.
+Materiali didattici interattivi per la scuola secondaria. Ogni attività è una cartella autonoma, senza link tra un lavoro e l’altro.
 
-## Indirizzo per la classe
+## Attività
 
-- Home: https://hidetoshi777.github.io/Scuola/
-- Gioco: https://hidetoshi777.github.io/Scuola/gioco.html
+### Rotazione terrestre · Prima media
 
-GitHub ([hidetoshi777/Scuola](https://github.com/hidetoshi777/Scuola)) mostra il codice. Per giocare si usa il link sopra.
+- Home: https://hidetoshi777.github.io/Scuola/rotazione-terrestre/
+- Gioco: https://hidetoshi777.github.io/Scuola/rotazione-terrestre/gioco.html
 
-## Pagine
+### Parti invariabili del discorso · Prima superiore
 
-- Home: `index.html`
-- Lezione: `imparare.html`
-- Laboratorio: `laboratorio.html`
-- Gioco: `gioco.html`
+- Home: https://hidetoshi777.github.io/Scuola/parti-invariabili/
+- Gioco: https://hidetoshi777.github.io/Scuola/parti-invariabili/gioco.html
+
+## Struttura del repository
+
+```
+rotazione-terrestre/   → scienze, prima media
+parti-invariabili/     → italiano, prima superiore
+```
+
+Nuove attività: nuova sottocartella, stessa struttura (home, imparare, laboratorio, gioco).
