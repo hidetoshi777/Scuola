@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <title>Fumetto · Manzoni | Scuola</title>
+  <meta name="description" content="Fumetto didattico sui Promessi Sposi: Renzo segue la trama, tavole a più vignette.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700&family=Newsreader:opsz,wght@6..72,500;6..72,600;6..72,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/fumetto.css">
+</head>
+<body class="page-fumetto">
+  <a class="skip-link visually-hidden" href="#contenuto">Salta al contenuto</a>
+  <header class="site-header">
+    <div class="wrap header-inner">
+      <a class="brand" href="index.html">
+        <span class="brand-mark" aria-hidden="true"></span>
+        Manzoni
+      </a>
+      <nav class="site-nav" aria-label="Principale">
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="imparare.html">Imparare</a></li>
+          <li><a href="fumetto.html">Fumetto</a></li>
+          <li><a href="personaggi.html">Personaggi</a></li>
+          <li><a href="laboratorio.html">Laboratorio</a></li>
+          <li><a href="gioco.html">Gioco</a></li>
+        </ul>
+      </nav>
+      <button type="button" class="theme-toggle" data-theme-toggle aria-pressed="false">Tema chiaro</button>
+    </div>
+  </header>
+
+  <main id="contenuto" class="fumetto-main" tabindex="-1">
+    <header class="fumetto-intro">
+      <p class="kicker">Fumetto · quattro tavole</p>
+      <h1>Con Renzo nella trama</h1>
+      <p class="lead">Più vignette per pagina. Segui Renzo: dal matrimonio bloccato alla Provvidenza, fino a Manzoni che scrive.</p>
+    </header>
+
+    <section class="fumetto-reader" aria-roledescription="fumetto" aria-label="I Promessi Sposi a fumetti">
+      <p class="fumetto-status">Tavola <span id="fumetto-num">1</span> di 4</p>
+
+      <div class="fumetto-viewport" id="fumetto-viewport">
+        <figure class="fumetto-page is-active" data-page="1">
+          <img src="img/tavole/01-lecco.jpg" alt="Tavola 1: a Lecco il matrimonio è bloccato e Renzo e Lucia fuggono" width="864" height="1152" fetchpriority="high">
+        </figure>
+        <figure class="fumetto-page" data-page="2" aria-hidden="true">
+          <img src="img/tavole/02-fuga.jpg" alt="Tavola 2: Milano, rapimento di Lucia, conversione dell’Innominato" width="864" height="1152" loading="lazy">
+        </figure>
+        <figure class="fumetto-page" data-page="3" aria-hidden="true">
+          <img src="img/tavole/03-provvidenza.jpg" alt="Tavola 3: peste, morte di Don Rodrigo, ritrovo e matrimonio" width="864" height="1152" loading="lazy">
+        </figure>
+        <figure class="fumetto-page" data-page="4" aria-hidden="true">
+          <img src="img/tavole/04-manzoni.jpg" alt="Tavola 4: Manzoni, lingua fiorentina, censura, unità aristoteliche, Provvidenza" width="864" height="1152" loading="lazy">
+        </figure>
+      </div>
+
+      <p class="fumetto-caption" id="fumetto-caption" aria-live="polite"></p>
+
+      <div class="fumetto-controls">
+        <button type="button" class="btn btn-secondary fumetto-nav" id="fumetto-prev" disabled>← Indietro</button>
+        <div class="fumetto-dots" id="fumetto-dots" role="tablist" aria-label="Tavole"></div>
+        <button type="button" class="btn btn-primary fumetto-nav" id="fumetto-next">Avanti →</button>
+      </div>
+      <p class="fumetto-hint">Scorri o tocca i lati della tavola per cambiare pagina.</p>
+    </section>
+
+    <div class="hero-actions" style="justify-content:center;margin-top:1.25rem">
+      <a class="btn btn-primary" href="gioco.html">Gioca: Inchiostro contro i Bravi</a>
+      <a class="btn btn-secondary" href="personaggi.html">Rete dei personaggi</a>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <p>Fumetto didattico in quattro tavole a più vignette. Realizzato dal Prof. Rossano Bella.</p>
+    </div>
+  </footer>
+  <script src="js/common.js" defer></script>
+  <script src="js/fumetto.js" defer></script>
+</body>
+</html>
