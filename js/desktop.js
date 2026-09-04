@@ -45,6 +45,16 @@
       .replace(/'/g, "&#39;");
   }
 
+  /* Toglie gli accenti per la ricerca: chi cerca "unita" o "liberta"
+     senza accento deve trovare "L'unità d'Italia" e "La libertà nel
+     mondo", altrimenti su una pagina in italiano non trova mezza cosa. */
+  function piatto(testo) {
+    return String(testo)
+      .normalize("NFD")
+      .replace(/[\u0300-\u036f]/g, "")
+      .toLowerCase();
+  }
+
   /* Impronta stabile: stesso ID, stesso numero, sempre. */
   function impronta(testo) {
     let h = 2166136261;
@@ -170,13 +180,13 @@
     if (!campo || !ripiani.length) return;
 
     function filtra() {
-      const cerca = campo.value.trim().toLowerCase();
+      const cerca = piatto(campo.value.trim());
       let visibili = 0;
 
       ripiani.forEach((ripiano) => {
         let rimasti = 0;
         ripiano.querySelectorAll(".dorso").forEach((dorso) => {
-          const titolo = (dorso.getAttribute("aria-label") || "").toLowerCase();
+          const titolo = piatto(dorso.getAttribute("aria-label") || "");
           const passa = !cerca || titolo.includes(cerca);
           dorso.hidden = !passa;
           if (passa) rimasti += 1;

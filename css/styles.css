@@ -391,6 +391,11 @@ h1 em {
   );
 }
 
+/* Serve per forza esplicito: il `display: flex` qui sotto è una regola
+   d'autore e batte lo `[hidden] { display: none }` del browser, quindi
+   senza questa riga la ricerca nasconde i dorsi solo sulla carta. */
+.dorso[hidden] { display: none; }
+
 .dorso {
   height: var(--riga);
   display: flex; align-items: flex-end;
