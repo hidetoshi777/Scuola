@@ -10,6 +10,7 @@ Materiali didattici interattivi, ognuno in una **sottocartella autonoma**.
 - Una homepage comune con i link si potrà fare in seguito, se servirà.
 - In **ogni** lavoro per la scuola, nel footer (o credito visibile), scrivi sempre: **Realizzato dal Prof. Rossano Bella**.
 - Per i prossimi lavori Scuola, **usa il MCP Canva** (lavori e risorse già presenti nell’account Canva del Prof.) quando servono grafiche, template, export o materiali già realizzati lì: non reinventare da zero se Canva ha già qualcosa di utile.
+- **Inserire i Canva del Prof.**: se per un argomento esiste già un design Canva (presentazione, poster, slide, ecc.), **va incluso nel lavoro web** (export immagini/PDF, embed, galleria o sezione dedicata), non lasciato fuori. Prima di inventare grafiche nuove, cerca e riusa quei Canva.
 
 ## Preferenze agente
 
@@ -20,6 +21,7 @@ Materiali didattici interattivi, ognuno in una **sottocartella autonoma**.
 - **Riuso immagini**: le scene e i ritratti fatti per la Storia vanno **riproposti** anche in Home, Imparare e Laboratorio (schede, hero, quiz), così il materiale resta coerente e non si spreca lavoro grafico.
 - **Layout diversi**: non ripetere sempre lo stesso schema UI (stessa home a due colonne, stesse card, stesso stage VN). Ogni nuova attività (o espansione sostanziale) deve cambiare composizione, tipografia o ritmo visivo, restando coerente al tema.
 - **Mappe e personaggi storici realistici**: niente silhouettes schematiche o “poligoni grezzi” se si può fare di meglio. Per le **mappe** usa contorni reali (SVG/GeoJSON open data) anche se i confini sono odierni/semplificati, con nota didattica chiara. Per i **personaggi storici** punta a ritratti riconoscibili e verosimili (foto storiche di pubblico dominio, Canva, o generazione immagini guidata), non a figure generiche o cartoon anonimi.
+- **Canva nel sito**: laddove il Prof. ha già fatto un Canva sull’argomento, **mettilo nell’attività** (export + pagina/sezione visibile agli alunni). Il sito non sostituisce il Canva: lo valorizza.
 
 Struttura tipica di ogni cartella:
 
