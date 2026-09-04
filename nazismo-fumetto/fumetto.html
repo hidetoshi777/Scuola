@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <title>Fumetto · Ombre sul Reich | Scuola</title>
+  <meta name="description" content="Fumetto didattico in sei tavole sul Nazismo: Weimar, ascesa, propaganda, Shoah, memoria.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Sora:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/fumetto.css">
+</head>
+<body class="page-fumetto">
+  <a class="skip-link visually-hidden" href="#contenuto">Salta al contenuto</a>
+  <header class="site-header fumetto-header">
+    <div class="wrap header-inner">
+      <a class="brand" href="index.html">
+        <span class="brand-mark" aria-hidden="true"></span>
+        Ombre sul Reich
+      </a>
+      <nav class="site-nav" aria-label="Principale">
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="imparare.html">Imparare</a></li>
+          <li><a href="fumetto.html">Fumetto</a></li>
+          <li><a href="gioco.html">Storia</a></li>
+        </ul>
+      </nav>
+      <button type="button" class="theme-toggle" data-theme-toggle aria-pressed="false">Tema chiaro</button>
+    </div>
+  </header>
+
+  <main id="contenuto" class="fumetto-main" tabindex="-1">
+    <section class="fumetto-reader" aria-roledescription="fumetto" aria-label="Ombre sul Reich, sei tavole">
+      <p class="fumetto-status" id="fumetto-status">Tavola <span id="fumetto-num">1</span> di 6</p>
+
+      <div class="fumetto-viewport" id="fumetto-viewport">
+        <figure class="fumetto-page is-active" data-page="1">
+          <img src="img/tavole/01-copertina.png" alt="Copertina del fumetto Ombre sul Reich, Il Nazismo 1933-1945" width="1024" height="1536" fetchpriority="high">
+        </figure>
+        <figure class="fumetto-page" data-page="2" aria-hidden="true">
+          <img src="img/tavole/02-weimar.png" alt="Tavola sulla crisi di Weimar e il 1929" width="1024" height="1536" loading="lazy">
+        </figure>
+        <figure class="fumetto-page" data-page="3" aria-hidden="true">
+          <img src="img/tavole/03-ascesa.png" alt="Tavola sull’ascesa al potere nel 1933" width="1024" height="1536" loading="lazy">
+        </figure>
+        <figure class="fumetto-page" data-page="4" aria-hidden="true">
+          <img src="img/tavole/04-propaganda.png" alt="Tavola su propaganda e ideologia" width="1024" height="1536" loading="lazy">
+        </figure>
+        <figure class="fumetto-page" data-page="5" aria-hidden="true">
+          <img src="img/tavole/05-shoah.png" alt="Tavola sulla Shoah e la memoria" width="1024" height="1536" loading="lazy">
+        </figure>
+        <figure class="fumetto-page" data-page="6" aria-hidden="true">
+          <img src="img/tavole/06-memoria.png" alt="Tavola finale: resistenza, processi e difesa della democrazia" width="1024" height="1536" loading="lazy">
+        </figure>
+      </div>
+
+      <div class="fumetto-controls">
+        <button type="button" class="btn btn-secondary fumetto-nav" id="fumetto-prev" disabled>← Indietro</button>
+        <div class="fumetto-dots" id="fumetto-dots" role="tablist" aria-label="Tavole"></div>
+        <button type="button" class="btn btn-primary fumetto-nav" id="fumetto-next">Avanti →</button>
+      </div>
+      <p class="fumetto-hint">Scorri o tocca i lati della tavola per cambiare pagina.</p>
+    </section>
+  </main>
+
+  <footer class="site-footer fumetto-footer">
+    <div class="wrap">
+      <p>Fumetto didattico in sei tavole. Realizzato dal Prof. Rossano Bella.</p>
+    </div>
+  </footer>
+  <script src="js/common.js" defer></script>
+  <script src="js/fumetto.js" defer></script>
+</body>
+</html>

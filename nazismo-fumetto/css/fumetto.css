@@ -1,0 +1,178 @@
+/* Lettore fumetto: layout a tavola intera, diverso dalla visual novel. */
+
+.page-fumetto {
+  background:
+    radial-gradient(900px 420px at 80% -10%, color-mix(in srgb, var(--teal) 16%, transparent), transparent 55%),
+    linear-gradient(180deg, #0f1218, var(--bg));
+}
+
+.fumetto-main {
+  width: min(100%, 42rem);
+  margin-inline: auto;
+  padding: 0.6rem 0.75rem 1.25rem;
+  position: relative;
+  z-index: 1;
+}
+
+.fumetto-status {
+  margin: 0 0 0.55rem;
+  text-align: center;
+  font-family: var(--font-display);
+  letter-spacing: 0.04em;
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+
+.fumetto-reader {
+  display: grid;
+  gap: 0.75rem;
+}
+
+.fumetto-viewport {
+  position: relative;
+  border-radius: 1rem;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  background: #090b10;
+  box-shadow: var(--shadow);
+  aspect-ratio: 3 / 4;
+  max-height: min(78dvh, 52rem);
+  margin-inline: auto;
+  width: min(100%, 34rem);
+  touch-action: pan-y;
+  user-select: none;
+}
+
+.fumetto-page {
+  margin: 0;
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.28s ease, translate 0.28s ease;
+  translate: 12px 0;
+}
+
+.fumetto-page.is-active {
+  opacity: 1;
+  pointer-events: auto;
+  translate: 0;
+}
+
+.fumetto-page img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: center;
+  background: #090b10;
+}
+
+.fumetto-controls {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  gap: 0.55rem;
+  align-items: center;
+}
+
+.fumetto-nav {
+  min-height: 3rem;
+  width: 100%;
+}
+
+.fumetto-nav:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.fumetto-dots {
+  display: flex;
+  gap: 0.4rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.fumetto-dot {
+  width: 0.7rem;
+  height: 0.7rem;
+  border-radius: 999px;
+  border: 0;
+  padding: 0;
+  background: color-mix(in srgb, var(--ink) 28%, transparent);
+  cursor: pointer;
+}
+
+.fumetto-dot[aria-current="true"] {
+  background: var(--amber);
+  transform: scale(1.2);
+}
+
+.fumetto-hint {
+  margin: 0;
+  text-align: center;
+  color: var(--muted);
+  font-size: 0.88rem;
+}
+
+.fumetto-footer {
+  padding-top: 0.5rem;
+}
+
+@media (max-width: 640px) {
+  .page-fumetto .site-header {
+    position: static;
+  }
+
+  .page-fumetto .site-nav ul {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .fumetto-main {
+    padding: 0.35rem 0.55rem 0.9rem;
+  }
+
+  .fumetto-viewport {
+    width: 100%;
+    max-height: calc(100dvh - 11.5rem);
+    border-radius: 0.75rem;
+  }
+
+  .fumetto-controls {
+    grid-template-columns: 1fr 1fr;
+    grid-template-areas:
+      "dots dots"
+      "prev next";
+  }
+
+  .fumetto-dots {
+    grid-area: dots;
+  }
+
+  #fumetto-prev {
+    grid-area: prev;
+  }
+
+  #fumetto-next {
+    grid-area: next;
+  }
+
+  .fumetto-nav {
+    min-height: 3.1rem;
+  }
+}
+
+@media (min-width: 900px) {
+  .fumetto-main {
+    width: min(100% - 2rem, 48rem);
+  }
+
+  .fumetto-viewport {
+    width: min(100%, 38rem);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .fumetto-page {
+    transition: none;
+  }
+}
