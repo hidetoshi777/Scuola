@@ -92,8 +92,21 @@
       els.scena.textContent = scenaLabel(nodo.scena);
     }
     if (els.avatar) {
-      els.avatar.className = `vn-avatar ${p.classe}`;
-      els.avatar.setAttribute("aria-hidden", "true");
+      const nextSrc = `img/personaggi/${p.classe}.png`;
+      const swap = () => {
+        els.avatar.className = `vn-avatar ${p.classe}`;
+        els.avatar.src = nextSrc;
+        els.avatar.alt = `Ritratto di ${p.nome}`;
+        els.avatar.classList.remove("is-swapping");
+        void els.avatar.offsetWidth;
+        els.avatar.classList.add("is-swapping");
+      };
+      if (els.avatar.getAttribute("src") !== nextSrc) {
+        els.avatar.classList.add("is-fading");
+        window.setTimeout(swap, 120);
+      } else {
+        swap();
+      }
     }
     if (els.nome) {
       els.nome.textContent = p.nome;
