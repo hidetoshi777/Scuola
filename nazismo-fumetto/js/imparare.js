@@ -18,7 +18,9 @@
   const counter = document.getElementById("canva-counter");
   const prevBtn = document.getElementById("canva-prev");
   const nextBtn = document.getElementById("canva-next");
+  const fullBtn = document.getElementById("canva-fullscreen");
   const thumbs = document.querySelector(".canva-thumbs");
+  const viewer = document.querySelector("[data-canva-viewer]");
 
   if (!img || !counter || !prevBtn || !nextBtn || !thumbs) {
     return;
@@ -47,6 +49,34 @@
     });
   }
 
+  function isFullscreen() {
+    return Boolean(document.fullscreenElement || document.webkitFullscreenElement);
+  }
+
+  function syncFullscreenLabel() {
+    if (!fullBtn) return;
+    const on = isFullscreen() && (document.fullscreenElement === viewer || document.webkitFullscreenElement === viewer);
+    fullBtn.setAttribute("aria-pressed", String(on));
+    fullBtn.textContent = on ? "Esci" : "Schermo intero";
+  }
+
+  async function toggleFullscreen() {
+    if (!viewer) return;
+    try {
+      if (isFullscreen() && (document.fullscreenElement === viewer || document.webkitFullscreenElement === viewer)) {
+        if (document.exitFullscreen) await document.exitFullscreen();
+        else if (document.webkitExitFullscreen) document.webkitExitFullscreen();
+      } else if (viewer.requestFullscreen) {
+        await viewer.requestFullscreen();
+      } else if (viewer.webkitRequestFullscreen) {
+        viewer.webkitRequestFullscreen();
+      }
+    } catch (err) {
+      /* ignore */
+    }
+    syncFullscreenLabel();
+  }
+
   for (let i = 1; i <= TOTAL; i += 1) {
     const btn = document.createElement("button");
     btn.type = "button";
@@ -66,14 +96,19 @@
 
   prevBtn.addEventListener("click", () => show(index - 1));
   nextBtn.addEventListener("click", () => show(index + 1));
+  if (fullBtn) fullBtn.addEventListener("click", toggleFullscreen);
 
   document.addEventListener("keydown", (event) => {
-    if (event.key === "ArrowLeft") {
-      show(index - 1);
-    } else if (event.key === "ArrowRight") {
-      show(index + 1);
+    if (event.key === "ArrowLeft") show(index - 1);
+    else if (event.key === "ArrowRight") show(index + 1);
+    else if ((event.key === "f" || event.key === "F") && !/input|textarea|select/i.test(event.target.tagName)) {
+      toggleFullscreen();
     }
   });
 
+  document.addEventListener("fullscreenchange", syncFullscreenLabel);
+  document.addEventListener("webkitfullscreenchange", syncFullscreenLabel);
+
   show(1);
+  syncFullscreenLabel();
 })();
