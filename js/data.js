@@ -17,13 +17,14 @@ function canvaLink(id) {
   return "https://www.canva.com/design/" + id + "/view";
 }
 
+/* L'ordine qui è l'ordine dei ripiani sullo scaffale, dal più pieno al più vuoto. */
 window.MATERIE = {
-  storia: { label: "Storia", icona: "🏛️" },
-  italiano: { label: "Italiano", icona: "📖" },
-  geografia: { label: "Geografia", icona: "🌍" },
-  edcivica: { label: "Educazione civica", icona: "⚖️" },
-  filosofia: { label: "Filosofia", icona: "🧠" },
-  religione: { label: "Religione", icona: "🕊️" },
+  storia: { label: "Storia", adesivo: "st-colonna" },
+  italiano: { label: "Italiano", adesivo: "st-pennino" },
+  edcivica: { label: "Educazione civica", adesivo: "st-libro-stella" },
+  geografia: { label: "Geografia", adesivo: "st-globo" },
+  religione: { label: "Religione", adesivo: "st-colomba" },
+  filosofia: { label: "Filosofia", adesivo: "st-gufo" },
 };
 
 window.ATTIVITA_WEB = [
@@ -33,7 +34,8 @@ window.ATTIVITA_WEB = [
     classe: "Prima media",
     descrizione: "Sito interattivo su giorno/notte, stagioni e fusi orari, con gioco a tempo finale.",
     url: "rotazione-terrestre/",
-    stato: "live",
+    tinta: "scienze",
+    adesivo: "st-pianeta",
     extra: [{ label: "Gioco", url: "rotazione-terrestre/gioco.html" }],
   },
   {
@@ -42,7 +44,8 @@ window.ATTIVITA_WEB = [
     classe: "Prima superiore",
     descrizione: "Avverbi, preposizioni, congiunzioni e interiezioni: teoria, quattro esercizi e un gioco a tempo.",
     url: "parti-invariabili/",
-    stato: "live",
+    tinta: "italiano",
+    adesivo: "st-pennino",
     extra: [{ label: "Gioco", url: "parti-invariabili/gioco.html" }],
   },
   {
@@ -51,7 +54,8 @@ window.ATTIVITA_WEB = [
     classe: "Secondo grado",
     descrizione: "Visual novel didattica sul Nazismo: storia a fumetto con scelte, per capire crisi, propaganda, dittatura e Shoah.",
     url: "nazismo-fumetto/",
-    stato: "live",
+    tinta: "storia",
+    adesivo: "st-fumetto",
     extra: [
       { label: "Fumetto", url: "nazismo-fumetto/fumetto.html" },
       { label: "Mappa", url: "nazismo-fumetto/mappa.html" },
@@ -64,7 +68,8 @@ window.ATTIVITA_WEB = [
     classe: "Secondo grado",
     descrizione: "Laboratorio su Alessandro Manzoni e I Promessi Sposi: studio, rete dei personaggi, esercizi e prova a tempo, con le slide Canva del Prof.",
     url: "manzoni-promessi/",
-    stato: "live",
+    tinta: "italiano",
+    adesivo: "st-libro-aperto",
     extra: [
       { label: "Fumetto", url: "manzoni-promessi/fumetto.html" },
       { label: "Personaggi", url: "manzoni-promessi/personaggi.html" },
