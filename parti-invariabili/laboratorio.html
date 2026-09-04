@@ -5,10 +5,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
   <title>Laboratorio parti invariabili | Scuola</title>
-  <meta name="description" content="Laboratorio interattivo: classifica parole nelle quattro parti invariabili del discorso.">
+  <meta name="description" content="Quattro esercizi interattivi sulle parti invariabili del discorso: smistamento, completamento, intruso e analisi di frase.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@500;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
@@ -33,27 +33,47 @@
   </header>
   <main id="contenuto" class="wrap" tabindex="-1">
     <p class="kicker">Laboratorio</p>
-    <h1>Classifica le parole</h1>
-    <p class="lead">Leggi la parola nel mazzo centrale e clicca la categoria giusta. Puoi usare anche i tasti <strong>1</strong>–<strong>4</strong> da sinistra a destra.</p>
+    <h1>Quattro esercizi</h1>
+    <p class="lead">Ogni esercizio allena una cosa diversa: riconoscere la categoria, scegliere la parola giusta nel contesto, individuare l’eccezione, analizzare una frase intera.</p>
+
+    <div class="mode-bar" id="mode-bar" role="group" aria-label="Tipo di esercizio">
+      <button type="button" data-modo="smistamento" aria-pressed="true">Smistamento</button>
+      <button type="button" data-modo="cloze" aria-pressed="false">Completa la frase</button>
+      <button type="button" data-modo="intruso" aria-pressed="false">Trova l’intruso</button>
+      <button type="button" data-modo="analisi" aria-pressed="false">Analizza la frase</button>
+    </div>
 
     <div class="lab-hud panel">
-      <p>Punteggio: <span id="lab-punteggio">0</span> / <span id="lab-totale">20</span></p>
+      <ul class="hud-stats">
+        <li class="hud-pill">Corrette <strong id="lab-punteggio">0</strong> / <strong id="lab-totale">0</strong></li>
+        <li class="hud-pill is-streak">Serie <strong id="lab-serie">0</strong></li>
+      </ul>
       <button class="btn btn-secondary" type="button" id="lab-reset">Ricomincia</button>
     </div>
 
-    <div class="lab-layout">
-      <div class="mazzo panel" id="mazzo" aria-live="polite"></div>
-      <div class="bucket-grid" id="buckets"></div>
-    </div>
-    <p class="live" id="lab-feedback"></p>
+    <div class="progress" aria-hidden="true"><span id="lab-barra" style="width: 0%"></span></div>
+
+    <div id="lab-area"></div>
+    <p class="live" id="lab-feedback" aria-live="polite"></p>
+
+    <section class="panel reveal" style="margin-top: 1.5rem;">
+      <h2>Come si usano</h2>
+      <ul>
+        <li><strong>Smistamento</strong> — una parola alla volta, quattro contenitori. Da tastiera: tasti <kbd>1</kbd>–<kbd>4</kbd>.</li>
+        <li><strong>Completa la frase</strong> — solo una delle quattro parole regge il senso e la sintassi.</li>
+        <li><strong>Trova l’intruso</strong> — tre parole della stessa categoria, una no.</li>
+        <li><strong>Analizza la frase</strong> — clicca tutte le parti invariabili che riesci a individuare.</li>
+      </ul>
+      <p class="live">Il sito tiene il conto di dove sbagli più spesso e te lo dice a fine serie.</p>
+    </section>
 
     <p class="inline-actions">
-      <a class="btn btn-primary" href="gioco.html">Ora prova il gioco</a>
+      <a class="btn btn-primary" href="gioco.html">Passa alla prova a tempo</a>
     </p>
   </main>
   <footer class="site-footer">
     <div class="wrap">
-      <p>Laboratorio con 20 parole da classificare. Ogni errore mostra subito la risposta corretta.</p>
+      <p>Ogni errore mostra subito la risposta corretta e la spiegazione.</p>
       <p>Realizzato dal Prof. Rossano Bella.</p>
     </div>
   </footer>
