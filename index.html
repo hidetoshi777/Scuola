@@ -12,7 +12,7 @@
   <!-- Il ?v= va alzato a ogni modifica di CSS o JS: senza, un browser che
        si è tenuto una copia vecchia (o un 404 preso durante il deploy)
        continua a servirla e la pagina esce senza stile. -->
-  <link rel="stylesheet" href="css/styles.css?v=3">
+  <link rel="stylesheet" href="css/styles.css?v=4">
 </head>
 <body>
 
@@ -170,6 +170,9 @@
 <dialog class="scheda" id="scheda">
   <div class="scheda-corpo">
     <button type="button" class="scheda-chiudi" data-chiudi aria-label="Chiudi la scheda">×</button>
+    <figure class="scheda-anteprima" id="scheda-anteprima" hidden>
+      <img id="scheda-img" alt="" width="440" height="248">
+    </figure>
     <div class="scheda-testa">
       <span class="adesivo scheda-adesivo" id="scheda-adesivo"></span>
       <div>
@@ -189,7 +192,7 @@
   </div>
 </footer>
 
-<script src="js/data.js?v=3" defer></script>
-<script src="js/desktop.js?v=3" defer></script>
+<script src="js/data.js?v=4" defer></script>
+<script src="js/desktop.js?v=4" defer></script>
 </body>
 </html>

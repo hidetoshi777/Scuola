@@ -226,6 +226,18 @@
         v.pp + (v.pp === 1 ? " pagina" : " pagine") + (v.periodo ? " · " + v.periodo : "");
       document.getElementById("scheda-titolo").textContent = v.titolo;
       document.getElementById("scheda-link").href = canvaLink(v.id);
+
+      /* L'anteprima resta nascosta finché l'immagine non è arrivata davvero:
+         i lavori aggiunti dopo l'ultima ricognizione non hanno il file, e
+         un riquadro vuoto sarebbe peggio di nessun riquadro. */
+      const cornice = document.getElementById("scheda-anteprima");
+      const img = document.getElementById("scheda-img");
+      cornice.hidden = true;
+      img.onload = () => { cornice.hidden = false; };
+      img.onerror = () => { cornice.hidden = true; };
+      img.alt = "Prima pagina di « " + v.titolo + " »";
+      img.src = "img/canva/" + v.id + ".jpg";
+
       scheda.showModal();
     });
 

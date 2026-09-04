@@ -484,14 +484,40 @@ html[data-theme="dark"] .dorso-titolo {
   padding: 1.5rem 1.6rem 1.6rem;
   box-shadow: 0 30px 60px -25px rgba(20, 14, 4, 0.6);
 }
+/* Sta sopra l'anteprima, quindi ha bisogno di un fondo suo: senza,
+   sparisce ogni volta che l'immagine è chiara in quell'angolo. */
 .scheda-chiudi {
-  position: absolute; top: 0.55rem; right: 0.7rem;
-  font: 400 1.6rem/1 var(--f-testo);
-  color: var(--matita);
-  background: none; border: 0; cursor: pointer;
-  padding: 0.2rem 0.45rem; border-radius: 0.4rem;
+  position: absolute; top: 0.6rem; right: 0.6rem; z-index: 2;
+  display: grid; place-items: center;
+  width: 2rem; height: 2rem;
+  font: 400 1.4rem/1 var(--f-testo);
+  color: var(--inchiostro);
+  background: color-mix(in srgb, var(--carta-alta) 88%, transparent);
+  backdrop-filter: blur(4px);
+  border: 1px solid var(--bordo);
+  border-radius: 50%;
+  cursor: pointer;
 }
-.scheda-chiudi:hover { color: var(--inchiostro); }
+.scheda-chiudi:hover { background: var(--carta-alta); border-color: var(--bordo-forte); }
+/* Anteprima della prima pagina. I lavori non hanno tutti la stessa forma
+   (le lezioni sono 16:9, le infografiche sono strisce verticali), quindi
+   l'immagine si adatta DENTRO il riquadro invece di essere ritagliata:
+   meglio una striscia stretta e centrata che una locandina decapitata. */
+.scheda-anteprima {
+  margin: 0 0 1.1rem;
+  border-radius: 0.6rem;
+  overflow: hidden;
+  background: color-mix(in srgb, var(--tinta) 12%, transparent);
+  border: 1px solid var(--bordo);
+}
+.scheda-anteprima[hidden] { display: none; }
+.scheda-anteprima img {
+  display: block;
+  width: 100%; height: auto;
+  max-height: 15rem;
+  object-fit: contain;
+}
+
 .scheda-testa { display: flex; align-items: center; gap: 0.85rem; margin-bottom: 0.9rem; }
 .scheda-materia {
   margin: 0;
