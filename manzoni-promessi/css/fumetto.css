@@ -1,4 +1,4 @@
-/* Lettore fumetto: tavole multipannello, trama con Renzo. */
+/* Lettore fumetto: tavole multipannello + effetto sfoglia. */
 
 .page-fumetto .site-header {
   position: sticky;
@@ -49,6 +49,8 @@
   width: min(100%, 34rem);
   touch-action: pan-y;
   user-select: none;
+  perspective: 1800px;
+  perspective-origin: 50% 50%;
 }
 
 .fumetto-page {
@@ -57,14 +59,18 @@
   inset: 0;
   opacity: 0;
   pointer-events: none;
-  transition: opacity 0.28s ease, translate 0.28s ease;
-  translate: 12px 0;
+  z-index: 1;
+  transform-style: preserve-3d;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  will-change: transform, opacity;
 }
 
 .fumetto-page.is-active {
   opacity: 1;
   pointer-events: auto;
-  translate: 0;
+  z-index: 2;
+  transform: rotateY(0deg);
 }
 
 .fumetto-page img {
@@ -74,6 +80,70 @@
   object-position: center;
   background: #0a1214;
   display: block;
+  box-shadow: 0 0 0 1px rgb(0 0 0 / 0.2);
+}
+
+/* —— Sfoglia avanti (pagina esce a sinistra) —— */
+.fumetto-page.is-flip-out-next {
+  z-index: 4;
+  transform-origin: left center;
+  animation: fumettoFlipOutNext 0.55s cubic-bezier(0.4, 0.05, 0.2, 1) forwards;
+}
+
+.fumetto-page.is-flip-in-next {
+  z-index: 3;
+  opacity: 1;
+  pointer-events: none;
+  transform-origin: right center;
+  animation: fumettoFlipInNext 0.55s cubic-bezier(0.4, 0.05, 0.2, 1) forwards;
+}
+
+/* —— Sfoglia indietro (pagina esce a destra) —— */
+.fumetto-page.is-flip-out-prev {
+  z-index: 4;
+  transform-origin: right center;
+  animation: fumettoFlipOutPrev 0.55s cubic-bezier(0.4, 0.05, 0.2, 1) forwards;
+}
+
+.fumetto-page.is-flip-in-prev {
+  z-index: 3;
+  opacity: 1;
+  pointer-events: none;
+  transform-origin: left center;
+  animation: fumettoFlipInPrev 0.55s cubic-bezier(0.4, 0.05, 0.2, 1) forwards;
+}
+
+@keyframes fumettoFlipOutNext {
+  0% { transform: rotateY(0deg); opacity: 1; filter: brightness(1); }
+  55% { filter: brightness(0.85); }
+  100% { transform: rotateY(-95deg); opacity: 0.15; filter: brightness(0.55); }
+}
+
+@keyframes fumettoFlipInNext {
+  0% { transform: rotateY(55deg); opacity: 0.35; }
+  100% { transform: rotateY(0deg); opacity: 1; }
+}
+
+@keyframes fumettoFlipOutPrev {
+  0% { transform: rotateY(0deg); opacity: 1; filter: brightness(1); }
+  55% { filter: brightness(0.85); }
+  100% { transform: rotateY(95deg); opacity: 0.15; filter: brightness(0.55); }
+}
+
+@keyframes fumettoFlipInPrev {
+  0% { transform: rotateY(-55deg); opacity: 0.35; }
+  100% { transform: rotateY(0deg); opacity: 1; }
+}
+
+.reduced-motion .fumetto-page,
+.reduced-motion .fumetto-page.is-flip-out-next,
+.reduced-motion .fumetto-page.is-flip-in-next,
+.reduced-motion .fumetto-page.is-flip-out-prev,
+.reduced-motion .fumetto-page.is-flip-in-prev {
+  animation: none !important;
+  transition: opacity 0.15s ease;
+  transform: none !important;
+  filter: none !important;
 }
 
 .fumetto-caption {
