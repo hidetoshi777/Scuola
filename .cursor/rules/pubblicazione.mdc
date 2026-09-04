@@ -16,7 +16,7 @@ alwaysApply: true
 - Se esiste un **Canva del Prof.** sull’argomento, **inseriscilo in una sezione dedicata** del lavoro (export/galleria), non lasciarlo fuori.
 - **Imparare** = sezione di studio: ci devono essere le **informazioni** (non solo schede belle). Poi renderle facili da ricordare (mnemonici, elenchi, timeline).
 - **Fumetto = standard**: `fumetto.html` con **più vignette per tavola** e un **minimo di trama** (spesso un personaggio che segue le vicende).
-- **Gioco ≠ quiz**: `gioco.html` di default è un **mini-gioco divertente** (arcade, Tetris-like, sparatutto, dodge…), non un questionario. Le domande stanno nel laboratorio.
+- **Gioco = didattico**: deve far ripassare contenuti. Ok formati diversi dal quiz (memory, ordina eventi…). **No arcade puro** senza apprendimento. Se manca un’alternativa solida → **domande/risposte**.
 - **Mappe e personaggi storici**: farli **realistici** (contorni geografici veri; ritratti riconoscibili), non schematici/generici.
 
 ## Dopo ogni nuova attività

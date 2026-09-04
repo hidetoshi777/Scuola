@@ -140,6 +140,18 @@ window.ManzoniData = {
     unita: "Unità aristoteliche",
   },
 
+  /* Coppie per il memory didattico (faccia A ↔ faccia B). */
+  memory: [
+    { id: "m1", a: "Renzo", b: "Uomo comune: se si allontana da Dio, le cose peggiorano" },
+    { id: "m2", a: "Lucia", b: "Fede costante: modello di credente" },
+    { id: "m3", a: "Don Abbondio", b: "Paura: non celebra il matrimonio" },
+    { id: "m4", a: "L’Innominato", b: "Si converte e libera Lucia" },
+    { id: "m5", a: "Don Rodrigo", b: "Muore di peste: bilancia della Provvidenza" },
+    { id: "m6", a: "Risciacquare i panni in Arno", b: "Lingua: riscrivere in fiorentino" },
+    { id: "m7", a: "Manoscritto in soffitta", b: "Espediente contro la censura austriaca" },
+    { id: "m8", a: "Unità aristoteliche", b: "Manzoni le rompe: tempo lungo, tanti luoghi" },
+  ],
+
   quiz: [
     {
       q: "Perché Manzoni sceglie il fiorentino?",

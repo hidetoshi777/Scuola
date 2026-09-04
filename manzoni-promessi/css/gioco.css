@@ -1,127 +1,144 @@
-/* Arcade: Inchiostro contro i Bravi */
+/* Memoria manzoniana — ripasso a coppie */
 
 .page-gioco .site-header {
   position: sticky;
 }
 
 .gioco-main {
-  width: min(100% - 1.25rem, 28rem);
-  margin-inline: auto;
-  padding: 1rem 0 2rem;
+  max-width: 40rem;
 }
 
-.gioco-lead {
-  margin-bottom: 1rem;
-}
-
-.arcade-shell {
-  position: relative;
-  border: 1px solid var(--line);
-  background: #071214;
-  box-shadow: var(--shadow);
-  overflow: hidden;
-}
-
-.arcade-hud {
+.memory-hud {
   display: flex;
-  justify-content: space-between;
-  gap: 0.5rem;
-  padding: 0.55rem 0.75rem;
-  font-variant-numeric: tabular-nums;
+  flex-wrap: wrap;
+  gap: 0.65rem 1rem;
+  align-items: center;
+  margin: 1rem 0 1.1rem;
   color: var(--muted);
-  font-size: 0.9rem;
-  background: color-mix(in srgb, var(--ink) 70%, transparent);
-  border-bottom: 1px solid var(--line);
+  font-variant-numeric: tabular-nums;
 }
 
-.arcade-hud strong {
-  color: var(--parchment);
+.memory-hud strong {
+  color: var(--text);
   font-family: var(--font-display);
 }
 
-#arcade {
-  display: block;
-  width: 100%;
-  height: auto;
-  aspect-ratio: 390 / 560;
-  background:
-    linear-gradient(180deg, #0c2f36 0%, #071214 55%, #0a1a1c 100%);
-  touch-action: none;
+.memory-hud .btn {
+  margin-left: auto;
+  min-height: 2.6rem;
+  padding: 0.45rem 0.9rem;
 }
 
-.arcade-pad {
+.memory-board {
   display: grid;
-  grid-template-columns: 1fr 1.1fr 1fr;
-  gap: 0.45rem;
-  padding: 0.65rem;
-  background: color-mix(in srgb, var(--bg-elev) 80%, transparent);
-  border-top: 1px solid var(--line);
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.55rem;
 }
 
-.pad-btn {
-  min-height: 3.4rem;
-  border: 1px solid var(--line);
-  background: color-mix(in srgb, var(--lake-mid) 35%, var(--bg));
-  color: var(--text);
-  font-size: 1.35rem;
+@media (min-width: 560px) {
+  .memory-board {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+.memory-card {
+  position: relative;
+  min-height: 5.8rem;
+  border: 0;
+  padding: 0;
   cursor: pointer;
-  border-radius: 0.35rem;
-  user-select: none;
-  -webkit-user-select: none;
-  touch-action: manipulation;
+  background: transparent;
+  perspective: 700px;
+  -webkit-tap-highlight-color: transparent;
 }
 
-.pad-btn:active,
-.pad-btn.is-down {
-  background: var(--mist);
-  color: var(--ink);
+.memory-card:disabled {
+  cursor: default;
 }
 
-.pad-fire {
-  background: color-mix(in srgb, var(--gold) 35%, var(--bg));
-  font-size: 1.5rem;
+.memory-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  min-height: 5.8rem;
+  transform-style: preserve-3d;
+  transition: transform 0.35s ease;
 }
 
-.arcade-overlay {
+.memory-card.is-flipped .memory-inner,
+.memory-card.is-matched .memory-inner {
+  transform: rotateY(180deg);
+}
+
+.memory-face {
   position: absolute;
-  inset: 2.6rem 0 4.6rem;
+  inset: 0;
   display: grid;
-  place-content: center;
-  gap: 0.65rem;
-  padding: 1.25rem;
+  place-items: center;
+  padding: 0.55rem 0.45rem;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  border-radius: 0.3rem;
+  border: 1px solid var(--line);
   text-align: center;
-  background: color-mix(in srgb, #071214 78%, transparent);
-  backdrop-filter: blur(4px);
+  font: inherit;
+  line-height: 1.25;
 }
 
-.arcade-overlay[hidden] {
+.memory-back {
+  background:
+    linear-gradient(145deg, color-mix(in srgb, var(--lake-mid) 55%, #071214), #0a1618);
+  color: var(--parchment);
+  font-family: var(--font-display);
+  font-size: 1.35rem;
+  letter-spacing: 0.06em;
+}
+
+.memory-front {
+  background: var(--parchment);
+  color: var(--ink-text);
+  transform: rotateY(180deg);
+  font-size: clamp(0.78rem, 2.8vw, 0.92rem);
+  font-weight: 600;
+}
+
+.memory-card.is-matched .memory-front {
+  background: color-mix(in srgb, var(--ok) 18%, var(--parchment));
+  border-color: var(--ok);
+}
+
+.memory-card:focus-visible .memory-face {
+  outline: 3px solid var(--gold);
+  outline-offset: 2px;
+}
+
+.memory-feedback {
+  min-height: 1.4em;
+  margin: 0.85rem 0 0;
+  color: var(--muted);
+  text-align: center;
+}
+
+.memory-end {
+  margin-top: 1.25rem;
+}
+
+.memory-end[hidden] {
   display: none;
 }
 
-.arcade-overlay h2 {
-  margin: 0;
-  color: var(--parchment);
+.reduced-motion .memory-inner {
+  transition: none;
 }
 
-.arcade-overlay p {
-  margin: 0;
-  color: var(--muted);
-}
+@media (max-width: 520px) {
+  .memory-card,
+  .memory-inner {
+    min-height: 6.4rem;
+  }
 
-.arcade-overlay .btn {
-  justify-self: center;
-  min-width: 10rem;
-}
-
-.gioco-tip {
-  margin-top: 0.9rem;
-  color: var(--muted);
-  font-size: 0.92rem;
-  text-align: center;
-}
-
-@media (min-width: 720px) {
-  .gioco-main {
-    width: min(100% - 2rem, 32rem);
+  .memory-hud .btn {
+    margin-left: 0;
+    width: 100%;
   }
 }
