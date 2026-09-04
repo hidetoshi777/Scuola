@@ -299,10 +299,29 @@ a:hover { color: var(--gold); }
 
 .hero-archivio {
   position: relative;
-  min-height: min(92dvh, 54rem);
+  min-height: calc(100dvh - 5.5rem);
   display: grid;
   align-items: end;
   overflow: hidden;
+}
+
+@media (max-width: 520px) {
+  .hero-archivio {
+    min-height: calc(100dvh - 7.5rem);
+  }
+
+  .hero-copy {
+    padding-bottom: 1.25rem;
+  }
+
+  .hero-brand {
+    font-size: clamp(2.4rem, 14vw, 3.4rem);
+  }
+
+  .hero-copy .lead {
+    font-size: 1rem;
+    margin: 0.5rem 0 0;
+  }
 }
 
 .hero-archivio .hero-bg {
