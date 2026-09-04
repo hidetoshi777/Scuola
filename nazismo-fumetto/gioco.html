@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <title>Storia a fumetto · Ombre sul Reich | Scuola</title>
+  <meta name="description" content="Gioca la visual novel didattica sul Nazismo: dialoghi, scelte e capitoli storici.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Sora:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <a class="skip-link visually-hidden" href="#contenuto">Salta al contenuto</a>
+  <header class="site-header">
+    <div class="wrap header-inner">
+      <a class="brand" href="index.html">
+        <span class="brand-mark" aria-hidden="true"></span>
+        Ombre sul Reich
+      </a>
+      <nav class="site-nav" aria-label="Principale">
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="imparare.html">Imparare</a></li>
+          <li><a href="laboratorio.html">Laboratorio</a></li>
+          <li><a href="gioco.html">Storia</a></li>
+        </ul>
+      </nav>
+      <button type="button" class="theme-toggle" data-theme-toggle aria-pressed="false">Tema chiaro</button>
+    </div>
+  </header>
+
+  <main id="contenuto" class="wrap" tabindex="-1">
+    <div class="vn-shell">
+      <div class="vn-hud">
+        <div class="vn-meta">
+          <strong id="vn-capitolo">Prologo</strong>
+          <span class="live">Il progresso resta su questo dispositivo.</span>
+        </div>
+        <div class="inline-actions">
+          <div class="vn-progress-track" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" aria-label="Avanzamento storia">
+            <span id="vn-progress"></span>
+          </div>
+          <button type="button" class="btn btn-secondary" id="vn-riparti">Ricomincia</button>
+        </div>
+      </div>
+
+      <section id="vn-stage" data-scena="aula" aria-live="polite">
+        <div class="vn-backdrop" aria-hidden="true"></div>
+        <p class="vn-scene-tag" id="vn-scena">Aula di storia</p>
+        <div class="vn-cast">
+          <div id="vn-avatar" class="vn-avatar guida" aria-hidden="true"></div>
+        </div>
+        <div class="vn-dialogue">
+          <div class="vn-speaker-row">
+            <strong id="vn-nome">Guida</strong>
+            <span id="vn-ruolo">Voce didattica</span>
+          </div>
+          <p id="vn-testo"></p>
+          <div id="vn-scelte" class="vn-choices"></div>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <dialog id="vn-fine" aria-labelledby="vn-fine-titolo">
+    <form method="dialog">
+      <h2 id="vn-fine-titolo">Storia completata</h2>
+      <p id="vn-fine-testo"></p>
+      <div class="hero-actions">
+        <button type="submit" class="btn btn-primary" value="ok">Chiudi</button>
+        <button type="button" class="btn btn-secondary" data-vn-restart>Ricomincia</button>
+        <a class="btn btn-secondary" href="laboratorio.html">Vai al laboratorio</a>
+      </div>
+      <p class="live" style="margin-top: 1rem;">Realizzato dal Prof. Rossano Bella.</p>
+    </form>
+  </dialog>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <p>Visual novel didattica sul Nazismo. Realizzato dal Prof. Rossano Bella.</p>
+    </div>
+  </footer>
+  <script src="js/common.js" defer></script>
+  <script src="js/story.js" defer></script>
+  <script src="js/engine.js" defer></script>
+</body>
+</html>

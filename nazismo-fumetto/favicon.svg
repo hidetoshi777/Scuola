@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Nazismo fumetto">
+  <rect width="64" height="64" rx="12" fill="#1a1f2a"/>
+  <rect x="10" y="14" width="44" height="36" rx="4" fill="#f4e6c8" stroke="#c4a574" stroke-width="2"/>
+  <path d="M18 24h28M18 32h22M18 40h16" stroke="#2a3344" stroke-width="2.5" stroke-linecap="round"/>
+  <circle cx="48" cy="46" r="8" fill="#d97706"/>
+  <path d="M45 46h6M48 43v6" stroke="#1a1f2a" stroke-width="2" stroke-linecap="round"/>
+</svg>

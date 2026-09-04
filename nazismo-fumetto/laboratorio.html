@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <title>Laboratorio · Ombre sul Reich | Scuola</title>
+  <meta name="description" content="Verifica i concetti sul Nazismo con sei domande e spiegazioni.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Sora:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <a class="skip-link visually-hidden" href="#contenuto">Salta al contenuto</a>
+  <header class="site-header">
+    <div class="wrap header-inner">
+      <a class="brand" href="index.html">
+        <span class="brand-mark" aria-hidden="true"></span>
+        Ombre sul Reich
+      </a>
+      <nav class="site-nav" aria-label="Principale">
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="imparare.html">Imparare</a></li>
+          <li><a href="laboratorio.html">Laboratorio</a></li>
+          <li><a href="gioco.html">Storia</a></li>
+        </ul>
+      </nav>
+      <button type="button" class="theme-toggle" data-theme-toggle aria-pressed="false">Tema chiaro</button>
+    </div>
+  </header>
+
+  <main id="contenuto" class="wrap" tabindex="-1">
+    <p class="kicker">Verifica</p>
+    <h1>Laboratorio</h1>
+    <p class="lead">Sei domande sui punti della storia a fumetto. Dopo ogni risposta compare una spiegazione breve.</p>
+
+    <section class="panel" id="lab-box">
+      <h2>Pronto?</h2>
+      <p>Non c’è timer: conta capire, non correre.</p>
+      <button type="button" class="btn btn-primary" id="lab-start">Inizia</button>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <p>Realizzato dal Prof. Rossano Bella.</p>
+    </div>
+  </footer>
+  <script src="js/common.js" defer></script>
+  <script src="js/laboratorio.js" defer></script>
+</body>
+</html>
