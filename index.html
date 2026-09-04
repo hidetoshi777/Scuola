@@ -9,7 +9,10 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,400..800&family=Caveat:wght@500;600;700&family=Karla:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/styles.css">
+  <!-- Il ?v= va alzato a ogni modifica di CSS o JS: senza, un browser che
+       si è tenuto una copia vecchia (o un 404 preso durante il deploy)
+       continua a servirla e la pagina esce senza stile. -->
+  <link rel="stylesheet" href="css/styles.css?v=3">
 </head>
 <body>
 
@@ -186,7 +189,7 @@
   </div>
 </footer>
 
-<script src="js/data.js" defer></script>
-<script src="js/desktop.js" defer></script>
+<script src="js/data.js?v=3" defer></script>
+<script src="js/desktop.js?v=3" defer></script>
 </body>
 </html>
