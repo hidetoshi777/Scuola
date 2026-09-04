@@ -928,11 +928,15 @@ dialog::backdrop {
   }
 
   .vn-avatar {
-    width: clamp(3.1rem, 16vw, 4rem);
-    max-height: min(7.2rem, 72%);
+    width: clamp(2.6rem, 14vw, 3.4rem);
+    height: auto;
+    max-height: 5.2rem;
+    aspect-ratio: 3 / 4;
+    object-fit: cover;
+    object-position: center top;
     border-width: 2px;
-    border-radius: 0.75rem 0.75rem 0.4rem 0.4rem;
-    box-shadow: 0 8px 18px rgb(0 0 0 / 0.35);
+    border-radius: 0.65rem 0.65rem 0.35rem 0.35rem;
+    box-shadow: 0 6px 14px rgb(0 0 0 / 0.35);
   }
 
   .vn-dialogue {
