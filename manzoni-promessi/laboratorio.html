@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <title>Laboratorio · Manzoni | Scuola</title>
+  <meta name="description" content="Esercizi su I Promessi Sposi: ordina la trama e abbina i concetti chiave.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700&family=Newsreader:opsz,wght@6..72,500;6..72,600;6..72,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <a class="skip-link visually-hidden" href="#contenuto">Salta al contenuto</a>
+  <header class="site-header">
+    <div class="wrap header-inner">
+      <a class="brand" href="index.html">
+        <span class="brand-mark" aria-hidden="true"></span>
+        Manzoni
+      </a>
+      <nav class="site-nav" aria-label="Principale">
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="imparare.html">Imparare</a></li>
+          <li><a href="personaggi.html">Personaggi</a></li>
+          <li><a href="laboratorio.html">Laboratorio</a></li>
+          <li><a href="gioco.html">Gioco</a></li>
+        </ul>
+      </nav>
+      <button type="button" class="theme-toggle" data-theme-toggle aria-pressed="false">Tema chiaro</button>
+    </div>
+  </header>
+
+  <main id="contenuto" class="wrap page-pad" tabindex="-1">
+    <p class="kicker">Esercizi</p>
+    <h1>Laboratorio del manoscritto</h1>
+    <p class="lead">Due prove: ricostruisci l’ordine della trama e abbina ogni pezzo al concetto giusto.</p>
+
+    <div class="lab-tabs" role="tablist" aria-label="Tipi di esercizio">
+      <button type="button" role="tab" id="tab-ordine" aria-controls="panel-ordine" aria-selected="true">Ordine della trama</button>
+      <button type="button" role="tab" id="tab-abbina" aria-controls="panel-abbina" aria-selected="false">Abbina i concetti</button>
+    </div>
+
+    <section class="sheet lab-panel" id="panel-ordine" role="tabpanel" aria-labelledby="tab-ordine">
+      <h2>Metti in ordine gli eventi</h2>
+      <p>Usa le frecce per spostare le strisce. Poi controlla.</p>
+      <ol class="ordine-lista" id="ordine-lista"></ol>
+      <div class="hero-actions">
+        <button type="button" class="btn btn-primary" id="ordine-check">Controlla l’ordine</button>
+        <button type="button" class="btn btn-secondary" id="ordine-shuffle">Mescola di nuovo</button>
+      </div>
+      <div class="feedback" id="ordine-feedback" hidden></div>
+    </section>
+
+    <section class="sheet lab-panel" id="panel-abbina" role="tabpanel" aria-labelledby="tab-abbina" hidden>
+      <h2>Abbina pezzo → concetto</h2>
+      <p>Per ogni riga scegli l’etichetta corretta.</p>
+      <div class="match-grid" id="match-grid"></div>
+      <div class="hero-actions">
+        <button type="button" class="btn btn-primary" id="match-check">Controlla gli abbinamenti</button>
+      </div>
+      <div class="feedback" id="match-feedback" hidden></div>
+    </section>
+
+    <div class="hero-actions" style="margin-top:1.5rem">
+      <a class="btn btn-primary" href="gioco.html">Passa al gioco</a>
+      <a class="btn btn-secondary" href="personaggi.html">Rivedi i personaggi</a>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <p>Realizzato dal Prof. Rossano Bella.</p>
+    </div>
+  </footer>
+  <script src="js/data.js" defer></script>
+  <script src="js/common.js" defer></script>
+  <script src="js/laboratorio.js" defer></script>
+</body>
+</html>
