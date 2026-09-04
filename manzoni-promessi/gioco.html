@@ -2,10 +2,10 @@
 <html lang="it">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
-  <title>Gioco · Inchiostro contro i Bravi | Scuola</title>
-  <meta name="description" content="Mini-gioco arcade: muovi Renzo, spara inchiostro ai Bravi e raccogli i fogli del manoscritto.">
+  <title>Gioco · Memoria manzoniana | Scuola</title>
+  <meta name="description" content="Memory didattico sui Promessi Sposi: abbina personaggi e concetti a coppie.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700&family=Newsreader:opsz,wght@6..72,500;6..72,600;6..72,700&display=swap" rel="stylesheet">
@@ -34,41 +34,30 @@
     </div>
   </header>
 
-  <main id="contenuto" class="gioco-main" tabindex="-1">
-    <p class="kicker">Arcade · non un quiz</p>
-    <h1>Inchiostro contro i Bravi</h1>
-    <p class="lead gioco-lead">Muovi Renzo, spara macchie d’inchiostro ai Bravi, raccogli i fogli del manoscritto. Tre vite.</p>
+  <main id="contenuto" class="wrap page-pad gioco-main" tabindex="-1">
+    <p class="kicker">Ripasso · memory</p>
+    <h1>Memoria manzoniana</h1>
+    <p class="lead">Gira due carte: abbina personaggio o concetto alla spiegazione giusta. È un ripasso, non uno sparatutto.</p>
 
-    <div class="arcade-shell">
-      <div class="arcade-hud" aria-live="polite">
-        <span>Punti <strong id="hud-score">0</strong></span>
-        <span>Vite <strong id="hud-lives">♥♥♥</strong></span>
-        <span>Fogli <strong id="hud-pages">0</strong></span>
-      </div>
+    <div class="memory-hud" aria-live="polite">
+      <span>Mosse <strong id="hud-moves">0</strong></span>
+      <span>Coppie <strong id="hud-pairs">0</strong>/<span id="hud-total">8</span></span>
+      <button type="button" class="btn btn-secondary" id="btn-restart">Rimescola</button>
+    </div>
 
-      <canvas id="arcade" width="390" height="560" aria-label="Campo di gioco: Renzo contro i Bravi"></canvas>
+    <div class="memory-board" id="memory-board" role="grid" aria-label="Carte del memory"></div>
 
-      <div class="arcade-pad" aria-label="Comandi">
-        <button type="button" class="pad-btn" id="btn-left" aria-label="Sinistra">◀</button>
-        <button type="button" class="pad-btn pad-fire" id="btn-fire" aria-label="Spara">✦</button>
-        <button type="button" class="pad-btn" id="btn-right" aria-label="Destra">▶</button>
-      </div>
+    <p class="memory-feedback" id="memory-feedback" aria-live="polite"></p>
 
-      <div class="arcade-overlay" id="overlay-start">
-        <h2>Pronto, Renzo?</h2>
-        <p>Tastiera: frecce + spazio. Telefono: tasti sotto.</p>
-        <button type="button" class="btn btn-primary" id="btn-start">Inizia</button>
-      </div>
-
-      <div class="arcade-overlay" id="overlay-end" hidden>
-        <h2 id="end-title">Fine</h2>
-        <p id="end-text"></p>
-        <button type="button" class="btn btn-primary" id="btn-retry">Ricomincia</button>
+    <div class="sheet memory-end" id="memory-end" hidden>
+      <h2>Manoscritto completo</h2>
+      <p id="memory-end-text"></p>
+      <div class="hero-actions">
+        <button type="button" class="btn btn-primary" id="btn-again">Ricomincia</button>
+        <a class="btn btn-secondary" href="laboratorio.html">Vai al laboratorio</a>
         <a class="btn btn-secondary" href="fumetto.html">Rileggi il fumetto</a>
       </div>
     </div>
-
-    <p class="gioco-tip">I fogli del manoscritto valgono di più dei Bravi: la letteratura batte la prepotenza.</p>
   </main>
 
   <footer class="site-footer">
@@ -76,6 +65,7 @@
       <p>Realizzato dal Prof. Rossano Bella.</p>
     </div>
   </footer>
+  <script src="js/data.js" defer></script>
   <script src="js/common.js" defer></script>
   <script src="js/gioco.js" defer></script>
 </body>
