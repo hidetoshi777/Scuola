@@ -309,9 +309,9 @@ a:hover { color: var(--gold); }
   position: absolute;
   inset: 0;
   background:
-    linear-gradient(to top, var(--bg) 8%, transparent 42%),
-    linear-gradient(105deg, color-mix(in srgb, var(--ink) 70%, transparent) 0%, transparent 55%),
-    radial-gradient(ellipse 90% 60% at 70% 40%, color-mix(in srgb, var(--lake-mid) 55%, transparent), transparent 60%),
+    linear-gradient(to top, var(--bg) 12%, color-mix(in srgb, var(--ink) 72%, transparent) 48%, transparent 72%),
+    linear-gradient(100deg, color-mix(in srgb, var(--ink) 88%, transparent) 0%, color-mix(in srgb, var(--ink) 45%, transparent) 42%, transparent 70%),
+    radial-gradient(ellipse 90% 60% at 70% 40%, color-mix(in srgb, var(--lake-mid) 40%, transparent), transparent 60%),
     url("../img/canva/slide-01.jpg") center / cover no-repeat;
   transform: scale(1.04);
   animation: drift 28s ease-in-out infinite alternate;
