@@ -376,7 +376,6 @@ a:hover { color: var(--gold); }
   text-shadow:
     0 2px 0 rgb(0 0 0 / 0.35),
     0 10px 36px rgb(0 0 0 / 0.7);
-  animation: rise 0.9s ease both;
 }
 
 .hero-copy .kicker {
@@ -387,11 +386,20 @@ a:hover { color: var(--gold); }
 .hero-copy .lead {
   color: color-mix(in srgb, #f3ebd8 82%, var(--muted));
   text-shadow: 0 2px 14px rgb(0 0 0 / 0.55);
-  animation: rise 0.9s ease 0.12s both;
 }
 
-.hero-actions {
-  animation: rise 0.9s ease 0.22s both;
+@media (prefers-reduced-motion: no-preference) {
+  .hero-brand {
+    animation: rise 0.7s ease both;
+  }
+
+  .hero-copy .lead {
+    animation: rise 0.7s ease 0.08s both;
+  }
+
+  .hero-actions {
+    animation: rise 0.7s ease 0.14s both;
+  }
 }
 
 @keyframes rise {
