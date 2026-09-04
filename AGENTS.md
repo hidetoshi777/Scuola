@@ -8,6 +8,7 @@ Materiali didattici interattivi, ognuno in una **sottocartella autonoma**.
 - **Non cancellare** i lavori già pubblicati: si aggiungono e si ordinano nuove cartelle.
 - **Niente rimandi** tra un lavoro e l’altro (niente link incrociati nella navigazione).
 - Una homepage comune con i link si potrà fare in seguito, se servirà.
+- In **ogni** lavoro per la scuola, nel footer (o credito visibile), scrivi sempre: **Realizzato dal Prof. Rossano Bella**.
 
 Struttura tipica di ogni cartella:
 

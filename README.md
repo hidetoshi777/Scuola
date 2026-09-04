@@ -2,6 +2,8 @@
 
 Materiali didattici interattivi per la scuola secondaria. Ogni attività è una cartella autonoma, senza link tra un lavoro e l’altro.
 
+Realizzato dal Prof. Rossano Bella.
+
 ## Attività
 
 ### Rotazione terrestre · Prima media
