@@ -24,7 +24,23 @@
       deck.push({ pairId: pair.id, text: pair.a, side: "a" });
       deck.push({ pairId: pair.id, text: pair.b, side: "b" });
     });
-    return window.mescola(deck);
+    const shuffle = window.mescola || ((lista) => {
+      const copia = [...lista];
+      for (let i = copia.length - 1; i > 0; i -= 1) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [copia[i], copia[j]] = [copia[j], copia[i]];
+      }
+      return copia;
+    });
+    return shuffle(deck);
+  }
+
+  function escapeHtml(text) {
+    return String(text)
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;");
   }
 
   function render() {
@@ -47,7 +63,7 @@
       btn.innerHTML = `
         <span class="memory-inner">
           <span class="memory-face memory-back" aria-hidden="true">M</span>
-          <span class="memory-face memory-front">${card.text}</span>
+          <span class="memory-face memory-front">${escapeHtml(card.text)}</span>
         </span>
       `;
       btn.addEventListener("click", () => onFlip(index, btn));
