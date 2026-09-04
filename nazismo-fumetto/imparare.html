@@ -5,13 +5,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
   <title>Imparare · Ombre sul Reich | Scuola</title>
-  <meta name="description" content="Schede illustrate sul Nazismo: Weimar, ascesa, ideologia, Shoah, resistenza, memoria.">
+  <meta name="description" content="Studio sul Nazismo: cause, ascesa, ideologia, Shoah, confronto con il Fascismo. Con le slide Canva del Prof. Rossano Bella.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Sora:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/imparare.css">
 </head>
-<body>
+<body class="page-imparare">
   <a class="skip-link visually-hidden" href="#contenuto">Salta al contenuto</a>
   <header class="site-header">
     <div class="wrap header-inner">
@@ -34,72 +35,174 @@
   </header>
 
   <main id="contenuto" class="wrap" tabindex="-1">
-    <p class="kicker">Schede illustrate</p>
-    <h1>Fatti da tenere a mente</h1>
-    <p class="lead">Le stesse scene della storia a fumetto, qui come schede rapide da ripassare.</p>
+    <p class="kicker">Sezione di studio</p>
+    <h1>Il Nazismo da sapere</h1>
+    <p class="lead">Qui trovi le informazioni da studiare (cause, date, ideologia, Shoah). Sotto ogni blocco c’è un trucco per ricordarle. In fondo: le slide Canva del Prof.</p>
 
-    <section class="scheda-visual">
-      <article class="scheda-card">
+    <nav class="studio-toc" aria-label="Indice di studio">
+      <a href="#cause">Cause</a>
+      <a href="#potere">Potere</a>
+      <a href="#ideologia">Ideologia</a>
+      <a href="#shoah">Shoah</a>
+      <a href="#confronto">vs Fascismo</a>
+      <a href="#canva-prof">Slide Canva</a>
+    </nav>
+
+    <section class="studio-block" id="cause" aria-labelledby="h-cause">
+      <div class="studio-visual">
         <img src="img/scene/weimar.png" alt="Strada di Weimar in crisi" width="1280" height="720" loading="lazy">
-        <div class="scheda-body">
-          <h2>Weimar e la crisi</h2>
-          <p>Democrazia fragile, umiliazione postbellica e crisi del 1929. Terreno fertile, non destino obbligato.</p>
-        </div>
-      </article>
-      <article class="scheda-card">
+      </div>
+      <div class="studio-copy">
+        <h2 id="h-cause">1 · Perché sale Hitler?</h2>
+        <p>Il Nazismo non nasce dal nulla. Tre fattori si sommano (1933–1945: dittatura nazista).</p>
+        <ol class="studio-list">
+          <li><strong>Crisi economica</strong>: dopo il 1929, disoccupazione e povertà devastano la Germania. I risarcimenti di Versailles pesano ancora.</li>
+          <li><strong>Vergogna e reduci</strong>: molti sentono la sconfitta della Grande Guerra come umiliazione. La delusione dei reduci alimenta rabbia e nazionalismo.</li>
+          <li><strong>Weimar debole</strong>: la Repubblica è formalmente democratica, ma i governi cambiano in continuazione. Le istituzioni non reggono lo scontro.</li>
+        </ol>
+        <p class="ricorda"><span>Ricorda così</span> Formula <strong>C-V-W</strong>: <em>Crisi</em> + <em>Vergogna</em> + <em>Weimar debole</em>.</p>
+      </div>
+    </section>
+
+    <section class="studio-block studio-block-flip" id="potere" aria-labelledby="h-potere">
+      <div class="studio-visual">
         <img src="img/scene/potere.png" alt="Berlino politica nel 1933" width="1280" height="720" loading="lazy">
-        <div class="scheda-body">
-          <h2>Ascesa (1933)</h2>
-          <p>Cancelliere via sistema politico, poi pieno poteri e repressione. Distrugge la democrazia dall’interno.</p>
+      </div>
+      <div class="studio-copy">
+        <h2 id="h-potere">2 · Come prende il potere?</h2>
+        <ul class="studio-list">
+          <li><strong>1933</strong>: Hitler diventa Cancelliere attraverso il sistema politico (elezioni + alleanze), non con una «marcia» come Mussolini.</li>
+          <li>Poi <strong>smantella la democrazia</strong>: partito unico, repressione degli oppositori, poteri concentrati.</li>
+          <li><strong>1934</strong> — Notte dei lunghi coltelli: elimina i rivali interni. Messaggio: comanda lui, senza rivali nel partito.</li>
+        </ul>
+        <div class="contrast">
+          <p><strong>Hitler ≠ Mussolini (ascesa)</strong></p>
+          <p>Mussolini: Marcia su Roma ≈ colpo di forza (1922). Hitler: vince lo spazio elettorale e poi distrugge la democrazia dall’interno.</p>
         </div>
-      </article>
-      <article class="scheda-card">
-        <img src="img/scene/notte.png" alt="Corridoio notturno, consolidamento del potere" width="1280" height="720" loading="lazy">
-        <div class="scheda-body">
-          <h2>Notte dei lunghi coltelli</h2>
-          <p>1934: eliminazione dei rivali interni. Messaggio chiaro su chi comanda.</p>
-        </div>
-      </article>
-      <article class="scheda-card">
+        <p class="ricorda"><span>Ricorda così</span> <strong>E → D</strong>: prima <em>Elezioni</em>, poi <em>Dittatura</em>.</p>
+      </div>
+    </section>
+
+    <section class="studio-block" id="ideologia" aria-labelledby="h-ideo">
+      <div class="studio-visual">
         <img src="img/scene/libro.png" alt="Libro e lume, studio dell’ideologia" width="1280" height="720" loading="lazy">
-        <div class="scheda-body">
-          <h2>Ideologia</h2>
-          <p>Razzismo, Lebensraum, antisemitismo, odio per democrazia e comunismo: un programma, non solo un testo.</p>
-        </div>
-      </article>
-      <article class="scheda-card">
-        <img src="img/scene/radio.png" alt="Radio d’epoca e propaganda" width="1280" height="720" loading="lazy">
-        <div class="scheda-body">
-          <h2>Propaganda e società</h2>
-          <p>Radio, scuola, gioventù organizzata: consenso e paura insieme.</p>
-        </div>
-      </article>
-      <article class="scheda-card">
+      </div>
+      <div class="studio-copy">
+        <h2 id="h-ideo">3 · Ideologia (Mein Kampf)</h2>
+        <p>«Mein Kampf» = «La mia battaglia». Tre pilastri da sapere:</p>
+        <ol class="studio-list">
+          <li><strong>Teoria della razza</strong>: gerarchia inventata; gli «ariani» sopra, ebrei e altri popoli come «nemici».</li>
+          <li><strong>Lebensraum</strong> (spazio vitale): espandersi a Est per terre e dominio.</li>
+          <li><strong>Anti-comunismo e anti-democrazia</strong>: bolscevismo e liberalismo come nemici da distruggere.</li>
+        </ol>
+        <p class="ricorda"><span>Ricorda così</span> <strong>R-S-A</strong>: <em>Razza</em> · <em>Spazio vitale</em> · <em>Anti</em> (comunismo/democrazia).</p>
+      </div>
+    </section>
+
+    <section class="studio-block studio-block-flip" id="shoah" aria-labelledby="h-shoah">
+      <div class="studio-visual">
         <img src="img/scene/shoah.png" alt="Binari nella nebbia, memoria della Shoah" width="1280" height="720" loading="lazy">
-        <div class="scheda-body">
-          <h2>Shoah</h2>
-          <p>Da Norimberga 1935 alla Soluzione finale. Concentramento ≠ sterminio: funzioni diverse, entrambi crimini.</p>
+      </div>
+      <div class="studio-copy">
+        <h2 id="h-shoah">4 · Shoah: da legge a sterminio</h2>
+        <ul class="studio-list">
+          <li><strong>1935 — Leggi di Norimberga</strong>: gli ebrei esclusi dalla vita pubblica (cittadinanza, matrimoni misti, discriminazione quotidiana).</li>
+          <li>Propaganda, violenza e confische preparano la deportazione.</li>
+          <li>Durante la guerra: <strong>Soluzione finale</strong> = sterminio sistematico. Milioni di ebrei, rom, disabili, oppositori e altri gruppi assassinati.</li>
+        </ul>
+        <div class="contrast">
+          <p><strong>Concentramento ≠ sterminio</strong></p>
+          <ul>
+            <li><em>Concentramento</em> (es. Dachau): detenzione, lavoro forzato, fame, violenza; mortalità altissima.</li>
+            <li><em>Sterminio</em> (es. Auschwitz-Birkenau, Treblinka, Sobibor): creato per uccidere su larga scala (anche camere a gas). Molti in Polonia.</li>
+          </ul>
         </div>
-      </article>
-      <article class="scheda-card">
-        <img src="img/scene/resistenza.png" alt="Stampa clandestina nella resistenza" width="1280" height="720" loading="lazy">
-        <div class="scheda-body">
-          <h2>Resistenza</h2>
-          <p>Non tutti tacquero: esilio, aiuto, sabotaggio. Rari, rischiosi, da ricordare.</p>
+        <p class="ricorda"><span>Ricorda così</span> Prima la <strong>legge</strong> (Norimberga), poi lo <strong>sterminio</strong> (Soluzione finale). L’odio diventa Stato.</p>
+      </div>
+    </section>
+
+    <section class="studio-block" id="confronto" aria-labelledby="h-conf">
+      <div class="studio-visual">
+        <img src="img/scene/radio.png" alt="Radio d’epoca e propaganda" width="1280" height="720" loading="lazy">
+      </div>
+      <div class="studio-copy">
+        <h2 id="h-conf">5 · Similitudini Fascismo / Nazismo</h2>
+        <p>Sei punti in comune (dal Canva del Prof.):</p>
+        <ol class="studio-list compact">
+          <li>Crisi e umiliazione dopo la Grande Guerra</li>
+          <li>Propaganda di massa</li>
+          <li>Democrazia debole</li>
+          <li>Culto del capo (Duce / Führer)</li>
+          <li>Violenza politica</li>
+          <li>Nazionalismo aggressivo</li>
+        </ol>
+        <p class="ricorda"><span>Ricorda così</span> Acronimo <strong>C-P-D-C-V-N</strong>: Crisi, Propaganda, Democrazia debole, Culto, Violenza, Nazionalismo.</p>
+        <div class="contrast">
+          <p><strong>Differenza di potere</strong></p>
+          <p>Hitler diventa praticamente assoluto. Mussolini deve ancora mediare con il Re (Vittorio Emanuele III).</p>
         </div>
-      </article>
-      <article class="scheda-card">
-        <img src="img/scene/processi.png" alt="Aula di tribunale per i processi del dopoguerra" width="1280" height="720" loading="lazy">
-        <div class="scheda-body">
-          <h2>Processi e memoria</h2>
-          <p>Norimberga giudica i crimini. Studiare oggi serve a riconoscere odio legalizzato e silenzi comodi.</p>
+      </div>
+    </section>
+
+    <section class="studio-timeline" aria-label="Timeline essenziale">
+      <h2>Timeline lampo</h2>
+      <ol>
+        <li><strong>1929</strong> crisi → terreno fertile</li>
+        <li><strong>1933</strong> Cancelliere → dittatura</li>
+        <li><strong>1934</strong> Notte dei lunghi coltelli</li>
+        <li><strong>1935</strong> Leggi di Norimberga</li>
+        <li><strong>1939–45</strong> guerra e Shoah</li>
+        <li><strong>1945</strong> fine del Reich · memoria</li>
+      </ol>
+    </section>
+
+    <section class="canva-section" id="canva-prof" aria-labelledby="h-canva">
+      <p class="kicker">Materiale di classe</p>
+      <h2 id="h-canva">Le slide Canva del Prof.</h2>
+      <p class="lead canva-lead">Presentazione «Il Nazismo» (a cura del Prof. Rossano Bella). Scorri le slide come in classe.</p>
+
+      <div class="canva-viewer" data-canva-viewer>
+        <div class="canva-stage">
+          <img
+            id="canva-slide"
+            src="img/canva/slide-01.jpg"
+            alt="Slide 1 di 11: titolo Il Nazismo 1933–1945"
+            width="1920"
+            height="1080"
+            decoding="async"
+          >
         </div>
-      </article>
+        <div class="canva-controls">
+          <button type="button" class="btn btn-secondary" id="canva-prev" aria-label="Slide precedente">←</button>
+          <p class="canva-counter" id="canva-counter" aria-live="polite">1 / 11</p>
+          <button type="button" class="btn btn-secondary" id="canva-next" aria-label="Slide successiva">→</button>
+        </div>
+        <div class="canva-thumbs" role="list" aria-label="Anteprime slide">
+          <!-- filled by script for maintainability; noscript fallback below -->
+        </div>
+      </div>
+
+      <noscript>
+        <div class="canva-gallery">
+          <img src="img/canva/slide-01.jpg" alt="Slide 1" width="1920" height="1080" loading="lazy">
+          <img src="img/canva/slide-02.jpg" alt="Slide 2" width="1920" height="1080" loading="lazy">
+          <img src="img/canva/slide-03.jpg" alt="Slide 3" width="1920" height="1080" loading="lazy">
+          <img src="img/canva/slide-04.jpg" alt="Slide 4" width="1920" height="1080" loading="lazy">
+          <img src="img/canva/slide-05.jpg" alt="Slide 5" width="1920" height="1080" loading="lazy">
+          <img src="img/canva/slide-06.jpg" alt="Slide 6" width="1920" height="1080" loading="lazy">
+          <img src="img/canva/slide-07.jpg" alt="Slide 7" width="1920" height="1080" loading="lazy">
+          <img src="img/canva/slide-08.jpg" alt="Slide 8" width="1920" height="1080" loading="lazy">
+          <img src="img/canva/slide-09.jpg" alt="Slide 9" width="1920" height="1080" loading="lazy">
+          <img src="img/canva/slide-10.jpg" alt="Slide 10" width="1920" height="1080" loading="lazy">
+          <img src="img/canva/slide-11.jpg" alt="Slide 11" width="1920" height="1080" loading="lazy">
+        </div>
+      </noscript>
     </section>
 
     <div class="hero-actions">
-      <a class="btn btn-primary" href="gioco.html">Vai alla storia</a>
-      <a class="btn btn-secondary" href="laboratorio.html">Prova il laboratorio</a>
+      <a class="btn btn-primary" href="laboratorio.html">Prova il laboratorio</a>
+      <a class="btn btn-secondary" href="fumetto.html">Leggi il fumetto</a>
+      <a class="btn btn-secondary" href="gioco.html">Vai alla storia</a>
     </div>
   </main>
 
@@ -109,5 +212,6 @@
     </div>
   </footer>
   <script src="js/common.js" defer></script>
+  <script src="js/imparare.js" defer></script>
 </body>
 </html>
