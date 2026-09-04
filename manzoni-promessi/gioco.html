@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <title>Gioco · Manzoni | Scuola</title>
+  <meta name="description" content="Quiz a tempo su Manzoni e I Promessi Sposi: dodici domande sul filo della Provvidenza.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700&family=Newsreader:opsz,wght@6..72,500;6..72,600;6..72,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <a class="skip-link visually-hidden" href="#contenuto">Salta al contenuto</a>
+  <header class="site-header">
+    <div class="wrap header-inner">
+      <a class="brand" href="index.html">
+        <span class="brand-mark" aria-hidden="true"></span>
+        Manzoni
+      </a>
+      <nav class="site-nav" aria-label="Principale">
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="imparare.html">Imparare</a></li>
+          <li><a href="personaggi.html">Personaggi</a></li>
+          <li><a href="laboratorio.html">Laboratorio</a></li>
+          <li><a href="gioco.html">Gioco</a></li>
+        </ul>
+      </nav>
+      <button type="button" class="theme-toggle" data-theme-toggle aria-pressed="false">Tema chiaro</button>
+    </div>
+  </header>
+
+  <main id="contenuto" class="wrap page-pad" tabindex="-1">
+    <p class="kicker">Prova a tempo</p>
+    <h1>Il filo della Provvidenza</h1>
+    <p class="lead">Dodici domande. Rispondi senza aiuto: alla fine vedi il punteggio e dove ripassare.</p>
+
+    <div id="gioco-start" class="sheet">
+      <h2>Pronto?</h2>
+      <p>Le domande mescolano lingua, opere, romanzo storico, personaggi e Provvidenza.</p>
+      <button type="button" class="btn btn-primary" id="btn-start">Inizia la prova</button>
+    </div>
+
+    <div id="gioco-play" class="sheet" hidden>
+      <div class="gioco-hud">
+        <span>Domanda <strong id="q-num">1</strong> / <span id="q-tot">12</span></span>
+        <span>Punteggio <strong id="q-score">0</strong></span>
+        <div class="progress-track" aria-hidden="true"><div class="progress-bar" id="q-bar"></div></div>
+      </div>
+      <h2 id="q-text">…</h2>
+      <div class="choices" id="q-choices" role="group" aria-labelledby="q-text"></div>
+      <p class="feedback" id="q-feedback" hidden></p>
+      <button type="button" class="btn btn-primary" id="btn-next" hidden>Domanda successiva</button>
+    </div>
+
+    <div id="gioco-end" class="sheet risultato-finale" hidden>
+      <h2>Esito</h2>
+      <p id="end-summary"></p>
+      <p id="end-tip"></p>
+      <div class="hero-actions">
+        <button type="button" class="btn btn-primary" id="btn-retry">Ricomincia</button>
+        <a class="btn btn-secondary" href="imparare.html">Ripassa lo studio</a>
+        <a class="btn btn-secondary" href="laboratorio.html">Torna al laboratorio</a>
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <p>Realizzato dal Prof. Rossano Bella.</p>
+    </div>
+  </footer>
+  <script src="js/data.js" defer></script>
+  <script src="js/common.js" defer></script>
+  <script src="js/gioco.js" defer></script>
+</body>
+</html>
