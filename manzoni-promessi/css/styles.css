@@ -340,13 +340,21 @@ a:hover { color: var(--gold); }
   font-size: clamp(2.6rem, 11vw, 5.2rem);
   line-height: 0.95;
   margin: 0;
-  color: var(--parchment);
-  text-shadow: 0 8px 40px rgb(0 0 0 / 0.55);
+  color: #f3ebd8;
+  text-shadow:
+    0 2px 0 rgb(0 0 0 / 0.35),
+    0 10px 36px rgb(0 0 0 / 0.7);
   animation: rise 0.9s ease both;
 }
 
+.hero-copy .kicker {
+  color: #b7d9d3;
+  text-shadow: 0 1px 8px rgb(0 0 0 / 0.55);
+}
+
 .hero-copy .lead {
-  color: color-mix(in srgb, var(--parchment) 78%, var(--muted));
+  color: color-mix(in srgb, #f3ebd8 82%, var(--muted));
+  text-shadow: 0 2px 14px rgb(0 0 0 / 0.55);
   animation: rise 0.9s ease 0.12s both;
 }
 
