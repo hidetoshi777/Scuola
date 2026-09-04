@@ -297,21 +297,34 @@ a:hover { color: var(--gold); }
   padding: 0;
 }
 
+/* Home: header sopra l’hero a tutto schermo, così brand + CTA restano nel primo viewport */
+.page-home .site-header {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  background: linear-gradient(to bottom, rgb(7 18 20 / 0.82), transparent);
+  border-bottom: none;
+  backdrop-filter: none;
+}
+
+.page-home .site-header .theme-toggle {
+  background: color-mix(in srgb, var(--ink) 55%, transparent);
+}
+
 .hero-archivio {
   position: relative;
-  min-height: calc(100dvh - 5.5rem);
+  min-height: 100dvh;
   display: grid;
   align-items: end;
   overflow: hidden;
 }
 
 @media (max-width: 520px) {
-  .hero-archivio {
-    min-height: calc(100dvh - 7.5rem);
-  }
-
   .hero-copy {
-    padding-bottom: 1.25rem;
+    padding: 5.5rem 0 1.35rem;
+    width: min(100% - 1.5rem, 40rem);
+    margin-inline: auto;
   }
 
   .hero-brand {
