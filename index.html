@@ -2,11 +2,91 @@
 <html lang="it">
 <head>
   <meta charset="utf-8">
-  <meta http-equiv="refresh" content="0; url=rotazione-terrestre/">
-  <title>Reindirizzamento…</title>
-  <link rel="canonical" href="rotazione-terrestre/">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <title>Scuola — Materiali del Prof. Rossano Bella</title>
+  <meta name="description" content="Indice dei materiali didattici: attività interattive del sito e lavori Canva divisi per materia.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
-  <p>Reindirizzamento a <a href="rotazione-terrestre/">rotazione terrestre</a>…</p>
+  <a class="skip-link visually-hidden" href="#contenuto">Salta al contenuto</a>
+  <header class="site-header">
+    <div class="wrap header-inner">
+      <a class="brand" href="index.html">
+        <span class="brand-mark" aria-hidden="true"></span>
+        Scuola
+      </a>
+      <nav aria-label="Sezioni">
+        <a href="#attivita">Attività</a>
+        <a href="#canva">Lavori Canva</a>
+      </nav>
+      <button type="button" class="theme-toggle" data-theme-toggle aria-pressed="false">Tema chiaro</button>
+    </div>
+  </header>
+
+  <main id="contenuto" class="wrap" tabindex="-1">
+    <section class="hero">
+      <p class="kicker">Prof. Rossano Bella</p>
+      <h1>I materiali della classe, tutti da qui</h1>
+      <p class="lead">Le attività interattive del sito e i lavori Canva, divisi per materia, cercabili e sempre aggiornati. Un solo indirizzo per ritrovare tutto.</p>
+      <div class="hero-stats">
+        <div class="stat">
+          <span class="stat-value" id="stat-attivita">–</span>
+          <span class="stat-label">attività interattive</span>
+        </div>
+        <div class="stat">
+          <span class="stat-value" id="stat-canva">–</span>
+          <span class="stat-label">lavori Canva</span>
+        </div>
+        <div class="stat">
+          <span class="stat-value" id="stat-materie">–</span>
+          <span class="stat-label">materie</span>
+        </div>
+      </div>
+    </section>
+
+    <section id="attivita" class="blocco">
+      <div class="section-head">
+        <h2>Attività interattive</h2>
+        <p>Siti giocabili nel browser, con teoria ed esercizi.</p>
+      </div>
+      <div class="card-grid" id="griglia-attivita"></div>
+    </section>
+
+    <section id="canva" class="blocco">
+      <div class="section-head">
+        <h2>Lavori Canva</h2>
+        <p id="contatore-risultati" class="contatore">– lavori</p>
+      </div>
+      <div class="filtri">
+        <div class="ricerca-wrap">
+          <input type="search" id="ricerca-canva" placeholder="Cerca per titolo…" aria-label="Cerca un lavoro per titolo">
+        </div>
+        <div class="chip-row" id="chip-materie"></div>
+      </div>
+      <div class="card-grid" id="griglia-canva"></div>
+      <p class="nota">I link ai design Canva vengono generati ad ogni apertura di questa pagina a partire dall'ID del design, l'unica chiave che non cambia — se un link chiede il login, vuol dire che la condivisione pubblica di quel design va riattivata da Canva.</p>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <p>Materiali didattici per le classi del Prof. Rossano Bella. Indice statico, nessun dato viene raccolto.</p>
+      <p>Realizzato dal Prof. Rossano Bella.</p>
+    </div>
+  </footer>
+
+  <script src="js/data.js" defer></script>
+  <script src="js/desktop.js" defer></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      document.getElementById("stat-attivita").textContent = window.ATTIVITA_WEB.filter(function (a) { return a.stato === "live"; }).length;
+      document.getElementById("stat-canva").textContent = window.CANVA.length;
+      document.getElementById("stat-materie").textContent = Object.keys(window.MATERIE).length;
+    });
+  </script>
 </body>
 </html>
