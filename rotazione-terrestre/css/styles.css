@@ -654,13 +654,54 @@ dialog::backdrop {
 }
 
 @media (max-width: 48rem) {
+  body {
+    overflow-x: clip;
+    padding-bottom: env(safe-area-inset-bottom, 0);
+  }
+
+  .wrap {
+    width: min(100% - 1.25rem, var(--content));
+  }
+
+  .header-inner {
+    gap: 0.5rem;
+  }
+
+  .site-nav {
+    flex: 1 1 100%;
+    order: 3;
+  }
+
+  .site-nav ul {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.4rem;
+    width: 100%;
+  }
+
+  .site-nav a,
+  .theme-toggle,
+  .btn {
+    min-height: 2.75rem;
+    justify-content: center;
+  }
+
   .hero,
   .split {
     grid-template-columns: 1fr;
   }
 
+  .hero-actions .btn,
+  .inline-actions .btn {
+    flex: 1 1 100%;
+  }
+
   .globe-stage {
-    min-height: 18rem;
+    min-height: 16rem;
+  }
+
+  .quiz-options button {
+    min-height: 2.75rem;
   }
 }
 

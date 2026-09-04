@@ -226,7 +226,8 @@ a:hover { color: var(--accent); }
 }
 
 .site-nav a {
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
   padding: 0.4rem 0.8rem;
   border-radius: 999px;
   border: 1px solid transparent;
@@ -997,9 +998,71 @@ dialog::backdrop { background: rgb(3 6 14 / 0.65); backdrop-filter: blur(3px); }
 /* ---------- schermi stretti ---------- */
 
 @media (max-width: 56rem) {
+  body {
+    overflow-x: clip;
+    padding-bottom: env(safe-area-inset-bottom, 0);
+  }
+
+  .wrap {
+    width: min(100% - 1.25rem, var(--content));
+  }
+
   .hero,
   .lab-layout { grid-template-columns: 1fr; }
-  .site-header { position: static; }
+
+  .site-header { position: sticky; }
+
+  .site-nav {
+    flex: 1 1 100%;
+    order: 3;
+  }
+
+  .site-nav ul {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.4rem;
+    width: 100%;
+  }
+
+  .site-nav a,
+  .theme-toggle,
+  .btn {
+    min-height: 2.75rem;
+    justify-content: center;
+  }
+
+  .hero-actions .btn,
+  .inline-actions .btn {
+    flex: 1 1 100%;
+  }
+
+  .tab-bar {
+    gap: 0.4rem;
+  }
+
+  .tab-bar button {
+    min-height: 2.75rem;
+    flex: 1 1 calc(50% - 0.4rem);
+  }
+
+  .quiz-options button,
+  .word-chip {
+    min-height: 2.85rem;
+  }
+
+  .word-chip {
+    padding: 0.25rem 0.35rem;
+  }
+
+  .bucket button,
+  .intruso-grid button {
+    min-height: 2.85rem;
+  }
+
+  dialog {
+    width: calc(100vw - 1.25rem);
+    max-width: none;
+  }
 }
 
 /* ---------- rispetto delle preferenze di movimento ---------- */
