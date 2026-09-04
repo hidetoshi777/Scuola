@@ -80,6 +80,9 @@
     salva(id);
     visitati.add(id);
     aggiornaProgresso();
+    if (window.AudioUi) {
+      window.AudioUi.beep("page");
+    }
 
     const p = personaggio(nodo.speaker);
     stage.dataset.scena = nodo.scena || "aula";
@@ -129,7 +132,12 @@
         btn.className = "vn-choice";
         btn.textContent = scelta.testo;
         btn.style.setProperty("--i", String(index));
-        btn.addEventListener("click", () => render(scelta.vai));
+        btn.addEventListener("click", () => {
+          if (window.AudioUi) {
+            window.AudioUi.beep("choice");
+          }
+          render(scelta.vai);
+        });
         els.scelte.appendChild(btn);
       });
       const primo = els.scelte.querySelector("button");
@@ -152,9 +160,11 @@
       potere: "Berlino · 1933",
       libro: "Ideologia",
       strada: "Vita sotto il regime",
+      radio: "Propaganda e radio",
       shoah: "Memoria della Shoah",
       guerra: "Europa in guerra",
       memoria: "Oggi",
+      appunti: "Appunti e memoria",
     };
     return map[scena] || "Scena";
   }

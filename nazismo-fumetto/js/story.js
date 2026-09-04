@@ -189,7 +189,7 @@ window.STORIA_NAZISMO = {
       scelte: [{ testo: "Come si vive sotto il regime?", vai: "dittatura" }],
     },
     dittatura: {
-      scena: "strada",
+      scena: "radio",
       capitolo: "4 · Dittatura totale",
       speaker: "narratore",
       testo:
@@ -206,7 +206,7 @@ window.STORIA_NAZISMO = {
       ],
     },
     consenso_sbaglio: {
-      scena: "strada",
+      scena: "radio",
       capitolo: "4 · Dittatura totale",
       speaker: "guida",
       testo:
@@ -214,7 +214,7 @@ window.STORIA_NAZISMO = {
       scelte: [{ testo: "Parliamo di consenso e paura.", vai: "consenso" }],
     },
     consenso: {
-      scena: "strada",
+      scena: "radio",
       capitolo: "4 · Dittatura totale",
       speaker: "lena",
       testo:
@@ -288,7 +288,7 @@ window.STORIA_NAZISMO = {
       scelte: [{ testo: "Memoria e oggi.", vai: "memoria" }],
     },
     memoria: {
-      scena: "memoria",
+      scena: "appunti",
       capitolo: "7 · Perché studiarlo",
       speaker: "guida",
       testo:
@@ -301,7 +301,7 @@ window.STORIA_NAZISMO = {
       ],
     },
     scelta_finale: {
-      scena: "memoria",
+      scena: "appunti",
       capitolo: "7 · Perché studiarlo",
       speaker: "tu",
       testo: "Scegli il segnale che vuoi portare a casa. Non c’è una sola risposta giusta: tutte sono pezzi dello stesso allarme.",
@@ -321,7 +321,7 @@ window.STORIA_NAZISMO = {
       ],
     },
     fine_legge: {
-      scena: "memoria",
+      scena: "appunti",
       capitolo: "Epilogo",
       speaker: "guida",
       testo:
@@ -332,7 +332,7 @@ window.STORIA_NAZISMO = {
       scelte: [{ testo: "Vedi il riepilogo", vai: "__fine__" }],
     },
     fine_propaganda: {
-      scena: "memoria",
+      scena: "appunti",
       capitolo: "Epilogo",
       speaker: "guida",
       testo:
@@ -343,7 +343,7 @@ window.STORIA_NAZISMO = {
       scelte: [{ testo: "Vedi il riepilogo", vai: "__fine__" }],
     },
     fine_silenzio: {
-      scena: "memoria",
+      scena: "appunti",
       capitolo: "Epilogo",
       speaker: "guida",
       testo:

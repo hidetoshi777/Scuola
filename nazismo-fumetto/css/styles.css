@@ -454,6 +454,10 @@ main.wrap {
   background-image: url("../img/scene/strada.png");
 }
 
+#vn-stage[data-scena="radio"] .vn-backdrop {
+  background-image: url("../img/scene/radio.png");
+}
+
 #vn-stage[data-scena="shoah"] .vn-backdrop {
   background-image: url("../img/scene/shoah.png");
   filter: saturate(0.85);
@@ -465,6 +469,10 @@ main.wrap {
 
 #vn-stage[data-scena="memoria"] .vn-backdrop {
   background-image: url("../img/scene/memoria.png");
+}
+
+#vn-stage[data-scena="appunti"] .vn-backdrop {
+  background-image: url("../img/scene/appunti.png");
 }
 
 .vn-cast {
