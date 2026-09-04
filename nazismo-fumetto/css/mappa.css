@@ -1,0 +1,237 @@
+/* Mappa animata: layout "console storica", diverso da VN e fumetto. */
+
+.page-mappa {
+  background:
+    radial-gradient(700px 380px at 10% 0%, color-mix(in srgb, #3d7ea6 20%, transparent), transparent 60%),
+    linear-gradient(165deg, #0c1016, #151b24 55%, #10151c);
+}
+
+.mappa-main {
+  width: min(100% - 1.25rem, 72rem);
+  margin-inline: auto;
+  padding: 1rem 0 2rem;
+  position: relative;
+  z-index: 1;
+}
+
+.mappa-intro h1 {
+  max-width: 16ch;
+}
+
+.mappa-lead {
+  max-width: 58ch;
+}
+
+.mappa-stage {
+  margin-top: 1rem;
+  display: grid;
+  gap: 0.85rem;
+  grid-template-columns: 1fr;
+  align-items: stretch;
+}
+
+.mappa-year {
+  justify-self: start;
+  font-family: var(--font-display);
+  font-size: clamp(2.2rem, 8vw, 3.6rem);
+  line-height: 1;
+  color: var(--amber);
+  letter-spacing: 0.04em;
+  text-shadow: 0 0 24px color-mix(in srgb, var(--amber) 35%, transparent);
+}
+
+.mappa-svg {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 1rem;
+  border: 1px solid var(--line);
+  box-shadow: var(--shadow);
+  background: #102030;
+}
+
+.mappa-svg .lands path {
+  transition: fill 0.55s ease, filter 0.45s ease, opacity 0.45s ease;
+}
+
+.mappa-svg .lands path.is-core {
+  fill: #c47a2e;
+  filter: url(#glow);
+}
+
+.mappa-svg .lands path.is-annex {
+  fill: #b4532a;
+}
+
+.mappa-svg .lands path.is-occ {
+  fill: #8f3b3b;
+}
+
+.mappa-svg .lands path.is-adv {
+  fill: #6b2f55;
+}
+
+.mappa-svg .lands path.is-flash {
+  animation: mappa-flash 0.7s ease;
+}
+
+@keyframes mappa-flash {
+  0% { opacity: 0.35; }
+  40% { opacity: 1; }
+  100% { opacity: 1; }
+}
+
+.mappa-card {
+  background: color-mix(in srgb, var(--panel) 88%, transparent);
+  border: 1px solid var(--line);
+  border-radius: 1rem;
+  padding: 1rem 1.1rem;
+  box-shadow: var(--shadow);
+}
+
+.mappa-step-label {
+  margin: 0 0 0.35rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-size: 0.75rem;
+  color: var(--teal);
+}
+
+.mappa-card h2 {
+  font-size: clamp(1.2rem, 3vw, 1.55rem);
+  margin-bottom: 0.45rem;
+}
+
+.mappa-card p {
+  margin: 0;
+  color: var(--muted);
+}
+
+.mappa-controls {
+  margin-top: 0.9rem;
+  display: grid;
+  grid-template-columns: auto auto 1fr auto;
+  gap: 0.55rem;
+  align-items: center;
+}
+
+.mappa-controls .btn {
+  min-height: 2.85rem;
+  min-width: 2.85rem;
+}
+
+#mappa-play {
+  min-width: 6.5rem;
+}
+
+#mappa-slider {
+  width: 100%;
+  accent-color: var(--amber);
+  height: 2rem;
+}
+
+.mappa-legend {
+  grid-column: 1 / -1;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.55rem 1rem;
+  color: var(--muted);
+  font-size: 0.88rem;
+}
+
+.mappa-legend i {
+  display: inline-block;
+  width: 0.85rem;
+  height: 0.85rem;
+  border-radius: 0.2rem;
+  margin-right: 0.35rem;
+  vertical-align: -0.1rem;
+}
+
+.leg.core { background: #c47a2e; }
+.leg.annex { background: #b4532a; }
+.leg.occ { background: #8f3b3b; }
+.leg.adv { background: #6b2f55; }
+
+.mappa-note {
+  margin-top: 1rem;
+  color: var(--muted);
+  font-size: 0.92rem;
+  max-width: 62ch;
+}
+
+@media (min-width: 900px) {
+  .mappa-stage {
+    grid-template-columns: 1.55fr 0.85fr;
+    grid-template-areas:
+      "year card"
+      "map card";
+  }
+
+  .mappa-year { grid-area: year; }
+  .mappa-svg { grid-area: map; }
+  .mappa-card {
+    grid-area: card;
+    align-self: stretch;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+}
+
+@media (max-width: 640px) {
+  .page-mappa .site-header {
+    position: static;
+  }
+
+  .page-mappa .site-nav ul {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .mappa-main {
+    padding: 0.55rem 0 1.4rem;
+  }
+
+  .mappa-intro h1 {
+    max-width: none;
+    font-size: clamp(1.6rem, 7vw, 2.1rem);
+  }
+
+  .mappa-year {
+    font-size: 2rem;
+  }
+
+  .mappa-svg .labels {
+    font-size: 11px;
+  }
+
+  .mappa-controls {
+    grid-template-columns: 1fr 1fr;
+    grid-template-areas:
+      "play play"
+      "slider slider"
+      "prev next"
+      "legend legend";
+  }
+
+  #mappa-play { grid-area: play; width: 100%; }
+  #mappa-slider { grid-area: slider; }
+  #mappa-prev { grid-area: prev; }
+  #mappa-next { grid-area: next; }
+  .mappa-legend { grid-area: legend; }
+
+  .mappa-controls .btn {
+    width: 100%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mappa-svg .lands path {
+    transition: none;
+  }
+
+  .mappa-svg .lands path.is-flash {
+    animation: none;
+  }
+}

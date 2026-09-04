@@ -48,7 +48,7 @@ Sito base: `https://hidetoshi777.github.io/Scuola/`
 |----------|------|-------|
 | Rotazione terrestre (prima media) | https://hidetoshi777.github.io/Scuola/rotazione-terrestre/ | https://hidetoshi777.github.io/Scuola/rotazione-terrestre/gioco.html |
 | Parti invariabili (prima superiore) | https://hidetoshi777.github.io/Scuola/parti-invariabili/ | https://hidetoshi777.github.io/Scuola/parti-invariabili/gioco.html |
-| Ombre sul Reich · Nazismo a fumetto | https://hidetoshi777.github.io/Scuola/nazismo-fumetto/ | https://hidetoshi777.github.io/Scuola/nazismo-fumetto/gioco.html · [Fumetto](https://hidetoshi777.github.io/Scuola/nazismo-fumetto/fumetto.html) |
+| Ombre sul Reich · Nazismo a fumetto | https://hidetoshi777.github.io/Scuola/nazismo-fumetto/ | [Fumetto](https://hidetoshi777.github.io/Scuola/nazismo-fumetto/fumetto.html) · [Mappa](https://hidetoshi777.github.io/Scuola/nazismo-fumetto/mappa.html) · [VN](https://hidetoshi777.github.io/Scuola/nazismo-fumetto/gioco.html) |
 
 I vecchi link alla radice (`/gioco.html`, ecc.) reindirizzano ancora alla rotazione terrestre.
 
