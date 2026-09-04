@@ -9,6 +9,7 @@ Materiali didattici interattivi, ognuno in una **sottocartella autonoma**.
 - **Niente rimandi** tra un lavoro e l’altro (niente link incrociati nella navigazione).
 - Una homepage comune con i link si potrà fare in seguito, se servirà.
 - In **ogni** lavoro per la scuola, nel footer (o credito visibile), scrivi sempre: **Realizzato dal Prof. Rossano Bella**.
+- Per i prossimi lavori Scuola, **usa il MCP Canva** (lavori e risorse già presenti nell’account Canva del Prof.) quando servono grafiche, template, export o materiali già realizzati lì: non reinventare da zero se Canva ha già qualcosa di utile.
 
 Struttura tipica di ogni cartella:
 
