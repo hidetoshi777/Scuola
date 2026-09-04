@@ -19,6 +19,7 @@ Materiali didattici interattivi, ognuno in una **sottocartella autonoma**.
 - **Visual novel / fumetti didattici**: preferisci **poche scelte** (spesso solo «Continua») e **tante immagini di scena diverse**. Le scelte servono a correggere un concetto, non a ramificare la trama. Per le illustrazioni usa generazione immagini (es. Grok / GenerateImage) o Canva quando già c’è materiale utile.
 - **Riuso immagini**: le scene e i ritratti fatti per la Storia vanno **riproposti** anche in Home, Imparare e Laboratorio (schede, hero, quiz), così il materiale resta coerente e non si spreca lavoro grafico.
 - **Layout diversi**: non ripetere sempre lo stesso schema UI (stessa home a due colonne, stesse card, stesso stage VN). Ogni nuova attività (o espansione sostanziale) deve cambiare composizione, tipografia o ritmo visivo, restando coerente al tema.
+- **Mappe e personaggi storici realistici**: niente silhouettes schematiche o “poligoni grezzi” se si può fare di meglio. Per le **mappe** usa contorni reali (SVG/GeoJSON open data) anche se i confini sono odierni/semplificati, con nota didattica chiara. Per i **personaggi storici** punta a ritratti riconoscibili e verosimili (foto storiche di pubblico dominio, Canva, o generazione immagini guidata), non a figure generiche o cartoon anonimi.
 
 Struttura tipica di ogni cartella:
 
