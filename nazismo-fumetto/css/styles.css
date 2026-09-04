@@ -778,6 +778,8 @@ dialog::backdrop {
   }
 
   .site-nav ul {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 0.35rem;
     width: 100%;
   }
@@ -794,11 +796,6 @@ dialog::backdrop {
     flex: 1 1 auto;
     justify-content: center;
     text-align: center;
-  }
-
-  .site-nav ul {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
   main.wrap {
@@ -842,64 +839,148 @@ dialog::backdrop {
     flex: 1 1 100%;
   }
 
+  /* —— VN: scena + testo nello stesso schermo —— */
+  body.page-gioco {
+    overflow-x: clip;
+  }
+
+  body.page-gioco .site-header {
+    position: static;
+  }
+
+  body.page-gioco main.wrap {
+    padding: 0.45rem 0 0.75rem;
+  }
+
+  body.page-gioco .site-footer {
+    display: none;
+  }
+
   .vn-hud {
-    gap: 0.65rem;
+    gap: 0.45rem;
+  }
+
+  .vn-hud .live {
+    display: none;
+  }
+
+  .vn-meta strong {
+    font-size: 1rem;
+  }
+
+  .vn-hud .inline-actions {
+    width: 100%;
+    margin-top: 0.35rem;
+  }
+
+  .vn-hud .btn {
+    flex: 1 1 auto;
+    min-height: 2.5rem;
+    padding: 0.45rem 0.7rem;
+    font-size: 0.88rem;
   }
 
   .vn-progress-track {
     width: 100%;
+    flex: 1 1 100%;
+  }
+
+  .vn-shell {
+    gap: 0.55rem;
   }
 
   #vn-stage {
-    min-height: auto;
+    display: flex;
+    flex-direction: column;
+    height: calc(100dvh - 7.5rem);
+    min-height: 26rem;
+    max-height: calc(100dvh - 6.5rem);
     border-radius: 0.9rem;
+    overflow: hidden;
+  }
+
+  .vn-backdrop {
+    position: absolute;
+    inset: 0 auto auto 0;
+    width: 100%;
+    height: 46%;
+    bottom: auto;
+  }
+
+  .vn-backdrop::after {
+    background: linear-gradient(
+      180deg,
+      rgb(10 12 16 / 0.08) 0%,
+      rgb(10 12 16 / 0.2) 45%,
+      rgb(10 12 16 / 0.92) 100%
+    );
   }
 
   .vn-cast {
-    min-height: 7.5rem;
-    padding: 1.1rem 0.75rem 0.35rem;
+    position: relative;
+    z-index: 1;
+    flex: 0 0 46%;
+    min-height: 0;
+    max-height: 46%;
+    padding: 1.6rem 0.65rem 0.35rem;
+    align-items: flex-end;
+    justify-content: flex-end;
   }
 
   .vn-avatar {
-    width: clamp(5.5rem, 32vw, 7.5rem);
+    width: clamp(4.8rem, 28vw, 6.4rem);
   }
 
   .vn-dialogue {
-    margin: 0 0.45rem 0.55rem;
-    padding: 0.85rem 0.8rem 0.95rem;
+    position: relative;
+    z-index: 2;
+    flex: 1 1 auto;
+    min-height: 0;
+    margin: 0;
+    border-radius: 1rem 1rem 0.6rem 0.6rem;
     border-width: 2px;
-    box-shadow: 0 6px 0 #1a160f;
+    box-shadow: 0 -4px 18px rgb(0 0 0 / 0.25);
+    padding: 0.75rem 0.75rem 0.85rem;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior: contain;
   }
 
   .vn-speaker-row {
     flex-wrap: wrap;
     gap: 0.2rem 0.6rem;
+    position: sticky;
+    top: 0;
+    background: var(--paper);
+    z-index: 1;
+    padding-bottom: 0.25rem;
   }
 
   .vn-speaker-row strong {
-    font-size: 1.05rem;
+    font-size: 1.02rem;
   }
 
   #vn-testo {
-    font-size: 1.02rem;
-    line-height: 1.45;
+    font-size: 0.98rem;
+    line-height: 1.4;
   }
 
   .vn-choices {
-    gap: 0.5rem;
+    gap: 0.45rem;
+    margin-top: 0.7rem;
   }
 
   .vn-choice {
-    min-height: 3rem;
-    padding: 0.85rem 0.9rem;
-    font-size: 0.98rem;
+    min-height: 2.85rem;
+    padding: 0.7rem 0.8rem;
+    font-size: 0.95rem;
   }
 
   .vn-scene-tag {
-    top: 0.55rem;
-    left: 0.55rem;
-    font-size: 0.72rem;
-    max-width: calc(100% - 1.2rem);
+    top: 0.45rem;
+    left: 0.45rem;
+    font-size: 0.7rem;
+    max-width: calc(100% - 1rem);
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;

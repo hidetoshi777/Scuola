@@ -167,6 +167,10 @@
     } else {
       delete stage.dataset.epilogo;
     }
+
+    if (window.matchMedia("(max-width: 640px)").matches) {
+      stage.scrollIntoView({ block: "nearest", behavior: "instant" in window ? "instant" : "auto" });
+    }
   }
 
   function scenaLabel(scena) {
