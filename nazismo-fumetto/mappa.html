@@ -37,75 +37,15 @@
     <header class="mappa-intro">
       <p class="kicker">Laboratorio visuale</p>
       <h1>L’espansione 1938–1942</h1>
-      <p class="lead mappa-lead">Mappa schematica (non geografica al millimetro): vedi come il controllo nazista si allarga, passo dopo passo, fino al massimo nel 1942.</p>
+      <p class="lead mappa-lead">Mappa reale dell’Europa (confini odierni semplificati): vedi come il controllo nazista si allarga, passo dopo passo, fino al massimo nel 1942.</p>
     </header>
 
     <section class="mappa-stage" aria-label="Mappa animata dell’Europa">
       <div class="mappa-year" id="mappa-year" aria-live="polite">1937</div>
 
-      <svg class="mappa-svg" viewBox="0 0 1000 620" role="img" aria-labelledby="mappa-title mappa-desc">
-        <title id="mappa-title">Europa: espansione tedesca 1938-1942</title>
-        <desc id="mappa-desc">Animazione didattica dei territori sotto controllo o occupazione nazista.</desc>
-
-        <defs>
-          <linearGradient id="sea" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0%" stop-color="#1a3044"/>
-            <stop offset="100%" stop-color="#102030"/>
-          </linearGradient>
-          <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
-            <feGaussianBlur stdDeviation="4" result="b"/>
-            <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
-          </filter>
-        </defs>
-
-        <rect width="1000" height="620" fill="url(#sea)"/>
-        <!-- Mare del Nord / Mediterraneo hint -->
-        <ellipse cx="420" cy="70" rx="280" ry="40" fill="#143044" opacity="0.55"/>
-        <ellipse cx="520" cy="560" rx="360" ry="50" fill="#143044" opacity="0.45"/>
-
-        <!-- Regioni schematiche -->
-        <g class="lands" fill="#2a3340" stroke="#0d1218" stroke-width="2">
-          <path id="r-uk" data-label="GB" d="M250,120 L310,110 L330,160 L300,210 L250,200 Z"/>
-          <path id="r-ireland" d="M200,140 L240,135 L245,175 L210,180 Z"/>
-          <path id="r-norway" d="M480,30 L540,40 L560,120 L510,150 L470,100 Z"/>
-          <path id="r-sweden" d="M560,50 L610,55 L620,160 L570,170 L550,100 Z"/>
-          <path id="r-finland" d="M640,40 L700,50 L710,120 L660,130 Z"/>
-          <path id="r-denmark" d="M470,150 L510,148 L515,175 L475,178 Z"/>
-          <path id="r-netherlands" d="M400,195 L435,190 L440,220 L405,225 Z"/>
-          <path id="r-belgium" d="M390,225 L430,220 L435,245 L392,250 Z"/>
-          <path id="r-france" d="M300,230 L390,220 L410,320 L360,380 L280,350 L270,280 Z"/>
-          <path id="r-spain" d="M250,370 L340,360 L350,430 L280,450 L240,410 Z"/>
-          <path id="r-portugal" d="M220,380 L250,375 L255,430 L225,435 Z"/>
-          <path id="r-italy" d="M450,340 L490,330 L510,420 L480,480 L455,430 Z"/>
-          <path id="r-switzerland" d="M420,290 L455,285 L460,310 L425,315 Z"/>
-          <path id="r-germany" class="focus" d="M430,180 L520,170 L545,250 L500,300 L430,290 L410,230 Z"/>
-          <path id="r-austria" d="M500,300 L560,295 L565,325 L505,330 Z"/>
-          <path id="r-sudeten" d="M545,240 L590,235 L595,265 L548,270 Z"/>
-          <path id="r-czech" d="M548,270 L600,265 L605,305 L550,310 Z"/>
-          <path id="r-poland" d="M560,200 L660,190 L680,280 L590,300 L545,250 Z"/>
-          <path id="r-hungary" d="M560,325 L620,320 L625,360 L565,365 Z"/>
-          <path id="r-romania" d="M625,330 L700,325 L710,390 L630,395 Z"/>
-          <path id="r-yugoslavia" d="M520,350 L600,345 L610,420 L530,430 L500,390 Z"/>
-          <path id="r-greece" d="M560,440 L620,435 L630,500 L570,510 L550,470 Z"/>
-          <path id="r-bulgaria" d="M630,400 L690,395 L695,440 L635,445 Z"/>
-          <path id="r-baltic" d="M640,150 L700,145 L710,195 L650,200 Z"/>
-          <path id="r-ussr" d="M700,80 L960,70 L980,400 L720,410 L690,250 Z"/>
-          <path id="r-ussr-west" d="M680,180 L760,170 L780,320 L690,330 Z"/>
-          <path id="r-north-africa" d="M280,500 L520,490 L530,560 L290,570 Z"/>
-        </g>
-
-        <g class="labels" fill="#c9d2de" font-family="Sora, sans-serif" font-size="13" pointer-events="none">
-          <text x="455" y="235">Germania</text>
-          <text x="510" y="318">Austria</text>
-          <text x="555" y="255">Sudeti</text>
-          <text x="555" y="295">Ceco</text>
-          <text x="600" y="245">Polonia</text>
-          <text x="320" y="300">Francia</text>
-          <text x="455" y="400">Italia</text>
-          <text x="800" y="220">URSS</text>
-          <text x="265" y="155">GB</text>
-        </g>
-      </svg>
+      <div id="mappa-svg-host" class="mappa-svg-host" aria-busy="true">
+        <p class="live">Caricamento mappa dell’Europa…</p>
+      </div>
 
       <aside class="mappa-card" aria-live="polite">
         <p class="mappa-step-label" id="mappa-step-label">Passo 1 di 8</p>

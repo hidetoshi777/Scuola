@@ -40,37 +40,50 @@
   text-shadow: 0 0 24px color-mix(in srgb, var(--amber) 35%, transparent);
 }
 
-.mappa-svg {
+.mappa-svg-host {
   width: 100%;
-  height: auto;
-  display: block;
   border-radius: 1rem;
   border: 1px solid var(--line);
   box-shadow: var(--shadow);
+  overflow: hidden;
+  background: #102030;
+  min-height: 12rem;
+}
+
+.mappa-svg-host .mappa-svg,
+.mappa-svg-host > svg {
+  width: 100%;
+  height: auto;
+  display: block;
   background: #102030;
 }
 
-.mappa-svg .lands path {
+.mappa-svg .lands path,
+.mappa-svg-host .lands path {
   transition: fill 0.55s ease, filter 0.45s ease, opacity 0.45s ease;
 }
 
+.mappa-svg-host .lands path.is-core,
 .mappa-svg .lands path.is-core {
   fill: #c47a2e;
-  filter: url(#glow);
 }
 
+.mappa-svg-host .lands path.is-annex,
 .mappa-svg .lands path.is-annex {
   fill: #b4532a;
 }
 
+.mappa-svg-host .lands path.is-occ,
 .mappa-svg .lands path.is-occ {
   fill: #8f3b3b;
 }
 
+.mappa-svg-host .lands path.is-adv,
 .mappa-svg .lands path.is-adv {
   fill: #6b2f55;
 }
 
+.mappa-svg-host .lands path.is-flash,
 .mappa-svg .lands path.is-flash {
   animation: mappa-flash 0.7s ease;
 }

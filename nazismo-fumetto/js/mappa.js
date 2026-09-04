@@ -3,8 +3,8 @@
     {
       year: "1937",
       title: "Germania prima dell’espansione",
-      text: "I confini sono ancora quelli dell’Europa di Versailles. Il regime è già dittatoriale, ma la conquista territoriale vera inizia dopo.",
-      core: ["r-germany"],
+      text: "Sulla mappa reale dell’Europa, il Reich è ancora nei confini di Versailles. L’espansione territoriale vera inizia nel 1938.",
+      core: ["DE"],
       annex: [],
       occ: [],
       adv: [],
@@ -12,91 +12,111 @@
     {
       year: "1938",
       title: "Anschluss: l’Austria",
-      text: "Marzo 1938: l’Austria viene annessa al Reich. È il primo grande salto oltre i confini: Europa inizia a cambiare carta.",
-      core: ["r-germany"],
-      annex: ["r-austria"],
+      text: "Marzo 1938: l’Austria viene annessa. È il primo grande cambiamento di carta: un intero Stato sparisce nel Reich.",
+      core: ["DE"],
+      annex: ["AT"],
       occ: [],
       adv: [],
     },
     {
       year: "1938",
-      title: "Sudeti",
-      text: "Autunno 1938: a Monaco le democrazie europee cedono i Sudeti. Hitler ottiene territorio senza ancora una guerra generale.",
-      core: ["r-germany"],
-      annex: ["r-austria", "r-sudeten"],
-      occ: [],
+      title: "Sudeti (Cecoslovacchia)",
+      text: "Autunno 1938: con gli accordi di Monaco Hitler ottiene i Sudeti. Qui evidenziamo la Cecoslovacchia (oggi Cechia + Slovacchia), sotto pressione e smembramento.",
+      core: ["DE"],
+      annex: ["AT"],
+      occ: ["CZ", "SK"],
       adv: [],
     },
     {
       year: "1939",
       title: "Boemia e Moravia",
-      text: "Marzo 1939: sparisce la Cecoslovacchia indipendente. Nasce il Protettorato di Boemia e Moravia. La maschera «pacifica» cade.",
-      core: ["r-germany"],
-      annex: ["r-austria", "r-sudeten", "r-czech"],
-      occ: [],
+      text: "Marzo 1939: la Cechia diventa Protettorato; la Slovacchia un satellite. La politica delle «annessioni pacifiche» è finita.",
+      core: ["DE"],
+      annex: ["AT", "CZ"],
+      occ: ["SK"],
       adv: [],
     },
     {
       year: "1939",
       title: "Invasione della Polonia",
-      text: "1° settembre 1939: scoppia la Seconda guerra mondiale. La Polonia viene invasa e smembrata. L’occupazione militare diventa metodo.",
-      core: ["r-germany"],
-      annex: ["r-austria", "r-sudeten", "r-czech"],
-      occ: ["r-poland"],
+      text: "1° settembre 1939: invasione della Polonia e inizio della Seconda guerra mondiale. L’occupazione militare diventa il metodo principale.",
+      core: ["DE"],
+      annex: ["AT", "CZ"],
+      occ: ["SK", "PL"],
       adv: [],
     },
     {
       year: "1940",
       title: "Europa occidentale",
-      text: "1940: Danimarca, Norvegia, Paesi Bassi, Belgio e gran parte della Francia cadono in pochi mesi. Il Reich domina il centro-ovest europeo.",
-      core: ["r-germany"],
-      annex: ["r-austria", "r-sudeten", "r-czech"],
-      occ: ["r-poland", "r-denmark", "r-norway", "r-netherlands", "r-belgium", "r-france"],
+      text: "1940: Danimarca, Norvegia, Paesi Bassi, Belgio, Lussemburgo e gran parte della Francia. In pochi mesi il centro-ovest europeo è sotto controllo nazista.",
+      core: ["DE"],
+      annex: ["AT", "CZ"],
+      occ: ["SK", "PL", "DK", "NO", "NL", "BE", "LU", "FR"],
       adv: [],
     },
     {
       year: "1941",
-      title: "Balcani e attacco all’URSS",
-      text: "1941: campagna nei Balcani, poi Operazione Barbarossa contro l’Unione Sovietica. La guerra diventa continentale e di sterminio.",
-      core: ["r-germany"],
-      annex: ["r-austria", "r-sudeten", "r-czech"],
+      title: "Balcani e Barbarossa",
+      text: "1941: campagna nei Balcani, poi attacco all’URSS. Qui compaiono Grecia e Jugoslavia (Stati odierni) e l’avanzata su Baltico, Bielorussia e Ucraina.",
+      core: ["DE"],
+      annex: ["AT", "CZ"],
       occ: [
-        "r-poland",
-        "r-denmark",
-        "r-norway",
-        "r-netherlands",
-        "r-belgium",
-        "r-france",
-        "r-yugoslavia",
-        "r-greece",
-        "r-baltic",
+        "SK",
+        "PL",
+        "DK",
+        "NO",
+        "NL",
+        "BE",
+        "LU",
+        "FR",
+        "SI",
+        "HR",
+        "BA",
+        "RS",
+        "ME",
+        "MK",
+        "AL",
+        "GR",
+        "EE",
+        "LV",
+        "LT",
       ],
-      adv: ["r-ussr-west"],
+      adv: ["BY", "UA"],
     },
     {
       year: "1942",
       title: "Massima espansione",
-      text: "Intorno al 1942 il controllo nazista tocca il punto più ampio. Poi la marea inizia a ritirarsi: Stalingrado e la controffensiva alleata cambieranno tutto.",
-      core: ["r-germany"],
-      annex: ["r-austria", "r-sudeten", "r-czech", "r-hungary"],
+      text: "Intorno al 1942 il sistema di controllo (occupazione + alleati/satelliti come Ungheria, Romania, Bulgaria) tocca il punto più ampio. Poi inizia il ripiegamento.",
+      core: ["DE"],
+      annex: ["AT", "CZ", "HU"],
       occ: [
-        "r-poland",
-        "r-denmark",
-        "r-norway",
-        "r-netherlands",
-        "r-belgium",
-        "r-france",
-        "r-yugoslavia",
-        "r-greece",
-        "r-baltic",
-        "r-romania",
-        "r-bulgaria",
-        "r-north-africa",
+        "SK",
+        "PL",
+        "DK",
+        "NO",
+        "NL",
+        "BE",
+        "LU",
+        "FR",
+        "SI",
+        "HR",
+        "BA",
+        "RS",
+        "ME",
+        "MK",
+        "AL",
+        "GR",
+        "EE",
+        "LV",
+        "LT",
+        "RO",
+        "BG",
       ],
-      adv: ["r-ussr-west"],
+      adv: ["BY", "UA"],
     },
   ];
 
+  const host = document.getElementById("mappa-svg-host");
   const yearEl = document.getElementById("mappa-year");
   const titleEl = document.getElementById("mappa-title-step");
   const textEl = document.getElementById("mappa-text");
@@ -105,16 +125,27 @@
   const playBtn = document.getElementById("mappa-play");
   const prevBtn = document.getElementById("mappa-prev");
   const nextBtn = document.getElementById("mappa-next");
-  const paths = Array.from(document.querySelectorAll(".mappa-svg .lands path"));
 
-  if (!yearEl || !slider || !paths.length) {
+  if (!host || !slider) {
     return;
   }
 
   let index = 0;
   let playing = false;
   let timer = null;
+  let paths = [];
   const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  const labelNames = {
+    DE: "Germania",
+    AT: "Austria",
+    PL: "Polonia",
+    FR: "Francia",
+    IT: "Italia",
+    GB: "GB",
+    ES: "Spagna",
+    RU: "URSS",
+  };
 
   function clearClasses(path) {
     path.classList.remove("is-core", "is-annex", "is-occ", "is-adv", "is-flash");
@@ -129,7 +160,7 @@
     stepLabel.textContent = `Passo ${i + 1} di ${steps.length}`;
     slider.value = String(i);
 
-    const map = {
+    const sets = {
       "is-core": new Set(step.core),
       "is-annex": new Set(step.annex),
       "is-occ": new Set(step.occ),
@@ -137,17 +168,18 @@
     };
 
     paths.forEach((path) => {
-      const before = path.className.baseVal || path.getAttribute("class") || "";
+      const iso = path.getAttribute("data-iso");
+      const prev = path.className.baseVal || "";
       clearClasses(path);
       let next = null;
-      Object.keys(map).forEach((cls) => {
-        if (map[cls].has(path.id)) {
+      Object.keys(sets).forEach((cls) => {
+        if (sets[cls].has(iso)) {
           next = cls;
         }
       });
       if (next) {
         path.classList.add(next);
-        if (animate && !before.includes(next.replace("is-", ""))) {
+        if (animate && !prev.includes(next)) {
           path.classList.add("is-flash");
         }
       }
@@ -155,7 +187,6 @@
 
     prevBtn.disabled = i === 0;
     nextBtn.disabled = i === steps.length - 1;
-
     if (window.AudioUi) {
       window.AudioUi.beep(i === 0 ? "page" : i === steps.length - 1 ? "somber" : "scene");
     }
@@ -182,31 +213,73 @@
     }, reduceMotion ? 2200 : 1700);
   }
 
-  playBtn.addEventListener("click", () => {
-    if (playing) {
-      stopPlay();
-      return;
-    }
-    if (index >= steps.length - 1) {
+  function addLabels(svg) {
+    const g = document.createElementNS("http://www.w3.org/2000/svg", "g");
+    g.setAttribute("class", "labels");
+    g.setAttribute("fill", "#d5deea");
+    g.setAttribute("font-family", "Sora, sans-serif");
+    g.setAttribute("font-size", "12");
+    g.setAttribute("pointer-events", "none");
+    Object.keys(labelNames).forEach((iso) => {
+      const path = svg.querySelector(`#c-${iso}`);
+      if (!path || !path.getBBox) {
+        return;
+      }
+      try {
+        const b = path.getBBox();
+        const t = document.createElementNS("http://www.w3.org/2000/svg", "text");
+        t.setAttribute("x", String(b.x + b.width / 2));
+        t.setAttribute("y", String(b.y + b.height / 2));
+        t.setAttribute("text-anchor", "middle");
+        t.textContent = labelNames[iso];
+        g.appendChild(t);
+      } catch (err) {
+        /* ignore */
+      }
+    });
+    svg.appendChild(g);
+  }
+
+  fetch("img/europe-real.svg")
+    .then((r) => r.text())
+    .then((svgText) => {
+      host.innerHTML = svgText;
+      const svg = host.querySelector("svg");
+      if (!svg) {
+        throw new Error("SVG mancante");
+      }
+      svg.classList.add("mappa-svg");
+      svg.setAttribute("role", "img");
+      svg.setAttribute("aria-label", "Mappa reale dell’Europa con espansione tedesca animata");
+      paths = Array.from(svg.querySelectorAll(".lands path"));
+      addLabels(svg);
+
+      playBtn.addEventListener("click", () => {
+        if (playing) {
+          stopPlay();
+          return;
+        }
+        if (index >= steps.length - 1) {
+          applyStep(0, false);
+        }
+        startPlay();
+      });
+      prevBtn.addEventListener("click", () => {
+        stopPlay();
+        applyStep(Math.max(0, index - 1), !reduceMotion);
+      });
+      nextBtn.addEventListener("click", () => {
+        stopPlay();
+        applyStep(Math.min(steps.length - 1, index + 1), !reduceMotion);
+      });
+      slider.addEventListener("input", () => {
+        stopPlay();
+        applyStep(Number(slider.value), !reduceMotion);
+      });
+
       applyStep(0, false);
-    }
-    startPlay();
-  });
-
-  prevBtn.addEventListener("click", () => {
-    stopPlay();
-    applyStep(Math.max(0, index - 1), !reduceMotion);
-  });
-
-  nextBtn.addEventListener("click", () => {
-    stopPlay();
-    applyStep(Math.min(steps.length - 1, index + 1), !reduceMotion);
-  });
-
-  slider.addEventListener("input", () => {
-    stopPlay();
-    applyStep(Number(slider.value), !reduceMotion);
-  });
-
-  applyStep(0, false);
+    })
+    .catch(() => {
+      host.innerHTML = "<p class='live'>Impossibile caricare la mappa dell’Europa.</p>";
+    });
 })();
