@@ -80,13 +80,29 @@
     salva(id);
     visitati.add(id);
     aggiornaProgresso();
-    if (window.AudioUi) {
-      window.AudioUi.beep("page");
-    }
 
+    const scenaPrima = stage.dataset.scena;
     const p = personaggio(nodo.speaker);
-    stage.dataset.scena = nodo.scena || "aula";
+    const scenaNuova = nodo.scena || "aula";
+    stage.dataset.scena = scenaNuova;
     stage.dataset.speaker = p.classe;
+
+    if (window.AudioUi) {
+      if (nodo.epilogo) {
+        window.AudioUi.beep("epilogue");
+      } else if (scenaPrima && scenaPrima !== scenaNuova) {
+        if (scenaNuova === "shoah" || scenaNuova === "notte" || scenaNuova === "guerra") {
+          window.AudioUi.beep("somber");
+        } else if (scenaNuova === "memoria" || scenaNuova === "processi" || scenaNuova === "appunti") {
+          window.AudioUi.beep("warm");
+        } else {
+          window.AudioUi.beep("scene");
+        }
+      } else {
+        window.AudioUi.beep("page");
+      }
+      window.setTimeout(() => window.AudioUi && window.AudioUi.beep("type"), 90);
+    }
 
     if (els.capitolo) {
       els.capitolo.textContent = nodo.capitolo || "";
@@ -161,8 +177,13 @@
       libro: "Ideologia",
       strada: "Vita sotto il regime",
       radio: "Propaganda e radio",
+      gioventu: "Gioventù e regime",
+      notte: "Notte dei lunghi coltelli",
+      anschluss: "Espansione",
       shoah: "Memoria della Shoah",
       guerra: "Europa in guerra",
+      resistenza: "Resistenza",
+      processi: "Processi di Norimberga",
       memoria: "Oggi",
       appunti: "Appunti e memoria",
     };

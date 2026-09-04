@@ -111,11 +111,19 @@
     const live = document.getElementById("lab-live");
     if (opt.ok) {
       score += 1;
+      if (window.AudioUi) {
+        window.AudioUi.beep("ok");
+      }
       if (live) {
         live.textContent = `Corretto. ${item.why}`;
       }
-    } else if (live) {
-      live.textContent = `Non proprio. ${item.why}`;
+    } else {
+      if (window.AudioUi) {
+        window.AudioUi.beep("bad");
+      }
+      if (live) {
+        live.textContent = `Non proprio. ${item.why}`;
+      }
     }
 
     const next = document.createElement("button");

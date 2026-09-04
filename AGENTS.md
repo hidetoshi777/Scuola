@@ -14,6 +14,8 @@ Materiali didattici interattivi, ognuno in una **sottocartella autonoma**.
 ## Preferenze agente
 
 - **Niente verifiche lunghe**: dopo le modifiche, commit/push e basta. Il Prof. prova lui sul browser e dice se qualcosa non va. Evitare walkthrough video, computer-use prolungato e suite di test manuali elaborate, salvo richiesta esplicita.
+- **Visual novel / fumetti didattici**: preferisci **poche scelte** (spesso solo «Continua») e **tante immagini di scena diverse**. Le scelte servono a correggere un concetto, non a ramificare la trama. Per le illustrazioni usa generazione immagini (es. Grok / GenerateImage) o Canva quando già c’è materiale utile.
+- **Riuso immagini**: le scene e i ritratti fatti per la Storia vanno **riproposti** anche in Home, Imparare e Laboratorio (schede, hero, quiz), così il materiale resta coerente e non si spreca lavoro grafico.
 
 Struttura tipica di ogni cartella:
 
