@@ -5,10 +5,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
   <title>Imparare le parti invariabili | Scuola</title>
-  <meta name="description" content="Lezione guidata sulle parti invariabili del discorso per la prima superiore.">
+  <meta name="description" content="Lezione guidata sulle parti invariabili del discorso per il primo anno delle superiori: sottotipi, esempi e casi dubbi.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@500;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
@@ -34,12 +34,12 @@
   <main id="contenuto" class="wrap" tabindex="-1">
     <p class="kicker">Lezione guidata</p>
     <h1>Parti invariabili: cosa sono e come riconoscerle</h1>
-    <p class="lead prose">Le <strong>parti del discorso</strong> sono le categorie in cui classifichiamo le parole. Alcune si flettono (cambiano forma), altre no: queste ultime sono le <strong>parti invariabili</strong>.</p>
+    <p class="lead prose">Le <strong>parti del discorso</strong> sono le categorie in cui classifichiamo le parole. Alcune si flettono, cioè cambiano forma; altre no. Queste ultime sono le <strong>parti invariabili</strong>, e sono quattro.</p>
 
-    <div class="panel prose">
+    <div class="panel prose reveal">
       <h2>Variabili o invariabili?</h2>
       <table class="compare">
-        <caption>Due gruppi, funzioni diverse</caption>
+        <caption>Due gruppi, due comportamenti</caption>
         <thead>
           <tr>
             <th scope="col">Tipo</th>
@@ -51,78 +51,86 @@
           <tr>
             <th scope="row">Variabili</th>
             <td>nome, articolo, aggettivo, pronome, verbo</td>
-            <td>Hanno flessioni (genere, numero, persona…)</td>
+            <td>Hanno flessione: genere, numero, persona, tempo…</td>
           </tr>
           <tr>
             <th scope="row">Invariabili</th>
             <td>avverbio, preposizione, congiunzione, interiezione</td>
-            <td>Non cambiano forma</td>
+            <td>Non cambiano mai forma</td>
           </tr>
         </tbody>
       </table>
+      <div class="callout">
+        <p><strong>Il principio che regge tutto:</strong> non esiste una lista di parole da imparare a memoria. La stessa parola cambia categoria a seconda della <strong>funzione</strong> che svolge nella frase. «Lungo» è aggettivo in «un cavo lungo», preposizione impropria in «cammina lungo il cavo».</p>
+      </div>
     </div>
 
     <div class="tab-bar" role="tablist" aria-label="Categorie">
-      <button type="button" role="tab" data-tab="avverbio" aria-selected="true" id="tab-avverbio">Avverbi</button>
-      <button type="button" role="tab" data-tab="preposizione" aria-selected="false" tabindex="-1" id="tab-preposizione">Preposizioni</button>
-      <button type="button" role="tab" data-tab="congiunzione" aria-selected="false" tabindex="-1" id="tab-congiunzione">Congiunzioni</button>
-      <button type="button" role="tab" data-tab="interiezione" aria-selected="false" tabindex="-1" id="tab-interiezione">Interiezioni</button>
+      <button type="button" role="tab" class="tipo-avverbio" data-tab="avverbio" aria-selected="true" id="tab-avverbio">Avverbi</button>
+      <button type="button" role="tab" class="tipo-preposizione" data-tab="preposizione" aria-selected="false" tabindex="-1" id="tab-preposizione">Preposizioni</button>
+      <button type="button" role="tab" class="tipo-congiunzione" data-tab="congiunzione" aria-selected="false" tabindex="-1" id="tab-congiunzione">Congiunzioni</button>
+      <button type="button" role="tab" class="tipo-interiezione" data-tab="interiezione" aria-selected="false" tabindex="-1" id="tab-interiezione">Interiezioni</button>
     </div>
 
-    <section class="panel lesson-panel" data-panel="avverbio" id="avverbio">
+    <section class="panel lesson-panel tipo-avverbio" data-panel="avverbio" id="avverbio">
       <h2>Avverbi</h2>
-      <p>Modificano un <strong>verbo</strong> («corro <em>velocemente</em>»), un <strong>aggettivo</strong> («è <em>molto</em> bello») o un altro <strong>avverbio</strong> («parla <em>abbastanza</em> piano»).</p>
-      <div class="callout"><p><strong>Trucco:</strong> chiediti «come?», «quando?», «dove?», «quanto?». Se la parola risponde, spesso è un avverbio.</p></div>
-      <p><strong>Esempi:</strong> bene, male, presto, tardi, qui, lì, sempre, mai, forse, lentamente.</p>
-      <p>Molti avverbi di modo finiscono in <strong>-mente</strong> (lentamente, felicemente), ma non tutti: «bene», «male», «presto» non hanno -mente.</p>
+      <p>Modificano un <strong>verbo</strong> («corro <em>velocemente</em>»), un <strong>aggettivo</strong> («è <em>molto</em> preciso») o un altro <strong>avverbio</strong> («parla <em>abbastanza</em> piano»).</p>
+      <div class="callout"><p><strong>Prova del nove:</strong> chiediti «come?», «quando?», «dove?», «quanto?». Se la parola risponde e la puoi togliere lasciando la frase in piedi, è un avverbio.</p></div>
+      <p>Molti avverbi di modo finiscono in <strong>-mente</strong> (lentamente, felicemente), ma non tutti: <em>bene</em>, <em>male</em>, <em>presto</em> non ce l’hanno.</p>
+      <h3>I sottotipi</h3>
+      <div data-sottotipi="avverbio"></div>
     </section>
 
-    <section class="panel lesson-panel" data-panel="preposizione" id="preposizione" hidden>
+    <section class="panel lesson-panel tipo-preposizione" data-panel="preposizione" id="preposizione" hidden>
       <h2>Preposizioni</h2>
-      <p>Collegano parole tra loro e introducono un <strong>complemento</strong>. Stanno di solito prima di un nome o di un pronome.</p>
-      <div class="callout"><p><strong>Trucco:</strong> prova a sostituire con «di / a / da / in / con / su / per / tra»: se ha senso, potrebbe essere una preposizione.</p></div>
-      <p><strong>Semplici:</strong> di, a, da, in, con, su, per, tra, fra.</p>
-      <p><strong>Articolate:</strong> del, al, dal, nel, col, sul, della, alla… (preposizione + articolo).</p>
-      <p>Esempio: «Vado <em>a</em> scuola <em>con</em> Marco» — <em>a</em> e <em>con</em> sono preposizioni.</p>
+      <p>Collegano le parole fra loro e introducono un <strong>complemento</strong>. Stanno quasi sempre davanti a un nome o a un pronome, e da sole non significano nulla.</p>
+      <div class="callout"><p><strong>Prova del nove:</strong> se dopo la parola ti aspetti un nome, e senza quel nome la frase resta monca, è una preposizione. «Vado a…» chiede un seguito; «Vado bene» no.</p></div>
+      <h3>I sottotipi</h3>
+      <div data-sottotipi="preposizione"></div>
     </section>
 
-    <section class="panel lesson-panel" data-panel="congiunzione" id="congiunzione" hidden>
+    <section class="panel lesson-panel tipo-congiunzione" data-panel="congiunzione" id="congiunzione" hidden>
       <h2>Congiunzioni</h2>
-      <p>Collegano parole, frasi o proposizioni e indicano un rapporto logico (causa, tempo, condizione, opposizione…).</p>
-      <p><strong>Coordinanti</strong> (stesso livello): e, o, ma, oppure, quindi, perché.</p>
-      <p><strong>Subordinanti</strong> (introducono una subordinata): che, se, quando, benché, affinché.</p>
-      <p>Esempio: «Studio <em>perché</em> voglio imparare» — <em>perché</em> unisce due proposizioni.</p>
+      <p>Collegano parole, frasi o proposizioni e dichiarano il <strong>rapporto logico</strong> fra loro: causa, tempo, condizione, opposizione, conseguenza.</p>
+      <div class="callout"><p><strong>Coordinanti o subordinanti?</strong> Se le due frasi reggono anche da sole, la congiunzione è coordinante («Studio <em>e</em> lavoro»). Se la seconda senza la prima non sta in piedi, è subordinante («Studio <em>perché</em> voglio imparare»).</p></div>
+      <h3>I sottotipi</h3>
+      <div data-sottotipi="congiunzione"></div>
     </section>
 
-    <section class="panel lesson-panel" data-panel="interiezione" id="interiezione" hidden>
+    <section class="panel lesson-panel tipo-interiezione" data-panel="interiezione" id="interiezione" hidden>
       <h2>Interiezioni</h2>
-      <p>Esprimono un’<strong>emozione</strong>, un <strong>richiamo</strong> o un <strong>comando improvviso</strong>. Spesso sono isolate e seguite dal punto esclamativo.</p>
-      <p><strong>Esempi:</strong> ah, oh, ehi, uffa, bravo, aiuto, zitto, evviva.</p>
-      <p>Esempio: «<em>Ah</em>, che bella sorpresa!» — <em>ah</em> esprime stupore.</p>
+      <p>Esprimono un’<strong>emozione</strong>, un <strong>richiamo</strong> o un <strong>comando improvviso</strong>. Sono sintatticamente autonome: le puoi isolare fra virgole o far seguire da un punto esclamativo senza toccare il resto.</p>
+      <div class="callout"><p><strong>Prova del nove:</strong> togli la parola. Se la frase resta grammaticalmente completa e perde solo il tono, era un’interiezione.</p></div>
+      <h3>I sottotipi</h3>
+      <div data-sottotipi="interiezione"></div>
     </section>
 
-    <h2>Domande frequenti</h2>
-    <details name="curiosita">
+    <h2 class="reveal">Casi dubbi</h2>
+    <details name="curiosita" class="reveal">
       <summary>«Perché» è sempre una congiunzione?</summary>
-      <p>No. Può essere congiunzione («Piango perché sono triste») o preposizione («Un bicchiere d’acqua» → perché = per + che, ma qui «per» è preposizione). Guarda la funzione nella frase.</p>
+      <p>No. È congiunzione subordinante causale in «Piango perché sono triste», ma è <strong>avverbio interrogativo</strong> in «Perché piangi?». E può perfino essere un nome: «Voglio sapere il perché».</p>
     </details>
-    <details name="curiosita">
+    <details name="curiosita" class="reveal">
       <summary>Tutte le parole in -mente sono avverbi?</summary>
-      <p>Quasi sempre sì, se modificano un verbo o un aggettivo. Attenzione però: «mente» da sola è un nome («la mente umana»).</p>
+      <p>Quasi sempre sì, quando modificano un verbo o un aggettivo. Attenzione però: «mente» da sola è un nome («la mente umana») e «mente» è anche voce del verbo mentire.</p>
     </details>
-    <details name="curiosita">
+    <details name="curiosita" class="reveal">
+      <summary>Come distinguo «davanti» avverbio da «davanti» preposizione?</summary>
+      <p>Guarda se regge un nome. «Il camion sta <em>davanti</em>» — avverbio di luogo, non regge nulla. «Il camion sta <em>davanti al</em> capannone» — preposizione impropria, introduce il complemento.</p>
+    </details>
+    <details name="curiosita" class="reveal">
       <summary>Le interiezioni possono stare in mezzo alla frase?</summary>
-      <p>Sì, ma restano scollegate dal resto: «Ho, ahimè, dimenticato il libro». Sono comunque interiezioni.</p>
+      <p>Sì, ma restano scollegate dal resto: «Ho, <em>ahimè</em>, dimenticato il manuale». Se la togli, la frase è ancora completa.</p>
     </details>
 
     <div class="inline-actions">
-      <a class="btn btn-primary" href="laboratorio.html">Prova il laboratorio</a>
-      <a class="btn btn-secondary" href="gioco.html">Passa al gioco</a>
+      <a class="btn btn-primary" href="laboratorio.html">Passa agli esercizi</a>
+      <a class="btn btn-secondary" href="gioco.html">Mettiti alla prova</a>
     </div>
   </main>
   <footer class="site-footer">
     <div class="wrap">
-      <p>Lezione pensata per la classe prima della scuola secondaria di secondo grado.</p>
+      <p>Lezione pensata per il primo anno della scuola secondaria di secondo grado.</p>
       <p>Realizzato dal Prof. Rossano Bella.</p>
     </div>
   </footer>

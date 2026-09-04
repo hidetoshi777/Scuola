@@ -4,11 +4,11 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
-  <title>Gioco: parti invariabili | Scuola</title>
-  <meta name="description" content="Sfida a quiz sulle parti invariabili del discorso per la prima superiore.">
+  <title>Prova a tempo: parti invariabili | Scuola</title>
+  <meta name="description" content="Prova a tempo sulle parti invariabili del discorso, con riepilogo degli errori e statistiche per categoria.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@500;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
@@ -32,29 +32,35 @@
     </div>
   </header>
   <main id="contenuto" class="wrap" tabindex="-1">
-    <p class="kicker">Sfida</p>
-    <h1>Parti invariabili: mettiti alla prova</h1>
-    <p class="lead">12 domande sulle quattro categorie. Alla fine puoi stampare un piccolo attestato.</p>
+    <p class="kicker">Prova</p>
+    <h1>Mettiti alla prova</h1>
+    <p class="lead">Dodici domande estratte a sorte da un banco più ampio, con le risposte in ordine casuale. Alla fine vedi dove hai sbagliato e come vai categoria per categoria.</p>
 
     <section class="panel" id="intro-gioco">
-      <h2>Come si gioca</h2>
+      <h2>Regole</h2>
       <ol>
-        <li>Leggi la domanda.</li>
-        <li>Scegli una risposta.</li>
-        <li>Dopo ogni prova vedi una spiegazione breve.</li>
+        <li>Dodici domande, una risposta sola per domanda.</li>
+        <li>Con il tempo attivo hai <strong>25 secondi</strong> ciascuna: allo scadere la domanda è persa.</li>
+        <li>Dopo ogni risposta compare la spiegazione, giusta o sbagliata che sia.</li>
+        <li>Le risposte consecutive corrette formano una <strong>serie</strong>.</li>
       </ol>
       <div class="inline-actions">
-        <button class="btn btn-primary" type="button" id="inizia">Inizia la sfida</button>
+        <button class="btn btn-primary" type="button" id="inizia">Inizia la prova</button>
+        <button class="btn btn-secondary" type="button" id="tempo" aria-pressed="true">A tempo: sì</button>
         <button class="btn btn-secondary" type="button" id="suono" aria-pressed="true">Suono: acceso</button>
       </div>
     </section>
 
     <section class="panel" id="partita" hidden>
       <div class="game-hud">
-        <p>Prova <span id="num-prova">1</span> di <span id="tot-prove">12</span></p>
-        <p>Punteggio: <span id="punteggio">0</span></p>
+        <p>Domanda <span id="num-prova">1</span> di <span id="tot-prove">12</span></p>
+        <ul class="hud-stats">
+          <li class="hud-pill">Corrette <strong id="punteggio">0</strong></li>
+          <li class="hud-pill is-streak">Serie <strong id="serie">0</strong></li>
+        </ul>
       </div>
       <div class="progress" aria-hidden="true"><span id="barra" style="width: 0%"></span></div>
+      <div class="timer-bar" id="timer-bar" aria-hidden="true"><span id="timer-fill" style="width: 100%"></span></div>
       <h2 id="domanda"></h2>
       <div id="opzioni" class="quiz-options"></div>
       <p class="live" id="feedback" aria-live="polite"></p>
@@ -66,10 +72,12 @@
 
   <dialog id="fine-dialogo" aria-labelledby="fine-titolo">
     <form method="dialog">
-      <h2 id="fine-titolo">Sfida completata</h2>
+      <h2 id="fine-titolo">Prova completata</h2>
       <div class="stars-row" id="stelle" aria-hidden="true"></div>
       <p id="fine-testo"></p>
-      <p><strong>Attestato:</strong> ha studiato le parti invariabili del discorso e superato la sfida.</p>
+      <div id="fine-dettaglio"></div>
+      <p><strong>Attestato:</strong> ha studiato le parti invariabili del discorso e superato la prova.</p>
+      <p class="live">Realizzato dal Prof. Rossano Bella.</p>
       <div class="inline-actions">
         <button class="btn btn-primary" value="replay" type="submit">Rigioca</button>
         <button class="btn btn-secondary" value="print" type="button" id="stampa">Stampa attestato</button>
@@ -80,7 +88,7 @@
 
   <footer class="site-footer">
     <div class="wrap">
-      <p>Gioco pensato per la classe prima della scuola secondaria di secondo grado.</p>
+      <p>Prova pensata per il primo anno della scuola secondaria di secondo grado.</p>
       <p>Realizzato dal Prof. Rossano Bella.</p>
     </div>
   </footer>

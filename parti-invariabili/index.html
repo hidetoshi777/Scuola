@@ -8,7 +8,7 @@
   <meta name="description" content="Sito interattivo per la prima superiore sulle parti invariabili del discorso: avverbi, preposizioni, congiunzioni e interiezioni.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@500;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
@@ -34,66 +34,77 @@
   <main id="contenuto" class="wrap" tabindex="-1">
     <section class="hero">
       <div>
-        <p class="kicker">Italiano · Prima superiore</p>
+        <p class="kicker">Italiano · Primo anno · Istituto tecnico</p>
         <h1>Le parti invariabili del discorso</h1>
-        <p class="lead">Nomi, aggettivi e verbi <strong>cambiano forma</strong>. Avverbi, preposizioni, congiunzioni e interiezioni, invece, <strong>restano uguali</strong>. In questo percorso li impari a riconoscere con esempi, un laboratorio e una sfida finale.</p>
+        <p class="lead">Nomi, aggettivi e verbi <strong>cambiano forma</strong>. Avverbi, preposizioni, congiunzioni e interiezioni <strong>restano sempre uguali</strong>. Qui le riconosci sul campo: teoria essenziale, quattro tipi di esercizio e una prova a tempo.</p>
         <div class="hero-actions">
-          <a class="btn btn-primary" href="imparare.html">Inizia a imparare</a>
-          <a class="btn btn-secondary" href="gioco.html">Vai al gioco</a>
+          <a class="btn btn-primary" href="imparare.html">Inizia dalla teoria</a>
+          <a class="btn btn-secondary" href="laboratorio.html">Vai agli esercizi</a>
         </div>
       </div>
       <aside class="panel sentence-panel">
-        <h2 class="sentence-title">Tocca le parole evidenziate</h2>
+        <h2 class="sentence-title">Frase di prova — clicca le parole sottolineate</h2>
         <p class="sentence-demo" id="frase-demo" aria-label="Frase interattiva"></p>
-        <p class="live" id="info-parola">Clicca una parola colorata per scoprire di che tipo è.</p>
+        <p class="live" id="info-parola">Ogni categoria ha un colore e un simbolo suo.</p>
+        <ul class="legend" id="legenda"></ul>
       </aside>
     </section>
 
-    <h2>Le quattro categorie</h2>
-    <div class="card-grid">
+    <h2 class="reveal">Le quattro categorie</h2>
+    <div class="card-grid reveal">
       <article class="card tipo-avverbio">
         <h3>Avverbi</h3>
-        <p>Modificano verbi, aggettivi o altri avverbi. Esempi: <em>bene</em>, <em>presto</em>, <em>molto</em>, <em>qui</em>.</p>
-        <a href="imparare.html#avverbio">Scopri di più</a>
+        <p>Modificano verbi, aggettivi o altri avverbi. Rispondono a <em>come? quando? dove? quanto?</em></p>
+        <a href="imparare.html#avverbio">Sei sottotipi da distinguere</a>
       </article>
       <article class="card tipo-preposizione">
         <h3>Preposizioni</h3>
-        <p>Collegano parole e introducono complementi. Esempi: <em>di</em>, <em>a</em>, <em>in</em>, <em>con</em>, <em>del</em>.</p>
-        <a href="imparare.html#preposizione">Scopri di più</a>
+        <p>Collegano parole e introducono un complemento: <em>di</em>, <em>a</em>, <em>in</em>, <em>del</em>, <em>durante</em>.</p>
+        <a href="imparare.html#preposizione">Proprie, articolate, improprie</a>
       </article>
       <article class="card tipo-congiunzione">
         <h3>Congiunzioni</h3>
-        <p>Uniscono parole o frasi. Esempi: <em>e</em>, <em>ma</em>, <em>perché</em>, <em>se</em>, <em>quando</em>.</p>
-        <a href="imparare.html#congiunzione">Scopri di più</a>
+        <p>Uniscono parole o proposizioni e dichiarano il rapporto logico fra loro.</p>
+        <a href="imparare.html#congiunzione">Coordinanti e subordinanti</a>
       </article>
       <article class="card tipo-interiezione">
         <h3>Interiezioni</h3>
-        <p>Esprimono emozioni o richiami. Esempi: <em>ah</em>, <em>oh</em>, <em>ehi</em>, <em>bravo</em>, <em>aiuto</em>.</p>
-        <a href="imparare.html#interiezione">Scopri di più</a>
+        <p>Esprimono emozione o richiamo, e restano isolate dal resto della frase.</p>
+        <a href="imparare.html#interiezione">Proprie, improprie, onomatopee</a>
       </article>
     </div>
 
-    <section class="panel" style="margin-top: 1.5rem;">
-      <h2>Ricorda</h2>
+    <section class="panel reveal" style="margin-top: 1.5rem;">
+      <h2>Tre cose da non sbagliare</h2>
       <div class="card-grid">
         <div class="fact">
           <span class="fact-num" aria-hidden="true">4</span>
-          <p>Le parti invariabili sono <strong>quattro</strong>: avverbi, preposizioni, congiunzioni, interiezioni.</p>
+          <p>Le parti invariabili sono <strong>quattro</strong>: avverbio, preposizione, congiunzione, interiezione.</p>
         </div>
         <div class="fact">
           <span class="fact-num" aria-hidden="true">≠</span>
-          <p>Non vanno confuse con le parti <strong>variabili</strong> (nome, articolo, aggettivo, pronome, verbo).</p>
+          <p>Non vanno confuse con le parti <strong>variabili</strong>: nome, articolo, aggettivo, pronome, verbo.</p>
         </div>
         <div class="fact">
-          <span class="fact-num" aria-hidden="true">?</span>
-          <p>Per gli avverbi chiediti: <strong>come? quando? dove? quanto?</strong></p>
+          <span class="fact-num" aria-hidden="true">fn</span>
+          <p>La stessa parola può cambiare categoria: conta la <strong>funzione</strong> che ha in quella frase, non la parola in sé.</p>
         </div>
       </div>
+    </section>
+
+    <section class="panel reveal" style="margin-top: 1.5rem;">
+      <h2>Come si usa questo sito</h2>
+      <ol>
+        <li><a href="imparare.html">Imparare</a> — la teoria con i sottotipi e le domande frequenti.</li>
+        <li><a href="laboratorio.html">Laboratorio</a> — quattro esercizi: smistamento, completamento, intruso, analisi di frase.</li>
+        <li><a href="gioco.html">Gioco</a> — dodici domande a tempo, con riepilogo degli errori.</li>
+      </ol>
+      <p class="live">I progressi restano salvati su questo dispositivo: nessun dato viene inviato altrove.</p>
     </section>
   </main>
   <footer class="site-footer">
     <div class="wrap">
-      <p>Materiale didattico per la scuola secondaria di secondo grado, classe prima. Funziona anche offline, dopo aver scaricato il sito.</p>
+      <p>Materiale didattico per il primo anno della scuola secondaria di secondo grado. Funziona anche offline, dopo aver scaricato il sito.</p>
       <p>Realizzato dal Prof. Rossano Bella.</p>
     </div>
   </footer>
