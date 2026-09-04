@@ -1,0 +1,127 @@
+/* Arcade: Inchiostro contro i Bravi */
+
+.page-gioco .site-header {
+  position: sticky;
+}
+
+.gioco-main {
+  width: min(100% - 1.25rem, 28rem);
+  margin-inline: auto;
+  padding: 1rem 0 2rem;
+}
+
+.gioco-lead {
+  margin-bottom: 1rem;
+}
+
+.arcade-shell {
+  position: relative;
+  border: 1px solid var(--line);
+  background: #071214;
+  box-shadow: var(--shadow);
+  overflow: hidden;
+}
+
+.arcade-hud {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.5rem;
+  padding: 0.55rem 0.75rem;
+  font-variant-numeric: tabular-nums;
+  color: var(--muted);
+  font-size: 0.9rem;
+  background: color-mix(in srgb, var(--ink) 70%, transparent);
+  border-bottom: 1px solid var(--line);
+}
+
+.arcade-hud strong {
+  color: var(--parchment);
+  font-family: var(--font-display);
+}
+
+#arcade {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 390 / 560;
+  background:
+    linear-gradient(180deg, #0c2f36 0%, #071214 55%, #0a1a1c 100%);
+  touch-action: none;
+}
+
+.arcade-pad {
+  display: grid;
+  grid-template-columns: 1fr 1.1fr 1fr;
+  gap: 0.45rem;
+  padding: 0.65rem;
+  background: color-mix(in srgb, var(--bg-elev) 80%, transparent);
+  border-top: 1px solid var(--line);
+}
+
+.pad-btn {
+  min-height: 3.4rem;
+  border: 1px solid var(--line);
+  background: color-mix(in srgb, var(--lake-mid) 35%, var(--bg));
+  color: var(--text);
+  font-size: 1.35rem;
+  cursor: pointer;
+  border-radius: 0.35rem;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+}
+
+.pad-btn:active,
+.pad-btn.is-down {
+  background: var(--mist);
+  color: var(--ink);
+}
+
+.pad-fire {
+  background: color-mix(in srgb, var(--gold) 35%, var(--bg));
+  font-size: 1.5rem;
+}
+
+.arcade-overlay {
+  position: absolute;
+  inset: 2.6rem 0 4.6rem;
+  display: grid;
+  place-content: center;
+  gap: 0.65rem;
+  padding: 1.25rem;
+  text-align: center;
+  background: color-mix(in srgb, #071214 78%, transparent);
+  backdrop-filter: blur(4px);
+}
+
+.arcade-overlay[hidden] {
+  display: none;
+}
+
+.arcade-overlay h2 {
+  margin: 0;
+  color: var(--parchment);
+}
+
+.arcade-overlay p {
+  margin: 0;
+  color: var(--muted);
+}
+
+.arcade-overlay .btn {
+  justify-self: center;
+  min-width: 10rem;
+}
+
+.gioco-tip {
+  margin-top: 0.9rem;
+  color: var(--muted);
+  font-size: 0.92rem;
+  text-align: center;
+}
+
+@media (min-width: 720px) {
+  .gioco-main {
+    width: min(100% - 2rem, 32rem);
+  }
+}

@@ -17,8 +17,10 @@ Materiali didattici interattivi, ognuno in una **sottocartella autonoma**.
 - **Mobile first (sempre)**: forte attenzione all’uso su **cellulare**. Layout, dialoghi, bottoni, immagini e touch devono funzionare bene su schermi stretti (leggibilità, aree cliccabili grandi, niente overflow orizzontale, stage VN usabile col pollice). Controllare almeno a ~390px di larghezza prima di pubblicare.
 - **Visual novel su telefono**: scena/ritratto e testo devono stare **nello stesso viewport** (immagine in alto ~40%, dialogo sotto con scroll interno se serve). Evitare layout dove le immagini restano «sopra» fuori schermo mentre si legge solo il fumetto. I **ritratti** sul cellulare restano **piccoli** (angolo scena, non mezza faccia a tutto schermo).
 - **Niente verifiche lunghe**: dopo le modifiche, commit/push e basta. Il Prof. prova lui sul browser e dice se qualcosa non va. Evitare walkthrough video, computer-use prolungato e suite di test manuali elaborate, salvo richiesta esplicita. Un controllo rapido mobile (viewport stretto) resta comunque dovuto.
+- **Fumetto = standard**: nei nuovi lavori (e dove ha senso) includi una pagina `fumetto.html`. Preferisci **più vignette per tavola** (non una sola scena a pagina intera). Serve un **minimo di trama**: spesso un personaggio che «segue» le vicende e guida lo studente nei fatti da ricordare. Lettore a tavole con avanti/indietro, swipe, mobile-first.
+- **Gioco ≠ quiz a domande**: la pagina `gioco.html` non deve essere (di default) un questionario vero/falso o multiple choice. Preferisci un **mini-gioco divertente** legato al tema (anche banale: tipo Tetris, sparatutto, dodge/runner, catcher, puzzle arcade). Le domande restano nel laboratorio se servono per ripasso.
 - **Visual novel / fumetti didattici**: preferisci **poche scelte** (spesso solo «Continua») e **tante immagini di scena diverse**. Le scelte servono a correggere un concetto, non a ramificare la trama. Per le illustrazioni usa generazione immagini (es. Grok / GenerateImage) o Canva quando già c’è materiale utile.
-- **Riuso immagini**: le scene e i ritratti fatti per la Storia vanno **riproposti** anche in Home, Imparare e Laboratorio (schede, hero, quiz), così il materiale resta coerente e non si spreca lavoro grafico.
+- **Riuso immagini**: le scene e i ritratti fatti per la Storia / il fumetto vanno **riproposti** anche in Home, Imparare e Laboratorio (schede, hero), così il materiale resta coerente e non si spreca lavoro grafico.
 - **Layout diversi**: non ripetere sempre lo stesso schema UI (stessa home a due colonne, stesse card, stesso stage VN). Ogni nuova attività (o espansione sostanziale) deve cambiare composizione, tipografia o ritmo visivo, restando coerente al tema.
 - **Mappe e personaggi storici realistici**: niente silhouettes schematiche o “poligoni grezzi” se si può fare di meglio. Per le **mappe** usa contorni reali (SVG/GeoJSON open data) anche se i confini sono odierni/semplificati, con nota didattica chiara. Per i **personaggi storici** punta a ritratti riconoscibili e verosimili (foto storiche di pubblico dominio, Canva, o generazione immagini guidata), non a figure generiche o cartoon anonimi.
 - **Canva nel sito**: laddove il Prof. ha già fatto un Canva sull’argomento, **mettilo in una sezione dedicata** dell’attività (export + galleria/slide viewer), così gli alunni lo vedono come materiale di classe. Il sito non sostituisce il Canva: lo valorizza.
@@ -30,6 +32,7 @@ Struttura tipica di ogni cartella:
 nome-attivita/
   index.html
   imparare.html
+  fumetto.html
   laboratorio.html
   gioco.html
   css/
@@ -53,7 +56,7 @@ Sito base: `https://hidetoshi777.github.io/Scuola/`
 | Rotazione terrestre (prima media) | https://hidetoshi777.github.io/Scuola/rotazione-terrestre/ | https://hidetoshi777.github.io/Scuola/rotazione-terrestre/gioco.html |
 | Parti invariabili (prima superiore) | https://hidetoshi777.github.io/Scuola/parti-invariabili/ | https://hidetoshi777.github.io/Scuola/parti-invariabili/gioco.html |
 | Ombre sul Reich · Nazismo a fumetto | https://hidetoshi777.github.io/Scuola/nazismo-fumetto/ | [Fumetto](https://hidetoshi777.github.io/Scuola/nazismo-fumetto/fumetto.html) · [Mappa](https://hidetoshi777.github.io/Scuola/nazismo-fumetto/mappa.html) · [VN](https://hidetoshi777.github.io/Scuola/nazismo-fumetto/gioco.html) |
-| Manzoni · Archivio del manoscritto | https://hidetoshi777.github.io/Scuola/manzoni-promessi/ | [Personaggi](https://hidetoshi777.github.io/Scuola/manzoni-promessi/personaggi.html) · [Gioco](https://hidetoshi777.github.io/Scuola/manzoni-promessi/gioco.html) |
+| Manzoni · Archivio del manoscritto | https://hidetoshi777.github.io/Scuola/manzoni-promessi/ | [Fumetto](https://hidetoshi777.github.io/Scuola/manzoni-promessi/fumetto.html) · [Gioco arcade](https://hidetoshi777.github.io/Scuola/manzoni-promessi/gioco.html) |
 
 I vecchi link alla radice (`/gioco.html`, ecc.) reindirizzano ancora alla rotazione terrestre.
 
