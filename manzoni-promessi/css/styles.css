@@ -1010,10 +1010,14 @@ a:hover { color: var(--gold); }
   .canva-controls {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    grid-template-areas: "counter counter" "prev next";
+    grid-template-areas:
+      "counter counter"
+      "prev next"
+      "full full";
   }
 
   .canva-counter { grid-area: counter; }
   #canva-prev { grid-area: prev; width: 100%; }
   #canva-next { grid-area: next; width: 100%; }
+  #canva-fullscreen { grid-area: full; width: 100%; }
 }
