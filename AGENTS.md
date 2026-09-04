@@ -25,7 +25,7 @@ nome-attivita/
 
 Dopo ogni nuova attività:
 
-1. Apri una pull request e fai il **merge** su `main` (Origin).
+1. Apri una pull request e **fai tu il merge** su `main` (Origin), senza aspettare.
 2. Pubblica su GitHub, così la classe ha l’indirizzo web.
 
 Repository GitHub: `https://github.com/hidetoshi777/Scuola`  
