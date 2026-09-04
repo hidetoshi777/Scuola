@@ -1,7 +1,23 @@
 document.addEventListener("DOMContentLoaded", () => {
   const frase = document.getElementById("frase-demo");
   const info = document.getElementById("info-parola");
-  if (!frase || !window.Grammatica) {
+  const legenda = document.getElementById("legenda");
+  if (!window.Grammatica) {
+    return;
+  }
+
+  // Legenda: ogni categoria ha un colore E un glifo, così resta
+  // riconoscibile anche da chi i colori non li distingue.
+  if (legenda) {
+    Grammatica.categorie.forEach((cat) => {
+      const li = document.createElement("li");
+      li.className = `legend-item tipo-${cat.id}`;
+      li.textContent = cat.nome;
+      legenda.append(li);
+    });
+  }
+
+  if (!frase) {
     return;
   }
 
@@ -18,9 +34,12 @@ document.addEventListener("DOMContentLoaded", () => {
     btn.addEventListener("click", () => {
       frase.querySelectorAll(".word-chip").forEach((chip) => chip.classList.remove("is-active"));
       btn.classList.add("is-active");
-      const cat = Grammatica.categorie.find((c) => c.id === pezzo.tipo);
+      const cat = Grammatica.categoria(pezzo.tipo);
       if (cat && info) {
-        info.innerHTML = `<strong>${cat.nome}</strong> — ${cat.breve}`;
+        info.replaceChildren();
+        const nome = document.createElement("strong");
+        nome.textContent = `${cat.glifo} ${cat.nome}`;
+        info.append(nome, ` — ${cat.breve} ${cat.trucco}`);
       }
     });
     frase.append(btn);
