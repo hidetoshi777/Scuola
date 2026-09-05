@@ -163,7 +163,7 @@ a { color: inherit; }
   background: var(--carta-alta);
   border: 1px solid var(--bordo-forte);
   padding: 0.52rem 0.95rem;
-  border-radius: 999px;
+  border-radius: 0.45rem;
   cursor: pointer;
   transition: border-color 0.16s, transform 0.16s;
 }
@@ -171,24 +171,34 @@ a { color: inherit; }
 
 /* ---------------- Apertura ---------------- */
 
-.apertura { padding-top: clamp(2.6rem, 7vw, 5.5rem); }
+.apertura { padding-top: clamp(2.2rem, 6vw, 4.8rem); }
+
+.marchio-hero {
+  font-family: var(--f-display);
+  font-size: clamp(1.15rem, 2.4vw, 1.45rem);
+  font-weight: 800;
+  font-variation-settings: "wdth" 92;
+  letter-spacing: -0.03em;
+  margin: 0 0 0.55rem;
+  color: var(--inchiostro);
+}
 
 .occhiello {
   font-family: var(--f-testo);
   font-size: 0.76rem; font-weight: 700;
   letter-spacing: 0.2em; text-transform: uppercase;
   color: var(--matita);
-  margin: 0 0 1.1rem;
+  margin: 0 0 1rem;
 }
 
 h1 {
   font-family: var(--f-display);
-  font-size: clamp(2.9rem, 9.5vw, 6.6rem);
+  font-size: clamp(2.6rem, 8.5vw, 5.8rem);
   font-weight: 800;
   font-variation-settings: "wdth" 88;
   line-height: 0.9;
   letter-spacing: -0.045em;
-  margin: 0 0 1.5rem;
+  margin: 0 0 1.25rem;
 }
 /* Il terzo verso è cavo: la fila di dorsi qui sotto è il pieno.
    Serve una spaziatura più larga del resto del titolo, altrimenti
@@ -205,37 +215,100 @@ h1 em {
   max-width: 34rem;
   font-size: 1.1rem;
   color: var(--matita);
-  margin: 0 0 clamp(2.2rem, 5vw, 3.6rem);
+  margin: 0 0 1.5rem;
 }
 .sommario b { color: var(--inchiostro); font-weight: 700; }
+
+.apertura-cta {
+  display: flex; flex-wrap: wrap; gap: 0.65rem 0.85rem;
+  margin-bottom: clamp(2rem, 4.5vw, 3.2rem);
+}
+.cta {
+  display: inline-flex; align-items: center; justify-content: center;
+  min-height: 2.75rem;
+  padding: 0.55rem 1.15rem;
+  font: 700 0.95rem/1.2 var(--f-testo);
+  text-decoration: none;
+  border-radius: 0.45rem;
+  transition: transform 0.16s, background-color 0.16s, border-color 0.16s;
+}
+.cta:hover { transform: translateY(-2px); }
+.cta-primaria {
+  color: var(--carta-alta);
+  background: var(--inchiostro);
+  border: 1px solid var(--inchiostro);
+}
+.cta-primaria:hover { background: var(--c-storia); border-color: var(--c-storia); }
+.cta-secondaria {
+  color: var(--inchiostro);
+  background: transparent;
+  border: 1.5px solid var(--bordo-forte);
+}
+.cta-secondaria:hover { border-color: var(--inchiostro); }
 
 /* La fascia: tutti i lavori in miniatura, in una riga sola. */
 .fascia {
   margin: 0;
   padding: 0 var(--margine) clamp(1.6rem, 3vw, 2.4rem);
 }
+.fascia-salta {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+  border-radius: 2px;
+}
+.fascia-salta:focus-visible {
+  outline: 3px solid var(--c-italiano);
+  outline-offset: 4px;
+}
 .fascia-dorsi {
-  display: flex; align-items: flex-end; gap: 2px;
-  height: 96px;
-  padding-bottom: 7px;
-  border-bottom: 6px solid var(--asse);
-  border-radius: 0 0 2px 2px;
-  box-shadow: 0 7px 12px -8px var(--asse-ombra);
+  display: flex; align-items: flex-end; gap: 1.5px;
+  height: 108px;
+  padding: 0 2px 8px;
+  border-bottom: 8px solid var(--asse);
+  border-radius: 0 0 3px 3px;
+  box-shadow:
+    0 8px 14px -9px var(--asse-ombra),
+    inset 0 -2px 0 rgba(255, 255, 255, 0.18);
+  background:
+    linear-gradient(180deg, transparent 70%, color-mix(in srgb, var(--asse) 18%, transparent));
 }
 .fascia-dorso {
   flex: 1 1 0; min-width: 2px;
   height: var(--h);
-  background: var(--tinta);
+  background:
+    linear-gradient(90deg, rgba(0, 0, 0, 0.12), transparent 35%, transparent 65%, rgba(255, 255, 255, 0.12)),
+    var(--tinta);
   border-radius: 2px 2px 0 0;
-  opacity: 0.92;
+  opacity: 0.94;
+  transform-origin: bottom center;
+  animation: sale 0.45s both;
+  animation-delay: calc(var(--i, 0) * 4ms);
+}
+.fascia-gap {
+  flex: 0 0 5px;
+  align-self: stretch;
+  margin-bottom: 8px;
+  opacity: 0.35;
+  background: repeating-linear-gradient(
+    to bottom,
+    transparent 0 3px,
+    var(--bordo) 3px 4px
+  );
 }
 .fascia-legenda {
+  display: flex; flex-wrap: wrap; align-items: baseline; gap: 0.35rem 1rem;
   font-family: var(--f-mano);
   font-size: 1.28rem;
   color: var(--matita);
   margin-top: 0.85rem;
 }
-.fascia-legenda span { color: var(--inchiostro); font-weight: 700; }
+.fascia-legenda span:not(.fascia-invito) { color: var(--inchiostro); font-weight: 700; }
+.fascia-invito {
+  margin-left: auto;
+  font-weight: 500 !important;
+  color: var(--matita) !important;
+}
 
 /* ---------------- Reparti ---------------- */
 
@@ -269,33 +342,44 @@ h1 em {
 
 .cartelliera {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(15.2rem, 1fr));
-  gap: 2.5rem 1.2rem;
+  grid-template-columns: repeat(12, 1fr);
+  gap: 2.6rem 1.15rem;
 }
 
 .cartellina {
   position: relative;
+  grid-column: span 6;
   display: flex; flex-direction: column; gap: 0.55rem;
   background: var(--carta-cart);
   border: 1px solid var(--bordo);
   border-top: 3px solid var(--tinta);
-  border-radius: 0.25rem 0.7rem 0.7rem 0.7rem;
+  border-radius: 0.25rem 0.55rem 0.55rem 0.55rem;
   padding: 1.15rem 1.2rem 1.25rem;
   box-shadow: 0 1px 0 var(--bordo), 0 12px 22px -18px var(--ombra-dorso);
-  transition: transform 0.18s, box-shadow 0.18s;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
+.cartellina:first-child {
+  grid-column: span 12;
+  padding: 1.4rem 1.45rem 1.5rem;
+}
+.cartellina:first-child h3 {
+  font-size: clamp(1.35rem, 2.5vw, 1.75rem);
+  max-width: 28ch;
+}
+.cartellina:first-child p { max-width: 42rem; font-size: 1rem; }
+.cartellina:first-child .adesivo { width: 2.85rem; height: 2.85rem; }
 /* La linguetta, sfalsata come nei raccoglitori veri. */
 .cartellina::before {
   content: "";
   position: absolute; top: -1.05rem; left: var(--tab, 1.1rem);
   width: 6.2rem; height: 1.1rem;
   background: var(--tinta);
-  border-radius: 0.4rem 0.4rem 0 0;
+  border-radius: 0.35rem 0.35rem 0 0;
 }
 .cartellina:nth-child(2)::before { --tab: 4.4rem; }
 .cartellina:nth-child(3)::before { --tab: 2.6rem; }
 .cartellina:nth-child(4)::before { --tab: 5.6rem; }
-.cartellina:hover { transform: translateY(-3px); box-shadow: 0 1px 0 var(--bordo), 0 20px 30px -20px var(--ombra-dorso); }
+.cartellina:hover { transform: translateY(-4px); box-shadow: 0 1px 0 var(--bordo), 0 22px 34px -20px var(--ombra-dorso); }
 
 .cartellina-testa { display: flex; align-items: flex-start; justify-content: space-between; gap: 0.8rem; }
 .cartellina-dove {
@@ -315,20 +399,31 @@ h1 em {
 .cartellina p { margin: 0; font-size: 0.93rem; color: var(--matita); }
 
 .cartellina-altro {
-  display: flex; flex-wrap: wrap; gap: 0.35rem 0.5rem;
-  margin-top: auto; padding-top: 0.55rem;
+  display: flex; flex-wrap: wrap; align-items: center; gap: 0.15rem 0;
+  margin-top: auto; padding-top: 0.65rem;
+  border-top: 1px dashed var(--bordo);
 }
 .cartellina-altro a {
   position: relative; z-index: 1;
-  font-size: 0.79rem; font-weight: 700;
+  font-size: 0.84rem; font-weight: 700;
   text-decoration: none;
-  padding: 0.24rem 0.6rem;
-  border: 1px solid var(--bordo-forte);
-  border-radius: 999px;
   color: var(--matita);
-  transition: color 0.15s, border-color 0.15s;
+  padding: 0.2rem 0;
+  transition: color 0.15s;
 }
-.cartellina-altro a:hover { color: var(--tinta); border-color: var(--tinta); }
+.cartellina-altro a:not(:last-child)::after {
+  content: "·";
+  margin: 0 0.55rem;
+  color: var(--bordo-forte);
+  font-weight: 400;
+  pointer-events: none;
+}
+.cartellina-altro a:hover { color: var(--tinta); text-decoration: underline; text-underline-offset: 3px; }
+
+@media (max-width: 46rem) {
+  .cartellina,
+  .cartellina:first-child { grid-column: span 12; }
+}
 
 /* ---------------- Il banco: ricerca ---------------- */
 
@@ -545,10 +640,77 @@ html[data-theme="dark"] .dorso-titolo {
   color: var(--carta-alta);
   background: var(--inchiostro);
   padding: 0.68rem 1.2rem;
-  border-radius: 0.6rem;
+  border-radius: 0.45rem;
   transition: background-color 0.16s;
 }
 .bottone:hover { background: var(--tinta); }
+
+/* Quizizz / Kahoot raccolti per l'argomento del volume. */
+.scheda-quiz {
+  margin-top: 1.35rem;
+  padding-top: 1.15rem;
+  border-top: 1px dashed var(--bordo-forte);
+}
+.scheda-quiz[hidden] { display: none; }
+.scheda-quiz-titolo {
+  font-family: var(--f-display);
+  font-size: 1.05rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  margin: 0 0 0.15rem;
+}
+.scheda-quiz-nota {
+  margin: 0 0 0.75rem;
+  font-size: 1.1rem;
+  color: var(--matita);
+}
+.scheda-quiz-lista {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 0.45rem;
+}
+.scheda-quiz-lista a {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.65rem;
+  min-height: 2.75rem;
+  padding: 0.55rem 0.7rem;
+  text-decoration: none;
+  border: 1px solid var(--bordo);
+  border-radius: 0.45rem;
+  background: color-mix(in srgb, var(--carta) 70%, transparent);
+  transition: border-color 0.15s, transform 0.15s;
+}
+.scheda-quiz-lista a:hover {
+  border-color: var(--tinta);
+  transform: translateY(-1px);
+}
+.scheda-quiz-badge {
+  flex: none;
+  font-size: 0.68rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--carta-alta);
+  background: var(--inchiostro);
+  padding: 0.28rem 0.4rem;
+  border-radius: 0.3rem;
+  margin-top: 0.1rem;
+}
+.scheda-quiz-badge[data-p="quizizz"] { background: #6C63FF; }
+.scheda-quiz-badge[data-p="kahoot"] { background: #46178F; }
+.scheda-quiz-testo { display: flex; flex-direction: column; gap: 0.12rem; min-width: 0; }
+.scheda-quiz-testo strong {
+  font-size: 0.92rem;
+  line-height: 1.25;
+  font-weight: 700;
+}
+.scheda-quiz-meta {
+  font-size: 0.78rem;
+  color: var(--matita);
+}
 
 /* ---------------- Coda ---------------- */
 
@@ -581,7 +743,8 @@ html[data-theme="dark"] .dorso-titolo {
 /* ---------------- Schermi stretti ---------------- */
 
 @media (max-width: 46rem) {
-  .fascia-dorsi { height: 68px; }
+  .fascia-dorsi { height: 76px; }
+  .fascia-invito { margin-left: 0; width: 100%; }
   h1 em { -webkit-text-stroke-width: 1.5px; }
   /* Basta cambiare le due misure: il passo delle assi e l'altezza dei
      dorsi sono calcolati da queste, quindi non possono più sfasarsi. */

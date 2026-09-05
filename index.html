@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
-  <title>Lo scaffale del Prof. | Scuola</title>
+  <title>Lo scaffale del Prof. Rossano | Scuola</title>
   <meta name="description" content="Tutti i lavori della classe su un unico scaffale: le attività da aprire nel browser e le lezioni Canva, ordinate per materia.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -12,7 +12,7 @@
   <!-- Il ?v= va alzato a ogni modifica di CSS o JS: senza, un browser che
        si è tenuto una copia vecchia (o un 404 preso durante il deploy)
        continua a servirla e la pagina esce senza stile. -->
-  <link rel="stylesheet" href="css/styles.css?v=6">
+  <link rel="stylesheet" href="css/styles.css?v=7">
 </head>
 <body>
 
@@ -95,7 +95,7 @@
   <div class="misura testata-corpo">
     <a class="marchio" href="index.html">
       <span class="marchio-dorsi" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span>
-      Lo scaffale del Prof.
+      Lo scaffale del Prof. Rossano
     </a>
     <button type="button" class="interruttore" data-tema aria-pressed="false">Lavagna</button>
   </div>
@@ -106,20 +106,28 @@
   <!-- ============ Apertura ============ -->
   <section class="apertura">
     <div class="misura">
+      <p class="marchio-hero">Lo scaffale del Prof. Rossano</p>
       <p class="occhiello">Rossano Bella · docente</p>
-      <h1>Nove anni<br>di lezioni,<br><em>in fila.</em></h1>
+      <h1>Cinque anni<br>di lezioni,<br><em>in fila.</em></h1>
       <p class="sommario">
         Ogni dorso è un lavoro: lo <b>spessore</b> conta le pagine, il <b>colore</b> dice la materia.
         Qui sotto ci sono tutti insieme.
       </p>
+      <div class="apertura-cta">
+        <a class="cta cta-primaria" href="#attivita">Le cartelline</a>
+        <a class="cta cta-secondaria" href="#scaffale">Lo scaffale</a>
+      </div>
     </div>
 
     <!-- La fascia: tutti i lavori in miniatura, a tutta larghezza. -->
     <figure class="fascia" aria-labelledby="fascia-did">
-      <div class="fascia-dorsi" id="fascia-dorsi"></div>
+      <a class="fascia-salta" href="#scaffale" aria-label="Vai allo scaffale completo">
+        <div class="fascia-dorsi" id="fascia-dorsi"></div>
+      </a>
       <figcaption class="fascia-legenda" id="fascia-did">
         <span id="fascia-conto">–</span> lavori · <span id="fascia-pagine">–</span> pagine ·
         <span id="fascia-materie">–</span> materie
+        <span class="fascia-invito mano">tocca per aprire lo scaffale</span>
       </figcaption>
     </figure>
   </section>
@@ -182,6 +190,11 @@
     </div>
     <h3 id="scheda-titolo"></h3>
     <a class="bottone" id="scheda-link" href="#" target="_blank" rel="noopener">Apri su Canva ↗</a>
+    <div class="scheda-quiz" id="scheda-quiz" hidden>
+      <h4 class="scheda-quiz-titolo">Ripassa</h4>
+      <p class="scheda-quiz-nota mano">Quizizz (e Kahoot) sullo stesso argomento</p>
+      <ul class="scheda-quiz-lista" id="scheda-quiz-lista"></ul>
+    </div>
   </div>
 </dialog>
 
@@ -192,7 +205,7 @@
   </div>
 </footer>
 
-<script src="js/data.js?v=6" defer></script>
-<script src="js/desktop.js?v=6" defer></script>
+<script src="js/data.js?v=7" defer></script>
+<script src="js/desktop.js?v=7" defer></script>
 </body>
 </html>
