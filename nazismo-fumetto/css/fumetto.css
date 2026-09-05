@@ -69,7 +69,7 @@
   box-sizing: border-box;
   background: #05070b;
   display: grid;
-  grid-template-rows: auto minmax(0, 1fr) auto auto;
+  grid-template-rows: auto minmax(0, 1fr);
   gap: 0.55rem;
   align-content: stretch;
 }
@@ -109,16 +109,11 @@ body.fumetto-immersive-lock {
 
 .fumetto-reader:fullscreen .fumetto-hint,
 .fumetto-reader:-webkit-full-screen .fumetto-hint,
-.fumetto-reader.is-immersive .fumetto-hint {
-  color: #9aa3b2;
-  margin: 0;
-}
-
+.fumetto-reader.is-immersive .fumetto-hint,
 .fumetto-reader:fullscreen .fumetto-controls,
 .fumetto-reader:-webkit-full-screen .fumetto-controls,
 .fumetto-reader.is-immersive .fumetto-controls {
-  width: min(100%, 36rem);
-  margin-inline: auto;
+  display: none;
 }
 
 .fumetto-page {
