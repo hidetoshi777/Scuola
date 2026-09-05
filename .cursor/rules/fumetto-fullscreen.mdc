@@ -13,7 +13,7 @@ Ogni `fumetto.html` (nuova o rivista) deve permettere di leggere le tavole **a s
 - Pulsante **«Schermo intero»** / **«Esci»** nella toolbar del lettore
 - Fullscreen API sul contenitore del lettore (es. `#fumetto-stage`)
 - **Esc** per uscire
-- In fullscreen: viewport che occupa lo spazio utile; controlli ancora a portata di pollice
+- In fullscreen: viewport che occupa lo spazio utile; **niente barra Avanti/Indietro** (né hint): bastano swipe e tap ai lati. Resta la toolbar con stato tavola + «Esci».
 - **Fallback iOS/Safari**: se `requestFullscreen` non entra, modalità immersiva a viewport intera (`position: fixed`, `100dvh`, classe tipo `is-immersive`, lock scroll sul body)
 
 ## Riferimento
