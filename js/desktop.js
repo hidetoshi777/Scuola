@@ -214,15 +214,16 @@
 
   /* ---------------- La scheda del volume ---------------- */
 
-  function quizPerTitolo(titolo) {
+  function quizPerTitolo(titolo, id) {
     const t = piatto(titolo);
     const lista = Array.isArray(window.QUIZ) ? window.QUIZ : [];
-    const trovati = lista.filter((q) =>
-      (q.chiavi || []).some((k) => {
+    const trovati = lista.filter((q) => {
+      if (id && Array.isArray(q.ids) && q.ids.includes(id)) return true;
+      return (q.chiavi || []).some((k) => {
         const chiave = piatto(k);
         return chiave.length >= 4 && t.includes(chiave);
-      })
-    );
+      });
+    });
     /* Quizizz prima di Kahoot; poi per numero di domande. */
     trovati.sort((a, b) => {
       const pa = a.piattaforma === "quizizz" ? 0 : 1;
@@ -230,15 +231,21 @@
       if (pa !== pb) return pa - pb;
       return (b.domande || 0) - (a.domande || 0);
     });
-    return trovati;
+    /* Stesso URL una sola volta (più chiavi possono portare allo stesso quiz). */
+    const visti = new Set();
+    return trovati.filter((q) => {
+      if (visti.has(q.url)) return false;
+      visti.add(q.url);
+      return true;
+    });
   }
 
-  function riempiQuiz(titolo) {
+  function riempiQuiz(titolo, id) {
     const blocco = document.getElementById("scheda-quiz");
     const lista = document.getElementById("scheda-quiz-lista");
     if (!blocco || !lista) return;
 
-    const quiz = quizPerTitolo(titolo);
+    const quiz = quizPerTitolo(titolo, id);
     if (!quiz.length) {
       blocco.hidden = true;
       lista.innerHTML = "";
@@ -291,7 +298,7 @@
         v.pp + (v.pp === 1 ? " pagina" : " pagine") + (v.periodo ? " · " + v.periodo : "");
       document.getElementById("scheda-titolo").textContent = v.titolo;
       document.getElementById("scheda-link").href = canvaLink(v.id);
-      riempiQuiz(v.titolo);
+      riempiQuiz(v.titolo, v.id);
 
       /* L'anteprima resta nascosta finché l'immagine non è arrivata davvero:
          i lavori aggiunti dopo l'ultima ricognizione non hanno il file, e
