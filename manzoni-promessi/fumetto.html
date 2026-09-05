@@ -41,8 +41,11 @@
       <p class="lead">Più vignette per pagina. Segui Renzo: dal matrimonio bloccato alla Provvidenza, fino a Manzoni che scrive.</p>
     </header>
 
-    <section class="fumetto-reader" aria-roledescription="fumetto" aria-label="I Promessi Sposi a fumetti">
-      <p class="fumetto-status">Tavola <span id="fumetto-num">1</span> di 4</p>
+    <section class="fumetto-reader" id="fumetto-stage" aria-roledescription="fumetto" aria-label="I Promessi Sposi a fumetti">
+      <div class="fumetto-toolbar">
+        <p class="fumetto-status">Tavola <span id="fumetto-num">1</span> di 4</p>
+        <button type="button" class="btn btn-secondary fumetto-full" id="fumetto-fullscreen" aria-pressed="false">Schermo intero</button>
+      </div>
 
       <div class="fumetto-viewport" id="fumetto-viewport">
         <figure class="fumetto-page is-active" data-page="1">
@@ -66,7 +69,7 @@
         <div class="fumetto-dots" id="fumetto-dots" role="tablist" aria-label="Tavole"></div>
         <button type="button" class="btn btn-primary fumetto-nav" id="fumetto-next">Avanti →</button>
       </div>
-      <p class="fumetto-hint">Scorri o tocca i lati della tavola per cambiare pagina.</p>
+      <p class="fumetto-hint">Scorri o tocca i lati della tavola. Sul telefono: «Schermo intero» per leggere grande. Esc per uscire.</p>
     </section>
 
     <div class="hero-actions" style="justify-content:center;margin-top:1.25rem">

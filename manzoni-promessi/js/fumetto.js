@@ -142,5 +142,80 @@
     else if (x < rect.width * 0.33) go(index - 1, -1);
   });
 
+  /* -------- Schermo intero (mobile soprattutto; fallback iOS) -------- */
+  const stage = document.getElementById("fumetto-stage");
+  const fullBtn = document.getElementById("fumetto-fullscreen");
+
+  function stageIsFullscreen() {
+    const el = document.fullscreenElement || document.webkitFullscreenElement;
+    return el === stage || (stage && stage.classList.contains("is-immersive"));
+  }
+
+  function setImmersive(on) {
+    if (!stage) return;
+    stage.classList.toggle("is-immersive", on);
+    document.documentElement.classList.toggle("fumetto-immersive-lock", on);
+    document.body.classList.toggle("fumetto-immersive-lock", on);
+  }
+
+  function syncFullscreenLabel() {
+    if (!fullBtn) return;
+    const on = stageIsFullscreen();
+    fullBtn.setAttribute("aria-pressed", String(on));
+    fullBtn.textContent = on ? "Esci" : "Schermo intero";
+  }
+
+  async function toggleFullscreen() {
+    if (!stage) return;
+    try {
+      if (stage.classList.contains("is-immersive")) {
+        setImmersive(false);
+      } else if (document.fullscreenElement === stage || document.webkitFullscreenElement === stage) {
+        if (document.exitFullscreen) await document.exitFullscreen();
+        else if (document.webkitExitFullscreen) document.webkitExitFullscreen();
+      } else if (stage.requestFullscreen && document.fullscreenEnabled !== false) {
+        await stage.requestFullscreen();
+      } else if (stage.webkitRequestFullscreen) {
+        stage.webkitRequestFullscreen();
+        setTimeout(() => {
+          if (!document.fullscreenElement && !document.webkitFullscreenElement) {
+            setImmersive(true);
+            syncFullscreenLabel();
+          }
+        }, 120);
+      } else {
+        setImmersive(true);
+      }
+    } catch (err) {
+      setImmersive(true);
+    }
+    syncFullscreenLabel();
+  }
+
+  if (fullBtn) fullBtn.addEventListener("click", (event) => {
+    event.stopPropagation();
+    toggleFullscreen();
+  });
+
+  document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape" && stage && stage.classList.contains("is-immersive")) {
+      setImmersive(false);
+      syncFullscreenLabel();
+      return;
+    }
+    if ((event.key === "f" || event.key === "F") && !/input|textarea|select/i.test(event.target.tagName || "")) {
+      toggleFullscreen();
+    }
+  });
+  document.addEventListener("fullscreenchange", () => {
+    if (document.fullscreenElement === stage) setImmersive(false);
+    syncFullscreenLabel();
+  });
+  document.addEventListener("webkitfullscreenchange", () => {
+    if (document.webkitFullscreenElement === stage) setImmersive(false);
+    syncFullscreenLabel();
+  });
+  syncFullscreenLabel();
+
   settle(0);
 })();
