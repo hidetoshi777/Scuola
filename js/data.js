@@ -78,8 +78,12 @@ window.ATTIVITA_WEB = [
   },
 ];
 
-/* Lavori Canva per materia. pp = numero di pagine, id = design ID Canva. */
+/* Lavori Canva per materia. pp = numero di pagine, id = design ID Canva.
+   Ricognizione aggiornata 2026-09-05 (audit Canva: Ventennio + 12 omissioni). */
 window.CANVA = [
+  // ---- STORIA — Preistoria ----
+  { materia: "storia", periodo: "Preistoria", titolo: "MENHIR", pp: 13, id: "DAG4Sa3wsz4" },
+
   // ---- STORIA — Tardo antico e Medioevo ----
   { materia: "storia", periodo: "Tardo antico e Medioevo", titolo: "La debolezza dell'impero romano", pp: 19, id: "DAFVGYG9s1Q" },
   { materia: "storia", periodo: "Tardo antico e Medioevo", titolo: "Schemino caduta impero romano", pp: 1, id: "DAGU-UcsbTM" },
@@ -88,9 +92,12 @@ window.CANVA = [
   { materia: "storia", periodo: "Tardo antico e Medioevo", titolo: "Franchi e Bizantini", pp: 22, id: "DAFV7zzglvY" },
   { materia: "storia", periodo: "Tardo antico e Medioevo", titolo: "Il monachesimo", pp: 23, id: "DAFT-c0qlzg" },
   { materia: "storia", periodo: "Tardo antico e Medioevo", titolo: "Lotta per le investiture", pp: 18, id: "DAFOKEIuC0E" },
+  { materia: "storia", periodo: "Tardo antico e Medioevo", titolo: "La nascita delle monarchie feudali", pp: 16, id: "DAFRYIDi6yI" },
   { materia: "storia", periodo: "Tardo antico e Medioevo", titolo: "La rinascita dopo l'anno 1000", pp: 21, id: "DAFTsdqfvro" },
   { materia: "storia", periodo: "Tardo antico e Medioevo", titolo: "La nascita dei comuni", pp: 23, id: "DAFT-dKsPms" },
+  { materia: "storia", periodo: "Tardo antico e Medioevo", titolo: "Dai comuni alle signorie", pp: 20, id: "DAFZ38QUnE8" },
   { materia: "storia", periodo: "Tardo antico e Medioevo", titolo: "Scoperte e invenzioni nel Medioevo", pp: 15, id: "DAFSwacI8Y0" },
+  { materia: "storia", periodo: "Tardo antico e Medioevo", titolo: "Le Crociate", pp: 19, id: "DAFR2J46aAY" },
   { materia: "storia", periodo: "Tardo antico e Medioevo", titolo: "I NORMANNI", pp: 1, id: "DAFRcsTrIgc" },
   { materia: "storia", periodo: "Tardo antico e Medioevo", titolo: "Da Federico I Barbarossa a Federico II di Svevia", pp: 29, id: "DAFYTz9gmJM" },
   { materia: "storia", periodo: "Tardo antico e Medioevo", titolo: "Il Regno di Federico II", pp: 12, id: "DAFYsLYGau4" },
@@ -104,6 +111,7 @@ window.CANVA = [
   { materia: "storia", periodo: "Età moderna", titolo: "Le guerre d'Italia", pp: 16, id: "DAFfWGLHcu0" },
   { materia: "storia", periodo: "Età moderna", titolo: "L'Italia Spagnola", pp: 7, id: "DAFguVgy_6E" },
   { materia: "storia", periodo: "Età moderna", titolo: "La Riforma protestante", pp: 15, id: "DAFeqFKhyEs" },
+  { materia: "storia", periodo: "Età moderna", titolo: "La Controriforma ed il concilio di Trento", pp: 10, id: "DAFflrCEMYA" },
   { materia: "storia", periodo: "Età moderna", titolo: "Le guerre di Religione tra cattolici e protestanti", pp: 21, id: "DAFf-RgLqWU" },
   { materia: "storia", periodo: "Età moderna", titolo: "Guerra dei Trent'anni", pp: 14, id: "DAFhvtpWESE" },
   { materia: "storia", periodo: "Età moderna", titolo: "Olivares / Richelieu e Mazzarino", pp: 14, id: "DAFiP-DZATw" },
@@ -127,14 +135,17 @@ window.CANVA = [
   { materia: "storia", periodo: "Risorgimento", titolo: "Schemino regni Unità d'Italia", pp: 1, id: "DAFyXtAhMfE" },
 
   // ---- STORIA — Novecento ----
+  { materia: "storia", periodo: "Novecento", titolo: "I grandi conflitti di fine Ottocento", pp: 11, id: "DAF0--jPKps" },
   { materia: "storia", periodo: "Novecento", titolo: "Belle Époque", pp: 19, id: "DAF0meVynx0" },
   { materia: "storia", periodo: "Novecento", titolo: "La prima guerra mondiale (Italia)", pp: 20, id: "DAF2OFcPV3A" },
   { materia: "storia", periodo: "Novecento", titolo: "La prima guerra mondiale (parte 2 — Europa)", pp: 18, id: "DAF4ch5JAfs" },
   { materia: "storia", periodo: "Novecento", titolo: "Le 6 ragioni dell'ascesa di Mussolini", pp: 4, id: "DAF6gY-5TG8" },
+  { materia: "storia", periodo: "Novecento", titolo: "Il Ventennio fascista (1922 - 1942)", pp: 22, id: "DAF79AclMV4" },
   { materia: "storia", periodo: "Novecento", titolo: "Il Nazismo", pp: 11, id: "DAGe-xaxEtU" },
 
   // ---- ITALIANO — Letteratura ----
   { materia: "italiano", periodo: "Letteratura", titolo: "Alle origini della nostra poesia", pp: 20, id: "DAFQD-r2Cvg" },
+  { materia: "italiano", periodo: "Letteratura", titolo: "La guerra di Troia: Mito ed eroi", pp: 23, id: "DAFS8HWcqbI" },
   { materia: "italiano", periodo: "Letteratura", titolo: "Dante", pp: 20, id: "DAFX8u75EYU" },
   { materia: "italiano", periodo: "Letteratura", titolo: "Il Sommo Poeta: Dante Alighieri", pp: 16, id: "DAF1ph5Dx8U" },
   { materia: "italiano", periodo: "Letteratura", titolo: "Giovanni Boccaccio", pp: 16, id: "DAFhR0Q8HfM" },
@@ -180,12 +191,17 @@ window.CANVA = [
   { materia: "edcivica", titolo: "Le società", pp: 3, id: "DAFjp8bbHYc" },
   { materia: "edcivica", titolo: "Concorso nazionale Tricolore vivo", pp: 18, id: "DAF_7TtKsds" },
   { materia: "edcivica", titolo: "Le forme dell'inquinamento", pp: 14, id: "DAG2liP4Obk" },
+  { materia: "edcivica", titolo: "Il riscaldamento globale", pp: 9, id: "DAGBdue5TLs" },
+  { materia: "edcivica", titolo: "Raccolta differenziata del vetro", pp: 2, id: "DAHAiIt3Ycs" },
 
   // ---- FILOSOFIA ----
   { materia: "filosofia", titolo: "Freud e la psicanalisi", pp: 10, id: "DAF3O0SlRWg" },
+  { materia: "filosofia", titolo: "Estetica", pp: 17, id: "DAFN0GKt0t4" },
+  { materia: "filosofia", titolo: "Felicità", pp: 17, id: "DAFNsP7rYck" },
 
   // ---- RELIGIONE ----
-  { materia: "religione", titolo: "Islam", pp: 3, id: "DAHCaUFrgOU" },
+  { materia: "religione", titolo: "L'Islam", pp: 18, id: "DAFWt3uKuws" },
+  { materia: "religione", titolo: "Islam — scheda", pp: 3, id: "DAHCaUFrgOU" },
 ];
 
 /* =========================================================
@@ -234,7 +250,7 @@ window.QUIZ = [
     titolo: "Classi sociali e ordini medievali",
     url: "https://quizizz.com/admin/quiz/662bc08422709d50ad4aea3b/classi-sociali-e-ordini-medievali",
     piattaforma: "quizizz", domande: 12, livello: "medie / superiori",
-    chiavi: ["nascita dei comuni", "rinascita dopo l'anno 1000", "monachesimo"],
+    chiavi: ["nascita dei comuni", "rinascita dopo l'anno 1000", "monachesimo", "dai comuni alle signorie", "monarchie feudali"],
   },
   {
     titolo: "Lotta per le investiture",
@@ -308,7 +324,7 @@ window.QUIZ = [
     titolo: "Riforma protestante e Controriforma cattolica",
     url: "https://quizizz.com/admin/quiz/61effd80033f8f001eaacb9a/riforma-protestante-e-controriforma-cattolica",
     piattaforma: "quizizz", domande: 37, livello: "superiori",
-    chiavi: ["riforma protestante", "guerre di religione"],
+    chiavi: ["riforma protestante", "guerre di religione", "controriforma", "concilio di trento"],
   },
   {
     titolo: "Guerra dei Trent'anni",
@@ -400,13 +416,19 @@ window.QUIZ = [
     titolo: "Fascismo e Nazismo",
     url: "https://quizizz.com/admin/quiz/5cb47d91139b67001a97360b/fascismo-e-nazismo",
     piattaforma: "quizizz", domande: 17, livello: "superiori",
-    chiavi: ["nazismo", "mussolini"],
+    chiavi: ["nazismo", "mussolini", "ventennio fascista", "ventennio"],
   },
   {
     titolo: "Primo dopoguerra e avvento del fascismo",
     url: "https://quizizz.com/admin/quiz/65aaa535524f09376d4fdf91/primo-dopoguerra-e-avvento-del-fascismo",
     piattaforma: "quizizz", domande: 32, livello: "superiori",
-    chiavi: ["mussolini", "nazismo"],
+    chiavi: ["mussolini", "nazismo", "ventennio fascista", "ventennio"],
+  },
+  {
+    titolo: "Le Crociate",
+    url: "https://quizizz.com/admin/quiz/5e6f9d8c3b0961001b159a74/le-crociate",
+    piattaforma: "quizizz", domande: 19, livello: "medie / superiori",
+    chiavi: ["crociate"],
   },
 
   // ---- ITALIANO ----
@@ -504,7 +526,7 @@ window.QUIZ = [
     titolo: "Epica: L'Eneide",
     url: "https://quizizz.com/admin/quiz/5dd81b0d0a7eb3001b8a26b3/epica-leneide",
     piattaforma: "quizizz", domande: 27, livello: "medie",
-    chiavi: ["eneide"],
+    chiavi: ["eneide", "guerra di troia", "troia"],
   },
   {
     titolo: "L'inno di Mameli",
@@ -608,7 +630,7 @@ window.QUIZ = [
     titolo: "L'inquinamento — forme e cause",
     url: "https://quizizz.com/admin/quiz/6787c6028018f952040bfc7b/linquinamento",
     piattaforma: "quizizz", domande: 20, livello: "medie / superiori",
-    chiavi: ["inquinamento"],
+    chiavi: ["inquinamento", "riscaldamento globale", "raccolta differenziata"],
   },
   {
     titolo: "Quiz sulla psicoanalisi di Freud",
