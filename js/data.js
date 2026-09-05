@@ -179,12 +179,12 @@ window.CANVA = [
   { materia: "edcivica", titolo: "Canva bullismo", pp: 12, id: "DAHGbiMeFaQ" },
   { materia: "edcivica", titolo: "Le società", pp: 3, id: "DAFjp8bbHYc" },
   { materia: "edcivica", titolo: "Concorso nazionale Tricolore vivo", pp: 18, id: "DAF_7TtKsds" },
+  { materia: "edcivica", titolo: "Le forme dell'inquinamento", pp: 14, id: "DAG2liP4Obk" },
 
   // ---- FILOSOFIA ----
   { materia: "filosofia", titolo: "Freud e la psicanalisi", pp: 10, id: "DAF3O0SlRWg" },
 
-  // ---- RELIGIONE / ATTIVITÀ ALTERNATIVA ----
-  { materia: "religione", titolo: "Canva per Alternativa Religione", pp: 14, id: "DAG2liP4Obk" },
+  // ---- RELIGIONE ----
   { materia: "religione", titolo: "Islam", pp: 3, id: "DAHCaUFrgOU" },
 ];
 
@@ -387,5 +387,13 @@ window.QUIZ = [
     domande: 14,
     livello: "superiori",
     chiavi: ["costituzione", "festivita civili", "festività civili", "tricolore"],
+  },
+  {
+    titolo: "L'inquinamento — forme e cause",
+    url: "https://quizizz.com/admin/quiz/6787c6028018f952040bfc7b/linquinamento",
+    piattaforma: "quizizz",
+    domande: 20,
+    livello: "medie / superiori",
+    chiavi: ["inquinamento"],
   },
 ];
