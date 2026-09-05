@@ -89,18 +89,21 @@
 
     /* I lavori in fila, raggruppati per materia: la fascia mostra
        anche le proporzioni fra un ripiano e l'altro. */
-    const ordinati = [];
-    chiaviMaterie.forEach((m) => ordinati.push(...lavoriDi(m)));
-
-    contenitore.innerHTML = ordinati
-      .map((v) => {
-        const h = Math.round(24 + Math.min(v.pp, 29) * 2.2);
-        return (
+    const pezzi = [];
+    let indice = 0;
+    chiaviMaterie.forEach((m, mi) => {
+      if (mi > 0) pezzi.push('<span class="fascia-gap" aria-hidden="true"></span>');
+      lavoriDi(m).forEach((v) => {
+        const h = Math.round(28 + Math.min(v.pp, 29) * 2.4);
+        pezzi.push(
           '<span class="fascia-dorso" style="--tinta: var(--c-' + v.materia + ');' +
-          " --h: " + h + 'px" title="' + esc(v.titolo) + '"></span>'
+          " --h: " + h + "px; --i: " + Math.min(indice, 40) + '" title="' + esc(v.titolo) + '"></span>'
         );
-      })
-      .join("");
+        indice += 1;
+      });
+    });
+
+    contenitore.innerHTML = pezzi.join("");
 
     const pagine = window.CANVA.reduce((somma, v) => somma + (Number(v.pp) || 0), 0);
     document.getElementById("fascia-conto").textContent = window.CANVA.length;
@@ -211,6 +214,58 @@
 
   /* ---------------- La scheda del volume ---------------- */
 
+  function quizPerTitolo(titolo) {
+    const t = piatto(titolo);
+    const lista = Array.isArray(window.QUIZ) ? window.QUIZ : [];
+    const trovati = lista.filter((q) =>
+      (q.chiavi || []).some((k) => {
+        const chiave = piatto(k);
+        return chiave.length >= 4 && t.includes(chiave);
+      })
+    );
+    /* Quizizz prima di Kahoot; poi per numero di domande. */
+    trovati.sort((a, b) => {
+      const pa = a.piattaforma === "quizizz" ? 0 : 1;
+      const pb = b.piattaforma === "quizizz" ? 0 : 1;
+      if (pa !== pb) return pa - pb;
+      return (b.domande || 0) - (a.domande || 0);
+    });
+    return trovati;
+  }
+
+  function riempiQuiz(titolo) {
+    const blocco = document.getElementById("scheda-quiz");
+    const lista = document.getElementById("scheda-quiz-lista");
+    if (!blocco || !lista) return;
+
+    const quiz = quizPerTitolo(titolo);
+    if (!quiz.length) {
+      blocco.hidden = true;
+      lista.innerHTML = "";
+      return;
+    }
+
+    lista.innerHTML = quiz
+      .map((q) => {
+        const badge = q.piattaforma === "kahoot" ? "Kahoot" : "Quizizz";
+        const meta = [
+          q.domande ? q.domande + " domande" : "",
+          q.livello || "",
+        ]
+          .filter(Boolean)
+          .join(" · ");
+        return (
+          '<li><a href="' + esc(q.url) + '" target="_blank" rel="noopener">' +
+          '<span class="scheda-quiz-badge" data-p="' + esc(q.piattaforma) + '">' + badge + "</span>" +
+          '<span class="scheda-quiz-testo"><strong>' + esc(q.titolo) + "</strong>" +
+          (meta ? '<span class="scheda-quiz-meta">' + esc(meta) + "</span>" : "") +
+          "</span></a></li>"
+        );
+      })
+      .join("");
+    blocco.hidden = false;
+  }
+
   function collegaScheda() {
     const scheda = document.getElementById("scheda");
     if (!scheda || typeof scheda.showModal !== "function") return;
@@ -236,6 +291,7 @@
         v.pp + (v.pp === 1 ? " pagina" : " pagine") + (v.periodo ? " · " + v.periodo : "");
       document.getElementById("scheda-titolo").textContent = v.titolo;
       document.getElementById("scheda-link").href = canvaLink(v.id);
+      riempiQuiz(v.titolo);
 
       /* L'anteprima resta nascosta finché l'immagine non è arrivata davvero:
          i lavori aggiunti dopo l'ultima ricognizione non hanno il file, e
