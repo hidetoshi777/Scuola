@@ -34,8 +34,11 @@
   </header>
 
   <main id="contenuto" class="fumetto-main" tabindex="-1">
-    <section class="fumetto-reader" aria-roledescription="fumetto" aria-label="Ombre sul Reich, sei tavole">
-      <p class="fumetto-status" id="fumetto-status">Tavola <span id="fumetto-num">1</span> di 6</p>
+    <section class="fumetto-reader" id="fumetto-stage" aria-roledescription="fumetto" aria-label="Ombre sul Reich, sei tavole">
+      <div class="fumetto-toolbar">
+        <p class="fumetto-status" id="fumetto-status">Tavola <span id="fumetto-num">1</span> di 6</p>
+        <button type="button" class="btn btn-secondary fumetto-full" id="fumetto-fullscreen" aria-pressed="false">Schermo intero</button>
+      </div>
 
       <div class="fumetto-viewport" id="fumetto-viewport">
         <figure class="fumetto-page is-active" data-page="1">
@@ -63,7 +66,7 @@
         <div class="fumetto-dots" id="fumetto-dots" role="tablist" aria-label="Tavole"></div>
         <button type="button" class="btn btn-primary fumetto-nav" id="fumetto-next">Avanti →</button>
       </div>
-      <p class="fumetto-hint">Scorri o tocca i lati della tavola per cambiare pagina.</p>
+      <p class="fumetto-hint">Scorri o tocca i lati della tavola. Sul telefono: «Schermo intero» per leggere grande. Esc per uscire.</p>
     </section>
   </main>
 

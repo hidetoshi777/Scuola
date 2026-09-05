@@ -1,0 +1,21 @@
+---
+description: I lettori fumetto devono avere schermo intero usabile sul telefono
+globs: "**/fumetto.html,**/fumetto.css,**/fumetto.js"
+alwaysApply: false
+---
+
+# Fumetto · schermo intero
+
+Ogni `fumetto.html` (nuova o rivista) deve permettere di leggere le tavole **a schermo intero**, soprattutto sul cellulare.
+
+## Obbligatorio
+
+- Pulsante **«Schermo intero»** / **«Esci»** nella toolbar del lettore
+- Fullscreen API sul contenitore del lettore (es. `#fumetto-stage`)
+- **Esc** per uscire
+- In fullscreen: viewport che occupa lo spazio utile; controlli ancora a portata di pollice
+- **Fallback iOS/Safari**: se `requestFullscreen` non entra, modalità immersiva a viewport intera (`position: fixed`, `100dvh`, classe tipo `is-immersive`, lock scroll sul body)
+
+## Riferimento
+
+Pattern già usato nei viewer Canva (`imparare`) e nei fumetti Nazismo / Manzoni.

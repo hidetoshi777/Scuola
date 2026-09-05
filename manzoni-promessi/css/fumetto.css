@@ -25,11 +25,25 @@
 }
 
 .fumetto-status {
-  margin: 0 0 0.55rem;
-  text-align: center;
+  margin: 0;
+  text-align: left;
   font-family: var(--font-display);
   color: var(--muted);
   font-size: 0.95rem;
+}
+
+.fumetto-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.fumetto-full {
+  min-height: 2.75rem;
+  padding-inline: 0.9rem;
+  flex: none;
 }
 
 .fumetto-reader {
@@ -51,6 +65,74 @@
   user-select: none;
   perspective: 1800px;
   perspective-origin: 50% 50%;
+}
+
+.fumetto-reader:fullscreen,
+.fumetto-reader:-webkit-full-screen,
+.fumetto-reader.is-immersive {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0.55rem 0.65rem 0.75rem;
+  box-sizing: border-box;
+  background: #071012;
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr) auto auto auto;
+  gap: 0.5rem;
+}
+
+.fumetto-reader.is-immersive {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  width: 100vw;
+  height: 100dvh;
+  max-height: 100dvh;
+}
+
+html.fumetto-immersive-lock,
+body.fumetto-immersive-lock {
+  overflow: hidden;
+  height: 100%;
+}
+
+.fumetto-reader:fullscreen .fumetto-viewport,
+.fumetto-reader:-webkit-full-screen .fumetto-viewport,
+.fumetto-reader.is-immersive .fumetto-viewport {
+  width: 100%;
+  max-width: none;
+  max-height: none;
+  height: 100%;
+  aspect-ratio: auto;
+  border-radius: 0.35rem;
+  margin: 0;
+}
+
+.fumetto-reader:fullscreen .fumetto-caption,
+.fumetto-reader:-webkit-full-screen .fumetto-caption,
+.fumetto-reader.is-immersive .fumetto-caption {
+  max-height: 4.5rem;
+  overflow: auto;
+}
+
+.fumetto-reader:fullscreen .fumetto-status,
+.fumetto-reader:-webkit-full-screen .fumetto-status,
+.fumetto-reader.is-immersive .fumetto-status {
+  color: #c9d4d6;
+}
+
+.fumetto-reader:fullscreen .fumetto-hint,
+.fumetto-reader:-webkit-full-screen .fumetto-hint,
+.fumetto-reader.is-immersive .fumetto-hint {
+  color: #9aabac;
+  margin: 0;
+}
+
+.fumetto-reader:fullscreen .fumetto-controls,
+.fumetto-reader:-webkit-full-screen .fumetto-controls,
+.fumetto-reader.is-immersive .fumetto-controls {
+  width: min(100%, 36rem);
+  margin-inline: auto;
 }
 
 .fumetto-page {
@@ -204,6 +286,25 @@
 }
 
 @media (max-width: 520px) {
+  .fumetto-toolbar {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .fumetto-status {
+    text-align: center;
+  }
+
+  .fumetto-full {
+    min-height: 2.9rem;
+    width: 100%;
+  }
+
+  .fumetto-viewport {
+    width: 100%;
+    max-height: calc(100dvh - 14rem);
+  }
+
   .fumetto-controls {
     grid-template-columns: 1fr 1fr;
     grid-template-areas:

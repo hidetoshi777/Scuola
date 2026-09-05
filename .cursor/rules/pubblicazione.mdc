@@ -15,7 +15,7 @@ alwaysApply: true
 - Nei lavori Scuola, **preferisci il MCP Canva** per grafiche, template, export e materiali già presenti nell’account Canva: consultalo e riusalo prima di creare da zero.
 - Se esiste un **Canva del Prof.** sull’argomento, **inseriscilo in una sezione dedicata** del lavoro (export/galleria), non lasciarlo fuori.
 - **Imparare** = sezione di studio: ci devono essere le **informazioni** (non solo schede belle). Poi renderle facili da ricordare (mnemonici, elenchi, timeline).
-- **Fumetto = standard**: `fumetto.html` con **più vignette per tavola**, minimo di trama (personaggio-guida) e **effetto sfoglia pagina**.
+- **Fumetto = standard**: `fumetto.html` con **più vignette per tavola**, minimo di trama (personaggio-guida), **effetto sfoglia pagina** e **schermo intero** (pulsante + Fullscreen API; fallback immersivo su iOS; Esc per uscire). Sul telefono le tavole devono potersi leggere grandi.
 - **Gioco = didattico**: deve far ripassare contenuti. Ok formati diversi dal quiz (memory, ordina eventi…). **No arcade puro** senza apprendimento. Se manca un’alternativa solida → **domande/risposte**.
 - **Canva**: sezione dedicata + export; viewer con **schermo intero**.
 - **Mappe e personaggi storici**: farli **realistici** (contorni geografici veri; ritratti riconoscibili), non schematici/generici.
