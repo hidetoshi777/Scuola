@@ -11,15 +11,17 @@ alwaysApply: false
 - Genera **tavole illustrate reali** (GenerateImage / Grok; o export Canva se già esiste).
 - **Vietato** pubblicare un fumetto fatto solo di vignette HTML/CSS + testo al posto delle immagini.
 - Più vignette per tavola; personaggio-guida; sfoglia pagina; schermo intero (Fullscreen API + fallback iOS).
-- **Riusa** le stesse immagini in Home, Imparare, Laboratorio (e Gioco se naturale).
+- Riusa le immagini in **Home** e **Laboratorio** (e Gioco se naturale).
 
 ## Layout (obbligatorio)
 
 - Ogni nuova attività deve avere una **composizione diversa** dalle precedenti.
 - Non basta cambiare palette/font sullo stesso scheletro (header sticky + hero + path numerato + card).
 
-## Imparare (obbligatorio)
+## Imparare = cuore del lavoro (obbligatorio)
 
-- Studio **ricco**: spiegazioni, esempi, contrasti — soprattutto in filosofia.
+- Studio **ricco e ordinato**: spiegazioni, esempi, contrasti — soprattutto in filosofia.
+- Layout leggibile (indice + capitoli lineari). Niente collage confusi.
 - «Ricorda così» sì, ma **dopo** paragrafi chiari con i contenuti da sapere.
+- **Immagini in Imparare**: usa le vignette del fumetto **solo se chiariscono** lo studio. Altrimenti **non metterle**, oppure crea grafiche adatte allo studio (schemi, JPEG/GIF/animazioni didattiche). Non infilare tavole fumetto intere se appesantiscono la lettura.
 - Niente schede solo decorative con una riga di testo.
