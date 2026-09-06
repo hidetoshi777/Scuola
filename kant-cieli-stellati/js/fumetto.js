@@ -131,7 +131,6 @@
 
   viewport.addEventListener("click", (event) => {
     if (busy) return;
-    if (event.target.closest(".balloon, button, a")) return;
     const rect = viewport.getBoundingClientRect();
     const x = event.clientX - rect.left;
     if (x > rect.width * 0.66) go(index + 1, 1);

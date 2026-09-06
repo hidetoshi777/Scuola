@@ -46,7 +46,11 @@ window.KantData = {
   passeggiata: [
     {
       id: "s1",
-      luogo: "Piazza del Castello",
+      luogo: "Castello",
+      pin: "CAST",
+      x: 18,
+      y: 28,
+      img: "img/tavole/02-fenomeno.jpg",
       tipo: "quiz",
       domanda: "Secondo Kant, conosciamo la cosa «in sé»?",
       opzioni: [
@@ -58,7 +62,11 @@ window.KantData = {
     },
     {
       id: "s2",
-      luogo: "Passeggiata delle Otto",
+      luogo: "Passeggiata",
+      pin: "OTT",
+      x: 36,
+      y: 18,
+      img: "img/scene/kant-ritratto.jpg",
       tipo: "quiz",
       domanda: "Cosa significa la «rivoluzione copernicana» di Kant?",
       opzioni: [
@@ -71,6 +79,10 @@ window.KantData = {
     {
       id: "s3",
       luogo: "Biblioteca",
+      pin: "BIB",
+      x: 62,
+      y: 32,
+      img: "img/tavole/03-giudizi.jpg",
       tipo: "quiz",
       domanda: "«7 + 5 = 12» per Kant è soprattutto…",
       opzioni: [
@@ -83,27 +95,29 @@ window.KantData = {
     {
       id: "s4",
       luogo: "Mercato",
+      pin: "MER",
+      x: 78,
+      y: 55,
+      img: "img/tavole/04-dovere.jpg",
       tipo: "morale",
       domanda: "Il bottegaio ti dà resto in più. Cosa chiede l’imperativo categorico?",
       opzioni: [
-        {
-          t: "Lo tengo: «se nessuno se ne accorge, va bene»",
-          ok: false,
-        },
+        { t: "Lo tengo: «se nessuno se ne accorge, va bene»", ok: false },
         {
           t: "Lo restituisco: non posso volere che tutti trattengano il resto «se nessuno se ne accorge»",
           ok: true,
         },
-        {
-          t: "Lo tengo solo se mi serve per un fine buono",
-          ok: false,
-        },
+        { t: "Lo tengo solo se mi serve per un fine buono", ok: false },
       ],
       spiegazione: "Universalizza la massima. Se tutti tenessero il resto «in segreto», fiducia e commercio crollerebbero.",
     },
     {
       id: "s5",
-      luogo: "Ponte sulla Pregel",
+      luogo: "Ponte",
+      pin: "PON",
+      x: 54,
+      y: 76,
+      img: "img/tavole/04-dovere.jpg",
       tipo: "morale",
       domanda: "Un amico chiede di mentire per coprirlo. Quale risposta è più kantiana?",
       opzioni: [
@@ -115,7 +129,11 @@ window.KantData = {
     },
     {
       id: "s6",
-      luogo: "Sotto le stelle",
+      luogo: "Stelle",
+      pin: "★",
+      x: 24,
+      y: 68,
+      img: "img/tavole/01-cieli.jpg",
       tipo: "quiz",
       domanda: "Nella citazione finale, cielo stellato e legge morale indicano…",
       opzioni: [

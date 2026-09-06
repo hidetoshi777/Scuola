@@ -8,69 +8,64 @@
   <meta name="description" content="Classifica i giudizi kantiani: analitico/sintetico × a priori/a posteriori.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Sora:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:opsz,wght@6..96,500;6..96,600;6..96,700&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
   <a class="skip-link visually-hidden" href="#contenuto">Salta al contenuto</a>
-  <header class="site-header">
-    <div class="header-inner">
-      <a class="brand" href="index.html"><span class="brand-mark" aria-hidden="true"></span>Kant</a>
-      <nav class="site-nav" aria-label="Principale">
-        <ul>
-          <li><a href="index.html">Home</a></li>
-          <li><a href="imparare.html">Imparare</a></li>
-          <li><a href="fumetto.html">Fumetto</a></li>
-          <li><a href="laboratorio.html">Laboratorio</a></li>
-          <li><a href="gioco.html">Gioco</a></li>
-        </ul>
-      </nav>
-      <button type="button" class="theme-toggle" data-theme-toggle aria-pressed="false">Tema chiaro</button>
-    </div>
-  </header>
 
-  <main id="contenuto" class="wrap page-pad" tabindex="-1">
-    <p class="kicker">Esercizi</p>
-    <h1>Laboratorio dei giudizi</h1>
-    <p class="lead">Tocca una scheda, poi il quadrante giusto. L’obiettivo: riconoscere soprattutto i <strong>sintetici a priori</strong>.</p>
+  <aside class="astro-rail" aria-label="Navigazione">
+    <a class="brand" href="index.html">KANT</a>
+    <nav>
+      <a href="index.html" title="Home">★</a>
+      <a href="imparare.html" title="Imparare">ST</a>
+      <a href="fumetto.html" title="Fumetto">FM</a>
+      <a href="laboratorio.html" aria-current="page" title="Laboratorio">LB</a>
+      <a href="gioco.html" title="Gioco">PS</a>
+    </nav>
+    <button type="button" class="theme-toggle" data-theme-toggle aria-pressed="false">CHIARO</button>
+  </aside>
 
-    <p class="kicker" style="margin-top:1rem">Schede da collocare</p>
-    <div class="chip-pool" id="chip-pool" aria-label="Giudizi da classificare"></div>
+  <div class="shell">
+    <main id="contenuto" class="wrap page-pad" tabindex="-1">
+      <div class="lab-hero">
+        <div>
+          <p class="kicker">Esercizi</p>
+          <h1>Laboratorio dei giudizi</h1>
+          <p class="lead">Tocca una scheda, poi il quadrante. Obiettivo: riconoscere i <strong>sintetici a priori</strong> (come nella tavola del fumetto).</p>
+        </div>
+        <figure class="lab-thumb">
+          <img src="img/tavole/03-giudizi.jpg" alt="Tavola sui giudizi sintetici a priori" width="864" height="1152" loading="lazy">
+        </figure>
+      </div>
 
-    <div class="quad-grid" id="quad-grid" role="group" aria-label="Quattro tipi di giudizio"></div>
+      <p class="kicker">Schede da collocare</p>
+      <div class="chip-pool" id="chip-pool" aria-label="Giudizi da classificare"></div>
+      <div class="quad-grid" id="quad-grid" role="group" aria-label="Quattro tipi di giudizio"></div>
 
-    <div class="hero-actions">
-      <button type="button" class="btn btn-primary" id="lab-check">Controlla</button>
-      <button type="button" class="btn btn-secondary" id="lab-reset">Rimescola</button>
-    </div>
-    <div class="feedback" id="lab-feedback" hidden></div>
+      <div class="hero-actions">
+        <button type="button" class="btn btn-primary" id="lab-check">Controlla</button>
+        <button type="button" class="btn btn-secondary" id="lab-reset">Rimescola</button>
+      </div>
+      <div class="feedback" id="lab-feedback" hidden></div>
 
-    <p class="ricorda" style="margin-top:1.5rem">
-      <span>Nota didattica</span>
-      «Analitico a posteriori» è una casella quasi vuota nella tavola classica: se ci metti qualcosa, probabilmente è un errore. Usala come trappola consapevole.
-    </p>
+      <p class="ricorda" style="margin-top:1.4rem">
+        <span>Nota didattica</span>
+        «Analitico a posteriori» è quasi vuota nella tavola classica: se ci metti qualcosa, probabilmente è un errore.
+      </p>
 
-    <div class="hero-actions" style="margin-top:1.5rem">
-      <a class="btn btn-primary" href="gioco.html">Passeggiata di Königsberg</a>
-      <a class="btn btn-secondary" href="imparare.html">Rivedi lo studio</a>
-    </div>
-  </main>
+      <div class="hero-actions" style="margin-top:1.4rem">
+        <a class="btn btn-primary" href="gioco.html">Passeggiata di Königsberg</a>
+        <a class="btn btn-secondary" href="imparare.html">Rivedi lo studio</a>
+      </div>
+    </main>
 
-  <footer class="site-footer">
-    <div class="wrap">
-      <p>Realizzato dal Prof. Rossano Bella.</p>
-    </div>
-  </footer>
-
-  <nav class="dock" aria-label="Navigazione rapida">
-    <ul>
-      <li><a href="index.html"><span class="dock-ico" aria-hidden="true">★</span>Home</a></li>
-      <li><a href="imparare.html"><span class="dock-ico" aria-hidden="true">▣</span>Studio</a></li>
-      <li><a href="fumetto.html"><span class="dock-ico" aria-hidden="true">▤</span>Fumetto</a></li>
-      <li><a href="laboratorio.html" aria-current="page"><span class="dock-ico" aria-hidden="true">▦</span>Lab</a></li>
-      <li><a href="gioco.html"><span class="dock-ico" aria-hidden="true">◉</span>Gioco</a></li>
-    </ul>
-  </nav>
+    <footer class="site-footer">
+      <div class="wrap">
+        <p>Realizzato dal Prof. Rossano Bella.</p>
+      </div>
+    </footer>
+  </div>
 
   <script src="js/data.js" defer></script>
   <script src="js/common.js" defer></script>

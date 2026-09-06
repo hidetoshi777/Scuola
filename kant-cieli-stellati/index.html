@@ -5,80 +5,63 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
   <title>Kant · I cieli stellati | Scuola</title>
-  <meta name="description" content="Laboratorio interattivo su Immanuel Kant: studio, fumetto, laboratorio dei giudizi e passeggiata didattica a Königsberg.">
+  <meta name="description" content="Osservatorio didattico su Immanuel Kant: studio, fumetto illustrato, laboratorio dei giudizi e passeggiata a Königsberg.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Sora:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:opsz,wght@6..96,500;6..96,600;6..96,700&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/styles.css">
 </head>
 <body class="page-home">
   <a class="skip-link visually-hidden" href="#contenuto">Salta al contenuto</a>
-  <header class="site-header">
-    <div class="header-inner">
-      <a class="brand" href="index.html"><span class="brand-mark" aria-hidden="true"></span>Kant</a>
-      <nav class="site-nav" aria-label="Principale">
-        <ul>
-          <li><a href="index.html">Home</a></li>
-          <li><a href="imparare.html">Imparare</a></li>
-          <li><a href="fumetto.html">Fumetto</a></li>
-          <li><a href="laboratorio.html">Laboratorio</a></li>
-          <li><a href="gioco.html">Gioco</a></li>
-        </ul>
-      </nav>
-      <button type="button" class="theme-toggle" data-theme-toggle aria-pressed="false">Tema chiaro</button>
-    </div>
-  </header>
 
-  <main id="contenuto" tabindex="-1">
-    <section class="hero-sky" aria-label="Introduzione">
-      <div class="hero-sky-inner">
-        <p class="kicker">Filosofia · Secondo grado</p>
-        <h1 class="hero-brand">KANT</h1>
-        <p class="hero-sub">I cieli stellati</p>
-        <blockquote class="hero-quote">Due cose riempiono l’animo di ammirazione: il cielo stellato sopra di me e la legge morale in me.</blockquote>
-        <div class="hero-actions">
-          <a class="btn btn-primary" href="imparare.html">Inizia dallo studio</a>
-          <a class="btn btn-secondary" href="gioco.html">Passeggiata di Königsberg</a>
+  <aside class="astro-rail" aria-label="Navigazione">
+    <a class="brand" href="index.html">KANT</a>
+    <nav>
+      <a href="index.html" aria-current="page" title="Home">★</a>
+      <a href="imparare.html" title="Imparare">ST</a>
+      <a href="fumetto.html" title="Fumetto">FM</a>
+      <a href="laboratorio.html" title="Laboratorio">LB</a>
+      <a href="gioco.html" title="Gioco">PS</a>
+    </nav>
+    <button type="button" class="theme-toggle" data-theme-toggle aria-pressed="false">CHIARO</button>
+  </aside>
+
+  <div class="shell">
+    <main id="contenuto" tabindex="-1">
+      <section class="home-burst" aria-label="Introduzione">
+        <div class="home-visual">
+          <img src="img/tavole/01-cieli.jpg" alt="Tavola del fumetto: Clara e Kant sotto il cielo stellato di Königsberg" width="864" height="1152" fetchpriority="high">
         </div>
+        <div class="home-copy">
+          <p class="kicker">Filosofia · osservatorio</p>
+          <h1 class="mast">KANT</h1>
+          <p class="tagline">I cieli stellati</p>
+          <blockquote>Due cose riempiono l’animo di ammirazione: il cielo stellato sopra di me e la legge morale in me.</blockquote>
+          <div class="constellation" aria-label="Mappa delle sezioni">
+            <svg viewBox="0 0 200 200" aria-hidden="true">
+              <polyline points="44,56 116,36 156,96 92,144 36,124 44,56" fill="none" stroke="currentColor" stroke-opacity="0.35" stroke-width="1"/>
+            </svg>
+            <a href="imparare.html" data-pos="1">Studio</a>
+            <a href="fumetto.html" data-pos="2">Fumetto</a>
+            <a href="laboratorio.html" data-pos="3">Lab</a>
+            <a href="gioco.html" data-pos="4">Passeggiata</a>
+            <a href="fumetto.html" data-pos="5">Tavole</a>
+          </div>
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="imparare.html">Apri lo studio</a>
+            <a class="btn btn-secondary" href="fumetto.html">Sfoglia il fumetto</a>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="wrap">
+        <p>Materiale didattico su Immanuel Kant. Funziona anche offline dopo aver scaricato il sito.</p>
+        <p>Realizzato dal Prof. Rossano Bella.</p>
       </div>
-    </section>
-
-    <ol class="home-path" aria-label="Percorso">
-      <li>
-        <a href="imparare.html">Imparare</a>
-        <p>Vita, rivoluzione copernicana, giudizi, etica. Punti da sapere.</p>
-      </li>
-      <li>
-        <a href="fumetto.html">Fumetto</a>
-        <p>Quattro tavole: Clara guida Kant tra fenomeni e doveri.</p>
-      </li>
-      <li>
-        <a href="laboratorio.html">Laboratorio</a>
-        <p>Classifica i giudizi nei quattro quadranti.</p>
-      </li>
-      <li>
-        <a href="gioco.html">Gioco</a>
-        <p>La passeggiata: fermate con domande e dilemmi morali.</p>
-      </li>
-    </ol>
-  </main>
-
-  <footer class="site-footer">
-    <div class="wrap">
-      <p>Materiale didattico su Immanuel Kant. Funziona anche offline dopo aver scaricato il sito.</p>
-      <p>Realizzato dal Prof. Rossano Bella.</p>
-    </div>
-  </footer>
-
-  <nav class="dock" aria-label="Navigazione rapida">
-    <ul>
-      <li><a href="index.html" aria-current="page"><span class="dock-ico" aria-hidden="true">★</span>Home</a></li>
-      <li><a href="imparare.html"><span class="dock-ico" aria-hidden="true">▣</span>Studio</a></li>
-      <li><a href="fumetto.html"><span class="dock-ico" aria-hidden="true">▤</span>Fumetto</a></li>
-      <li><a href="laboratorio.html"><span class="dock-ico" aria-hidden="true">▦</span>Lab</a></li>
-      <li><a href="gioco.html"><span class="dock-ico" aria-hidden="true">◉</span>Gioco</a></li>
-    </ul>
-  </nav>
+    </footer>
+  </div>
 
   <script src="js/common.js" defer></script>
 </body>

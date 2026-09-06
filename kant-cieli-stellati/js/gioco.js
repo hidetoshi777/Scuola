@@ -3,7 +3,7 @@
   const stops = data && data.passeggiata;
   if (!stops || !stops.length) return;
 
-  const map = document.getElementById("path-map");
+  const map = document.getElementById("city-map");
   const meta = document.getElementById("stop-meta");
   const title = document.getElementById("stop-title");
   const question = document.getElementById("stop-question");
@@ -16,23 +16,35 @@
   const hudTotal = document.getElementById("hud-total");
   const hudScore = document.getElementById("hud-score");
   const card = document.getElementById("stop-card");
+  const stage = document.getElementById("stop-stage");
+  const stopImg = document.getElementById("stop-img");
 
   let index = 0;
   let score = 0;
   let answered = false;
+  const pins = [];
 
   hudTotal.textContent = String(stops.length);
 
+  stops.forEach((stop, i) => {
+    const pin = document.createElement("button");
+    pin.type = "button";
+    pin.className = "map-pin";
+    pin.textContent = stop.pin || String(i + 1);
+    pin.style.left = `${stop.x}%`;
+    pin.style.top = `${stop.y}%`;
+    pin.setAttribute("aria-label", stop.luogo);
+    pin.tabIndex = -1;
+    map.appendChild(pin);
+    pins.push(pin);
+  });
+
   function renderMap() {
-    map.innerHTML = "";
-    stops.forEach((stop, i) => {
-      const el = document.createElement("div");
-      el.className = "path-stop";
-      el.textContent = stop.luogo;
-      if (i < index) el.classList.add("is-done");
-      else if (i === index) el.classList.add("is-current");
-      else el.classList.add("is-locked");
-      map.appendChild(el);
+    pins.forEach((pin, i) => {
+      pin.classList.remove("is-done", "is-current", "is-locked");
+      if (i < index) pin.classList.add("is-done");
+      else if (i === index) pin.classList.add("is-current");
+      else pin.classList.add("is-locked");
     });
   }
 
@@ -40,6 +52,7 @@
     const stop = stops[index];
     answered = false;
     endBox.hidden = true;
+    stage.hidden = false;
     card.hidden = false;
     nextBtn.hidden = true;
     feedback.hidden = true;
@@ -49,6 +62,10 @@
     meta.textContent = stop.tipo === "morale" ? "Dilemma morale" : "Domanda di ripasso";
     title.textContent = stop.luogo;
     question.textContent = stop.domanda;
+    if (stopImg && stop.img) {
+      stopImg.src = stop.img;
+      stopImg.alt = `Scena: ${stop.luogo}`;
+    }
     list.innerHTML = "";
 
     const opzioni = window.mescola ? window.mescola(stop.opzioni) : stop.opzioni;
@@ -106,7 +123,7 @@
   }
 
   function finish() {
-    card.hidden = true;
+    stage.hidden = true;
     endBox.hidden = false;
     renderMap();
     const totale = stops.length;

@@ -1,0 +1,25 @@
+---
+description: Obblighi grafici e di studio per ogni nuova attività Scuola
+globs: "**/index.html,**/imparare.html,**/fumetto.html,**/fumetto.css,**/fumetto.js"
+alwaysApply: false
+---
+
+# Scuola · tavole, layout, Imparare
+
+## Fumetto (obbligatorio)
+
+- Genera **tavole illustrate reali** (GenerateImage / Grok; o export Canva se già esiste).
+- **Vietato** pubblicare un fumetto fatto solo di vignette HTML/CSS + testo al posto delle immagini.
+- Più vignette per tavola; personaggio-guida; sfoglia pagina; schermo intero (Fullscreen API + fallback iOS).
+- **Riusa** le stesse immagini in Home, Imparare, Laboratorio (e Gioco se naturale).
+
+## Layout (obbligatorio)
+
+- Ogni nuova attività deve avere una **composizione diversa** dalle precedenti.
+- Non basta cambiare palette/font sullo stesso scheletro (header sticky + hero + path numerato + card).
+
+## Imparare (obbligatorio)
+
+- Studio **ricco**: spiegazioni, esempi, contrasti — soprattutto in filosofia.
+- «Ricorda così» sì, ma **dopo** paragrafi chiari con i contenuti da sapere.
+- Niente schede solo decorative con una riga di testo.
