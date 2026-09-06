@@ -34,6 +34,7 @@ window.ATTIVITA_WEB = [
     classe: "Prima media",
     descrizione: "Sito interattivo su giorno/notte, stagioni e fusi orari, con gioco a tempo finale.",
     url: "rotazione-terrestre/",
+    copertina: "rotazione-terrestre/img/og-share.jpg",
     tinta: "scienze",
     adesivo: "st-pianeta",
     extra: [{ label: "Gioco", url: "rotazione-terrestre/gioco.html" }],
@@ -44,6 +45,7 @@ window.ATTIVITA_WEB = [
     classe: "Prima superiore",
     descrizione: "Avverbi, preposizioni, congiunzioni e interiezioni: teoria, quattro esercizi e un gioco a tempo.",
     url: "parti-invariabili/",
+    copertina: "parti-invariabili/img/og-share.jpg",
     tinta: "italiano",
     adesivo: "st-pennino",
     extra: [{ label: "Gioco", url: "parti-invariabili/gioco.html" }],
@@ -54,6 +56,7 @@ window.ATTIVITA_WEB = [
     classe: "Secondo grado",
     descrizione: "Visual novel didattica sul Nazismo: storia a fumetto con scelte, per capire crisi, propaganda, dittatura e Shoah.",
     url: "nazismo-fumetto/",
+    copertina: "nazismo-fumetto/img/og-share.png",
     tinta: "storia",
     adesivo: "st-fumetto",
     extra: [
@@ -68,6 +71,7 @@ window.ATTIVITA_WEB = [
     classe: "Secondo grado",
     descrizione: "Laboratorio su Alessandro Manzoni e I Promessi Sposi: studio, rete dei personaggi, esercizi e prova a tempo, con le slide Canva del Prof.",
     url: "manzoni-promessi/",
+    copertina: "manzoni-promessi/img/og-share.jpg",
     tinta: "italiano",
     adesivo: "st-libro-aperto",
     extra: [
@@ -82,6 +86,7 @@ window.ATTIVITA_WEB = [
     classe: "Secondo grado",
     descrizione: "Studio su Kant: rivoluzione copernicana, fenomeno e noumeno, giudizi, imperativo categorico; fumetto, laboratorio e passeggiata di Königsberg.",
     url: "kant-cieli-stellati/",
+    copertina: "kant-cieli-stellati/img/og-share.jpg",
     tinta: "filosofia",
     adesivo: "st-gufo",
     extra: [
@@ -96,6 +101,7 @@ window.ATTIVITA_WEB = [
     classe: "Secondo grado",
     descrizione: "Studio su Tommaso d'Aquino: fede e ragione, le cinque vie, legge naturale; fumetto, laboratorio delle vie e cammino didattico.",
     url: "tommaso-cinque-vie/",
+    copertina: "tommaso-cinque-vie/img/og-share.jpg",
     tinta: "filosofia",
     adesivo: "st-gufo",
     extra: [
