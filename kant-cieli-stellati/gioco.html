@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <title>Gioco · Passeggiata di Königsberg | Scuola</title>
+  <meta name="description" content="Gioco didattico su Kant: sei fermate con quiz e dilemmi sull’imperativo categorico.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Sora:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/gioco.css">
+</head>
+<body class="page-gioco">
+  <a class="skip-link visually-hidden" href="#contenuto">Salta al contenuto</a>
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="brand" href="index.html"><span class="brand-mark" aria-hidden="true"></span>Kant</a>
+      <nav class="site-nav" aria-label="Principale">
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="imparare.html">Imparare</a></li>
+          <li><a href="fumetto.html">Fumetto</a></li>
+          <li><a href="laboratorio.html">Laboratorio</a></li>
+          <li><a href="gioco.html">Gioco</a></li>
+        </ul>
+      </nav>
+      <button type="button" class="theme-toggle" data-theme-toggle aria-pressed="false">Tema chiaro</button>
+    </div>
+  </header>
+
+  <main id="contenuto" class="gioco-main" tabindex="-1">
+    <p class="kicker">Ripasso · percorso</p>
+    <h1>Passeggiata di Königsberg</h1>
+    <p class="lead">Sei fermate sul percorso di Kant. A ogni tappa: una domanda o un dilemma morale. Non è arcade: serve per ripassare.</p>
+
+    <div class="gioco-hud" aria-live="polite">
+      <span>Fermata <strong id="hud-stop">1</strong>/<span id="hud-total">6</span></span>
+      <span>Punti <strong id="hud-score">0</strong></span>
+      <button type="button" class="btn btn-secondary" id="btn-restart">Ricomincia</button>
+    </div>
+
+    <div class="path-map" id="path-map" aria-label="Mappa delle fermate"></div>
+
+    <section class="stop-card" id="stop-card" aria-live="polite">
+      <p class="stop-meta" id="stop-meta"></p>
+      <h2 id="stop-title"></h2>
+      <p id="stop-question"></p>
+      <ul class="choice-list" id="choice-list"></ul>
+      <div class="feedback" id="stop-feedback" hidden></div>
+      <div class="hero-actions" style="margin-top:1rem">
+        <button type="button" class="btn btn-primary" id="btn-next" hidden>Fermata successiva →</button>
+      </div>
+    </section>
+
+    <div class="gioco-end" id="gioco-end" hidden>
+      <h2>Passeggiata completata</h2>
+      <p id="end-text"></p>
+      <div class="hero-actions">
+        <button type="button" class="btn btn-primary" id="btn-again">Un altro giro</button>
+        <a class="btn btn-secondary" href="laboratorio.html">Laboratorio</a>
+        <a class="btn btn-secondary" href="fumetto.html">Fumetto</a>
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <p>Realizzato dal Prof. Rossano Bella.</p>
+    </div>
+  </footer>
+
+  <nav class="dock" aria-label="Navigazione rapida">
+    <ul>
+      <li><a href="index.html"><span class="dock-ico" aria-hidden="true">★</span>Home</a></li>
+      <li><a href="imparare.html"><span class="dock-ico" aria-hidden="true">▣</span>Studio</a></li>
+      <li><a href="fumetto.html"><span class="dock-ico" aria-hidden="true">▤</span>Fumetto</a></li>
+      <li><a href="laboratorio.html"><span class="dock-ico" aria-hidden="true">▦</span>Lab</a></li>
+      <li><a href="gioco.html" aria-current="page"><span class="dock-ico" aria-hidden="true">◉</span>Gioco</a></li>
+    </ul>
+  </nav>
+
+  <script src="js/data.js" defer></script>
+  <script src="js/common.js" defer></script>
+  <script src="js/gioco.js" defer></script>
+</body>
+</html>
