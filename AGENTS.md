@@ -57,6 +57,7 @@ Sito base: `https://hidetoshi777.github.io/Scuola/`
 | Parti invariabili (prima superiore) | https://hidetoshi777.github.io/Scuola/parti-invariabili/ | https://hidetoshi777.github.io/Scuola/parti-invariabili/gioco.html |
 | Ombre sul Reich · Nazismo a fumetto | https://hidetoshi777.github.io/Scuola/nazismo-fumetto/ | [Fumetto](https://hidetoshi777.github.io/Scuola/nazismo-fumetto/fumetto.html) · [Mappa](https://hidetoshi777.github.io/Scuola/nazismo-fumetto/mappa.html) · [VN](https://hidetoshi777.github.io/Scuola/nazismo-fumetto/gioco.html) |
 | Manzoni · Archivio del manoscritto | https://hidetoshi777.github.io/Scuola/manzoni-promessi/ | [Fumetto](https://hidetoshi777.github.io/Scuola/manzoni-promessi/fumetto.html) · [Memory](https://hidetoshi777.github.io/Scuola/manzoni-promessi/gioco.html) |
+| Kant · I cieli stellati | https://hidetoshi777.github.io/Scuola/kant-cieli-stellati/ | [Fumetto](https://hidetoshi777.github.io/Scuola/kant-cieli-stellati/fumetto.html) · [Passeggiata](https://hidetoshi777.github.io/Scuola/kant-cieli-stellati/gioco.html) |
 
 I vecchi link alla radice (`/gioco.html`, ecc.) reindirizzano ancora alla rotazione terrestre.
 

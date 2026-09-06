@@ -1,0 +1,136 @@
+/* Passeggiata di Königsberg */
+
+.page-gioco .gioco-main {
+  width: min(100% - 1.5rem, 40rem);
+  margin-inline: auto;
+  padding: 1.25rem 0 2rem;
+}
+
+.path-map {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.45rem;
+  margin: 1rem 0 1.25rem;
+}
+
+.path-stop {
+  appearance: none;
+  border: 1px solid var(--line);
+  background: var(--bg-elev);
+  color: var(--ink-soft);
+  font-family: var(--font-body);
+  font-size: 0.72rem;
+  font-weight: 600;
+  padding: 0.65rem 0.35rem;
+  border-radius: var(--radius);
+  cursor: default;
+  text-align: center;
+  line-height: 1.25;
+  min-height: 3.4rem;
+}
+
+.path-stop.is-current {
+  border-color: var(--amber);
+  color: var(--amber);
+  box-shadow: 0 0 0 1px color-mix(in srgb, var(--amber) 35%, transparent);
+}
+
+.path-stop.is-done {
+  border-color: color-mix(in srgb, var(--ok) 55%, var(--line));
+  color: var(--ok);
+}
+
+.path-stop.is-locked {
+  opacity: 0.45;
+}
+
+.stop-card {
+  padding: 1rem 1.05rem 1.15rem;
+  border: 1px solid var(--line);
+  background: color-mix(in srgb, var(--bg-elev) 88%, transparent);
+  border-radius: var(--radius);
+}
+
+.stop-card h2 {
+  margin-bottom: 0.35rem;
+}
+
+.stop-meta {
+  margin: 0 0 0.85rem;
+  font-size: 0.8rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--teal);
+  font-weight: 600;
+}
+
+.choice-list {
+  list-style: none;
+  margin: 0.75rem 0 0;
+  padding: 0;
+  display: grid;
+  gap: 0.55rem;
+}
+
+.choice-list button {
+  width: 100%;
+  text-align: left;
+  appearance: none;
+  border: 1px solid var(--line);
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  line-height: 1.4;
+  padding: 0.85rem 0.95rem;
+  border-radius: var(--radius);
+  cursor: pointer;
+  min-height: 3rem;
+  touch-action: manipulation;
+}
+
+.choice-list button:hover:not(:disabled) {
+  border-color: var(--amber);
+}
+
+.choice-list button:disabled {
+  cursor: default;
+}
+
+.choice-list button.is-ok {
+  border-color: var(--ok);
+  background: color-mix(in srgb, var(--ok) 12%, transparent);
+}
+
+.choice-list button.is-bad {
+  border-color: var(--danger);
+  opacity: 0.85;
+}
+
+.gioco-hud {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem 1.25rem;
+  align-items: center;
+  margin: 0.5rem 0 1rem;
+  color: var(--ink-soft);
+  font-size: 0.92rem;
+}
+
+.gioco-hud strong {
+  color: var(--ink);
+  font-family: var(--font-display);
+}
+
+.gioco-end {
+  margin-top: 1.25rem;
+  padding: 1rem 1.05rem;
+  border: 1px solid var(--line);
+  background: var(--bg-elev);
+}
+
+@media (max-width: 420px) {
+  .path-map {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}

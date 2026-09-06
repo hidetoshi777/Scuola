@@ -1,0 +1,329 @@
+/* Lettore fumetto HTML a vignette + sfoglia + fullscreen */
+
+.fumetto-main {
+  width: min(100% - 1rem, 42rem);
+  margin-inline: auto;
+  padding: 0.75rem 0 1.5rem;
+}
+
+.fumetto-intro {
+  text-align: center;
+  margin-bottom: 0.85rem;
+}
+
+.fumetto-intro .lead {
+  margin-inline: auto;
+}
+
+.fumetto-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.fumetto-status {
+  margin: 0;
+  color: var(--ink-soft);
+  font-family: var(--font-display);
+}
+
+.fumetto-reader {
+  display: grid;
+  gap: 0.75rem;
+}
+
+.fumetto-viewport {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  background: #070d18;
+  box-shadow: var(--shadow);
+  aspect-ratio: 3 / 4;
+  max-height: min(78dvh, 52rem);
+  margin-inline: auto;
+  width: min(100%, 34rem);
+  touch-action: pan-y;
+  user-select: none;
+  perspective: 1800px;
+}
+
+.fumetto-page {
+  position: absolute;
+  inset: 0;
+  margin: 0;
+  padding: 0.55rem;
+  opacity: 0;
+  pointer-events: none;
+  transform-origin: left center;
+  backface-visibility: hidden;
+  background: #0e1626;
+  display: grid;
+  gap: 0.4rem;
+  grid-template-rows: auto;
+}
+
+.fumetto-page.is-active {
+  opacity: 1;
+  pointer-events: auto;
+  z-index: 2;
+}
+
+.fumetto-page.is-flip-out-next {
+  animation: flip-out-next 0.55s ease forwards;
+  z-index: 3;
+}
+
+.fumetto-page.is-flip-in-next {
+  animation: flip-in-next 0.55s ease forwards;
+  z-index: 2;
+}
+
+.fumetto-page.is-flip-out-prev {
+  animation: flip-out-prev 0.55s ease forwards;
+  z-index: 3;
+}
+
+.fumetto-page.is-flip-in-prev {
+  animation: flip-in-prev 0.55s ease forwards;
+  z-index: 2;
+}
+
+@keyframes flip-out-next {
+  to {
+    transform: rotateY(-88deg);
+    opacity: 0.2;
+  }
+}
+
+@keyframes flip-in-next {
+  from {
+    transform: rotateY(72deg);
+    opacity: 0.2;
+  }
+  to {
+    transform: none;
+    opacity: 1;
+  }
+}
+
+@keyframes flip-out-prev {
+  to {
+    transform: rotateY(88deg);
+    opacity: 0.2;
+  }
+}
+
+@keyframes flip-in-prev {
+  from {
+    transform: rotateY(-72deg);
+    opacity: 0.2;
+  }
+  to {
+    transform: none;
+    opacity: 1;
+  }
+}
+
+.reduced-motion .fumetto-page.is-flip-out-next,
+.reduced-motion .fumetto-page.is-flip-in-next,
+.reduced-motion .fumetto-page.is-flip-out-prev,
+.reduced-motion .fumetto-page.is-flip-in-prev {
+  animation: none;
+}
+
+.tavola {
+  display: grid;
+  gap: 0.4rem;
+  height: 100%;
+  min-height: 0;
+}
+
+.tavola-2 {
+  grid-template-rows: 1.15fr 1fr;
+}
+
+.tavola-3 {
+  grid-template-rows: 1fr 1fr 1fr;
+}
+
+.tavola-4 {
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+}
+
+.vignetta {
+  position: relative;
+  overflow: hidden;
+  border: 2px solid #d8d2c4;
+  background:
+    linear-gradient(160deg, rgba(106, 154, 150, 0.18), transparent 50%),
+    linear-gradient(20deg, #152038, #0c1422);
+  padding: 0.55rem 0.6rem 0.65rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  min-height: 0;
+}
+
+.vignetta.sky {
+  background:
+    radial-gradient(1px 1px at 20% 25%, #fff8 50%, transparent 51%),
+    radial-gradient(1.2px 1.2px at 70% 18%, #e8b86d 50%, transparent 51%),
+    radial-gradient(1px 1px at 55% 40%, #fff6 50%, transparent 51%),
+    linear-gradient(180deg, #152744, #0a101c 70%);
+}
+
+.vignetta.study {
+  background:
+    linear-gradient(135deg, rgba(232, 184, 109, 0.12), transparent 45%),
+    linear-gradient(180deg, #1a2438, #101826);
+}
+
+.vignetta.street {
+  background:
+    linear-gradient(180deg, #243048 0%, #1a2234 40%, #121820 100%);
+}
+
+.vignetta.moral {
+  background:
+    linear-gradient(160deg, rgba(232, 184, 109, 0.2), transparent 40%),
+    linear-gradient(180deg, #1c2030, #12141e);
+}
+
+.balloon {
+  margin: 0;
+  padding: 0.45rem 0.55rem;
+  background: #f2ecdf;
+  color: #1a1820;
+  font-size: clamp(0.72rem, 2.8vw, 0.88rem);
+  line-height: 1.35;
+  border-radius: 0.25rem;
+  box-shadow: 0 2px 0 rgba(0, 0, 0, 0.2);
+}
+
+.balloon strong {
+  color: #6a4520;
+}
+
+.who {
+  display: inline-block;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--amber);
+  margin-bottom: 0.25rem;
+}
+
+.scene-label {
+  position: absolute;
+  top: 0.4rem;
+  left: 0.45rem;
+  font-size: 0.65rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(232, 228, 217, 0.55);
+}
+
+.fumetto-caption {
+  margin: 0;
+  color: var(--ink-soft);
+  font-size: 0.92rem;
+  min-height: 2.6rem;
+}
+
+.fumetto-controls {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+}
+
+.fumetto-dots {
+  display: flex;
+  gap: 0.35rem;
+}
+
+.fumetto-dot {
+  width: 0.55rem;
+  height: 0.55rem;
+  border-radius: 50%;
+  border: 0;
+  padding: 0;
+  background: var(--line);
+  cursor: pointer;
+}
+
+.fumetto-dot[aria-current="true"] {
+  background: var(--amber);
+}
+
+.fumetto-hint {
+  margin: 0;
+  font-size: 0.82rem;
+  color: var(--ink-soft);
+  text-align: center;
+}
+
+.fumetto-reader:fullscreen,
+.fumetto-reader:-webkit-full-screen,
+.fumetto-reader.is-immersive {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0.55rem 0.65rem 0.75rem;
+  box-sizing: border-box;
+  background: #070d18;
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr) auto;
+  gap: 0.5rem;
+}
+
+.fumetto-reader.is-immersive {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  width: 100vw;
+  height: 100dvh;
+  max-height: 100dvh;
+}
+
+html.fumetto-immersive-lock,
+body.fumetto-immersive-lock {
+  overflow: hidden;
+  height: 100%;
+}
+
+.fumetto-reader:fullscreen .fumetto-viewport,
+.fumetto-reader:-webkit-full-screen .fumetto-viewport,
+.fumetto-reader.is-immersive .fumetto-viewport {
+  width: 100%;
+  max-width: none;
+  max-height: none;
+  height: 100%;
+  aspect-ratio: auto;
+}
+
+.fumetto-reader:fullscreen .fumetto-controls,
+.fumetto-reader:-webkit-full-screen .fumetto-controls,
+.fumetto-reader.is-immersive .fumetto-controls,
+.fumetto-reader:fullscreen .fumetto-hint,
+.fumetto-reader:-webkit-full-screen .fumetto-hint,
+.fumetto-reader.is-immersive .fumetto-hint {
+  display: none;
+}
+
+.fumetto-reader:fullscreen .fumetto-caption,
+.fumetto-reader:-webkit-full-screen .fumetto-caption,
+.fumetto-reader.is-immersive .fumetto-caption {
+  max-height: 4.5rem;
+  overflow: auto;
+}
+
+@media (max-width: 420px) {
+  .balloon {
+    font-size: 0.74rem;
+  }
+}
