@@ -15,7 +15,8 @@ alwaysApply: true
 - Nei lavori Scuola, **preferisci il MCP Canva** per grafiche, template, export e materiali già presenti nell’account Canva: consultalo e riusalo prima di creare da zero.
 - Se esiste un **Canva del Prof.** sull’argomento, **inseriscilo in una sezione dedicata** del lavoro (export/galleria), non lasciarlo fuori.
 - **Imparare** = **cuore del lavoro**: studio ricco, ordinato, con spiegazioni ed esempi. Layout chiaro (non confusionario). Immagini del fumetto solo se aiutano; altrimenti niente, oppure grafiche/animazioni ad hoc per lo studio.
-- **Fumetto = tavole illustrate obbligatorie**: `fumetto.html` con **immagini generate da noi** (GenerateImage), più vignette per tavola, trama minima, sfoglia pagina, schermo intero. **Vietato** il solo placeholder HTML al posto delle tavole. Riusa le immagini in Home / Lab (in Imparare solo se utili allo studio).
+- **Fumetto = tavole illustrate obbligatorie**: `fumetto.html` con **immagini generate da noi** (GenerateImage), più vignette per tavola, trama minima, sfoglia pagina, schermo intero. **Numero di tavole da 4 a 8** secondo complessità e necessità di esposizione (non sempre 4). Testo nelle tavole sempre in italiano. In fullscreen la tavola deve usare lo spazio liberato (immagine più grande). **Vietato** il solo placeholder HTML al posto delle tavole. Riusa le immagini in Home / Lab (in Imparare solo se utili allo studio).
+- **Tema scuro di default** nelle attività web; chiaro opzionale via toggle.
 - **Layout diversi (obbligatorio)**: ogni attività cambia composizione (non lo stesso template con colori nuovi).
 - **Gioco = didattico**: deve far ripassare contenuti. Ok formati diversi dal quiz (memory, ordina eventi…). **No arcade puro** senza apprendimento. Se manca un’alternativa solida → **domande/risposte**.
 - **Canva**: sezione dedicata + export; viewer con **schermo intero**.
