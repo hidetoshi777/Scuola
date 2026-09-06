@@ -14,8 +14,8 @@ alwaysApply: true
 - In ogni lavoro per la scuola, nel footer (o credito visibile), includi sempre: **Realizzato dal Prof. Rossano Bella**.
 - Nei lavori Scuola, **preferisci il MCP Canva** per grafiche, template, export e materiali già presenti nell’account Canva: consultalo e riusalo prima di creare da zero.
 - Se esiste un **Canva del Prof.** sull’argomento, **inseriscilo in una sezione dedicata** del lavoro (export/galleria), non lasciarlo fuori.
-- **Imparare** = studio **ricco**: informazioni da sapere con spiegazioni ed esempi (in filosofia: analitico/sintetico, a priori/a posteriori, ecc.), poi «ricorda così» / timeline / contrasti. Niente riassunti estetici poveri.
-- **Fumetto = tavole illustrate obbligatorie**: `fumetto.html` con **immagini generate da noi** (GenerateImage), più vignette per tavola, trama minima, sfoglia pagina, schermo intero. **Vietato** il solo placeholder HTML al posto delle tavole. Riusa le immagini anche in Home / Imparare / Lab.
+- **Imparare** = **cuore del lavoro**: studio ricco, ordinato, con spiegazioni ed esempi. Layout chiaro (non confusionario). Immagini del fumetto solo se aiutano; altrimenti niente, oppure grafiche/animazioni ad hoc per lo studio.
+- **Fumetto = tavole illustrate obbligatorie**: `fumetto.html` con **immagini generate da noi** (GenerateImage), più vignette per tavola, trama minima, sfoglia pagina, schermo intero. **Vietato** il solo placeholder HTML al posto delle tavole. Riusa le immagini in Home / Lab (in Imparare solo se utili allo studio).
 - **Layout diversi (obbligatorio)**: ogni attività cambia composizione (non lo stesso template con colori nuovi).
 - **Gioco = didattico**: deve far ripassare contenuti. Ok formati diversi dal quiz (memory, ordina eventi…). **No arcade puro** senza apprendimento. Se manca un’alternativa solida → **domande/risposte**.
 - **Canva**: sezione dedicata + export; viewer con **schermo intero**.

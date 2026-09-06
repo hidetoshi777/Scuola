@@ -11,7 +11,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:opsz,wght@6..96,500;6..96,600;6..96,700&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/styles.css">
 </head>
-<body>
+<body class="page-imparare">
   <a class="skip-link visually-hidden" href="#contenuto">Salta al contenuto</a>
 
   <aside class="astro-rail" aria-label="Navigazione">
@@ -27,23 +27,34 @@
   </aside>
 
   <div class="shell">
-    <main id="contenuto" class="wrap page-pad" tabindex="-1">
-      <header class="mag-head">
-        <div>
-          <p class="kicker">Sezione di studio · liceo</p>
+    <main id="contenuto" class="wrap page-pad study-layout" tabindex="-1">
+      <header class="study-head">
+        <div class="study-head-text">
+          <p class="kicker">Cuore del lavoro · liceo</p>
           <h1>Cosa sapere su Kant</h1>
-          <p class="lead">Qui non basta un elenco di parole-chiave. Serve capire <em>perché</em> Kant distingue i giudizi, dove mette il confine della conoscenza e come fonda il dovere. Le immagini del fumetto tornano come ancore visive.</p>
+          <p class="lead">Qui studi i concetti. Il fumetto aiuta a ricordarli; questa pagina li spiega con ordine, esempi e contrasti.</p>
         </div>
-        <figure class="mag-portrait">
+        <figure class="study-portrait">
           <img src="img/scene/kant-ritratto.jpg" alt="Ritratto illustrato di Immanuel Kant" width="768" height="1024" loading="lazy">
+          <figcaption>Immanuel Kant</figcaption>
         </figure>
       </header>
 
-      <div class="mag-grid">
-        <article class="studio-block reveal" id="vita">
-          <h2>1 · Vita, Königsberg, tre Critiche</h2>
-          <p>Immanuel Kant (1724–1804) vive quasi tutta la vita a <strong>Königsberg</strong> (oggi Kaliningrad). Non è un avventuriero: è un professore che porta l’Illuminismo tedesco al massimo della rigore. La sua domanda-madre: <em>che cosa può sapere, fare e sperare la ragione?</em></p>
-          <p>Le tre Critiche non sono «tre libri a caso»: sono tre tribunali della ragione.</p>
+      <nav class="study-toc" aria-label="Indice di studio">
+        <a href="#vita">1 Vita</a>
+        <a href="#copernicana">2 Rivoluzione</a>
+        <a href="#fenomeno">3 Fenomeno</a>
+        <a href="#giudizi">4 Giudizi</a>
+        <a href="#etica">5 Etica</a>
+        <a href="#citazione">6 Citazione</a>
+      </nav>
+
+      <div class="study-flow">
+        <article class="study-chapter reveal" id="vita">
+          <p class="study-num">Capitolo 1</p>
+          <h2>Vita, Königsberg, tre Critiche</h2>
+          <p>Immanuel Kant (1724–1804) vive quasi tutta la vita a <strong>Königsberg</strong> (oggi Kaliningrad). Non è un avventuriero: è un professore che porta l’Illuminismo tedesco al massimo del rigore. La domanda-madre: <em>che cosa può sapere, fare e sperare la ragione?</em></p>
+          <p>Le tre Critiche sono tre tribunali della ragione, non tre libri scollegati.</p>
           <ul class="timeline">
             <li><time>1781</time><span><em>Critica della ragion pura</em> — che cosa possiamo conoscere? Dove finisce la scienza e inizia la speculazione vuota?</span></li>
             <li><time>1788</time><span><em>Critica della ragion pratica</em> — come dobbiamo agire? Da dove nasce il dovere?</span></li>
@@ -52,8 +63,9 @@
           <p class="ricorda"><span>Ricorda così</span> Tre Critiche = tre compiti: conoscere → agire → giudicare (puro, pratico, estetico).</p>
         </article>
 
-        <article class="studio-block offset reveal" id="copernicana">
-          <h2>2 · Rivoluzione copernicana (in filosofia)</h2>
+        <article class="study-chapter reveal" id="copernicana">
+          <p class="study-num">Capitolo 2</p>
+          <h2>Rivoluzione copernicana (in filosofia)</h2>
           <p>Prima di Kant molti pensavano così: gli oggetti sono «là fuori» e la mente deve adattarsi a essi, come uno specchio. Kant ribalta l’immagine, ispirandosi a Copernico (che aveva messo il Sole al centro).</p>
           <ul class="studio-list">
             <li>Non è (solo) la mente che si adegua agli oggetti «così come sono in sé».</li>
@@ -64,29 +76,27 @@
             <p><strong>Esempio</strong></p>
             <p>Non «troviamo» lo spazio nel mondo come una cosa tra le cose: organizziamo ogni esperienza <em>nello</em> spazio e <em>nel</em> tempo. Senza queste lenti non ci sarebbe esperienza ordinata, ma caos di sensazioni.</p>
           </div>
-          <figure style="margin:0.85rem 0 0;border:1px solid var(--hair);overflow:hidden">
-            <img src="img/tavole/02-fenomeno.jpg" alt="Tavola del fumetto: la mente filtra fenomeno e noumeno" width="864" height="1152" loading="lazy">
-          </figure>
           <p class="ricorda"><span>Ricorda così</span> Occhiali della mente: senza di essi non vedi; con essi vedi, ma già filtrato.</p>
+          <p class="study-link"><a href="fumetto.html">Nel fumetto · tavola 2 (la mente filtra)</a></p>
         </article>
 
-        <article class="studio-block span-2 reveal" id="fenomeno">
-          <h2>3 · Fenomeno ≠ noumeno</h2>
+        <article class="study-chapter reveal" id="fenomeno">
+          <p class="study-num">Capitolo 3</p>
+          <h2>Fenomeno ≠ noumeno</h2>
           <p>Da qui nasce la distinzione più famosa (e più fraintesa) di Kant.</p>
-          <div class="split-bleed">
+          <div class="split-study">
             <div class="pane fenomeno">
               <h3>Fenomeno</h3>
               <p>Ciò che <strong>appare</strong> a noi: l’oggetto come lo conosciamo nell’esperienza. È il campo della scienza, della fisica, della vita quotidiana ordinata.</p>
-              <img src="img/tavole/01-cieli.jpg" alt="Tavola: cielo e città come appaiono" width="864" height="1152" loading="lazy">
             </div>
             <div class="pane noumeno">
               <h3>Noumeno</h3>
               <p>La <strong>cosa in sé</strong>: ciò che la cosa sarebbe indipendentemente dal nostro modo di conoscerla. Possiamo <em>pensarla</em> (come limite), non conoscerla come oggetto di esperienza.</p>
-              <div class="contrast" style="margin-top:0.85rem">
-                <p><strong>Attenzione — non è solipsismo</strong></p>
-                <p>Kant non dice «il mondo non esiste». Dice: la conoscenza umana ha un <strong>confine</strong>. Oltre il fenomeno la ragione non ha prove da laboratorio o da esperienza.</p>
-              </div>
             </div>
+          </div>
+          <div class="contrast">
+            <p><strong>Attenzione — non è solipsismo</strong></p>
+            <p>Kant non dice «il mondo non esiste». Dice: la conoscenza umana ha un <strong>confine</strong>. Oltre il fenomeno la ragione non ha prove da laboratorio o da esperienza.</p>
           </div>
           <div class="contrast">
             <p><strong>Perché serve a scuola</strong></p>
@@ -95,11 +105,12 @@
           <p class="ricorda"><span>Ricorda così</span> Fenomeno = mappa affidabile; noumeno = territorio che la mappa non può fotografare.</p>
         </article>
 
-        <article class="studio-block span-2 reveal" id="giudizi">
-          <h2>4 · Giudizi: due assi da incrociare</h2>
-          <p>Un <strong>giudizio</strong> collega un soggetto e un predicato («S è P»). Kant chiede due cose diverse — e vanno tenute separate:</p>
+        <article class="study-chapter reveal" id="giudizi">
+          <p class="study-num">Capitolo 4</p>
+          <h2>Giudizi: due assi da incrociare</h2>
+          <p>Un <strong>giudizio</strong> collega un soggetto e un predicato («S è P»). Kant chiede due cose diverse — e vanno tenute separate.</p>
 
-          <h3 style="margin-top:1rem;font-size:1.15rem">Asse 1 · Analitico o sintetico?</h3>
+          <h3>Asse 1 · Analitico o sintetico?</h3>
           <p><strong>Analitico</strong>: il predicato è già contenuto nel concetto del soggetto. Non aggiungi informazione nuova; chiarisci ciò che già «stava dentro».</p>
           <ul class="studio-list">
             <li>«Il triangolo ha tre angoli» — se capisci cos’è un triangolo, i tre angoli ci sono già.</li>
@@ -113,7 +124,7 @@
             <li>«7 + 5 = 12» — per Kant non è pura analisi della parola «sette»: unisci e ottieni un risultato nuovo.</li>
           </ul>
 
-          <h3 style="margin-top:1.1rem;font-size:1.15rem">Asse 2 · A priori o a posteriori?</h3>
+          <h3>Asse 2 · A priori o a posteriori?</h3>
           <p><strong>A priori</strong>: indipendente dall’esperienza concreta. Vale con <em>necessità</em> e (di solito) <em>universalità</em>: non «oggi sì, domani no».</p>
           <ul class="studio-list">
             <li>Le verità matematiche pure, per Kant, non dipendono dal contare sassi ogni volta.</li>
@@ -125,28 +136,42 @@
             <li>«Kant insegnava a Königsberg» — fatto storico, non necessità logica.</li>
           </ul>
 
-          <h3 style="margin-top:1.1rem;font-size:1.15rem">L’incrocio: quattro caselle</h3>
-          <div class="contrast">
-            <p><strong>Tabella mentale</strong></p>
-            <ul class="studio-list">
-              <li><strong>Analitico a priori</strong> — chiarimenti di concetti (triangolo → tre angoli). Sicuro, ma non «amplia» il mondo.</li>
-              <li><strong>Sintetico a posteriori</strong> — fatti di esperienza (mela rossa, pioggia ieri). Amplia, ma senza necessità assoluta.</li>
-              <li><strong>Sintetico a priori</strong> — il cuore della <em>Critica della ragion pura</em>: amplia la conoscenza <em>e</em> vale con necessità (matematica; principi che rendono possibile la fisica).</li>
-              <li><strong>Analitico a posteriori</strong> — casella quasi vuota / sospetta: se qualcosa è analitico, non hai bisogno dell’esperienza per «scoprirlo». Se ci metti un giudizio, di solito hai sbagliato etichetta.</li>
-            </ul>
+          <h3>L’incrocio: quattro caselle</h3>
+          <p>Metti i due assi insieme. Questa griglia è lo strumento da usare in laboratorio e all’interrogazione.</p>
+          <div class="matrix-4" role="table" aria-label="Quattro tipi di giudizio">
+            <div class="matrix-corner" aria-hidden="true"></div>
+            <div class="matrix-axis" role="columnheader">A priori</div>
+            <div class="matrix-axis" role="columnheader">A posteriori</div>
+            <div class="matrix-axis" role="rowheader">Analitico</div>
+            <div class="matrix-cell">
+              <strong>Analitico a priori</strong>
+              <span>Chiarisci un concetto. Es. triangolo → tre angoli.</span>
+            </div>
+            <div class="matrix-cell is-empty">
+              <strong>Analitico a posteriori</strong>
+              <span>Casella sospetta / quasi vuota: se è analitico non «scopri» con l’esperienza.</span>
+            </div>
+            <div class="matrix-axis" role="rowheader">Sintetico</div>
+            <div class="matrix-cell is-key">
+              <strong>Sintetico a priori</strong>
+              <span>Cuore della Critica: amplia <em>e</em> vale con necessità. Es. 7+5=12; causa.</span>
+            </div>
+            <div class="matrix-cell">
+              <strong>Sintetico a posteriori</strong>
+              <span>Fatti di esperienza. Es. mela rossa; pioggia ieri.</span>
+            </div>
           </div>
-          <figure style="margin:0.85rem 0 0;border:1px solid var(--hair);overflow:hidden;max-width:28rem">
-            <img src="img/tavole/03-giudizi.jpg" alt="Tavola del fumetto: 7+5=12 come sintetico a priori" width="864" height="1152" loading="lazy">
-          </figure>
           <div class="contrast">
             <p><strong>Perché Kant insiste sul sintetico a priori?</strong></p>
             <p>Se tutta la conoscenza ampia venisse solo dall’esperienza (sintetica a posteriori), la scienza non avrebbe leggi necessarie. Se tutto il necessario fosse solo analitico, non spiegheremmo come la matematica e la fisica <em>aggiungano</em> contenuti. Il sintetico a priori è il «ponte» che Kant vuole giustificare.</p>
           </div>
           <p class="ricorda"><span>Ricorda così</span> Due domande su ogni frase: (1) aggiunge qualcosa? (2) serve l’esperienza? L’incrocio dà la casella.</p>
+          <p class="study-link"><a href="fumetto.html">Nel fumetto · tavola 3 (7+5=12)</a> · <a href="laboratorio.html">Esercita i quadranti</a></p>
         </article>
 
-        <article class="studio-block reveal" id="etica">
-          <h2>5 · Imperativo categorico (etica)</h2>
+        <article class="study-chapter reveal" id="etica">
+          <p class="study-num">Capitolo 5</p>
+          <h2>Imperativo categorico (etica)</h2>
           <p>In morale Kant distingue i modi in cui la ragione comanda.</p>
           <p><strong>Imperativo ipotetico</strong>: «Se vuoi X, allora fai Y». È un consiglio tecnico o prudenziale. Vale solo se vuoi il fine.</p>
           <ul class="studio-list">
@@ -165,23 +190,22 @@
             <p><strong>Esempio: mentire</strong></p>
             <p>Massima: «Mento quando mi conviene». Se diventasse legge universale, nessuno crederebbe più a nessuno: la menzogna stessa smetterebbe di funzionare. La massima si autodistrugge → non è legge morale. Non basta dire «questa volta sì» o «per un fine buono»: Kant guarda la <em>forma</em> della massima, non solo l’utile del momento.</p>
           </div>
-          <figure style="margin:0.85rem 0 0;border:1px solid var(--hair);overflow:hidden">
-            <img src="img/tavole/04-dovere.jpg" alt="Tavola del fumetto sull’imperativo categorico" width="864" height="1152" loading="lazy">
-          </figure>
           <p class="ricorda"><span>Ricorda così</span> Prima di agire: «E se tutti facessero così?» + «Sto usando qualcuno solo come strumento?»</p>
+          <p class="study-link"><a href="fumetto.html">Nel fumetto · tavola 4 (dovere)</a></p>
         </article>
 
-        <article class="studio-block offset reveal" id="citazione">
-          <h2>6 · Cielo stellato e legge morale</h2>
+        <article class="study-chapter reveal" id="citazione">
+          <p class="study-num">Capitolo 6</p>
+          <h2>Cielo stellato e legge morale</h2>
           <p>Nella chiusa della <em>Critica della ragion pratica</em> Kant unisce i due poli del suo pensiero:</p>
-          <blockquote class="lead" style="color:var(--ink);max-width:36rem">«Il cielo stellato sopra di me e la legge morale in me.»</blockquote>
+          <blockquote class="study-quote">«Il cielo stellato sopra di me e la legge morale in me.»</blockquote>
           <ul class="studio-list">
             <li><strong>Cielo stellato</strong>: grandezza del mondo sensibile, ordine cosmico che ci umilia per la nostra piccolezza fisica.</li>
             <li><strong>Legge morale</strong>: dignità della persona come essere libero e responsabile — non riducibile a un granello di polvere cosmica.</li>
           </ul>
           <p>Non è solo poesia: è il riassunto emotivo di fenomenico (fuori) e pratico (dentro).</p>
           <p class="ricorda"><span>Ricorda così</span> Fuori: infinito cosmico. Dentro: dovere. Due meraviglie, una sola persona.</p>
-          <div class="hero-actions" style="margin-top:1.1rem">
+          <div class="hero-actions" style="margin-top:1.15rem">
             <a class="btn btn-primary" href="fumetto.html">Leggi il fumetto</a>
             <a class="btn btn-secondary" href="laboratorio.html">Laboratorio dei giudizi</a>
           </div>
