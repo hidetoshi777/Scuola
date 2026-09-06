@@ -76,6 +76,20 @@ window.ATTIVITA_WEB = [
       { label: "Memory", url: "manzoni-promessi/gioco.html" },
     ],
   },
+  {
+    titolo: "Kant — I cieli stellati",
+    materia: "Filosofia",
+    classe: "Secondo grado",
+    descrizione: "Studio su Kant: rivoluzione copernicana, fenomeno e noumeno, giudizi, imperativo categorico; fumetto, laboratorio e passeggiata di Königsberg.",
+    url: "kant-cieli-stellati/",
+    tinta: "filosofia",
+    adesivo: "st-gufo",
+    extra: [
+      { label: "Fumetto", url: "kant-cieli-stellati/fumetto.html" },
+      { label: "Laboratorio", url: "kant-cieli-stellati/laboratorio.html" },
+      { label: "Passeggiata", url: "kant-cieli-stellati/gioco.html" },
+    ],
+  },
 ];
 
 /* Lavori Canva per materia. pp = numero di pagine, id = design ID Canva.
