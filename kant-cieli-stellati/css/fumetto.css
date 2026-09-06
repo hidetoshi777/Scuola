@@ -1,18 +1,15 @@
-/* Lettore fumetto HTML a vignette + sfoglia + fullscreen */
+/* Lettore fumetto: tavole immagine + sfoglia + fullscreen */
 
 .fumetto-main {
   width: min(100% - 1rem, 42rem);
   margin-inline: auto;
-  padding: 0.75rem 0 1.5rem;
+  padding: 1rem 0 1.75rem;
 }
 
 .fumetto-intro {
-  text-align: center;
-  margin-bottom: 0.85rem;
-}
-
-.fumetto-intro .lead {
-  margin-inline: auto;
+  text-align: left;
+  margin-bottom: 0.9rem;
+  max-width: 34rem;
 }
 
 .fumetto-toolbar {
@@ -25,8 +22,10 @@
 
 .fumetto-status {
   margin: 0;
-  color: var(--ink-soft);
-  font-family: var(--font-display);
+  color: var(--mute);
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  letter-spacing: 0.06em;
 }
 
 .fumetto-reader {
@@ -37,9 +36,8 @@
 .fumetto-viewport {
   position: relative;
   overflow: hidden;
-  border: 1px solid var(--line);
+  border: 1px solid var(--hair);
   background: #070d18;
-  box-shadow: var(--shadow);
   aspect-ratio: 3 / 4;
   max-height: min(78dvh, 52rem);
   margin-inline: auto;
@@ -47,203 +45,117 @@
   touch-action: pan-y;
   user-select: none;
   perspective: 1800px;
+  perspective-origin: 50% 50%;
 }
 
 .fumetto-page {
+  margin: 0;
   position: absolute;
   inset: 0;
-  margin: 0;
-  padding: 0.55rem;
   opacity: 0;
   pointer-events: none;
-  transform-origin: left center;
+  z-index: 1;
+  transform-style: preserve-3d;
   backface-visibility: hidden;
-  background: #0e1626;
-  display: grid;
-  gap: 0.4rem;
-  grid-template-rows: auto;
+  -webkit-backface-visibility: hidden;
+  will-change: transform, opacity;
 }
 
 .fumetto-page.is-active {
   opacity: 1;
   pointer-events: auto;
   z-index: 2;
+  transform: rotateY(0deg);
+}
+
+.fumetto-page img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: center;
+  background: #070d18;
+  display: block;
 }
 
 .fumetto-page.is-flip-out-next {
-  animation: flip-out-next 0.55s ease forwards;
-  z-index: 3;
+  z-index: 4;
+  transform-origin: left center;
+  animation: fumettoFlipOutNext 0.55s cubic-bezier(0.4, 0.05, 0.2, 1) forwards;
 }
 
 .fumetto-page.is-flip-in-next {
-  animation: flip-in-next 0.55s ease forwards;
-  z-index: 2;
+  z-index: 3;
+  opacity: 1;
+  pointer-events: none;
+  transform-origin: right center;
+  animation: fumettoFlipInNext 0.55s cubic-bezier(0.4, 0.05, 0.2, 1) forwards;
 }
 
 .fumetto-page.is-flip-out-prev {
-  animation: flip-out-prev 0.55s ease forwards;
-  z-index: 3;
+  z-index: 4;
+  transform-origin: right center;
+  animation: fumettoFlipOutPrev 0.55s cubic-bezier(0.4, 0.05, 0.2, 1) forwards;
 }
 
 .fumetto-page.is-flip-in-prev {
-  animation: flip-in-prev 0.55s ease forwards;
-  z-index: 2;
+  z-index: 3;
+  opacity: 1;
+  pointer-events: none;
+  transform-origin: left center;
+  animation: fumettoFlipInPrev 0.55s cubic-bezier(0.4, 0.05, 0.2, 1) forwards;
 }
 
-@keyframes flip-out-next {
-  to {
-    transform: rotateY(-88deg);
-    opacity: 0.2;
-  }
+@keyframes fumettoFlipOutNext {
+  0% { transform: rotateY(0deg); opacity: 1; filter: brightness(1); }
+  55% { filter: brightness(0.85); }
+  100% { transform: rotateY(-95deg); opacity: 0.15; filter: brightness(0.55); }
 }
 
-@keyframes flip-in-next {
-  from {
-    transform: rotateY(72deg);
-    opacity: 0.2;
-  }
-  to {
-    transform: none;
-    opacity: 1;
-  }
+@keyframes fumettoFlipInNext {
+  0% { transform: rotateY(55deg); opacity: 0.35; }
+  100% { transform: rotateY(0deg); opacity: 1; }
 }
 
-@keyframes flip-out-prev {
-  to {
-    transform: rotateY(88deg);
-    opacity: 0.2;
-  }
+@keyframes fumettoFlipOutPrev {
+  0% { transform: rotateY(0deg); opacity: 1; filter: brightness(1); }
+  55% { filter: brightness(0.85); }
+  100% { transform: rotateY(95deg); opacity: 0.15; filter: brightness(0.55); }
 }
 
-@keyframes flip-in-prev {
-  from {
-    transform: rotateY(-72deg);
-    opacity: 0.2;
-  }
-  to {
-    transform: none;
-    opacity: 1;
-  }
+@keyframes fumettoFlipInPrev {
+  0% { transform: rotateY(-55deg); opacity: 0.35; }
+  100% { transform: rotateY(0deg); opacity: 1; }
 }
 
+.reduced-motion .fumetto-page,
 .reduced-motion .fumetto-page.is-flip-out-next,
 .reduced-motion .fumetto-page.is-flip-in-next,
 .reduced-motion .fumetto-page.is-flip-out-prev,
 .reduced-motion .fumetto-page.is-flip-in-prev {
-  animation: none;
-}
-
-.tavola {
-  display: grid;
-  gap: 0.4rem;
-  height: 100%;
-  min-height: 0;
-}
-
-.tavola-2 {
-  grid-template-rows: 1.15fr 1fr;
-}
-
-.tavola-3 {
-  grid-template-rows: 1fr 1fr 1fr;
-}
-
-.tavola-4 {
-  grid-template-columns: 1fr 1fr;
-  grid-template-rows: 1fr 1fr;
-}
-
-.vignetta {
-  position: relative;
-  overflow: hidden;
-  border: 2px solid #d8d2c4;
-  background:
-    linear-gradient(160deg, rgba(106, 154, 150, 0.18), transparent 50%),
-    linear-gradient(20deg, #152038, #0c1422);
-  padding: 0.55rem 0.6rem 0.65rem;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
-  min-height: 0;
-}
-
-.vignetta.sky {
-  background:
-    radial-gradient(1px 1px at 20% 25%, #fff8 50%, transparent 51%),
-    radial-gradient(1.2px 1.2px at 70% 18%, #e8b86d 50%, transparent 51%),
-    radial-gradient(1px 1px at 55% 40%, #fff6 50%, transparent 51%),
-    linear-gradient(180deg, #152744, #0a101c 70%);
-}
-
-.vignetta.study {
-  background:
-    linear-gradient(135deg, rgba(232, 184, 109, 0.12), transparent 45%),
-    linear-gradient(180deg, #1a2438, #101826);
-}
-
-.vignetta.street {
-  background:
-    linear-gradient(180deg, #243048 0%, #1a2234 40%, #121820 100%);
-}
-
-.vignetta.moral {
-  background:
-    linear-gradient(160deg, rgba(232, 184, 109, 0.2), transparent 40%),
-    linear-gradient(180deg, #1c2030, #12141e);
-}
-
-.balloon {
-  margin: 0;
-  padding: 0.45rem 0.55rem;
-  background: #f2ecdf;
-  color: #1a1820;
-  font-size: clamp(0.72rem, 2.8vw, 0.88rem);
-  line-height: 1.35;
-  border-radius: 0.25rem;
-  box-shadow: 0 2px 0 rgba(0, 0, 0, 0.2);
-}
-
-.balloon strong {
-  color: #6a4520;
-}
-
-.who {
-  display: inline-block;
-  font-size: 0.68rem;
-  font-weight: 700;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  color: var(--amber);
-  margin-bottom: 0.25rem;
-}
-
-.scene-label {
-  position: absolute;
-  top: 0.4rem;
-  left: 0.45rem;
-  font-size: 0.65rem;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: rgba(232, 228, 217, 0.55);
+  animation: none !important;
+  transition: opacity 0.15s ease;
+  transform: none !important;
+  filter: none !important;
 }
 
 .fumetto-caption {
   margin: 0;
-  color: var(--ink-soft);
+  color: var(--mute);
   font-size: 0.92rem;
   min-height: 2.6rem;
 }
 
 .fumetto-controls {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
   gap: 0.5rem;
+  align-items: center;
 }
 
 .fumetto-dots {
   display: flex;
   gap: 0.35rem;
+  justify-content: center;
 }
 
 .fumetto-dot {
@@ -252,18 +164,18 @@
   border-radius: 50%;
   border: 0;
   padding: 0;
-  background: var(--line);
+  background: var(--hair);
   cursor: pointer;
 }
 
 .fumetto-dot[aria-current="true"] {
-  background: var(--amber);
+  background: var(--star);
 }
 
 .fumetto-hint {
   margin: 0;
   font-size: 0.82rem;
-  color: var(--ink-soft);
+  color: var(--mute);
   text-align: center;
 }
 
@@ -322,8 +234,15 @@ body.fumetto-immersive-lock {
   overflow: auto;
 }
 
-@media (max-width: 420px) {
-  .balloon {
-    font-size: 0.74rem;
+@media (max-width: 520px) {
+  .fumetto-controls {
+    grid-template-columns: 1fr 1fr;
+    grid-template-areas:
+      "dots dots"
+      "prev next";
   }
+
+  .fumetto-dots { grid-area: dots; }
+  #fumetto-prev { grid-area: prev; }
+  #fumetto-next { grid-area: next; }
 }

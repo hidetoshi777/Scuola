@@ -13,7 +13,8 @@
     const syncLabel = () => {
       const light = root.dataset.theme === "light";
       toggle.setAttribute("aria-pressed", String(light));
-      toggle.textContent = light ? "Tema scuro" : "Tema chiaro";
+      toggle.textContent = light ? "SCURO" : "CHIARO";
+      toggle.setAttribute("aria-label", light ? "Passa al tema scuro" : "Passa al tema chiaro");
     };
     syncLabel();
     toggle.addEventListener("click", () => {
@@ -24,7 +25,7 @@
   }
 
   const here = location.pathname.split("/").pop() || "index.html";
-  document.querySelectorAll(".site-nav a[href], .dock a[href]").forEach((link) => {
+  document.querySelectorAll(".astro-rail nav a[href]").forEach((link) => {
     const href = link.getAttribute("href");
     if (href === here || (here === "" && href === "index.html")) {
       link.setAttribute("aria-current", "page");
