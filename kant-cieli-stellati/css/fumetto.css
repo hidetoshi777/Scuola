@@ -236,6 +236,9 @@ body.fumetto-immersive-lock {
   min-height: 0;
   aspect-ratio: auto;
   border: 0;
+  touch-action: none;
+  -webkit-user-select: none;
+  user-select: none;
 }
 
 .fumetto-reader:fullscreen .fumetto-page img,
