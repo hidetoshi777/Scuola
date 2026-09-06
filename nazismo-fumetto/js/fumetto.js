@@ -14,6 +14,8 @@
     document.body.classList.contains("reduced-motion") ||
     window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
+  const zoom = window.FumettoZoom ? window.FumettoZoom.attach(viewport) : null;
+
   pages.forEach((_, i) => {
     const dot = document.createElement("button");
     dot.type = "button";
@@ -45,6 +47,7 @@
   }
 
   function settle(next) {
+    if (zoom) zoom.reset();
     pages.forEach((page, i) => {
       clearFlipClasses(page);
       const active = i === next;
@@ -59,6 +62,9 @@
   function go(next, forcedDir) {
     const target = Math.max(0, Math.min(total - 1, next));
     if (target === index || busy) return;
+    if (zoom && zoom.isZoomed()) {
+      zoom.reset();
+    }
     const dir = forcedDir != null ? forcedDir : target > index ? 1 : -1;
     if (window.AudioUi) window.AudioUi.beep(target === total - 1 ? "warm" : "page");
 
@@ -102,6 +108,7 @@
   viewport.addEventListener(
     "touchstart",
     (event) => {
+      if (event.touches.length > 1) return;
       const t = event.changedTouches[0];
       startX = t.clientX;
       startY = t.clientY;
@@ -111,6 +118,8 @@
   viewport.addEventListener(
     "touchend",
     (event) => {
+      if (zoom && zoom.blocksNav()) return;
+      if (event.touches.length > 0) return;
       const t = event.changedTouches[0];
       const dx = t.clientX - startX;
       const dy = t.clientY - startY;
@@ -123,6 +132,7 @@
 
   viewport.addEventListener("click", (event) => {
     if (busy) return;
+    if (zoom && zoom.blocksNav()) return;
     const rect = viewport.getBoundingClientRect();
     const x = event.clientX - rect.left;
     if (x > rect.width * 0.66) go(index + 1, 1);

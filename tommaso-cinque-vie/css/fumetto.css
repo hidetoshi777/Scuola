@@ -42,10 +42,21 @@
   max-height: min(78dvh, 52rem);
   margin-inline: auto;
   width: min(100%, 34rem);
-  touch-action: pan-y;
+  touch-action: none;
   user-select: none;
   perspective: 1800px;
   perspective-origin: 50% 50%;
+}
+
+.fumetto-viewport.has-zoom .fumetto-page img {
+  transform-origin: center center;
+  will-change: transform;
+}
+.fumetto-viewport.is-zoomed {
+  cursor: grab;
+}
+.fumetto-viewport.is-zooming .fumetto-page img {
+  transition: none !important;
 }
 
 .fumetto-page {

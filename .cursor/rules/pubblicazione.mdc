@@ -21,6 +21,8 @@ alwaysApply: true
 - **Gioco = didattico**: deve far ripassare contenuti. Ok formati diversi dal quiz (memory, ordina eventi…). **No arcade puro** senza apprendimento. Se manca un’alternativa solida → **domande/risposte**.
 - **Canva**: sezione dedicata + export; viewer con **schermo intero**.
 - **Mappe e personaggi storici**: farli **realistici** (contorni geografici veri; ritratti riconoscibili), non schematici/generici.
+- **Anteprima OG (obbligatoria)**: su ogni `index.html` (scaffale + attività) meta Open Graph + Twitter con `og:image` assoluta HTTPS (`img/og-share.jpg` ~1200×630, o `.png`).
+- **Zoom fumetto**: includi `../js/fumetto-zoom.js` (FumettoZoom) su ogni `fumetto.html`; reset al cambio tavola; con zoom attivo niente swipe di pagina.
 
 ## Dopo ogni nuova attività
 
