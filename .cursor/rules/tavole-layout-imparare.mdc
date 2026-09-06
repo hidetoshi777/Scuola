@@ -25,3 +25,8 @@ alwaysApply: false
 - «Ricorda così» sì, ma **dopo** paragrafi chiari con i contenuti da sapere.
 - **Immagini in Imparare**: usa le vignette del fumetto **solo se chiariscono** lo studio. Altrimenti **non metterle**, oppure crea grafiche adatte allo studio (schemi, JPEG/GIF/animazioni didattiche). Non infilare tavole fumetto intere se appesantiscono la lettura.
 - Niente schede solo decorative con una riga di testo.
+
+## Scaffale (obbligatorio)
+
+- Ogni nuova attività web va aggiunta a `js/data.js` in `ATTIVITA_WEB` (homepage Lo scaffale).
+- Alza anche `?v=` su `js/data.js` in `index.html` se serve forzare il refresh cache.

@@ -6,8 +6,8 @@ Materiali didattici interattivi, ognuno in una **sottocartella autonoma**.
 
 - Ogni attività vive in una propria cartella (es. `rotazione-terrestre/`, `parti-invariabili/`).
 - **Non cancellare** i lavori già pubblicati: si aggiungono e si ordinano nuove cartelle.
-- **Niente rimandi** tra un lavoro e l’altro (niente link incrociati nella navigazione).
-- Una homepage comune con i link si potrà fare in seguito, se servirà.
+- **Niente rimandi** tra un lavoro e l’altro (niente link incrociati nella navigazione **interna** delle attività).
+- La homepage comune è **Lo scaffale** (`index.html` + `js/data.js`): dopo ogni nuova attività web, **registrala obbligatoriamente** in `window.ATTIVITA_WEB` (titolo, materia, descrizione, url, tinta, adesivo, extra). Altrimenti la classe non la trova dallo scaffale.
 - In **ogni** lavoro per la scuola, nel footer (o credito visibile), scrivi sempre: **Realizzato dal Prof. Rossano Bella**.
 - Per i prossimi lavori Scuola, **usa il MCP Canva** (lavori e risorse già presenti nell’account Canva del Prof.) quando servono grafiche, template, export o materiali già realizzati lì: non reinventare da zero se Canva ha già qualcosa di utile.
 - **Inserire i Canva del Prof.**: se per un argomento esiste già un design Canva (presentazione, poster, slide, ecc.), **va messo in una sezione dedicata** del lavoro (es. «Le slide del Prof.» / galleria export), non solo riusato come asset sparso. Prima di inventare grafiche nuove, cerca e riusa quei Canva.
@@ -43,8 +43,9 @@ nome-attivita/
 
 Dopo ogni nuova attività:
 
-1. Apri una pull request e **fai tu il merge** su `main` (Origin), senza aspettare.
-2. Pubblica su GitHub, così la classe ha l’indirizzo web.
+1. Registrala sullo **scaffale** (`js/data.js` → `ATTIVITA_WEB`).
+2. Apri una pull request e **fai tu il merge** su `main` (Origin), senza aspettare.
+3. Pubblica su GitHub, così la classe ha l’indirizzo web.
 
 Repository GitHub: `https://github.com/hidetoshi777/Scuola`  
 Sito base: `https://hidetoshi777.github.io/Scuola/`
