@@ -3,7 +3,9 @@
     "Tavola 1 — Lucia incontra Tommaso nel chiostro: fede e ragione camminano insieme, non una contro l’altra.",
     "Tavola 2 — Prime vie: dal moto al Primo Motore; dalle cause alla Causa Prima.",
     "Tavola 3 — Altre vie: contingenza → Essere necessario; gradi → Massimo; finalità → Ordinatore.",
-    "Tavola 4 — Legge naturale: fare il bene, evitare il male — la ragione pratica al lavoro.",
+    "Tavola 4 — Essenza ed esistenza: nelle creature sono distinte; in Dio coincidono.",
+    "Tavola 5 — Legge naturale: fare il bene, evitare il male — la ragione pratica al lavoro.",
+    "Tavola 6 — Ricorda: cinque vie, fede e ragione, legge naturale — pronto per lo studio.",
   ];
 
   const pages = Array.from(document.querySelectorAll(".fumetto-page"));

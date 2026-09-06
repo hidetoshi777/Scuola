@@ -1,11 +1,11 @@
 (function () {
-  const KEY = "tema-tommaso-cinque-vie";
+  const KEY = "tema-tommaso-cinque-vie-v2";
   const root = document.documentElement;
   const stored = localStorage.getItem(KEY);
   if (stored === "light" || stored === "dark") {
     root.dataset.theme = stored;
   } else {
-    root.dataset.theme = "light";
+    root.dataset.theme = "dark";
   }
 
   const toggle = document.querySelector("[data-theme-toggle]");
