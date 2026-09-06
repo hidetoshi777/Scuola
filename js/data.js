@@ -90,6 +90,20 @@ window.ATTIVITA_WEB = [
       { label: "Passeggiata", url: "kant-cieli-stellati/gioco.html" },
     ],
   },
+  {
+    titolo: "Tommaso — Le cinque vie",
+    materia: "Filosofia",
+    classe: "Secondo grado",
+    descrizione: "Studio su Tommaso d'Aquino: fede e ragione, le cinque vie, legge naturale; fumetto, laboratorio delle vie e cammino didattico.",
+    url: "tommaso-cinque-vie/",
+    tinta: "filosofia",
+    adesivo: "st-gufo",
+    extra: [
+      { label: "Fumetto", url: "tommaso-cinque-vie/fumetto.html" },
+      { label: "Laboratorio", url: "tommaso-cinque-vie/laboratorio.html" },
+      { label: "Cammino", url: "tommaso-cinque-vie/gioco.html" },
+    ],
+  },
 ];
 
 /* Lavori Canva per materia. pp = numero di pagine, id = design ID Canva.

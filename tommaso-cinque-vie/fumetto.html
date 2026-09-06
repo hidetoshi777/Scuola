@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <title>Fumetto · Tommaso | Scuola</title>
+  <meta name="description" content="Fumetto didattico illustrato su Tommaso d’Aquino: quattro tavole con Lucia e Tommaso.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Source+Sans+3:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/fumetto.css">
+</head>
+<body class="page-fumetto">
+  <a class="skip-link visually-hidden" href="#contenuto">Salta al contenuto</a>
+
+  <header class="chiostro" aria-label="Navigazione">
+    <a class="brand" href="index.html">TOMMASO</a>
+    <nav class="chiostro-nav">
+      <a href="index.html">Home</a>
+      <a href="imparare.html">Studio</a>
+      <a href="fumetto.html" aria-current="page">Fumetto</a>
+      <a href="laboratorio.html">Lab</a>
+      <a href="gioco.html">Cammino</a>
+    </nav>
+    <button type="button" class="theme-toggle" data-theme-toggle aria-pressed="true">SCURO</button>
+  </header>
+
+  <div class="shell">
+    <main id="contenuto" class="fumetto-main" tabindex="-1">
+      <header class="fumetto-intro">
+        <p class="kicker">Fumetto · quattro tavole illustrate</p>
+        <h1>Con Lucia nel chiostro</h1>
+        <p class="lead">Più vignette per pagina. Lucia interroga Tommaso: dalle cinque vie alla legge naturale.</p>
+      </header>
+
+      <section class="fumetto-reader" id="fumetto-stage" aria-roledescription="fumetto" aria-label="Tommaso a fumetti">
+        <div class="fumetto-toolbar">
+          <p class="fumetto-status">Tavola <span id="fumetto-num">1</span> di 4</p>
+          <button type="button" class="btn btn-secondary fumetto-full" id="fumetto-fullscreen" aria-pressed="false">Schermo intero</button>
+        </div>
+
+        <div class="fumetto-viewport" id="fumetto-viewport">
+          <figure class="fumetto-page is-active" data-page="1">
+            <img src="img/tavole/01-incontro.jpg" alt="Tavola 1: Lucia e Tommaso nel chiostro; fede e ragione insieme" width="864" height="1152" fetchpriority="high">
+          </figure>
+          <figure class="fumetto-page" data-page="2" aria-hidden="true">
+            <img src="img/tavole/02-prime-vie.jpg" alt="Tavola 2: prime vie — moto e causa" width="864" height="1152" loading="lazy">
+          </figure>
+          <figure class="fumetto-page" data-page="3" aria-hidden="true">
+            <img src="img/tavole/03-altre-vie.jpg" alt="Tavola 3: altre vie — contingenza, gradi, finalità" width="864" height="1152" loading="lazy">
+          </figure>
+          <figure class="fumetto-page" data-page="4" aria-hidden="true">
+            <img src="img/tavole/04-legge-naturale.jpg" alt="Tavola 4: legge naturale — fare il bene, evitare il male" width="864" height="1152" loading="lazy">
+          </figure>
+        </div>
+
+        <p class="fumetto-caption" id="fumetto-caption" aria-live="polite"></p>
+
+        <div class="fumetto-controls">
+          <button type="button" class="btn btn-secondary fumetto-nav" id="fumetto-prev" disabled>← Indietro</button>
+          <div class="fumetto-dots" id="fumetto-dots" role="tablist" aria-label="Tavole"></div>
+          <button type="button" class="btn btn-primary fumetto-nav" id="fumetto-next">Avanti →</button>
+        </div>
+        <p class="fumetto-hint">Scorri o tocca i lati. «Schermo intero» sul telefono. Esc per uscire.</p>
+      </section>
+
+      <div class="hero-actions" style="margin-top:1.2rem">
+        <a class="btn btn-primary" href="laboratorio.html">Laboratorio</a>
+        <a class="btn btn-secondary" href="gioco.html">Cammino</a>
+      </div>
+    </main>
+
+    <footer class="site-footer">
+      <div class="wrap">
+        <p>Fumetto didattico in quattro tavole illustrate. Realizzato dal Prof. Rossano Bella.</p>
+      </div>
+    </footer>
+  </div>
+
+  <script src="js/common.js" defer></script>
+  <script src="js/fumetto.js" defer></script>
+</body>
+</html>
