@@ -1,5 +1,6 @@
 /**
  * Pinch-to-zoom + doppio tap sulle tavole del fumetto.
+ * Touch Events per pinch (iOS/fullscreen); Pointer per mouse e doppio tap.
  * Uso: const zoom = FumettoZoom.attach(viewport); zoom.reset() al cambio pagina.
  */
 (function () {
@@ -13,6 +14,18 @@
     return Math.hypot(ax - bx, ay - by);
   }
 
+  function touchDist(touches) {
+    if (touches.length < 2) return 0;
+    return hypot(touches[0].clientX, touches[0].clientY, touches[1].clientX, touches[1].clientY) || 1;
+  }
+
+  function touchMid(touches) {
+    return {
+      x: (touches[0].clientX + touches[1].clientX) / 2,
+      y: (touches[0].clientY + touches[1].clientY) / 2,
+    };
+  }
+
   window.FumettoZoom = {
     attach(viewport, options) {
       if (!viewport) return null;
@@ -20,7 +33,6 @@
       let scale = 1;
       let tx = 0;
       let ty = 0;
-      const pointers = new Map();
       let pinchDist0 = 0;
       let pinchScale0 = 1;
       let pan0 = null;
@@ -28,6 +40,7 @@
       let lastTap = { t: 0, x: 0, y: 0 };
       let blockNavUntil = 0;
       let pinching = false;
+      let touchMode = false;
 
       function activeImg() {
         if (typeof opts.getImage === "function") return opts.getImage();
@@ -41,8 +54,8 @@
           return;
         }
         const rect = viewport.getBoundingClientRect();
-        const maxX = (rect.width * (scale - 1)) / 2 + 8;
-        const maxY = (rect.height * (scale - 1)) / 2 + 8;
+        const maxX = (rect.width * (scale - 1)) / 2 + 24;
+        const maxY = (rect.height * (scale - 1)) / 2 + 24;
         tx = Math.max(-maxX, Math.min(maxX, tx));
         ty = Math.max(-maxY, Math.min(maxY, ty));
       }
@@ -81,9 +94,10 @@
         tx = 0;
         ty = 0;
         pinching = false;
-        pointers.clear();
         pan0 = null;
         downMeta = null;
+        pinchDist0 = 0;
+        touchMode = false;
         viewport.classList.remove("is-zoomed", "is-zooming");
         viewport.querySelectorAll(".fumetto-page img").forEach((img) => {
           img.style.transition = "none";
@@ -104,61 +118,147 @@
         blockNavUntil = Date.now() + (ms || 320);
       }
 
-      function onPointerDown(event) {
-        if (event.pointerType === "mouse" && event.button !== 0) return;
-        pointers.set(event.pointerId, { x: event.clientX, y: event.clientY });
-        try {
-          viewport.setPointerCapture(event.pointerId);
-        } catch (err) {
-          /* ignore */
+      function finishDoubleTap(clientX, clientY) {
+        const now = Date.now();
+        const dt = now - lastTap.t;
+        const near = hypot(clientX, clientY, lastTap.x, lastTap.y) < 36;
+        if (dt > 0 && dt < DOUBLE_MS && near) {
+          if (isZoomed()) {
+            scale = 1;
+            tx = 0;
+            ty = 0;
+            apply(true);
+          } else {
+            zoomAround(ZOOM_TAP, clientX, clientY, true);
+          }
+          markNavBlock(360);
+          lastTap = { t: 0, x: 0, y: 0 };
+        } else {
+          lastTap = { t: now, x: clientX, y: clientY };
         }
-        viewport.classList.add("is-zooming");
+      }
 
-        if (pointers.size === 1) {
+      /* ---- Touch (pinch affidabile su iOS, anche in fullscreen) ---- */
+
+      function onTouchStart(event) {
+        touchMode = true;
+        const touches = event.touches;
+        if (touches.length === 1) {
           downMeta = {
-            id: event.pointerId,
-            x: event.clientX,
-            y: event.clientY,
+            x: touches[0].clientX,
+            y: touches[0].clientY,
             t: Date.now(),
             moved: false,
           };
           if (isZoomed()) {
-            pan0 = { x: event.clientX, y: event.clientY, tx, ty };
+            pan0 = { x: touches[0].clientX, y: touches[0].clientY, tx, ty };
           } else {
             pan0 = null;
           }
-        } else if (pointers.size === 2) {
+        } else if (touches.length >= 2) {
+          event.preventDefault();
           pinching = true;
-          markNavBlock(400);
-          const pts = Array.from(pointers.values());
-          pinchDist0 = hypot(pts[0].x, pts[0].y, pts[1].x, pts[1].y) || 1;
+          markNavBlock(500);
+          pinchDist0 = touchDist(touches);
           pinchScale0 = scale;
           pan0 = null;
           downMeta = null;
+          viewport.classList.add("is-zooming");
         }
       }
 
-      function onPointerMove(event) {
-        if (!pointers.has(event.pointerId)) return;
-        pointers.set(event.pointerId, { x: event.clientX, y: event.clientY });
+      function onTouchMove(event) {
+        const touches = event.touches;
+        if (touches.length >= 2) {
+          event.preventDefault();
+          pinching = true;
+          viewport.classList.add("is-zooming");
+          if (!pinchDist0) {
+            pinchDist0 = touchDist(touches);
+            pinchScale0 = scale;
+          }
+          const mid = touchMid(touches);
+          zoomAround(pinchScale0 * (touchDist(touches) / pinchDist0), mid.x, mid.y, false);
+          return;
+        }
 
-        if (downMeta && event.pointerId === downMeta.id) {
-          if (hypot(event.clientX, event.clientY, downMeta.x, downMeta.y) > TAP_SLOP) {
+        if (touches.length === 1 && downMeta) {
+          if (hypot(touches[0].clientX, touches[0].clientY, downMeta.x, downMeta.y) > TAP_SLOP) {
             downMeta.moved = true;
           }
         }
 
-        if (pointers.size >= 2) {
-          pinching = true;
-          const pts = Array.from(pointers.values());
-          const dist = hypot(pts[0].x, pts[0].y, pts[1].x, pts[1].y) || 1;
-          const midX = (pts[0].x + pts[1].x) / 2;
-          const midY = (pts[0].y + pts[1].y) / 2;
-          zoomAround(pinchScale0 * (dist / pinchDist0), midX, midY, false);
+        if (touches.length === 1 && pan0 && isZoomed()) {
+          event.preventDefault();
+          tx = pan0.tx + (touches[0].clientX - pan0.x);
+          ty = pan0.ty + (touches[0].clientY - pan0.y);
+          apply(false);
+        }
+      }
+
+      function onTouchEnd(event) {
+        const touches = event.touches;
+        if (touches.length >= 2) {
+          pinchDist0 = touchDist(touches);
+          pinchScale0 = scale;
           return;
         }
 
-        if (pointers.size === 1 && pan0 && isZoomed()) {
+        if (touches.length === 1 && isZoomed()) {
+          pinchDist0 = 0;
+          pan0 = { x: touches[0].clientX, y: touches[0].clientY, tx, ty };
+          return;
+        }
+
+        viewport.classList.remove("is-zooming");
+        const wasPinch = pinching;
+        pinching = false;
+        pinchDist0 = 0;
+        pan0 = null;
+
+        if (!wasPinch && downMeta && !downMeta.moved && event.changedTouches[0]) {
+          const t = event.changedTouches[0];
+          finishDoubleTap(t.clientX, t.clientY);
+        }
+        downMeta = null;
+        if (typeof opts.onZoomChange === "function") opts.onZoomChange(isZoomed());
+        if (touches.length === 0) {
+          window.setTimeout(() => {
+            touchMode = false;
+          }, 50);
+        }
+      }
+
+      /* ---- Mouse (desktop): doppio click + drag se zoomato ---- */
+
+      function onPointerDown(event) {
+        if (touchMode || event.pointerType === "touch") return;
+        if (event.pointerType === "mouse" && event.button !== 0) return;
+        downMeta = {
+          x: event.clientX,
+          y: event.clientY,
+          t: Date.now(),
+          moved: false,
+          id: event.pointerId,
+        };
+        if (isZoomed()) {
+          pan0 = { x: event.clientX, y: event.clientY, tx, ty };
+          viewport.classList.add("is-zooming");
+          try {
+            viewport.setPointerCapture(event.pointerId);
+          } catch (err) {
+            /* ignore */
+          }
+        }
+      }
+
+      function onPointerMove(event) {
+        if (touchMode || event.pointerType === "touch") return;
+        if (!downMeta || downMeta.id !== event.pointerId) return;
+        if (hypot(event.clientX, event.clientY, downMeta.x, downMeta.y) > TAP_SLOP) {
+          downMeta.moved = true;
+        }
+        if (pan0 && isZoomed()) {
           tx = pan0.tx + (event.clientX - pan0.x);
           ty = pan0.ty + (event.clientY - pan0.y);
           apply(false);
@@ -166,47 +266,15 @@
       }
 
       function onPointerUp(event) {
-        if (!pointers.has(event.pointerId)) return;
-        pointers.delete(event.pointerId);
-
-        if (pointers.size < 2) {
-          pinchDist0 = 0;
+        if (touchMode || event.pointerType === "touch") return;
+        if (!downMeta || downMeta.id !== event.pointerId) return;
+        viewport.classList.remove("is-zooming");
+        pan0 = null;
+        if (!downMeta.moved) {
+          finishDoubleTap(event.clientX, event.clientY);
         }
-
-        if (pointers.size === 1 && isZoomed()) {
-          const only = Array.from(pointers.values())[0];
-          pan0 = { x: only.x, y: only.y, tx, ty };
-        }
-
-        if (pointers.size === 0) {
-          viewport.classList.remove("is-zooming");
-          pan0 = null;
-
-          const wasPinch = pinching;
-          pinching = false;
-
-          if (!wasPinch && downMeta && event.pointerId === downMeta.id && !downMeta.moved) {
-            const now = Date.now();
-            const dt = now - lastTap.t;
-            const near = hypot(event.clientX, event.clientY, lastTap.x, lastTap.y) < 36;
-            if (dt > 0 && dt < DOUBLE_MS && near) {
-              if (isZoomed()) {
-                scale = 1;
-                tx = 0;
-                ty = 0;
-                apply(true);
-              } else {
-                zoomAround(ZOOM_TAP, event.clientX, event.clientY, true);
-              }
-              markNavBlock(360);
-              lastTap = { t: 0, x: 0, y: 0 };
-            } else {
-              lastTap = { t: now, x: event.clientX, y: event.clientY };
-            }
-          }
-          downMeta = null;
-          if (typeof opts.onZoomChange === "function") opts.onZoomChange(isZoomed());
-        }
+        downMeta = null;
+        if (typeof opts.onZoomChange === "function") opts.onZoomChange(isZoomed());
       }
 
       function onWheel(event) {
@@ -217,6 +285,10 @@
         markNavBlock(200);
       }
 
+      viewport.addEventListener("touchstart", onTouchStart, { passive: false });
+      viewport.addEventListener("touchmove", onTouchMove, { passive: false });
+      viewport.addEventListener("touchend", onTouchEnd, { passive: false });
+      viewport.addEventListener("touchcancel", onTouchEnd, { passive: false });
       viewport.addEventListener("pointerdown", onPointerDown);
       viewport.addEventListener("pointermove", onPointerMove);
       viewport.addEventListener("pointerup", onPointerUp);
@@ -229,6 +301,10 @@
         isZoomed,
         blocksNav,
         destroy() {
+          viewport.removeEventListener("touchstart", onTouchStart);
+          viewport.removeEventListener("touchmove", onTouchMove);
+          viewport.removeEventListener("touchend", onTouchEnd);
+          viewport.removeEventListener("touchcancel", onTouchEnd);
           viewport.removeEventListener("pointerdown", onPointerDown);
           viewport.removeEventListener("pointermove", onPointerMove);
           viewport.removeEventListener("pointerup", onPointerUp);

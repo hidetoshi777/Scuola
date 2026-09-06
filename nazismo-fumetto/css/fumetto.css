@@ -110,6 +110,9 @@ body.fumetto-immersive-lock {
   aspect-ratio: auto;
   border-radius: 0.35rem;
   margin: 0;
+  touch-action: none;
+  -webkit-user-select: none;
+  user-select: none;
 }
 
 .fumetto-reader:fullscreen .fumetto-status,
