@@ -121,8 +121,18 @@
       const altri = (a.extra || [])
         .map((e) => '<a href="' + esc(e.url) + '">' + esc(e.label) + "</a>")
         .join("");
+      const copertina = a.copertina
+        ? '<figure class="cartellina-copertina">' +
+          '<img src="' + esc(a.copertina) + '" alt="" width="1200" height="630" loading="' +
+          (i === 0 ? "eager" : "lazy") + '"' +
+          (i === 0 ? ' fetchpriority="high"' : "") +
+          ">" +
+          "</figure>"
+        : "";
       return (
         '<article class="cartellina entra" style="--tinta: var(--c-' + a.tinta + '); --i: ' + i + '">' +
+        copertina +
+        '<div class="cartellina-corpo">' +
         '<div class="cartellina-testa">' +
         '<span class="cartellina-dove">' + esc(a.materia) + " · " + esc(a.classe) + "</span>" +
         adesivo(a.adesivo, a.tinta, a.titolo) +
@@ -130,6 +140,7 @@
         '<h3><a href="' + esc(a.url) + '">' + esc(a.titolo) + "</a></h3>" +
         "<p>" + esc(a.descrizione) + "</p>" +
         (altri ? '<div class="cartellina-altro">' + altri + "</div>" : "") +
+        "</div>" +
         "</article>"
       );
     }).join("");

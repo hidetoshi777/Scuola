@@ -10,7 +10,7 @@ alwaysApply: true
 - Ogni attività in una **sottocartella** propria (es. `rotazione-terrestre/`, `parti-invariabili/`).
 - **Non cancellare** i lavori esistenti: si aggiungono nuove cartelle.
 - **Niente link** tra un lavoro e l’altro nella navigazione dei siti.
-- **Scaffale obbligatorio**: ogni nuova attività web va aggiunta a `js/data.js` in `ATTIVITA_WEB` (homepage Lo scaffale del Prof.).
+- **Scaffale obbligatorio**: ogni nuova attività web va aggiunta a `js/data.js` in `ATTIVITA_WEB` (homepage Lo scaffale del Prof.), con campo **`copertina`** = percorso di `img/og-share.jpg` (o `.png`) — compare sulla cartellina.
 - In ogni lavoro per la scuola, nel footer (o credito visibile), includi sempre: **Realizzato dal Prof. Rossano Bella**.
 - Nei lavori Scuola, **preferisci il MCP Canva** per grafiche, template, export e materiali già presenti nell’account Canva: consultalo e riusalo prima di creare da zero.
 - Se esiste un **Canva del Prof.** sull’argomento, **inseriscilo in una sezione dedicata** del lavoro (export/galleria), non lasciarlo fuori.
@@ -21,10 +21,12 @@ alwaysApply: true
 - **Gioco = didattico**: deve far ripassare contenuti. Ok formati diversi dal quiz (memory, ordina eventi…). **No arcade puro** senza apprendimento. Se manca un’alternativa solida → **domande/risposte**.
 - **Canva**: sezione dedicata + export; viewer con **schermo intero**.
 - **Mappe e personaggi storici**: farli **realistici** (contorni geografici veri; ritratti riconoscibili), non schematici/generici.
+- **Anteprima OG (obbligatoria)**: su ogni `index.html` (scaffale + attività) meta Open Graph + Twitter con `og:image` assoluta HTTPS (`img/og-share.jpg` ~1200×630, o `.png`). La stessa immagine alimenta la cartellina sullo scaffale via `ATTIVITA_WEB.copertina`.
+- **Zoom fumetto**: includi `../js/fumetto-zoom.js` (FumettoZoom) su ogni `fumetto.html`; reset al cambio tavola; con zoom attivo niente swipe di pagina.
 
 ## Dopo ogni nuova attività
 
-1. Aggiungi l’attività a `js/data.js` (`ATTIVITA_WEB`) — Lo scaffale.
+1. Aggiungi l’attività a `js/data.js` (`ATTIVITA_WEB`, incluso `copertina`) — Lo scaffale.
 2. Apri una pull request e **fai tu il merge** su `main` (non aspettare l’utente).
 3. Pubblica su GitHub (`hidetoshi777/Scuola`) con `git push github main`.
 4. Il sito pubblico è `https://hidetoshi777.github.io/Scuola/` seguito dal percorso della cartella (es. `/parti-invariabili/`).
