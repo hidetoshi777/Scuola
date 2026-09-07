@@ -50,7 +50,6 @@ window.KantData = {
       pin: "CAST",
       x: 18,
       y: 28,
-      img: "img/tavole/02-fenomeno.jpg",
       tipo: "quiz",
       domanda: "Secondo Kant, conosciamo la cosa «in sé»?",
       opzioni: [
@@ -66,7 +65,6 @@ window.KantData = {
       pin: "OTT",
       x: 36,
       y: 18,
-      img: "img/scene/kant-ritratto.jpg",
       tipo: "quiz",
       domanda: "Cosa significa la «rivoluzione copernicana» di Kant?",
       opzioni: [
@@ -82,7 +80,6 @@ window.KantData = {
       pin: "BIB",
       x: 62,
       y: 32,
-      img: "img/tavole/03-giudizi.jpg",
       tipo: "quiz",
       domanda: "«7 + 5 = 12» per Kant è soprattutto…",
       opzioni: [
@@ -98,7 +95,6 @@ window.KantData = {
       pin: "MER",
       x: 78,
       y: 55,
-      img: "img/tavole/04-dovere.jpg",
       tipo: "morale",
       domanda: "Il bottegaio ti dà resto in più. Cosa chiede l’imperativo categorico?",
       opzioni: [
@@ -117,7 +113,6 @@ window.KantData = {
       pin: "PON",
       x: 54,
       y: 76,
-      img: "img/tavole/04-dovere.jpg",
       tipo: "morale",
       domanda: "Un amico chiede di mentire per coprirlo. Quale risposta è più kantiana?",
       opzioni: [
@@ -133,7 +128,6 @@ window.KantData = {
       pin: "★",
       x: 24,
       y: 68,
-      img: "img/tavole/01-cieli.jpg",
       tipo: "quiz",
       domanda: "Nella citazione finale, cielo stellato e legge morale indicano…",
       opzioni: [

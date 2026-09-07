@@ -17,7 +17,6 @@
   const hudScore = document.getElementById("hud-score");
   const card = document.getElementById("stop-card");
   const stage = document.getElementById("stop-stage");
-  const stopImg = document.getElementById("stop-img");
 
   let index = 0;
   let score = 0;
@@ -62,10 +61,6 @@
     meta.textContent = stop.tipo === "morale" ? "Legge naturale" : "Domanda di ripasso";
     title.textContent = stop.luogo;
     question.textContent = stop.domanda;
-    if (stopImg && stop.img) {
-      stopImg.src = stop.img;
-      stopImg.alt = `Scena: ${stop.luogo}`;
-    }
     list.innerHTML = "";
 
     const opzioni = window.mescola ? window.mescola(stop.opzioni) : stop.opzioni;

@@ -63,7 +63,6 @@ window.TommasoData = {
       pin: "1",
       x: 12,
       y: 55,
-      img: "img/tavole/01-incontro.jpg",
       tipo: "quiz",
       domanda: "Secondo Tommaso, fede e ragione…",
       opzioni: [
@@ -79,7 +78,6 @@ window.TommasoData = {
       pin: "I",
       x: 28,
       y: 28,
-      img: "img/tavole/02-prime-vie.jpg",
       tipo: "quiz",
       domanda: "La Via del moto conclude a…",
       opzioni: [
@@ -95,7 +93,6 @@ window.TommasoData = {
       pin: "II",
       x: 48,
       y: 18,
-      img: "img/tavole/02-prime-vie.jpg",
       tipo: "quiz",
       domanda: "La Via della causa efficiente porta a…",
       opzioni: [
@@ -111,7 +108,6 @@ window.TommasoData = {
       pin: "III",
       x: 68,
       y: 32,
-      img: "img/tavole/03-altre-vie.jpg",
       tipo: "quiz",
       domanda: "La Via della contingenza distingue…",
       opzioni: [
@@ -127,7 +123,6 @@ window.TommasoData = {
       pin: "IV",
       x: 82,
       y: 55,
-      img: "img/tavole/03-altre-vie.jpg",
       tipo: "quiz",
       domanda: "Gradi di perfezione e finalità del mondo indicano…",
       opzioni: [
@@ -143,7 +138,6 @@ window.TommasoData = {
       pin: "LN",
       x: 55,
       y: 78,
-      img: "img/tavole/04-legge-naturale.jpg",
       tipo: "morale",
       domanda: "Il primo precetto della legge naturale, per Tommaso, è…",
       opzioni: [
