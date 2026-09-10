@@ -2,6 +2,10 @@
 
 Materiali didattici interattivi, ognuno in una **sottocartella autonoma**.
 
+## Contesto sostegno (locale)
+
+Per PEI e lavori su alunni specifici dell’a.s. **2026/2027** (Ferraris Acireale, professionale AM): leggi e aggiorna il file locale **`SOSTEGNO_2026_2027.md`** (gitignored, non pubblicare). Non mettere nomi o dati sensibili nel sito o nei commit.
+
 ## Organizzazione
 
 - Ogni attività vive in una propria cartella (es. `rotazione-terrestre/`, `parti-invariabili/`).
@@ -63,6 +67,7 @@ Sito base: `https://hidetoshi777.github.io/Scuola/`
 | Manzoni · Archivio del manoscritto | https://hidetoshi777.github.io/Scuola/manzoni-promessi/ | [Fumetto](https://hidetoshi777.github.io/Scuola/manzoni-promessi/fumetto.html) · [Memory](https://hidetoshi777.github.io/Scuola/manzoni-promessi/gioco.html) |
 | Kant · I cieli stellati | https://hidetoshi777.github.io/Scuola/kant-cieli-stellati/ | [Fumetto](https://hidetoshi777.github.io/Scuola/kant-cieli-stellati/fumetto.html) · [Passeggiata](https://hidetoshi777.github.io/Scuola/kant-cieli-stellati/gioco.html) |
 | Tommaso · Le cinque vie | https://hidetoshi777.github.io/Scuola/tommaso-cinque-vie/ | [Fumetto](https://hidetoshi777.github.io/Scuola/tommaso-cinque-vie/fumetto.html) · [Cammino](https://hidetoshi777.github.io/Scuola/tommaso-cinque-vie/gioco.html) |
+| Kierkegaard · Aut-aut | https://hidetoshi777.github.io/Scuola/kierkegaard-aut-aut/ | [Fumetto](https://hidetoshi777.github.io/Scuola/kierkegaard-aut-aut/fumetto.html) · [Aut-aut](https://hidetoshi777.github.io/Scuola/kierkegaard-aut-aut/gioco.html) |
 
 I vecchi link alla radice (`/gioco.html`, ecc.) reindirizzano ancora alla rotazione terrestre.
 

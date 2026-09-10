@@ -110,6 +110,21 @@ window.ATTIVITA_WEB = [
       { label: "Cammino", url: "tommaso-cinque-vie/gioco.html" },
     ],
   },
+  {
+    titolo: "Kierkegaard — Aut-aut",
+    materia: "Filosofia",
+    classe: "Secondo grado",
+    descrizione: "Studio su Kierkegaard e l’esistenzialismo: stadi estetico/etico/religioso, angoscia, salto della fede; fumetto, laboratorio e percorso Aut-aut.",
+    url: "kierkegaard-aut-aut/",
+    copertina: "kierkegaard-aut-aut/img/og-share.jpg",
+    tinta: "filosofia",
+    adesivo: "st-gufo",
+    extra: [
+      { label: "Fumetto", url: "kierkegaard-aut-aut/fumetto.html" },
+      { label: "Laboratorio", url: "kierkegaard-aut-aut/laboratorio.html" },
+      { label: "Aut-aut", url: "kierkegaard-aut-aut/gioco.html" },
+    ],
+  },
 ];
 
 /* Lavori Canva per materia. pp = numero di pagine, id = design ID Canva.
