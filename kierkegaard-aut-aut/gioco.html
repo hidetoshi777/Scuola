@@ -10,8 +10,8 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500;1,600&family=IBM+Plex+Mono:wght@400;500&family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/styles.css">
-  <link rel="stylesheet" href="css/gioco.css">
+  <link rel="stylesheet" href="css/styles.css?v=2">
+  <link rel="stylesheet" href="css/gioco.css?v=2">
 </head>
 <body class="page-gioco">
   <a class="skip-link visually-hidden" href="#contenuto">Salta al contenuto</a>
@@ -32,11 +32,11 @@
         <button type="button" class="btn btn-secondary" id="btn-restart">Ricomincia</button>
       </div>
 
-      <div class="city-map" id="city-map" aria-label="Mappa schematica di Copenaghen">
+      <div class="city-map" id="city-map" aria-label="Mappa di Copenaghen: percorso Aut-aut">
+        <img class="city-map-bg" src="img/mappa-copenaghen.jpg" alt="" width="1456" height="816" decoding="async">
         <svg viewBox="0 0 400 275" aria-hidden="true">
-          <path class="river" d="M0 170 C 70 130, 130 200, 210 160 S 320 100, 400 140"/>
-          <path class="route" d="M70 165 L140 110 L210 150 L280 95 L330 185 L120 70"/>
-          <path class="route" d="M210 150 L250 200" />
+          <path class="route-glow" d="M48 215 C 90 170, 100 145, 112 143 S 160 200, 192 187 S 230 110, 248 105 S 290 155, 312 160 S 340 100, 360 77"/>
+          <path class="route" d="M48 215 C 90 170, 100 145, 112 143 S 160 200, 192 187 S 230 110, 248 105 S 290 155, 312 160 S 340 100, 360 77"/>
         </svg>
       </div>
 

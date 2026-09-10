@@ -32,13 +32,35 @@
 .city-map {
   position: relative;
   border: 1px solid var(--hair);
-  background:
-    radial-gradient(circle at 20% 30%, color-mix(in srgb, var(--mist) 18%, transparent), transparent 40%),
-    radial-gradient(circle at 75% 65%, color-mix(in srgb, var(--amber) 12%, transparent), transparent 42%),
-    var(--fog);
-  aspect-ratio: 16 / 11;
+  background: #121820;
+  aspect-ratio: 16 / 9;
   margin-bottom: 1rem;
   overflow: hidden;
+}
+
+.city-map-bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 55%;
+  filter: saturate(0.9) contrast(1.05) brightness(0.88);
+  z-index: 0;
+}
+
+.city-map::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background: linear-gradient(
+    180deg,
+    rgba(14, 12, 11, 0.2) 0%,
+    rgba(14, 12, 11, 0.15) 45%,
+    rgba(14, 12, 11, 0.45) 100%
+  );
 }
 
 .city-map svg {
@@ -46,40 +68,47 @@
   inset: 0;
   width: 100%;
   height: 100%;
+  z-index: 2;
+  pointer-events: none;
 }
 
-.city-map .river {
+.city-map .route-glow {
   fill: none;
-  stroke: color-mix(in srgb, var(--mist) 65%, transparent);
-  stroke-width: 10;
+  stroke: rgba(212, 165, 116, 0.35);
+  stroke-width: 7;
   stroke-linecap: round;
+  stroke-linejoin: round;
 }
 
 .city-map .route {
   fill: none;
-  stroke: color-mix(in srgb, var(--amber) 55%, transparent);
-  stroke-width: 2;
-  stroke-dasharray: 5 7;
+  stroke: #e8c48a;
+  stroke-width: 2.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-dasharray: 1 0;
+  filter: drop-shadow(0 0 4px rgba(212, 165, 116, 0.45));
 }
 
 .map-pin {
   position: absolute;
   transform: translate(-50%, -50%);
   appearance: none;
-  border: 1px solid var(--hair);
-  background: var(--ink);
-  color: var(--mute);
+  border: 2px solid rgba(240, 235, 227, 0.55);
+  background: rgba(14, 12, 11, 0.82);
+  color: #f0ebe3;
   font-family: var(--font-mono);
-  font-size: 0.72rem;
-  letter-spacing: 0.03em;
-  width: 2.6rem;
-  height: 2.6rem;
+  font-size: 0.78rem;
+  font-weight: 600;
+  width: 2.35rem;
+  height: 2.35rem;
   border-radius: 50%;
   cursor: default;
-  padding: 0.15rem;
-  line-height: 1.05;
+  padding: 0;
+  line-height: 1;
   text-align: center;
-  z-index: 2;
+  z-index: 3;
+  backdrop-filter: blur(4px);
 }
 
 .map-pin.is-current {

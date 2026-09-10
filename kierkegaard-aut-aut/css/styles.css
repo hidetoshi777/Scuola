@@ -398,43 +398,45 @@ h2 {
 
 /* —— Studio —— */
 .study-head {
-  display: grid;
-  gap: 1rem;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: end;
+  gap: 0.85rem 1.1rem;
   margin-bottom: 1.25rem;
   padding-bottom: 1.15rem;
   border-bottom: 1px solid var(--hair);
 }
 
-@media (min-width: 640px) {
-  .study-head {
-    grid-template-columns: minmax(0, 1fr) 8rem;
-    align-items: end;
-    gap: 1.25rem;
-  }
+.study-head-text {
+  flex: 1 1 14rem;
+  min-width: 0;
 }
 
 .study-portrait {
+  flex: 0 0 auto;
   margin: 0;
   border: 1px solid var(--hair);
   background: var(--fog);
   overflow: hidden;
-  max-width: 8rem;
-  justify-self: start;
+  width: 6.75rem;
+  max-width: 6.75rem;
 }
 
 .study-portrait img {
   display: block;
-  width: 100%;
-  aspect-ratio: 3 / 4;
+  width: 6.75rem;
+  height: 8.5rem;
+  max-width: 100%;
   object-fit: cover;
-  object-position: 50% 18%;
+  object-position: 50% 12%;
 }
 
 .study-portrait figcaption {
-  padding: 0.35rem 0.45rem;
-  font-size: 0.72rem;
+  padding: 0.3rem 0.4rem;
+  font-size: 0.68rem;
   color: var(--mute);
   border-top: 1px solid var(--hair);
+  line-height: 1.2;
 }
 
 .study-toc {

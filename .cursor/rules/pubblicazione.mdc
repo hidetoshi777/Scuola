@@ -19,6 +19,7 @@ alwaysApply: true
 - **Tema scuro di default** nelle attività web; chiaro opzionale via toggle.
 - **Layout diversi (obbligatorio)**: ogni attività cambia composizione (non lo stesso template con colori nuovi).
 - **Gioco = didattico**: deve far ripassare contenuti. Ok formati diversi dal quiz (memory, ordina eventi…). **No arcade puro** senza apprendimento. Se manca un’alternativa solida → **domande/risposte**.
+- **Mappa / percorso di gioco**: sfondo a tema (immagine) + tracciato chiaro; niente sole linee SVG su fondo piatto.
 - **Canva**: sezione dedicata + export; viewer con **schermo intero**.
 - **Mappe e personaggi storici**: farli **realistici** (contorni geografici veri; ritratti riconoscibili), non schematici/generici.
 - **Anteprima OG (obbligatoria)**: su ogni `index.html` (scaffale + attività) meta Open Graph + Twitter con `og:image` assoluta HTTPS (`img/og-share.jpg` ~1200×630, o `.png`). La stessa immagine alimenta la cartellina sullo scaffale via `ATTIVITA_WEB.copertina`.
