@@ -23,11 +23,18 @@ alwaysApply: false
 - Studio **ricco e ordinato**: spiegazioni, esempi, contrasti — soprattutto in filosofia.
 - Layout leggibile (indice + capitoli lineari). Niente collage confusi.
 - «Ricorda così» sì, ma **dopo** paragrafi chiari con i contenuti da sapere.
+- Se manca un pezzo **canonico** del programma (es. Kant senza pace perpetua), **aggiungilo**.
 - **Ritratto in testata**: piccolo a lato del titolo (`max-width` ~7.5–8rem, colonna fissa su desktop). **Vietato** farlo alto a tutta larghezza / mezza pagina (come errore Kierkegaard prima del fix).
 - **Immagini in Imparare**: usa le vignette del fumetto **solo se chiariscono** lo studio. Altrimenti **non metterle**, oppure crea grafiche adatte allo studio (schemi, JPEG/GIF/animazioni didattiche). Non infilare tavole fumetto intere se appesantiscono la lettura.
 - Niente schede solo decorative con una riga di testo.
 
+## Home (obbligatorio)
+
+- Con hero/tavola dietro il testo: **scrim più forte** sotto la copia; titolo leggibile. Niente fumetto che invade la scritta.
+- Citazione ad hoc del personaggio/tema in home; stessa citazione sulla cartellina scaffale (`citazione` in `ATTIVITA_WEB`).
+
 ## Scaffale (obbligatorio)
 
 - Ogni nuova attività web va aggiunta a `js/data.js` in `ATTIVITA_WEB` (homepage Lo scaffale).
+- Campo **`citazione`** (stringa breve) per la cartellina.
 - Alza anche `?v=` su `js/data.js` in `index.html` se serve forzare il refresh cache.

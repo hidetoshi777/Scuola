@@ -127,6 +127,9 @@
           (i === 0 ? "eager" : "lazy") + '"' +
           (i === 0 ? ' fetchpriority="high"' : "") +
           ">" +
+          (a.citazione
+            ? '<figcaption class="cartellina-citazione"><q>' + esc(a.citazione) + "</q></figcaption>"
+            : "") +
           "</figure>"
         : "";
       return (

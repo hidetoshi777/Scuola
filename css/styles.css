@@ -365,6 +365,7 @@ h1 em {
   overflow: hidden;
   background: color-mix(in srgb, var(--tinta) 18%, var(--carta-cart));
   border-bottom: 1px solid var(--bordo);
+  position: relative;
 }
 .cartellina-copertina img {
   width: 100%;
@@ -372,6 +373,22 @@ h1 em {
   object-fit: cover;
   object-position: center;
   display: block;
+}
+.cartellina-citazione {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: 0;
+  padding: 0.65rem 0.75rem 0.7rem;
+  background: linear-gradient(180deg, transparent 0%, rgba(20, 16, 12, 0.82) 35%, rgba(20, 16, 12, 0.92) 100%);
+  color: #f7f3ea;
+  font-size: 0.82rem;
+  line-height: 1.35;
+  font-style: italic;
+}
+.cartellina-citazione q {
+  quotes: "«" "»";
 }
 .cartellina-corpo {
   display: flex;
