@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="color-scheme" content="dark light">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <title>Fumetto · Kierkegaard | Scuola</title>
+  <meta name="description" content="Fumetto didattico illustrato su Kierkegaard: sei tavole a più vignette con Nora a Copenaghen.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500;1,600&family=IBM+Plex+Mono:wght@400;500&family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/fumetto.css">
+</head>
+<body class="page-fumetto">
+  <a class="skip-link visually-hidden" href="#contenuto">Salta al contenuto</a>
+
+  <div class="shell">
+    <main id="contenuto" class="fumetto-main" tabindex="-1">
+      <header class="fumetto-intro">
+        <p class="kicker">Fumetto · sei tavole illustrate</p>
+        <h1>Con Nora a Copenaghen</h1>
+        <p class="lead">Più vignette per pagina. Nora interroga Kierkegaard: dagli stadi al salto, fino all’esistenzialismo.</p>
+      </header>
+
+      <section class="fumetto-reader" id="fumetto-stage" aria-roledescription="fumetto" aria-label="Kierkegaard a fumetti">
+        <div class="fumetto-toolbar">
+          <p class="fumetto-status">Tavola <span id="fumetto-num">1</span> di 6</p>
+          <button type="button" class="btn btn-secondary fumetto-full" id="fumetto-fullscreen" aria-pressed="false">Schermo intero</button>
+        </div>
+
+        <div class="fumetto-viewport" id="fumetto-viewport">
+          <figure class="fumetto-page is-active" data-page="1">
+            <img src="img/tavole/01-incontro.jpg" alt="Tavola 1: Nora incontra Kierkegaard nella nebbia di Copenaghen" width="864" height="1152" fetchpriority="high">
+          </figure>
+          <figure class="fumetto-page" data-page="2" aria-hidden="true">
+            <img src="img/tavole/02-estetico.jpg" alt="Tavola 2: lo stadio estetico e la noia" width="864" height="1152" loading="lazy">
+          </figure>
+          <figure class="fumetto-page" data-page="3" aria-hidden="true">
+            <img src="img/tavole/03-etico.jpg" alt="Tavola 3: lo stadio etico e la responsabilità" width="864" height="1152" loading="lazy">
+          </figure>
+          <figure class="fumetto-page" data-page="4" aria-hidden="true">
+            <img src="img/tavole/04-angoscia.jpg" alt="Tavola 4: angoscia e libertà" width="864" height="1152" loading="lazy">
+          </figure>
+          <figure class="fumetto-page" data-page="5" aria-hidden="true">
+            <img src="img/tavole/05-salto.jpg" alt="Tavola 5: stadio religioso e salto della fede" width="864" height="1152" loading="lazy">
+          </figure>
+          <figure class="fumetto-page" data-page="6" aria-hidden="true">
+            <img src="img/tavole/06-ricorda.jpg" alt="Tavola 6: Sartre, Camus e punti da ricordare" width="864" height="1152" loading="lazy">
+          </figure>
+        </div>
+
+        <p class="fumetto-caption" id="fumetto-caption" aria-live="polite"></p>
+
+        <div class="fumetto-controls">
+          <button type="button" class="btn btn-secondary fumetto-nav" id="fumetto-prev" disabled>← Indietro</button>
+          <div class="fumetto-dots" id="fumetto-dots" role="tablist" aria-label="Tavole"></div>
+          <button type="button" class="btn btn-primary fumetto-nav" id="fumetto-next">Avanti →</button>
+        </div>
+        <p class="fumetto-hint">Scorri o tocca i lati. Pizzica o doppio tap per ingrandire. «Schermo intero» sul telefono. Esc per uscire.</p>
+      </section>
+
+      <div class="hero-actions" style="margin-top:1.2rem">
+        <a class="btn btn-primary" href="laboratorio.html">Laboratorio</a>
+        <a class="btn btn-secondary" href="gioco.html">Aut-aut</a>
+      </div>
+    </main>
+
+    <footer class="site-footer">
+      <div class="wrap">
+        <p>Fumetto didattico in sei tavole illustrate. Realizzato dal Prof. Rossano Bella.</p>
+      </div>
+    </footer>
+  </div>
+
+  <nav class="dock" aria-label="Navigazione">
+    <a class="dock-brand" href="index.html">K</a>
+    <div class="dock-nav">
+      <a href="index.html">Home</a>
+      <a href="imparare.html">Studio</a>
+      <a href="fumetto.html" aria-current="page">Fumetto</a>
+      <a href="laboratorio.html">Lab</a>
+      <a href="gioco.html">Aut-aut</a>
+    </div>
+    <button type="button" class="theme-toggle" data-theme-toggle aria-pressed="false">Chiaro</button>
+  </nav>
+
+  <script src="js/common.js" defer></script>
+  <script src="../js/fumetto-zoom.js" defer></script>
+  <script src="js/fumetto.js" defer></script>
+</body>
+</html>

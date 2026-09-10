@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Kierkegaard">
+  <rect width="64" height="64" rx="10" fill="#0e0c0b"/>
+  <path d="M18 46 L32 18 L46 46" fill="none" stroke="#d4a574" stroke-width="2.2" stroke-linejoin="round"/>
+  <path d="M24 46h16" stroke="#8a9ba8" stroke-width="1.6" stroke-linecap="round"/>
+  <circle cx="32" cy="28" r="2.2" fill="#f0ebe3"/>
+</svg>
