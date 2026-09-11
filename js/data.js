@@ -132,6 +132,22 @@ window.ATTIVITA_WEB = [
       { label: "Aut-aut", url: "kierkegaard-aut-aut/gioco.html" },
     ],
   },
+  {
+    titolo: "Logica — Induttivo e deduttivo",
+    materia: "Filosofia",
+    classe: "Secondo grado",
+    descrizione: "Basi della logica: metodo deduttivo e induttivo a confronto, con esempi, fumetto, laboratorio e prove; slide Canva dalle scienze del Seicento.",
+    citazione: "Se le premesse sono vere, lo è anche la conclusione.",
+    url: "logica-induttivo-deduttivo/",
+    copertina: "logica-induttivo-deduttivo/img/og-share.jpg",
+    tinta: "filosofia",
+    adesivo: "st-gufo",
+    extra: [
+      { label: "Fumetto", url: "logica-induttivo-deduttivo/fumetto.html" },
+      { label: "Laboratorio", url: "logica-induttivo-deduttivo/laboratorio.html" },
+      { label: "Prove", url: "logica-induttivo-deduttivo/gioco.html" },
+    ],
+  },
 ];
 
 /* Lavori Canva per materia. pp = numero di pagine, id = design ID Canva.
