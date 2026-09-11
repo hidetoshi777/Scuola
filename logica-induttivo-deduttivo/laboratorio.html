@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="color-scheme" content="dark light">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <title>Laboratorio · Logica induttivo/deduttivo | Scuola</title>
+  <meta name="description" content="Classifica casi di ragionamento come deduttivi o induttivi.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600;700&family=Syne:wght@600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <a class="skip-link visually-hidden" href="#contenuto">Salta al contenuto</a>
+
+  <header class="lane-bar" aria-label="Navigazione">
+    <a class="lane-brand" href="index.html" aria-label="Home logica">
+      <span class="lane-chip lane-chip--ded">Deduttivo</span>
+      <span class="lane-chip lane-chip--ind">Induttivo</span>
+    </a>
+    <nav class="lane-nav">
+      <a href="index.html">Home</a>
+      <a href="imparare.html">Studio</a>
+      <a href="fumetto.html">Fumetto</a>
+      <a href="laboratorio.html" aria-current="page">Lab</a>
+      <a href="gioco.html">Prove</a>
+    </nav>
+    <button type="button" class="theme-toggle" data-theme-toggle aria-pressed="false">Chiaro</button>
+  </header>
+
+  <div class="shell">
+    <main id="contenuto" class="wrap page-pad" tabindex="-1">
+      <div class="lab-hero">
+        <div>
+          <p class="kicker">Esercizi</p>
+          <h1>Laboratorio a due cassoni</h1>
+          <p class="lead">Tocca una scheda, poi il metodo. Obiettivo: distinguere <strong>deduttivo</strong> e <strong>induttivo</strong>.</p>
+        </div>
+      </div>
+
+      <p class="kicker">Schede da collocare</p>
+      <div class="chip-pool" id="chip-pool" aria-label="Casi da classificare"></div>
+      <div class="dual-grid" id="dual-grid" role="group" aria-label="Due metodi di ragionamento"></div>
+
+      <div class="hero-actions">
+        <button type="button" class="btn btn-primary" id="lab-check">Controlla</button>
+        <button type="button" class="btn btn-secondary" id="lab-reset">Rimescola</button>
+      </div>
+      <div class="feedback" id="lab-feedback" hidden></div>
+
+      <p class="ricorda" style="margin-top:1.4rem">
+        <span>Nota didattica</span>
+        In dubbio: stai scendendo da una regola (deduttivo) o salendo dai casi (induttivo)? E la conclusione è necessaria o solo probabile?
+      </p>
+
+      <div class="hero-actions" style="margin-top:1.4rem">
+        <a class="btn btn-primary" href="gioco.html">Percorso Prove</a>
+        <a class="btn btn-secondary" href="imparare.html">Rivedi lo studio</a>
+      </div>
+    </main>
+
+    <footer class="site-footer">
+      <div class="wrap">
+        <p>Realizzato dal Prof. Rossano Bella.</p>
+      </div>
+    </footer>
+  </div>
+
+  <script src="js/data.js" defer></script>
+  <script src="js/common.js" defer></script>
+  <script src="js/laboratorio.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,204 @@
+/* Prove: mappa logica con sfondo tematico */
+
+.gioco-main {
+  width: min(100% - 1.25rem, 48rem);
+  margin-inline: auto;
+  padding: 1.25rem 0 2.25rem;
+}
+
+.gioco-top {
+  display: grid;
+  gap: 0.85rem;
+  margin-bottom: 1rem;
+}
+
+.gioco-hud {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.65rem 1.1rem;
+  align-items: center;
+  margin: 0.35rem 0 1rem;
+  color: var(--mute);
+  font-size: 0.9rem;
+  font-family: var(--font-mono);
+}
+
+.gioco-hud strong {
+  color: var(--text);
+  font-family: var(--font-display);
+  font-size: 1.05rem;
+}
+
+.city-map {
+  position: relative;
+  border: 1px solid var(--hair);
+  background: #121a18;
+  aspect-ratio: 16 / 9;
+  margin-bottom: 1rem;
+  overflow: hidden;
+}
+
+.city-map-bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 50%;
+  filter: saturate(0.85) contrast(1.05) brightness(0.82);
+  z-index: 0;
+}
+
+.city-map::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background: linear-gradient(
+    180deg,
+    rgba(8, 12, 10, 0.25) 0%,
+    rgba(8, 12, 10, 0.18) 45%,
+    rgba(8, 12, 10, 0.5) 100%
+  );
+}
+
+.city-map svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.city-map .route-glow {
+  fill: none;
+  stroke: rgba(62, 207, 207, 0.35);
+  stroke-width: 7;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.city-map .route {
+  fill: none;
+  stroke: #3ecfcf;
+  stroke-width: 2.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  filter: drop-shadow(0 0 4px rgba(62, 207, 207, 0.45));
+}
+
+.map-pin {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  appearance: none;
+  border: 2px solid rgba(216, 224, 214, 0.5);
+  background: rgba(8, 12, 10, 0.82);
+  color: #d8e0d6;
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  font-weight: 600;
+  width: 2.35rem;
+  height: 2.35rem;
+  border-radius: 50%;
+  cursor: default;
+  padding: 0;
+  line-height: 1;
+  text-align: center;
+  z-index: 3;
+  backdrop-filter: blur(4px);
+}
+
+.map-pin.is-current {
+  border-color: var(--amber);
+  color: #1a1206;
+  background: var(--amber);
+  box-shadow: 0 0 0 4px color-mix(in srgb, var(--amber) 25%, transparent);
+}
+
+.map-pin.is-done {
+  border-color: var(--ok);
+  color: var(--ok);
+}
+
+.map-pin.is-locked {
+  opacity: 0.4;
+}
+
+.stop-stage {
+  display: grid;
+  gap: 0.85rem;
+}
+
+.stop-card {
+  padding: 1rem 1.05rem 1.15rem;
+  border: 1px solid var(--hair);
+  background: color-mix(in srgb, var(--surface) 88%, transparent);
+}
+
+.stop-meta {
+  margin: 0 0 0.55rem;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--cyan);
+}
+
+.choice-list {
+  list-style: none;
+  margin: 0.75rem 0 0;
+  padding: 0;
+  display: grid;
+  gap: 0.5rem;
+}
+
+.choice-list button {
+  width: 100%;
+  text-align: left;
+  appearance: none;
+  border: 1px solid var(--hair);
+  background: var(--dust);
+  color: var(--text);
+  font-family: var(--font-body);
+  font-size: 0.94rem;
+  line-height: 1.4;
+  padding: 0.8rem 0.9rem;
+  cursor: pointer;
+  min-height: 3rem;
+  touch-action: manipulation;
+}
+
+.choice-list button:hover:not(:disabled) {
+  border-color: var(--cyan);
+}
+
+.choice-list button:disabled {
+  cursor: default;
+}
+
+.choice-list button.is-ok {
+  border-color: var(--ok);
+  background: color-mix(in srgb, var(--ok) 12%, transparent);
+}
+
+.choice-list button.is-bad {
+  border-color: var(--bad);
+  opacity: 0.85;
+}
+
+.gioco-end {
+  margin-top: 1.1rem;
+  padding: 1rem 1.05rem;
+  border: 1px solid var(--hair);
+  background: var(--surface);
+}
+
+@media (max-width: 520px) {
+  .map-pin {
+    width: 2.45rem;
+    height: 2.45rem;
+    font-size: 0.72rem;
+  }
+}

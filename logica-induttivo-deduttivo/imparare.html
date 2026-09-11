@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="color-scheme" content="dark light">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <title>Imparare · Logica induttivo/deduttivo | Scuola</title>
+  <meta name="description" content="Studio sul ragionamento deduttivo e induttivo: definizioni, direzione dell’inferenza, certezza vs probabilità, esempi dalle scienze e dalla medicina.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600;700&family=Syne:wght@600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body class="page-imparare">
+  <a class="skip-link visually-hidden" href="#contenuto">Salta al contenuto</a>
+
+  <header class="lane-bar" aria-label="Navigazione">
+    <a class="lane-brand" href="index.html" aria-label="Home logica">
+      <span class="lane-chip lane-chip--ded">Deduttivo</span>
+      <span class="lane-chip lane-chip--ind">Induttivo</span>
+    </a>
+    <nav class="lane-nav">
+      <a href="index.html">Home</a>
+      <a href="imparare.html" aria-current="page">Studio</a>
+      <a href="fumetto.html">Fumetto</a>
+      <a href="laboratorio.html">Lab</a>
+      <a href="gioco.html">Prove</a>
+    </nav>
+    <button type="button" class="theme-toggle" data-theme-toggle aria-pressed="false">Chiaro</button>
+  </header>
+
+  <div class="shell">
+    <main id="contenuto" class="wrap page-pad study-layout" tabindex="-1">
+      <header class="study-head">
+        <div class="study-head-text">
+          <p class="kicker">Cuore del lavoro · logica</p>
+          <h1>Cosa sapere: induttivo e deduttivo</h1>
+          <p class="lead">Due modi di ragionare. Qui trovi definizioni, direzione dell’inferenza, forza della conclusione (certezza vs probabilità), premesse ed esempi — anche dalle slide sulle scienze del XVII secolo.</p>
+        </div>
+      </header>
+
+      <nav class="study-toc" aria-label="Indice di studio">
+        <a href="#due-metodi">1 Due metodi</a>
+        <a href="#deduttivo">2 Deduttivo</a>
+        <a href="#induttivo">3 Induttivo</a>
+        <a href="#direzione">4 Direzione</a>
+        <a href="#certezza">5 Certezza</a>
+        <a href="#premesse">6 Premesse</a>
+        <a href="#scienze">7 Scienze</a>
+        <a href="#medicina">8 Medicina</a>
+        <a href="#ricorda">9 Ricorda</a>
+        <a href="#canva-prof">Canva</a>
+      </nav>
+
+      <div class="study-flow">
+        <article class="study-chapter reveal" id="due-metodi">
+          <p class="study-num">Capitolo 1</p>
+          <h2>Due metodi, non «due opinioni»</h2>
+          <p>In logica (e nelle scienze) distinguiamo <strong>come</strong> si costruisce un ragionamento. Non è solo «avere ragione»: è capire se stai <em>scendendo</em> da una regola generale o <em>salendo</em> dai casi osservati.</p>
+          <div class="method-pair">
+            <div class="method-card" data-kind="deduttivo">
+              <span>Deduttivo</span>
+              Parti da premesse generali (o da una teoria) e arrivi a una conclusione sul caso concreto.
+            </div>
+            <div class="method-card" data-kind="induttivo">
+              <span>Induttivo</span>
+              Parti da osservazioni / esempi e proponi una regola o una previsione più ampia.
+            </div>
+          </div>
+          <p class="ricorda"><span>Ricorda così</span> Deduttivo = scendi. Induttivo = sali. Poi chiediti: la conclusione è <em>necessaria</em> o solo <em>probabile</em>?</p>
+        </article>
+
+        <article class="study-chapter reveal" id="deduttivo">
+          <p class="study-num">Capitolo 2</p>
+          <h2>Metodo deduttivo</h2>
+          <p>Nel <strong>ragionamento deduttivo</strong> la conclusione è già «contenuta» nelle premesse: se il ragionamento è <em>valido</em> e le premesse sono vere, la conclusione <strong>deve</strong> essere vera.</p>
+          <ul class="studio-list">
+            <li>Schema classico: <em>Tutti gli uomini sono mortali; Socrate è un uomo; quindi Socrate è mortale.</em></li>
+            <li>In matematica: da definizioni e teoremi ricavi conseguenze obbligate.</li>
+            <li>Citazione-guida: «Se le premesse sono vere, lo è anche la conclusione.»</li>
+          </ul>
+          <div class="contrast">
+            <p><strong>Attenzione</strong></p>
+            <p>Un ragionamento può essere <em>valido</em> (forma corretta) ma partire da premesse false → la conclusione non è affidabile. Validità ≠ verità delle premesse.</p>
+          </div>
+          <p class="study-link"><a href="fumetto.html">Nel fumetto · tavola 2</a></p>
+        </article>
+
+        <article class="study-chapter reveal" id="induttivo">
+          <p class="study-num">Capitolo 3</p>
+          <h2>Metodo induttivo</h2>
+          <p>Nel <strong>ragionamento induttivo</strong> parti da casi particolari e proponi una generalizzazione. È il cuore di molta scienza sperimentale: osservi, misuri, ripeti, poi azzardi una regola.</p>
+          <ul class="studio-list">
+            <li>Esempio storico-didattico: «Ho visto tanti cigni bianchi → tutti i cigni sono bianchi.» Utile… finché non compare un cigno nero.</li>
+            <li>L’induzione non dà la certezza della deduzione formale: dà <strong>probabilità</strong> (più o meno forte secondo i dati).</li>
+            <li>Un campione piccolo o sbilanciato (solo i compagni alti della classe) rende la generalizzazione debole.</li>
+          </ul>
+          <p class="ricorda"><span>Ricorda così</span> Induzione = dai fatti alla regola. Sempre aperta a nuovi controesempi.</p>
+          <p class="study-link"><a href="fumetto.html">Nel fumetto · tavola 3</a></p>
+        </article>
+
+        <article class="study-chapter reveal" id="direzione">
+          <p class="study-num">Capitolo 4</p>
+          <h2>Direzione dell’inferenza</h2>
+          <p>Una domanda semplice: <em>dove vai?</em></p>
+          <div class="arrow-row" aria-label="Direzioni">
+            <span class="arrow-pill arrow-pill--ded">Deduttivo → generale → particolare</span>
+            <span class="arrow-pill arrow-pill--ind">Induttivo → particolare → generale</span>
+          </div>
+          <ul class="studio-list">
+            <li><strong>Deduttivo:</strong> dalla legge / definizione al caso (es. «l’acqua pura a livello del mare bolle a 100 °C; questa è acqua pura…»).</li>
+            <li><strong>Induttivo:</strong> da molti casi a una previsione o a una ipotesi (es. «in 800 pazienti su 1000 il farmaco ha funzionato…»).</li>
+          </ul>
+          <div class="contrast">
+            <p><strong>Non confondere</strong></p>
+            <p>«Partire dai fatti» non significa automaticamente «avere ragione». I fatti vanno letti bene; la generalizzazione può essere troppo larga.</p>
+          </div>
+        </article>
+
+        <article class="study-chapter reveal" id="certezza">
+          <p class="study-num">Capitolo 5</p>
+          <h2>Certezza vs probabilità</h2>
+          <p>Qui si decide spesso la verifica.</p>
+          <ul class="studio-list">
+            <li><strong>Deduzione valida + premesse vere</strong> → conclusione <em>certa</em> (necessaria).</li>
+            <li><strong>Induzione</strong> → conclusione <em>probabile</em>: può essere fortissima (tanti dati, controlli) o debolissima (pochi esempi).</li>
+            <li>In classe: un teorema non si «prova» contando esempi a caso; un’ipotesi scientifica sì, si costruisce e si mette alla prova con i dati.</li>
+          </ul>
+          <p class="ricorda"><span>Ricorda così</span> Deduttivo ≈ necessità. Induttivo ≈ probabilità.</p>
+        </article>
+
+        <article class="study-chapter reveal" id="premesse">
+          <p class="study-num">Capitolo 6</p>
+          <h2>Premesse, conclusione, errore tipico</h2>
+          <p>Ogni ragionamento ha pezzi: <strong>premesse</strong> (ciò che assumi) e <strong>conclusione</strong> (ciò che ne ricavi). Se le premesse sono confuse, anche la forma «bella» non salva il contenuto.</p>
+          <ul class="studio-list">
+            <li>Chiediti: le premesse sono esplicite? Sono accettabili? Sono complete?</li>
+            <li>Errore tipico: trattare un’induzione debole come se fosse una deduzione («quindi è sicuro al 100%»).</li>
+            <li>Altro errore: partire da una regola generale falsa e «dedurre» conseguenze che sembrano logiche.</li>
+          </ul>
+          <p class="study-link"><a href="fumetto.html">Nel fumetto · tavola 4</a></p>
+        </article>
+
+        <article class="study-chapter reveal" id="scienze">
+          <p class="study-num">Capitolo 7</p>
+          <h2>Scienze del XVII secolo e i due metodi</h2>
+          <p>Nelle slide del Prof. («Lo sviluppo delle scienze nel XVII secolo») i metodi entrano nel racconto della modernità scientifica: osservazione, prova, discussione del metodo. Giordano Bruno e il clima culturale dell’epoca aiutano a capire perché <em>come</em> si ragiona diventa una questione pubblica, non solo scolastica.</p>
+          <ul class="timeline">
+            <li><time>Contesto</time><span>Nuove scienze: non basta citare autorità; contano prova, esperienza, modello.</span></li>
+            <li><time>Deduzione</time><span>Modelli e conseguenze logiche (matematica, geometria della natura).</span></li>
+            <li><time>Induzione</time><span>Dati, esperimenti, generalizzazioni da controllare.</span></li>
+          </ul>
+          <p class="ricorda"><span>In pratica</span> La scienza moderna usa spesso <em>entrambi</em>: indurre un’ipotesi dai fatti, poi dedurre conseguenze da verificare.</p>
+          <p class="study-link"><a href="#canva-prof">Vai alle slide Canva</a></p>
+        </article>
+
+        <article class="study-chapter reveal" id="medicina">
+          <p class="study-num">Capitolo 8</p>
+          <h2>Esempio: medicina e farmaci</h2>
+          <p>Un farmaco testato su molti pazienti: se funziona spesso, è <strong>ragionevole</strong> pensare che funzioni anche sul prossimo caso simile. Non è però la certezza di un teorema: restano eccezioni, dosi, condizioni, effetti collaterali.</p>
+          <ul class="studio-list">
+            <li>I dati clinici → induzione (probabilità).</li>
+            <li>Da una linea guida già accettata ricavi indicazioni per un paziente concreto → spesso schema più vicino alla deduzione applicativa.</li>
+            <li>Didattica: non «la scienza è solo induttiva» e non «solo deduttiva»: conta sapere <em>quale passo</em> stai facendo.</li>
+          </ul>
+          <p class="study-link"><a href="fumetto.html">Nel fumetto · tavola 5</a></p>
+        </article>
+
+        <article class="study-chapter reveal" id="ricorda">
+          <p class="study-num">Capitolo 9</p>
+          <h2>Ricorda così (prima della verifica)</h2>
+          <ul class="studio-list">
+            <li><strong>Deduttivo</strong> — generale → particolare; se valido e premesse vere → conclusione certa.</li>
+            <li><strong>Induttivo</strong> — particolare → generale; conclusione probabile, aperta a controesempi.</li>
+            <li><strong>Premesse</strong> — senza basi chiare il ragionamento vacilla.</li>
+            <li><strong>Scienze</strong> — spesso: dati → ipotesi (induzione) → conseguenze da provare (deduzione).</li>
+            <li><strong>Medicina</strong> — evidenze = probabilità utile, non teorema.</li>
+          </ul>
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="laboratorio.html">Laboratorio a due cassoni</a>
+            <a class="btn btn-secondary" href="gioco.html">Percorso Prove</a>
+          </div>
+        </article>
+      </div>
+
+      <section class="canva-section reveal" id="canva-prof" aria-labelledby="h-canva">
+        <p class="kicker">Materiale di classe</p>
+        <h2 id="h-canva">Le slide Canva del Prof.</h2>
+        <p class="lead">Da «Lo sviluppo delle scienze nel XVII secolo»: Bruno e i metodi deduttivo / induttivo. Quattro slide da sfogliare come in classe.</p>
+
+        <div class="canva-viewer" data-canva-viewer>
+          <div class="canva-stage">
+            <img
+              id="canva-slide"
+              src="img/canva/slide-01.jpg"
+              alt="Slide 1 di 4: Lo sviluppo delle scienze nel XVII secolo — Bruno e metodi deduttivo/induttivo"
+              width="1920"
+              height="1080"
+              decoding="async"
+            >
+          </div>
+          <div class="canva-controls">
+            <button type="button" class="btn btn-secondary" id="canva-prev" aria-label="Slide precedente">←</button>
+            <p class="canva-counter" id="canva-counter" aria-live="polite">1 / 4</p>
+            <button type="button" class="btn btn-secondary" id="canva-next" aria-label="Slide successiva">→</button>
+            <button type="button" class="btn btn-secondary" id="canva-fullscreen" aria-pressed="false">Schermo intero</button>
+          </div>
+          <div class="canva-thumbs" role="list" aria-label="Anteprime slide"></div>
+        </div>
+
+        <noscript>
+          <div class="canva-gallery">
+            <img src="img/canva/slide-01.jpg" alt="Slide 1" width="1920" height="1080" loading="lazy">
+            <img src="img/canva/slide-02.jpg" alt="Slide 2" width="1920" height="1080" loading="lazy">
+            <img src="img/canva/slide-03.jpg" alt="Slide 3" width="1920" height="1080" loading="lazy">
+            <img src="img/canva/slide-04.jpg" alt="Slide 4" width="1920" height="1080" loading="lazy">
+          </div>
+        </noscript>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="wrap">
+        <p>Realizzato dal Prof. Rossano Bella.</p>
+      </div>
+    </footer>
+  </div>
+
+  <script src="js/common.js" defer></script>
+  <script src="js/imparare.js" defer></script>
+</body>
+</html>

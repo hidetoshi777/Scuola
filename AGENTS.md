@@ -72,6 +72,7 @@ Sito base: `https://hidetoshi777.github.io/Scuola/`
 | Kant · I cieli stellati | https://hidetoshi777.github.io/Scuola/kant-cieli-stellati/ | [Fumetto](https://hidetoshi777.github.io/Scuola/kant-cieli-stellati/fumetto.html) · [Passeggiata](https://hidetoshi777.github.io/Scuola/kant-cieli-stellati/gioco.html) |
 | Tommaso · Le cinque vie | https://hidetoshi777.github.io/Scuola/tommaso-cinque-vie/ | [Fumetto](https://hidetoshi777.github.io/Scuola/tommaso-cinque-vie/fumetto.html) · [Cammino](https://hidetoshi777.github.io/Scuola/tommaso-cinque-vie/gioco.html) |
 | Kierkegaard · Aut-aut | https://hidetoshi777.github.io/Scuola/kierkegaard-aut-aut/ | [Fumetto](https://hidetoshi777.github.io/Scuola/kierkegaard-aut-aut/fumetto.html) · [Aut-aut](https://hidetoshi777.github.io/Scuola/kierkegaard-aut-aut/gioco.html) |
+| Logica · Induttivo e deduttivo | https://hidetoshi777.github.io/Scuola/logica-induttivo-deduttivo/ | [Fumetto](https://hidetoshi777.github.io/Scuola/logica-induttivo-deduttivo/fumetto.html) · [Prove](https://hidetoshi777.github.io/Scuola/logica-induttivo-deduttivo/gioco.html) |
 
 I vecchi link alla radice (`/gioco.html`, ecc.) reindirizzano ancora alla rotazione terrestre.
 
