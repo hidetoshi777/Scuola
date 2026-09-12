@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="color-scheme" content="dark light">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <title>Laboratorio · Mazzini · Giovane Italia | Scuola</title>
+  <meta name="description" content="Classifica schede su Mazzini, Cavour e Garibaldi: protagonisti dell’Unità d’Italia.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;600;700&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <a class="skip-link visually-hidden" href="#contenuto">Salta al contenuto</a>
+
+  <aside class="manifesto-panel" aria-label="Navigazione manifesto">
+    <div class="manifesto-tricolor" aria-hidden="true"><span></span><span></span><span></span></div>
+    <a class="manifesto-brand" href="index.html">Mazzini<small>Giovane Italia</small></a>
+    <nav class="manifesto-nav">
+      <a href="index.html">Home</a>
+      <a href="imparare.html">Studio</a>
+      <a href="fumetto.html">Fumetto</a>
+      <a href="laboratorio.html" aria-current="page">Lab</a>
+      <a href="gioco.html">Battaglia</a>
+    </nav>
+    <button type="button" class="theme-toggle" data-theme-toggle aria-pressed="false">Chiaro</button>
+    <p class="manifesto-foot">Dio e il Popolo</p>
+  </aside>
+
+  <div class="shell">
+    <main id="contenuto" class="wrap page-pad" tabindex="-1">
+      <div class="lab-hero">
+        <div>
+          <p class="kicker">Esercizi</p>
+          <h1>Laboratorio dei protagonisti</h1>
+          <p class="lead">Tocca una scheda, poi il nome. Obiettivo: distinguere <strong>Mazzini</strong>, <strong>Cavour</strong> e <strong>Garibaldi</strong>.</p>
+        </div>
+      </div>
+
+      <p class="kicker">Schede da collocare</p>
+      <div class="chip-pool" id="chip-pool" aria-label="Fatti da classificare"></div>
+      <div class="tri-grid dual-grid" id="dual-grid" role="group" aria-label="Tre protagonisti del Risorgimento"></div>
+
+      <div class="hero-actions">
+        <button type="button" class="btn btn-primary" id="lab-check">Controlla</button>
+        <button type="button" class="btn btn-secondary" id="lab-reset">Rimescola</button>
+      </div>
+      <div class="feedback" id="lab-feedback" hidden></div>
+
+      <p class="ricorda" style="margin-top:1.4rem">
+        <span>Nota didattica</span>
+        In dubbio: idea/repubblica/esilio → Mazzini; diplomazia/Piemonte → Cavour; azione militare/Mille → Garibaldi.
+      </p>
+
+      <div class="hero-actions" style="margin-top:1.4rem">
+        <a class="btn btn-primary" href="gioco.html">Battaglia Metternich / Radetzky</a>
+        <a class="btn btn-secondary" href="imparare.html">Rivedi lo studio</a>
+      </div>
+    </main>
+
+    <footer class="site-footer">
+      <div class="wrap">
+        <p>Realizzato dal Prof. Rossano Bella.</p>
+      </div>
+    </footer>
+  </div>
+
+  <script src="js/data.js" defer></script>
+  <script src="js/common.js" defer></script>
+  <script src="js/laboratorio.js" defer></script>
+</body>
+</html>

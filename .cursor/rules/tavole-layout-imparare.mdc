@@ -33,6 +33,10 @@ alwaysApply: false
 - Con hero/tavola dietro il testo: **scrim più forte** sotto la copia; titolo leggibile. Niente fumetto che invade la scritta.
 - Citazione ad hoc del personaggio/tema in home; stessa citazione sulla cartellina scaffale (`citazione` in `ATTIVITA_WEB`).
 
+## Storia / personaggi (obbligatorio)
+
+- Nei giochi e nei fumetti: **figure ed eventi reali** (Metternich, Radetzky…), non allegorie generiche al posto dei nomi storici.
+
 ## Scaffale (obbligatorio)
 
 - Ogni nuova attività web va aggiunta a `js/data.js` in `ATTIVITA_WEB` (homepage Lo scaffale).
