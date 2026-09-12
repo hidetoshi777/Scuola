@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="color-scheme" content="dark light">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <title>Battaglia · Mazzini · Giovane Italia | Scuola</title>
+  <meta name="description" content="Due battaglie didattiche: Mazzini contro Metternich e Radetzky. Ogni attacco è una domanda sul Risorgimento.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;600;700&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/gioco.css">
+</head>
+<body class="page-gioco">
+  <a class="skip-link visually-hidden" href="#contenuto">Salta al contenuto</a>
+
+  <aside class="manifesto-panel" aria-label="Navigazione manifesto">
+    <div class="manifesto-tricolor" aria-hidden="true"><span></span><span></span><span></span></div>
+    <a class="manifesto-brand" href="index.html">Mazzini<small>Giovane Italia</small></a>
+    <nav class="manifesto-nav">
+      <a href="index.html">Home</a>
+      <a href="imparare.html">Studio</a>
+      <a href="fumetto.html">Fumetto</a>
+      <a href="laboratorio.html">Lab</a>
+      <a href="gioco.html" aria-current="page">Battaglia</a>
+    </nav>
+    <button type="button" class="theme-toggle" data-theme-toggle aria-pressed="false">Chiaro</button>
+    <p class="manifesto-foot">Dio e il Popolo</p>
+  </aside>
+
+  <div class="shell">
+    <main id="contenuto" class="battle-app" tabindex="-1">
+      <section class="battle-intro" id="battle-intro">
+        <p class="kicker">Gioco didattico · 2 battaglie</p>
+        <h1>Contro l’Austria</h1>
+        <p>Sei Mazzini. Affronti prima <strong>Metternich</strong> (Restaurazione e censura), poi <strong>Radetzky</strong> (forza militare nel Lombardo-Veneto).</p>
+        <p>Ogni <em>Attacca</em> o <em>Idea</em> apre una domanda: risposta giusta = danno; sbagliata = il nemico reagisce.</p>
+        <div class="hero-actions">
+          <button type="button" class="btn btn-primary" id="battle-start">Inizia vs Metternich</button>
+          <a class="btn btn-secondary" href="imparare.html">Prima studio</a>
+        </div>
+      </section>
+
+      <section class="battle-between" id="battle-between" hidden>
+        <h2>Metternich battuto</h2>
+        <p>Le idee della Giovane Italia incrinano l’ordine della Restaurazione. Ora tocca al generale: <strong>Radetzky</strong> aspetta nel Lombardo-Veneto.</p>
+        <div class="hero-actions">
+          <button type="button" class="btn btn-primary" id="battle-next">Battaglia vs Radetzky</button>
+        </div>
+      </section>
+
+      <section class="battle-stage-wrap" id="battle-stage-wrap" hidden>
+        <div class="battle-stage" id="battle-stage" role="img" aria-label="Campo di battaglia">
+          <div class="battle-actor battle-actor--enemy">
+            <div class="hp-block">
+              <strong id="enemy-name">Nemico</strong>
+              <div class="hp-bar"><span id="enemy-hp-bar"></span></div>
+              <p class="hp-text" id="enemy-hp-text">100 / 100</p>
+            </div>
+            <img id="enemy-sprite" src="img/battle/enemy-metternich.png" alt="" width="512" height="512">
+          </div>
+          <div class="battle-actor battle-actor--hero">
+            <div class="hp-block">
+              <strong>Mazzini</strong>
+              <div class="hp-bar"><span id="hero-hp-bar"></span></div>
+              <p class="hp-text" id="hero-hp-text">100 / 100</p>
+            </div>
+            <img id="hero-sprite" src="img/battle/hero-mazzini.png" alt="Mazzini" width="512" height="512">
+          </div>
+        </div>
+
+        <div class="battle-log" id="battle-log" aria-live="polite"><p>Prepara il comando.</p></div>
+        <p class="battle-hint-box" id="battle-hint"></p>
+
+        <div class="battle-menu" id="battle-menu">
+          <button type="button" id="cmd-attacca">Attacca</button>
+          <button type="button" id="cmd-idea">Idea</button>
+          <button type="button" id="cmd-difendi">Difendi</button>
+          <button type="button" id="cmd-studia">Studia</button>
+        </div>
+
+        <div class="battle-quiz" id="battle-quiz">
+          <h3 id="quiz-title">Domanda</h3>
+          <div class="quiz-opts" id="quiz-opts"></div>
+        </div>
+      </section>
+
+      <section class="battle-end" id="battle-end" hidden>
+        <h2>Vittoria · Dio e il Popolo</h2>
+        <p data-end-lead>Hai completato le due battaglie didattiche.</p>
+        <p class="score-line" id="score-line">Risposte corrette: 0 / 0</p>
+        <div class="hero-actions">
+          <button type="button" class="btn btn-primary" id="battle-retry">Ricomincia</button>
+          <a class="btn btn-secondary" href="imparare.html">Studio</a>
+          <a class="btn btn-secondary" href="fumetto.html">Fumetto</a>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="wrap">
+        <p>Realizzato dal Prof. Rossano Bella.</p>
+      </div>
+    </footer>
+  </div>
+
+  <script src="js/data.js" defer></script>
+  <script src="js/common.js" defer></script>
+  <script src="js/gioco.js" defer></script>
+</body>
+</html>

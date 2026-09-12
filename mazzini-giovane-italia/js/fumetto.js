@@ -1,0 +1,225 @@
+(function () {
+  const captions = [
+    "Tavola 1 — Giovane Italia: Mazzini chiama i giovani all’unità, alla libertà, alla repubblica.",
+    "Tavola 2 — Esilio: da Londra e dalle città d’Europa continua a scrivere, organizzare, non mollare.",
+    "Tavola 3 — Contrasto: Mazzini sogna la repubblica; Cavour punta su monarchie e diplomazia.",
+    "Tavola 4 — Tenacia: fallimenti e repressioni non spengono il programma «Dio e il Popolo».",
+    "Tavola 5 — Roma 1849: la Repubblica Romana, i triunviri, la difesa — poi la caduta.",
+    "Tavola 6 — Ricorda: unità + libertà + repubblica; Metternich e Radetzky come nemici storici.",
+  ];
+
+  const pages = Array.from(document.querySelectorAll(".fumetto-page"));
+  const statusNum = document.getElementById("fumetto-num");
+  const caption = document.getElementById("fumetto-caption");
+  const prevBtn = document.getElementById("fumetto-prev");
+  const nextBtn = document.getElementById("fumetto-next");
+  const dotsWrap = document.getElementById("fumetto-dots");
+  const viewport = document.getElementById("fumetto-viewport");
+  if (!pages.length || !viewport) return;
+
+  let index = 0;
+  let busy = false;
+  const total = pages.length;
+  const reduceMotion =
+    document.body.classList.contains("reduced-motion") ||
+    window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  const zoom = window.FumettoZoom ? window.FumettoZoom.attach(viewport) : null;
+
+  pages.forEach((_, i) => {
+    const dot = document.createElement("button");
+    dot.type = "button";
+    dot.className = "fumetto-dot";
+    dot.setAttribute("aria-label", `Vai alla tavola ${i + 1}`);
+    dot.addEventListener("click", () => go(i));
+    dotsWrap.appendChild(dot);
+  });
+  const dots = Array.from(dotsWrap.querySelectorAll(".fumetto-dot"));
+
+  function clearFlipClasses(page) {
+    page.classList.remove(
+      "is-flip-out-next",
+      "is-flip-in-next",
+      "is-flip-out-prev",
+      "is-flip-in-prev"
+    );
+  }
+
+  function syncChrome() {
+    dots.forEach((dot, i) => {
+      if (i === index) dot.setAttribute("aria-current", "true");
+      else dot.removeAttribute("aria-current");
+    });
+    if (statusNum) statusNum.textContent = String(index + 1);
+    if (caption) caption.textContent = captions[index] || "";
+    prevBtn.disabled = index === 0 || busy;
+    nextBtn.disabled = index === total - 1 || busy;
+  }
+
+  function settle(next) {
+    if (zoom) zoom.reset();
+    pages.forEach((page, i) => {
+      clearFlipClasses(page);
+      const active = i === next;
+      page.classList.toggle("is-active", active);
+      page.setAttribute("aria-hidden", active ? "false" : "true");
+    });
+    index = next;
+    busy = false;
+    syncChrome();
+  }
+
+  function go(next, forcedDir) {
+    const target = Math.max(0, Math.min(total - 1, next));
+    if (target === index || busy) return;
+    if (zoom && zoom.isZoomed()) {
+      zoom.reset();
+    }
+    const dir = forcedDir != null ? forcedDir : target > index ? 1 : -1;
+    if (window.AudioUi) window.AudioUi.beep(target === total - 1 ? "win" : "page");
+
+    if (reduceMotion) {
+      settle(target);
+      return;
+    }
+
+    busy = true;
+    syncChrome();
+    const outgoing = pages[index];
+    const incoming = pages[target];
+    clearFlipClasses(outgoing);
+    clearFlipClasses(incoming);
+    incoming.classList.add("is-active");
+    incoming.setAttribute("aria-hidden", "false");
+    outgoing.classList.add(dir === 1 ? "is-flip-out-next" : "is-flip-out-prev");
+    incoming.classList.add(dir === 1 ? "is-flip-in-next" : "is-flip-in-prev");
+
+    let done = false;
+    const finish = () => {
+      if (done) return;
+      done = true;
+      outgoing.removeEventListener("animationend", finish);
+      settle(target);
+    };
+    outgoing.addEventListener("animationend", finish);
+    window.setTimeout(finish, 650);
+  }
+
+  prevBtn.addEventListener("click", () => go(index - 1, -1));
+  nextBtn.addEventListener("click", () => go(index + 1, 1));
+
+  document.addEventListener("keydown", (event) => {
+    if (event.key === "ArrowRight" || event.key === "PageDown") go(index + 1, 1);
+    else if (event.key === "ArrowLeft" || event.key === "PageUp") go(index - 1, -1);
+  });
+
+  let startX = 0;
+  let startY = 0;
+  viewport.addEventListener(
+    "touchstart",
+    (event) => {
+      if (event.touches.length > 1) return;
+      const t = event.changedTouches[0];
+      startX = t.clientX;
+      startY = t.clientY;
+    },
+    { passive: true }
+  );
+  viewport.addEventListener(
+    "touchend",
+    (event) => {
+      if (zoom && zoom.blocksNav()) return;
+      if (event.touches.length > 0) return;
+      const t = event.changedTouches[0];
+      const dx = t.clientX - startX;
+      const dy = t.clientY - startY;
+      if (Math.abs(dx) < 40 || Math.abs(dx) < Math.abs(dy)) return;
+      if (dx < 0) go(index + 1, 1);
+      else go(index - 1, -1);
+    },
+    { passive: true }
+  );
+
+  viewport.addEventListener("click", (event) => {
+    if (busy) return;
+    if (zoom && zoom.blocksNav()) return;
+    const rect = viewport.getBoundingClientRect();
+    const x = event.clientX - rect.left;
+    if (x > rect.width * 0.66) go(index + 1, 1);
+    else if (x < rect.width * 0.33) go(index - 1, -1);
+  });
+
+  const stage = document.getElementById("fumetto-stage");
+  const fullBtn = document.getElementById("fumetto-fullscreen");
+
+  function stageIsFullscreen() {
+    const el = document.fullscreenElement || document.webkitFullscreenElement;
+    return el === stage || (stage && stage.classList.contains("is-immersive"));
+  }
+
+  function setImmersive(on) {
+    if (!stage) return;
+    stage.classList.toggle("is-immersive", on);
+    document.documentElement.classList.toggle("fumetto-immersive-lock", on);
+    document.body.classList.toggle("fumetto-immersive-lock", on);
+  }
+
+  function syncFullscreenLabel() {
+    if (!fullBtn) return;
+    const on = stageIsFullscreen();
+    fullBtn.setAttribute("aria-pressed", String(on));
+    fullBtn.textContent = on ? "Esci" : "Schermo intero";
+  }
+
+  async function toggleFullscreen() {
+    if (!stage) return;
+    try {
+      if (stage.classList.contains("is-immersive")) {
+        setImmersive(false);
+      } else if (document.fullscreenElement === stage || document.webkitFullscreenElement === stage) {
+        if (document.exitFullscreen) await document.exitFullscreen();
+        else if (document.webkitExitFullscreen) document.webkitExitFullscreen();
+      } else if (stage.requestFullscreen && document.fullscreenEnabled !== false) {
+        await stage.requestFullscreen();
+      } else if (stage.webkitRequestFullscreen) {
+        stage.webkitRequestFullscreen();
+        setTimeout(() => {
+          if (!document.fullscreenElement && !document.webkitFullscreenElement) {
+            setImmersive(true);
+            syncFullscreenLabel();
+          }
+        }, 120);
+      } else {
+        setImmersive(true);
+      }
+    } catch (err) {
+      setImmersive(true);
+    }
+    syncFullscreenLabel();
+  }
+
+  if (fullBtn) {
+    fullBtn.addEventListener("click", (event) => {
+      event.stopPropagation();
+      toggleFullscreen();
+    });
+  }
+
+  document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape" && stage && stage.classList.contains("is-immersive")) {
+      setImmersive(false);
+      syncFullscreenLabel();
+    }
+  });
+  document.addEventListener("fullscreenchange", () => {
+    if (document.fullscreenElement === stage) setImmersive(false);
+    syncFullscreenLabel();
+  });
+  document.addEventListener("webkitfullscreenchange", () => {
+    if (document.webkitFullscreenElement === stage) setImmersive(false);
+    syncFullscreenLabel();
+  });
+
+  syncFullscreenLabel();
+  settle(0);
+})();

@@ -1,0 +1,342 @@
+/* Mazzini · battaglia didattica (stile FF7) */
+
+.page-gioco {
+  overflow-x: hidden;
+}
+
+.page-gioco .shell {
+  width: min(100% - 0.75rem, 42rem);
+}
+
+.battle-app {
+  display: grid;
+  gap: 0.75rem;
+  padding: 0.65rem 0 1.5rem;
+}
+
+.battle-intro,
+.battle-between,
+.battle-end {
+  padding: 1rem 0.85rem;
+  background: var(--surface);
+  border: 1px solid var(--hair);
+  border-left: 4px solid var(--gold);
+}
+
+.battle-intro h1,
+.battle-between h2,
+.battle-end h2 {
+  margin: 0.2rem 0 0.55rem;
+  font-size: clamp(1.4rem, 5vw, 1.9rem);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.battle-intro p,
+.battle-between p,
+.battle-end p {
+  margin: 0.4rem 0;
+  color: var(--mute);
+}
+
+.battle-stage-wrap {
+  display: none;
+}
+
+.battle-stage-wrap.is-active {
+  display: grid;
+  gap: 0.55rem;
+}
+
+.battle-stage-wrap[hidden] {
+  display: none !important;
+}
+
+.battle-stage {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 11;
+  max-height: min(42dvh, 18rem);
+  overflow: hidden;
+  border: 2px solid #1a1410;
+  box-shadow:
+    inset 0 0 0 1px rgba(232, 194, 122, 0.35),
+    0 8px 24px rgba(0, 0, 0, 0.45);
+  background: #0a0807 center / cover no-repeat;
+}
+
+.battle-stage::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    linear-gradient(180deg, rgba(0, 0, 0, 0.15) 0%, transparent 30%, rgba(0, 0, 0, 0.45) 100%);
+  z-index: 1;
+}
+
+.battle-actor {
+  position: absolute;
+  z-index: 2;
+  display: grid;
+  justify-items: center;
+  gap: 0.2rem;
+  transition: transform 0.18s ease, filter 0.18s ease;
+}
+
+.battle-actor img {
+  width: auto;
+  height: auto;
+  max-height: min(38vw, 9.5rem);
+  max-width: min(42vw, 10rem);
+  object-fit: contain;
+  filter: drop-shadow(0 6px 10px rgba(0, 0, 0, 0.55));
+  display: block;
+}
+
+.battle-actor--enemy {
+  top: 8%;
+  left: 4%;
+}
+
+.battle-actor--hero {
+  bottom: 4%;
+  right: 3%;
+}
+
+.battle-actor.is-hit {
+  animation: battleHit 0.35s ease;
+}
+
+.battle-actor.is-attack {
+  animation: battleLunge 0.32s ease;
+}
+
+.battle-actor--enemy.is-attack {
+  animation: battleLungeEnemy 0.32s ease;
+}
+
+@keyframes battleHit {
+  0%,
+  100% {
+    filter: none;
+    transform: translateX(0);
+  }
+  30% {
+    filter: brightness(2.2) saturate(0.2);
+    transform: translateX(4px);
+  }
+  60% {
+    transform: translateX(-4px);
+  }
+}
+
+@keyframes battleLunge {
+  0%,
+  100% {
+    transform: translate(0, 0);
+  }
+  45% {
+    transform: translate(-18px, -6px);
+  }
+}
+
+@keyframes battleLungeEnemy {
+  0%,
+  100% {
+    transform: translate(0, 0);
+  }
+  45% {
+    transform: translate(18px, 6px);
+  }
+}
+
+.reduced-motion .battle-actor.is-hit,
+.reduced-motion .battle-actor.is-attack,
+.reduced-motion .battle-actor--enemy.is-attack {
+  animation: none;
+}
+
+.hp-block {
+  width: min(100%, 9.5rem);
+  background: rgba(10, 8, 7, 0.78);
+  border: 1px solid rgba(232, 194, 122, 0.4);
+  padding: 0.28rem 0.4rem 0.35rem;
+  font-family: var(--font-ui);
+}
+
+.hp-block strong {
+  display: block;
+  font-size: 0.68rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 0.15rem;
+}
+
+.hp-bar {
+  height: 0.55rem;
+  background: #2a221c;
+  border: 1px solid #000;
+  overflow: hidden;
+}
+
+.hp-bar > span {
+  display: block;
+  height: 100%;
+  width: 100%;
+  background: linear-gradient(90deg, #2f9e4a, #7dcf6a);
+  transform-origin: left center;
+  transition: transform 0.35s ease;
+}
+
+.hp-bar.is-low > span {
+  background: linear-gradient(90deg, #c43c3c, #e8a04a);
+}
+
+.hp-text {
+  margin: 0.15rem 0 0;
+  font-size: 0.65rem;
+  letter-spacing: 0.04em;
+  color: #ddd;
+  font-variant-numeric: tabular-nums;
+}
+
+.battle-log {
+  min-height: 3.2rem;
+  max-height: 4.6rem;
+  overflow: auto;
+  padding: 0.55rem 0.7rem;
+  background: rgba(18, 14, 12, 0.92);
+  border: 2px solid rgba(232, 194, 122, 0.45);
+  color: #efe6d8;
+  font-size: 0.9rem;
+  line-height: 1.4;
+}
+
+.battle-log p {
+  margin: 0;
+}
+
+.battle-menu {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.45rem;
+}
+
+.battle-menu button {
+  min-height: 3rem;
+  font-family: var(--font-ui);
+  font-size: 0.9rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  border: 2px solid rgba(232, 194, 122, 0.55);
+  background: linear-gradient(180deg, #2a221c 0%, #16110e 100%);
+  color: var(--gold);
+  cursor: pointer;
+  touch-action: manipulation;
+}
+
+.battle-menu button:hover:not(:disabled),
+.battle-menu button:focus-visible {
+  background: var(--gold);
+  color: #1a1208;
+}
+
+.battle-menu button:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.battle-quiz {
+  display: none;
+  padding: 0.75rem;
+  background: rgba(18, 14, 12, 0.95);
+  border: 2px solid rgba(232, 194, 122, 0.5);
+}
+
+.battle-quiz.is-open {
+  display: grid;
+  gap: 0.55rem;
+}
+
+.battle-quiz h3 {
+  margin: 0;
+  font-size: 1rem;
+  letter-spacing: 0.04em;
+}
+
+.battle-quiz .quiz-opts {
+  display: grid;
+  gap: 0.4rem;
+}
+
+.battle-quiz .quiz-opts button {
+  min-height: 2.85rem;
+  text-align: left;
+  padding: 0.55rem 0.7rem;
+  font-family: var(--font-body);
+  font-size: 0.92rem;
+  border: 1px solid var(--hair);
+  background: var(--surface);
+  color: var(--text);
+  cursor: pointer;
+  touch-action: manipulation;
+}
+
+.battle-quiz .quiz-opts button:hover,
+.battle-quiz .quiz-opts button:focus-visible {
+  border-color: var(--gold);
+}
+
+.battle-hint-box {
+  display: none;
+  padding: 0.65rem 0.75rem;
+  border-left: 3px solid var(--green);
+  background: var(--surface);
+  color: var(--mute);
+  font-size: 0.92rem;
+}
+
+.battle-hint-box.is-open {
+  display: block;
+}
+
+.score-line {
+  font-family: var(--font-ui);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--gold);
+  font-size: 0.95rem;
+}
+
+@media (min-width: 560px) {
+  .battle-stage {
+    max-height: min(48dvh, 22rem);
+  }
+
+  .battle-actor img {
+    max-height: 11rem;
+    max-width: 11.5rem;
+  }
+
+  .battle-menu {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+@media (max-width: 389px) {
+  .battle-actor img {
+    max-height: 7.2rem;
+  }
+
+  .hp-block {
+    width: 7.8rem;
+  }
+
+  .battle-menu button {
+    font-size: 0.78rem;
+    min-height: 2.75rem;
+  }
+}

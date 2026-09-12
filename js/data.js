@@ -148,6 +148,22 @@ window.ATTIVITA_WEB = [
       { label: "Prove", url: "logica-induttivo-deduttivo/gioco.html" },
     ],
   },
+  {
+    titolo: "Mazzini — Giovane Italia",
+    materia: "Storia",
+    classe: "Secondo grado",
+    descrizione: "Giuseppe Mazzini: Giovane Italia, esilio, contrasto con Cavour, Repubblica Romana 1849; studio, fumetto, laboratorio e battaglie didattiche contro Metternich e Radetzky.",
+    citazione: "Dio e il Popolo.",
+    url: "mazzini-giovane-italia/",
+    copertina: "mazzini-giovane-italia/img/og-share.jpg",
+    tinta: "storia",
+    adesivo: "st-colonna",
+    extra: [
+      { label: "Fumetto", url: "mazzini-giovane-italia/fumetto.html" },
+      { label: "Laboratorio", url: "mazzini-giovane-italia/laboratorio.html" },
+      { label: "Battaglia", url: "mazzini-giovane-italia/gioco.html" },
+    ],
+  },
 ];
 
 /* Lavori Canva per materia. pp = numero di pagine, id = design ID Canva.
