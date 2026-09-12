@@ -96,12 +96,14 @@
 
 .battle-actor--enemy {
   top: 8%;
-  left: 4%;
+  right: 4%;
+  left: auto;
 }
 
 .battle-actor--hero {
   bottom: 4%;
-  right: 3%;
+  left: 3%;
+  right: auto;
 }
 
 .battle-actor.is-hit {
@@ -124,10 +126,10 @@
   }
   30% {
     filter: brightness(2.2) saturate(0.2);
-    transform: translateX(4px);
+    transform: translateX(-4px);
   }
   60% {
-    transform: translateX(-4px);
+    transform: translateX(4px);
   }
 }
 
@@ -137,7 +139,7 @@
     transform: translate(0, 0);
   }
   45% {
-    transform: translate(-18px, -6px);
+    transform: translate(18px, -6px);
   }
 }
 
@@ -147,7 +149,7 @@
     transform: translate(0, 0);
   }
   45% {
-    transform: translate(18px, 6px);
+    transform: translate(-18px, 6px);
   }
 }
 
