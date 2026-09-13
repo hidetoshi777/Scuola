@@ -1,9 +1,11 @@
 /**
  * Stampa di TUTTO il fumetto (tutte le tavole), accanto a Schermo intero.
+ * Su ogni tavola stampata compare in piccolo: Realizzato dal Prof. Rossano Bella.
  * Uso: bottone #fumetto-print + questo script su ogni fumetto.html.
  */
 (function () {
   const STYLE_ID = "fumetto-print-style";
+  const CREDITO = "Realizzato dal Prof. Rossano Bella";
 
   function ensurePrintCss() {
     if (document.getElementById(STYLE_ID)) return;
@@ -17,8 +19,7 @@
   align-items: center;
 }
 
-/* Anteprima stampa: layout lineare di tutte le tavole (anche fuori da @media print,
-   così il motore di stampa non misura solo la tavola attiva assoluta). */
+/* Layout lineare di tutte le tavole prima/durante la stampa */
 body.fumetto-print-all .fumetto-intro,
 body.fumetto-print-all .fumetto-toolbar,
 body.fumetto-print-all .fumetto-controls,
@@ -56,6 +57,17 @@ body.fumetto-print-all .fumetto-page img {
   height: auto !important;
   max-height: none !important;
   object-fit: contain !important;
+}
+body.fumetto-print-all .fumetto-page::after {
+  content: "${CREDITO}";
+  display: block;
+  margin-top: 0.35rem;
+  font-family: system-ui, sans-serif;
+  font-size: 0.68rem;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  color: #666;
+  text-align: right;
 }
 
 @media print {
@@ -140,9 +152,20 @@ body.fumetto-print-all .fumetto-page img {
   .fumetto-page img {
     width: 100% !important;
     height: auto !important;
-    max-height: 260mm;
+    max-height: 250mm;
     object-fit: contain !important;
     background: transparent !important;
+  }
+  .fumetto-page::after {
+    content: "${CREDITO}";
+    display: block !important;
+    margin-top: 2.5mm;
+    font-family: system-ui, sans-serif;
+    font-size: 7.5pt;
+    font-weight: 500;
+    letter-spacing: 0.02em;
+    color: #555 !important;
+    text-align: right;
   }
 }
 `;
@@ -158,7 +181,6 @@ body.fumetto-print-all .fumetto-page img {
       const done = () => resolve();
       img.addEventListener("load", done, { once: true });
       img.addEventListener("error", done, { once: true });
-      /* Ricarica se era solo placeholder lazy non partito */
       if (img.dataset.src && !img.src) img.src = img.dataset.src;
       else if (img.src) img.src = img.src;
     });
@@ -195,7 +217,6 @@ body.fumetto-print-all .fumetto-page img {
     const restored = prepareAllPages();
     try {
       await Promise.all(imgs.map(loadImage));
-      /* Un frame per far ricalcolare il layout lineare a tutte le tavole */
       await new Promise((r) => requestAnimationFrame(() => requestAnimationFrame(r)));
       const cleanup = () => {
         restorePages(restored);
@@ -203,7 +224,6 @@ body.fumetto-print-all .fumetto-page img {
       };
       window.addEventListener("afterprint", cleanup);
       window.print();
-      /* Fallback se afterprint non arriva (alcuni WebView) */
       setTimeout(cleanup, 2000);
     } catch (err) {
       restorePages(restored);

@@ -724,4 +724,13 @@ dialog::backdrop {
   main {
     padding: 0;
   }
+
+  body::after {
+    content: "Realizzato dal Prof. Rossano Bella";
+    display: block;
+    margin-top: 1rem;
+    font-size: 8pt;
+    color: #555;
+    text-align: right;
+  }
 }

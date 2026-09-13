@@ -15,6 +15,7 @@ Nella toolbar del lettore, **sempre entrambi**:
 1. **«Stampa tutto»** (`id="fumetto-print"`) — a fianco di Schermo intero  
    - Script: `../js/fumetto-print.js`  
    - Stampa **tutte** le tavole (non solo quella attiva)  
+   - Su **ogni foglio**, in piccolo: **Realizzato dal Prof. Rossano Bella** (i materiali non devono circolare in copisteria senza firma)
 2. **«Schermo intero»** / **«Esci»** (`id="fumetto-fullscreen"`)
 
 ```html

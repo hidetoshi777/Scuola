@@ -13,6 +13,7 @@ Per PEI e lavori su alunni specifici dell’a.s. **2026/2027** (Ferraris Acireal
 - **Niente rimandi** tra un lavoro e l’altro (niente link incrociati nella navigazione **interna** delle attività).
 - La homepage comune è **Lo scaffale** (`index.html` + `js/data.js`): dopo ogni nuova attività web, **registrala obbligatoriamente** in `window.ATTIVITA_WEB` (titolo, materia, descrizione, url, **copertina**, tinta, adesivo, extra). La `copertina` punta a `img/og-share.jpg` (o `.png`) dell’attività e compare sulla cartellina dello scaffale. Altrimenti la classe non la trova dallo scaffale.
 - In **ogni** lavoro per la scuola, nel footer (o credito visibile), scrivi sempre: **Realizzato dal Prof. Rossano Bella**.
+- **Stampe**: su ogni foglio stampato (fumetti, attestati, schede) il credito **Realizzato dal Prof. Rossano Bella** va in **piccolo** — i materiali non devono circolare anonimi in copisteria.
 - Per i prossimi lavori Scuola, **usa il MCP Canva** (lavori e risorse già presenti nell’account Canva del Prof.) quando servono grafiche, template, export o materiali già realizzati lì: non reinventare da zero se Canva ha già qualcosa di utile.
 - **Inserire i Canva del Prof.**: se per un argomento esiste già un design Canva (presentazione, poster, slide, ecc.), **va messo in una sezione dedicata** del lavoro (es. «Le slide del Prof.» / galleria export), non solo riusato come asset sparso. Prima di inventare grafiche nuove, cerca e riusa quei Canva.
 
