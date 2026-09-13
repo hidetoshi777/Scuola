@@ -113,6 +113,83 @@
 
   /* ---------------- Le cartelline ---------------- */
 
+  let filtroMateria = "";
+
+  function materieDelleCartelline() {
+    const viste = new Set();
+    const elenco = [];
+    window.ATTIVITA_WEB.forEach((a) => {
+      if (viste.has(a.materia)) return;
+      viste.add(a.materia);
+      elenco.push({ label: a.materia, tinta: a.tinta });
+    });
+    return elenco;
+  }
+
+  function costruisciFiltriCartelline() {
+    const contenitore = document.getElementById("filtri-cartelline");
+    if (!contenitore) return;
+
+    const materie = materieDelleCartelline();
+    const bottoni =
+      '<button type="button" class="filtro" data-materia="" aria-pressed="true" style="--tinta-filtro: var(--inchiostro)">Tutte</button>' +
+      materie
+        .map(
+          (m) =>
+            '<button type="button" class="filtro" data-materia="' +
+            esc(m.label) +
+            '" aria-pressed="false" style="--tinta-filtro: var(--c-' +
+            esc(m.tinta) +
+            ')">' +
+            esc(m.label) +
+            "</button>"
+        )
+        .join("");
+
+    contenitore.innerHTML = bottoni;
+
+    contenitore.addEventListener("click", (ev) => {
+      const bottone = ev.target.closest(".filtro");
+      if (!bottone || !contenitore.contains(bottone)) return;
+      filtroMateria = bottone.dataset.materia || "";
+      contenitore.querySelectorAll(".filtro").forEach((b) => {
+        b.setAttribute("aria-pressed", String(b === bottone));
+      });
+      applicaFiltroCartelline();
+    });
+  }
+
+  function applicaFiltroCartelline() {
+    const contenitore = document.getElementById("cartelliera");
+    const esito = document.getElementById("esito-cartelline");
+    const binario = document.querySelector(".cartelliera-binario");
+    if (!contenitore) return;
+
+    let visibili = 0;
+    contenitore.querySelectorAll(".cartellina").forEach((card) => {
+      const ok = !filtroMateria || card.dataset.materia === filtroMateria;
+      card.hidden = !ok;
+      if (ok) visibili += 1;
+    });
+
+    if (esito) {
+      if (!filtroMateria) {
+        esito.textContent = "Scorri le cartelline · si aprono anche dal telefono";
+      } else if (visibili === 0) {
+        esito.textContent = "Nessuna cartellina per «" + filtroMateria + "»";
+      } else if (visibili === 1) {
+        esito.textContent = "1 cartellina di " + filtroMateria;
+      } else {
+        esito.textContent = visibili + " cartelline di " + filtroMateria;
+      }
+    }
+
+    if (binario) {
+      const riduci = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      binario.scrollTo({ left: 0, behavior: riduci ? "auto" : "smooth" });
+    }
+  }
+
   function costruisciCartelline() {
     const contenitore = document.getElementById("cartelliera");
     if (!contenitore) return;
@@ -133,7 +210,8 @@
           "</figure>"
         : "";
       return (
-        '<article class="cartellina entra" style="--tinta: var(--c-' + a.tinta + '); --i: ' + i + '">' +
+        '<article class="cartellina entra" data-materia="' + esc(a.materia) + '"' +
+        ' style="--tinta: var(--c-' + a.tinta + '); --i: ' + i + '">' +
         copertina +
         '<div class="cartellina-corpo">' +
         '<div class="cartellina-testa">' +
@@ -147,6 +225,8 @@
         "</article>"
       );
     }).join("");
+
+    applicaFiltroCartelline();
   }
 
   /* ---------------- I ripiani ---------------- */
@@ -337,6 +417,7 @@
 
   document.addEventListener("DOMContentLoaded", () => {
     costruisciFascia();
+    costruisciFiltriCartelline();
     costruisciCartelline();
     costruisciRipiani();
     collegaRicerca();

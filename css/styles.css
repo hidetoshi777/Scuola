@@ -338,17 +338,85 @@ h1 em {
   margin: 0;
 }
 
+/* ---------------- Filtri materia (cartelline) ---------------- */
+
+.filtri {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem 0.5rem;
+  margin-bottom: 0.85rem;
+}
+.filtro {
+  font: 700 0.78rem/1.2 var(--f-testo);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--matita);
+  background: transparent;
+  border: 1.5px solid var(--bordo-forte);
+  border-radius: 999px;
+  padding: 0.45rem 0.85rem;
+  min-height: 2.4rem;
+  cursor: pointer;
+  transition: color 0.15s, background 0.15s, border-color 0.15s, box-shadow 0.15s;
+}
+.filtro:hover {
+  color: var(--inchiostro);
+  border-color: var(--inchiostro);
+}
+.filtro:focus-visible {
+  outline: 2px solid var(--inchiostro);
+  outline-offset: 3px;
+}
+.filtro[aria-pressed="true"] {
+  color: #fff;
+  background: var(--tinta-filtro, var(--inchiostro));
+  border-color: var(--tinta-filtro, var(--inchiostro));
+  box-shadow: 0 6px 14px -10px var(--ombra-dorso);
+}
+.esito-cartelline {
+  min-height: 1.4em;
+  margin: 0 0 0.35rem;
+  font-size: 1.1rem;
+}
+
 /* ---------------- Cartelline (le attività) ---------------- */
 
+.cartelliera-binario {
+  overflow-x: auto;
+  overflow-y: hidden;
+  overscroll-behavior-x: contain;
+  scroll-snap-type: x mandatory;
+  scroll-padding-inline: max(var(--margine), calc((100% - min(100%, var(--misura))) / 2 + var(--margine)));
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: thin;
+  scrollbar-color: var(--bordo-forte) transparent;
+  /* Cue leggero: qualcosa continua a destra. */
+  mask-image: linear-gradient(90deg, #000 0%, #000 calc(100% - 1.6rem), transparent 100%);
+}
+.cartelliera-binario:focus-within {
+  outline: 2px solid color-mix(in srgb, var(--inchiostro) 35%, transparent);
+  outline-offset: 4px;
+}
+@supports not (mask-image: linear-gradient(90deg, #000, transparent)) {
+  .cartelliera-binario { mask-image: none; }
+}
+
 .cartelliera {
-  display: grid;
-  grid-template-columns: repeat(12, 1fr);
-  gap: 2.6rem 1.15rem;
+  display: flex;
+  align-items: stretch;
+  gap: 1.15rem;
+  width: max-content;
+  min-height: 100%;
+  padding-block: 1.25rem 0.55rem;
+  padding-inline-start: max(var(--margine), calc((100% - min(100%, var(--misura))) / 2 + var(--margine)));
+  padding-inline-end: max(2.4rem, calc(var(--margine) + 2rem));
 }
 
 .cartellina {
   position: relative;
-  grid-column: span 6;
+  flex: 0 0 min(17.5rem, 78vw);
+  width: min(17.5rem, 78vw);
+  scroll-snap-align: start;
   display: flex; flex-direction: column; gap: 0;
   background: var(--carta-cart);
   border: 1px solid var(--bordo);
@@ -359,6 +427,7 @@ h1 em {
   box-shadow: 0 1px 0 var(--bordo), 0 12px 22px -18px var(--ombra-dorso);
   transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
+.cartellina[hidden] { display: none; }
 .cartellina-copertina {
   margin: 0;
   aspect-ratio: 16 / 9;
@@ -397,22 +466,6 @@ h1 em {
   padding: 1.15rem 1.2rem 1.25rem;
   flex: 1;
 }
-.cartellina:first-child {
-  grid-column: span 12;
-}
-.cartellina:first-child .cartellina-corpo {
-  padding: 1.4rem 1.45rem 1.5rem;
-}
-.cartellina:first-child .cartellina-copertina {
-  aspect-ratio: 21 / 9;
-  max-height: 16rem;
-}
-.cartellina:first-child h3 {
-  font-size: clamp(1.35rem, 2.5vw, 1.75rem);
-  max-width: 28ch;
-}
-.cartellina:first-child p { max-width: 42rem; font-size: 1rem; }
-.cartellina:first-child .adesivo { width: 2.85rem; height: 2.85rem; }
 /* La linguetta, sfalsata come nei raccoglitori veri. */
 .cartellina::before {
   content: "";
@@ -421,9 +474,9 @@ h1 em {
   background: var(--tinta);
   border-radius: 0.35rem 0.35rem 0 0;
 }
-.cartellina:nth-child(2)::before { --tab: 4.4rem; }
-.cartellina:nth-child(3)::before { --tab: 2.6rem; }
-.cartellina:nth-child(4)::before { --tab: 5.6rem; }
+.cartellina:nth-child(4n + 2)::before { --tab: 4.4rem; }
+.cartellina:nth-child(4n + 3)::before { --tab: 2.6rem; }
+.cartellina:nth-child(4n + 4)::before { --tab: 5.6rem; }
 .cartellina:hover { transform: translateY(-4px); box-shadow: 0 1px 0 var(--bordo), 0 22px 34px -20px var(--ombra-dorso); }
 
 .cartellina-testa { display: flex; align-items: flex-start; justify-content: space-between; gap: 0.8rem; }
@@ -465,9 +518,8 @@ h1 em {
 }
 .cartellina-altro a:hover { color: var(--tinta); text-decoration: underline; text-underline-offset: 3px; }
 
-@media (max-width: 46rem) {
-  .cartellina,
-  .cartellina:first-child { grid-column: span 12; }
+@media (prefers-reduced-motion: reduce) {
+  .cartelliera-binario { scroll-behavior: auto; }
 }
 
 /* ---------------- Il banco: ricerca ---------------- */
