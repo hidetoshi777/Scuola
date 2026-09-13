@@ -1,22 +1,41 @@
 ---
-description: I lettori fumetto devono avere schermo intero usabile sul telefono
+description: Ogni fumetto.html deve avere Schermo intero e Stampa tutto (tutte le tavole)
 globs: "**/fumetto.html,**/fumetto.css,**/fumetto.js"
 alwaysApply: false
 ---
 
-# Fumetto · schermo intero
+# Fumetto · schermo intero e stampa
 
-Ogni `fumetto.html` (nuova o rivista) deve permettere di leggere le tavole **a schermo intero**, soprattutto sul cellulare.
+Ogni `fumetto.html` (nuova o rivista) deve permettere di leggere le tavole **a schermo intero** (soprattutto sul cellulare) e di **stampare tutto il fumetto**.
 
-## Obbligatorio
+## Obbligatorio — toolbar
 
-- Pulsante **«Schermo intero»** / **«Esci»** nella toolbar del lettore
-- Pulsante **«Stampa tutto»** a fianco: stampa **tutte** le tavole (non solo quella attiva)
+Nella toolbar del lettore, **sempre entrambi**:
+
+1. **«Stampa tutto»** (`id="fumetto-print"`) — a fianco di Schermo intero  
+   - Script: `../js/fumetto-print.js`  
+   - Stampa **tutte** le tavole (non solo quella attiva)  
+2. **«Schermo intero»** / **«Esci»** (`id="fumetto-fullscreen"`)
+
+```html
+<div class="fumetto-toolbar-actions">
+  <button type="button" class="btn btn-secondary fumetto-print" id="fumetto-print">Stampa tutto</button>
+  <button type="button" class="btn btn-secondary fumetto-full" id="fumetto-fullscreen" aria-pressed="false">Schermo intero</button>
+</div>
+```
+
+```html
+<script src="../js/fumetto-zoom.js" defer></script>
+<script src="../js/fumetto-print.js" defer></script>
+```
+
+## Obbligatorio — fullscreen
+
 - Fullscreen API sul contenitore del lettore (es. `#fumetto-stage`)
 - **Esc** per uscire
-- In fullscreen: viewport che occupa lo spazio utile; **niente barra Avanti/Indietro** (né hint): bastano swipe e tap ai lati. Resta la toolbar con stato tavola + «Esci».
+- In fullscreen: viewport che occupa lo spazio utile; **niente barra Avanti/Indietro** (né hint): bastano swipe e tap ai lati. Resta la toolbar con stato tavola + «Esci» (+ Stampa se resta utile).
 - **Fallback iOS/Safari**: se `requestFullscreen` non entra, modalità immersiva a viewport intera (`position: fixed`, `100dvh`, classe tipo `is-immersive`, lock scroll sul body)
 
 ## Riferimento
 
-Pattern già usato nei viewer Canva (`imparare`) e nei fumetti Nazismo / Manzoni.
+Pattern già nei fumetti pubblicati (es. Origini della poesia, Kant, Nazismo).
