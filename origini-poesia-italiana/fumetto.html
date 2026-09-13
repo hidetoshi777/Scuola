@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="color-scheme" content="dark light">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <title>Fumetto · Alle origini della poesia | Scuola</title>
+  <meta name="description" content="Fumetto didattico in sei tavole: volgare, scuola siciliana, stilnovo, Dante e Cecco Angiolieri.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;600;700&family=Fraunces:opsz,wght@9..144,500;700;800&family=Source+Serif+4:ital,wght@0,400;0,600;1,400;1,600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/fumetto.css">
+</head>
+<body class="page-fumetto">
+  <a class="skip-link visually-hidden" href="#contenuto">Salta al contenuto</a>
+
+  <header class="codex-bar" aria-label="Navigazione">
+    <a class="codex-brand" href="index.html"><span class="codex-mark" aria-hidden="true"></span> Origini</a>
+    <nav class="codex-nav">
+      <a href="index.html">Home</a>
+      <a href="imparare.html">Studio</a>
+      <a href="fumetto.html" aria-current="page">Fumetto</a>
+      <a href="laboratorio.html">Lab</a>
+      <a href="gioco.html">Percorso</a>
+    </nav>
+    <button type="button" class="theme-toggle" data-theme-toggle aria-pressed="false">Chiaro</button>
+  </header>
+
+  <div class="shell">
+    <main id="contenuto" class="fumetto-main" tabindex="-1">
+      <header class="fumetto-intro">
+        <p class="kicker">Fumetto · sei tavole illustrate</p>
+        <h1>Dal codice alle tre scuole</h1>
+        <p class="lead">Un percorso a vignette: volgare, Federico II, stilnovo, Dante, Cecco. Più vignette per tavola.</p>
+      </header>
+
+      <section class="fumetto-reader" id="fumetto-stage" aria-roledescription="fumetto" aria-label="Origini della poesia a fumetti">
+        <div class="fumetto-toolbar">
+          <p class="fumetto-status">Tavola <span id="fumetto-num">1</span> di 6</p>
+          <button type="button" class="btn btn-secondary fumetto-full" id="fumetto-fullscreen" aria-pressed="false">Schermo intero</button>
+        </div>
+
+        <div class="fumetto-viewport" id="fumetto-viewport">
+          <figure class="fumetto-page is-active" data-page="1">
+            <img src="img/tavole/01-volgare.jpg" alt="Tavola 1: dal latino al volgare" width="864" height="1152" fetchpriority="high">
+          </figure>
+          <figure class="fumetto-page" data-page="2" aria-hidden="true">
+            <img src="img/tavole/02-siciliana.jpg" alt="Tavola 2: scuola siciliana e sonetto" width="864" height="1152" loading="lazy">
+          </figure>
+          <figure class="fumetto-page" data-page="3" aria-hidden="true">
+            <img src="img/tavole/03-stilnovo.jpg" alt="Tavola 3: Dolce stil novo e donna-angelo" width="864" height="1152" loading="lazy">
+          </figure>
+          <figure class="fumetto-page" data-page="4" aria-hidden="true">
+            <img src="img/tavole/04-dante.jpg" alt="Tavola 4: Dante e Tanto gentile" width="864" height="1152" loading="lazy">
+          </figure>
+          <figure class="fumetto-page" data-page="5" aria-hidden="true">
+            <img src="img/tavole/05-cecco.jpg" alt="Tavola 5: Cecco Angiolieri e il comico-realista" width="864" height="1152" loading="lazy">
+          </figure>
+          <figure class="fumetto-page" data-page="6" aria-hidden="true">
+            <img src="img/tavole/06-ricorda.jpg" alt="Tavola 6: ricorda le tre scuole" width="864" height="1152" loading="lazy">
+          </figure>
+        </div>
+
+        <p class="fumetto-caption" id="fumetto-caption" aria-live="polite"></p>
+
+        <div class="fumetto-controls">
+          <button type="button" class="btn btn-secondary fumetto-nav" id="fumetto-prev" disabled>← Indietro</button>
+          <div class="fumetto-dots" id="fumetto-dots" role="tablist" aria-label="Tavole"></div>
+          <button type="button" class="btn btn-primary fumetto-nav" id="fumetto-next">Avanti →</button>
+        </div>
+        <p class="fumetto-hint">Scorri o tocca i lati. Pizzica o doppio tap per ingrandire. «Schermo intero» sul telefono. Esc per uscire.</p>
+      </section>
+
+      <div class="hero-actions" style="margin-top:1.2rem">
+        <a class="btn btn-primary" href="laboratorio.html">Laboratorio</a>
+        <a class="btn btn-secondary" href="gioco.html">Percorso</a>
+      </div>
+    </main>
+
+    <footer class="site-footer">
+      <div class="wrap">
+        <p>Fumetto didattico in sei tavole illustrate. Realizzato dal Prof. Rossano Bella.</p>
+      </div>
+    </footer>
+  </div>
+
+  <script src="js/common.js" defer></script>
+  <script src="../js/fumetto-zoom.js" defer></script>
+  <script src="js/fumetto.js" defer></script>
+</body>
+</html>

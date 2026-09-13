@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="color-scheme" content="dark light">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <title>Laboratorio · Alle origini della poesia | Scuola</title>
+  <meta name="description" content="Classifica schede nelle tre scuole: siciliana, Dolce stil novo, comico-realista.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;600;700&family=Fraunces:opsz,wght@9..144,500;700;800&family=Source+Serif+4:ital,wght@0,400;0,600;1,400;1,600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <a class="skip-link visually-hidden" href="#contenuto">Salta al contenuto</a>
+
+  <header class="codex-bar" aria-label="Navigazione">
+    <a class="codex-brand" href="index.html"><span class="codex-mark" aria-hidden="true"></span> Origini</a>
+    <nav class="codex-nav">
+      <a href="index.html">Home</a>
+      <a href="imparare.html">Studio</a>
+      <a href="fumetto.html">Fumetto</a>
+      <a href="laboratorio.html" aria-current="page">Lab</a>
+      <a href="gioco.html">Percorso</a>
+    </nav>
+    <button type="button" class="theme-toggle" data-theme-toggle aria-pressed="false">Chiaro</button>
+  </header>
+
+  <div class="shell">
+    <main id="contenuto" class="wrap page-pad" tabindex="-1">
+      <div class="lab-hero">
+        <div>
+          <p class="kicker">Esercizi</p>
+          <h1>Laboratorio a tre cassoni</h1>
+          <p class="lead">Tocca una scheda, poi la scuola. Obiettivo: distinguere <strong>siciliana</strong>, <strong>stilnovo</strong> e <strong>comico-realista</strong>.</p>
+        </div>
+      </div>
+
+      <p class="kicker">Schede da collocare</p>
+      <div class="chip-pool" id="chip-pool" aria-label="Schede da classificare"></div>
+      <div class="dual-grid" id="dual-grid" role="group" aria-label="Tre scuole poetiche"></div>
+
+      <div class="hero-actions">
+        <button type="button" class="btn btn-primary" id="lab-check">Controlla</button>
+        <button type="button" class="btn btn-secondary" id="lab-reset">Rimescola</button>
+      </div>
+      <div class="feedback" id="lab-feedback" hidden></div>
+
+      <p class="ricorda" style="margin-top:1.4rem">
+        <span>Nota didattica</span>
+        In dubbio: corte e sonetto (siciliana)? Donna-angelo e stile dolce (stilnovo)? Taverna e parodia (comico)?
+      </p>
+
+      <div class="hero-actions" style="margin-top:1.4rem">
+        <a class="btn btn-primary" href="gioco.html">Percorso sul volgare</a>
+        <a class="btn btn-secondary" href="imparare.html">Rivedi lo studio</a>
+      </div>
+    </main>
+
+    <footer class="site-footer">
+      <div class="wrap">
+        <p>Realizzato dal Prof. Rossano Bella.</p>
+      </div>
+    </footer>
+  </div>
+
+  <script src="js/data.js" defer></script>
+  <script src="js/common.js" defer></script>
+  <script src="js/laboratorio.js" defer></script>
+</body>
+</html>
