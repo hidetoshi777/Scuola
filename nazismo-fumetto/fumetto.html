@@ -37,7 +37,10 @@
     <section class="fumetto-reader" id="fumetto-stage" aria-roledescription="fumetto" aria-label="Ombre sul Reich, sei tavole">
       <div class="fumetto-toolbar">
         <p class="fumetto-status" id="fumetto-status">Tavola <span id="fumetto-num">1</span> di 6</p>
-        <button type="button" class="btn btn-secondary fumetto-full" id="fumetto-fullscreen" aria-pressed="false">Schermo intero</button>
+        <div class="fumetto-toolbar-actions">
+          <button type="button" class="btn btn-secondary fumetto-print" id="fumetto-print">Stampa tutto</button>
+          <button type="button" class="btn btn-secondary fumetto-full" id="fumetto-fullscreen" aria-pressed="false">Schermo intero</button>
+        </div>
       </div>
 
       <div class="fumetto-viewport" id="fumetto-viewport">
@@ -77,6 +80,7 @@
   </footer>
   <script src="js/common.js" defer></script>
   <script src="../js/fumetto-zoom.js" defer></script>
+  <script src="../js/fumetto-print.js?v=2" defer></script>
   <script src="js/fumetto.js" defer></script>
 </body>
 </html>

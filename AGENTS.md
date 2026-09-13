@@ -36,7 +36,7 @@ Per PEI e lavori su alunni specifici dell’a.s. **2026/2027** (Ferraris Acireal
 - **Home leggibile sul fumetto**: se la home usa tavola/hero a tutto campo dietro il testo, il testo deve restare **leggibile** (scrim/overlay scuro più forte sotto la copia, ombra leggera sul titolo). Niente fumetto che «esonda» nella scritta.
 - **Citazione ad hoc**: ogni home di attività ha una **citazione** del personaggio/tema; la stessa (campo `citazione` in `ATTIVITA_WEB`) compare anche sulla **cartellina** dello scaffale, sopra o sulla copertina.
 - **Anteprima di condivisione (obbligatoria)**: ogni attività (e lo scaffale) deve avere meta Open Graph + Twitter Card sulla home (`og:title`, `og:description`, `og:url`, `og:image` assoluta HTTPS su GitHub Pages). Metti `img/og-share.jpg` (preferibilmente ~1200×630) o riusa la tavola/hero principale copiata come `og-share`. La stessa immagine va in `ATTIVITA_WEB.copertina` così compare sulla cartellina dello scaffale. Senza immagine assoluta WhatsApp non mostra la anteprima.
-- **Zoom fumetto**: pinch + doppio tap via `../js/fumetto-zoom.js` (FumettoZoom) su ogni `fumetto.html`; reset allo sfogliare pagina; con zoom attivo non cambiare tavola con swipe.
+- **Zoom fumetto**: pinch + doppio tap via `../js/fumetto-zoom.js` (FumettoZoom) su ogni `fumetto.html`; reset allo sfogliare pagina; con zoom attivo non cambiare tavola con swipe. Pulsante **Stampa tutto** (`../js/fumetto-print.js`) a fianco di Schermo intero: stampa tutte le tavole.
 
 Struttura tipica di ogni cartella:
 
