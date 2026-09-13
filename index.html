@@ -24,7 +24,7 @@
   <!-- Il ?v= va alzato a ogni modifica di CSS o JS: senza, un browser che
        si è tenuto una copia vecchia (o un 404 preso durante il deploy)
        continua a servirla e la pagina esce senza stile. -->
-  <link rel="stylesheet" href="css/styles.css?v=15">
+  <link rel="stylesheet" href="css/styles.css?v=16">
 </head>
 <body>
 
@@ -149,8 +149,12 @@
     <div class="misura">
       <div class="reparto-testa">
         <h2>Le cartelline</h2>
-        <p class="mano">si aprono nel browser, anche dal telefono</p>
+        <p class="mano">scorri in orizzontale · filtra per materia</p>
       </div>
+      <div class="filtri" id="filtri-cartelline" role="group" aria-label="Filtra le cartelline per materia"></div>
+      <p class="esito-cartelline mano" id="esito-cartelline" aria-live="polite"></p>
+    </div>
+    <div class="cartelliera-binario">
       <div class="cartelliera" id="cartelliera"></div>
     </div>
   </section>
@@ -217,7 +221,7 @@
   </div>
 </footer>
 
-<script src="js/data.js?v=15" defer></script>
-<script src="js/desktop.js?v=15" defer></script>
+<script src="js/data.js?v=16" defer></script>
+<script src="js/desktop.js?v=16" defer></script>
 </body>
 </html>
