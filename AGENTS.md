@@ -75,6 +75,7 @@ Sito base: `https://hidetoshi777.github.io/Scuola/`
 | Kierkegaard · Aut-aut | https://hidetoshi777.github.io/Scuola/kierkegaard-aut-aut/ | [Fumetto](https://hidetoshi777.github.io/Scuola/kierkegaard-aut-aut/fumetto.html) · [Aut-aut](https://hidetoshi777.github.io/Scuola/kierkegaard-aut-aut/gioco.html) |
 | Logica · Induttivo e deduttivo | https://hidetoshi777.github.io/Scuola/logica-induttivo-deduttivo/ | [Fumetto](https://hidetoshi777.github.io/Scuola/logica-induttivo-deduttivo/fumetto.html) · [Prove](https://hidetoshi777.github.io/Scuola/logica-induttivo-deduttivo/gioco.html) |
 | Mazzini · Giovane Italia | https://hidetoshi777.github.io/Scuola/mazzini-giovane-italia/ | [Fumetto](https://hidetoshi777.github.io/Scuola/mazzini-giovane-italia/fumetto.html) · [Battaglia](https://hidetoshi777.github.io/Scuola/mazzini-giovane-italia/gioco.html) |
+| Origini della poesia | https://hidetoshi777.github.io/Scuola/origini-poesia-italiana/ | [Fumetto](https://hidetoshi777.github.io/Scuola/origini-poesia-italiana/fumetto.html) · [Percorso](https://hidetoshi777.github.io/Scuola/origini-poesia-italiana/gioco.html) |
 
 I vecchi link alla radice (`/gioco.html`, ecc.) reindirizzano ancora alla rotazione terrestre.
 

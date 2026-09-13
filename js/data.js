@@ -164,6 +164,22 @@ window.ATTIVITA_WEB = [
       { label: "Battaglia", url: "mazzini-giovane-italia/gioco.html" },
     ],
   },
+  {
+    titolo: "Alle origini della poesia",
+    materia: "Italiano",
+    classe: "Secondo grado",
+    descrizione: "Dal volgare alle tre scuole del Duecento: siciliana, Dolce stil novo e comico-realista, con poesie brevi, parafrasi, fumetto, laboratorio e percorso; slide Canva del Prof.",
+    citazione: "Tanto gentile e tanto onesta pare la donna mia quand’ella altrui saluta.",
+    url: "origini-poesia-italiana/",
+    copertina: "origini-poesia-italiana/img/og-share.jpg",
+    tinta: "italiano",
+    adesivo: "st-pennino",
+    extra: [
+      { label: "Fumetto", url: "origini-poesia-italiana/fumetto.html" },
+      { label: "Laboratorio", url: "origini-poesia-italiana/laboratorio.html" },
+      { label: "Percorso", url: "origini-poesia-italiana/gioco.html" },
+    ],
+  },
 ];
 
 /* Lavori Canva per materia. pp = numero di pagine, id = design ID Canva.
