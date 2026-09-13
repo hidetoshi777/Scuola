@@ -11,6 +11,7 @@ Ogni `fumetto.html` (nuova o rivista) deve permettere di leggere le tavole **a s
 ## Obbligatorio
 
 - Pulsante **«Schermo intero»** / **«Esci»** nella toolbar del lettore
+- Pulsante **«Stampa tutto»** a fianco: stampa **tutte** le tavole (non solo quella attiva)
 - Fullscreen API sul contenitore del lettore (es. `#fumetto-stage`)
 - **Esc** per uscire
 - In fullscreen: viewport che occupa lo spazio utile; **niente barra Avanti/Indietro** (né hint): bastano swipe e tap ai lati. Resta la toolbar con stato tavola + «Esci».
