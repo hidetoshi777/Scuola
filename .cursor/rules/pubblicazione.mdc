@@ -12,6 +12,8 @@ alwaysApply: true
 - **Niente link** tra un lavoro e l’altro nella navigazione dei siti.
 - **Scaffale obbligatorio**: ogni nuova attività web va aggiunta a `js/data.js` in `ATTIVITA_WEB` (homepage Lo scaffale del Prof.), con campo **`copertina`** = percorso di `img/og-share.jpg` (o `.png`) — compare sulla cartellina.
 - In ogni lavoro per la scuola, nel footer (o credito visibile), includi sempre: **Realizzato dal Prof. Rossano Bella**.
+- **Stampe**: ovunque si stampi (fumetto «Stampa tutto», attestati, schede), il credito **Realizzato dal Prof. Rossano Bella** deve comparire **in piccolo** su ogni foglio — evita che i materiali circolino in copisteria senza firma.
+- **Nelle stampe** (fumetto «Stampa tutto», attestati, fogli da stampare): credito **in piccolo** ma presente su ogni foglio/tavola — così resta chiaro di chi è il materiale.
 - Nei lavori Scuola, **preferisci il MCP Canva** per grafiche, template, export e materiali già presenti nell’account Canva: consultalo e riusalo prima di creare da zero.
 - Se esiste un **Canva del Prof.** sull’argomento, **inseriscilo in una sezione dedicata** del lavoro (export/galleria), non lasciarlo fuori.
 - **Imparare** = **cuore del lavoro**: studio ricco, ordinato, con spiegazioni ed esempi. Layout chiaro (non confusionario). Immagini del fumetto solo se aiutano; altrimenti niente, oppure grafiche/animazioni ad hoc per lo studio. **Ritratto in testata**: compatto a lato (`max-width` ~7.5–8rem); mai alto a tutta larghezza sul PC. Se manca un pezzo canonico (es. Kant → pace perpetua), aggiungilo.
