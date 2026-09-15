@@ -35,6 +35,7 @@
   aspect-ratio: 3 / 4;
   max-height: min(72dvh, 46rem);
   width: 100%;
+  margin-inline: auto;
   touch-action: none;
   user-select: none;
   perspective: 1800px;
@@ -43,8 +44,8 @@
 
 @media (min-width: 960px) {
   .fumetto-viewport {
-    max-height: min(82dvh, 56rem);
-    width: min(100%, calc(min(82dvh, 56rem) * 0.75));
+    max-height: min(78dvh, 48rem);
+    width: 100%;
   }
 }
 
