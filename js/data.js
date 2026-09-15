@@ -196,7 +196,7 @@ window.ATTIVITA_WEB = [
     titolo: "Acciaio, alluminio e ghisa",
     materia: "Tecnologia",
     classe: "Quarta superiore · professionale",
-    descrizione: "Peso e peso specifico: scheda stampabile, fumetto in quattro tavole e gioco in classe «Chi pesa di più?» con quiz di ripasso.",
+    descrizione: "Peso e peso specifico, produzione ghisa/acciaio e calcolo lamiera: scheda stampabile, fumetto in cinque tavole e gioco «Chi pesa di più?».",
     citazione: "Stesso volume, peso diverso: conta il materiale.",
     url: "acciaio-alluminio-ghisa/",
     copertina: "acciaio-alluminio-ghisa/img/og-share.jpg",

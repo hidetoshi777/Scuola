@@ -35,6 +35,23 @@
       giusta: 1,
       nota: "Il peso dipende da quantità e gravità; il peso specifico no.",
     },
+    {
+      testo: "La ghisa si lega soprattutto a…",
+      risposte: [
+        "Fusione e getti (altoforno)",
+        "Solo lamiera sottile",
+        "Meno carbonio dell’acciaio",
+        "Vetro",
+      ],
+      giusta: 0,
+      nota: "Ghisa: più carbonio, si fonde; acciaio: raffinato, meno carbonio.",
+    },
+    {
+      testo: "Stanze 4 m × 5 m, lamiera acciaio 2 mm (γ ≈ 7,8 kg/dm³). Ordine di grandezza della massa?",
+      risposte: ["Circa 30 kg", "Circa 314 kg", "Circa 3000 kg", "Circa 3 kg"],
+      giusta: 1,
+      nota: "V ≈ 40 dm³ → m ≈ 7,8 × 40 ≈ 314 kg (vedi scheda e tavola 5).",
+    },
   ];
 
   let ordine = window.mescola ? window.mescola([...domande]) : domande;

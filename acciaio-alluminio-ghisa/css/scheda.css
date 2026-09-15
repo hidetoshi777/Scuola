@@ -154,6 +154,24 @@
   }
 }
 
+.scheda-vignette {
+  margin: 0.75rem 0 0;
+  text-align: center;
+}
+
+.scheda-vignette img {
+  max-width: 100%;
+  height: auto;
+  border: 1px solid var(--bordo);
+  border-radius: 0.45rem;
+}
+
+.scheda-vignette figcaption {
+  margin-top: 0.35rem;
+  font-size: 0.82rem;
+  color: var(--mute);
+}
+
 .scheda-print-credit {
   display: none;
 }

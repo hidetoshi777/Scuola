@@ -4,6 +4,7 @@
     "Tavola 2 — Peso specifico = massa ÷ volume. Stesso volume, massa diversa.",
     "Tavola 3 — Alluminio leggero, acciaio resistente, ghisa fragile ma buona in fusione.",
     "Tavola 4 — Il peso dipende dalla quantità; il peso specifico è una proprietà del materiale.",
+    "Tavola 5 — Produzione: ghisa (altoforno) vs acciaio (raffinazione). Calcolo: stanza 4×5 m, lamiera 2 mm ≈ 314 kg.",
   ];
 
   const pages = Array.from(document.querySelectorAll(".fumetto-page"));
