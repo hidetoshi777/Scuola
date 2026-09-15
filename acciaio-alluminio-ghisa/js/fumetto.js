@@ -14,7 +14,7 @@
   const nextBtn = document.getElementById("fumetto-next");
   const dotsWrap = document.getElementById("fumetto-dots");
   const viewport = document.getElementById("fumetto-viewport");
-  if (!pages.length || !viewport) return;
+  if (!pages.length || !viewport || !prevBtn || !nextBtn || !dotsWrap) return;
 
   let index = 0;
   let busy = false;
@@ -71,8 +71,11 @@
   function go(next, forcedDir) {
     const target = Math.max(0, Math.min(total - 1, next));
     if (target === index || busy) return;
-    if (zoom && zoom.isZoomed()) zoom.reset();
+    if (zoom && zoom.isZoomed()) {
+      zoom.reset();
+    }
     const dir = forcedDir != null ? forcedDir : target > index ? 1 : -1;
+    if (window.AudioUi) window.AudioUi.beep(target === total - 1 ? "win" : "page");
 
     if (reduceMotion) {
       settle(target);
@@ -80,84 +83,149 @@
     }
 
     busy = true;
-    const out = pages[index];
-    const inn = pages[target];
-    clearFlipClasses(out);
-    clearFlipClasses(inn);
-    out.classList.add(dir > 0 ? "is-flip-out-next" : "is-flip-out-prev");
-    inn.classList.add(dir > 0 ? "is-flip-in-next" : "is-flip-in-prev");
-    inn.classList.add("is-active");
-    inn.setAttribute("aria-hidden", "false");
-    out.setAttribute("aria-hidden", "true");
+    syncChrome();
+    const outgoing = pages[index];
+    const incoming = pages[target];
+    clearFlipClasses(outgoing);
+    clearFlipClasses(incoming);
+    incoming.classList.add("is-active");
+    incoming.setAttribute("aria-hidden", "false");
+    outgoing.classList.add(dir === 1 ? "is-flip-out-next" : "is-flip-out-prev");
+    incoming.classList.add(dir === 1 ? "is-flip-in-next" : "is-flip-in-prev");
 
-    const onEnd = (e) => {
-      if (e.target !== out && e.target !== inn) return;
-      out.removeEventListener("animationend", onEnd);
-      inn.removeEventListener("animationend", onEnd);
+    let done = false;
+    const finish = () => {
+      if (done) return;
+      done = true;
+      outgoing.removeEventListener("animationend", finish);
       settle(target);
     };
-    out.addEventListener("animationend", onEnd);
-    inn.addEventListener("animationend", onEnd);
-    syncChrome();
+    outgoing.addEventListener("animationend", finish);
+    window.setTimeout(finish, 650);
   }
 
-  prevBtn.addEventListener("click", () => go(index - 1));
-  nextBtn.addEventListener("click", () => go(index + 1));
+  prevBtn.addEventListener("click", () => go(index - 1, -1));
+  nextBtn.addEventListener("click", () => go(index + 1, 1));
 
-  let touchStartX = 0;
+  document.addEventListener("keydown", (event) => {
+    const tag = event.target && event.target.tagName;
+    if (tag === "INPUT" || tag === "TEXTAREA" || tag === "SELECT") return;
+    if (event.key === "ArrowRight" || event.key === "PageDown") {
+      event.preventDefault();
+      go(index + 1, 1);
+    } else if (event.key === "ArrowLeft" || event.key === "PageUp") {
+      event.preventDefault();
+      go(index - 1, -1);
+    }
+  });
+
+  let startX = 0;
+  let startY = 0;
   viewport.addEventListener(
     "touchstart",
-    (e) => {
-      if (zoom && zoom.isZoomed()) return;
-      touchStartX = e.changedTouches[0].screenX;
+    (event) => {
+      if (event.touches.length > 1) return;
+      const t = event.changedTouches[0];
+      startX = t.clientX;
+      startY = t.clientY;
     },
     { passive: true }
   );
   viewport.addEventListener(
     "touchend",
-    (e) => {
-      if (zoom && zoom.isZoomed()) return;
-      const dx = e.changedTouches[0].screenX - touchStartX;
-      if (Math.abs(dx) < 40) return;
-      if (dx < 0) go(index + 1);
-      else go(index - 1);
+    (event) => {
+      if (zoom && zoom.blocksNav()) return;
+      if (event.touches.length > 0) return;
+      const t = event.changedTouches[0];
+      const dx = t.clientX - startX;
+      const dy = t.clientY - startY;
+      if (Math.abs(dx) < 40 || Math.abs(dx) < Math.abs(dy)) return;
+      if (dx < 0) go(index + 1, 1);
+      else go(index - 1, -1);
     },
     { passive: true }
   );
 
+  viewport.addEventListener("click", (event) => {
+    if (busy) return;
+    if (zoom && zoom.blocksNav()) return;
+    const rect = viewport.getBoundingClientRect();
+    const x = event.clientX - rect.left;
+    if (x > rect.width * 0.66) go(index + 1, 1);
+    else if (x < rect.width * 0.33) go(index - 1, -1);
+  });
+
   const stage = document.getElementById("fumetto-stage");
   const fullBtn = document.getElementById("fumetto-fullscreen");
-  if (fullBtn && stage) {
-    const immersive = () => {
-      stage.classList.add("is-immersive");
-      document.body.classList.add("fumetto-immersive-lock");
-      fullBtn.setAttribute("aria-pressed", "true");
-      fullBtn.textContent = "Esci";
-    };
-    const exitImmersive = () => {
-      stage.classList.remove("is-immersive");
-      document.body.classList.remove("fumetto-immersive-lock");
-      fullBtn.setAttribute("aria-pressed", "false");
-      fullBtn.textContent = "Schermo intero";
-    };
-    fullBtn.addEventListener("click", () => {
+
+  function stageIsFullscreen() {
+    const el = document.fullscreenElement || document.webkitFullscreenElement;
+    return el === stage || (stage && stage.classList.contains("is-immersive"));
+  }
+
+  function setImmersive(on) {
+    if (!stage) return;
+    stage.classList.toggle("is-immersive", on);
+    document.documentElement.classList.toggle("fumetto-immersive-lock", on);
+    document.body.classList.toggle("fumetto-immersive-lock", on);
+  }
+
+  function syncFullscreenLabel() {
+    if (!fullBtn) return;
+    const on = stageIsFullscreen();
+    fullBtn.setAttribute("aria-pressed", String(on));
+    fullBtn.textContent = on ? "Esci" : "Schermo intero";
+  }
+
+  async function toggleFullscreen() {
+    if (!stage) return;
+    try {
       if (stage.classList.contains("is-immersive")) {
-        if (document.fullscreenElement) document.exitFullscreen();
-        exitImmersive();
-        return;
-      }
-      if (stage.requestFullscreen) {
-        stage.requestFullscreen().then(immersive).catch(immersive);
+        setImmersive(false);
+      } else if (document.fullscreenElement === stage || document.webkitFullscreenElement === stage) {
+        if (document.exitFullscreen) await document.exitFullscreen();
+        else if (document.webkitExitFullscreen) document.webkitExitFullscreen();
+      } else if (stage.requestFullscreen && document.fullscreenEnabled !== false) {
+        await stage.requestFullscreen();
+      } else if (stage.webkitRequestFullscreen) {
+        stage.webkitRequestFullscreen();
+        setTimeout(() => {
+          if (!document.fullscreenElement && !document.webkitFullscreenElement) {
+            setImmersive(true);
+            syncFullscreenLabel();
+          }
+        }, 120);
       } else {
-        immersive();
+        setImmersive(true);
       }
-    });
-    document.addEventListener("fullscreenchange", () => {
-      if (!document.fullscreenElement && stage.classList.contains("is-immersive")) {
-        exitImmersive();
-      }
+    } catch (err) {
+      setImmersive(true);
+    }
+    syncFullscreenLabel();
+  }
+
+  if (fullBtn) {
+    fullBtn.addEventListener("click", (event) => {
+      event.stopPropagation();
+      toggleFullscreen();
     });
   }
 
-  syncChrome();
+  document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape" && stage && stage.classList.contains("is-immersive")) {
+      setImmersive(false);
+      syncFullscreenLabel();
+    }
+  });
+  document.addEventListener("fullscreenchange", () => {
+    if (document.fullscreenElement === stage) setImmersive(false);
+    syncFullscreenLabel();
+  });
+  document.addEventListener("webkitfullscreenchange", () => {
+    if (document.webkitFullscreenElement === stage) setImmersive(false);
+    syncFullscreenLabel();
+  });
+
+  syncFullscreenLabel();
+  settle(0);
 })();
