@@ -41,6 +41,13 @@
   box-shadow: 0 16px 0 rgba(0, 0, 0, 0.22);
 }
 
+@media (min-width: 960px) {
+  .fumetto-viewport {
+    max-height: min(82dvh, 56rem);
+    width: min(100%, calc(min(82dvh, 56rem) * 0.75));
+  }
+}
+
 .fumetto-viewport.has-zoom .fumetto-page img {
   transform-origin: center center;
   will-change: transform;
