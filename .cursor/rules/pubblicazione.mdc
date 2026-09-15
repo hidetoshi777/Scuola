@@ -21,7 +21,7 @@ alwaysApply: true
 - **Citazione**: in home dell’attività e sulla cartellina scaffale (`citazione` in `ATTIVITA_WEB`).
 - **Fumetto = tavole illustrate obbligatorie** quando c’è un fumetto: immagini generate da noi (GenerateImage), più vignette per tavola, trama minima, sfoglia pagina, schermo intero. **Numero di tavole da 4 a 8** secondo complessità (per un pezzo facilissimo vanno bene 4). Testo nelle tavole in italiano; nelle lezioni di **lingua** le nuvolette possono essere nella lingua da imparare, con traduzione italiana visibile. In fullscreen la tavola deve usare lo spazio liberato (immagine più grande). **Stampa tutto obbligatoria** (pulsante + `../js/fumetto-print.js`, tutte le tavole). **Vietato** il solo placeholder HTML al posto delle tavole.
 - **Non sempre la suite completa**: se il Prof chiede solo vignette / solo un pezzo, **non** costruire Imparare + Lab + Gioco. Basta il pezzo, lo scaffale e il credito.
-- **Terza e quarta professionale**: livello **terra terra** (tipo terza media), anche se gli alunni hanno ~17 anni. Frasi cortissime, visivo, niente testi da liceo.
+- **Terza e quarta professionale**: livello **terra terra** (tipo terza media), anche se gli alunni hanno ~17 anni. Frasi corte, visivo, niente testi da liceo. Nei testi **pubblici** (scaffale, meta, pagine) non scrivere «facilissimo», «terra terra», «cortissime».
 - **Tema scuro di default** nelle attività web; chiaro opzionale via toggle.
 - **Layout diversi (obbligatorio)**: ogni attività cambia composizione (non lo stesso template con colori nuovi).
 - **Gioco = didattico**: deve far ripassare contenuti. Ok formati diversi dal quiz (memory, ordina eventi…). **No arcade puro** senza apprendimento. Se manca un’alternativa solida → **domande/risposte**.

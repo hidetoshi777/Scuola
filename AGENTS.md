@@ -8,7 +8,9 @@ Per PEI e lavori su alunni specifici dell’a.s. **2026/2027** (Ferraris Acireal
 
 ## Terza e quarta professionale (livello)
 
-Le classi **terza AM** e **quarta AM** (Ferraris Acireale, professionale) hanno circa **17 anni**, ma il livello è **terra terra terra**: tipo **terza media**, spesso più basso. Frasi cortissime, tanto visivo, niente paragrafi, niente lessico da liceo. Vale per inglese, italiano, storia: si spiega come a 13 anni, anche se anagraficamente sono grandi.
+Le classi **terza AM** e **quarta AM** (Ferraris Acireale, professionale) hanno circa **17 anni**, ma il livello è **terra terra terra**: tipo **terza media**, spesso più basso. Frasi corte, tanto visivo, niente paragrafi, niente lessico da liceo. Vale per inglese, italiano, storia: si spiega come a 13 anni, anche se anagraficamente sono grandi.
+
+**Testi pubblici** (scaffale, meta, pagine, footer): niente «facilissimo», «terra terra», «cortissime» o tono da PEI. Il livello basso si fa nel materiale, non si scrive.
 
 ## Struttura: non sempre completa
 
