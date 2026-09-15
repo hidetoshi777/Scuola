@@ -4,6 +4,7 @@
     "Tavola 2 — Il nome: My name is… / What’s your name?",
     "Tavola 3 — Come stai: How are you? / I’m fine, thanks.",
     "Tavola 4 — Piacere: Nice to meet you. Poi ripeti tu.",
+    "Tavola 5 — Due frasi in più: My favourite singer is… / In my free time I like…",
   ];
 
   const pages = Array.from(document.querySelectorAll(".fumetto-page"));
