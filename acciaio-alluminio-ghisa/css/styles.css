@@ -1,0 +1,461 @@
+/* Acciaio · Alluminio · Ghisa — layout banco laboratorio (mobile first) */
+
+:root {
+  --acciaio: #5c6b7a;
+  --alluminio: #b8c5d4;
+  --ghisa: #3d454d;
+  --fiamma: #e86c2a;
+  --bg: #12161c;
+  --carta: #1a2129;
+  --testo: #eef2f7;
+  --mute: #9aa8b8;
+  --bordo: #2e3844;
+  --tag: var(--fiamma);
+  --btn: var(--fiamma);
+  --btn-text: #1a1008;
+  font-family: "IBM Plex Sans", system-ui, sans-serif;
+  color-scheme: dark;
+}
+
+[data-theme="light"] {
+  --bg: #eef1f5;
+  --carta: #fff;
+  --testo: #1a2129;
+  --mute: #5a6570;
+  --bordo: #c5cdd6;
+  color-scheme: light;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  min-height: 100dvh;
+  background: var(--bg);
+  color: var(--testo);
+  line-height: 1.5;
+}
+
+body.reduced-motion * {
+  animation-duration: 0.01ms !important;
+  transition-duration: 0.01ms !important;
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
+}
+
+.skip-link:focus {
+  position: fixed;
+  z-index: 999;
+  top: 0.5rem;
+  left: 0.5rem;
+  padding: 0.5rem 0.75rem;
+  background: var(--carta);
+  border: 2px solid var(--tag);
+  clip: auto;
+  width: auto;
+  height: auto;
+}
+
+.met-shell {
+  display: grid;
+  grid-template-columns: 1fr;
+  min-height: 100dvh;
+}
+
+@media (min-width: 768px) {
+  .met-shell {
+    grid-template-columns: 4.5rem 1fr;
+  }
+}
+
+.met-rail {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  padding: 0.65rem 1rem;
+  background: linear-gradient(90deg, var(--ghisa), #252c35 40%, var(--acciaio));
+  border-bottom: 3px solid var(--fiamma);
+}
+
+@media (min-width: 768px) {
+  .met-rail {
+    flex-direction: column;
+    justify-content: flex-start;
+    padding: 1rem 0.5rem;
+    border-bottom: none;
+    border-right: 3px solid var(--fiamma);
+    position: sticky;
+    top: 0;
+    height: 100dvh;
+  }
+}
+
+.met-brand {
+  font-weight: 800;
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  text-decoration: none;
+  color: #fff;
+  writing-mode: horizontal-tb;
+}
+
+@media (min-width: 768px) {
+  .met-brand {
+    writing-mode: vertical-rl;
+    transform: rotate(180deg);
+    font-size: 0.65rem;
+    margin-bottom: 1rem;
+  }
+}
+
+.met-nav {
+  display: flex;
+  gap: 0.35rem;
+  flex-wrap: wrap;
+}
+
+@media (min-width: 768px) {
+  .met-nav {
+    flex-direction: column;
+    width: 100%;
+  }
+}
+
+.met-nav a {
+  display: block;
+  padding: 0.45rem 0.65rem;
+  border-radius: 0.4rem;
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 0.82rem;
+  color: #e8edf2;
+  border: 1px solid transparent;
+}
+
+.met-nav a[aria-current="page"] {
+  background: rgba(232, 108, 42, 0.25);
+  border-color: var(--fiamma);
+}
+
+.met-nav a:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.theme-toggle {
+  font: inherit;
+  font-weight: 700;
+  font-size: 0.75rem;
+  padding: 0.4rem 0.55rem;
+  border-radius: 0.35rem;
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  background: rgba(0, 0, 0, 0.25);
+  color: #fff;
+  cursor: pointer;
+}
+
+.met-main {
+  padding: 1rem 1rem 2rem;
+  max-width: 46rem;
+  margin-inline: auto;
+  width: 100%;
+}
+
+.met-hero {
+  position: relative;
+  border-radius: 0.85rem;
+  overflow: hidden;
+  margin-bottom: 1.25rem;
+  border: 2px solid var(--bordo);
+}
+
+.met-hero img {
+  width: 100%;
+  height: auto;
+  display: block;
+  max-height: 12rem;
+  object-fit: cover;
+}
+
+.met-hero-copy {
+  position: relative;
+  padding: 1rem 1.1rem 1.2rem;
+  background: var(--carta);
+}
+
+.met-hero.has-bg .met-hero-copy {
+  margin-top: -4rem;
+  background: linear-gradient(to top, rgba(18, 22, 28, 0.97) 70%, transparent);
+  text-shadow: 0 1px 12px rgba(0, 0, 0, 0.8);
+}
+
+[data-theme="light"] .met-hero.has-bg .met-hero-copy {
+  background: linear-gradient(to top, rgba(255, 255, 255, 0.97) 75%, transparent);
+  text-shadow: none;
+}
+
+.met-kicker {
+  margin: 0;
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  color: var(--fiamma);
+  text-transform: uppercase;
+}
+
+.met-hero h1 {
+  margin: 0.25rem 0;
+  font-size: clamp(1.35rem, 4vw, 1.75rem);
+  line-height: 1.15;
+}
+
+.met-lead {
+  margin: 0;
+  color: var(--mute);
+  font-size: 0.95rem;
+}
+
+.met-quote {
+  margin: 0.75rem 0 0;
+  padding-left: 0.75rem;
+  border-left: 3px solid var(--alluminio);
+  font-style: italic;
+  font-size: 0.92rem;
+}
+
+.met-path {
+  display: grid;
+  gap: 0.65rem;
+}
+
+.met-card {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 0.85rem;
+  align-items: center;
+  padding: 0.85rem 1rem;
+  background: var(--carta);
+  border: 2px solid var(--bordo);
+  border-radius: 0.65rem;
+  text-decoration: none;
+  color: inherit;
+  transition: border-color 0.15s;
+}
+
+.met-card:hover {
+  border-color: var(--fiamma);
+}
+
+.met-card-num {
+  font-weight: 800;
+  font-size: 1.4rem;
+  color: var(--fiamma);
+  line-height: 1;
+}
+
+.met-card h2 {
+  margin: 0;
+  font-size: 1.05rem;
+}
+
+.met-card p {
+  margin: 0.2rem 0 0;
+  font-size: 0.88rem;
+  color: var(--mute);
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.35rem;
+  padding: 0.55rem 1rem;
+  border-radius: 0.45rem;
+  font-weight: 800;
+  font-size: 0.92rem;
+  border: 2px solid transparent;
+  cursor: pointer;
+  text-decoration: none;
+  font-family: inherit;
+}
+
+.btn-primary {
+  background: var(--btn);
+  color: var(--btn-text);
+}
+
+.btn-secondary {
+  background: transparent;
+  border-color: var(--bordo);
+  color: var(--testo);
+}
+
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+
+.site-footer {
+  margin-top: 2rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--bordo);
+  font-size: 0.82rem;
+  color: var(--mute);
+}
+
+.site-footer p {
+  margin: 0;
+}
+
+/* Gioco quiz */
+.gioco-poster {
+  border-radius: 0.65rem;
+  border: 2px solid var(--bordo);
+  overflow: hidden;
+  margin-bottom: 1rem;
+}
+
+.gioco-poster img {
+  width: 100%;
+  display: block;
+}
+
+.gioco-regole {
+  background: var(--carta);
+  border: 2px solid var(--bordo);
+  border-radius: 0.65rem;
+  padding: 1rem;
+  margin-bottom: 1rem;
+}
+
+.gioco-regole h2 {
+  margin-top: 0;
+  font-size: 1.1rem;
+}
+
+.gioco-regole ol {
+  margin: 0.5rem 0 0;
+  padding-left: 1.2rem;
+}
+
+.gioco-regole li {
+  margin-bottom: 0.35rem;
+}
+
+.quiz-box {
+  background: var(--carta);
+  border: 2px solid var(--bordo);
+  border-radius: 0.65rem;
+  padding: 1rem;
+}
+
+.quiz-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-weight: 800;
+  font-size: 0.85rem;
+  color: var(--mute);
+  margin-bottom: 0.5rem;
+}
+
+#quiz-testo {
+  font-weight: 700;
+  margin: 0 0 0.75rem;
+}
+
+#quiz-opzioni {
+  display: grid;
+  gap: 0.45rem;
+}
+
+.quiz-opt {
+  text-align: left;
+  padding: 0.65rem 0.75rem;
+  border-radius: 0.45rem;
+  border: 2px solid var(--bordo);
+  background: var(--bg);
+  color: var(--testo);
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.quiz-opt.is-ok {
+  border-color: #3d9a5f;
+  background: rgba(61, 154, 95, 0.2);
+}
+
+.quiz-opt.is-ko {
+  border-color: #c44;
+  background: rgba(200, 68, 68, 0.15);
+}
+
+#quiz-feedback {
+  margin: 0.65rem 0 0;
+  font-size: 0.9rem;
+  color: var(--mute);
+  min-height: 2.5em;
+}
+
+.fumetto-intro h1 {
+  margin: 0.2rem 0;
+}
+
+.fumetto-intro .lead {
+  color: var(--mute);
+  margin: 0;
+}
+
+.fumetto-hint {
+  font-size: 0.82rem;
+  color: var(--mute);
+  margin: 0.35rem 0 0;
+}
+
+.fumetto-immersive-lock {
+  overflow: hidden;
+}
+
+.fumetto-reader.is-immersive,
+.fumetto-reader:fullscreen {
+  position: fixed;
+  inset: 0;
+  z-index: 500;
+  background: #0a0e12;
+  padding: 0.5rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.fumetto-reader.is-immersive .fumetto-viewport,
+.fumetto-reader:fullscreen .fumetto-viewport {
+  flex: 1;
+  max-height: none;
+}
+
+.fumetto-reader.is-immersive .fumetto-controls,
+.fumetto-reader:fullscreen .fumetto-controls,
+.fumetto-reader.is-immersive .fumetto-hint,
+.fumetto-reader:fullscreen .fumetto-hint {
+  display: none;
+}

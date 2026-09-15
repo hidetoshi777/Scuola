@@ -192,6 +192,22 @@ window.ATTIVITA_WEB = [
     adesivo: "st-fumetto",
     extra: [{ label: "Gioco", url: "presentazioni-inglese/gioco.html" }],
   },
+  {
+    titolo: "Acciaio, alluminio e ghisa",
+    materia: "Tecnologia",
+    classe: "Quarta superiore · professionale",
+    descrizione: "Peso e peso specifico: scheda stampabile, fumetto in quattro tavole e gioco in classe «Chi pesa di più?» con quiz di ripasso.",
+    citazione: "Stesso volume, peso diverso: conta il materiale.",
+    url: "acciaio-alluminio-ghisa/",
+    copertina: "acciaio-alluminio-ghisa/img/og-share.jpg",
+    tinta: "scienze",
+    adesivo: "st-pianeta",
+    extra: [
+      { label: "Scheda", url: "acciaio-alluminio-ghisa/scheda.html" },
+      { label: "Fumetto", url: "acciaio-alluminio-ghisa/fumetto.html" },
+      { label: "Gioco", url: "acciaio-alluminio-ghisa/gioco.html" },
+    ],
+  },
 ];
 
 /* Lavori Canva per materia. pp = numero di pagine, id = design ID Canva.

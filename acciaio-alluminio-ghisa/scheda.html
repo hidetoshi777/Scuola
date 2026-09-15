@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="color-scheme" content="dark light">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <title>Scheda · Acciaio, alluminio e ghisa | Scuola</title>
+  <meta name="description" content="Scheda stampabile: obiettivi, tabella materiali, peso e peso specifico, esercizi e soluzioni per il docente.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/scheda.css">
+</head>
+<body>
+  <a class="skip-link visually-hidden" href="#contenuto">Salta al contenuto</a>
+
+  <div class="met-shell">
+    <aside class="met-rail no-print" aria-label="Menu">
+      <a class="met-brand" href="index.html">Fe · Al · Gh</a>
+      <nav class="met-nav" aria-label="Sezioni">
+        <a href="index.html">Home</a>
+        <a href="scheda.html">Scheda</a>
+        <a href="fumetto.html">Fumetto</a>
+        <a href="gioco.html">Gioco</a>
+      </nav>
+      <button type="button" class="theme-toggle" data-theme-toggle aria-pressed="false">Chiaro</button>
+    </aside>
+
+    <main id="contenuto" class="scheda-wrap" tabindex="-1">
+      <div class="scheda-toolbar no-print">
+        <button type="button" class="btn btn-primary" onclick="window.print()">Stampa scheda</button>
+        <a class="btn btn-secondary" href="fumetto.html">Fumetto</a>
+        <a class="btn btn-secondary" href="gioco.html">Gioco</a>
+      </div>
+
+      <p class="scheda-nota-doc no-print">Docente: apri le tendine «Soluzione» solo per correggere o per stampare la versione con risposte.</p>
+
+      <header class="scheda-head">
+        <div>
+          <h1>Acciaio, alluminio e ghisa</h1>
+          <p class="scheda-meta">Quarta professionale · Tecnologia · Prof. Rossano Bella</p>
+        </div>
+      </header>
+
+      <section class="scheda-section" aria-labelledby="obiettivi">
+        <h2 id="obiettivi">Obiettivi</h2>
+        <ul>
+          <li>Riconoscere <strong>acciaio</strong>, <strong>alluminio</strong> e <strong>ghisa</strong> e un uso tipico di ciascuno.</li>
+          <li>Distinguere <strong>peso</strong> (forza / quantità che senti sulla bilancia) e <strong>peso specifico</strong> (proprietà del materiale).</li>
+          <li>Usare valori indicativi di peso specifico (kg/dm³) per confrontare materiali a parità di volume.</li>
+        </ul>
+      </section>
+
+      <section class="scheda-section" aria-labelledby="tabella">
+        <h2 id="tabella">Tabella materiali (sintesi)</h2>
+        <table class="tabella-materiali">
+          <thead>
+            <tr>
+              <th scope="col">Materiale</th>
+              <th scope="col">Di cosa è fatto / come si ottiene</th>
+              <th scope="col">Carattere</th>
+              <th scope="col">Esempio d’uso</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Acciaio</strong></td>
+              <td>Lega di ferro con carbonio (e altri elementi)</td>
+              <td>Resistente, duro, un po’ pesante</td>
+              <td>Ponti, travi, utensili, bulloneria</td>
+            </tr>
+            <tr>
+              <td><strong>Alluminio</strong></td>
+              <td>Metallo leggero, buona resistenza alla corrosione</td>
+              <td>Leggero, duttile</td>
+              <td>Profili, lattine, parti di mezzi leggeri</td>
+            </tr>
+            <tr>
+              <td><strong>Ghisa</strong></td>
+              <td>Ferro fuso con più carbonio dell’acciaio</td>
+              <td>Dura ma fragile agli urti; ottima da fondere</td>
+              <td>Getti, tubi, piastre spesse, motori (blocchi)</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section class="scheda-section" aria-labelledby="peso">
+        <h2 id="peso">Peso e peso specifico</h2>
+        <div class="contrasto">
+          <div class="contrasto-box">
+            <strong>Peso (P)</strong>
+            Forza con cui la Terra attira un corpo. Dipende da <em>quanta</em> materia c’è e dalla gravità. Si misura in <strong>newton (N)</strong>. In laboratorio spesso usiamo la bilancia in <strong>kg</strong> (massa), ma parliamo di «peso» in senso quotidiano.
+          </div>
+          <div class="contrasto-box">
+            <strong>Peso specifico (γ)</strong>
+            Quanto è «denso» un materiale: massa per unità di volume. Formula: <strong>γ = m / V</strong>. Unità tipica: <strong>kg/dm³</strong> (uguale a g/cm³). Non dipende dalla forma del pezzo, solo dal materiale.
+          </div>
+        </div>
+        <p style="margin:0.65rem 0 0;font-size:0.9rem"><strong>Ricorda:</strong> due cubetti <em>uguali</em> di acciaio e alluminio hanno <em>volumi uguali</em> ma <em>pesi diversi</em> perché γ è diverso.</p>
+      </section>
+
+      <section class="scheda-section" aria-labelledby="valori">
+        <h2 id="valori">Valori tipici di peso specifico</h2>
+        <p style="margin:0 0 0.5rem">Valori indicativi (ordine di grandezza per la scuola):</p>
+        <table class="tabella-materiali">
+          <thead>
+            <tr>
+              <th scope="col">Materiale</th>
+              <th scope="col">γ circa (kg/dm³)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>Alluminio</td><td>≈ 2,7</td></tr>
+            <tr><td>Ghisa</td><td>≈ 7,0 – 7,4</td></tr>
+            <tr><td>Acciaio</td><td>≈ 7,8</td></tr>
+          </tbody>
+        </table>
+        <p style="margin:0.5rem 0 0;font-size:0.85rem;color:var(--mute)">A parità di volume, l’acciaio è il più pesante dei tre; l’alluminio il più leggero.</p>
+      </section>
+
+      <section class="scheda-section" aria-labelledby="esercizi">
+        <h2 id="esercizi">Esercizi</h2>
+
+        <div class="esercizio">
+          <p><strong>1.</strong> Tre cubetti hanno lo stesso volume (50 cm³). Ordina dal più leggero al più pesante: alluminio, acciaio, ghisa.</p>
+          <details class="soluzione-docente">
+            <summary>Soluzione (docente)</summary>
+            Alluminio (≈ 2,7 → circa 135 g) · Ghisa (≈ 7,2 → circa 360 g) · Acciaio (≈ 7,8 → circa 390 g). Ordine massa: alluminio &lt; ghisa &lt; acciaio.
+          </details>
+        </div>
+
+        <div class="esercizio">
+          <p><strong>2.</strong> Un blocco di acciaio ha volume 20 dm³. Stima la massa usando γ ≈ 7,8 kg/dm³.</p>
+          <details class="soluzione-docente">
+            <summary>Soluzione (docente)</summary>
+            m = γ × V = 7,8 × 20 = <strong>156 kg</strong> (stima).
+          </details>
+        </div>
+
+        <div class="esercizio">
+          <p><strong>3.</strong> Vero o falso? «Due pezzi di materiali diversi con la stessa massa hanno sempre lo stesso volume.»</p>
+          <details class="soluzione-docente">
+            <summary>Soluzione (docente)</summary>
+            <strong>Falso.</strong> A parità di massa, il materiale meno denso (alluminio) occupa più volume.
+          </details>
+        </div>
+
+        <div class="esercizio">
+          <p><strong>4.</strong> Completa: Il peso specifico è una proprietà del ______; il peso sulla bilancia dipende anche dalla ______ del pezzo.</p>
+          <details class="soluzione-docente">
+            <summary>Soluzione (docente)</summary>
+            materiale · quantità (massa/volume)
+          </details>
+        </div>
+      </section>
+
+      <section class="scheda-section" aria-labelledby="gioco-regole">
+        <h2 id="gioco-regole">Gioco in classe: «Chi pesa di più?»</h2>
+        <ol>
+          <li>Prepara tre campioni (o disegna tre cubetti uguali) di <strong>acciaio</strong>, <strong>alluminio</strong> e <strong>ghisa</strong> con etichette chiare.</li>
+          <li>Mostra che hanno la <strong>stessa forma</strong> (stesso volume). Chiedi: «Quale pesa di più?» — voto a mano alzata.</li>
+          <li>Pesa davanti alla classe (bilancia) e annota le masse. Collega al <strong>peso specifico</strong>.</li>
+          <li>Dividi in squadre: ogni squadra riceve una scheda con 3 domande veloci (ordina i materiali, vero/falso, stima massa).</li>
+          <li>Squadra con più risposte giuste: «campione del peso» della lezione. Ripassa con il <a href="gioco.html">quiz online</a> o il <a href="fumetto.html">fumetto</a>.</li>
+        </ol>
+        <p style="margin:0.5rem 0 0;font-size:0.88rem">Locandina e quiz: pagina <a href="gioco.html">Gioco</a>.</p>
+      </section>
+
+      <p class="scheda-print-credit" aria-hidden="true">Realizzato dal Prof. Rossano Bella</p>
+    </main>
+  </div>
+
+  <footer class="site-footer scheda-wrap no-print">
+    <p>Scheda stampabile. Realizzato dal Prof. Rossano Bella.</p>
+  </footer>
+
+  <script src="js/common.js" defer></script>
+</body>
+</html>
