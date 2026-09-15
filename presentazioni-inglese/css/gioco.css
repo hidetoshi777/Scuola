@@ -167,3 +167,11 @@
     font-size: 0.95rem;
   }
 }
+
+@media (min-width: 720px) {
+  .stop-stage,
+  .gioco-end {
+    width: min(100%, 36rem);
+    margin-inline: auto;
+  }
+}

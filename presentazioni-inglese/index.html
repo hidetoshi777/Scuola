@@ -28,28 +28,25 @@
 <body class="page-hello">
   <a class="skip-link visually-hidden" href="#contenuto">Salta al contenuto</a>
 
-  <div class="hello-top">
-    <header class="hello-clip">
-      <a class="hello-brand" href="index.html">
-        <span class="hello-clip-ring" aria-hidden="true"></span>
-        <span class="hello-clip-strap" aria-hidden="true"></span>
-        <span class="hello-badge">HELLO · MY NAME IS</span>
-      </a>
-      <button type="button" class="theme-toggle" data-theme-toggle aria-pressed="false">Chiaro</button>
-    </header>
+  <header class="hello-top">
+    <a class="hello-brand" href="index.html">
+      <span class="hello-badge">HELLO · MY NAME IS</span>
+    </a>
     <nav class="hello-nav" aria-label="Sezioni">
       <a href="index.html" aria-current="page">Fumetto</a>
       <a href="gioco.html">Gioco</a>
     </nav>
-  </div>
+    <button type="button" class="theme-toggle" data-theme-toggle aria-pressed="false">Chiaro</button>
+  </header>
 
   <main id="contenuto" class="hello-board" tabindex="-1">
     <header class="hello-intro">
       <h1 class="hello-mast">Ciao. Come ti chiami?</h1>
-      <p class="hello-lead">Cinque tavole sulle presentazioni. Ripeti a voce alta.</p>
+      <p class="hello-lead">Prima le tavole, poi le sei frasi. Ripeti a voce alta.</p>
       <blockquote class="hello-quote">Hello! My name is…</blockquote>
     </header>
 
+    <p class="hello-step">1 · Il fumetto</p>
     <section class="fumetto-reader" id="fumetto-stage" aria-roledescription="fumetto" aria-label="Presentazioni in inglese a fumetti">
       <div class="fumetto-toolbar">
         <p class="fumetto-status">Tavola <span id="fumetto-num">1</span> di 5</p>
@@ -88,17 +85,17 @@
     </section>
 
     <section class="hello-frasi" aria-labelledby="frasi-titolo">
-      <h2 id="frasi-titolo">Le 6 frasi da dire</h2>
-      <div class="frasi-grid">
-        <p class="frase"><b>Hello!</b> <span>Ciao!</span></p>
-        <p class="frase"><b>My name is…</b> <span>Mi chiamo…</span></p>
-        <p class="frase"><b>How are you?</b> <span>Come stai?</span></p>
-        <p class="frase"><b>Nice to meet you!</b> <span>Piacere!</span></p>
-        <p class="frase"><b>My favourite singer is…</b> <span>Il mio cantante preferito è…</span></p>
-        <p class="frase"><b>In my free time I like…</b> <span>Nel tempo libero mi piace…</span></p>
-      </div>
-      <div class="hero-actions" style="margin-top:0.85rem">
-        <a class="btn btn-primary" href="gioco.html">Gioco nel cortile</a>
+      <h2 id="frasi-titolo" class="hello-step">2 · Le 6 frasi da dire</h2>
+      <ol class="frasi-grid">
+        <li class="frase"><b>Hello!</b> <span>Ciao!</span></li>
+        <li class="frase"><b>My name is…</b> <span>Mi chiamo…</span></li>
+        <li class="frase"><b>How are you?</b> <span>Come stai?</span></li>
+        <li class="frase"><b>Nice to meet you!</b> <span>Piacere!</span></li>
+        <li class="frase"><b>My favourite singer is…</b> <span>Il mio cantante preferito è…</span></li>
+        <li class="frase"><b>In my free time I like…</b> <span>Nel tempo libero mi piace…</span></li>
+      </ol>
+      <div class="hero-actions">
+        <a class="btn btn-primary" href="gioco.html">3 · Gioco nel cortile</a>
       </div>
     </section>
   </main>
