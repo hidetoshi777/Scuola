@@ -208,8 +208,9 @@
     });
   }
 
-  function buildSchedina() {
+  function ensureSchedinaList() {
     if (!elSchedinaList) return;
+    if (elSchedinaList.children.length >= Object.keys(MATERIALI).length) return;
     elSchedinaList.innerHTML = "";
     Object.keys(MATERIALI).forEach((id) => {
       const li = document.createElement("li");
@@ -218,6 +219,19 @@
       li.innerHTML = `<span class="dens-sched-name">${m.label}</span><span class="dens-sched-val">${m.kgM3} kg/m³</span>`;
       elSchedinaList.appendChild(li);
     });
+  }
+
+  function syncSchedinaOffset() {
+    if (!elSchedina) return;
+    const collapsed = elSchedina.classList.contains("is-collapsed");
+    document.body.classList.toggle("dens-schedina-collapsed", collapsed);
+    const isSide = window.matchMedia("(min-width: 900px)").matches;
+    if (isSide) {
+      document.documentElement.style.removeProperty("--dens-schedina-h");
+      return;
+    }
+    const h = elSchedina.getBoundingClientRect().height;
+    document.documentElement.style.setProperty("--dens-schedina-h", `${Math.ceil(h)}px`);
   }
 
   elMaterialeChips.addEventListener("click", (e) => {
@@ -251,10 +265,15 @@
       toggle.addEventListener("click", () => {
         const collapsed = elSchedina.classList.toggle("is-collapsed");
         toggle.setAttribute("aria-expanded", String(!collapsed));
-        toggle.textContent = collapsed ? "Mostra" : "Nascondi";
+        toggle.textContent = collapsed ? "Mostra schedina materiali" : "Nascondi schedina";
+        syncSchedinaOffset();
       });
     }
   }
+
+  window.addEventListener("resize", () => {
+    syncSchedinaOffset();
+  });
 
   btnControlla.addEventListener("click", () => {
     if (bloccato) return;
@@ -279,8 +298,11 @@
   }
 
   buildMaterialeChips();
-  buildSchedina();
+  ensureSchedinaList();
+  syncSchedinaOffset();
   aggiornaScore();
   aggiornaDomanda();
+  evidenziaSchedina();
+  requestAnimationFrame(syncSchedinaOffset);
   elValore.focus();
 })();
