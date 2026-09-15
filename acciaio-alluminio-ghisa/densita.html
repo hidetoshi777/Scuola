@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="color-scheme" content="dark light">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <title>Peso specifico · Allenamento | Acciaio, alluminio e ghisa</title>
+  <meta name="description" content="Inserisci il peso specifico tipico di acciaio, alluminio o ghisa nelle unità kg/m³, kg/dm³ o g/cm³.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/densita.css">
+</head>
+<body>
+  <a class="skip-link visually-hidden" href="#contenuto">Salta al contenuto</a>
+
+  <div class="met-shell">
+    <aside class="met-rail" aria-label="Menu">
+      <a class="met-brand" href="index.html">Fe · Al · Gh</a>
+      <nav class="met-nav" aria-label="Sezioni">
+        <a href="index.html">Home</a>
+        <a href="scheda.html">Scheda</a>
+        <a href="fumetto.html">Fumetto</a>
+        <a href="gioco.html">Gioco</a>
+        <a href="densita.html">Densità</a>
+      </nav>
+      <button type="button" class="theme-toggle" data-theme-toggle aria-pressed="false">Chiaro</button>
+    </aside>
+
+    <main id="contenuto" class="met-main" tabindex="-1">
+      <p class="met-kicker">Laboratorio · peso specifico</p>
+      <h1>Quanto vale γ?</h1>
+      <p class="dens-lead">Scegli materiale e unità, scrivi il valore tipico e controlla.</p>
+
+      <div class="dens-score" aria-live="polite">
+        <span>Punti: <strong id="dens-punteggio">0</strong></span>
+        <span>Serie: <strong id="dens-serie">0</strong></span>
+      </div>
+
+      <button type="button" class="dens-mode btn btn-secondary" id="dens-allenamento" aria-pressed="true">
+        Allenamento: combinazioni a caso
+      </button>
+
+      <p class="dens-domanda" id="dens-domanda"></p>
+
+      <div class="dens-panel">
+        <fieldset class="dens-field" id="dens-materiale">
+          <legend>Materiale</legend>
+          <div class="dens-chips">
+            <button type="button" class="dens-chip" data-mat="acciaio" aria-pressed="false">Acciaio</button>
+            <button type="button" class="dens-chip" data-mat="alluminio" aria-pressed="false">Alluminio</button>
+            <button type="button" class="dens-chip" data-mat="ghisa" aria-pressed="false">Ghisa</button>
+          </div>
+        </fieldset>
+
+        <fieldset class="dens-field" id="dens-unita">
+          <legend>Unità (massa ÷ volume)</legend>
+          <div class="dens-chips">
+            <button type="button" class="dens-chip" data-unit="kg/m3" aria-pressed="false">kg/m³</button>
+            <button type="button" class="dens-chip" data-unit="kg/dm3" aria-pressed="false">kg/dm³</button>
+            <button type="button" class="dens-chip" data-unit="g/cm3" aria-pressed="false">g/cm³</button>
+          </div>
+        </fieldset>
+
+        <label class="dens-input-wrap" for="dens-valore">
+          <span class="dens-input-label">Valore numerico</span>
+          <input class="dens-input" id="dens-valore" name="valore" type="text" inputmode="decimal" autocomplete="off" placeholder="es. 7,85">
+        </label>
+
+        <div class="dens-actions">
+          <button type="button" class="btn btn-primary" id="dens-controlla">Controlla</button>
+          <button type="button" class="btn btn-secondary" id="dens-prossima" hidden>Prossima</button>
+        </div>
+
+        <p class="dens-feedback" id="dens-feedback" aria-live="polite"></p>
+        <p class="dens-aiuto" id="dens-aiuto" hidden></p>
+      </div>
+    </main>
+  </div>
+
+  <footer class="site-footer met-main">
+    <p>Allenamento sul peso specifico. Realizzato dal Prof. Rossano Bella.</p>
+  </footer>
+
+  <script src="js/common.js" defer></script>
+  <script src="js/densita.js" defer></script>
+</body>
+</html>

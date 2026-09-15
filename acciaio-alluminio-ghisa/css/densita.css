@@ -1,0 +1,151 @@
+.dens-lead {
+  margin: 0 0 0.75rem;
+  color: var(--mute);
+  font-size: 0.95rem;
+}
+
+.dens-score {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-bottom: 0.65rem;
+  font-weight: 700;
+  font-size: 0.9rem;
+}
+
+.dens-score strong {
+  color: var(--fiamma);
+}
+
+.dens-mode {
+  width: 100%;
+  margin-bottom: 0.85rem;
+  text-align: left;
+  font-size: 0.88rem;
+}
+
+.dens-mode[aria-pressed="true"] {
+  border-color: var(--fiamma);
+  background: color-mix(in srgb, var(--fiamma) 18%, var(--carta));
+}
+
+.dens-domanda {
+  font-weight: 800;
+  font-size: 1.05rem;
+  margin: 0 0 0.85rem;
+  line-height: 1.35;
+}
+
+.dens-panel {
+  background: var(--carta);
+  border: 2px solid var(--bordo);
+  border-radius: 0.65rem;
+  padding: 1rem;
+}
+
+.dens-field {
+  border: none;
+  margin: 0 0 1rem;
+  padding: 0;
+}
+
+.dens-field legend {
+  font-weight: 800;
+  font-size: 0.85rem;
+  margin-bottom: 0.45rem;
+  color: var(--mute);
+}
+
+.dens-field.is-locked .dens-chip {
+  opacity: 0.55;
+  pointer-events: none;
+}
+
+.dens-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+}
+
+.dens-chip {
+  flex: 1 1 5.5rem;
+  min-height: 2.75rem;
+  padding: 0.5rem 0.65rem;
+  border-radius: 0.45rem;
+  border: 2px solid var(--bordo);
+  background: var(--bg);
+  color: var(--testo);
+  font: inherit;
+  font-weight: 700;
+  font-size: 0.92rem;
+  cursor: pointer;
+}
+
+.dens-chip[aria-pressed="true"] {
+  border-color: var(--fiamma);
+  background: color-mix(in srgb, var(--fiamma) 22%, var(--bg));
+}
+
+.dens-input-wrap {
+  display: block;
+  margin-bottom: 0.85rem;
+}
+
+.dens-input-label {
+  display: block;
+  font-weight: 800;
+  font-size: 0.85rem;
+  margin-bottom: 0.35rem;
+  color: var(--mute);
+}
+
+.dens-input {
+  width: 100%;
+  max-width: 14rem;
+  font: inherit;
+  font-size: 1.25rem;
+  font-weight: 700;
+  padding: 0.55rem 0.65rem;
+  border-radius: 0.45rem;
+  border: 2px solid var(--bordo);
+  background: var(--bg);
+  color: var(--testo);
+}
+
+.dens-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.dens-feedback {
+  margin: 0.5rem 0 0;
+  font-weight: 700;
+  min-height: 1.4em;
+}
+
+.dens-feedback.is-ok {
+  color: #3d9a5f;
+}
+
+.dens-feedback.is-near {
+  color: #c9a227;
+}
+
+.dens-feedback.is-ko {
+  color: #e07070;
+}
+
+.dens-feedback.is-warn {
+  color: var(--mute);
+}
+
+.dens-aiuto {
+  margin: 0.5rem 0 0;
+  padding: 0.55rem 0.65rem;
+  border-left: 3px solid var(--fiamma);
+  background: color-mix(in srgb, var(--fiamma) 10%, var(--carta));
+  font-size: 0.9rem;
+  color: var(--testo);
+}

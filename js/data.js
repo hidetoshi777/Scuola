@@ -196,7 +196,7 @@ window.ATTIVITA_WEB = [
     titolo: "Acciaio, alluminio e ghisa",
     materia: "Tecnologia",
     classe: "Quarta superiore · professionale",
-    descrizione: "Peso e peso specifico, produzione ghisa/acciaio e calcolo lamiera: scheda stampabile, fumetto in cinque tavole e gioco «Chi pesa di più?».",
+    descrizione: "Peso e peso specifico, produzione ghisa/acciaio e calcolo lamiera: scheda, fumetto, gioco in classe e allenamento interattivo sul valore di γ.",
     citazione: "Stesso volume, peso diverso: conta il materiale.",
     url: "acciaio-alluminio-ghisa/",
     copertina: "acciaio-alluminio-ghisa/img/og-share.jpg",
@@ -206,6 +206,7 @@ window.ATTIVITA_WEB = [
       { label: "Scheda", url: "acciaio-alluminio-ghisa/scheda.html" },
       { label: "Fumetto", url: "acciaio-alluminio-ghisa/fumetto.html" },
       { label: "Gioco", url: "acciaio-alluminio-ghisa/gioco.html" },
+      { label: "Densità", url: "acciaio-alluminio-ghisa/densita.html" },
     ],
   },
 ];

@@ -22,6 +22,7 @@ Realizzato dal Prof. Rossano Bella.
 - Scheda: https://hidetoshi777.github.io/Scuola/acciaio-alluminio-ghisa/scheda.html
 - Fumetto: https://hidetoshi777.github.io/Scuola/acciaio-alluminio-ghisa/fumetto.html
 - Gioco: https://hidetoshi777.github.io/Scuola/acciaio-alluminio-ghisa/gioco.html
+- Densità (allenamento γ): https://hidetoshi777.github.io/Scuola/acciaio-alluminio-ghisa/densita.html
 
 ## Struttura del repository
 
