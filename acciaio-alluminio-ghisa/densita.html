@@ -16,6 +16,38 @@
 <body class="page-densita">
   <a class="skip-link visually-hidden" href="#contenuto">Salta al contenuto</a>
 
+  <aside class="dens-schedina" id="dens-schedina" aria-label="Schedina materiali, densità in kg per metro cubo">
+    <div class="dens-schedina-head">
+      <div class="dens-schedina-titles">
+        <h2 class="dens-schedina-title">Materiali · densità in kg/m³</h2>
+        <p class="dens-schedina-hint">
+          <span class="dens-div-badge" aria-label="Per passare a kg per decimetro cubo o grammi per centimetro cubo">÷ 1000</span>
+          <span class="dens-schedina-hint-txt">per kg/dm³ o g/cm³</span>
+        </p>
+      </div>
+      <button type="button" class="dens-schedina-toggle" aria-expanded="true" aria-controls="dens-schedina-body">
+        Nascondi schedina
+      </button>
+    </div>
+    <div class="dens-schedina-body" id="dens-schedina-body">
+      <ul class="dens-schedina-list" id="dens-schedina-list">
+        <li data-sched-mat="acciaio"><span class="dens-sched-name">Acciaio</span><span class="dens-sched-val">7850 kg/m³</span></li>
+        <li data-sched-mat="ghisa"><span class="dens-sched-name">Ghisa</span><span class="dens-sched-val">7200 kg/m³</span></li>
+        <li data-sched-mat="rame"><span class="dens-sched-name">Rame</span><span class="dens-sched-val">8960 kg/m³</span></li>
+        <li data-sched-mat="ottone"><span class="dens-sched-name">Ottone</span><span class="dens-sched-val">8500 kg/m³</span></li>
+        <li data-sched-mat="alluminio"><span class="dens-sched-name">Alluminio</span><span class="dens-sched-val">2700 kg/m³</span></li>
+        <li data-sched-mat="titanio"><span class="dens-sched-name">Titanio</span><span class="dens-sched-val">4500 kg/m³</span></li>
+        <li data-sched-mat="piombo"><span class="dens-sched-name">Piombo</span><span class="dens-sched-val">11340 kg/m³</span></li>
+        <li data-sched-mat="zinco"><span class="dens-sched-name">Zinco</span><span class="dens-sched-val">7140 kg/m³</span></li>
+        <li data-sched-mat="nichel"><span class="dens-sched-name">Nichel</span><span class="dens-sched-val">8900 kg/m³</span></li>
+        <li data-sched-mat="vetro"><span class="dens-sched-name">Vetro</span><span class="dens-sched-val">2500 kg/m³</span></li>
+        <li data-sched-mat="pvc"><span class="dens-sched-name">PVC</span><span class="dens-sched-val">1400 kg/m³</span></li>
+        <li data-sched-mat="acqua"><span class="dens-sched-name">Acqua (riferimento)</span><span class="dens-sched-val">1000 kg/m³</span></li>
+      </ul>
+      <p class="dens-schedina-note">Valori indicativi tipici (officina / scuola).</p>
+    </div>
+  </aside>
+
   <div class="met-shell">
     <aside class="met-rail" aria-label="Menu">
       <a class="met-brand" href="index.html">Fe · Al · Gh</a>
@@ -30,26 +62,9 @@
     </aside>
 
     <main id="contenuto" class="met-main dens-main" tabindex="-1">
-      <aside class="dens-schedina" id="dens-schedina" aria-label="Schedina densità in kg per metro cubo">
-        <div class="dens-schedina-head">
-          <div>
-            <p class="dens-schedina-kicker">Riferimento</p>
-            <h2 class="dens-schedina-title">Solo kg/m³</h2>
-            <p class="dens-schedina-hint">Per kg/dm³ o g/cm³: <strong>÷ 1000</strong></p>
-          </div>
-          <button type="button" class="dens-schedina-toggle" aria-expanded="true" aria-controls="dens-schedina-body">
-            Nascondi
-          </button>
-        </div>
-        <div class="dens-schedina-body" id="dens-schedina-body">
-          <ul class="dens-schedina-list" id="dens-schedina-list"></ul>
-          <p class="dens-schedina-note">Valori indicativi tipici (officina / scuola).</p>
-        </div>
-      </aside>
-
       <p class="met-kicker">Laboratorio · proporzioni</p>
       <h1>Quanto vale γ?</h1>
-      <p class="dens-lead">Scegli materiale e unità, usa la schedina in kg/m³ e calcola il valore richiesto.</p>
+      <p class="dens-lead">La <strong>schedina in alto</strong> (o a destra su PC) elenca i kg/m³. Scegli materiale e unità, poi calcola con le proporzioni.</p>
 
       <div class="dens-score" aria-live="polite">
         <span>Punti: <strong id="dens-punteggio">0</strong></span>
@@ -93,7 +108,7 @@
     </main>
   </div>
 
-  <footer class="site-footer met-main">
+  <footer class="site-footer met-main dens-footer">
     <p>Allenamento sul peso specifico. Realizzato dal Prof. Rossano Bella.</p>
   </footer>
 
