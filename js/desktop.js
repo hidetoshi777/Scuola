@@ -218,6 +218,12 @@
         '<span class="cartellina-dove">' + esc(a.materia) + " · " + esc(a.classe) + "</span>" +
         adesivo(a.adesivo, a.tinta, a.titolo) +
         "</div>" +
+        (a.annoProf === 3 || a.annoProf === 4
+          ? '<span class="cartellina-bollino" data-anno="' + esc(String(a.annoProf)) + '"' +
+            ' title="' + esc(a.annoProf === 3 ? "Terza professionale" : "Quarta professionale") + '"' +
+            ' aria-label="' + esc(a.annoProf === 3 ? "Terza professionale" : "Quarta professionale") + '">' +
+            esc(String(a.annoProf)) + "</span>"
+          : "") +
         '<h3><a href="' + esc(a.url) + '">' + esc(a.titolo) + "</a></h3>" +
         "<p>" + esc(a.descrizione) + "</p>" +
         (altri ? '<div class="cartellina-altro">' + altri + "</div>" : "") +

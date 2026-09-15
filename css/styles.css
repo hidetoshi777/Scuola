@@ -482,6 +482,28 @@ h1 em {
 .cartellina:nth-child(4n + 4)::before { --tab: 5.6rem; }
 .cartellina:hover { transform: translateY(-4px); box-shadow: 0 1px 0 var(--bordo), 0 22px 34px -20px var(--ombra-dorso); }
 
+.cartellina-bollino {
+  position: absolute;
+  top: 0.55rem;
+  left: 0.55rem;
+  z-index: 3;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.85rem;
+  height: 1.85rem;
+  border-radius: 50%;
+  font-size: 0.95rem;
+  font-weight: 800;
+  line-height: 1;
+  color: #fff;
+  background: #c44f12;
+  border: 2px solid var(--carta);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.25);
+  pointer-events: none;
+}
+.cartellina-bollino[data-anno="4"] { background: #1a5a9e; }
+
 .cartellina-testa { display: flex; align-items: flex-start; justify-content: space-between; gap: 0.8rem; }
 .cartellina-dove {
   font-size: 0.73rem; font-weight: 700;

@@ -22,6 +22,7 @@ La cartella tipo (`index` + `imparare` + `fumetto` + `laboratorio` + `gioco`) va
 - **Non cancellare** i lavori già pubblicati: si aggiungono e si ordinano nuove cartelle.
 - **Niente rimandi** tra un lavoro e l’altro (niente link incrociati nella navigazione **interna** delle attività).
 - La homepage comune è **Lo scaffale** (`index.html` + `js/data.js`): dopo ogni nuova attività web, **registrala obbligatoriamente** in `window.ATTIVITA_WEB` (titolo, materia, descrizione, url, **copertina**, tinta, adesivo, extra). La `copertina` punta a `img/og-share.jpg` (o `.png`) dell’attività e compare sulla cartellina dello scaffale. Altrimenti la classe non la trova dallo scaffale.
+- **Raccoglitore professionale (obbligatorio per Ferraris AM)**: i lavori per **terza** o **quarta professionale** vanno **sia** sullo scaffale **sia** nel raccoglitore [`professionale/`](https://hidetoshi777.github.io/Scuola/professionale/). In `ATTIVITA_WEB` imposta sempre **`annoProf: 3`** o **`annoProf: 4`** (bollino sulla cartellina dello scaffale e sulle card del raccoglitore). Il raccoglitore legge `window.attivitaProfessionale()` da `data.js`; le card in HTML statico in `professionale/index.html` restano fallback se JS non parte — dopo ogni nuovo lavoro professionale aggiorna anche quel blocco (o lascia che `hub.js` rigeneri dalla lista). Filtri per **materia** sul raccoglitore. Link da dare alla classe professionale: **`https://hidetoshi777.github.io/Scuola/professionale/`** (non il solo scaffale generale).
 - In **ogni** lavoro per la scuola, nel footer (o credito visibile), scrivi sempre: **Realizzato dal Prof. Rossano Bella**.
 - **Stampe**: su ogni foglio stampato (fumetti, attestati, schede) il credito **Realizzato dal Prof. Rossano Bella** va in **piccolo** — i materiali non devono circolare anonimi in copisteria.
 - Per i prossimi lavori Scuola, **usa il MCP Canva** (lavori e risorse già presenti nell’account Canva del Prof.) quando servono grafiche, template, export o materiali già realizzati lì: non reinventare da zero se Canva ha già qualcosa di utile.
@@ -90,6 +91,7 @@ Sito base: `https://hidetoshi777.github.io/Scuola/`
 | Mazzini · Giovane Italia | https://hidetoshi777.github.io/Scuola/mazzini-giovane-italia/ | [Fumetto](https://hidetoshi777.github.io/Scuola/mazzini-giovane-italia/fumetto.html) · [Battaglia](https://hidetoshi777.github.io/Scuola/mazzini-giovane-italia/gioco.html) |
 | Origini della poesia | https://hidetoshi777.github.io/Scuola/origini-poesia-italiana/ | [Fumetto](https://hidetoshi777.github.io/Scuola/origini-poesia-italiana/fumetto.html) · [Percorso](https://hidetoshi777.github.io/Scuola/origini-poesia-italiana/gioco.html) |
 | Hello · Presentazioni | https://hidetoshi777.github.io/Scuola/presentazioni-inglese/ | [Gioco](https://hidetoshi777.github.io/Scuola/presentazioni-inglese/gioco.html) |
+| **Raccoglitore professionale AM** | https://hidetoshi777.github.io/Scuola/professionale/ | Terza e quarta AM (bollini 3 / 4) |
 
 I vecchi link alla radice (`/gioco.html`, ecc.) reindirizzano ancora alla rotazione terrestre.
 

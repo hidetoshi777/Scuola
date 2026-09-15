@@ -6,6 +6,10 @@ Realizzato dal Prof. Rossano Bella.
 
 ## Attività
 
+### Raccoglitore professionale (terza e quarta AM)
+
+- https://hidetoshi777.github.io/Scuola/professionale/
+
 ### Rotazione terrestre · Prima media
 
 - Home: https://hidetoshi777.github.io/Scuola/rotazione-terrestre/
