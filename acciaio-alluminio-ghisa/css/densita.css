@@ -1,3 +1,125 @@
+.page-densita .dens-main {
+  position: relative;
+}
+
+.dens-schedina {
+  position: sticky;
+  top: 0.25rem;
+  z-index: 30;
+  margin: 0 0 0.85rem;
+  padding: 0.65rem 0.75rem;
+  border-radius: 0.55rem;
+  border: 2px solid var(--fiamma);
+  background: color-mix(in srgb, var(--carta) 92%, var(--bg));
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+  backdrop-filter: blur(6px);
+}
+
+.dens-schedina.is-collapsed .dens-schedina-body {
+  display: none;
+}
+
+.dens-schedina.is-collapsed .dens-schedina-toggle {
+  /* label updated in JS optional — keep text via aria */
+}
+
+.dens-schedina-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 0.5rem;
+}
+
+.dens-schedina-kicker {
+  margin: 0;
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--fiamma);
+}
+
+.dens-schedina-title {
+  margin: 0.1rem 0 0;
+  font-size: 1rem;
+}
+
+.dens-schedina-hint {
+  margin: 0.2rem 0 0;
+  font-size: 0.8rem;
+  color: var(--mute);
+}
+
+.dens-schedina-toggle {
+  flex-shrink: 0;
+  font: inherit;
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 0.35rem 0.5rem;
+  border-radius: 0.35rem;
+  border: 1px solid var(--bordo);
+  background: var(--bg);
+  color: var(--testo);
+  cursor: pointer;
+}
+
+.dens-schedina-body {
+  margin-top: 0.5rem;
+}
+
+.dens-schedina-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  max-height: 9.5rem;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  font-size: 0.82rem;
+}
+
+.dens-schedina-list li {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.5rem;
+  padding: 0.28rem 0.35rem;
+  border-radius: 0.3rem;
+  border-bottom: 1px solid color-mix(in srgb, var(--bordo) 70%, transparent);
+}
+
+.dens-schedina-list li.is-current {
+  background: color-mix(in srgb, var(--fiamma) 20%, transparent);
+  font-weight: 800;
+}
+
+.dens-sched-name {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.dens-sched-val {
+  flex-shrink: 0;
+  font-variant-numeric: tabular-nums;
+  font-weight: 700;
+}
+
+.dens-schedina-note {
+  margin: 0.35rem 0 0;
+  font-size: 0.72rem;
+  color: var(--mute);
+}
+
+@media (min-width: 768px) {
+  .dens-schedina-list {
+    max-height: 11rem;
+    columns: 2;
+    column-gap: 0.75rem;
+  }
+
+  .dens-schedina-list li {
+    break-inside: avoid;
+  }
+}
+
 .dens-lead {
   margin: 0 0 0.75rem;
   color: var(--mute);
@@ -68,16 +190,16 @@
 }
 
 .dens-chip {
-  flex: 1 1 5.5rem;
-  min-height: 2.75rem;
-  padding: 0.5rem 0.65rem;
+  flex: 1 1 4.75rem;
+  min-height: 2.65rem;
+  padding: 0.45rem 0.55rem;
   border-radius: 0.45rem;
   border: 2px solid var(--bordo);
   background: var(--bg);
   color: var(--testo);
   font: inherit;
   font-weight: 700;
-  font-size: 0.92rem;
+  font-size: 0.85rem;
   cursor: pointer;
 }
 
@@ -123,6 +245,7 @@
   margin: 0.5rem 0 0;
   font-weight: 700;
   min-height: 1.4em;
+  line-height: 1.4;
 }
 
 .dens-feedback.is-ok {
@@ -148,4 +271,5 @@
   background: color-mix(in srgb, var(--fiamma) 10%, var(--carta));
   font-size: 0.9rem;
   color: var(--testo);
+  line-height: 1.45;
 }
