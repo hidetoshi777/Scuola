@@ -184,6 +184,7 @@ window.ATTIVITA_WEB = [
     titolo: "Hello — Presentazioni",
     materia: "Inglese",
     classe: "Terza superiore · professionale",
+    annoProf: 3,
     descrizione: "Cinque tavole per presentarsi in inglese: Hello, My name is, How are you, Nice to meet you, favourite singer, free time; con gioco nel cortile.",
     citazione: "Hello! My name is…",
     url: "presentazioni-inglese/",
@@ -196,6 +197,7 @@ window.ATTIVITA_WEB = [
     titolo: "Acciaio, alluminio e ghisa",
     materia: "Tecnologia",
     classe: "Quarta superiore · professionale",
+    annoProf: 4,
     descrizione: "Peso e peso specifico, produzione ghisa/acciaio e calcolo lamiera: scheda, fumetto, gioco in classe e allenamento interattivo sul valore di γ.",
     citazione: "Stesso volume, peso diverso: conta il materiale.",
     url: "acciaio-alluminio-ghisa/",
@@ -210,6 +212,11 @@ window.ATTIVITA_WEB = [
     ],
   },
 ];
+
+/** Attività web per il raccoglitore professionale (Ferraris AM): richiede `annoProf` 3 o 4. */
+window.attivitaProfessionale = function attivitaProfessionale() {
+  return window.ATTIVITA_WEB.filter((a) => a.annoProf === 3 || a.annoProf === 4);
+};
 
 /* Lavori Canva per materia. pp = numero di pagine, id = design ID Canva.
    Ricognizione aggiornata 2026-09-05 (audit Canva: Ventennio + 12 omissioni). */

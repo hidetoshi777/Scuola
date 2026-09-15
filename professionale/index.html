@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="color-scheme" content="dark light">
+  <link rel="icon" href="../favicon.svg" type="image/svg+xml">
+  <title>Lavori professionale · Ferraris AM | Prof. Rossano Bella</title>
+  <meta name="description" content="Raccoglitore dei lavori interattivi per terza e quarta professionale AM: filtra per materia e apri le attività dal browser.">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="it_IT">
+  <meta property="og:site_name" content="Scuola · Prof. Rossano Bella">
+  <meta property="og:title" content="Lavori professionale · Ferraris AM">
+  <meta property="og:description" content="Tutti i lavori web per terza e quarta professionale, con filtro per materia.">
+  <meta property="og:url" content="https://hidetoshi777.github.io/Scuola/professionale/">
+  <meta property="og:image" content="https://hidetoshi777.github.io/Scuola/professionale/img/og-share.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Lavori professionale · Ferraris AM">
+  <meta name="twitter:description" content="Tutti i lavori web per terza e quarta professionale, con filtro per materia.">
+  <meta name="twitter:image" content="https://hidetoshi777.github.io/Scuola/professionale/img/og-share.jpg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,600;9..40,700;9..40,800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/hub.css?v=1">
+</head>
+<body class="prof-hub" data-theme="dark">
+  <a class="prof-skip" href="#lavori">Salta ai lavori</a>
+
+  <header class="prof-top">
+    <div class="prof-top-inner">
+      <p class="prof-istituto">IIS Ferraris · Acireale · AM</p>
+      <h1>Raccoglitore professionale</h1>
+      <p class="prof-intro">
+        Qui trovi solo i lavori fatti per <strong>terza</strong> e <strong>quarta</strong> professionale.
+        Il bollino <span class="prof-bollino prof-bollino--demo" aria-hidden="true">3</span> o
+        <span class="prof-bollino prof-bollino--demo prof-bollino--4" aria-hidden="true">4</span>
+        indica la classe.
+      </p>
+      <p class="prof-scaffale">
+        <a href="../index.html#attivita">← Lo scaffale completo del Prof.</a>
+      </p>
+      <button type="button" class="prof-theme" data-prof-theme aria-pressed="true">Tema chiaro</button>
+    </div>
+  </header>
+
+  <main class="prof-main" id="lavori">
+    <div class="prof-toolbar">
+      <div class="prof-filtri" id="prof-filtri" role="group" aria-label="Filtra per materia">
+        <button type="button" class="prof-filtro is-on" data-materia="" aria-pressed="true">Tutte</button>
+        <button type="button" class="prof-filtro" data-materia="Inglese" aria-pressed="false">Inglese</button>
+        <button type="button" class="prof-filtro" data-materia="Tecnologia" aria-pressed="false">Tecnologia</button>
+      </div>
+      <p class="prof-esito" id="prof-esito" aria-live="polite">2 lavori</p>
+    </div>
+
+    <div class="prof-griglia" id="prof-griglia">
+      <article class="prof-card" data-materia="Inglese" data-anno="3">
+        <a class="prof-card-link" href="../presentazioni-inglese/">
+          <span class="prof-bollino" title="Terza professionale" aria-label="Terza professionale">3</span>
+          <figure class="prof-card-cover">
+            <img src="../presentazioni-inglese/img/og-share.jpg" alt="" width="1200" height="630" loading="eager">
+          </figure>
+          <div class="prof-card-body">
+            <p class="prof-card-meta">Inglese · Terza professionale</p>
+            <h2>Hello — Presentazioni</h2>
+            <p>Cinque tavole per presentarsi in inglese, con gioco nel cortile.</p>
+          </div>
+        </a>
+      </article>
+      <article class="prof-card" data-materia="Tecnologia" data-anno="4">
+        <a class="prof-card-link" href="../acciaio-alluminio-ghisa/">
+          <span class="prof-bollino prof-bollino--4" title="Quarta professionale" aria-label="Quarta professionale">4</span>
+          <figure class="prof-card-cover">
+            <img src="../acciaio-alluminio-ghisa/img/og-share.jpg" alt="" width="1200" height="630" loading="lazy">
+          </figure>
+          <div class="prof-card-body">
+            <p class="prof-card-meta">Tecnologia · Quarta professionale</p>
+            <h2>Acciaio, alluminio e ghisa</h2>
+            <p>Scheda, fumetto, gioco in classe e laboratorio sul peso specifico γ.</p>
+          </div>
+        </a>
+      </article>
+    </div>
+  </main>
+
+  <footer class="prof-footer">
+    <p>Realizzato dal Prof. Rossano Bella</p>
+  </footer>
+
+  <script src="../js/data.js?v=24" defer></script>
+  <script src="js/hub.js?v=1" defer></script>
+</body>
+</html>
