@@ -235,6 +235,10 @@ a { color: var(--tag); }
   cursor: not-allowed;
 }
 
+[hidden] {
+  display: none !important;
+}
+
 .hero-actions {
   display: flex;
   flex-wrap: wrap;
