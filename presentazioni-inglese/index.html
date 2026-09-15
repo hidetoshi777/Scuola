@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="color-scheme" content="dark light">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <title>Hello · Presentazioni in inglese | Scuola</title>
+  <meta name="description" content="Quattro tavole facilissime per presentarsi in inglese: Hello, My name is, How are you, Nice to meet you.">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="it_IT">
+  <meta property="og:site_name" content="Scuola · Prof. Rossano Bella">
+  <meta property="og:title" content="Hello · Presentazioni in inglese">
+  <meta property="og:description" content="Quattro tavole facilissime per dire ciao e presentarsi in inglese.">
+  <meta property="og:url" content="https://hidetoshi777.github.io/Scuola/presentazioni-inglese/">
+  <meta property="og:image" content="https://hidetoshi777.github.io/Scuola/presentazioni-inglese/img/og-share.jpg">
+  <meta property="og:image:alt" content="Hello · My name is">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Hello · Presentazioni in inglese">
+  <meta name="twitter:description" content="Quattro tavole facilissime per presentarsi in inglese.">
+  <meta name="twitter:image" content="https://hidetoshi777.github.io/Scuola/presentazioni-inglese/img/og-share.jpg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@500;700;800&family=Outfit:wght@700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/fumetto.css">
+</head>
+<body class="page-hello">
+  <a class="skip-link visually-hidden" href="#contenuto">Salta al contenuto</a>
+
+  <header class="hello-clip">
+    <a class="hello-brand" href="index.html">
+      <span class="hello-clip-ring" aria-hidden="true"></span>
+      <span class="hello-clip-strap" aria-hidden="true"></span>
+      <span class="hello-badge">HELLO · MY NAME IS</span>
+    </a>
+    <button type="button" class="theme-toggle" data-theme-toggle aria-pressed="false">Chiaro</button>
+  </header>
+
+  <main id="contenuto" class="hello-board" tabindex="-1">
+    <h1 class="hello-mast">Ciao. Come ti chiami?</h1>
+    <p class="hello-lead">Quattro tavole. Frasi cortissime. Ripeti a voce alta.</p>
+    <blockquote class="hello-quote">Hello! My name is…</blockquote>
+
+    <section class="fumetto-reader" id="fumetto-stage" aria-roledescription="fumetto" aria-label="Presentazioni in inglese a fumetti">
+      <div class="fumetto-toolbar">
+        <p class="fumetto-status">Tavola <span id="fumetto-num">1</span> di 4</p>
+        <div class="fumetto-toolbar-actions">
+          <button type="button" class="btn btn-secondary fumetto-print" id="fumetto-print">Stampa tutto</button>
+          <button type="button" class="btn btn-secondary fumetto-full" id="fumetto-fullscreen" aria-pressed="false">Schermo intero</button>
+        </div>
+      </div>
+
+      <div class="fumetto-viewport" id="fumetto-viewport">
+        <figure class="fumetto-page is-active" data-page="1">
+          <img src="img/tavole/01-hello.jpg" alt="Tavola 1: Hello, Hi, Good morning" width="864" height="1152" fetchpriority="high">
+        </figure>
+        <figure class="fumetto-page" data-page="2" aria-hidden="true">
+          <img src="img/tavole/02-nome.jpg" alt="Tavola 2: My name is, What’s your name" width="864" height="1152" loading="lazy">
+        </figure>
+        <figure class="fumetto-page" data-page="3" aria-hidden="true">
+          <img src="img/tavole/03-how-are-you.jpg" alt="Tavola 3: How are you, I’m fine thanks" width="864" height="1152" loading="lazy">
+        </figure>
+        <figure class="fumetto-page" data-page="4" aria-hidden="true">
+          <img src="img/tavole/04-piacere.jpg" alt="Tavola 4: Nice to meet you" width="864" height="1152" loading="lazy">
+        </figure>
+      </div>
+
+      <p class="fumetto-caption" id="fumetto-caption" aria-live="polite"></p>
+
+      <div class="fumetto-controls">
+        <button type="button" class="btn btn-secondary fumetto-nav" id="fumetto-prev" disabled>← Indietro</button>
+        <div class="fumetto-dots" id="fumetto-dots" role="tablist" aria-label="Tavole"></div>
+        <button type="button" class="btn btn-primary fumetto-nav" id="fumetto-next">Avanti →</button>
+      </div>
+      <p class="fumetto-hint">Scorri o tocca i lati. Pizzica per ingrandire. «Schermo intero» sul telefono.</p>
+    </section>
+
+    <section class="hello-frasi" aria-labelledby="frasi-titolo">
+      <h2 id="frasi-titolo">Le 4 frasi da dire</h2>
+      <div class="frasi-grid">
+        <p class="frase"><b>Hello!</b> <span>Ciao!</span></p>
+        <p class="frase"><b>My name is…</b> <span>Mi chiamo…</span></p>
+        <p class="frase"><b>How are you?</b> <span>Come stai?</span></p>
+        <p class="frase"><b>Nice to meet you!</b> <span>Piacere!</span></p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p>Fumetto facilissimo sulle presentazioni in inglese. Realizzato dal Prof. Rossano Bella.</p>
+  </footer>
+
+  <script src="js/common.js" defer></script>
+  <script src="../js/fumetto-zoom.js" defer></script>
+  <script src="../js/fumetto-print.js?v=3" defer></script>
+  <script src="js/fumetto.js" defer></script>
+</body>
+</html>

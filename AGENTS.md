@@ -6,6 +6,14 @@ Materiali didattici interattivi, ognuno in una **sottocartella autonoma**.
 
 Per PEI e lavori su alunni specifici dell’a.s. **2026/2027** (Ferraris Acireale, professionale AM): leggi e aggiorna il file locale **`SOSTEGNO_2026_2027.md`** (gitignored, non pubblicare). Non mettere nomi o dati sensibili nel sito o nei commit.
 
+## Terza e quarta professionale (livello)
+
+Le classi **terza AM** e **quarta AM** (Ferraris Acireale, professionale) hanno circa **17 anni**, ma il livello è **terra terra terra**: tipo **terza media**, spesso più basso. Frasi cortissime, tanto visivo, niente paragrafi, niente lessico da liceo. Vale per inglese, italiano, storia: si spiega come a 13 anni, anche se anagraficamente sono grandi.
+
+## Struttura: non sempre completa
+
+La cartella tipo (`index` + `imparare` + `fumetto` + `laboratorio` + `gioco`) vale per i lavori da programma, ricchi. **Se il Prof chiede un pezzo solo** (es. tre o quattro vignette, una scheda, solo il fumetto), si fa **solo quello**: una sottocartella, registrazione sullo scaffale, credito, obblighi del pezzo chiesto. Per un fumetto restano tavole generate, sfoglia, schermo intero, zoom, stampa tutto. **Non** inventare Studio / Lab / Gioco se non sono stati chiesti.
+
 ## Organizzazione
 
 - Ogni attività vive in una propria cartella (es. `rotazione-terrestre/`, `parti-invariabili/`).
@@ -22,7 +30,7 @@ Per PEI e lavori su alunni specifici dell’a.s. **2026/2027** (Ferraris Acireal
 - **Mobile first (sempre)**: forte attenzione all’uso su **cellulare**. Layout, dialoghi, bottoni, immagini e touch devono funzionare bene su schermi stretti (leggibilità, aree cliccabili grandi, niente overflow orizzontale, stage VN usabile col pollice). Controllare almeno a ~390px di larghezza prima di pubblicare.
 - **Visual novel su telefono**: scena/ritratto e testo devono stare **nello stesso viewport** (immagine in alto ~40%, dialogo sotto con scroll interno se serve). Evitare layout dove le immagini restano «sopra» fuori schermo mentre si legge solo il fumetto. I **ritratti** sul cellulare restano **piccoli** (angolo scena, non mezza faccia a tutto schermo).
 - **Niente verifiche lunghe**: dopo le modifiche, commit/push e basta. Il Prof. prova lui sul browser e dice se qualcosa non va. Evitare walkthrough video, computer-use prolungato e suite di test manuali elaborate, salvo richiesta esplicita. Un controllo rapido mobile (viewport stretto) resta comunque dovuto.
-- **Fumetto = tavole illustrate OBBLIGATORIE**: nei nuovi lavori (e dove ha senso) includi `fumetto.html`. Le tavole devono essere **immagini generate da noi** (GenerateImage / Grok o export Canva se già esiste materiale utile) — **vietato** accontentarsi di placeholder HTML/CSS (div-vignetta + testo) al posto delle tavole. Preferisci **più vignette per tavola** (non una sola scena a pagina intera). **Numero di tavole: da 4 a 8**, in base alla complessità dell’argomento e a quanto serve esporre (non fissare sempre 4). Testo nelle tavole **sempre in italiano**. Serve un **minimo di trama**: personaggio-guida che porta lo studente nei fatti da ricordare. Lettore a tavole con avanti/indietro, swipe, mobile-first. **Effetto sfoglia pagina** obbligatorio (rispetta `prefers-reduced-motion`). **Schermo intero obbligatorio** (pulsante + Fullscreen API; Esc; su iOS fallback `is-immersive` / `100dvh`): in fullscreen i tasti Inferiori possono sparire e la tavola deve **usare lo spazio** (padding ridotto, immagine più grande). **Stampa tutto obbligatoria**: pulsante a fianco di Schermo intero + `../js/fumetto-print.js` (stampa **tutte** le tavole, non solo quella attiva). Sul telefono le tavole si leggono grandi.
+- **Fumetto = tavole illustrate OBBLIGATORIE** quando c’è un fumetto: immagini generate da noi (GenerateImage / Grok o export Canva se già esiste materiale utile) — **vietato** accontentarsi di placeholder HTML/CSS. Più vignette per tavola. **Numero di tavole: da 4 a 8**, in base alla complessità (per un pezzo facilissimo vanno bene 4). Testo in italiano; nelle lezioni di **lingua** le nuvolette possono essere nella lingua da imparare, con traduzione italiana visibile. Trama minima, sfoglia pagina, schermo intero, zoom, stampa tutto. Non inventare Studio / Lab / Gioco se il Prof ha chiesto solo il fumetto.
 - **Tema scuro di default**: ogni nuova attività parte in tema scuro; il chiaro resta un’opzione del toggle.
 - **Gioco = didattico**: `gioco.html` deve far ripassare contenuti, non solo divertire. Preferisci formati diversi dal solo questionario (es. memory a coppie, ordina la trama, percorso a tappe con scelte sul fatto giusto). **Niente arcade puro** (Tetris / sparatutto / dodge) se non porta apprendimento chiaro. Se non trovi un’alternativa didattica solida, **usa domande/risposte** (quiz a tempo) come sul Manzoni originale.
 - **Mappa / percorso di gioco**: se c’è un percorso a tappe, **non** bastano linee SVG grezze su fondo piatto. Usa uno **sfondo a tema** (immagine illustrata) e un tracciato chiaro, leggibile, senza linee che si incrociano a caso. Pin ordinati lungo il cammino.
@@ -39,7 +47,7 @@ Per PEI e lavori su alunni specifici dell’a.s. **2026/2027** (Ferraris Acireal
 - **Anteprima di condivisione (obbligatoria)**: ogni attività (e lo scaffale) deve avere meta Open Graph + Twitter Card sulla home (`og:title`, `og:description`, `og:url`, `og:image` assoluta HTTPS su GitHub Pages). Metti `img/og-share.jpg` (preferibilmente ~1200×630) o riusa la tavola/hero principale copiata come `og-share`. La stessa immagine va in `ATTIVITA_WEB.copertina` così compare sulla cartellina dello scaffale. Senza immagine assoluta WhatsApp non mostra la anteprima.
 - **Zoom fumetto**: pinch + doppio tap via `../js/fumetto-zoom.js` (FumettoZoom) su ogni `fumetto.html`; reset allo sfogliare pagina; con zoom attivo non cambiare tavola con swipe. Pulsante **Stampa tutto** (`../js/fumetto-print.js`) a fianco di Schermo intero: stampa tutte le tavole.
 
-Struttura tipica di ogni cartella:
+Struttura **piena** (quando il lavoro è da programma, ricco):
 
 ```
 nome-attivita/
@@ -51,6 +59,8 @@ nome-attivita/
   css/
   js/
 ```
+
+Struttura **corta** (quando il Prof chiede un pezzo): solo i file del pezzo + `index.html` che lo apre, più scaffale e credito. Non riempire le altre pagine per abitudine.
 
 ## Pubblicazione (sempre così)
 
@@ -77,6 +87,7 @@ Sito base: `https://hidetoshi777.github.io/Scuola/`
 | Logica · Induttivo e deduttivo | https://hidetoshi777.github.io/Scuola/logica-induttivo-deduttivo/ | [Fumetto](https://hidetoshi777.github.io/Scuola/logica-induttivo-deduttivo/fumetto.html) · [Prove](https://hidetoshi777.github.io/Scuola/logica-induttivo-deduttivo/gioco.html) |
 | Mazzini · Giovane Italia | https://hidetoshi777.github.io/Scuola/mazzini-giovane-italia/ | [Fumetto](https://hidetoshi777.github.io/Scuola/mazzini-giovane-italia/fumetto.html) · [Battaglia](https://hidetoshi777.github.io/Scuola/mazzini-giovane-italia/gioco.html) |
 | Origini della poesia | https://hidetoshi777.github.io/Scuola/origini-poesia-italiana/ | [Fumetto](https://hidetoshi777.github.io/Scuola/origini-poesia-italiana/fumetto.html) · [Percorso](https://hidetoshi777.github.io/Scuola/origini-poesia-italiana/gioco.html) |
+| Hello · Presentazioni | https://hidetoshi777.github.io/Scuola/presentazioni-inglese/ | [Fumetto](https://hidetoshi777.github.io/Scuola/presentazioni-inglese/) |
 
 I vecchi link alla radice (`/gioco.html`, ecc.) reindirizzano ancora alla rotazione terrestre.
 
