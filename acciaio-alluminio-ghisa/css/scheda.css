@@ -1,0 +1,165 @@
+/* Scheda stampabile — acciaio, alluminio, ghisa */
+
+.scheda-wrap {
+  max-width: 48rem;
+  margin: 0 auto;
+  padding: 1rem;
+}
+
+.scheda-head {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 0.5rem;
+  align-items: flex-start;
+  margin-bottom: 1rem;
+}
+
+.scheda-head h1 {
+  margin: 0;
+  font-size: 1.35rem;
+}
+
+.scheda-meta {
+  font-size: 0.85rem;
+  color: var(--mute);
+}
+
+.scheda-section {
+  margin-bottom: 1.1rem;
+  padding: 0.85rem 1rem;
+  background: var(--carta);
+  border: 1px solid var(--bordo);
+  border-radius: 0.5rem;
+}
+
+.scheda-section h2 {
+  margin: 0 0 0.5rem;
+  font-size: 1rem;
+  color: var(--fiamma);
+}
+
+.scheda-section ul,
+.scheda-section ol {
+  margin: 0.3rem 0 0;
+  padding-left: 1.2rem;
+}
+
+.scheda-section li {
+  margin-bottom: 0.25rem;
+}
+
+.tabella-materiali {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.88rem;
+}
+
+.tabella-materiali th,
+.tabella-materiali td {
+  border: 1px solid var(--bordo);
+  padding: 0.45rem 0.5rem;
+  text-align: left;
+}
+
+.tabella-materiali th {
+  background: color-mix(in srgb, var(--acciaio) 35%, var(--carta));
+}
+
+.contrasto {
+  display: grid;
+  gap: 0.5rem;
+}
+
+@media (min-width: 520px) {
+  .contrasto {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.contrasto-box {
+  padding: 0.65rem;
+  border-radius: 0.4rem;
+  border: 1px dashed var(--bordo);
+}
+
+.contrasto-box strong {
+  display: block;
+  margin-bottom: 0.25rem;
+}
+
+.esercizio {
+  margin-top: 0.65rem;
+  padding-top: 0.65rem;
+  border-top: 1px solid var(--bordo);
+}
+
+.soluzione-docente {
+  margin-top: 0.5rem;
+  padding: 0.5rem 0.65rem;
+  background: color-mix(in srgb, var(--fiamma) 12%, var(--carta));
+  border-left: 3px solid var(--fiamma);
+  font-size: 0.88rem;
+}
+
+.soluzione-docente summary {
+  cursor: pointer;
+  font-weight: 800;
+}
+
+.scheda-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.scheda-nota-doc {
+  font-size: 0.82rem;
+  color: var(--mute);
+  margin: 0 0 0.75rem;
+}
+
+@media print {
+  .met-rail,
+  .scheda-toolbar,
+  .scheda-nota-doc,
+  .no-print {
+    display: none !important;
+  }
+
+  body {
+    background: #fff;
+    color: #000;
+  }
+
+  .scheda-section {
+    break-inside: avoid;
+    border-color: #ccc;
+    background: #fff;
+  }
+
+  .soluzione-docente[open] summary {
+    list-style: none;
+  }
+
+  .scheda-print-credit {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    font-size: 7pt;
+    text-align: center;
+    color: #666;
+  }
+}
+
+.scheda-print-credit {
+  display: none;
+}
+
+@media print {
+  .scheda-print-credit {
+    display: block;
+  }
+}

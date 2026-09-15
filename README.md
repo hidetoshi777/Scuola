@@ -16,11 +16,19 @@ Realizzato dal Prof. Rossano Bella.
 - Home: https://hidetoshi777.github.io/Scuola/parti-invariabili/
 - Gioco: https://hidetoshi777.github.io/Scuola/parti-invariabili/gioco.html
 
+### Acciaio, alluminio e ghisa · Quarta professionale
+
+- Home: https://hidetoshi777.github.io/Scuola/acciaio-alluminio-ghisa/
+- Scheda: https://hidetoshi777.github.io/Scuola/acciaio-alluminio-ghisa/scheda.html
+- Fumetto: https://hidetoshi777.github.io/Scuola/acciaio-alluminio-ghisa/fumetto.html
+- Gioco: https://hidetoshi777.github.io/Scuola/acciaio-alluminio-ghisa/gioco.html
+
 ## Struttura del repository
 
 ```
-rotazione-terrestre/   → scienze, prima media
-parti-invariabili/     → italiano, prima superiore
+rotazione-terrestre/        → scienze, prima media
+parti-invariabili/          → italiano, prima superiore
+acciaio-alluminio-ghisa/    → tecnologia, quarta professionale (scheda, fumetto, gioco)
 ```
 
 Nuove attività: nuova sottocartella, stessa struttura (home, imparare, laboratorio, gioco).

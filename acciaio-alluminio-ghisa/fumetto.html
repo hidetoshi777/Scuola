@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="color-scheme" content="dark light">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <title>Fumetto · Acciaio, alluminio e ghisa | Scuola</title>
+  <meta name="description" content="Fumetto didattico in quattro tavole su peso e peso specifico dei metalli.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/fumetto.css">
+</head>
+<body>
+  <a class="skip-link visually-hidden" href="#contenuto">Salta al contenuto</a>
+
+  <div class="met-shell">
+    <aside class="met-rail" aria-label="Menu">
+      <a class="met-brand" href="index.html">Fe · Al · Gh</a>
+      <nav class="met-nav" aria-label="Sezioni">
+        <a href="index.html">Home</a>
+        <a href="scheda.html">Scheda</a>
+        <a href="fumetto.html">Fumetto</a>
+        <a href="gioco.html">Gioco</a>
+      </nav>
+      <button type="button" class="theme-toggle" data-theme-toggle aria-pressed="false">Chiaro</button>
+    </aside>
+
+    <main id="contenuto" class="met-main" tabindex="-1">
+      <header class="fumetto-intro">
+        <p class="met-kicker">Fumetto · 4 tavole</p>
+        <h1>In laboratorio</h1>
+        <p class="lead">Leggi le tavole, poi apri la scheda o il gioco.</p>
+      </header>
+
+      <section class="fumetto-reader" id="fumetto-stage" aria-roledescription="fumetto" aria-label="Acciaio alluminio ghisa a fumetti">
+        <div class="fumetto-toolbar">
+          <p class="fumetto-status">Tavola <span id="fumetto-num">1</span> di 4</p>
+          <div class="fumetto-toolbar-actions">
+            <button type="button" class="btn btn-secondary fumetto-print" id="fumetto-print">Stampa tutto</button>
+            <button type="button" class="btn btn-secondary fumetto-full" id="fumetto-fullscreen" aria-pressed="false">Schermo intero</button>
+          </div>
+        </div>
+
+        <div class="fumetto-viewport" id="fumetto-viewport">
+          <figure class="fumetto-page is-active" data-page="1">
+            <img src="img/tavole/01-stessa-forma.png" alt="Tavola 1: tre pezzi della stessa forma" width="864" height="1152" fetchpriority="high">
+          </figure>
+          <figure class="fumetto-page" data-page="2" aria-hidden="true">
+            <img src="img/tavole/02-peso-specifico.png" alt="Tavola 2: peso specifico massa diviso volume" width="864" height="1152" loading="lazy">
+          </figure>
+          <figure class="fumetto-page" data-page="3" aria-hidden="true">
+            <img src="img/tavole/03-tre-materiali.png" alt="Tavola 3: caratteristiche dei tre materiali" width="864" height="1152" loading="lazy">
+          </figure>
+          <figure class="fumetto-page" data-page="4" aria-hidden="true">
+            <img src="img/tavole/04-peso-vs-specifico.png" alt="Tavola 4: peso e peso specifico" width="864" height="1152" loading="lazy">
+          </figure>
+        </div>
+
+        <p class="fumetto-caption" id="fumetto-caption" aria-live="polite"></p>
+
+        <div class="fumetto-controls">
+          <button type="button" class="btn btn-secondary fumetto-nav" id="fumetto-prev" disabled>← Indietro</button>
+          <div class="fumetto-dots" id="fumetto-dots" role="tablist" aria-label="Tavole"></div>
+          <button type="button" class="btn btn-primary fumetto-nav" id="fumetto-next">Avanti →</button>
+        </div>
+        <p class="fumetto-hint">Scorri o tocca i lati. Pizzica per ingrandire. «Schermo intero» sul telefono.</p>
+      </section>
+
+      <div class="hero-actions">
+        <a class="btn btn-primary" href="scheda.html">Scheda</a>
+        <a class="btn btn-secondary" href="gioco.html">Gioco</a>
+      </div>
+    </main>
+  </div>
+
+  <footer class="site-footer met-main">
+    <p>Fumetto didattico in quattro tavole. Realizzato dal Prof. Rossano Bella.</p>
+  </footer>
+
+  <script src="js/common.js" defer></script>
+  <script src="../js/fumetto-zoom.js" defer></script>
+  <script src="../js/fumetto-print.js?v=3" defer></script>
+  <script src="js/fumetto.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="color-scheme" content="dark light">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <title>Chi pesa di più? · Acciaio, alluminio e ghisa | Scuola</title>
+  <meta name="description" content="Gioco in classe e quiz su acciaio, alluminio, ghisa, peso e peso specifico.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <a class="skip-link visually-hidden" href="#contenuto">Salta al contenuto</a>
+
+  <div class="met-shell">
+    <aside class="met-rail" aria-label="Menu">
+      <a class="met-brand" href="index.html">Fe · Al · Gh</a>
+      <nav class="met-nav" aria-label="Sezioni">
+        <a href="index.html">Home</a>
+        <a href="scheda.html">Scheda</a>
+        <a href="fumetto.html">Fumetto</a>
+        <a href="gioco.html">Gioco</a>
+      </nav>
+      <button type="button" class="theme-toggle" data-theme-toggle aria-pressed="false">Chiaro</button>
+    </aside>
+
+    <main id="contenuto" class="met-main" tabindex="-1">
+      <p class="met-kicker">Gioco · ripasso</p>
+      <h1>Chi pesa di più?</h1>
+
+      <figure class="gioco-poster">
+        <img src="img/gioco-chi-pesa-di-piu.png" alt="Locandina: Chi pesa di più? Acciaio, alluminio, ghisa" width="1200" height="630" loading="eager">
+      </figure>
+
+      <section class="gioco-regole" aria-labelledby="regole-titolo">
+        <h2 id="regole-titolo">In laboratorio (riassunto)</h2>
+        <ol>
+          <li>Tre pezzi <strong>uguali come forma</strong>, materiali diversi.</li>
+          <li>Indovina quale pesa di più, poi <strong>pesa</strong> e spiega con il peso specifico.</li>
+          <li>Squadre a confronto: chi ricorda γ e le caratteristiche dei tre metalli.</li>
+        </ol>
+        <p style="margin:0.5rem 0 0;font-size:0.88rem">Regole complete e esercizi sulla <a href="scheda.html">scheda stampabile</a>.</p>
+      </section>
+
+      <section class="quiz-box" aria-labelledby="quiz-titolo">
+        <h2 id="quiz-titolo">Quiz veloce</h2>
+        <div class="quiz-meta">
+          <span>Ripasso</span>
+          <span id="quiz-punteggio">0/0</span>
+        </div>
+        <p id="quiz-testo"></p>
+        <div id="quiz-opzioni"></div>
+        <p id="quiz-feedback" aria-live="polite"></p>
+        <button type="button" class="btn btn-primary" id="quiz-avanti" hidden>Avanti</button>
+        <div id="quiz-fine" hidden>
+          <p style="margin:0.75rem 0"><a class="btn btn-secondary" href="fumetto.html">Rileggi il fumetto</a></p>
+          <button type="button" class="btn btn-primary" id="quiz-restart">Ricomincia</button>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <footer class="site-footer met-main">
+    <p>Gioco didattico sui materiali. Realizzato dal Prof. Rossano Bella.</p>
+  </footer>
+
+  <script src="js/common.js" defer></script>
+  <script src="js/gioco.js" defer></script>
+</body>
+</html>
