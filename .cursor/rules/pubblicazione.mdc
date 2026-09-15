@@ -11,7 +11,7 @@ alwaysApply: true
 - **Non cancellare** i lavori esistenti: si aggiungono nuove cartelle.
 - **Niente link** tra un lavoro e l’altro nella navigazione dei siti.
 - **Scaffale obbligatorio**: ogni nuova attività web va aggiunta a `js/data.js` in `ATTIVITA_WEB` (homepage Lo scaffale del Prof.), con campo **`copertina`** = percorso di `img/og-share.jpg` (o `.png`) — compare sulla cartellina.
-- **Professionale (terza/quarta AM)**: stessa voce in `ATTIVITA_WEB` **più** `annoProf: 3` o `annoProf: 4` → compare anche in `professionale/` (raccoglitore con bollino e filtri materia). Link classe professionale: `/professionale/`.
+- **Professionale (terza/quarta AM)**: stessa voce in `ATTIVITA_WEB` **più** `annoProf: 3` o `annoProf: 4` → compare anche in `professionale/` (raccoglitore con bollino e filtri materia). Link classe professionale: `/professionale/`. **Non** mettere link dallo raccoglitore allo scaffale generale.
 - In ogni lavoro per la scuola, nel footer (o credito visibile), includi sempre: **Realizzato dal Prof. Rossano Bella**.
 - **Stampe**: ovunque si stampi (fumetto «Stampa tutto», attestati, schede), il credito **Realizzato dal Prof. Rossano Bella** deve comparire **in piccolo** su ogni foglio — evita che i materiali circolino in copisteria senza firma.
 - **Nelle stampe** (fumetto «Stampa tutto», attestati, fogli da stampare): credito **in piccolo** ma presente su ogni foglio/tavola — così resta chiaro di chi è il materiale.

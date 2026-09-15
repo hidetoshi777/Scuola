@@ -86,18 +86,6 @@
   color: var(--prof-text);
 }
 
-.prof-scaffale {
-  margin: 0.75rem 0 0;
-  font-size: 0.88rem;
-}
-
-.prof-scaffale a {
-  color: var(--prof-accent);
-  font-weight: 700;
-  text-decoration: underline;
-  text-underline-offset: 3px;
-}
-
 .prof-theme {
   position: absolute;
   top: 0;
