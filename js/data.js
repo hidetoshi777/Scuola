@@ -184,7 +184,7 @@ window.ATTIVITA_WEB = [
     titolo: "Hello — Presentazioni",
     materia: "Inglese",
     classe: "Terza superiore · professionale",
-    descrizione: "Cinque tavole facilissime per presentarsi: Hello, My name is, How are you, Nice to meet you, favourite singer, free time; con gioco nel cortile.",
+    descrizione: "Cinque tavole per presentarsi in inglese: Hello, My name is, How are you, Nice to meet you, favourite singer, free time; con gioco nel cortile.",
     citazione: "Hello! My name is…",
     url: "presentazioni-inglese/",
     copertina: "presentazioni-inglese/img/og-share.jpg",
