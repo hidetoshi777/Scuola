@@ -24,8 +24,27 @@
     });
   }
 
+  const here = location.pathname.split("/").pop() || "index.html";
+  document.querySelectorAll(".hello-nav a[href]").forEach((link) => {
+    const href = link.getAttribute("href");
+    if (href === here || (here === "" && href === "index.html")) {
+      link.setAttribute("aria-current", "page");
+    } else {
+      link.removeAttribute("aria-current");
+    }
+  });
+
   const menoMovimento = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   if (menoMovimento) document.body.classList.add("reduced-motion");
+
+  window.mescola = function mescola(lista) {
+    const copia = [...lista];
+    for (let i = copia.length - 1; i > 0; i -= 1) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [copia[i], copia[j]] = [copia[j], copia[i]];
+    }
+    return copia;
+  };
 
   window.AudioUi = {
     enabled: true,

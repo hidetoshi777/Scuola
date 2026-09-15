@@ -11,6 +11,7 @@
   --mute: #9bb5ab;
   --hair: rgba(243, 193, 74, 0.32);
   --ok: #7ee0c0;
+  --bad: #e07a7a;
   --surface: rgba(16, 36, 31, 0.92);
   --font-display: "Outfit", system-ui, sans-serif;
   --font-body: "Nunito", system-ui, sans-serif;
@@ -141,9 +142,40 @@ a { color: var(--tag); }
   cursor: pointer;
 }
 
+.hello-nav {
+  display: flex;
+  gap: 0.4rem;
+  width: min(100% - 1rem, 26rem);
+  margin: 0.65rem auto 0;
+}
+
+.hello-nav a {
+  flex: 1;
+  min-height: 2.7rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0.7rem;
+  background: var(--surface);
+  color: var(--text);
+  text-decoration: none;
+  font-weight: 800;
+  border: 2px solid var(--hair);
+}
+
+.hello-nav a[aria-current="page"] {
+  background: var(--tag);
+  color: var(--tag-ink);
+  border-color: var(--tag);
+}
+
 .hello-board {
   width: min(100% - 1rem, 26rem);
   margin: 0.35rem auto 0;
+}
+
+.hello-board--wide {
+  width: min(100% - 1rem, 40rem);
 }
 
 .hello-mast {
@@ -202,6 +234,12 @@ a { color: var(--tag); }
   cursor: not-allowed;
 }
 
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+}
+
 .hello-frasi {
   display: grid;
   gap: 0.55rem;
@@ -245,6 +283,10 @@ a { color: var(--tag); }
   font-size: 0.88rem;
 }
 
+.page-gioco .site-footer {
+  width: min(100% - 1rem, 40rem);
+}
+
 .site-footer p { margin: 0.2rem 0; }
 
 @media (max-width: 390px) {
@@ -253,6 +295,7 @@ a { color: var(--tag); }
 }
 
 body.fumetto-print-all .hello-clip,
+body.fumetto-print-all .hello-nav,
 body.fumetto-print-all .hello-board > :not(#fumetto-stage),
 body.fumetto-print-all .hello-frasi,
 body.fumetto-print-all .site-footer {

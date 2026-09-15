@@ -6,7 +6,7 @@
   <meta name="color-scheme" content="dark light">
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
   <title>Hello · Presentazioni in inglese | Scuola</title>
-  <meta name="description" content="Quattro tavole facilissime per presentarsi in inglese: Hello, My name is, How are you, Nice to meet you.">
+  <meta name="description" content="Cinque tavole facilissime per presentarsi in inglese: Hello, My name is, How are you, Nice to meet you, favourite singer, free time.">
   <meta property="og:type" content="website">
   <meta property="og:locale" content="it_IT">
   <meta property="og:site_name" content="Scuola · Prof. Rossano Bella">
@@ -36,15 +36,19 @@
     </a>
     <button type="button" class="theme-toggle" data-theme-toggle aria-pressed="false">Chiaro</button>
   </header>
+  <nav class="hello-nav" aria-label="Sezioni">
+    <a href="index.html" aria-current="page">Fumetto</a>
+    <a href="gioco.html">Gioco</a>
+  </nav>
 
   <main id="contenuto" class="hello-board" tabindex="-1">
     <h1 class="hello-mast">Ciao. Come ti chiami?</h1>
-    <p class="hello-lead">Quattro tavole. Frasi cortissime. Ripeti a voce alta.</p>
+    <p class="hello-lead">Cinque tavole. Frasi cortissime. Ripeti a voce alta.</p>
     <blockquote class="hello-quote">Hello! My name is…</blockquote>
 
     <section class="fumetto-reader" id="fumetto-stage" aria-roledescription="fumetto" aria-label="Presentazioni in inglese a fumetti">
       <div class="fumetto-toolbar">
-        <p class="fumetto-status">Tavola <span id="fumetto-num">1</span> di 4</p>
+        <p class="fumetto-status">Tavola <span id="fumetto-num">1</span> di 5</p>
         <div class="fumetto-toolbar-actions">
           <button type="button" class="btn btn-secondary fumetto-print" id="fumetto-print">Stampa tutto</button>
           <button type="button" class="btn btn-secondary fumetto-full" id="fumetto-fullscreen" aria-pressed="false">Schermo intero</button>
@@ -64,6 +68,9 @@
         <figure class="fumetto-page" data-page="4" aria-hidden="true">
           <img src="img/tavole/04-piacere.jpg" alt="Tavola 4: Nice to meet you" width="864" height="1152" loading="lazy">
         </figure>
+        <figure class="fumetto-page" data-page="5" aria-hidden="true">
+          <img src="img/tavole/05-tempo-libero.jpg" alt="Tavola 5: My favourite singer is, In my free time I like" width="864" height="1152" loading="lazy">
+        </figure>
       </div>
 
       <p class="fumetto-caption" id="fumetto-caption" aria-live="polite"></p>
@@ -77,12 +84,17 @@
     </section>
 
     <section class="hello-frasi" aria-labelledby="frasi-titolo">
-      <h2 id="frasi-titolo">Le 4 frasi da dire</h2>
+      <h2 id="frasi-titolo">Le 6 frasi da dire</h2>
       <div class="frasi-grid">
         <p class="frase"><b>Hello!</b> <span>Ciao!</span></p>
         <p class="frase"><b>My name is…</b> <span>Mi chiamo…</span></p>
         <p class="frase"><b>How are you?</b> <span>Come stai?</span></p>
         <p class="frase"><b>Nice to meet you!</b> <span>Piacere!</span></p>
+        <p class="frase"><b>My favourite singer is…</b> <span>Il mio cantante preferito è…</span></p>
+        <p class="frase"><b>In my free time I like…</b> <span>Nel tempo libero mi piace…</span></p>
+      </div>
+      <div class="hero-actions" style="margin-top:0.85rem">
+        <a class="btn btn-primary" href="gioco.html">Gioco nel cortile</a>
       </div>
     </section>
   </main>

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="color-scheme" content="dark light">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <title>Gioco · Hello | Scuola</title>
+  <meta name="description" content="Sei tappe facilissime nel cortile: Hello, My name is, How are you, Nice to meet you, favourite singer, free time.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@500;700;800&family=Outfit:wght@700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/gioco.css">
+</head>
+<body class="page-gioco">
+  <a class="skip-link visually-hidden" href="#contenuto">Salta al contenuto</a>
+
+  <header class="hello-clip">
+    <a class="hello-brand" href="index.html">
+      <span class="hello-clip-ring" aria-hidden="true"></span>
+      <span class="hello-clip-strap" aria-hidden="true"></span>
+      <span class="hello-badge">HELLO · MY NAME IS</span>
+    </a>
+    <button type="button" class="theme-toggle" data-theme-toggle aria-pressed="false">Chiaro</button>
+  </header>
+  <nav class="hello-nav" aria-label="Sezioni">
+    <a href="index.html">Fumetto</a>
+    <a href="gioco.html" aria-current="page">Gioco</a>
+  </nav>
+
+  <main id="contenuto" class="hello-board hello-board--wide" tabindex="-1">
+    <h1 class="hello-mast">Il cortile delle 6 frasi</h1>
+    <p class="hello-lead">Tocca la risposta giusta. Poi passa alla tappa dopo. Niente arcade: serve per ripassare.</p>
+
+    <div class="gioco-hud" aria-live="polite">
+      <span>Tappa <strong id="hud-stop">1</strong>/<span id="hud-total">6</span></span>
+      <span>Punti <strong id="hud-score">0</strong></span>
+      <button type="button" class="btn btn-secondary" id="btn-restart">Ricomincia</button>
+    </div>
+
+    <div class="yard" id="yard-map" aria-label="Cortile della scuola: percorso a sei tappe">
+      <img src="img/mappa-cortile.jpg" alt="" width="1280" height="720" decoding="async">
+    </div>
+
+    <section class="stop-stage" id="stop-stage">
+      <div class="badge-card" id="stop-card" aria-live="polite">
+        <p class="stop-meta" id="stop-meta"></p>
+        <h2 id="stop-title"></h2>
+        <p id="stop-question"></p>
+        <ul class="choice-list" id="choice-list"></ul>
+        <div class="feedback" id="stop-feedback" hidden></div>
+        <div class="hero-actions">
+          <button type="button" class="btn btn-primary" id="btn-next" hidden>Tappa successiva →</button>
+        </div>
+      </div>
+    </section>
+
+    <div class="gioco-end" id="gioco-end" hidden>
+      <h2>Cortile finito</h2>
+      <p id="end-text"></p>
+      <div class="hero-actions">
+        <button type="button" class="btn btn-primary" id="btn-again">Un altro giro</button>
+        <a class="btn btn-secondary" href="index.html">Fumetto</a>
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <p>Gioco didattico sulle presentazioni in inglese. Realizzato dal Prof. Rossano Bella.</p>
+  </footer>
+
+  <script src="js/common.js" defer></script>
+  <script src="js/gioco.js" defer></script>
+</body>
+</html>
