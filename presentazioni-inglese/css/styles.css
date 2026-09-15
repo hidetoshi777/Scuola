@@ -84,14 +84,17 @@ a { color: var(--tag); }
   font-weight: 800;
 }
 
+.hello-top {
+  width: min(100% - 1rem, 26rem);
+  margin-inline: auto;
+}
+
 .hello-clip {
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 0.75rem;
   padding: 0.7rem 0.9rem 0;
-  width: min(100% - 1rem, 26rem);
-  margin-inline: auto;
 }
 
 .hello-brand {
@@ -145,8 +148,7 @@ a { color: var(--tag); }
 .hello-nav {
   display: flex;
   gap: 0.4rem;
-  width: min(100% - 1rem, 26rem);
-  margin: 0.65rem auto 0;
+  margin: 0.65rem 0 0;
 }
 
 .hello-nav a {
@@ -172,10 +174,6 @@ a { color: var(--tag); }
 .hello-board {
   width: min(100% - 1rem, 26rem);
   margin: 0.35rem auto 0;
-}
-
-.hello-board--wide {
-  width: min(100% - 1rem, 40rem);
 }
 
 .hello-mast {
@@ -283,10 +281,6 @@ a { color: var(--tag); }
   font-size: 0.88rem;
 }
 
-.page-gioco .site-footer {
-  width: min(100% - 1rem, 40rem);
-}
-
 .site-footer p { margin: 0.2rem 0; }
 
 @media (max-width: 390px) {
@@ -294,6 +288,92 @@ a { color: var(--tag); }
   .btn { min-height: 3.2rem; }
 }
 
+@media (min-width: 720px) {
+  .hello-top,
+  .hello-board,
+  .site-footer {
+    width: min(100% - 1.5rem, 46rem);
+  }
+}
+
+@media (min-width: 960px) {
+  .hello-top,
+  .hello-board,
+  .site-footer {
+    width: min(100% - 2.5rem, 74rem);
+  }
+
+  .hello-mast {
+    font-size: clamp(2rem, 3.4vw, 2.75rem);
+  }
+
+  .hello-top {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 1rem;
+    padding-top: 0.35rem;
+  }
+
+  .hello-clip {
+    padding-inline: 0;
+    flex: 1;
+  }
+
+  .hello-brand {
+    justify-items: start;
+  }
+
+  .hello-nav {
+    margin: 0 0 0.15rem;
+    width: min(18rem, 42%);
+    flex: 0 0 auto;
+  }
+
+  .page-hello .hello-board {
+    display: grid;
+    grid-template-columns: minmax(28rem, 1.15fr) minmax(18rem, 0.85fr);
+    grid-template-areas:
+      "intro intro"
+      "comic frasi";
+    column-gap: 1.75rem;
+    row-gap: 0.55rem;
+    align-items: start;
+  }
+
+  .page-hello .hello-intro { grid-area: intro; }
+  .page-hello .fumetto-reader { grid-area: comic; }
+  .page-hello .hello-frasi {
+    grid-area: frasi;
+    margin-top: 0;
+    position: sticky;
+    top: 0.85rem;
+  }
+
+  .page-gioco .hello-board {
+    display: grid;
+    grid-template-columns: minmax(24rem, 1.35fr) minmax(20rem, 1fr);
+    grid-template-areas:
+      "intro intro"
+      "hud hud"
+      "yard card";
+    column-gap: 1.5rem;
+    row-gap: 0.55rem;
+    align-items: start;
+  }
+
+  .page-gioco .hello-intro { grid-area: intro; }
+  .page-gioco .gioco-hud { grid-area: hud; }
+  .page-gioco .yard { grid-area: yard; }
+  .page-gioco .stop-stage,
+  .page-gioco .gioco-end {
+    grid-area: card;
+    position: sticky;
+    top: 0.75rem;
+  }
+}
+
+body.fumetto-print-all .hello-top,
 body.fumetto-print-all .hello-clip,
 body.fumetto-print-all .hello-nav,
 body.fumetto-print-all .hello-board > :not(#fumetto-stage),
