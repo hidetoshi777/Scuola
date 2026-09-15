@@ -180,6 +180,17 @@ window.ATTIVITA_WEB = [
       { label: "Percorso", url: "origini-poesia-italiana/gioco.html" },
     ],
   },
+  {
+    titolo: "Hello — Presentazioni",
+    materia: "Inglese",
+    classe: "Terza superiore · professionale",
+    descrizione: "Quattro tavole facilissime per presentarsi: Hello, My name is, How are you, Nice to meet you.",
+    citazione: "Hello! My name is…",
+    url: "presentazioni-inglese/",
+    copertina: "presentazioni-inglese/img/og-share.jpg",
+    tinta: "inglese",
+    adesivo: "st-fumetto",
+  },
 ];
 
 /* Lavori Canva per materia. pp = numero di pagine, id = design ID Canva.
