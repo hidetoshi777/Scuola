@@ -1,8 +1,18 @@
 (function () {
+  /** Densità tipiche in kg/m³ (valori indicativi). kg/dm³ e g/cm³ = valore ÷ 1000. */
   const MATERIALI = {
-    acciaio: { label: "Acciaio", valori: { "kg/m3": 7850, "kg/dm3": 7.85, "g/cm3": 7.85 } },
-    alluminio: { label: "Alluminio", valori: { "kg/m3": 2700, "kg/dm3": 2.7, "g/cm3": 2.7 } },
-    ghisa: { label: "Ghisa", valori: { "kg/m3": 7200, "kg/dm3": 7.2, "g/cm3": 7.2 } },
+    acciaio: { label: "Acciaio", kgM3: 7850 },
+    ghisa: { label: "Ghisa", kgM3: 7200 },
+    rame: { label: "Rame", kgM3: 8960 },
+    ottone: { label: "Ottone", kgM3: 8500 },
+    alluminio: { label: "Alluminio", kgM3: 2700 },
+    titanio: { label: "Titanio", kgM3: 4500 },
+    piombo: { label: "Piombo", kgM3: 11340 },
+    zinco: { label: "Zinco", kgM3: 7140 },
+    nichel: { label: "Nichel", kgM3: 8900 },
+    vetro: { label: "Vetro", kgM3: 2500 },
+    pvc: { label: "PVC", kgM3: 1400 },
+    acqua: { label: "Acqua (riferimento)", kgM3: 1000 },
   };
 
   const UNITA = [
@@ -15,6 +25,7 @@
   const QUASI_TOLLERANZA = 0.06;
 
   const elMateriale = document.getElementById("dens-materiale");
+  const elMaterialeChips = document.getElementById("dens-materiale-chips");
   const elUnita = document.getElementById("dens-unita");
   const elValore = document.getElementById("dens-valore");
   const elFeedback = document.getElementById("dens-feedback");
@@ -25,12 +36,14 @@
   const elPunteggio = document.getElementById("dens-punteggio");
   const elSerie = document.getElementById("dens-serie");
   const elDomanda = document.getElementById("dens-domanda");
+  const elSchedinaList = document.getElementById("dens-schedina-list");
+  const elSchedina = document.getElementById("dens-schedina");
 
-  if (!elMateriale || !elUnita || !elValore || !btnControlla) return;
+  if (!elMateriale || !elMaterialeChips || !elUnita || !elValore || !btnControlla) return;
 
   let materialeCorrente = "acciaio";
   let unitaCorrente = "kg/dm3";
-  let allenamento = true;
+  let allenamento = false;
   let tentativiSbagliati = 0;
   let punteggio = 0;
   let serie = 0;
@@ -42,40 +55,28 @@
     return Number(s);
   }
 
+  function kgM3Corrente() {
+    return MATERIALI[materialeCorrente].kgM3;
+  }
+
   function atteso() {
-    return MATERIALI[materialeCorrente].valori[unitaCorrente];
+    const base = kgM3Corrente();
+    if (unitaCorrente === "kg/m3") return base;
+    return base / 1000;
   }
 
   function formatoAtteso(n, unitId) {
     if (unitId === "kg/m3") return Math.round(n).toString();
-    return String(n).replace(".", ",");
+    const rounded = Math.round(n * 100) / 100;
+    return String(rounded).replace(".", ",");
   }
 
-  function aggiornaDomanda() {
-    const mat = MATERIALI[materialeCorrente];
-    const uni = UNITA.find((u) => u.id === unitaCorrente);
-    if (elDomanda) {
-      elDomanda.textContent = `Quanto vale il peso specifico tipico del ${mat.label}? (in ${uni ? uni.label : ""})`;
-    }
-    syncScelte();
+  function labelUnita(unitId) {
+    const u = UNITA.find((x) => x.id === unitId);
+    return u ? u.label : "";
   }
 
-  function syncScelte() {
-    elMateriale.querySelectorAll("[data-mat]").forEach((btn) => {
-      const on = btn.getAttribute("data-mat") === materialeCorrente;
-      btn.setAttribute("aria-pressed", String(on));
-    });
-    elUnita.querySelectorAll("[data-unit]").forEach((btn) => {
-      const on = btn.getAttribute("data-unit") === unitaCorrente;
-      btn.setAttribute("aria-pressed", String(on));
-    });
-    if (btnAllenamento) btnAllenamento.setAttribute("aria-pressed", String(allenamento));
-  }
-
-  function randomRound() {
-    const mats = Object.keys(MATERIALI);
-    materialeCorrente = mats[Math.floor(Math.random() * mats.length)];
-    unitaCorrente = UNITA[Math.floor(Math.random() * UNITA.length)].id;
+  function resetRound() {
     tentativiSbagliati = 0;
     bloccato = false;
     elValore.value = "";
@@ -86,22 +87,70 @@
       elAiuto.textContent = "";
     }
     if (btnProssima) btnProssima.hidden = true;
+  }
+
+  function aggiornaDomanda() {
+    const mat = MATERIALI[materialeCorrente];
+    if (elDomanda) {
+      elDomanda.textContent = `Quanto vale γ per ${mat.label}? Rispondi in ${labelUnita(unitaCorrente)} usando la schedina (proporzioni).`;
+    }
+    syncScelte();
+    evidenziaSchedina();
+  }
+
+  function evidenziaSchedina() {
+    if (!elSchedinaList) return;
+    elSchedinaList.querySelectorAll("[data-sched-mat]").forEach((li) => {
+      const on = li.getAttribute("data-sched-mat") === materialeCorrente;
+      li.classList.toggle("is-current", on);
+    });
+  }
+
+  function syncScelte() {
+    elMaterialeChips.querySelectorAll("[data-mat]").forEach((btn) => {
+      const on = btn.getAttribute("data-mat") === materialeCorrente;
+      btn.setAttribute("aria-pressed", String(on));
+    });
+    elUnita.querySelectorAll("[data-unit]").forEach((btn) => {
+      const on = btn.getAttribute("data-unit") === unitaCorrente;
+      btn.setAttribute("aria-pressed", String(on));
+    });
+    if (btnAllenamento) btnAllenamento.setAttribute("aria-pressed", String(allenamento));
+    elMateriale.classList.toggle("is-locked", allenamento);
+    elUnita.classList.toggle("is-locked", allenamento);
+  }
+
+  function randomRound() {
+    const mats = Object.keys(MATERIALI);
+    materialeCorrente = mats[Math.floor(Math.random() * mats.length)];
+    unitaCorrente = UNITA[Math.floor(Math.random() * UNITA.length)].id;
+    resetRound();
     aggiornaDomanda();
     elValore.focus();
   }
 
-  function mostraAiuto() {
-    if (!elAiuto) return;
-    const att = atteso();
+  function aiutoProporzioni() {
+    const base = kgM3Corrente();
     const mat = MATERIALI[materialeCorrente].label;
-    let testo = "";
     if (unitaCorrente === "kg/m3") {
-      testo = `Ordine di grandezza: migliaia di kg per m³. Per ${mat} pensa a circa ${Math.round(att / 100) * 100} kg/m³.`;
-    } else {
-      testo = `In kg/dm³ e g/cm³ il numero è uguale. Per ${mat} è circa ${formatoAtteso(att, unitaCorrente)}.`;
+      return `Schedina: ${mat} = ${base} kg/m³. Stai già nell’unità giusta.`;
     }
-    elAiuto.textContent = testo;
-    elAiuto.hidden = false;
+    const div = base / 1000;
+    return `Schedina: ${base} kg/m³ per ${mat}. Per ${labelUnita(unitaCorrente)} dividi per 1000 → ${formatoAtteso(div, unitaCorrente)}.`;
+  }
+
+  function erroreProporzione(inserito, att) {
+    const base = kgM3Corrente();
+    if (unitaCorrente !== "kg/m3" && Math.abs(inserito - base) / base < 0.08) {
+      return "Sembra il valore in kg/m³. Per kg/dm³ o g/cm³ dividi per 1000.";
+    }
+    if (unitaCorrente === "kg/m3" && Math.abs(inserito - base / 1000) / (base / 1000) < 0.08) {
+      return "Hai usato kg/dm³ o g/cm³. In kg/m³ moltiplica per 1000 (o leggi direttamente la schedina).";
+    }
+    if (Math.abs(inserito - att) / att <= QUASI_TOLLERANZA) {
+      return `Quasi. Da ${base} kg/m³: ${aiutoProporzioni()}`;
+    }
+    return `Rileggi la schedina e fai le proporzioni. ${aiutoProporzioni()}`;
   }
 
   function valuta() {
@@ -123,18 +172,22 @@
       aggiornaScore();
       return;
     }
+    const msg = erroreProporzione(inserito, att);
     if (diff <= QUASI_TOLLERANZA) {
-      elFeedback.textContent = `Quasi! Il valore tipico è circa ${formatoAtteso(att, unitaCorrente)}.`;
+      elFeedback.textContent = msg;
       elFeedback.className = "dens-feedback is-near";
       tentativiSbagliati += 1;
     } else {
-      elFeedback.textContent = "Non coincide. Rileggi la scheda o prova un altro ordine di grandezza.";
+      elFeedback.textContent = msg;
       elFeedback.className = "dens-feedback is-ko";
       tentativiSbagliati += 1;
       serie = 0;
       aggiornaScore();
     }
-    if (tentativiSbagliati >= 2) mostraAiuto();
+    if (tentativiSbagliati >= 2 && elAiuto) {
+      elAiuto.textContent = aiutoProporzioni();
+      elAiuto.hidden = false;
+    }
   }
 
   function aggiornaScore() {
@@ -142,15 +195,36 @@
     if (elSerie) elSerie.textContent = String(serie);
   }
 
-  elMateriale.addEventListener("click", (e) => {
+  function buildMaterialeChips() {
+    elMaterialeChips.innerHTML = "";
+    Object.keys(MATERIALI).forEach((id) => {
+      const btn = document.createElement("button");
+      btn.type = "button";
+      btn.className = "dens-chip";
+      btn.setAttribute("data-mat", id);
+      btn.setAttribute("aria-pressed", "false");
+      btn.textContent = MATERIALI[id].label.replace(" (riferimento)", "");
+      elMaterialeChips.appendChild(btn);
+    });
+  }
+
+  function buildSchedina() {
+    if (!elSchedinaList) return;
+    elSchedinaList.innerHTML = "";
+    Object.keys(MATERIALI).forEach((id) => {
+      const li = document.createElement("li");
+      li.setAttribute("data-sched-mat", id);
+      const m = MATERIALI[id];
+      li.innerHTML = `<span class="dens-sched-name">${m.label}</span><span class="dens-sched-val">${m.kgM3} kg/m³</span>`;
+      elSchedinaList.appendChild(li);
+    });
+  }
+
+  elMaterialeChips.addEventListener("click", (e) => {
     const btn = e.target.closest("[data-mat]");
     if (!btn || allenamento) return;
     materialeCorrente = btn.getAttribute("data-mat");
-    tentativiSbagliati = 0;
-    bloccato = false;
-    elFeedback.textContent = "";
-    if (elAiuto) elAiuto.hidden = true;
-    if (btnProssima) btnProssima.hidden = true;
+    resetRound();
     aggiornaDomanda();
   });
 
@@ -158,22 +232,28 @@
     const btn = e.target.closest("[data-unit]");
     if (!btn || allenamento) return;
     unitaCorrente = btn.getAttribute("data-unit");
-    tentativiSbagliati = 0;
-    bloccato = false;
-    elFeedback.textContent = "";
-    if (elAiuto) elAiuto.hidden = true;
-    if (btnProssima) btnProssima.hidden = true;
+    resetRound();
     aggiornaDomanda();
   });
 
   if (btnAllenamento) {
     btnAllenamento.addEventListener("click", () => {
       allenamento = !allenamento;
-      elMateriale.classList.toggle("is-locked", allenamento);
-      elUnita.classList.toggle("is-locked", allenamento);
+      syncScelte();
       if (allenamento) randomRound();
-      else syncScelte();
+      else aggiornaDomanda();
     });
+  }
+
+  if (elSchedina) {
+    const toggle = elSchedina.querySelector(".dens-schedina-toggle");
+    if (toggle) {
+      toggle.addEventListener("click", () => {
+        const collapsed = elSchedina.classList.toggle("is-collapsed");
+        toggle.setAttribute("aria-expanded", String(!collapsed));
+        toggle.textContent = collapsed ? "Mostra" : "Nascondi";
+      });
+    }
   }
 
   btnControlla.addEventListener("click", () => {
@@ -192,20 +272,15 @@
     btnProssima.addEventListener("click", () => {
       if (allenamento) randomRound();
       else {
-        bloccato = false;
-        tentativiSbagliati = 0;
-        elValore.value = "";
-        elFeedback.textContent = "";
-        if (elAiuto) elAiuto.hidden = true;
-        btnProssima.hidden = true;
+        resetRound();
         elValore.focus();
       }
     });
   }
 
-  elMateriale.classList.add("is-locked");
-  elUnita.classList.add("is-locked");
-
+  buildMaterialeChips();
+  buildSchedina();
   aggiornaScore();
-  randomRound();
+  aggiornaDomanda();
+  elValore.focus();
 })();

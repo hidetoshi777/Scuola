@@ -5,15 +5,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="color-scheme" content="dark light">
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
-  <title>Peso specifico · Allenamento | Acciaio, alluminio e ghisa</title>
-  <meta name="description" content="Inserisci il peso specifico tipico di acciaio, alluminio o ghisa nelle unità kg/m³, kg/dm³ o g/cm³.">
+  <title>Peso specifico · Proporzioni | Materiali tecnici</title>
+  <meta name="description" content="Schedina in kg/m³ e esercizio: converti con le proporzioni in kg/dm³ o g/cm³ per acciaio, rame, alluminio e altri materiali da officina.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/styles.css">
   <link rel="stylesheet" href="css/densita.css">
 </head>
-<body>
+<body class="page-densita">
   <a class="skip-link visually-hidden" href="#contenuto">Salta al contenuto</a>
 
   <div class="met-shell">
@@ -29,17 +29,34 @@
       <button type="button" class="theme-toggle" data-theme-toggle aria-pressed="false">Chiaro</button>
     </aside>
 
-    <main id="contenuto" class="met-main" tabindex="-1">
-      <p class="met-kicker">Laboratorio · peso specifico</p>
+    <main id="contenuto" class="met-main dens-main" tabindex="-1">
+      <aside class="dens-schedina" id="dens-schedina" aria-label="Schedina densità in kg per metro cubo">
+        <div class="dens-schedina-head">
+          <div>
+            <p class="dens-schedina-kicker">Riferimento</p>
+            <h2 class="dens-schedina-title">Solo kg/m³</h2>
+            <p class="dens-schedina-hint">Per kg/dm³ o g/cm³: <strong>÷ 1000</strong></p>
+          </div>
+          <button type="button" class="dens-schedina-toggle" aria-expanded="true" aria-controls="dens-schedina-body">
+            Nascondi
+          </button>
+        </div>
+        <div class="dens-schedina-body" id="dens-schedina-body">
+          <ul class="dens-schedina-list" id="dens-schedina-list"></ul>
+          <p class="dens-schedina-note">Valori indicativi tipici (officina / scuola).</p>
+        </div>
+      </aside>
+
+      <p class="met-kicker">Laboratorio · proporzioni</p>
       <h1>Quanto vale γ?</h1>
-      <p class="dens-lead">Scegli materiale e unità, scrivi il valore tipico e controlla.</p>
+      <p class="dens-lead">Scegli materiale e unità, usa la schedina in kg/m³ e calcola il valore richiesto.</p>
 
       <div class="dens-score" aria-live="polite">
         <span>Punti: <strong id="dens-punteggio">0</strong></span>
         <span>Serie: <strong id="dens-serie">0</strong></span>
       </div>
 
-      <button type="button" class="dens-mode btn btn-secondary" id="dens-allenamento" aria-pressed="true">
+      <button type="button" class="dens-mode btn btn-secondary" id="dens-allenamento" aria-pressed="false">
         Allenamento: combinazioni a caso
       </button>
 
@@ -48,15 +65,11 @@
       <div class="dens-panel">
         <fieldset class="dens-field" id="dens-materiale">
           <legend>Materiale</legend>
-          <div class="dens-chips">
-            <button type="button" class="dens-chip" data-mat="acciaio" aria-pressed="false">Acciaio</button>
-            <button type="button" class="dens-chip" data-mat="alluminio" aria-pressed="false">Alluminio</button>
-            <button type="button" class="dens-chip" data-mat="ghisa" aria-pressed="false">Ghisa</button>
-          </div>
+          <div class="dens-chips" id="dens-materiale-chips"></div>
         </fieldset>
 
         <fieldset class="dens-field" id="dens-unita">
-          <legend>Unità (massa ÷ volume)</legend>
+          <legend>Unità richiesta (massa ÷ volume)</legend>
           <div class="dens-chips">
             <button type="button" class="dens-chip" data-unit="kg/m3" aria-pressed="false">kg/m³</button>
             <button type="button" class="dens-chip" data-unit="kg/dm3" aria-pressed="false">kg/dm³</button>
@@ -65,7 +78,7 @@
         </fieldset>
 
         <label class="dens-input-wrap" for="dens-valore">
-          <span class="dens-input-label">Valore numerico</span>
+          <span class="dens-input-label">Il tuo risultato</span>
           <input class="dens-input" id="dens-valore" name="valore" type="text" inputmode="decimal" autocomplete="off" placeholder="es. 7,85">
         </label>
 
