@@ -1,4 +1,4 @@
-/* Visual story · Edison — mobile first (scena + dialogo nello stesso viewport) */
+/* Visual story · Edison — VN mobile (scena ~42% + dialogo nello stesso schermo) */
 
 .page-storia {
   min-height: 100dvh;
@@ -6,36 +6,46 @@
   flex-direction: column;
 }
 
+.storia-foot {
+  padding: 0.65rem 1rem;
+  font-size: 0.78rem;
+}
+
 .storia-shell {
   flex: 1;
   display: flex;
   flex-direction: column;
-  max-width: 28rem;
   width: 100%;
+  max-width: 26rem;
   margin: 0 auto;
-  padding: 0 0 1rem;
+  padding: 0;
+  min-height: calc(100dvh - 3.5rem);
 }
 
 .storia-hud {
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 0.35rem 0.5rem;
   align-items: center;
-  justify-content: space-between;
-  gap: 0.5rem;
-  padding: 0.5rem 0.75rem;
-  font-size: 0.82rem;
+  padding: 0.45rem 0.65rem;
+  font-size: 0.8rem;
   border-bottom: 1px solid var(--bordo);
+  background: color-mix(in srgb, var(--panel) 90%, var(--bg));
 }
 
-.storia-hud strong {
+.storia-hud-meta strong {
   display: block;
-  font-size: 0.95rem;
+  font-size: 0.92rem;
+}
+
+.storia-hud-meta span {
+  color: var(--mute);
+  font-size: 0.75rem;
 }
 
 .storia-progress {
-  flex: 1;
-  min-width: 6rem;
-  height: 0.45rem;
+  grid-column: 1 / -1;
+  height: 0.4rem;
   background: var(--wire);
   border-radius: 999px;
   overflow: hidden;
@@ -46,97 +56,198 @@
   height: 100%;
   width: 0%;
   background: linear-gradient(90deg, var(--amber), var(--teal));
-  transition: width 0.25s ease-out;
+  transition: width 0.35s ease-out;
+}
+
+.storia-restart-btn {
+  padding: 0.35rem 0.55rem !important;
+  font-size: 0.75rem !important;
+}
+
+.storia-rail {
+  display: flex;
+  gap: 0.25rem;
+  padding: 0.35rem 0.5rem;
+  overflow-x: auto;
+  scrollbar-width: none;
+  border-bottom: 1px solid var(--bordo);
+}
+
+.storia-rail::-webkit-scrollbar {
+  display: none;
+}
+
+.storia-rail-dot {
+  flex: 0 0 auto;
+  padding: 0.2rem 0.45rem;
+  font: inherit;
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  border-radius: 999px;
+  border: 1px solid var(--bordo);
+  background: var(--bg);
+  color: var(--mute);
+}
+
+.storia-rail-dot.is-done {
+  border-color: var(--teal);
+  color: var(--teal);
+}
+
+.storia-rail-dot.is-here {
+  border-color: var(--amber);
+  background: color-mix(in srgb, var(--amber) 22%, var(--bg));
+  color: var(--testo);
+}
+
+.storia-intro {
+  padding: 1.25rem 0.85rem 1.5rem;
+  text-align: left;
+}
+
+.storia-intro[hidden],
+.storia-stage[hidden],
+.storia-end[hidden] {
+  display: none !important;
+}
+
+.storia-intro h1 {
+  margin: 0 0 0.5rem;
+  font-size: 1.35rem;
+}
+
+.storia-intro p {
+  margin: 0 0 0.75rem;
+  color: var(--mute);
+  font-size: 0.92rem;
+  line-height: 1.5;
+}
+
+.storia-intro-list {
+  margin: 0 0 1rem;
+  padding-left: 1.1rem;
+  font-size: 0.85rem;
+  color: var(--mute);
 }
 
 .storia-stage {
+  flex: 1;
   display: flex;
   flex-direction: column;
-  flex: 1;
   min-height: 0;
+  max-height: calc(100dvh - 8.5rem);
   background: var(--panel);
-  border-left: 1px solid var(--bordo);
-  border-right: 1px solid var(--bordo);
 }
 
 .storia-scene {
   position: relative;
-  flex: 0 0 min(42dvh, 16.5rem);
-  max-height: 45dvh;
+  flex: 0 0 42dvh;
+  max-height: 46dvh;
+  min-height: 9.5rem;
   background: #060910;
   overflow: hidden;
+}
+
+.storia-scene.is-fade .scene-bg {
+  opacity: 0.15;
 }
 
 .storia-scene img.scene-bg {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: center;
+  object-position: center center;
+  transition: opacity 0.35s ease, transform 0.6s ease;
+}
+
+.storia-scene img.scene-bg.is-loaded {
+  opacity: 1;
+}
+
+.storia-scene:not(.is-fade) img.scene-bg {
+  transform: scale(1.02);
 }
 
 .storia-scene-tag {
   position: absolute;
-  top: 0.5rem;
-  left: 0.5rem;
+  top: 0.45rem;
+  left: 0.45rem;
+  z-index: 2;
   margin: 0;
-  padding: 0.2rem 0.5rem;
-  font-size: 0.72rem;
+  padding: 0.22rem 0.5rem;
+  font-size: 0.68rem;
   font-weight: 700;
-  letter-spacing: 0.06em;
+  letter-spacing: 0.07em;
   text-transform: uppercase;
-  background: rgba(0, 0, 0, 0.65);
+  background: rgba(0, 0, 0, 0.72);
   color: var(--amber);
   border-radius: 4px;
 }
 
 .storia-portrait {
   position: absolute;
-  bottom: 0.35rem;
-  right: 0.35rem;
-  width: 4.25rem;
-  height: auto;
-  max-height: 5.5rem;
+  bottom: 0;
+  left: 0.4rem;
+  z-index: 2;
+  width: 4rem;
+  max-height: 5rem;
   object-fit: contain;
-  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.6));
-  border-radius: 6px;
+  object-position: bottom left;
+  filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.75));
+}
+
+.storia-portrait[hidden] {
+  display: none !important;
 }
 
 .storia-dialogue {
   flex: 1;
   display: flex;
   flex-direction: column;
-  min-height: 12rem;
-  padding: 0.85rem 0.85rem 1rem;
+  min-height: 0;
+  padding: 0.65rem 0.65rem calc(0.65rem + env(safe-area-inset-bottom, 0px));
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
+  border-top: 3px solid var(--amber);
+  background: linear-gradient(180deg, var(--panel) 0%, color-mix(in srgb, var(--panel) 85%, var(--bg)) 100%);
+}
+
+.storia-bubble {
+  margin-bottom: 0.5rem;
 }
 
 .storia-speaker {
-  margin: 0 0 0.15rem;
+  margin: 0 0 0.1rem;
   font-weight: 800;
-  font-size: 1rem;
+  font-size: 1.02rem;
   color: var(--amber);
 }
 
 .storia-role {
-  margin: 0 0 0.5rem;
-  font-size: 0.75rem;
+  margin: 0 0 0.45rem;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
   color: var(--mute);
 }
 
 .storia-text {
-  margin: 0 0 0.75rem;
-  font-size: 0.95rem;
+  margin: 0;
+  font-size: 0.98rem;
   line-height: 1.55;
   color: var(--testo);
 }
 
 .storia-note {
-  margin: 0 0 0.65rem;
-  padding: 0.45rem 0.55rem;
+  margin: 0 0 0.5rem;
+  padding: 0.5rem 0.6rem;
   font-size: 0.82rem;
-  border-radius: 6px;
-  background: color-mix(in srgb, var(--teal) 14%, var(--panel));
+  line-height: 1.45;
+  border-radius: 8px;
+  background: color-mix(in srgb, var(--teal) 12%, var(--panel));
   border-left: 3px solid var(--teal);
   color: var(--mute);
 }
@@ -147,42 +258,104 @@
 
 .storia-actions {
   margin-top: auto;
+  padding-top: 0.5rem;
   display: flex;
   flex-direction: column;
   gap: 0.45rem;
 }
 
+.storia-continue {
+  width: 100%;
+  min-height: 2.85rem;
+  font-size: 1rem;
+}
+
 .storia-choice {
   width: 100%;
   text-align: left;
-  padding: 0.6rem 0.75rem;
+  padding: 0.65rem 0.75rem;
   font: inherit;
   font-size: 0.88rem;
   font-weight: 600;
-  border-radius: 8px;
+  line-height: 1.35;
+  border-radius: 10px;
   border: 1px solid var(--bordo);
   background: var(--bg);
   color: var(--testo);
   cursor: pointer;
 }
 
-.storia-choice:active {
-  background: color-mix(in srgb, var(--amber) 20%, var(--bg));
+.storia-choice:disabled {
+  opacity: 0.7;
 }
 
 .storia-choice.is-ok {
   border-color: var(--teal);
+  background: color-mix(in srgb, var(--teal) 15%, var(--bg));
 }
 
 .storia-choice.is-ko {
   border-color: #f87171;
 }
 
-.storia-end {
-  padding: 1rem 0.75rem;
+.storia-hint {
+  margin: 0.45rem 0 0;
+  font-size: 0.72rem;
+  color: var(--mute);
   text-align: center;
-  border-top: 1px solid var(--bordo);
-  background: var(--panel);
+}
+
+.storia-hint[hidden] {
+  display: none !important;
+}
+
+.storia-end {
+  padding: 1.1rem 0.85rem 1.5rem;
+  text-align: center;
+}
+
+.storia-end h2 {
+  margin: 0 0 0.35rem;
+  font-size: 1.2rem;
+}
+
+.storia-end p {
+  margin: 0 0 0.75rem;
+  color: var(--mute);
+  font-size: 0.9rem;
+}
+
+.storia-recap {
+  display: grid;
+  gap: 0.5rem;
+  margin: 0 0 0.85rem;
+  text-align: left;
+}
+
+.storia-recap div {
+  padding: 0.55rem 0.65rem;
+  border-radius: 8px;
+  border: 1px solid var(--bordo);
+  background: var(--bg);
+  font-size: 0.82rem;
+}
+
+.storia-recap strong {
+  display: block;
+  color: var(--amber);
+  margin-bottom: 0.15rem;
+}
+
+.storia-recap span {
+  color: var(--mute);
+}
+
+.storia-end-list {
+  text-align: left;
+  margin: 0 0 1rem;
+  padding-left: 1.1rem;
+  font-size: 0.85rem;
+  color: var(--mute);
 }
 
 .storia-end .btn-row {
@@ -190,32 +363,23 @@
   flex-wrap: wrap;
   gap: 0.5rem;
   justify-content: center;
-  margin-top: 0.75rem;
-}
-
-.storia-end[hidden] {
-  display: none !important;
-}
-
-.storia-end ul {
-  text-align: left;
-  margin: 0.75rem 0;
-  padding-left: 1.1rem;
-  font-size: 0.88rem;
-  color: var(--mute);
 }
 
 @media (min-width: 720px) {
   .storia-shell {
-    max-width: 36rem;
-  }
-
-  .storia-scene {
-    flex-basis: min(38dvh, 18rem);
+    max-width: 32rem;
   }
 
   .storia-portrait {
-    width: 5rem;
-    max-height: 6.5rem;
+    width: 4.75rem;
+    max-height: 5.75rem;
   }
+}
+
+body.reduced-motion .storia-scene img.scene-bg {
+  transition: none;
+}
+
+body.reduced-motion .storia-progress i {
+  transition: none;
 }
