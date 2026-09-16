@@ -1,0 +1,277 @@
+/* Scheda · caduta di tensione — layout a cavo + pannello grafico */
+
+.page-scheda {
+  --carta: color-mix(in srgb, var(--panel) 94%, var(--teal) 6%);
+}
+
+.scheda-layout {
+  display: grid;
+  gap: 1rem;
+  max-width: 52rem;
+  margin: 0 auto;
+  padding: 1rem 1rem 2.5rem;
+}
+
+@media (min-width: 720px) {
+  .scheda-layout {
+    grid-template-columns: 3.5rem minmax(0, 1fr);
+    align-items: start;
+  }
+}
+
+.scheda-spine {
+  display: none;
+}
+
+@media (min-width: 720px) {
+  .scheda-spine {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.35rem;
+    padding-top: 4.5rem;
+  }
+
+  .scheda-spine i {
+    display: block;
+    width: 4px;
+    flex: 1;
+    min-height: 12rem;
+    border-radius: 4px;
+    background: linear-gradient(180deg, var(--amber), var(--cc-blue), var(--ac-violet));
+    box-shadow: 0 0 12px rgba(240, 180, 41, 0.35);
+  }
+
+  .scheda-spine span {
+    writing-mode: vertical-rl;
+    transform: rotate(180deg);
+    font-size: 0.65rem;
+    font-weight: 800;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--mute);
+  }
+}
+
+.scheda-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 0.75rem;
+}
+
+.scheda-head h1 {
+  margin: 0 0 0.35rem;
+  font-size: clamp(1.35rem, 4vw, 1.75rem);
+  line-height: 1.2;
+}
+
+.scheda-meta {
+  margin: 0 0 1rem;
+  font-size: 0.85rem;
+  color: var(--mute);
+}
+
+.scheda-block {
+  margin-bottom: 1rem;
+  padding: 1rem 1.05rem;
+  background: var(--carta);
+  border: 1px solid var(--bordo);
+  border-radius: 12px;
+}
+
+.scheda-block h2 {
+  margin: 0 0 0.55rem;
+  font-size: 1.05rem;
+  color: var(--amber);
+}
+
+.scheda-block p,
+.scheda-block li {
+  font-size: 0.95rem;
+}
+
+.scheda-block ul {
+  margin: 0.4rem 0 0;
+  padding-left: 1.15rem;
+}
+
+.formula-row {
+  display: grid;
+  gap: 0.65rem;
+  margin: 0.75rem 0;
+}
+
+@media (min-width: 540px) {
+  .formula-row {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.formula-card {
+  padding: 0.75rem 0.85rem;
+  border-radius: 10px;
+  border: 2px solid var(--bordo);
+  background: color-mix(in srgb, var(--panel) 88%, var(--amber) 12%);
+}
+
+.formula-card strong {
+  display: block;
+  font-size: 0.78rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--teal);
+  margin-bottom: 0.35rem;
+}
+
+.formula-card .eq {
+  font-size: 1.15rem;
+  font-weight: 800;
+  font-variant-numeric: tabular-nums;
+}
+
+.formula-card p {
+  margin: 0.45rem 0 0;
+  font-size: 0.88rem;
+  color: var(--mute);
+}
+
+.scheda-fig {
+  margin: 0.75rem 0 0;
+  border-radius: 10px;
+  overflow: hidden;
+  border: 1px solid var(--bordo);
+}
+
+.scheda-fig img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.scheda-fig figcaption {
+  padding: 0.5rem 0.65rem;
+  font-size: 0.82rem;
+  color: var(--mute);
+  background: var(--panel);
+}
+
+.graph-panel {
+  margin-top: 0.85rem;
+  padding: 0.85rem;
+  border-radius: 12px;
+  border: 1px dashed color-mix(in srgb, var(--teal) 50%, var(--bordo));
+  background: color-mix(in srgb, var(--bg) 70%, var(--panel) 30%);
+}
+
+.graph-panel h3 {
+  margin: 0 0 0.65rem;
+  font-size: 0.95rem;
+}
+
+.graph-controls {
+  display: grid;
+  gap: 0.65rem;
+  margin-bottom: 0.75rem;
+}
+
+.graph-controls label {
+  display: grid;
+  gap: 0.25rem;
+  font-size: 0.88rem;
+  font-weight: 600;
+}
+
+.graph-controls input[type="range"] {
+  width: 100%;
+  accent-color: var(--amber);
+}
+
+.graph-controls output {
+  font-weight: 800;
+  color: var(--teal);
+}
+
+#grafico-cavo {
+  width: 100%;
+  height: auto;
+  max-height: 220px;
+}
+
+.graph-readout {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.5rem;
+  margin-top: 0.65rem;
+}
+
+.graph-readout div {
+  padding: 0.5rem 0.6rem;
+  border-radius: 8px;
+  background: var(--panel);
+  border: 1px solid var(--bordo);
+  font-size: 0.85rem;
+}
+
+.graph-readout strong {
+  display: block;
+  font-size: 1.05rem;
+  color: var(--amber);
+}
+
+.legame-film {
+  margin-top: 0.65rem;
+  padding: 0.65rem 0.75rem;
+  border-left: 4px solid var(--cc-blue);
+  font-size: 0.9rem;
+  color: var(--mute);
+}
+
+.scheda-esempio {
+  font-size: 0.92rem;
+  line-height: 1.55;
+}
+
+.scheda-esempio .passi {
+  margin: 0.5rem 0;
+  padding: 0.65rem 0.75rem;
+  background: var(--panel);
+  border-radius: 8px;
+  font-family: ui-monospace, monospace;
+  font-size: 0.82rem;
+  overflow-x: auto;
+}
+
+.ricorda-box {
+  margin: 0;
+  padding: 0.75rem 0.85rem;
+  border-radius: 10px;
+  background: color-mix(in srgb, var(--panel) 85%, var(--ac-violet) 15%);
+  border: 1px solid var(--bordo);
+  font-size: 0.92rem;
+}
+
+@media print {
+  .no-print {
+    display: none !important;
+  }
+
+  .scheda-layout {
+    display: block;
+    padding: 0;
+  }
+
+  .scheda-block {
+    break-inside: avoid;
+    border-color: #999;
+  }
+
+  body::after {
+    content: "Realizzato dal Prof. Rossano Bella";
+    display: block;
+    margin-top: 1rem;
+    font-size: 8pt;
+    text-align: center;
+    color: #666;
+  }
+}

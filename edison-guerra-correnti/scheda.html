@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="color-scheme" content="dark light">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <title>Scheda · Caduta di tensione | Edison · Scuola</title>
+  <meta name="description" content="Scheda semplice: caduta di tensione su un cavo, prima e seconda legge di Ohm, grafico e esempio numerico. Quarta professionale.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/scheda.css">
+</head>
+<body class="page-scheda">
+  <a class="skip-link visually-hidden" href="#contenuto">Salta al contenuto</a>
+
+  <header class="ed-top no-print">
+    <a class="ed-brand" href="index.html">
+      <span class="ed-brand-mark" aria-hidden="true"></span>
+      Guerra delle correnti
+    </a>
+    <nav class="ed-nav" aria-label="Sezioni">
+      <a href="index.html">Home</a>
+      <a href="fumetto.html">Fumetto</a>
+      <a href="scheda.html">Scheda</a>
+    </nav>
+    <button type="button" class="theme-toggle" data-theme-toggle aria-pressed="false">Chiaro</button>
+  </header>
+
+  <main id="contenuto" class="scheda-layout" tabindex="-1">
+    <div class="scheda-spine" aria-hidden="true">
+      <span>Cavo</span>
+      <i></i>
+    </div>
+
+    <div>
+      <div class="scheda-toolbar no-print">
+        <button type="button" class="btn btn-primary" onclick="window.print()">Stampa scheda</button>
+        <a class="btn btn-secondary" href="fumetto.html">Fumetto</a>
+        <a class="btn btn-secondary" href="index.html">Home</a>
+      </div>
+
+      <header class="scheda-head">
+        <h1>Caduta di tensione lungo una linea</h1>
+        <p class="scheda-meta">Quarta professionale · Tecnologie elettriche e elettroniche</p>
+      </header>
+
+      <section class="scheda-block" aria-labelledby="idea">
+        <h2 id="idea">L’idea in breve</h2>
+        <p>
+          La <strong>tensione</strong> (volt, V) spinge la <strong>corrente</strong> (ampere, A) nel cavo.
+          Il filo ha una <strong>resistenza</strong> R: parte di tensione si «consuma» lungo il percorso.
+          Quella perdita si chiama <strong>caduta di tensione</strong> ΔU (delta U).
+        </p>
+        <p>All’inizio del cavo la tensione è più alta; verso la fine (lampione, presa, motore) è un po’ più bassa.</p>
+      </section>
+
+      <section class="scheda-block" aria-labelledby="ohm">
+        <h2 id="ohm">Prima legge di Ohm</h2>
+        <div class="formula-row">
+          <div class="formula-card">
+            <strong>Legge</strong>
+            <p class="eq">U = R × I</p>
+            <p>U in volt, R in ohm (Ω), I in ampere.</p>
+          </div>
+          <div class="formula-card">
+            <strong>Sulla linea</strong>
+            <p class="eq">ΔU = R × I</p>
+            <p>ΔU è quanta tensione perdi sul cavo con corrente I.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="scheda-block" aria-labelledby="ohm2">
+        <h2 id="ohm2">Seconda legge di Ohm</h2>
+        <p>La resistenza del filo dipende da <em>materiale</em>, <em>lunghezza</em> e <em>sezione</em>:</p>
+        <div class="formula-card" style="max-width: 22rem">
+          <strong>Resistenza del conduttore</strong>
+          <p class="eq">R = ρ × L / S</p>
+          <p>
+            ρ (rho) = resistività del materiale (es. rame ≈ 0,0175 Ω·mm²/m).<br>
+            L = lunghezza del cavo in metri.<br>
+            S = sezione del filo in mm².
+          </p>
+        </div>
+        <p style="margin-top:0.65rem">
+          <strong>Cavo più lungo</strong> → R aumenta → <strong>ΔU aumenta</strong>.<br>
+          <strong>Sezione più grossa</strong> → R diminuisce → <strong>ΔU diminuisce</strong>.
+        </p>
+      </section>
+
+      <section class="scheda-block" aria-labelledby="grafico">
+        <h2 id="grafico">Grafico e prova al volo</h2>
+        <figure class="scheda-fig">
+          <img src="img/caduta-tensione-linea.png" alt="Schema: linea elettrica con tensione 230 V all'inizio e minore alla fine del cavo, con formule R uguale rho per L diviso S e delta U uguale R per I" width="1200" height="675" loading="lazy">
+          <figcaption>Schema: lungo il cavo la tensione utile scende di ΔU.</figcaption>
+        </figure>
+
+        <div class="graph-panel" aria-labelledby="sim-titolo">
+          <h3 id="sim-titolo">Grafico ΔU (rame, U<sub>inizio</sub> = 230 V)</h3>
+          <div class="graph-controls">
+            <label>
+              Lunghezza L (m)
+              <input type="range" id="inp-L" min="10" max="150" step="5" value="50">
+              <output id="out-L" for="inp-L">50 m</output>
+            </label>
+            <label>
+              Sezione S (mm²)
+              <input type="range" id="inp-S" min="1.5" max="6" step="0.5" value="2.5">
+              <output id="out-S" for="inp-S">2.5 mm²</output>
+            </label>
+            <label>
+              Corrente I (A)
+              <input type="range" id="inp-I" min="4" max="32" step="1" value="10">
+              <output id="out-I" for="inp-I">10 A</output>
+            </label>
+          </div>
+          <svg id="grafico-cavo" role="img" aria-label="Grafico tensione che scende lungo il cavo"></svg>
+          <div class="graph-readout">
+            <div>R ≈ <strong id="read-R">0,35 Ω</strong></div>
+            <div>ΔU ≈ <strong id="read-delta">3,5 V</strong></div>
+            <div>Tensione a fine cavo ≈ <strong id="read-end">226,5 V</strong></div>
+            <div>ρ rame = 0,0175 Ω·mm²/m</div>
+          </div>
+        </div>
+
+        <p class="legame-film">
+          Nel film <em>Edison</em>, portare luce lontano con la CC richiedeva impianti vicini al consumo: su linee lunghe la caduta di tensione è un problema reale.
+          Con la CA e i trasformatori si alza o abbassa la tensione e si riduce la perdita su grandi distanze.
+        </p>
+      </section>
+
+      <section class="scheda-block scheda-esempio" aria-labelledby="esempio">
+        <h2 id="esempio">Esempio sul quaderno</h2>
+        <p>Cavo in rame: L = 40 m, S = 2,5 mm², I = 16 A. Calcola R e ΔU.</p>
+        <div class="passi">
+          R = ρ × L / S = 0,0175 × 40 / 2,5 = 0,28 Ω<br>
+          ΔU = R × I = 0,28 × 16 = 4,48 V<br>
+          Se parti da 230 V, a fine linea restano circa 230 − 4,48 ≈ 225,5 V
+        </div>
+      </section>
+
+      <section class="scheda-block" aria-labelledby="ricorda">
+        <h2 id="ricorda">Ricorda così</h2>
+        <p class="ricorda-box">
+          <strong>Prima legge:</strong> U = R × I → sulla linea ΔU = R × I.<br>
+          <strong>Seconda legge:</strong> R = ρ × L / S → cavo lungo e sottile = più caduta.<br>
+          In impianti veri controlla anche la <strong>caduta percentuale</strong> (regole CEI): qui ti basta capire il meccanismo.
+        </p>
+      </section>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <p>Scheda didattica · Realizzato dal Prof. Rossano Bella.</p>
+  </footer>
+
+  <script src="js/common.js" defer></script>
+  <script src="js/scheda.js" defer></script>
+</body>
+</html>
