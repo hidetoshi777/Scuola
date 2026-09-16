@@ -49,7 +49,8 @@
 
   async function tryLogin(password) {
     if (!HASH) return false;
-    const h = await sha256(password);
+    const pwd = String(password || "").trim();
+    const h = await sha256(pwd);
     if (h !== HASH) return false;
     writeSession();
     return true;
