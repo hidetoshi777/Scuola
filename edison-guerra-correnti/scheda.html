@@ -117,7 +117,8 @@
               <output id="out-I" for="inp-I">10 A</output>
             </label>
           </div>
-          <svg id="grafico-cavo" role="img" aria-label="Grafico tensione che scende lungo il cavo"></svg>
+          <svg id="grafico-cavo" role="img" aria-describedby="grafico-live"></svg>
+          <p id="grafico-live" class="visually-hidden" aria-live="polite"></p>
           <div class="graph-readout">
             <div>R ≈ <strong id="read-R">0,35 Ω</strong></div>
             <div>ΔU ≈ <strong id="read-delta">3,5 V</strong></div>
@@ -139,6 +140,35 @@
           R = ρ × L / S = 0,0175 × 40 / 2,5 = 0,28 Ω<br>
           ΔU = R × I = 0,28 × 16 = 4,48 V<br>
           Se parti da 230 V, a fine linea restano circa 230 − 4,48 ≈ 225,5 V
+        </div>
+      </section>
+
+      <section class="scheda-block" aria-labelledby="esercizi">
+        <h2 id="esercizi">Esercizi</h2>
+        <p class="scheda-nota-doc no-print">Docente: apri «Soluzione» solo per correggere o per stampare con risposte.</p>
+
+        <div class="esercizio">
+          <p><strong>1.</strong> Cavo in rame (ρ = 0,0175 Ω·mm²/m): L = 25 m, S = 1,5 mm², I = 10 A. Calcola R e ΔU.</p>
+          <details class="soluzione-docente">
+            <summary>Soluzione (docente)</summary>
+            R = 0,0175 × 25 / 1,5 = 0,292 Ω (circa). ΔU = 0,292 × 10 ≈ <strong>2,9 V</strong>.
+          </details>
+        </div>
+
+        <div class="esercizio">
+          <p><strong>2.</strong> Vero o falso? «Se raddoppi solo la lunghezza L del cavo (stessi S, I e materiale), la caduta di tensione ΔU raddoppia.»</p>
+          <details class="soluzione-docente">
+            <summary>Soluzione (docente)</summary>
+            <strong>Vero.</strong> Da R = ρ × L / S segue che R è proporzionale a L; con ΔU = R × I, anche ΔU raddoppia.
+          </details>
+        </div>
+
+        <div class="esercizio">
+          <p><strong>3.</strong> Stessa corrente I = 16 A, stesso rame, L = 30 m. Confronta la caduta: cavo A con S = 2,5 mm² oppure cavo B con S = 4 mm². Quale perde più tensione?</p>
+          <details class="soluzione-docente">
+            <summary>Soluzione (docente)</summary>
+            A: R = 0,0175 × 30 / 2,5 = 0,21 Ω → ΔU = 3,36 V. B: R = 0,0175 × 30 / 4 = 0,131 Ω → ΔU ≈ 2,1 V. Perde più tensione il cavo <strong>A</strong> (sezione più piccola).
+          </details>
         </div>
       </section>
 
