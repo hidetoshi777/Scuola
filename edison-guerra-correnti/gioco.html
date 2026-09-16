@@ -6,7 +6,7 @@
   <meta name="color-scheme" content="dark light">
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
   <title>Squadra luce · Gioco | Edison</title>
-  <meta name="description" content="Quarta professionale, tecnologie elettriche: gioco action sul film Edison — raccogli lampadine, schiva blackout, sei missioni CC vs CA.">
+  <meta name="description" content="Quarta professionale, tecnologie elettriche: gioco action sul film Edison — sprite, sfondi reali, missioni CC vs CA.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;600;700;800&display=swap" rel="stylesheet">
@@ -32,14 +32,20 @@
     <div class="game-hud" aria-live="polite">
       <p>Missione <strong id="hud-level">1</strong>/6</p>
       <p>Punti <strong id="hud-score">0</strong></p>
-      <p class="hud-wide">Tempo <strong id="hud-time">75</strong> s · Obiettivo <strong id="hud-target">12</strong></p>
-      <p class="hud-wide">Energia
-        <span class="energy-bar" aria-hidden="true"><i id="hud-energy" style="width:100%"></i></span>
+      <p class="hud-wide mission-goal" id="hud-goal">Obiettivo…</p>
+      <div class="hud-wide obj-track" aria-hidden="true">
+        <span class="obj-icon-wrap"><img id="hud-obj-icon" src="img/icons-collect.png" alt="" width="32" height="32"></span>
+        <span class="obj-bar"><i id="hud-obj-fill" style="width:0%"></i></span>
+        <strong id="hud-obj-count">0/10</strong>
+      </div>
+      <p class="hud-wide">Tempo <strong id="hud-time">85</strong> s · Energia
+        <span class="energy-bar"><i id="hud-energy" style="width:100%"></i></span>
       </p>
     </div>
 
     <div class="canvas-wrap">
-      <canvas id="game-canvas" width="400" height="500" aria-label="Campo di gioco Squadra luce"></canvas>
+      <canvas id="game-canvas" width="400" height="500" aria-label="Campo di gioco: Edison raccoglie luce ed evita blackout"></canvas>
+      <p class="canvas-loading" id="canvas-loading">Carico immagini…</p>
       <div class="quiz-overlay" id="quiz-overlay" hidden>
         <div class="quiz-card" role="dialog" aria-labelledby="quiz-title">
           <p class="ed-kicker" style="margin-bottom:0.35rem">Bonus film</p>
@@ -53,15 +59,19 @@
     </div>
 
     <div class="touch-pad" aria-label="Controlli touch">
-      <button type="button" id="touch-left" aria-label="Muovi a sinistra">◀</button>
-      <button type="button" id="touch-right" aria-label="Muovi a destra">▶</button>
+      <button type="button" id="touch-left" aria-label="Muovi Edison a sinistra">◀ Sinistra</button>
+      <button type="button" id="touch-right" aria-label="Muovi Edison a destra">Destra ▶</button>
     </div>
 
     <section class="game-panel" id="panel-intro">
+      <figure class="intro-figure" id="intro-figure">
+        <img id="intro-art" src="img/hero-menlo.png" alt="" width="640" height="360" loading="eager">
+      </figure>
       <h2 id="intro-title">Menlo Park</h2>
       <p id="intro-text"></p>
+      <p class="intro-objective" id="intro-objective"></p>
       <div class="btn-row">
-        <button type="button" class="btn btn-primary" id="btn-start">Via!</button>
+        <button type="button" class="btn btn-primary" id="btn-start">Inizia missione</button>
         <button type="button" class="btn btn-secondary" id="btn-pause" hidden>Pausa</button>
       </div>
     </section>
@@ -77,6 +87,28 @@
       </div>
     </section>
   </main>
+
+  <div class="tutorial-overlay" id="tutorial" hidden>
+    <div class="tutorial-card" role="dialog" aria-labelledby="tut-title">
+      <h2 id="tut-title">Tutorial · 30 secondi</h2>
+      <div class="tutorial-heroes">
+        <figure>
+          <img src="img/player.png" alt="Thomas Edison, protagonista" width="200" height="200">
+          <figcaption><strong>Tu sei Edison</strong> — muoviti in basso</figcaption>
+        </figure>
+        <figure>
+          <img src="img/icons-collect.png" alt="Icone da raccogliere o evitare" width="280" height="158">
+          <figcaption>Raccogli lampadine, brevetti, monete, CA… Evita nube e PR</figcaption>
+        </figure>
+      </div>
+      <ol class="tutorial-steps">
+        <li><kbd>←</kbd> <kbd>→</kbd> o <kbd>A</kbd> <kbd>D</kbd> · su telefono usa ◀ ▶</li>
+        <li>Completa la <strong>barra obiettivo</strong> della missione (legata al film)</li>
+        <li>Non perdere energia: schiva blackout e giornali PR</li>
+      </ol>
+      <button type="button" class="btn btn-primary" id="tutorial-go">Ho capito — missione 1</button>
+    </div>
+  </div>
 
   <footer class="site-footer">
     <p>Gioco didattico sul film <em>Edison — L'uomo che illuminò il mondo</em>. Realizzato dal Prof. Rossano Bella.</p>

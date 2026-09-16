@@ -248,6 +248,26 @@ body.reduced-motion * {
   align-items: center;
 }
 
+.ed-gallery {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.5rem;
+  margin: 0 0 1.75rem;
+}
+
+.ed-gallery img {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+  border: 1px solid var(--bordo);
+}
+
+@media (min-width: 640px) {
+  .ed-gallery {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
 .btn {
   display: inline-flex;
   align-items: center;
