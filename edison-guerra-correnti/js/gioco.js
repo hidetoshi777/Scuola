@@ -26,6 +26,8 @@
       objective: { type: "bulb", count: 10, text: "Accendi 10 lampadine nel laboratorio" },
       intro:
         "Come nel film: a Menlo Park Edison cerca un filamento che resti acceso. Raccogli le lampadine che cadono dai banchi!",
+      didattica:
+        "La lampadina converte energia elettrica in luce (e un po' di calore). Edison prova filamenti finché la luce resta accesa a lungo.",
       spawnGood: ["bulb", "bulb", "bulb", "patent"],
       quiz: {
         testo: "Dove Edison perfeziona la lampadina che «dura» nel film?",
@@ -41,6 +43,8 @@
       objective: { type: "bulb", count: 12, text: "Accendi 12 lampioni a Manhattan (corrente continua)" },
       intro:
         "Illuminare Manhattan con la CC: J.P. Morgan sostiene il progetto. Raccogli lampadine; le monete M danno energia extra.",
+      didattica:
+        "CC = corrente continua: elettroni vanno sempre nello stesso verso. L'icona batteria nel gioco la ricorda. Utile in città, ma sulle lunghe distanze perde efficacia.",
       spawnGood: ["bulb", "bulb", "coin", "cc"],
       quiz: {
         testo: "Chi finanzia Edison per illuminare New York nel film?",
@@ -56,6 +60,8 @@
       objective: { type: "patent", count: 8, text: "Raccogli 8 brevetti — Westinghouse ha proposto di collaborare, Edison rifiuta" },
       intro:
         "Westinghouse propone di collaborare; Edison rifiuta. Nasce la rivalità: raccogli brevetti e schiva i giornali PR!",
+      didattica:
+        "Il brevetto tutela un'invenzione. Nel film la «guerra» non è solo tecnica: anche soldi, stampa e fama (icona PR = campagna mediatica).",
       spawnGood: ["patent", "patent", "bulb", "cc"],
       quiz: {
         testo: "Cosa succede quando Westinghouse propone di collaborare?",
@@ -76,6 +82,8 @@
       objective: { type: "ac", count: 7, text: "Raccogli 7 fulmini CA — Tesla lascia Edison e passa a Westinghouse" },
       intro:
         "Nikola Tesla se ne va: promessa non mantenuta. Con Westinghouse sviluppa la corrente alternata. Raccogli i fulmini CA!",
+      didattica:
+        "CA = corrente alternata: cambia direzione molte volte al secondo (50 Hz in Italia oggi). Con trasformatori si alza la tensione e si perde meno energia sui cavi lunghi.",
       spawnGood: ["ac", "ac", "patent", "bulb"],
       quiz: {
         testo: "Perché la CA è importante nel film e come la presenta Edison?",
@@ -96,6 +104,8 @@
       objective: { type: "bulb", count: 15, text: "Porta 15 lampadine all'Esposizione di Chicago" },
       intro:
         "Esposizione universale 1893: Westinghouse e Tesla vincono l'illuminazione. Tu porti luce fino alla fiera — raccogli lampadine!",
+      didattica:
+        "L'Expo di Chicago è un appalto reale nel film: vincere significa dimostrare quale sistema elettrico è più adatto a illuminare un'intera fiera.",
       spawnGood: ["bulb", "bulb", "ac", "coin"],
       quiz: {
         testo: "Chi ottiene l'illuminazione dell'Esposizione di Chicago 1893?",
@@ -111,6 +121,8 @@
       objective: { type: "patent", count: 10, text: "Raccogli 10 brevetti per il kinetoscopio di Edison" },
       intro:
         "Edison si concentra sul kinetoscopio — immagini in movimento. Raccogli brevetti e lampadine, chiudi in positivo!",
+      didattica:
+        "Il kinetoscopio è un primissimo apparecchio per vedere immagini in sequenza: altra invenzione di Edison dopo il duello CC/CA.",
       spawnGood: ["patent", "patent", "bulb", "cc"],
       quiz: {
         testo: "Su cosa si concentra Edison verso la fine del film?",
@@ -122,12 +134,12 @@
   ];
 
   const LEARN_ALL = [
-    "Menlo Park: luce che dura.",
-    "Manhattan in CC con J.P. Morgan.",
-    "Rifiuto a Westinghouse → guerra delle correnti.",
-    "Tesla e CA con Westinghouse.",
-    "Chicago 1893: Westinghouse/Tesla illuminano la fiera.",
-    "Edison e il kinetoscopio.",
+    "Menlo Park: filamento che dura — energia elettrica → luce.",
+    "Manhattan: CC e finanziamento (Morgan); lampioni in corrente continua.",
+    "Guerra delle correnti: brevetti, rivalità, campagna mediatica (PR).",
+    "Tesla + Westinghouse: CA e trasporto dell'energia a distanza.",
+    "Chicago 1893: appalto Expo vinto da sistema Westinghouse/Tesla.",
+    "Kinetoscopio: Edison verso il cinema, oltre la lampadina.",
   ];
 
   const canvas = document.getElementById("game-canvas");
@@ -283,6 +295,7 @@
     const introTitle = document.getElementById("intro-title");
     const introText = document.getElementById("intro-text");
     const introObjective = document.getElementById("intro-objective");
+    const introDidactic = document.getElementById("intro-didactic");
     const introArt = document.getElementById("intro-art");
     const btnPause = document.getElementById("btn-pause");
 
@@ -291,6 +304,10 @@
     if (introTitle) introTitle.textContent = cfg.title;
     if (introText) introText.textContent = cfg.intro;
     if (introObjective) introObjective.textContent = "Obiettivo: " + cfg.objective.text;
+    if (introDidactic) {
+      introDidactic.textContent = cfg.didattica ? "In classe: " + cfg.didattica : "";
+      introDidactic.hidden = !cfg.didattica;
+    }
     if (introArt) introArt.src = cfg.art;
     if (btnPause) btnPause.hidden = true;
     playing = false;
@@ -518,6 +535,8 @@
     const endTitle = document.getElementById("end-title");
     const endText = document.getElementById("end-text");
     const learnList = document.getElementById("learn-list");
+    const endDidactic = document.getElementById("end-didactic");
+    const learnKicker = document.getElementById("learn-kicker");
     const btnNext = document.getElementById("btn-next-level");
     const btnPause = document.getElementById("btn-pause");
     if (panelIntro) panelIntro.hidden = true;
@@ -525,6 +544,8 @@
     if (endTitle) endTitle.textContent = "Riprova";
     if (endText) endText.textContent = msg;
     if (learnList) learnList.innerHTML = "";
+    if (endDidactic) endDidactic.hidden = true;
+    if (learnKicker) learnKicker.hidden = true;
     if (btnNext) btnNext.hidden = true;
     if (btnPause) btnPause.hidden = true;
   }
@@ -584,6 +605,8 @@
     const endTitle = document.getElementById("end-title");
     const endText = document.getElementById("end-text");
     const learnList = document.getElementById("learn-list");
+    const endDidactic = document.getElementById("end-didactic");
+    const learnKicker = document.getElementById("learn-kicker");
     const btnNext = document.getElementById("btn-next-level");
     const btnPause = document.getElementById("btn-pause");
     const cfg = levelCfg();
@@ -594,6 +617,11 @@
     if (endText) {
       endText.textContent = `Obiettivo raggiunto! Punti missione: ${score}. Totale: ${totalScore}.`;
     }
+    if (endDidactic) {
+      endDidactic.textContent = cfg.didattica ? "Ripasso tecnologie: " + cfg.didattica : "";
+      endDidactic.hidden = !cfg.didattica;
+    }
+    if (learnKicker) learnKicker.hidden = false;
     if (learnList) {
       learnList.innerHTML = LEARN_ALL.slice(0, levelIndex + 1)
         .map((t) => `<li>${t}</li>`)

@@ -217,7 +217,7 @@ window.ATTIVITA_WEB = [
     classe: "Quarta superiore · professionale",
     annoProf: 4,
     descrizione:
-      "Quarta professionale, tecnologie elettriche: dal film Edison — L'uomo che illuminò il mondo, gioco action Squadra luce con sei missioni (CC, CA, Tesla, Chicago 1893) e quiz.",
+      "Quarta professionale, tecnologie elettriche: gioco sul film Edison con CC/CA, Tesla e Chicago 1893; ripasso breve in ogni missione.",
     citazione: "La luce deve durare — non solo accendersi.",
     url: "edison-guerra-correnti/",
     copertina: "edison-guerra-correnti/img/og-share.jpg",

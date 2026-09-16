@@ -241,6 +241,37 @@ body.reduced-motion * {
   color: var(--mute);
 }
 
+.ed-tip {
+  margin-top: 0.35rem !important;
+  font-size: 0.82rem !important;
+  color: var(--teal) !important;
+  font-weight: 600;
+}
+
+.ed-didattica {
+  margin: 0 0 1.75rem;
+  padding: 1rem 1.1rem;
+  border-radius: 12px;
+  border: 1px dashed color-mix(in srgb, var(--teal) 55%, var(--bordo));
+  background: color-mix(in srgb, var(--panel) 92%, var(--teal) 8%);
+}
+
+.ed-didattica h2 {
+  margin: 0 0 0.65rem;
+  font-size: 1.02rem;
+}
+
+.ed-didattica ul {
+  margin: 0;
+  padding-left: 1.15rem;
+  font-size: 0.88rem;
+  color: var(--mute);
+}
+
+.ed-didattica li {
+  margin-bottom: 0.45rem;
+}
+
 .ed-cta {
   display: flex;
   flex-wrap: wrap;
