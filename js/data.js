@@ -217,13 +217,13 @@ window.ATTIVITA_WEB = [
     classe: "Quarta superiore · professionale",
     annoProf: 4,
     descrizione:
-      "Quarta professionale, tecnologie elettriche: gioco sul film Edison con CC/CA, Tesla e Chicago 1893; ripasso breve in ogni missione.",
+      "Quarta professionale, tecnologie elettriche: visual story sul film Edison (CC/CA, Tesla, Chicago 1893) con immagini e ripasso breve.",
     citazione: "La luce deve durare — non solo accendersi.",
     url: "edison-guerra-correnti/",
     copertina: "edison-guerra-correnti/img/og-share.jpg",
     tinta: "scienze",
     adesivo: "st-pianeta",
-    extra: [{ label: "Gioco", url: "edison-guerra-correnti/gioco.html" }],
+    extra: [{ label: "Storia visiva", url: "edison-guerra-correnti/gioco.html" }],
   },
 ];
 

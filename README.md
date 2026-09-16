@@ -31,7 +31,7 @@ Realizzato dal Prof. Rossano Bella.
 ### Edison · Guerra delle correnti · Quarta professionale (tecnologie elettriche)
 
 - Home: https://hidetoshi777.github.io/Scuola/edison-guerra-correnti/
-- Gioco: https://hidetoshi777.github.io/Scuola/edison-guerra-correnti/gioco.html
+- Storia visiva: https://hidetoshi777.github.io/Scuola/edison-guerra-correnti/gioco.html
 
 ## Struttura del repository
 
@@ -39,7 +39,7 @@ Realizzato dal Prof. Rossano Bella.
 rotazione-terrestre/        → scienze, prima media
 parti-invariabili/          → italiano, prima superiore
 acciaio-alluminio-ghisa/    → tecnologia, quarta professionale (scheda, fumetto, gioco)
-edison-guerra-correnti/     → tecnologie elettriche, quarta professionale (gioco action sul film Edison)
+edison-guerra-correnti/     → tecnologie elettriche, quarta professionale (visual story sul film Edison)
 ```
 
 Nuove attività: nuova sottocartella, stessa struttura (home, imparare, laboratorio, gioco).
