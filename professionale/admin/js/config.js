@@ -1,7 +1,7 @@
 /**
  * Config area riservata (statistiche visite).
  *
- * Password di default: rossano-stats
+ * Password attuale: Rossano99
  * Per cambiarla (sul PC del Prof):
  *   printf '%s' 'nuova-password' | sha256sum
  * Incolla l'hash a 64 caratteri in PASSWORD_SHA256 qui sotto (senza spazi).
@@ -11,7 +11,7 @@
  */
 window.PROF_ADMIN_CONFIG = {
   PASSWORD_SHA256:
-    "81afa944d0b4192751450cc926a134395edbda76ac2cacb20666c74bd51ec544",
+    "a83abbfbea94ab5118f3b5ade9c0f2b32c062c4a292d57774924bed3809e6e57",
   SESSION_KEY: "prof-admin-session-v1",
   SESSION_HOURS: 12,
 };
