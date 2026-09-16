@@ -213,16 +213,16 @@ window.ATTIVITA_WEB = [
   },
   {
     titolo: "Edison · Guerra delle correnti",
-    materia: "Italiano",
-    classe: "Terza e quarta professionale",
-    annoProf: 3,
+    materia: "Tecnologie elettriche e elettroniche",
+    classe: "Quarta superiore · professionale",
+    annoProf: 4,
     descrizione:
-      "Dal film Edison — L'uomo che illuminò il mondo: gioco action Squadra luce, sei missioni (Menlo Park, Manhattan, Tesla, Chicago 1893, kinetoscopio) con quiz sul film.",
+      "Quarta professionale, tecnologie elettriche: dal film Edison — L'uomo che illuminò il mondo, gioco action Squadra luce con sei missioni (CC, CA, Tesla, Chicago 1893) e quiz.",
     citazione: "La luce deve durare — non solo accendersi.",
     url: "edison-guerra-correnti/",
     copertina: "edison-guerra-correnti/img/og-share.jpg",
-    tinta: "italiano",
-    adesivo: "st-pennino",
+    tinta: "scienze",
+    adesivo: "st-pianeta",
     extra: [{ label: "Gioco", url: "edison-guerra-correnti/gioco.html" }],
   },
 ];
