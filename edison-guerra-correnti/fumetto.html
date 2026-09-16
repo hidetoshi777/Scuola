@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="color-scheme" content="dark light">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <title>Fumetto · Edison | Scuola</title>
+  <meta name="description" content="Cinque tavole illustrate: storia dell'elettricità dal film Edison — Menlo Park, CC, CA, Chicago 1893.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/fumetto.css">
+  <link rel="preload" as="image" href="img/tavole/01-menlo.jpg" fetchpriority="high">
+</head>
+<body class="page-fumetto">
+  <a class="skip-link visually-hidden" href="#contenuto">Salta al contenuto</a>
+
+  <header class="ed-top">
+    <a class="ed-brand" href="index.html">
+      <span class="ed-brand-mark" aria-hidden="true"></span>
+      Guerra delle correnti
+    </a>
+    <nav class="ed-nav" aria-label="Sezioni">
+      <a href="index.html">Home</a>
+      <a href="fumetto.html">Fumetto</a>
+      <a href="gioco.html">Storia</a>
+    </nav>
+    <button type="button" class="theme-toggle" data-theme-toggle aria-pressed="false">Chiaro</button>
+  </header>
+
+  <main id="contenuto" class="fumetto-main" tabindex="-1">
+    <header class="fumetto-intro">
+      <p class="ed-kicker">Quarta professionale · Cinque tavole</p>
+      <h1>La luce che cambiò il mondo</h1>
+      <p class="ed-lead" style="margin-bottom:0.75rem">
+        Fumetto breve sulla storia dell'elettricità nel film <em>Edison — L'uomo che illuminò il mondo</em>:
+        lampadina, corrente continua e alternata, guerra delle correnti, Chicago, kinetoscopio.
+      </p>
+    </header>
+
+    <section class="fumetto-reader" id="fumetto-stage" aria-roledescription="fumetto" aria-label="Edison a fumetti">
+      <div class="fumetto-toolbar">
+        <p class="fumetto-status">Tavola <span id="fumetto-num">1</span> di 5</p>
+        <div class="fumetto-toolbar-actions">
+          <button type="button" class="btn btn-secondary fumetto-print" id="fumetto-print">Stampa tutto</button>
+          <button type="button" class="btn btn-secondary fumetto-full" id="fumetto-fullscreen" aria-pressed="false">Schermo intero</button>
+        </div>
+      </div>
+
+      <div class="fumetto-viewport" id="fumetto-viewport">
+        <figure class="fumetto-page is-active" data-page="1">
+          <img src="img/tavole/01-menlo.jpg" alt="Tavola 1: Menlo Park, Edison e la lampadina" width="864" height="1152" fetchpriority="high">
+        </figure>
+        <figure class="fumetto-page" data-page="2" aria-hidden="true">
+          <img src="img/tavole/02-manhattan.jpg" alt="Tavola 2: Manhattan illuminata in corrente continua" width="864" height="1152" loading="lazy">
+        </figure>
+        <figure class="fumetto-page" data-page="3" aria-hidden="true">
+          <img src="img/tavole/03-guerra.jpg" alt="Tavola 3: Edison rifiuta Westinghouse" width="864" height="1152" loading="lazy">
+        </figure>
+        <figure class="fumetto-page" data-page="4" aria-hidden="true">
+          <img src="img/tavole/04-chicago.jpg" alt="Tavola 4: Tesla, Westinghouse e Chicago 1893" width="864" height="1152" loading="lazy">
+        </figure>
+        <figure class="fumetto-page" data-page="5" aria-hidden="true">
+          <img src="img/tavole/05-ricorda.jpg" alt="Tavola 5: kinetoscopio e ripasso CC e CA" width="864" height="1152" loading="lazy">
+        </figure>
+      </div>
+
+      <p class="fumetto-caption" id="fumetto-caption" aria-live="polite"></p>
+
+      <div class="fumetto-controls">
+        <button type="button" class="btn btn-secondary fumetto-nav" id="fumetto-prev" disabled>← Indietro</button>
+        <div class="fumetto-dots" id="fumetto-dots" role="tablist" aria-label="Tavole"></div>
+        <button type="button" class="btn btn-primary fumetto-nav" id="fumetto-next">Avanti →</button>
+      </div>
+      <p class="fumetto-hint">Scorri o tocca i lati · pizzica o doppio tap per zoom · Stampa tutto per la copisteria</p>
+    </section>
+
+    <div class="ed-cta" style="margin-top:1rem">
+      <a class="btn btn-primary" href="gioco.html">Visual story interattiva</a>
+      <a class="btn btn-secondary" href="index.html">Home</a>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <p>Fumetto didattico in cinque tavole. Realizzato dal Prof. Rossano Bella.</p>
+  </footer>
+
+  <script src="js/common.js" defer></script>
+  <script src="../js/fumetto-zoom.js" defer></script>
+  <script src="../js/fumetto-print.js?v=3" defer></script>
+  <script src="js/fumetto.js" defer></script>
+</body>
+</html>
