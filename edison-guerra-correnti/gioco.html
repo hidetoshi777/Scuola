@@ -2,19 +2,20 @@
 <html lang="it">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="color-scheme" content="dark light">
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
   <title>Storia visiva · Edison | Scuola</title>
-  <meta name="description" content="Visual story sul film Edison: Menlo Park, CC e CA, Tesla, Chicago 1893, kinetoscopio. Quarta professionale, tecnologie elettriche.">
+  <meta name="description" content="Visual story sul film Edison: Menlo Park, CC e CA, Tesla, Chicago 1893. Quarta professionale, tecnologie elettriche.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/styles.css">
-  <link rel="stylesheet" href="css/storia.css">
-  <link rel="preload" as="image" href="img/hero-menlo.png">
+  <link rel="stylesheet" href="css/vn.css">
+  <link rel="preload" as="image" href="img/personaggi/prof.png" fetchpriority="high">
+  <link rel="preload" as="image" href="img/player.png" fetchpriority="high">
 </head>
-<body class="page-storia">
+<body class="page-gioco">
   <a class="skip-link visually-hidden" href="#contenuto">Salta al contenuto</a>
 
   <header class="ed-top">
@@ -30,82 +31,59 @@
     <button type="button" class="theme-toggle" data-theme-toggle aria-pressed="false">Chiaro</button>
   </header>
 
-  <main id="contenuto" class="storia-shell" tabindex="-1">
-    <div class="storia-hud">
-      <div class="storia-hud-meta">
-        <strong id="storia-cap">Prologo</strong>
-        <span id="storia-passo">Passo 1 di 15</span>
+  <main id="contenuto" class="ed-wrap" tabindex="-1">
+    <div class="vn-shell">
+      <div class="vn-hud">
+        <div class="vn-meta">
+          <strong id="vn-capitolo">Prologo</strong>
+          <span class="live">Il progresso resta su questo dispositivo.</span>
+        </div>
+        <div class="inline-actions">
+          <div class="vn-progress-track" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" aria-label="Avanzamento storia">
+            <span id="vn-progress"></span>
+          </div>
+          <button type="button" class="btn btn-secondary" id="vn-riparti">Ricomincia</button>
+          <button type="button" class="btn btn-secondary" data-audio-toggle aria-pressed="true">Suono: acceso</button>
+        </div>
       </div>
-      <div class="storia-progress" id="storia-progress" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" aria-label="Avanzamento storia">
-        <i id="storia-progress-fill"></i>
-      </div>
-      <button type="button" class="btn btn-secondary storia-restart-btn" id="storia-restart">Ricomincia</button>
+
+      <section id="vn-stage" data-scena="intro" aria-live="polite">
+        <div class="vn-backdrop" aria-hidden="true"></div>
+        <p class="vn-scene-tag" id="vn-scena">Dopo il film</p>
+        <div class="vn-cast">
+          <img id="vn-avatar" class="vn-avatar" src="img/personaggi/prof.png" alt="" width="320" height="427">
+        </div>
+        <div class="vn-dialogue">
+          <div class="vn-speaker-row">
+            <strong id="vn-nome">Prof.</strong>
+            <span id="vn-ruolo">Tecnologie elettriche</span>
+          </div>
+          <p id="vn-testo"></p>
+          <div id="vn-scelte" class="vn-choices"></div>
+        </div>
+      </section>
     </div>
-
-    <nav class="storia-rail" id="storia-rail" aria-label="Capitoli"></nav>
-
-    <section class="storia-intro" id="storia-intro">
-      <h1>Storia visiva</h1>
-      <p>Dopo il film <em>Edison — L'uomo che illuminò il mondo</em>: immagini, dialoghi brevi e due domande di ripasso. Tocca <strong>Inizia</strong> — poi <strong>Continua</strong> o barra spaziatrice.</p>
-      <ul class="storia-intro-list">
-        <li>Menlo Park → Manhattan (CC)</li>
-        <li>Guerra delle correnti → Tesla (CA)</li>
-        <li>Chicago 1893 → Kinetoscopio</li>
-      </ul>
-      <button type="button" class="btn btn-primary" id="storia-start">Inizia</button>
-    </section>
-
-    <section class="storia-stage" id="storia-stage" hidden aria-live="polite">
-      <div class="storia-scene" id="storia-scene-wrap">
-        <p class="storia-scene-tag" id="storia-tag">Dopo il film</p>
-        <img class="scene-bg" id="storia-bg" src="img/player.png" alt="" width="1280" height="720" decoding="async">
-        <img class="storia-portrait" id="storia-portrait" src="img/player.png" alt="" width="120" height="180" hidden>
-      </div>
-      <div class="storia-dialogue">
-        <div class="storia-bubble">
-          <p class="storia-speaker" id="storia-nome">Prof.</p>
-          <p class="storia-role" id="storia-ruolo">Tecnologie elettriche</p>
-          <p class="storia-text" id="storia-testo"></p>
-        </div>
-        <p class="storia-note" id="storia-nota" hidden></p>
-        <div class="storia-actions" id="storia-actions"></div>
-        <p class="storia-hint" id="storia-hint">Invio o spazio = Continua</p>
-      </div>
-    </section>
-
-    <section class="storia-end" id="storia-end" hidden>
-      <h2>Storia completata</h2>
-      <p id="storia-end-lead">Hai ripercorso il film passo passo.</p>
-      <div class="storia-recap" aria-label="Ripasso CC e CA">
-        <div>
-          <strong>CC</strong>
-          <span>Corrente continua · batteria · Manhattan nel film</span>
-        </div>
-        <div>
-          <strong>CA</strong>
-          <span>Alternata · Tesla/Westinghouse · oggi 230 V in casa</span>
-        </div>
-      </div>
-      <ul class="storia-end-list">
-        <li>Menlo Park — lampadina che dura</li>
-        <li>Manhattan — CC e J.P. Morgan</li>
-        <li>Guerra delle correnti — rifiuto e stampa</li>
-        <li>Chicago 1893 — vittoria CA</li>
-        <li>Kinetoscopio — nuova invenzione</li>
-      </ul>
-      <div class="btn-row">
-        <a class="btn btn-primary" href="fumetto.html">Rileggi il fumetto</a>
-        <button type="button" class="btn btn-secondary" data-storia-restart>Ricomincia storia</button>
-        <a class="btn btn-secondary" href="index.html">Home</a>
-      </div>
-    </section>
   </main>
 
-  <footer class="site-footer storia-foot">
+  <dialog id="vn-fine" aria-labelledby="vn-fine-titolo">
+    <form method="dialog">
+      <h2 id="vn-fine-titolo">Storia completata</h2>
+      <p id="vn-fine-testo"></p>
+      <div class="hero-actions">
+        <button type="submit" class="btn btn-primary" value="ok">Chiudi</button>
+        <button type="button" class="btn btn-secondary" data-vn-restart>Ricomincia</button>
+        <a class="btn btn-secondary" href="fumetto.html">Vai al fumetto</a>
+      </div>
+      <p class="live" style="margin-top: 1rem;">Realizzato dal Prof. Rossano Bella.</p>
+    </form>
+  </dialog>
+
+  <footer class="site-footer">
     <p>Visual story sul film Edison. Realizzato dal Prof. Rossano Bella.</p>
   </footer>
 
   <script src="js/common.js" defer></script>
-  <script src="js/storia.js" defer></script>
+  <script src="js/story.js" defer></script>
+  <script src="js/engine.js" defer></script>
 </body>
 </html>
