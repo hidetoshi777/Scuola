@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="color-scheme" content="dark light">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <title>Squadra luce · Gioco | Edison</title>
+  <meta name="description" content="Gioco action: raccogli lampadine e brevetti, schiva blackout. Sei missioni dal film Edison — The Current War.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/gioco.css">
+</head>
+<body class="page-gioco">
+  <a class="skip-link visually-hidden" href="#contenuto">Salta al contenuto</a>
+
+  <header class="ed-top">
+    <a class="ed-brand" href="index.html">
+      <span class="ed-brand-mark" aria-hidden="true"></span>
+      Squadra luce
+    </a>
+    <nav class="ed-nav" aria-label="Sezioni">
+      <a href="index.html">Home</a>
+      <a href="gioco.html">Gioca</a>
+    </nav>
+    <button type="button" class="theme-toggle" data-theme-toggle aria-pressed="false">Chiaro</button>
+  </header>
+
+  <main id="contenuto" class="game-shell" tabindex="-1">
+    <div class="game-hud" aria-live="polite">
+      <p>Missione <strong id="hud-level">1</strong>/6</p>
+      <p>Punti <strong id="hud-score">0</strong></p>
+      <p class="hud-wide">Tempo <strong id="hud-time">75</strong> s · Obiettivo <strong id="hud-target">12</strong></p>
+      <p class="hud-wide">Energia
+        <span class="energy-bar" aria-hidden="true"><i id="hud-energy" style="width:100%"></i></span>
+      </p>
+    </div>
+
+    <div class="canvas-wrap">
+      <canvas id="game-canvas" width="400" height="500" aria-label="Campo di gioco Squadra luce"></canvas>
+      <div class="quiz-overlay" id="quiz-overlay" hidden>
+        <div class="quiz-card" role="dialog" aria-labelledby="quiz-title">
+          <p class="ed-kicker" style="margin-bottom:0.35rem">Bonus film</p>
+          <h2 id="quiz-title" style="margin:0 0 0.5rem;font-size:1rem">Domanda rapida</h2>
+          <p id="quiz-text"></p>
+          <div id="quiz-options"></div>
+          <p class="quiz-feedback" id="quiz-feedback" aria-live="polite"></p>
+          <button type="button" class="btn btn-primary" id="quiz-continue" hidden>Continua</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="touch-pad" aria-label="Controlli touch">
+      <button type="button" id="touch-left" aria-label="Muovi a sinistra">◀</button>
+      <button type="button" id="touch-right" aria-label="Muovi a destra">▶</button>
+    </div>
+
+    <section class="game-panel" id="panel-intro">
+      <h2 id="intro-title">Menlo Park</h2>
+      <p id="intro-text"></p>
+      <div class="btn-row">
+        <button type="button" class="btn btn-primary" id="btn-start">Via!</button>
+        <button type="button" class="btn btn-secondary" id="btn-pause" hidden>Pausa</button>
+      </div>
+    </section>
+
+    <section class="game-panel" id="panel-end" hidden>
+      <h2 id="end-title">Missione completata</h2>
+      <p id="end-text"></p>
+      <ul class="learn-list" id="learn-list"></ul>
+      <div class="btn-row">
+        <button type="button" class="btn btn-primary" id="btn-next-level" hidden>Missione successiva</button>
+        <button type="button" class="btn btn-secondary" id="btn-retry">Riprova missione</button>
+        <a class="btn btn-secondary" href="index.html">Torna alla home</a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p>Gioco didattico sul film <em>Edison — L'uomo che illuminò il mondo</em>. Realizzato dal Prof. Rossano Bella.</p>
+  </footer>
+
+  <script src="js/common.js" defer></script>
+  <script src="js/gioco.js" defer></script>
+</body>
+</html>

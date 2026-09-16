@@ -28,12 +28,18 @@ Realizzato dal Prof. Rossano Bella.
 - Gioco: https://hidetoshi777.github.io/Scuola/acciaio-alluminio-ghisa/gioco.html
 - Densità (allenamento γ): https://hidetoshi777.github.io/Scuola/acciaio-alluminio-ghisa/densita.html
 
+### Edison · Guerra delle correnti · Terza e quarta professionale
+
+- Home: https://hidetoshi777.github.io/Scuola/edison-guerra-correnti/
+- Gioco: https://hidetoshi777.github.io/Scuola/edison-guerra-correnti/gioco.html
+
 ## Struttura del repository
 
 ```
 rotazione-terrestre/        → scienze, prima media
 parti-invariabili/          → italiano, prima superiore
 acciaio-alluminio-ghisa/    → tecnologia, quarta professionale (scheda, fumetto, gioco)
+edison-guerra-correnti/     → italiano, terza/quarta professionale (gioco action sul film Edison)
 ```
 
 Nuove attività: nuova sottocartella, stessa struttura (home, imparare, laboratorio, gioco).

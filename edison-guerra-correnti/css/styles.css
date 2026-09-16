@@ -1,0 +1,288 @@
+/* Edison · Guerra delle correnti — hub (filament timeline layout) */
+
+:root {
+  --amber: #f0b429;
+  --amber-dim: #c48a12;
+  --teal: #2dd4bf;
+  --cc-blue: #5b8def;
+  --ac-violet: #a78bfa;
+  --bg: #0a0e14;
+  --panel: #121922;
+  --wire: #2a3544;
+  --testo: #eef3fa;
+  --mute: #8b9cb0;
+  --bordo: #243040;
+  --btn: var(--amber);
+  --btn-text: #1a1206;
+  font-family: "Archivo", "Segoe UI", system-ui, sans-serif;
+  color-scheme: dark;
+}
+
+[data-theme="light"] {
+  --bg: #f4f6fa;
+  --panel: #fff;
+  --wire: #d8dee8;
+  --testo: #141c28;
+  --mute: #5a6575;
+  --bordo: #c5ceda;
+  color-scheme: light;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  min-height: 100dvh;
+  background: var(--bg);
+  color: var(--testo);
+  line-height: 1.55;
+}
+
+body.reduced-motion * {
+  animation-duration: 0.01ms !important;
+  transition-duration: 0.01ms !important;
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
+}
+
+.skip-link:focus {
+  position: fixed;
+  z-index: 999;
+  top: 0.5rem;
+  left: 0.5rem;
+  padding: 0.5rem 0.75rem;
+  background: var(--panel);
+  border: 2px solid var(--amber);
+  clip: auto;
+  width: auto;
+  height: auto;
+}
+
+.ed-top {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid var(--bordo);
+  background: linear-gradient(180deg, #151c28, var(--bg));
+}
+
+.ed-brand {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-weight: 800;
+  font-size: 0.95rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--testo);
+  text-decoration: none;
+}
+
+.ed-brand-mark {
+  width: 2rem;
+  height: 2rem;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 30%, #fff8dc, var(--amber) 45%, var(--amber-dim));
+  box-shadow: 0 0 12px rgba(240, 180, 41, 0.45);
+}
+
+.ed-nav {
+  display: flex;
+  gap: 0.35rem;
+}
+
+.ed-nav a {
+  padding: 0.45rem 0.75rem;
+  border-radius: 999px;
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--mute);
+  text-decoration: none;
+  border: 1px solid transparent;
+}
+
+.ed-nav a[aria-current="page"] {
+  color: var(--btn-text);
+  background: var(--amber);
+  border-color: var(--amber-dim);
+}
+
+.theme-toggle {
+  font: inherit;
+  font-size: 0.82rem;
+  font-weight: 600;
+  padding: 0.4rem 0.7rem;
+  border-radius: 8px;
+  border: 1px solid var(--bordo);
+  background: var(--panel);
+  color: var(--testo);
+  cursor: pointer;
+}
+
+.ed-wrap {
+  max-width: 52rem;
+  margin: 0 auto;
+  padding: 1.25rem 1rem 2.5rem;
+}
+
+.ed-kicker {
+  margin: 0 0 0.35rem;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--teal);
+}
+
+.ed-hero h1 {
+  margin: 0 0 0.5rem;
+  font-size: clamp(1.65rem, 5vw, 2.35rem);
+  line-height: 1.15;
+  font-weight: 800;
+}
+
+.ed-lead {
+  margin: 0 0 1rem;
+  max-width: 38rem;
+  color: var(--mute);
+  font-size: 1.02rem;
+}
+
+.ed-quote {
+  margin: 0 0 1.5rem;
+  padding: 0.75rem 1rem;
+  border-left: 4px solid var(--amber);
+  background: color-mix(in srgb, var(--panel) 90%, var(--amber) 10%);
+  font-style: italic;
+  font-size: 0.98rem;
+}
+
+.ed-poster {
+  margin: 0 0 1.75rem;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid var(--bordo);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.35);
+}
+
+.ed-poster img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.ed-timeline {
+  position: relative;
+  padding-left: 1.75rem;
+  list-style: none;
+  margin: 0 0 2rem;
+}
+
+.ed-timeline::before {
+  content: "";
+  position: absolute;
+  left: 0.45rem;
+  top: 0.4rem;
+  bottom: 0.4rem;
+  width: 3px;
+  background: linear-gradient(180deg, var(--amber), var(--cc-blue), var(--ac-violet), var(--teal));
+  border-radius: 3px;
+}
+
+.ed-timeline li {
+  position: relative;
+  margin-bottom: 1rem;
+  padding: 0.85rem 1rem;
+  background: var(--panel);
+  border: 1px solid var(--bordo);
+  border-radius: 10px;
+}
+
+.ed-timeline li::before {
+  content: "";
+  position: absolute;
+  left: -1.45rem;
+  top: 1.1rem;
+  width: 0.65rem;
+  height: 0.65rem;
+  border-radius: 50%;
+  background: var(--amber);
+  box-shadow: 0 0 0 3px var(--bg);
+}
+
+.ed-timeline h2 {
+  margin: 0 0 0.25rem;
+  font-size: 1rem;
+}
+
+.ed-timeline p {
+  margin: 0;
+  font-size: 0.9rem;
+  color: var(--mute);
+}
+
+.ed-cta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  align-items: center;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.35rem;
+  padding: 0.65rem 1.15rem;
+  border-radius: 10px;
+  font: inherit;
+  font-weight: 700;
+  font-size: 0.95rem;
+  text-decoration: none;
+  border: 2px solid transparent;
+  cursor: pointer;
+}
+
+.btn-primary {
+  background: var(--btn);
+  color: var(--btn-text);
+  border-color: var(--amber-dim);
+}
+
+.btn-secondary {
+  background: transparent;
+  color: var(--testo);
+  border-color: var(--bordo);
+}
+
+.site-footer {
+  padding: 1.25rem 1rem 2rem;
+  text-align: center;
+  font-size: 0.85rem;
+  color: var(--mute);
+  border-top: 1px solid var(--bordo);
+}
+
+.site-footer p {
+  margin: 0;
+}

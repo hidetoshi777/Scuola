@@ -211,6 +211,20 @@ window.ATTIVITA_WEB = [
       { label: "Densità", url: "acciaio-alluminio-ghisa/densita.html" },
     ],
   },
+  {
+    titolo: "Edison · Guerra delle correnti",
+    materia: "Italiano",
+    classe: "Terza e quarta professionale",
+    annoProf: 3,
+    descrizione:
+      "Dal film Edison — L'uomo che illuminò il mondo: gioco action Squadra luce, sei missioni (Menlo Park, Manhattan, Tesla, Chicago 1893, kinetoscopio) con quiz sul film.",
+    citazione: "La luce deve durare — non solo accendersi.",
+    url: "edison-guerra-correnti/",
+    copertina: "edison-guerra-correnti/img/og-share.jpg",
+    tinta: "italiano",
+    adesivo: "st-pennino",
+    extra: [{ label: "Gioco", url: "edison-guerra-correnti/gioco.html" }],
+  },
 ];
 
 /** Attività web per il raccoglitore professionale (Ferraris AM): richiede `annoProf` 3 o 4. */

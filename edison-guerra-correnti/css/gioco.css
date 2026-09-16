@@ -1,0 +1,213 @@
+/* Gioco action — canvas stage */
+
+.page-gioco {
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+}
+
+.game-shell {
+  flex: 1;
+  max-width: 40rem;
+  width: 100%;
+  margin: 0 auto;
+  padding: 0.75rem 0.75rem 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+}
+
+.game-hud {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.35rem 0.75rem;
+  font-size: 0.82rem;
+  font-weight: 600;
+}
+
+.game-hud span {
+  color: var(--mute);
+}
+
+.game-hud strong {
+  color: var(--testo);
+  font-weight: 800;
+}
+
+.game-hud .hud-wide {
+  grid-column: 1 / -1;
+}
+
+.energy-bar {
+  height: 0.55rem;
+  background: var(--wire);
+  border-radius: 999px;
+  overflow: hidden;
+  margin-top: 0.15rem;
+}
+
+.energy-bar i {
+  display: block;
+  height: 100%;
+  width: 100%;
+  background: linear-gradient(90deg, var(--teal), var(--amber));
+  border-radius: inherit;
+  transition: width 0.15s linear;
+}
+
+.canvas-wrap {
+  position: relative;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 2px solid var(--bordo);
+  background: #060910;
+  touch-action: none;
+}
+
+#game-canvas {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 4 / 5;
+}
+
+.touch-pad {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.5rem;
+}
+
+.touch-pad button {
+  min-height: 3rem;
+  font: inherit;
+  font-weight: 800;
+  font-size: 1.1rem;
+  border-radius: 10px;
+  border: 2px solid var(--bordo);
+  background: var(--panel);
+  color: var(--testo);
+  cursor: pointer;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.touch-pad button:active {
+  background: color-mix(in srgb, var(--amber) 35%, var(--panel));
+}
+
+@media (min-width: 720px) {
+  .touch-pad {
+    display: none;
+  }
+}
+
+.game-panel {
+  padding: 1rem;
+  border-radius: 12px;
+  border: 1px solid var(--bordo);
+  background: var(--panel);
+}
+
+.game-panel h2 {
+  margin: 0 0 0.5rem;
+  font-size: 1.15rem;
+}
+
+.game-panel p {
+  margin: 0 0 0.75rem;
+  color: var(--mute);
+  font-size: 0.92rem;
+}
+
+.game-panel .btn-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.quiz-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.75rem;
+  background: rgba(6, 9, 16, 0.88);
+  z-index: 5;
+}
+
+.quiz-overlay[hidden] {
+  display: none !important;
+}
+
+.quiz-card {
+  width: 100%;
+  max-width: 22rem;
+  padding: 1rem;
+  border-radius: 12px;
+  border: 1px solid var(--bordo);
+  background: var(--panel);
+}
+
+.quiz-card p {
+  margin: 0 0 0.65rem;
+  font-size: 0.95rem;
+}
+
+.quiz-opt {
+  display: block;
+  width: 100%;
+  text-align: left;
+  margin-bottom: 0.4rem;
+  padding: 0.55rem 0.65rem;
+  font: inherit;
+  font-size: 0.88rem;
+  border-radius: 8px;
+  border: 1px solid var(--bordo);
+  background: var(--bg);
+  color: var(--testo);
+  cursor: pointer;
+}
+
+.quiz-opt:disabled {
+  opacity: 0.85;
+  cursor: default;
+}
+
+.quiz-opt.is-ok {
+  border-color: #2dd4bf;
+  background: color-mix(in srgb, #2dd4bf 25%, var(--bg));
+}
+
+.quiz-opt.is-ko {
+  border-color: #f87171;
+}
+
+.quiz-feedback {
+  min-height: 1.5rem;
+  font-size: 0.85rem;
+  color: var(--mute);
+}
+
+.learn-list {
+  margin: 0.75rem 0 0;
+  padding-left: 1.1rem;
+  font-size: 0.88rem;
+  color: var(--mute);
+}
+
+.learn-list li {
+  margin-bottom: 0.35rem;
+}
+
+@media print {
+  .ed-top,
+  .touch-pad,
+  .game-hud,
+  .canvas-wrap {
+    display: none !important;
+  }
+  .game-panel {
+    border: none;
+  }
+}
