@@ -37,4 +37,11 @@
   if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
     document.body.classList.add("reduced-motion");
   }
+
+  if (!window.ScuolaAccess) {
+    const s = document.createElement("script");
+    s.src = "../js/access-track.js?v=1";
+    s.defer = true;
+    document.head.appendChild(s);
+  }
 })();

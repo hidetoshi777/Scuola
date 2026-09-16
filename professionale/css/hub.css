@@ -269,3 +269,27 @@
 .prof-footer p {
   margin: 0;
 }
+
+/* Puntino quasi nascosto → area riservata (statistiche) */
+.prof-admin-dot {
+  display: inline-block;
+  margin-left: 0.15rem;
+  padding: 0.35rem 0.45rem;
+  color: inherit;
+  text-decoration: none;
+  opacity: 0.18;
+  font-size: 0.95em;
+  line-height: 1;
+  vertical-align: baseline;
+  border-radius: 0.25rem;
+}
+
+.prof-admin-dot:hover,
+.prof-admin-dot:focus-visible {
+  opacity: 0.55;
+  outline: none;
+}
+
+.prof-admin-dot:focus-visible {
+  box-shadow: 0 0 0 2px color-mix(in srgb, var(--prof-accent) 55%, transparent);
+}
