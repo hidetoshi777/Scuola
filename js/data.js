@@ -217,7 +217,7 @@ window.ATTIVITA_WEB = [
     classe: "Quarta superiore · professionale",
     annoProf: 4,
     descrizione:
-      "Quarta professionale, tecnologie elettriche: fumetto (5 tavole) e visual story sul film Edison — CC/CA, Tesla, Chicago 1893.",
+      "Quarta professionale, tecnologie elettriche: fumetto Edison (5 tavole) e scheda con grafico sulla caduta di tensione — legge di Ohm.",
     citazione: "La luce deve durare — non solo accendersi.",
     url: "edison-guerra-correnti/",
     copertina: "edison-guerra-correnti/img/og-share.jpg",
@@ -225,7 +225,7 @@ window.ATTIVITA_WEB = [
     adesivo: "st-pianeta",
     extra: [
       { label: "Fumetto", url: "edison-guerra-correnti/fumetto.html" },
-      { label: "Storia visiva", url: "edison-guerra-correnti/gioco.html" },
+      { label: "Scheda ΔU", url: "edison-guerra-correnti/scheda.html" },
     ],
   },
 ];
