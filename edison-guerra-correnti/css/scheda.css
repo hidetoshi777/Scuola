@@ -189,9 +189,15 @@
 
 .volt-stage {
   padding: 0 0.35rem;
+  min-height: 200px;
 }
 
-.volt-svg {
+.volt-diagram-host {
+  width: 100%;
+  min-height: 200px;
+}
+
+.volt-diagram-host .volt-svg,
   display: block;
   width: 100%;
   height: auto;
