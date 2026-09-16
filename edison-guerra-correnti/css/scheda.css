@@ -251,6 +251,31 @@
   font-size: 0.92rem;
 }
 
+.esercizio {
+  margin-top: 0.65rem;
+  padding-top: 0.65rem;
+  border-top: 1px solid var(--bordo);
+}
+
+.soluzione-docente {
+  margin-top: 0.5rem;
+  padding: 0.5rem 0.65rem;
+  background: color-mix(in srgb, var(--amber) 12%, var(--carta));
+  border-left: 3px solid var(--amber);
+  font-size: 0.88rem;
+}
+
+.soluzione-docente summary {
+  cursor: pointer;
+  font-weight: 800;
+}
+
+.scheda-nota-doc {
+  font-size: 0.82rem;
+  color: var(--mute);
+  margin: 0 0 0.5rem;
+}
+
 @media print {
   .no-print {
     display: none !important;
@@ -264,6 +289,10 @@
   .scheda-block {
     break-inside: avoid;
     border-color: #999;
+  }
+
+  .soluzione-docente[open] summary {
+    list-style: none;
   }
 
   body::after {
