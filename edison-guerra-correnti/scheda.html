@@ -92,40 +92,62 @@
       </section>
 
       <section class="scheda-block" aria-labelledby="grafico">
-        <h2 id="grafico">Grafico e prova al volo</h2>
-        <figure class="scheda-fig">
-          <img src="img/caduta-tensione-linea.png" alt="Schema: linea elettrica con tensione 230 V all'inizio e minore alla fine del cavo, con formule R uguale rho per L diviso S e delta U uguale R per I" width="1200" height="675" loading="lazy">
-          <figcaption>Schema: lungo il cavo la tensione utile scende di ΔU.</figcaption>
-        </figure>
+        <h2 id="grafico">Simulatore visivo</h2>
+        <p style="margin:0 0 0.75rem;font-size:0.92rem;color:var(--mute)">
+          Muovi i cursori: guarda come cambiano <strong>lunghezza</strong>, <strong>sezione</strong> e <strong>corrente</strong>.
+          Le colonne verde e ambra sono la tensione all’inizio e alla fine del cavo.
+        </p>
 
-        <div class="graph-panel" aria-labelledby="sim-titolo">
-          <h3 id="sim-titolo">Grafico ΔU (rame, U<sub>inizio</sub> = 230 V)</h3>
-          <div class="graph-controls">
-            <label>
-              Lunghezza L (m)
+        <div class="volt-lab" id="volt-lab" aria-labelledby="sim-titolo">
+          <h3 id="sim-titolo" class="volt-lab-title">Cavo in rame · U<sub>sorgente</sub> = 230 V</h3>
+
+          <div class="volt-stage">
+            <svg id="diagramma-cavo" class="volt-svg" viewBox="0 0 420 260" role="img" aria-describedby="grafico-live"></svg>
+            <p id="grafico-live" class="visually-hidden" aria-live="polite"></p>
+          </div>
+
+          <div class="volt-sliders">
+            <label class="volt-knob">
+              <span class="volt-knob-label">Lunghezza L</span>
               <input type="range" id="inp-L" min="10" max="150" step="5" value="50">
               <output id="out-L" for="inp-L">50 m</output>
             </label>
-            <label>
-              Sezione S (mm²)
+            <label class="volt-knob">
+              <span class="volt-knob-label">Sezione S</span>
               <input type="range" id="inp-S" min="1.5" max="6" step="0.5" value="2.5">
-              <output id="out-S" for="inp-S">2.5 mm²</output>
+              <output id="out-S" for="inp-S">2,5 mm²</output>
             </label>
-            <label>
-              Corrente I (A)
+            <label class="volt-knob">
+              <span class="volt-knob-label">Corrente I</span>
               <input type="range" id="inp-I" min="4" max="32" step="1" value="10">
               <output id="out-I" for="inp-I">10 A</output>
             </label>
           </div>
-          <svg id="grafico-cavo" role="img" aria-describedby="grafico-live"></svg>
-          <p id="grafico-live" class="visually-hidden" aria-live="polite"></p>
-          <div class="graph-readout">
-            <div>R ≈ <strong id="read-R">0,35 Ω</strong></div>
-            <div>ΔU ≈ <strong id="read-delta">3,5 V</strong></div>
-            <div>Tensione a fine cavo ≈ <strong id="read-end">226,5 V</strong></div>
-            <div>ρ rame = 0,0175 Ω·mm²/m</div>
+
+          <div class="volt-metrics">
+            <div class="volt-metric">
+              <span>Resistenza R</span>
+              <strong id="read-R">0,35 Ω</strong>
+            </div>
+            <div class="volt-metric volt-metric--drop">
+              <span>Caduta ΔU</span>
+              <strong id="read-delta">3,5 V</strong>
+            </div>
+            <div class="volt-metric">
+              <span>Tensione al carico</span>
+              <strong id="read-end">226,5 V</strong>
+            </div>
           </div>
+          <p class="volt-rho">ρ (rame) = 0,0175 Ω·mm²/m · ΔU = R × I</p>
         </div>
+
+        <details class="scheda-schema-extra no-print">
+          <summary>Schema generale (immagine)</summary>
+          <figure class="scheda-fig">
+            <img src="img/caduta-tensione-linea.png" alt="Linea elettrica: tensione che cala dal generatore al carico" width="1200" height="675" loading="lazy">
+            <figcaption>Vista d’insieme: generatore, cavo, utente finale.</figcaption>
+          </figure>
+        </details>
 
         <p class="legame-film">
           Nel film <em>Edison</em>, portare luce lontano con la CC richiedeva impianti vicini al consumo: su linee lunghe la caduta di tensione è un problema reale.
