@@ -1,8 +1,10 @@
 (function () {
   const captions = [
-    "Vignetta 1 — Guasto palese (fumo, rumore) e guasto nascosto: a volte il problema non si vede subito.",
-    "Vignetta 2 — Manutenzione preventiva: controllare, lubrificare, verificare prima che la macchina si fermi.",
-    "Vignetta 3 — Miglioramento: filtri, protezioni e ricambi migliori rendono l’impianto più sicuro e durevole.",
+    "Vignetta 1 — Quattro strategie: guasto palese/nascosto, preventiva e miglioramento per macchine affidabili.",
+    "Vignetta 2 — Tre tipi di manutenzione: ordinaria, straordinaria e preventiva.",
+    "Vignetta 3 — Strumenti di diagnostica: multimetro, termocamera, stetoscopio e altri.",
+    "Vignetta 4 — Checklist per sistemi complessi (CNC, PLC, sicurezze, lubrificazione…).",
+    "Vignetta 5 — Strumento giusto = diagnosi veloce: esempio cuscinetto caldo con termocamera.",
   ];
 
   const pages = Array.from(document.querySelectorAll(".fumetto-page"));
