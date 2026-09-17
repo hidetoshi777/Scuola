@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="color-scheme" content="dark light">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <title>Scheda · Guasti e manutenzione | Scuola</title>
+  <meta name="description" content="Scheda stampabile: tipi di guasto, manutenzione preventiva, miglioramenti ed esercizi con soluzioni docente.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,600;9..40,700;9..40,800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/scheda.css">
+</head>
+<body>
+  <a class="skip-link visually-hidden" href="#contenuto">Salta al contenuto</a>
+
+  <div class="off-shell">
+    <div class="off-tape" aria-hidden="true"></div>
+    <header class="off-top no-print">
+      <div class="off-top-inner">
+        <a class="off-brand" href="index.html">MP · Manutenzione</a>
+        <button type="button" class="theme-toggle" data-theme-toggle aria-pressed="false">Chiaro</button>
+      </div>
+      <nav class="off-tabs" aria-label="Sezioni">
+        <a href="index.html">Home</a>
+        <a href="scheda.html">Scheda</a>
+        <a href="fumetto.html">Fumetto</a>
+        <a href="gioco.html">Gioco</a>
+      </nav>
+    </header>
+
+    <main id="contenuto" class="off-main scheda-wrap" tabindex="-1">
+      <div class="scheda-toolbar no-print">
+        <button type="button" class="btn btn-primary" onclick="window.print()">Stampa scheda</button>
+        <a class="btn btn-secondary" href="fumetto.html">Fumetto</a>
+        <a class="btn btn-secondary" href="gioco.html">Gioco</a>
+      </div>
+
+      <p class="scheda-nota-doc no-print">Docente: apri «Soluzione» solo per correggere. In stampa le soluzioni restano nascoste agli alunni.</p>
+
+      <header class="scheda-head">
+        <div>
+          <h1>Guasti e manutenzione preventiva</h1>
+          <p class="scheda-meta">Quarta professionale · Tecnologie e tecniche di installazione e manutenzione · Prof. Rossano Bella</p>
+        </div>
+      </header>
+
+      <section class="scheda-section" aria-labelledby="tipi">
+        <h2 id="tipi">Tipi di guasto (sintesi)</h2>
+        <table class="tabella-guasti">
+          <thead>
+            <tr>
+              <th scope="col">Criterio</th>
+              <th scope="col">Cosa significa</th>
+              <th scope="col">Esempio in officina / impianto</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Palese</strong> vs <strong>nascosto</strong></td>
+              <td>Il guasto si vede o si sente subito, oppure è ancora «silenzioso».</td>
+              <td>Palese: motore che fuma. Nascosto: cuscinetto usurato prima del collasso.</td>
+            </tr>
+            <tr>
+              <td><strong>Prevedibile</strong> vs <strong>imprevedibile</strong></td>
+              <td>Si può anticipare con controlli e uso, oppure arriva all’improvviso.</td>
+              <td>Prevedibile: usura filtro dopo N ore. Imprevedibile: fulmine sul quadro.</td>
+            </tr>
+            <tr>
+              <td><strong>Frequente</strong> vs <strong>saltuario</strong></td>
+              <td>Si ripete spesso nello stesso punto, oppure è raro.</td>
+              <td>Frequente: stesso cuscinetto ogni due mesi. Saltuario: guasto dopo anni.</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section class="scheda-section" aria-labelledby="preventiva">
+        <h2 id="preventiva">Perché la manutenzione preventiva conviene</h2>
+        <ul>
+          <li><strong>Sicurezza</strong>: meno rischi per chi lavora vicino alla macchina.</li>
+          <li><strong>Costi</strong>: piccoli interventi programmati costano meno di una riparazione d’urgenza.</li>
+          <li><strong>Fermi macchina</strong>: si sceglie quando fermare, non quando il guasto obbliga a fermare tutto.</li>
+          <li><strong>Durata</strong>: lubrificare, controllare, serrare secondo piano = impianto che dura più a lungo.</li>
+          <li><strong>Qualità</strong>: meno scarti e lavoro più regolare in officina.</li>
+        </ul>
+      </section>
+
+      <section class="scheda-section" aria-labelledby="miglioramenti">
+        <h2 id="miglioramenti">Interventi di miglioramento (non solo «aggiustare»)</h2>
+        <ul>
+          <li>Sostituire un <strong>filtro</strong> vecchio con uno migliore o più adatto.</li>
+          <li>Aggiungere <strong>protezioni</strong> (cinghie, parti mobili, quadro elettrico).</li>
+          <li>Usare <strong>ricambi</strong> più resistenti o conformi al manuale.</li>
+          <li>Scrivere <strong>procedure</strong> chiare (check-list avvio, etichette, avvisi).</li>
+        </ul>
+      </section>
+
+      <section class="scheda-section" aria-labelledby="esercizi">
+        <h2 id="esercizi">Esercizi</h2>
+
+        <div class="esercizio">
+          <p><strong>1.</strong> Classifica: «Il motore vibra ma non si vede fumo» — guasto palese o nascosto?</p>
+          <details class="soluzione-docente">
+            <summary>Soluzione (docente)</summary>
+            <strong>Nascosto</strong> (o in fase iniziale): il problema c’è ma non è evidente come fumo o rumore fortissimo. Serve ispezione.
+          </details>
+        </div>
+
+        <div class="esercizio">
+          <p><strong>2.</strong> Ogni lunedì si rompe lo stesso sensore. È un guasto frequente o saltuario? Prevedibile o imprevedibile?</p>
+          <details class="soluzione-docente">
+            <summary>Soluzione (docente)</summary>
+            Frequente e in parte <strong>prevedibile</strong>: conviene capire la causa e programmare manutenzione / miglioramento (cablaggio, sensore migliore, fissaggio).
+          </details>
+        </div>
+
+        <p class="scheda-credito-stampa">Realizzato dal Prof. Rossano Bella</p>
+      </section>
+    </main>
+
+    <footer class="site-footer no-print">
+      <p>Scheda didattica. Realizzato dal Prof. Rossano Bella.</p>
+    </footer>
+  </div>
+
+  <script src="js/common.js" defer></script>
+</body>
+</html>

@@ -228,6 +228,24 @@ window.ATTIVITA_WEB = [
       { label: "Scheda ΔU", url: "edison-guerra-correnti/scheda.html" },
     ],
   },
+  {
+    titolo: "Guasti e manutenzione preventiva",
+    materia: "Tecnologie e tecniche di installazione e manutenzione",
+    classe: "Quarta superiore · professionale",
+    annoProf: 4,
+    descrizione:
+      "Tipi di guasto in officina, manutenzione preventiva e miglioramenti: scheda stampabile, fumetto in tre vignette e gioco «scegli l’intervento».",
+    citazione: "Prevenire è meglio che fermare tutto.",
+    url: "manutenzione-guasti-preventiva/",
+    copertina: "manutenzione-guasti-preventiva/img/og-share.jpg",
+    tinta: "scienze",
+    adesivo: "st-pianeta",
+    extra: [
+      { label: "Scheda", url: "manutenzione-guasti-preventiva/scheda.html" },
+      { label: "Fumetto", url: "manutenzione-guasti-preventiva/fumetto.html" },
+      { label: "Gioco", url: "manutenzione-guasti-preventiva/gioco.html" },
+    ],
+  },
 ];
 
 /** Attività web per il raccoglitore professionale (Ferraris AM): richiede `annoProf` 3 o 4. */
