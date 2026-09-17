@@ -2,7 +2,7 @@
   const captions = [
     "Vignetta 1 — Quattro strategie: guasto palese/nascosto, preventiva e miglioramento per macchine affidabili.",
     "Vignetta 2 — Tre tipi di manutenzione: ordinaria, straordinaria e preventiva.",
-    "Vignetta 3 — Strumenti di diagnostica: multimetro, termocamera, stetoscopio e altri.",
+    "Vignetta 3 — L’occhio nudo è il primo strumento: osserva sempre, poi multimetro, termocamera, stetoscopio…",
     "Vignetta 4 — Checklist per sistemi complessi (CNC, PLC, sicurezze, lubrificazione…).",
     "Vignetta 5 — Strumento giusto = diagnosi veloce: esempio cuscinetto caldo con termocamera.",
   ];
