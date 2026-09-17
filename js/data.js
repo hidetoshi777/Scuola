@@ -229,6 +229,20 @@ window.ATTIVITA_WEB = [
     ],
   },
   {
+    titolo: "Come nasce la corrente elettrica",
+    materia: "Tecnologie elettriche e elettroniche",
+    classe: "Quarta superiore · professionale",
+    annoProf: 4,
+    descrizione:
+      "Poster didattico: atomo, elettroni nel filo e corrente come cariche che passano in un secondo — stampabile da classe.",
+    citazione: "Più elettroni al secondo = corrente più forte.",
+    url: "come-nasce-la-corrente/",
+    copertina: "come-nasce-la-corrente/img/og-share.jpg",
+    tinta: "scienze",
+    adesivo: "st-pianeta",
+    extra: [{ label: "Poster", url: "come-nasce-la-corrente/" }],
+  },
+  {
     titolo: "Guasti e manutenzione preventiva",
     materia: "Tecnologie e tecniche di installazione e manutenzione",
     classe: "Quarta superiore · professionale",
