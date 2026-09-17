@@ -191,6 +191,18 @@
       nota: "Componenti elettromeccanici, serraggi e registrazioni: voci standard della checklist.",
     },
     {
+      tipo: "checklist",
+      badge: "Sostituzione sicura",
+      testo: "Il cuscinetto è da cambiare. Il capo chiede di finire in fretta. Cosa fai?",
+      opzioni: [
+        { id: "sicura", label: "Fermo, LOTO, DPI, ricambio corretto e checklist" },
+        { id: "fretta", label: "Smonto subito senza bloccare l’alimentazione" },
+        { id: "ricambio", label: "Metto un cuscinetto simile ma non dello stesso codice" },
+      ],
+      giusta: "sicura",
+      nota: "Sostituzione corretta: sicurezza prima, ricambio idoneo, procedura senza fretta (vedi tavola 6 del fumetto).",
+    },
+    {
       tipo: "intervento",
       badge: "Scegli l’intervento",
       testo: "Il piano dice: controllo olio e lubrificazione questa settimana.",

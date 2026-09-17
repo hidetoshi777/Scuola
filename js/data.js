@@ -234,7 +234,7 @@ window.ATTIVITA_WEB = [
     classe: "Quarta superiore · professionale",
     annoProf: 4,
     descrizione:
-      "Guasti, ordinaria/straordinaria/preventiva, strumenti e checklist: scheda stampabile, fumetto in 5 vignette e gioco in officina.",
+      "Guasti, manutenzione, strumenti, checklist e sostituzione sicura: scheda stampabile, fumetto in 6 vignette e gioco in officina.",
     citazione: "Prevenire è meglio che fermare tutto.",
     url: "manutenzione-guasti-preventiva/",
     copertina: "manutenzione-guasti-preventiva/img/og-share.jpg",
