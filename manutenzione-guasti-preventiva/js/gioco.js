@@ -65,6 +65,32 @@
     },
     {
       tipo: "strumento",
+      badge: "Prima cosa fare",
+      testo: "Arrivi al banco: vedi olio sul pavimento, una cinghia scura di fuliggine e una vite del supporto molto allentata.",
+      opzioni: [
+        { id: "occhio", label: "Ispezione visiva (occhio nudo) — osserva e annota" },
+        { id: "multimetro", label: "Multimetro subito" },
+        { id: "termocamera", label: "Termocamera subito" },
+        { id: "isolamento", label: "Tester isolamento subito" },
+      ],
+      giusta: "occhio",
+      nota: "Perdite, usura e allentamenti si vedono: prima ispezioni con l’occhio nudo, poi misuri se serve.",
+    },
+    {
+      tipo: "strumento",
+      badge: "Prima cosa fare",
+      testo: "La macchina si è fermata: sul quadro c’è una spia rossa accesa e senti odore di bruciato leggero.",
+      opzioni: [
+        { id: "occhio", label: "Guardare spie, cavi e quadro (ispezione visiva)" },
+        { id: "manometro", label: "Manometro" },
+        { id: "stetoscopio", label: "Stetoscopio meccanico" },
+        { id: "vibrazioni", label: "Analizzatore vibrazioni" },
+      ],
+      giusta: "occhio",
+      nota: "Spie, odori e stato del quadro: prima osservi in sicurezza, poi scegli lo strumento giusto.",
+    },
+    {
+      tipo: "strumento",
       badge: "Strumento giusto",
       testo: "Sospetti un corto o una tensione assente su un motore trifase nel quadro.",
       opzioni: [
