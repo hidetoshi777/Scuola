@@ -5,6 +5,7 @@
     "Vignetta 3 — L’occhio nudo è il primo strumento: osserva sempre, poi multimetro, termocamera, stetoscopio…",
     "Vignetta 4 — Checklist per sistemi complessi (CNC, PLC, sicurezze, lubrificazione…).",
     "Vignetta 5 — Strumento giusto = diagnosi veloce: esempio cuscinetto caldo con termocamera.",
+    "Vignetta 6 — Sostituzione sicura: niente fretta, LOTO, DPI, ricambio corretto e checklist.",
   ];
 
   const pages = Array.from(document.querySelectorAll(".fumetto-page"));
