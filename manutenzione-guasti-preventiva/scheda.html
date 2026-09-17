@@ -6,7 +6,7 @@
   <meta name="color-scheme" content="dark light">
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
   <title>Scheda · Guasti e manutenzione | Scuola</title>
-  <meta name="description" content="Scheda stampabile: tipi di guasto, manutenzione preventiva, miglioramenti ed esercizi con soluzioni docente.">
+  <meta name="description" content="Scheda stampabile: guasti, tipi di manutenzione, strumenti di diagnostica, checklist ed esercizi con soluzioni docente.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,600;9..40,700;9..40,800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
@@ -77,25 +77,75 @@
         </table>
       </section>
 
-      <section class="scheda-section" aria-labelledby="preventiva">
-        <h2 id="preventiva">Perché la manutenzione preventiva conviene</h2>
-        <ul>
-          <li><strong>Sicurezza</strong>: meno rischi per chi lavora vicino alla macchina.</li>
-          <li><strong>Costi</strong>: piccoli interventi programmati costano meno di una riparazione d’urgenza.</li>
-          <li><strong>Fermi macchina</strong>: si sceglie quando fermare, non quando il guasto obbliga a fermare tutto.</li>
-          <li><strong>Durata</strong>: lubrificare, controllare, serrare secondo piano = impianto che dura più a lungo.</li>
-          <li><strong>Qualità</strong>: meno scarti e lavoro più regolare in officina.</li>
-        </ul>
+      <section class="scheda-section" aria-labelledby="tipi-man">
+        <h2 id="tipi-man">Tipi di manutenzione</h2>
+        <table class="tabella-guasti">
+          <thead>
+            <tr>
+              <th scope="col">Tipo</th>
+              <th scope="col">In breve</th>
+              <th scope="col">Esempio in officina / impianto</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Ordinaria</strong></td>
+              <td>Attività regolari previste dal piano (pulizia, lubrificazione, piccole sostituzioni).</td>
+              <td>Ogni venerdì: pulire banco, lubrificare guide, svuotare trucioli.</td>
+            </tr>
+            <tr>
+              <td><strong>Straordinaria</strong></td>
+              <td>Intervento quando c’è un guasto o un fermo non programmato (spesso costi e tempi maggiori).</td>
+              <td>Riduttore rotto di notte: sostituire ingranaggio e rimettere in linea.</td>
+            </tr>
+            <tr>
+              <td><strong>Preventiva</strong></td>
+              <td>Controlli e interventi <em>pianificati</em> per evitare guasti e fermi.</td>
+              <td>Ogni 500 h: controllo cuscinetti, serraggi e allineamento come da manuale.</td>
+            </tr>
+          </tbody>
+        </table>
+        <p style="margin:0.5rem 0 0;font-size:0.88rem"><strong>Richiamo:</strong> preventiva e ordinaria riducono straordinaria d’urgenza. I <strong>miglioramenti</strong> (filtri migliori, protezioni, ricambi aggiornati) rendono l’impianto più sicuro e durevole.</p>
       </section>
 
-      <section class="scheda-section" aria-labelledby="miglioramenti">
-        <h2 id="miglioramenti">Interventi di miglioramento (non solo «aggiustare»)</h2>
-        <ul>
-          <li>Sostituire un <strong>filtro</strong> vecchio con uno migliore o più adatto.</li>
-          <li>Aggiungere <strong>protezioni</strong> (cinghie, parti mobili, quadro elettrico).</li>
-          <li>Usare <strong>ricambi</strong> più resistenti o conformi al manuale.</li>
-          <li>Scrivere <strong>procedure</strong> chiare (check-list avvio, etichette, avvisi).</li>
-        </ul>
+      <section class="scheda-section" aria-labelledby="strumenti">
+        <h2 id="strumenti">Strumenti di diagnostica (tipici)</h2>
+        <table class="tabella-guasti">
+          <thead>
+            <tr>
+              <th scope="col">Strumento</th>
+              <th scope="col">A cosa serve</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>Multimetro</strong></td><td>Tensioni, correnti, resistenze, continuità.</td></tr>
+            <tr><td><strong>Pinza amperometrica</strong></td><td>Misurare la corrente senza aprire il circuito.</td></tr>
+            <tr><td><strong>Termocamera</strong></td><td>Punti caldi (cuscinetti, morsetti, avvolgimenti).</td></tr>
+            <tr><td><strong>Stetoscopio meccanico</strong></td><td>Rumori interni anomali (cuscinetti, ingranaggi).</td></tr>
+            <tr><td><strong>Analizzatore vibrazioni</strong></td><td>Vibrazioni e squilibri su motori e assi.</td></tr>
+            <tr><td><strong>Manometro</strong></td><td>Pressione in impianti idraulici/pneumatici.</td></tr>
+            <tr><td><strong>Tester isolamento (megger)</strong></td><td>Resistenza di isolamento dei motori e cavi.</td></tr>
+          </tbody>
+        </table>
+        <p style="margin:0.5rem 0 0;font-size:0.88rem"><strong>Esempio:</strong> sospetto surriscaldamento → <strong>termocamera</strong>; sospetto corto → <strong>multimetro</strong>; rumore interno → <strong>stetoscopio</strong> (o vibrazioni).</p>
+      </section>
+
+      <section class="scheda-section" aria-labelledby="checklist">
+        <h2 id="checklist">Checklist nei sistemi complessi</h2>
+        <p style="margin:0 0 0.5rem">Macchine con <strong>PLC, CNC, sicurezze e software</strong> hanno molti punti da verificare. Una checklist evita di saltare controlli critici e riduce errori al riavvio.</p>
+        <p style="margin:0 0 0.5rem;font-weight:600">Esempio — macchinario elettromeccanico (quadro + motore + assi):</p>
+        <ol>
+          <li>Alimentazione spenta e messa in sicurezza (LOTO se previsto).</li>
+          <li>Serraggi morsetti, terra e collegamenti nel quadro.</li>
+          <li>Protezioni meccaniche, finecorsa e dispositivi di sicurezza.</li>
+          <li>Lubrificazione punti previsti dal manuale.</li>
+          <li>Tenute, guarnizioni, assenza perdite olio/aria.</li>
+          <li>Allineamento assi / gioco meccanico entro tolleranza.</li>
+          <li>Stato cinghie, catene, organi di trasmissione.</li>
+          <li>Software / PLC: allarmi, parametri, backup se necessario.</li>
+          <li>Prova a vuoto o ciclo di test controllato.</li>
+          <li>Registrazione intervento (data, operatore, esito).</li>
+        </ol>
       </section>
 
       <section class="scheda-section" aria-labelledby="esercizi">
@@ -114,6 +164,22 @@
           <details class="soluzione-docente">
             <summary>Soluzione (docente)</summary>
             Frequente e in parte <strong>prevedibile</strong>: conviene capire la causa e programmare manutenzione / miglioramento (cablaggio, sensore migliore, fissaggio).
+          </details>
+        </div>
+
+        <div class="esercizio">
+          <p><strong>3.</strong> Pulizia settimanale del banco e lubrificazione guide: manutenzione ordinaria, straordinaria o preventiva?</p>
+          <details class="soluzione-docente">
+            <summary>Soluzione (docente)</summary>
+            <strong>Ordinaria</strong> (attività regolari del piano). Se serve evitare guasti futuri è anche legata alla <strong>preventiva</strong>.
+          </details>
+        </div>
+
+        <div class="esercizio">
+          <p><strong>4.</strong> Un cuscinetto del motore è più caldo degli altri ma non fuma. Quale strumento usi per primo?</p>
+          <details class="soluzione-docente">
+            <summary>Soluzione (docente)</summary>
+            <strong>Termocamera</strong> (o termometro a contatto/infrarossi) per confermare il punto caldo; poi ispezione e intervento mirato.
           </details>
         </div>
 

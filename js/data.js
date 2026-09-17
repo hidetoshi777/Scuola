@@ -234,7 +234,7 @@ window.ATTIVITA_WEB = [
     classe: "Quarta superiore · professionale",
     annoProf: 4,
     descrizione:
-      "Tipi di guasto in officina, manutenzione preventiva e miglioramenti: scheda stampabile, fumetto in tre vignette e gioco «scegli l’intervento».",
+      "Guasti, ordinaria/straordinaria/preventiva, strumenti e checklist: scheda stampabile, fumetto in 5 vignette e gioco in officina.",
     citazione: "Prevenire è meglio che fermare tutto.",
     url: "manutenzione-guasti-preventiva/",
     copertina: "manutenzione-guasti-preventiva/img/og-share.jpg",
