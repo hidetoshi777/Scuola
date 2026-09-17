@@ -5,20 +5,20 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="color-scheme" content="dark light">
   <link rel="icon" href="../favicon.svg" type="image/svg+xml">
-  <title>Come nasce la corrente elettrica | Scuola</title>
-  <meta name="description" content="Poster didattico: atomo, elettroni nel filo e corrente come passaggio di cariche in un secondo. Terza professionale, tecnologie elettriche.">
+  <title>Pericolo della corrente elettrica | Scuola</title>
+  <meta name="description" content="Poster di sicurezza: scossa, cavi danneggiati, acqua e elettricità, togliere tensione e DPI. Terza professionale, tecnologie elettriche.">
   <meta property="og:type" content="website">
   <meta property="og:locale" content="it_IT">
   <meta property="og:site_name" content="Scuola · Prof. Rossano Bella">
-  <meta property="og:title" content="Come nasce la corrente elettrica">
-  <meta property="og:description" content="Infografica: dentro l'atomo, corrente nel filo, più elettroni al secondo = corrente più forte.">
-  <meta property="og:url" content="https://hidetoshi777.github.io/Scuola/come-nasce-la-corrente/">
-  <meta property="og:image" content="https://hidetoshi777.github.io/Scuola/come-nasce-la-corrente/img/og-share.jpg">
-  <meta property="og:image:alt" content="Poster La corrente elettrica">
+  <meta property="og:title" content="Pericolo della corrente elettrica">
+  <meta property="og:description" content="Sicurezza in laboratorio: rispetta l'elettricità, segnala i danni, lavora senza tensione e usa i dispositivi di protezione.">
+  <meta property="og:url" content="https://hidetoshi777.github.io/Scuola/pericolo-corrente-elettrica/">
+  <meta property="og:image" content="https://hidetoshi777.github.io/Scuola/pericolo-corrente-elettrica/img/og-share.jpg">
+  <meta property="og:image:alt" content="Poster Pericolo della corrente elettrica">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Come nasce la corrente elettrica">
-  <meta name="twitter:description" content="Poster didattico su atomo, filo e ampere.">
-  <meta name="twitter:image" content="https://hidetoshi777.github.io/Scuola/come-nasce-la-corrente/img/og-share.jpg">
+  <meta name="twitter:title" content="Pericolo della corrente elettrica">
+  <meta name="twitter:description" content="Poster di sicurezza elettrica per la terza professionale.">
+  <meta name="twitter:image" content="https://hidetoshi777.github.io/Scuola/pericolo-corrente-elettrica/img/og-share.jpg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;600;700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
@@ -35,25 +35,25 @@
 
     <main id="contenuto" tabindex="-1">
       <header class="hero">
-        <h1>Come nasce la corrente elettrica</h1>
+        <h1>Pericolo della corrente elettrica</h1>
         <p>
-          Un poster da tenere in classe: dall’atomo al filo, cosa significa «corrente» e perché conta quanti elettroni passano in un secondo.
+          Poster da appendere in laboratorio: scossa, cavi e prese danneggiate, acqua vicino all’elettricità, togliere tensione prima di intervenire e DPI obbligatori.
         </p>
-        <blockquote class="quote">«Più elettroni al secondo = corrente più forte.»</blockquote>
+        <blockquote class="quote">«Pensa, controlla, proteggiti. Lavora sicuro!»</blockquote>
       </header>
 
       <div class="actions">
         <button type="button" class="btn btn-primary" id="btn-zoom">Schermo intero</button>
         <button type="button" class="btn btn-ghost" id="btn-print">Stampa poster</button>
-        <a class="btn btn-ghost" href="img/come-nasce-la-corrente.png" target="_blank" rel="noopener">Apri immagine</a>
+        <a class="btn btn-ghost" href="img/pericolo-corrente-elettrica.jpg" target="_blank" rel="noopener">Apri immagine</a>
       </div>
 
       <div class="poster-wrap">
         <figure>
           <img
             id="poster"
-            src="img/come-nasce-la-corrente.png"
-            alt="Poster: dentro l'atomo gli elettroni girano intorno al nucleo; nel filo la batteria spinge gli elettroni — la corrente è il passaggio di un certo numero di elettroni in un secondo."
+            src="img/pericolo-corrente-elettrica.jpg"
+            alt="Poster di sicurezza: la corrente può dare scossa; non toccare cavi danneggiati; acqua ed elettricità sono pericolose; prima di lavorare togliere tensione e verificare; usa DPI e segui le procedure."
             width="1280"
             height="720"
             loading="eager"
@@ -75,14 +75,14 @@
         <button type="button" class="btn btn-ghost" id="viewer-close">Chiudi</button>
         <button type="button" class="btn btn-primary" id="viewer-print">Stampa</button>
       </div>
-      <img src="img/come-nasce-la-corrente.png" alt="" width="1280" height="720">
+      <img src="img/pericolo-corrente-elettrica.jpg" alt="" width="1280" height="720">
     </div>
   </dialog>
 
   <script>
     (function () {
       const root = document.body;
-      const CHIAVE = "tema-come-corrente";
+      const CHIAVE = "tema-pericolo-corrente";
       const themeBtn = document.getElementById("theme-toggle");
       const viewer = document.getElementById("viewer");
       const poster = document.getElementById("poster");
@@ -111,7 +111,7 @@
       function apriViewer() {
         if (!viewer) return;
         if (viewer.showModal) viewer.showModal();
-        else window.open("img/come-nasce-la-corrente.png", "_blank", "noopener");
+        else window.open("img/pericolo-corrente-elettrica.jpg", "_blank", "noopener");
       }
 
       document.getElementById("btn-zoom")?.addEventListener("click", apriViewer);

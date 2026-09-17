@@ -231,8 +231,8 @@ window.ATTIVITA_WEB = [
   {
     titolo: "Come nasce la corrente elettrica",
     materia: "Tecnologie elettriche e elettroniche",
-    classe: "Quarta superiore · professionale",
-    annoProf: 4,
+    classe: "Terza superiore · professionale",
+    annoProf: 3,
     descrizione:
       "Poster didattico: atomo, elettroni nel filo e corrente come cariche che passano in un secondo — stampabile da classe.",
     citazione: "Più elettroni al secondo = corrente più forte.",
@@ -241,6 +241,20 @@ window.ATTIVITA_WEB = [
     tinta: "scienze",
     adesivo: "st-pianeta",
     extra: [{ label: "Poster", url: "come-nasce-la-corrente/" }],
+  },
+  {
+    titolo: "Pericolo della corrente elettrica",
+    materia: "Tecnologie elettriche e elettroniche",
+    classe: "Terza superiore · professionale",
+    annoProf: 3,
+    descrizione:
+      "Poster di sicurezza: scossa, cavi danneggiati, acqua e elettricità, togliere tensione prima di lavorare e uso dei DPI.",
+    citazione: "Pensa, controlla, proteggiti. Lavora sicuro!",
+    url: "pericolo-corrente-elettrica/",
+    copertina: "pericolo-corrente-elettrica/img/og-share.jpg",
+    tinta: "scienze",
+    adesivo: "st-pianeta",
+    extra: [{ label: "Poster", url: "pericolo-corrente-elettrica/" }],
   },
   {
     titolo: "Guasti e manutenzione preventiva",
