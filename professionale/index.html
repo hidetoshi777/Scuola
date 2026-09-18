@@ -21,7 +21,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,600;9..40,700;9..40,800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/hub.css?v=4">
+  <link rel="stylesheet" href="css/hub.css?v=5">
 </head>
 <body class="prof-hub" data-theme="dark">
   <a class="prof-skip" href="#lavori">Salta ai lavori</a>
@@ -37,6 +37,30 @@
         indica la classe.
       </p>
       <button type="button" class="prof-theme" data-prof-theme aria-pressed="true">Tema chiaro</button>
+
+      <section class="prof-novita" id="prof-novita" aria-labelledby="prof-novita-titolo">
+        <div class="prof-novita-inner">
+          <h2 id="prof-novita-titolo">Avvisi nuovi lavori</h2>
+          <p class="prof-novita-lead">
+            Vuoi sapere quando esce un lavoro nuovo? Scegli la classe e attiva gli avvisi.
+          </p>
+          <div class="prof-novita-anni" role="group" aria-label="Classe per gli avvisi">
+            <label class="prof-novita-check">
+              <input type="checkbox" data-novita-anno="3" checked>
+              <span>Terza</span>
+            </label>
+            <label class="prof-novita-check">
+              <input type="checkbox" data-novita-anno="4" checked>
+              <span>Quarta</span>
+            </label>
+          </div>
+          <button type="button" class="prof-novita-btn" data-novita-toggle>Attiva avvisi</button>
+          <p class="prof-novita-stato" data-novita-stato aria-live="polite"></p>
+          <p class="prof-novita-nota">
+            Gli avvisi partono quando apri questa pagina. Su iPhone: aggiungi il raccoglitore alla Home, poi consenti le notifiche.
+          </p>
+        </div>
+      </section>
     </div>
   </header>
 
@@ -92,30 +116,6 @@
       </article>
     </div>
   </main>
-
-  <section class="prof-novita" id="prof-novita" aria-labelledby="prof-novita-titolo">
-    <div class="prof-novita-inner">
-      <h2 id="prof-novita-titolo">Avvisi nuovi lavori</h2>
-      <p class="prof-novita-lead">
-        Vuoi sapere quando esce un lavoro nuovo? Scegli la classe e attiva gli avvisi.
-      </p>
-      <div class="prof-novita-anni" role="group" aria-label="Classe per gli avvisi">
-        <label class="prof-novita-check">
-          <input type="checkbox" data-novita-anno="3" checked>
-          <span>Terza</span>
-        </label>
-        <label class="prof-novita-check">
-          <input type="checkbox" data-novita-anno="4" checked>
-          <span>Quarta</span>
-        </label>
-      </div>
-      <button type="button" class="prof-novita-btn" data-novita-toggle>Attiva avvisi</button>
-      <p class="prof-novita-stato" data-novita-stato aria-live="polite"></p>
-      <p class="prof-novita-nota">
-        Gli avvisi partono quando apri questa pagina. Su iPhone: aggiungi il raccoglitore alla Home, poi consenti le notifiche.
-      </p>
-    </div>
-  </section>
 
   <footer class="prof-footer">
     <p>
