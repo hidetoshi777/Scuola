@@ -194,6 +194,23 @@ window.ATTIVITA_WEB = [
     extra: [{ label: "Gioco", url: "presentazioni-inglese/gioco.html" }],
   },
   {
+    titolo: "What time is it? — L’orologio",
+    materia: "Inglese",
+    classe: "Quarta superiore · professionale",
+    annoProf: 4,
+    descrizione:
+      "Quattro tavole e un gioco: o’clock, half past, quarter past e quarter to, con orologio analogico.",
+    citazione: "What time is it? It’s eight o’clock.",
+    url: "orologio-inglese/",
+    copertina: "orologio-inglese/img/og-share.jpg",
+    tinta: "inglese",
+    adesivo: "st-fumetto",
+    extra: [
+      { label: "Fumetto", url: "orologio-inglese/fumetto.html" },
+      { label: "Gioco", url: "orologio-inglese/gioco.html" },
+    ],
+  },
+  {
     titolo: "Acciaio, alluminio e ghisa",
     materia: "Tecnologia",
     classe: "Quarta superiore · professionale",

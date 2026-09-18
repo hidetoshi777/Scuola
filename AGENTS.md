@@ -91,6 +91,7 @@ Sito base: `https://hidetoshi777.github.io/Scuola/`
 | Mazzini · Giovane Italia | https://hidetoshi777.github.io/Scuola/mazzini-giovane-italia/ | [Fumetto](https://hidetoshi777.github.io/Scuola/mazzini-giovane-italia/fumetto.html) · [Battaglia](https://hidetoshi777.github.io/Scuola/mazzini-giovane-italia/gioco.html) |
 | Origini della poesia | https://hidetoshi777.github.io/Scuola/origini-poesia-italiana/ | [Fumetto](https://hidetoshi777.github.io/Scuola/origini-poesia-italiana/fumetto.html) · [Percorso](https://hidetoshi777.github.io/Scuola/origini-poesia-italiana/gioco.html) |
 | Hello · Presentazioni | https://hidetoshi777.github.io/Scuola/presentazioni-inglese/ | [Gioco](https://hidetoshi777.github.io/Scuola/presentazioni-inglese/gioco.html) |
+| What time is it? · L’orologio | https://hidetoshi777.github.io/Scuola/orologio-inglese/ | [Fumetto](https://hidetoshi777.github.io/Scuola/orologio-inglese/fumetto.html) · [Gioco](https://hidetoshi777.github.io/Scuola/orologio-inglese/gioco.html) |
 | **Raccoglitore professionale AM** | https://hidetoshi777.github.io/Scuola/professionale/ | Terza e quarta AM (bollini 3 / 4) |
 
 I vecchi link alla radice (`/gioco.html`, ecc.) reindirizzano ancora alla rotazione terrestre.
