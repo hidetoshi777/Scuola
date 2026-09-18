@@ -1,13 +1,15 @@
 /**
  * Avvisi nuovi lavori sul raccoglitore professionale.
- * Sito statico: il controllo avviene all’apertura della pagina (e via SW se attivo).
- * Filtro: terza e/o quarta (annoProf).
+ * Bottoncino → pannello; controllo all’apertura della pagina (+ SW se attivo).
  */
 (function () {
   const STORAGE_KEY = "prof-novita-v1";
   const root = document.getElementById("prof-novita");
   if (!root) return;
 
+  const openBtn = root.querySelector("[data-novita-open]");
+  const panel = root.querySelector("#prof-novita-panel");
+  const chiudiBtn = root.querySelector("[data-novita-chiudi]");
   const statoEl = root.querySelector("[data-novita-stato]");
   const btn = root.querySelector("[data-novita-toggle]");
   const check3 = root.querySelector('[data-novita-anno="3"]');
@@ -82,16 +84,39 @@
     return anni;
   }
 
+  function isOpen() {
+    return panel && !panel.hidden;
+  }
+
+  function apri() {
+    if (!panel || !openBtn) return;
+    panel.hidden = false;
+    openBtn.setAttribute("aria-expanded", "true");
+  }
+
+  function chiudi() {
+    if (!panel || !openBtn) return;
+    panel.hidden = true;
+    openBtn.setAttribute("aria-expanded", "false");
+  }
+
   function aggiornaUi(prefs) {
     syncCheckbox(prefs);
+    if (openBtn) {
+      openBtn.classList.toggle(
+        "is-on",
+        !!(prefs.enabled && Notification.permission === "granted")
+      );
+      openBtn.title = prefs.enabled ? "Avvisi attivi — modifica" : "Avvisi nuovi lavori";
+    }
     if (!btn) return;
     const supportati = "Notification" in window;
     if (!supportati) {
       btn.disabled = true;
-      btn.textContent = "Avvisi non disponibili";
+      btn.textContent = "Non disponibili";
       if (statoEl) {
         statoEl.textContent =
-          "Questo browser non supporta gli avvisi. Prova Chrome o Safari aggiornato.";
+          "Questo browser non supporta gli avvisi.";
       }
       return;
     }
@@ -104,9 +129,7 @@
       if (prefs.anni.indexOf(4) !== -1) parti.push("4ª");
       if (statoEl) {
         statoEl.textContent =
-          "Avvisi attivi per " +
-          (parti.join(" e ") || "nessuna classe") +
-          ". Controlliamo i nuovi lavori quando apri questa pagina.";
+          "Attivi per " + (parti.join(" e ") || "nessuna classe") + ".";
       }
     } else {
       btn.textContent = "Attiva avvisi";
@@ -114,10 +137,9 @@
       if (statoEl) {
         if (Notification.permission === "denied") {
           statoEl.textContent =
-            "Permesso negato dal browser. Riattivalo nelle impostazioni del sito, poi riprova.";
+            "Permesso negato. Riattivalo nelle impostazioni del sito.";
         } else {
-          statoEl.textContent =
-            "Scegli 3ª e/o 4ª, poi attiva. Ti avvisiamo se esce un lavoro nuovo.";
+          statoEl.textContent = "Scegli 3ª e/o 4ª, poi attiva.";
         }
       }
     }
@@ -126,10 +148,9 @@
   async function registraSw() {
     if (!("serviceWorker" in navigator)) return null;
     try {
-      const reg = await navigator.serviceWorker.register("./sw.js?v=1", {
+      return await navigator.serviceWorker.register("./sw.js?v=1", {
         scope: "./",
       });
-      return reg;
     } catch (err) {
       return null;
     }
@@ -168,8 +189,7 @@
     }
   }
 
-  async function controllaNuovi(prefs, options) {
-    const opts = options || {};
+  async function controllaNuovi(prefs) {
     if (!prefs.enabled || Notification.permission !== "granted") return prefs;
     if (!prefs.anni.length) return prefs;
 
@@ -180,15 +200,6 @@
     const nuovi = lista.filter(function (a) {
       return a.id && !known.has(a.id);
     });
-
-    if (opts.silenzioso) {
-      lista.forEach(function (a) {
-        known.add(a.id);
-      });
-      prefs.knownIds = Array.from(known);
-      salva(prefs);
-      return prefs;
-    }
 
     for (let i = 0; i < nuovi.length; i += 1) {
       await mostraAvviso(nuovi[i]);
@@ -210,9 +221,7 @@
   async function attiva() {
     const anni = anniDaCheckbox();
     if (!anni.length) {
-      if (statoEl) {
-        statoEl.textContent = "Seleziona almeno terza o quarta.";
-      }
+      if (statoEl) statoEl.textContent = "Seleziona almeno terza o quarta.";
       return;
     }
     if (!("Notification" in window)) {
@@ -231,13 +240,12 @@
     const prefs = leggi();
     prefs.enabled = true;
     prefs.anni = anni;
-    /* Baseline: i lavori già presenti non generano avviso. */
     prefs.knownIds = idsPerAnni(anni);
     salva(prefs);
     aggiornaUi(prefs);
     if (statoEl) {
       statoEl.textContent =
-        "Avvisi attivi. I lavori già in elenco non ti verranno segnalati; solo quelli nuovi.";
+        "Attivi. Solo i lavori nuovi verranno segnalati.";
     }
   }
 
@@ -253,7 +261,6 @@
     const anni = anniDaCheckbox();
     prefs.anni = anni;
     if (prefs.enabled) {
-      /* Nuove classi selezionate: marca i lavori attuali come già visti. */
       const known = new Set(prefs.knownIds || []);
       idsPerAnni(anni).forEach(function (id) {
         known.add(id);
@@ -264,6 +271,19 @@
     aggiornaUi(prefs);
   }
 
+  if (openBtn) {
+    openBtn.addEventListener("click", function (ev) {
+      ev.stopPropagation();
+      if (isOpen()) chiudi();
+      else apri();
+    });
+  }
+  if (chiudiBtn) {
+    chiudiBtn.addEventListener("click", function () {
+      chiudi();
+      if (openBtn) openBtn.focus();
+    });
+  }
   if (btn) {
     btn.addEventListener("click", function () {
       const prefs = leggi();
@@ -276,6 +296,18 @@
   }
   if (check3) check3.addEventListener("change", onAnniChange);
   if (check4) check4.addEventListener("change", onAnniChange);
+
+  document.addEventListener("click", function (ev) {
+    if (!isOpen()) return;
+    if (root.contains(ev.target)) return;
+    chiudi();
+  });
+  document.addEventListener("keydown", function (ev) {
+    if (ev.key === "Escape" && isOpen()) {
+      chiudi();
+      if (openBtn) openBtn.focus();
+    }
+  });
 
   if ("serviceWorker" in navigator) {
     navigator.serviceWorker.addEventListener("message", function (event) {
@@ -293,7 +325,7 @@
     aggiornaUi(prefs);
     if (prefs.enabled && Notification.permission === "granted") {
       await registraSw();
-      prefs = await controllaNuovi(prefs, { silenzioso: false });
+      prefs = await controllaNuovi(prefs);
       aggiornaUi(prefs);
     }
   }

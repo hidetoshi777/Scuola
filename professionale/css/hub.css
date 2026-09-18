@@ -56,6 +56,20 @@
   max-width: 42rem;
   margin: 0 auto;
   position: relative;
+  padding-right: 9.5rem;
+}
+
+@media (max-width: 420px) {
+  .prof-top-inner {
+    padding-right: 0;
+    padding-top: 2.6rem;
+  }
+
+  .prof-top-azioni {
+    left: 0;
+    right: 0;
+    justify-content: flex-end;
+  }
 }
 
 .prof-istituto {
@@ -86,11 +100,21 @@
   color: var(--prof-text);
 }
 
-.prof-theme {
+.prof-top-azioni {
   position: absolute;
   top: 0;
   right: 0;
-  z-index: 2;
+  z-index: 3;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 0.4rem;
+  max-width: calc(100% - 0.25rem);
+}
+
+.prof-theme,
+.prof-novita-open {
   font: inherit;
   font-size: 0.78rem;
   font-weight: 700;
@@ -100,53 +124,130 @@
   background: var(--prof-surface);
   color: var(--prof-text);
   cursor: pointer;
+  min-height: 2.35rem;
 }
 
-.prof-top .prof-novita {
-  margin-top: 1rem;
-  padding: 0;
+.prof-novita {
+  position: relative;
 }
 
-.prof-top .prof-novita-inner {
+.prof-novita-open.is-on {
+  border-color: var(--prof-accent);
+  color: var(--prof-accent);
+}
+
+.prof-novita-panel {
+  position: absolute;
+  top: calc(100% + 0.4rem);
+  right: 0;
+  width: min(18.5rem, calc(100vw - 2rem));
+  padding: 0.85rem 0.9rem 0.95rem;
+  background: var(--prof-surface);
+  border: 1px solid var(--prof-border);
+  border-radius: 0.55rem;
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.35);
+  z-index: 5;
+}
+
+.prof-novita-panel[hidden] {
+  display: none !important;
+}
+
+.prof-novita-panel-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 0.5rem;
+}
+
+.prof-novita-panel h2 {
   margin: 0;
-  padding: 0.75rem 0.85rem 0.85rem;
-}
-
-.prof-top .prof-novita h2 {
   font-size: 0.95rem;
-  padding-right: 0;
+  font-weight: 800;
+  line-height: 1.25;
 }
 
-.prof-top .prof-novita-lead {
-  margin-top: 0.35rem;
-  font-size: 0.85rem;
+.prof-novita-chiudi {
+  font: inherit;
+  font-size: 1.25rem;
+  line-height: 1;
+  width: 2rem;
+  height: 2rem;
+  border: 0;
+  border-radius: 0.3rem;
+  background: transparent;
+  color: var(--prof-muted);
+  cursor: pointer;
+  flex-shrink: 0;
 }
 
-.prof-top .prof-novita-anni {
-  margin-top: 0.55rem;
-  gap: 0.45rem 0.85rem;
+.prof-novita-chiudi:hover,
+.prof-novita-chiudi:focus-visible {
+  color: var(--prof-text);
+  background: color-mix(in srgb, var(--prof-border) 55%, transparent);
+  outline: none;
 }
 
-.prof-top .prof-novita-check {
-  min-height: 2.25rem;
-  font-size: 0.88rem;
-}
-
-.prof-top .prof-novita-btn {
-  margin-top: 0.55rem;
-  padding: 0.55rem 0.9rem;
-  min-height: 2.5rem;
-  font-size: 0.88rem;
-}
-
-.prof-top .prof-novita-stato {
-  margin-top: 0.5rem;
+.prof-novita-lead {
+  margin: 0.4rem 0 0;
   font-size: 0.82rem;
+  color: var(--prof-muted);
 }
 
-.prof-top .prof-novita-nota {
-  margin-top: 0.4rem;
-  font-size: 0.74rem;
+.prof-novita-anni {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem 0.85rem;
+  margin-top: 0.65rem;
+}
+
+.prof-novita-check {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.88rem;
+  font-weight: 700;
+  cursor: pointer;
+  min-height: 2.25rem;
+}
+
+.prof-novita-check input {
+  width: 1.1rem;
+  height: 1.1rem;
+  accent-color: var(--prof-accent);
+}
+
+.prof-novita-btn {
+  margin-top: 0.55rem;
+  width: 100%;
+  font: inherit;
+  font-size: 0.88rem;
+  font-weight: 700;
+  padding: 0.55rem 0.85rem;
+  min-height: 2.5rem;
+  border-radius: 0.4rem;
+  border: 2px solid transparent;
+  background: var(--prof-accent);
+  color: #1a1008;
+  cursor: pointer;
+}
+
+.prof-novita-btn:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+.prof-novita-stato {
+  margin: 0.5rem 0 0;
+  font-size: 0.8rem;
+  color: var(--prof-text);
+}
+
+.prof-novita-nota {
+  margin: 0.4rem 0 0;
+  font-size: 0.72rem;
+  color: var(--prof-muted);
+  line-height: 1.35;
 }
 
 .prof-main {
@@ -340,85 +441,4 @@
 
 .prof-admin-dot:focus-visible {
   box-shadow: 0 0 0 2px color-mix(in srgb, var(--prof-accent) 55%, transparent);
-}
-
-/* Avvisi nuovi lavori */
-.prof-novita {
-  padding: 0 1rem 0.5rem;
-}
-
-.prof-novita-inner {
-  max-width: 42rem;
-  margin: 0 auto 1rem;
-  padding: 1rem 1rem 1.1rem;
-  background: var(--prof-surface);
-  border: 1px solid var(--prof-border);
-  border-radius: 0.55rem;
-}
-
-.prof-novita h2 {
-  margin: 0;
-  font-size: 1.05rem;
-  font-weight: 800;
-}
-
-.prof-novita-lead {
-  margin: 0.45rem 0 0;
-  font-size: 0.92rem;
-  color: var(--prof-muted);
-}
-
-.prof-novita-anni {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.65rem 1rem;
-  margin-top: 0.85rem;
-}
-
-.prof-novita-check {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.45rem;
-  font-size: 0.95rem;
-  font-weight: 700;
-  cursor: pointer;
-  min-height: 2.5rem;
-}
-
-.prof-novita-check input {
-  width: 1.15rem;
-  height: 1.15rem;
-  accent-color: var(--prof-accent);
-}
-
-.prof-novita-btn {
-  margin-top: 0.75rem;
-  font: inherit;
-  font-size: 0.92rem;
-  font-weight: 700;
-  padding: 0.65rem 1rem;
-  min-height: 2.75rem;
-  border-radius: 0.4rem;
-  border: 2px solid transparent;
-  background: var(--prof-accent);
-  color: #1a1008;
-  cursor: pointer;
-}
-
-.prof-novita-btn:disabled {
-  opacity: 0.55;
-  cursor: not-allowed;
-}
-
-.prof-novita-stato {
-  margin: 0.65rem 0 0;
-  font-size: 0.88rem;
-  color: var(--prof-text);
-}
-
-.prof-novita-nota {
-  margin: 0.55rem 0 0;
-  font-size: 0.78rem;
-  color: var(--prof-muted);
-  line-height: 1.4;
 }
