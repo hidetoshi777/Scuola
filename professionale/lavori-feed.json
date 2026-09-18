@@ -1,0 +1,51 @@
+[
+  {
+    "id": "presentazioni-inglese",
+    "titolo": "Hello — Presentazioni",
+    "annoProf": 3,
+    "url": "presentazioni-inglese/",
+    "materia": "Inglese"
+  },
+  {
+    "id": "orologio-inglese",
+    "titolo": "What time is it? — L’orologio",
+    "annoProf": 4,
+    "url": "orologio-inglese/",
+    "materia": "Inglese"
+  },
+  {
+    "id": "acciaio-alluminio-ghisa",
+    "titolo": "Acciaio, alluminio e ghisa",
+    "annoProf": 4,
+    "url": "acciaio-alluminio-ghisa/",
+    "materia": "Tecnologia"
+  },
+  {
+    "id": "edison-guerra-correnti",
+    "titolo": "Edison · Guerra delle correnti",
+    "annoProf": 4,
+    "url": "edison-guerra-correnti/",
+    "materia": "Tecnologie elettriche e elettroniche"
+  },
+  {
+    "id": "come-nasce-la-corrente",
+    "titolo": "Come nasce la corrente elettrica",
+    "annoProf": 3,
+    "url": "come-nasce-la-corrente/",
+    "materia": "Tecnologie elettriche e elettroniche"
+  },
+  {
+    "id": "pericolo-corrente-elettrica",
+    "titolo": "Pericolo della corrente elettrica",
+    "annoProf": 3,
+    "url": "pericolo-corrente-elettrica/",
+    "materia": "Tecnologie elettriche e elettroniche"
+  },
+  {
+    "id": "manutenzione-guasti-preventiva",
+    "titolo": "Guasti e manutenzione preventiva",
+    "annoProf": 4,
+    "url": "manutenzione-guasti-preventiva/",
+    "materia": "Tecnologie e tecniche di installazione e manutenzione"
+  }
+]

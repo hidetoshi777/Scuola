@@ -293,3 +293,84 @@
 .prof-admin-dot:focus-visible {
   box-shadow: 0 0 0 2px color-mix(in srgb, var(--prof-accent) 55%, transparent);
 }
+
+/* Avvisi nuovi lavori */
+.prof-novita {
+  padding: 0 1rem 0.5rem;
+}
+
+.prof-novita-inner {
+  max-width: 42rem;
+  margin: 0 auto 1rem;
+  padding: 1rem 1rem 1.1rem;
+  background: var(--prof-surface);
+  border: 1px solid var(--prof-border);
+  border-radius: 0.55rem;
+}
+
+.prof-novita h2 {
+  margin: 0;
+  font-size: 1.05rem;
+  font-weight: 800;
+}
+
+.prof-novita-lead {
+  margin: 0.45rem 0 0;
+  font-size: 0.92rem;
+  color: var(--prof-muted);
+}
+
+.prof-novita-anni {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.65rem 1rem;
+  margin-top: 0.85rem;
+}
+
+.prof-novita-check {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  font-size: 0.95rem;
+  font-weight: 700;
+  cursor: pointer;
+  min-height: 2.5rem;
+}
+
+.prof-novita-check input {
+  width: 1.15rem;
+  height: 1.15rem;
+  accent-color: var(--prof-accent);
+}
+
+.prof-novita-btn {
+  margin-top: 0.75rem;
+  font: inherit;
+  font-size: 0.92rem;
+  font-weight: 700;
+  padding: 0.65rem 1rem;
+  min-height: 2.75rem;
+  border-radius: 0.4rem;
+  border: 2px solid transparent;
+  background: var(--prof-accent);
+  color: #1a1008;
+  cursor: pointer;
+}
+
+.prof-novita-btn:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+.prof-novita-stato {
+  margin: 0.65rem 0 0;
+  font-size: 0.88rem;
+  color: var(--prof-text);
+}
+
+.prof-novita-nota {
+  margin: 0.55rem 0 0;
+  font-size: 0.78rem;
+  color: var(--prof-muted);
+  line-height: 1.4;
+}
