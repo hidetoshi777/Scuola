@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="color-scheme" content="dark" id="color-scheme">
+  <script>
+    {
+      const t = localStorage.getItem("tema-orologio-inglese");
+      const tema = t === "light" || t === "dark" ? t : "dark";
+      document.documentElement.dataset.theme = tema;
+      document.getElementById("color-scheme").content = tema;
+    }
+  </script>
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <title>Gioco · What time is it? | Scuola</title>
+  <meta name="description" content="Guarda l’orologio analogico e scegli la frase inglese giusta.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@500;700;800&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/gioco.css">
+</head>
+<body class="page-gioco">
+  <a class="skip-link visually-hidden" href="#contenuto">Salta al contenuto</a>
+
+  <header class="clk-rail">
+    <a class="clk-brand" href="index.html">
+      <span class="clk-badge">WHAT TIME IS IT?</span>
+    </a>
+    <nav class="clk-nav" aria-label="Sezioni">
+      <a href="index.html">Home</a>
+      <a href="fumetto.html">Fumetto</a>
+      <a href="gioco.html" aria-current="page">Gioco</a>
+    </nav>
+    <button type="button" class="theme-toggle" data-theme-toggle aria-pressed="false">Chiaro</button>
+  </header>
+
+  <main id="contenuto" class="clk-stage" tabindex="-1">
+    <header class="clk-mast clk-mast--text">
+      <div>
+        <p class="clk-kicker">Gioco · 8 orologi</p>
+        <h1>Che ore sono?</h1>
+      </div>
+      <p class="clk-lead">Guarda le lancette. Poi tocca la frase inglese giusta.</p>
+    </header>
+
+    <div class="gioco-hud" aria-live="polite">
+      <span>Ora <strong id="hud-stop">1</strong>/<span id="hud-total">8</span></span>
+      <span>Punti <strong id="hud-score">0</strong></span>
+      <button type="button" class="btn btn-secondary" id="btn-restart">Ricomincia</button>
+    </div>
+    <div class="dots-ora" id="dots-ora" aria-hidden="true"></div>
+
+    <div class="clock-hang">
+      <div class="clk-host" id="game-clock"></div>
+      <p class="clock-digital" id="clock-digital" hidden></p>
+    </div>
+
+    <section class="ask-card" id="ask-card" aria-live="polite">
+      <p class="stop-meta" id="stop-meta"></p>
+      <h2>What time is it?</h2>
+      <p id="stop-help">Scegli una frase.</p>
+      <ul class="choice-list" id="choice-list"></ul>
+      <div class="feedback" id="stop-feedback" hidden></div>
+      <div class="hero-actions">
+        <button type="button" class="btn btn-primary" id="btn-next" hidden>Orologio successivo →</button>
+      </div>
+    </section>
+
+    <ul class="legend" aria-label="Aiuto">
+      <li><b>o’clock</b> in punto</li>
+      <li><b>half past</b> e mezza</li>
+      <li><b>quarter past</b> e un quarto</li>
+      <li><b>quarter to</b> meno un quarto</li>
+    </ul>
+
+    <div class="gioco-end" id="gioco-end" hidden>
+      <h2>Officina chiusa</h2>
+      <p id="end-text"></p>
+      <div class="hero-actions">
+        <button type="button" class="btn btn-primary" id="btn-again">Un altro giro</button>
+        <a class="btn btn-secondary" href="fumetto.html">Fumetto</a>
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <p>Gioco didattico sull’orologio in inglese. Realizzato dal Prof. Rossano Bella.</p>
+  </footer>
+
+  <script src="js/common.js" defer></script>
+  <script src="js/orologio.js" defer></script>
+  <script src="js/gioco.js" defer></script>
+</body>
+</html>

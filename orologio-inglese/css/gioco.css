@@ -1,0 +1,204 @@
+/* Gioco: orologio analogico appeso al muro dell’officina */
+
+.page-gioco {
+  background:
+    linear-gradient(180deg, rgba(12, 14, 19, 0.55), rgba(12, 14, 19, 0.82)),
+    url("../img/officina-muro.jpg") center / cover no-repeat,
+    var(--navy);
+}
+
+[data-theme="light"] .page-gioco {
+  background:
+    linear-gradient(180deg, rgba(247, 240, 222, 0.72), rgba(232, 220, 192, 0.88)),
+    url("../img/officina-muro.jpg") center / cover no-repeat,
+    var(--navy);
+}
+
+.gioco-hud {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.4rem;
+  padding: 0.55rem 0.7rem;
+  border-radius: 1rem;
+  background: var(--surface);
+  border: 1px solid var(--hair);
+  font-weight: 800;
+}
+
+.clock-hang {
+  display: grid;
+  justify-items: center;
+  gap: 0.35rem;
+}
+
+.clock-hang .clk-host {
+  width: min(100%, 16.5rem);
+  filter: drop-shadow(0 14px 0 rgba(0, 0, 0, 0.28));
+}
+
+.clock-digital {
+  min-height: 1.4rem;
+  margin: 0;
+  font-family: var(--font-display);
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  color: var(--brass);
+}
+
+.ask-card {
+  background: var(--brass);
+  color: var(--brass-ink);
+  border-radius: 1.1rem;
+  padding: 0.95rem 1rem 1.1rem;
+  box-shadow: 0 10px 0 rgba(0, 0, 0, 0.18);
+}
+
+.ask-card .stop-meta {
+  margin: 0 0 0.3rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-size: 0.78rem;
+}
+
+.ask-card h2 {
+  margin: 0 0 0.45rem;
+  font-family: var(--font-display);
+  font-size: 1.45rem;
+  line-height: 1.15;
+}
+
+.ask-card p {
+  margin: 0;
+  font-size: 1.12rem;
+}
+
+.choice-list {
+  list-style: none;
+  margin: 0.75rem 0 0;
+  padding: 0;
+  display: grid;
+  gap: 0.45rem;
+}
+
+.choice-list button {
+  width: 100%;
+  min-height: 3.15rem;
+  padding: 0.55rem 0.8rem;
+  border-radius: 0.9rem;
+  border: 2px solid rgba(26, 20, 8, 0.18);
+  background: var(--cream);
+  color: var(--brass-ink);
+  font-family: var(--font-body);
+  font-weight: 800;
+  font-size: 1.05rem;
+  text-align: left;
+  cursor: pointer;
+}
+
+.choice-list button.is-ok {
+  background: #c8f0d8;
+  border-color: #2a7a4a;
+}
+
+.choice-list button.is-bad {
+  background: #f6cfcf;
+  border-color: #a33b3b;
+}
+
+.feedback {
+  margin: 0.7rem 0 0;
+  padding: 0.55rem 0.65rem;
+  border-radius: 0.7rem;
+  font-weight: 800;
+}
+
+.feedback.is-ok {
+  background: #c8f0d8;
+}
+
+.feedback.is-bad {
+  background: #f6cfcf;
+}
+
+.legend {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.35rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-size: 0.88rem;
+}
+
+.legend li {
+  background: var(--surface);
+  border: 1px solid var(--hair);
+  border-radius: 0.7rem;
+  padding: 0.45rem 0.55rem;
+}
+
+.legend b {
+  display: block;
+  color: var(--brass);
+}
+
+.gioco-end {
+  background: var(--panel);
+  border: 2px solid var(--brass);
+  border-radius: 1.1rem;
+  padding: 1rem;
+}
+
+.gioco-end h2 {
+  margin: 0 0 0.4rem;
+  font-family: var(--font-display);
+}
+
+.dots-ora {
+  display: flex;
+  gap: 0.35rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.dots-ora span {
+  width: 0.7rem;
+  height: 0.7rem;
+  border-radius: 50%;
+  background: var(--hair);
+}
+
+.dots-ora span.is-now {
+  background: var(--brass);
+  outline: 2px solid #fff;
+}
+
+.dots-ora span.is-done {
+  background: var(--ok);
+}
+
+@media (min-width: 720px) {
+  .page-gioco .clk-stage {
+    grid-template-columns: minmax(16rem, 20rem) 1fr;
+    align-items: start;
+  }
+
+  .page-gioco .clk-mast,
+  .page-gioco .gioco-hud,
+  .page-gioco .dots-ora,
+  .page-gioco .legend,
+  .page-gioco .gioco-end {
+    grid-column: 1 / -1;
+  }
+
+  .clock-hang {
+    grid-row: span 2;
+  }
+
+  .clock-hang .clk-host {
+    width: 100%;
+  }
+}

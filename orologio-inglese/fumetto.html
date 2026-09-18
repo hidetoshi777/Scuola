@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="color-scheme" content="dark" id="color-scheme">
+  <script>
+    {
+      const t = localStorage.getItem("tema-orologio-inglese");
+      const tema = t === "light" || t === "dark" ? t : "dark";
+      document.documentElement.dataset.theme = tema;
+      document.getElementById("color-scheme").content = tema;
+    }
+  </script>
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <title>Fumetto · What time is it? | Scuola</title>
+  <meta name="description" content="Quattro tavole: o’clock, half past, quarter past e quarter to.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@500;700;800&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/fumetto.css">
+</head>
+<body class="page-fumetto">
+  <a class="skip-link visually-hidden" href="#contenuto">Salta al contenuto</a>
+
+  <header class="clk-rail">
+    <a class="clk-brand" href="index.html">
+      <span class="clk-badge">WHAT TIME IS IT?</span>
+    </a>
+    <nav class="clk-nav" aria-label="Sezioni">
+      <a href="index.html">Home</a>
+      <a href="fumetto.html" aria-current="page">Fumetto</a>
+      <a href="gioco.html">Gioco</a>
+    </nav>
+    <button type="button" class="theme-toggle" data-theme-toggle aria-pressed="false">Chiaro</button>
+  </header>
+
+  <main id="contenuto" class="clk-stage" tabindex="-1">
+    <header class="clk-mast clk-mast--text">
+      <div>
+        <p class="clk-kicker">Fumetto · 4 tavole</p>
+        <h1>In officina</h1>
+      </div>
+      <p class="clk-lead">Leo e Maya guardano l’orologio. Leggi le nuvolette in inglese. Sotto c’è l’italiano.</p>
+    </header>
+
+    <section class="fumetto-reader" id="fumetto-stage" aria-roledescription="fumetto" aria-label="L’orologio in inglese a fumetti">
+      <div class="fumetto-toolbar">
+        <p class="fumetto-status">Tavola <span id="fumetto-num">1</span> di 4</p>
+        <div class="fumetto-toolbar-actions">
+          <button type="button" class="btn btn-secondary fumetto-print" id="fumetto-print">Stampa tutto</button>
+          <button type="button" class="btn btn-secondary fumetto-full" id="fumetto-fullscreen" aria-pressed="false">Schermo intero</button>
+        </div>
+      </div>
+
+      <div class="fumetto-viewport" id="fumetto-viewport">
+        <figure class="fumetto-page is-active" data-page="1">
+          <img src="img/tavole/01-eight.jpg" alt="Tavola 1: What time is it? It’s eight o’clock." width="864" height="1152" fetchpriority="high">
+        </figure>
+        <figure class="fumetto-page" data-page="2" aria-hidden="true">
+          <img src="img/tavole/02-half.jpg" alt="Tavola 2: It’s half past ten." width="864" height="1152" loading="lazy">
+        </figure>
+        <figure class="fumetto-page" data-page="3" aria-hidden="true">
+          <img src="img/tavole/03-quarters.jpg" alt="Tavola 3: quarter past three e quarter to five." width="864" height="1152" loading="lazy">
+        </figure>
+        <figure class="fumetto-page" data-page="4" aria-hidden="true">
+          <img src="img/tavole/04-ricorda.jpg" alt="Tavola 4: ricorda o’clock, half past, quarter past, quarter to." width="864" height="1152" loading="lazy">
+        </figure>
+      </div>
+
+      <p class="fumetto-caption" id="fumetto-caption" aria-live="polite"></p>
+
+      <div class="fumetto-controls">
+        <button type="button" class="btn btn-secondary fumetto-nav" id="fumetto-prev" disabled>← Indietro</button>
+        <div class="fumetto-dots" id="fumetto-dots" role="tablist" aria-label="Tavole"></div>
+        <button type="button" class="btn btn-primary fumetto-nav" id="fumetto-next">Avanti →</button>
+      </div>
+      <p class="fumetto-hint">Scorri o tocca i lati. Pizzica per ingrandire. «Schermo intero» sul telefono.</p>
+    </section>
+
+    <div class="hero-actions">
+      <a class="btn btn-primary" href="gioco.html">Poi il gioco</a>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <p>Fumetto sull’orologio in inglese. Realizzato dal Prof. Rossano Bella.</p>
+  </footer>
+
+  <script src="js/common.js" defer></script>
+  <script src="../js/fumetto-zoom.js" defer></script>
+  <script src="../js/fumetto-print.js?v=3" defer></script>
+  <script src="js/fumetto.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="color-scheme" content="dark" id="color-scheme">
+  <script>
+    {
+      const t = localStorage.getItem("tema-orologio-inglese");
+      const tema = t === "light" || t === "dark" ? t : "dark";
+      document.documentElement.dataset.theme = tema;
+      document.getElementById("color-scheme").content = tema;
+    }
+  </script>
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <title>What time is it? · L’orologio | Scuola</title>
+  <meta name="description" content="O’clock, half past, quarter past e quarter to: quattro tavole e un gioco con l’orologio analogico.">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="it_IT">
+  <meta property="og:site_name" content="Scuola · Prof. Rossano Bella">
+  <meta property="og:title" content="What time is it? · L’orologio">
+  <meta property="og:description" content="Quattro tavole e un gioco: dire l’ora in inglese.">
+  <meta property="og:url" content="https://hidetoshi777.github.io/Scuola/orologio-inglese/">
+  <meta property="og:image" content="https://hidetoshi777.github.io/Scuola/orologio-inglese/img/og-share.jpg">
+  <meta property="og:image:alt" content="What time is it? It’s eight o’clock.">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="What time is it? · L’orologio">
+  <meta name="twitter:description" content="Quattro tavole e un gioco: dire l’ora in inglese.">
+  <meta name="twitter:image" content="https://hidetoshi777.github.io/Scuola/orologio-inglese/img/og-share.jpg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@500;700;800&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body class="page-home">
+  <a class="skip-link visually-hidden" href="#contenuto">Salta al contenuto</a>
+
+  <header class="clk-rail">
+    <a class="clk-brand" href="index.html">
+      <span class="clk-badge">
+        <svg viewBox="0 0 32 32" width="22" height="22" aria-hidden="true">
+          <circle cx="16" cy="16" r="11" fill="#f4ead4"/>
+          <path d="M16 16 V9 M16 16 L11 19" stroke="#1a1408" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+        WHAT TIME IS IT?
+      </span>
+    </a>
+    <nav class="clk-nav" aria-label="Sezioni">
+      <a href="index.html" aria-current="page">Home</a>
+      <a href="fumetto.html">Fumetto</a>
+      <a href="gioco.html">Gioco</a>
+    </nav>
+    <button type="button" class="theme-toggle" data-theme-toggle aria-pressed="false">Chiaro</button>
+  </header>
+
+  <main id="contenuto" class="clk-stage" tabindex="-1">
+    <header class="clk-mast">
+      <div class="clk-host" data-clock data-h="8" data-m="0"></div>
+      <div>
+        <p class="clk-kicker">Inglese · Quarta professionale</p>
+        <h1>What time is it?</h1>
+      </div>
+      <p class="clk-lead">Guarda le lancette. Poi dillo in inglese. Quattro modi, sempre gli stessi.</p>
+      <blockquote class="clk-quote">What time is it? It’s eight o’clock.</blockquote>
+    </header>
+
+    <p class="clk-ask"><b>What time is it?</b> <span>Che ore sono?</span></p>
+
+    <section class="quadrante" aria-label="Le quattro ore da ricordare">
+      <figure class="tile">
+        <div class="clk-host" data-clock data-h="8" data-m="0"></div>
+        <figcaption>
+          <b>It’s eight o’clock.</b>
+          <span>Sono le otto in punto.</span>
+        </figcaption>
+      </figure>
+      <figure class="tile">
+        <div class="clk-host" data-clock data-h="10" data-m="30"></div>
+        <figcaption>
+          <b>It’s half past ten.</b>
+          <span>Sono le dieci e mezza.</span>
+        </figcaption>
+      </figure>
+      <figure class="tile">
+        <div class="clk-host" data-clock data-h="3" data-m="15"></div>
+        <figcaption>
+          <b>It’s quarter past three.</b>
+          <span>Sono le tre e un quarto.</span>
+        </figcaption>
+      </figure>
+      <figure class="tile">
+        <div class="clk-host" data-clock data-h="4" data-m="45"></div>
+        <figcaption>
+          <b>It’s quarter to five.</b>
+          <span>Sono le cinque meno un quarto.</span>
+        </figcaption>
+      </figure>
+    </section>
+
+    <nav class="ports" aria-label="Apri fumetto o gioco">
+      <a class="port" href="fumetto.html">Fumetto <small>4 tavole</small></a>
+      <a class="port port-ghost" href="gioco.html">Gioco <small>8 orologi</small></a>
+    </nav>
+
+    <figure class="strip">
+      <a href="fumetto.html">
+        <img src="img/tavole/01-eight.jpg" alt="Tavola 1 del fumetto: It’s eight o’clock." width="864" height="1152">
+      </a>
+      <figcaption>Leo e Maya in officina. Tocca per aprire il fumetto.</figcaption>
+    </figure>
+  </main>
+
+  <footer class="site-footer">
+    <p>Dire l’ora in inglese. Realizzato dal Prof. Rossano Bella.</p>
+  </footer>
+
+  <script src="js/common.js" defer></script>
+  <script src="js/orologio.js" defer></script>
+</body>
+</html>
