@@ -141,12 +141,28 @@
   top: calc(100% + 0.4rem);
   right: 0;
   width: min(18.5rem, calc(100vw - 2rem));
+  max-width: calc(100vw - 2rem);
   padding: 0.85rem 0.9rem 0.95rem;
   background: var(--prof-surface);
   border: 1px solid var(--prof-border);
   border-radius: 0.55rem;
   box-shadow: 0 10px 28px rgba(0, 0, 0, 0.35);
-  z-index: 5;
+  z-index: 20;
+  box-sizing: border-box;
+}
+
+/* Sul cellulare: ancorata al viewport, non al solo bottone Avvisi */
+@media (max-width: 520px) {
+  .prof-novita-panel {
+    position: fixed;
+    top: 4.5rem;
+    left: 1rem;
+    right: 1rem;
+    width: auto;
+    max-width: none;
+    max-height: calc(100dvh - 5.5rem);
+    overflow-y: auto;
+  }
 }
 
 .prof-novita-panel[hidden] {
