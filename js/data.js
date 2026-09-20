@@ -185,6 +185,7 @@ window.ATTIVITA_WEB = [
     materia: "Inglese",
     classe: "Terza superiore · professionale",
     annoProf: 3,
+    pubblicato: "2026-09-15",
     descrizione: "Cinque tavole per presentarsi in inglese: Hello, My name is, How are you, Nice to meet you, favourite singer, free time; con gioco nel cortile.",
     citazione: "Hello! My name is…",
     url: "presentazioni-inglese/",
@@ -198,6 +199,7 @@ window.ATTIVITA_WEB = [
     materia: "Inglese",
     classe: "Quarta superiore · professionale",
     annoProf: 4,
+    pubblicato: "2026-09-18",
     descrizione:
       "Quattro tavole e un gioco: o’clock, half past, quarter past e quarter to, con orologio analogico.",
     citazione: "What time is it? It’s eight o’clock.",
@@ -215,6 +217,7 @@ window.ATTIVITA_WEB = [
     materia: "Tecnologia",
     classe: "Quarta superiore · professionale",
     annoProf: 4,
+    pubblicato: "2026-09-15",
     descrizione: "Peso e peso specifico, produzione ghisa/acciaio e calcolo lamiera: scheda, fumetto, gioco in classe e allenamento interattivo sul valore di γ.",
     citazione: "Stesso volume, peso diverso: conta il materiale.",
     url: "acciaio-alluminio-ghisa/",
@@ -233,6 +236,7 @@ window.ATTIVITA_WEB = [
     materia: "Tecnologie elettriche e elettroniche",
     classe: "Quarta superiore · professionale",
     annoProf: 4,
+    pubblicato: "2026-09-16",
     descrizione:
       "Quarta professionale, tecnologie elettriche: fumetto Edison (5 tavole) e scheda con grafico sulla caduta di tensione — legge di Ohm.",
     citazione: "La luce deve durare — non solo accendersi.",
@@ -250,6 +254,7 @@ window.ATTIVITA_WEB = [
     materia: "Tecnologie elettriche e elettroniche",
     classe: "Terza superiore · professionale",
     annoProf: 3,
+    pubblicato: "2026-09-17",
     descrizione:
       "Poster didattico: atomo, elettroni nel filo e corrente come cariche che passano in un secondo — stampabile da classe.",
     citazione: "Più elettroni al secondo = corrente più forte.",
@@ -264,6 +269,7 @@ window.ATTIVITA_WEB = [
     materia: "Tecnologie elettriche e elettroniche",
     classe: "Terza superiore · professionale",
     annoProf: 3,
+    pubblicato: "2026-09-17",
     descrizione:
       "Poster di sicurezza: scossa, cavi danneggiati, acqua e elettricità, togliere tensione prima di lavorare e uso dei DPI.",
     citazione: "Pensa, controlla, proteggiti. Lavora sicuro!",
@@ -278,6 +284,7 @@ window.ATTIVITA_WEB = [
     materia: "Tecnologie e tecniche di installazione e manutenzione",
     classe: "Quarta superiore · professionale",
     annoProf: 4,
+    pubblicato: "2026-09-17",
     descrizione:
       "Guasti, manutenzione, strumenti, checklist e sostituzione sicura: scheda stampabile, fumetto in 6 vignette e gioco in officina.",
     citazione: "Prevenire è meglio che fermare tutto.",
