@@ -353,6 +353,82 @@
   animation: school-wind 6.8s 2.4s linear infinite;
 }
 
+.school-clock__rain,
+.school-clock__lightning {
+  display: none;
+  position: absolute;
+  z-index: 4;
+}
+
+.school-clock__rain {
+  top: 2.8rem;
+  width: 0.18rem;
+  height: 0.7rem;
+  border-radius: 99px;
+  background: #7dd8ff;
+  transform: rotate(17deg);
+  box-shadow:
+    1rem 0.55rem #7dd8ff,
+    2rem 0.1rem #7dd8ff,
+    3rem 0.75rem #7dd8ff,
+    4rem 0.25rem #7dd8ff;
+  animation: school-rain 0.75s linear infinite;
+}
+
+.school-clock__rain--one { left: 1.7rem; }
+.school-clock__rain--two { left: 5.2rem; animation-delay: 0.32s; }
+
+.school-clock__lightning {
+  top: 2.75rem;
+  right: 2.7rem;
+  width: 1.25rem;
+  height: 2.1rem;
+  background: #ffe868;
+  clip-path: polygon(48% 0, 100% 0, 68% 39%, 94% 39%, 24% 100%, 42% 56%, 12% 56%);
+  filter: drop-shadow(0 0 0.45rem rgb(255 232 104 / 70%));
+  animation: school-lightning 2.4s steps(1) infinite;
+}
+
+.school-clock[data-weather="sereno"] .school-clock__cloud,
+.school-clock[data-weather="sereno"] .school-clock__rain,
+.school-clock[data-weather="sereno"] .school-clock__lightning {
+  display: none;
+}
+
+.school-clock[data-weather="nuvoloso"] .school-clock__sun,
+.school-clock[data-weather="pioggia"] .school-clock__sun,
+.school-clock[data-weather="temporale"] .school-clock__sun,
+.school-clock[data-weather="nebbia"] .school-clock__sun,
+.school-clock[data-weather="neve"] .school-clock__sun {
+  opacity: 0.22;
+}
+
+.school-clock[data-weather="pioggia"] .school-clock__rain,
+.school-clock[data-weather="temporale"] .school-clock__rain {
+  display: block;
+}
+
+.school-clock[data-weather="temporale"] .school-clock__lightning {
+  display: block;
+}
+
+.school-clock[data-weather="nebbia"] .school-clock__scene {
+  filter: grayscale(0.28) contrast(0.82) brightness(1.12);
+}
+
+.school-clock[data-weather="neve"] .school-clock__rain {
+  display: block;
+  height: 0.34rem;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: 1rem 0.55rem #fff, 2rem 0.1rem #fff, 3rem 0.75rem #fff, 4rem 0.25rem #fff;
+}
+
+.school-clock[data-windy="false"] .school-clock__wind {
+  display: none;
+}
+
 .school-clock__display {
   position: relative;
   z-index: 5;
@@ -366,6 +442,22 @@
 .school-clock__date {
   margin: 0;
   color: #aebdca;
+}
+
+.school-clock__weather {
+  margin: 0.45rem 0 0;
+  color: #f7dcaa;
+  font-size: 0.72rem;
+  font-weight: 700;
+  line-height: 1.25;
+}
+
+.school-clock__source {
+  display: inline-block;
+  margin-top: 0.22rem;
+  color: #8fa2b2;
+  font-size: 0.58rem;
+  text-underline-offset: 0.15rem;
 }
 
 .school-clock__period {
@@ -428,6 +520,17 @@
   12% { opacity: 1; }
   78% { opacity: 0.82; }
   100% { transform: translateX(25rem); opacity: 0; }
+}
+
+@keyframes school-rain {
+  from { translate: 0 -0.45rem; opacity: 0; }
+  20% { opacity: 1; }
+  to { translate: -0.25rem 2.2rem; opacity: 0; }
+}
+
+@keyframes school-lightning {
+  0%, 8%, 14%, 100% { opacity: 0; }
+  4%, 11% { opacity: 1; }
 }
 
 .admin-card {
@@ -676,6 +779,14 @@
   .school-clock__date {
     font-size: 0.64rem;
   }
+
+  .school-clock__weather {
+    font-size: 0.64rem;
+  }
+
+  .school-clock__source {
+    font-size: 0.54rem;
+  }
 }
 
 @media (max-width: 24rem) {
@@ -697,7 +808,9 @@
   .school-clock__sun,
   .school-clock__sun::before,
   .school-clock__cloud,
-  .school-clock__wind {
+  .school-clock__wind,
+  .school-clock__rain,
+  .school-clock__lightning {
     animation: none;
   }
 
