@@ -25,6 +25,21 @@
     return n === 3 ? "Terza professionale" : "Quarta professionale";
   }
 
+  function dataPubblicazione(valore) {
+    if (!/^\d{4}-\d{2}-\d{2}$/.test(valore || "")) return null;
+    const data = new Date(valore + "T00:00:00Z");
+    if (Number.isNaN(data.getTime())) return null;
+    return {
+      iso: valore,
+      label: new Intl.DateTimeFormat("it-IT", {
+        day: "numeric",
+        month: "long",
+        year: "numeric",
+        timeZone: "UTC",
+      }).format(data),
+    };
+  }
+
   function costruisciGriglia() {
     if (!griglia) return;
     const attivita = elenco();
@@ -33,6 +48,7 @@
     griglia.innerHTML = attivita
       .map((a, i) => {
         const anno = a.annoProf;
+        const pubblicato = dataPubblicazione(a.pubblicato);
         const bollinoClass = anno === 4 ? " prof-bollino--4" : "";
         const href = "../" + a.url.replace(/^\//, "");
         const copertina = a.copertina ? "../" + a.copertina.replace(/^\//, "") : "";
@@ -68,6 +84,13 @@
           " · " +
           esc(labelAnno(anno)) +
           "</p>" +
+          (pubblicato
+            ? '<p class="prof-card-data">Pubblicato il <time datetime="' +
+              esc(pubblicato.iso) +
+              '">' +
+              esc(pubblicato.label) +
+              "</time></p>"
+            : "") +
           "<h2>" +
           esc(a.titolo) +
           "</h2>" +
