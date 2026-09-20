@@ -25,7 +25,18 @@
 }
 
 .admin-wrap--wide {
-  max-width: 40rem;
+  max-width: 62rem;
+}
+
+.admin-hero {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(15.5rem, 20rem);
+  gap: clamp(1.25rem, 4vw, 3rem);
+  align-items: start;
+}
+
+.admin-intro {
+  padding-top: 0.4rem;
 }
 
 .admin-eyebrow {
@@ -49,6 +60,207 @@
   margin: 0.55rem 0 0;
   color: var(--muted);
   font-size: 0.95rem;
+}
+
+.school-clock {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  border: 1px solid color-mix(in srgb, var(--accent) 32%, var(--border));
+  border-radius: 1.1rem;
+  background:
+    radial-gradient(circle at 80% 14%, rgb(255 193 88 / 18%), transparent 32%),
+    linear-gradient(145deg, #172a3a, #111a24 72%);
+  box-shadow: 0 1.25rem 3rem rgb(0 0 0 / 28%);
+}
+
+.school-clock::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background-image: radial-gradient(circle, rgb(255 255 255 / 14%) 1px, transparent 1px);
+  background-size: 13px 13px;
+  mask-image: linear-gradient(to bottom, #000, transparent 62%);
+}
+
+.school-clock__scene {
+  position: relative;
+  height: 9.2rem;
+}
+
+.school-clock__scene img {
+  position: absolute;
+  z-index: 2;
+  left: 50%;
+  bottom: -0.35rem;
+  width: 112%;
+  height: auto;
+  transform: translateX(-50%);
+  filter: drop-shadow(0 0.8rem 0.7rem rgb(0 0 0 / 32%));
+}
+
+.school-clock__sun {
+  position: absolute;
+  z-index: 1;
+  top: 0.75rem;
+  right: 1.2rem;
+  width: 2.1rem;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: #ffc857;
+  box-shadow: 0 0 1.4rem rgb(255 200 87 / 55%);
+  animation: school-sun 14s linear infinite;
+}
+
+.school-clock__sun::before,
+.school-clock__sun::after,
+.school-clock__sun i::before,
+.school-clock__sun i::after {
+  content: "";
+  position: absolute;
+  inset: -0.48rem 0.87rem;
+  border-radius: 99px;
+  background: #ffc857;
+}
+
+.school-clock__sun::after { transform: rotate(45deg); }
+.school-clock__sun i::before { transform: rotate(90deg); }
+.school-clock__sun i::after { transform: rotate(135deg); }
+
+.school-clock__cloud {
+  position: absolute;
+  z-index: 3;
+  width: 2.7rem;
+  height: 0.82rem;
+  border-radius: 99px;
+  background: #f6fbff;
+  opacity: 0.92;
+  filter: drop-shadow(0 0.25rem 0.22rem rgb(0 0 0 / 16%));
+}
+
+.school-clock__cloud::before,
+.school-clock__cloud::after {
+  content: "";
+  position: absolute;
+  bottom: 0.2rem;
+  border-radius: 50%;
+  background: inherit;
+}
+
+.school-clock__cloud::before {
+  left: 0.46rem;
+  width: 1.05rem;
+  height: 1.05rem;
+}
+
+.school-clock__cloud::after {
+  right: 0.42rem;
+  width: 1.42rem;
+  height: 1.42rem;
+}
+
+.school-clock__cloud--one {
+  top: 1.55rem;
+  left: -3.5rem;
+  animation: school-cloud 11s ease-in-out infinite;
+}
+
+.school-clock__cloud--two {
+  top: 3.45rem;
+  left: -4rem;
+  scale: 0.7;
+  opacity: 0.72;
+  animation: school-cloud 15s 3.5s ease-in-out infinite;
+}
+
+.school-clock__wind {
+  position: absolute;
+  z-index: 4;
+  left: -4rem;
+  width: 3.8rem;
+  height: 0.8rem;
+  border-top: 2px solid rgb(190 229 246 / 85%);
+  border-radius: 50%;
+}
+
+.school-clock__wind::after {
+  content: "";
+  position: absolute;
+  top: 0.26rem;
+  left: 1.1rem;
+  width: 2.1rem;
+  height: 0.5rem;
+  border-top: 2px solid rgb(190 229 246 / 62%);
+  border-radius: 50%;
+}
+
+.school-clock__wind--one {
+  top: 4.1rem;
+  animation: school-wind 5.4s 0.5s linear infinite;
+}
+
+.school-clock__wind--two {
+  top: 6.15rem;
+  scale: 0.78;
+  animation: school-wind 6.8s 2.4s linear infinite;
+}
+
+.school-clock__display {
+  position: relative;
+  z-index: 5;
+  padding: 0.7rem 1rem 0.85rem;
+  text-align: center;
+  background: linear-gradient(to bottom, rgb(10 17 24 / 72%), rgb(10 17 24 / 96%));
+  border-top: 1px solid rgb(255 255 255 / 9%);
+}
+
+.school-clock__place,
+.school-clock__date {
+  margin: 0;
+  color: #aebdca;
+}
+
+.school-clock__place {
+  font-size: 0.7rem;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.school-clock__time {
+  display: block;
+  margin-top: 0.12rem;
+  font-family: "JetBrains Mono", ui-monospace, monospace;
+  font-size: clamp(1.65rem, 5vw, 2.2rem);
+  font-weight: 700;
+  line-height: 1.12;
+  letter-spacing: -0.06em;
+  color: #fff5dc;
+  text-shadow: 0 0 1.2rem rgb(232 108 42 / 35%);
+}
+
+.school-clock__date {
+  margin-top: 0.1rem;
+  font-size: 0.74rem;
+  text-transform: capitalize;
+}
+
+@keyframes school-sun {
+  to { transform: rotate(360deg); }
+}
+
+@keyframes school-cloud {
+  0% { transform: translateX(0); }
+  48% { transform: translateX(22rem) translateY(-0.2rem); }
+  49%, 100% { transform: translateX(22rem); }
+}
+
+@keyframes school-wind {
+  0% { transform: translateX(0); opacity: 0; }
+  12% { opacity: 1; }
+  78% { opacity: 0.82; }
+  100% { transform: translateX(25rem); opacity: 0; }
 }
 
 .admin-card {
@@ -246,4 +458,76 @@
 
 .admin-footer p {
   margin: 0;
+}
+
+@media (max-width: 44rem) {
+  .admin-hero {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .school-clock {
+    display: grid;
+    grid-template-columns: minmax(0, 1.35fr) minmax(8.8rem, 1fr);
+    align-items: stretch;
+  }
+
+  .school-clock__scene {
+    height: 8.2rem;
+    overflow: hidden;
+  }
+
+  .school-clock__scene img {
+    width: 125%;
+    bottom: 0;
+  }
+
+  .school-clock__display {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 0.7rem 0.65rem;
+    border-top: 0;
+    border-left: 1px solid rgb(255 255 255 / 9%);
+  }
+
+  .school-clock__place {
+    font-size: 0.59rem;
+  }
+
+  .school-clock__time {
+    font-size: clamp(1.35rem, 7vw, 1.9rem);
+  }
+
+  .school-clock__date {
+    font-size: 0.64rem;
+  }
+}
+
+@media (max-width: 24rem) {
+  .school-clock {
+    grid-template-columns: 1fr;
+  }
+
+  .school-clock__scene {
+    height: 8.7rem;
+  }
+
+  .school-clock__display {
+    border-left: 0;
+    border-top: 1px solid rgb(255 255 255 / 9%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .school-clock__sun,
+  .school-clock__cloud,
+  .school-clock__wind {
+    animation: none;
+  }
+
+  .school-clock__cloud--one { left: 1rem; }
+  .school-clock__cloud--two { left: 5.2rem; }
+  .school-clock__wind--one { left: 7.5rem; }
+  .school-clock__wind--two { left: 2rem; }
 }

@@ -10,16 +10,36 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,600;9..40,700;9..40,800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/admin.css?v=2">
+  <link rel="stylesheet" href="css/admin.css?v=3">
 </head>
 <body class="admin-page" data-theme="dark">
   <main class="admin-wrap admin-wrap--wide">
-    <p class="admin-eyebrow">Area riservata</p>
-    <h1>Visite alle pagine</h1>
-    <p class="admin-lead">
-      Conteggi remoti (tutti i dispositivi). Totale, ultime 24 ore e orario dell’ultima visita.
-      Hub professionale e attività collegate.
-    </p>
+    <header class="admin-hero">
+      <div class="admin-intro">
+        <p class="admin-eyebrow">Area riservata</p>
+        <h1>Visite alle pagine</h1>
+        <p class="admin-lead">
+          Conteggi remoti (tutti i dispositivi). Totale, ultime 24 ore e orario dell’ultima visita.
+          Hub professionale e attività collegate.
+        </p>
+      </div>
+
+      <section class="school-clock" aria-label="Ora locale del plesso Meucci">
+        <div class="school-clock__scene" aria-hidden="true">
+          <span class="school-clock__sun"><i></i></span>
+          <span class="school-clock__cloud school-clock__cloud--one"></span>
+          <span class="school-clock__cloud school-clock__cloud--two"></span>
+          <span class="school-clock__wind school-clock__wind--one"></span>
+          <span class="school-clock__wind school-clock__wind--two"></span>
+          <img src="img/meucci-isometrica.png" alt="" width="900" height="540">
+        </div>
+        <div class="school-clock__display">
+          <p class="school-clock__place">Plesso Meucci · Acireale</p>
+          <time class="school-clock__time" id="school-clock-time">--:--:--</time>
+          <p class="school-clock__date" id="school-clock-date">Ora locale</p>
+        </div>
+      </section>
+    </header>
 
     <div class="admin-toolbar">
       <div>
@@ -44,5 +64,6 @@
   <script src="../../js/data.js?v=30" defer></script>
   <script src="../../js/access-track.js?v=2" defer></script>
   <script src="js/stats.js?v=2" defer></script>
+  <script src="js/school-clock.js?v=1" defer></script>
 </body>
 </html>
