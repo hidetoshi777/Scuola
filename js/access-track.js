@@ -126,13 +126,16 @@
       cache: "no-store",
     })
       .then(function (r) {
-        return r.ok ? r.json() : { views: 0 };
+        if (!r.ok) throw new Error("HTTP " + r.status);
+        return r.json();
       })
       .then(function (data) {
-        return Number(data && data.views) || 0;
+        if (!data || data.views === null || data.views === undefined) return null;
+        const value = Number(data.views);
+        return Number.isFinite(value) ? value : null;
       })
       .catch(function () {
-        return 0;
+        return null;
       });
   }
 
@@ -144,6 +147,7 @@
         return fetchViews(base + "/__h/" + stamp);
       })
     ).then(function (counts) {
+      if (counts.some(function (n) { return n === null; })) return null;
       return counts.reduce(function (sum, n) {
         return sum + n;
       }, 0);
