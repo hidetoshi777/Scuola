@@ -37,30 +37,32 @@
     }
     if (statoEl) statoEl.textContent = "Aggiorno i numeri…";
     if (lista) lista.innerHTML = "";
+    if (refreshBtn) refreshBtn.disabled = true;
 
-    const pagine = window.ScuolaAccess.catalogoPagine();
-    const [risultati, lastOverall] = await Promise.all([
-      Promise.all(
-        pagine.map(async function (p) {
-          const [views, views24h, lastSeen] = await Promise.all([
-            window.ScuolaAccess.fetchViews(p.path),
-            window.ScuolaAccess.fetchViews24h(p.path),
-            window.ScuolaAccess.fetchLastSeen(p.path),
-          ]);
-          return {
-            titolo: p.titolo,
-            path: p.path,
-            gruppo: p.gruppo,
-            views: views,
-            views24h: views24h,
-            lastSeen: lastSeen,
-          };
-        })
-      ),
-      window.ScuolaAccess.fetchLastSeenOverall(),
-    ]);
+    try {
+      const pagine = window.ScuolaAccess.catalogoPagine();
+      const [risultati, lastOverall] = await Promise.all([
+        Promise.all(
+          pagine.map(async function (p) {
+            const [views, views24h, lastSeen] = await Promise.all([
+              window.ScuolaAccess.fetchViews(p.path),
+              window.ScuolaAccess.fetchViews24h(p.path),
+              window.ScuolaAccess.fetchLastSeen(p.path),
+            ]);
+            return {
+              titolo: p.titolo,
+              path: p.path,
+              gruppo: p.gruppo,
+              views: views,
+              views24h: views24h,
+              lastSeen: lastSeen,
+            };
+          })
+        ),
+        window.ScuolaAccess.fetchLastSeenOverall(),
+      ]);
 
-    risultati.sort(function (a, b) {
+      risultati.sort(function (a, b) {
       return (
         b.views24h - a.views24h ||
         b.views - a.views ||
@@ -68,28 +70,28 @@
       );
     });
 
-    const totale = risultati.reduce(function (s, r) {
+      const totale = risultati.reduce(function (s, r) {
       return s + r.views;
     }, 0);
-    const totale24 = risultati.reduce(function (s, r) {
+      const totale24 = risultati.reduce(function (s, r) {
       return s + r.views24h;
     }, 0);
 
-    if (totaleEl) {
+      if (totaleEl) {
       totaleEl.textContent =
         totale === 1 ? "1 visita in totale" : totale + " visite in totale";
     }
-    if (totale24El) {
+      if (totale24El) {
       totale24El.textContent =
         totale24 === 1
           ? "1 visita nelle ultime 24 ore"
           : totale24 + " visite nelle ultime 24 ore";
     }
-    if (lastEl) {
+      if (lastEl) {
       lastEl.textContent = "Ultima visita (sito): " + formatQuando(lastOverall);
     }
 
-    if (lista) {
+      if (lista) {
       if (!risultati.length) {
         lista.innerHTML = "<li class='admin-empty'>Nessuna pagina in elenco.</li>";
       } else {
@@ -127,14 +129,24 @@
       }
     }
 
-    if (statoEl) {
-      const ora = new Date();
-      statoEl.textContent =
-        "Aggiornato alle " +
-        ora.toLocaleTimeString("it-IT", { hour: "2-digit", minute: "2-digit" }) +
-        " · " +
-        risultati.length +
-        " pagine · fasce orarie Europe/Rome";
+      if (statoEl) {
+        const ora = new Date();
+        statoEl.textContent =
+          "Aggiornato alle " +
+          ora.toLocaleTimeString("it-IT", { hour: "2-digit", minute: "2-digit" }) +
+          " · " +
+          risultati.length +
+          " pagine · fasce orarie Europe/Rome";
+      }
+    } catch (error) {
+      if (statoEl) {
+        statoEl.textContent = "Il servizio statistiche non risponde. Riprova tra poco.";
+      }
+      if (lista) {
+        lista.innerHTML = "<li class='admin-empty'>Numeri temporaneamente non disponibili.</li>";
+      }
+    } finally {
+      if (refreshBtn) refreshBtn.disabled = false;
     }
   }
 

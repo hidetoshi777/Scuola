@@ -14,6 +14,19 @@
   const SKIP_RE = /\/professionale\/admin(\/|$)/i;
   const KEYVAL = "https://api.keyval.org";
   const TZ = "Europe/Rome";
+  const REQUEST_TIMEOUT_MS = 8000;
+
+  function fetchWithTimeout(url, options) {
+    if (typeof AbortController === "undefined") return fetch(url, options);
+    const controller = new AbortController();
+    const timer = window.setTimeout(function () {
+      controller.abort();
+    }, REQUEST_TIMEOUT_MS);
+    const opts = Object.assign({}, options, { signal: controller.signal });
+    return fetch(url, opts).finally(function () {
+      window.clearTimeout(timer);
+    });
+  }
 
   function normalizePath(pathname) {
     let p = String(pathname || "/").split("?")[0].split("#")[0];
@@ -93,7 +106,7 @@
   }
 
   function ping(url) {
-    return fetch(url, {
+    return fetchWithTimeout(url, {
       method: "GET",
       mode: "cors",
       credentials: "omit",
@@ -106,7 +119,7 @@
 
   function fetchViews(path) {
     const p = normalizePath(path);
-    return fetch(viewsUrl(p), {
+    return fetchWithTimeout(viewsUrl(p), {
       method: "GET",
       mode: "cors",
       credentials: "omit",
@@ -138,7 +151,7 @@
   }
 
   function readKeyval(key) {
-    return fetch(KEYVAL + "/get/" + encodeURIComponent(key), {
+    return fetchWithTimeout(KEYVAL + "/get/" + encodeURIComponent(key), {
       method: "GET",
       mode: "cors",
       credentials: "omit",
