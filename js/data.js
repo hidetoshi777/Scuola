@@ -362,14 +362,15 @@ window.ATTIVITA_WEB = [
     annoProf: 3,
     pubblicato: "2026-09-21",
     descrizione:
-      "Circuito chiuso, E, resistenza R e poli +/−: scheda con infografiche ed esercizi, gioco per montare i fili e quiz di ripasso.",
+      "Circuito chiuso, resistenza R, legge di Ohm V=R×I, scheda circuito e scheda Ohm, gioco sul banco con quiz.",
     citazione: "Senza circuito chiuso non c’è luce.",
     url: "circuito-lampadina/",
     copertina: "circuito-lampadina/img/og-share.jpg",
     tinta: "scienze",
     adesivo: "st-pianeta",
     extra: [
-      { label: "Scheda", url: "circuito-lampadina/scheda.html" },
+      { label: "Circuito", url: "circuito-lampadina/scheda.html" },
+      { label: "Legge di Ohm", url: "circuito-lampadina/scheda-ohm.html" },
       { label: "Gioco", url: "circuito-lampadina/gioco.html" },
     ],
   },

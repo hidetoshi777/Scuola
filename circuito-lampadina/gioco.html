@@ -6,7 +6,7 @@
   <meta name="color-scheme" content="dark light">
   <link rel="icon" href="../favicon.svg" type="image/svg+xml">
   <title>Gioco · Circuito e lampadina | Scuola</title>
-  <meta name="description" content="Monta il circuito, quiz su poli, resistenza R, lampadina e simbolo E.">
+  <meta name="description" content="Monta il circuito, poster resistenza, quiz Ohm V=R×I, R, E e lampadina.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Source+Sans+3:wght@500;600;700;800&display=swap" rel="stylesheet">
@@ -27,7 +27,8 @@
       <p class="qe-rail-brand">E · CIRCUITO</p>
       <nav class="qe-nav" aria-label="Sezioni">
         <a href="index.html">Home</a>
-        <a href="scheda.html">Scheda</a>
+        <a href="scheda.html">Circuito</a>
+        <a href="scheda-ohm.html">Ohm</a>
         <a href="gioco.html">Gioco</a>
       </nav>
     </aside>
@@ -81,6 +82,26 @@
           </div>
         </section>
 
+        <section class="game-poster" id="schermata-resistenza" aria-labelledby="tit-r">
+          <h2 id="tit-r">Resistenza elettrica · poster</h2>
+          <p class="game-intro">Leggi l’infografica, poi rispondi sotto.</p>
+          <figure class="game-poster-fig">
+            <img src="img/cos-e-la-resistenza-elettrica.png" alt="Poster resistenza elettrica: simbolo R, ohm, materiale lunghezza sezione, filamento lampadina" width="1200" height="900" loading="lazy">
+          </figure>
+          <p class="game-quiz-q">Cos’è la resistenza <span class="mono">R</span>?</p>
+          <div class="quiz-choices">
+            <button type="button" data-quiz-r-def="ostacolo">Ostacola il passaggio della corrente (ohm)</button>
+            <button type="button" data-quiz-r-def="polo">È il polo negativo del filo lungo</button>
+          </div>
+          <p class="quiz-feedback" id="quiz-r-def-feedback" aria-live="polite"></p>
+          <p class="game-quiz-q" style="margin-top:1rem">Da cosa dipende <strong>di solito</strong> R? (scegli la risposta più completa)</p>
+          <div class="quiz-choices">
+            <button type="button" data-quiz-r-fatt="tre">Materiale, lunghezza e sezione del filo</button>
+            <button type="button" data-quiz-r-fatt="colore">Solo il colore del cavo</button>
+          </div>
+          <p class="quiz-feedback" id="quiz-r-fatt-feedback" aria-live="polite"></p>
+        </section>
+
         <section class="game-quiz" aria-labelledby="quiz-poli">
           <h2 id="quiz-poli">Quiz · poli e lunghezza filo</h2>
           <p class="game-quiz-q">Vero o falso? «Il filo più lungo del circuito è il polo negativo (−).»</p>
@@ -91,8 +112,26 @@
           <p class="quiz-feedback" id="quiz-poli-feedback" aria-live="polite"></p>
         </section>
 
+        <section class="game-quiz" aria-labelledby="quiz-ohm">
+          <h2 id="quiz-ohm">Quiz · Legge di Ohm</h2>
+          <p class="game-quiz-q"><span class="mono">V = 12 V</span> e <span class="mono">R = 6 Ω</span>. Quanto vale <span class="mono">I</span>?</p>
+          <div class="quiz-choices">
+            <button type="button" data-quiz-ohm-i="2">2 A</button>
+            <button type="button" data-quiz-ohm-i="72">72 A</button>
+            <button type="button" data-quiz-ohm-i="0.5">0,5 A</button>
+          </div>
+          <p class="quiz-feedback" id="quiz-ohm-i-feedback" aria-live="polite"></p>
+          <p class="game-quiz-q" style="margin-top:1rem">Quale formula è la legge di Ohm?</p>
+          <div class="quiz-choices">
+            <button type="button" data-quiz-ohm-form="vri">V = R × I</button>
+            <button type="button" data-quiz-ohm-form="vir">V = I ÷ R</button>
+          </div>
+          <p class="quiz-feedback" id="quiz-ohm-form-feedback" aria-live="polite"></p>
+          <p style="margin:0.5rem 0 0;font-size:0.9rem"><a href="scheda-ohm.html">Apri scheda Ohm</a></p>
+        </section>
+
         <section class="game-quiz" aria-labelledby="quiz-r">
-          <h2 id="quiz-r">Quiz · resistenza R</h2>
+          <h2 id="quiz-r">Quiz · lunghezza e R</h2>
           <p class="game-quiz-q">Stesso materiale e stessa sezione: cosa succede alla resistenza se il filo è più lungo?</p>
           <div class="quiz-choices">
             <button type="button" data-quiz-r="diminuisce">Diminuisce</button>

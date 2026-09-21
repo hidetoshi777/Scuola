@@ -294,6 +294,12 @@ body.reduced-motion * {
   }
 }
 
+@media (min-width: 900px) {
+  .qe-path {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
 .qe-tile {
   display: block;
   padding: 1rem 1.1rem;

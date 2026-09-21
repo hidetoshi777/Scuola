@@ -227,3 +227,30 @@
   width: 100%;
   max-height: 5rem;
 }
+
+.game-poster {
+  margin-top: 1.25rem;
+  padding: 1rem;
+  background: var(--carta);
+  border: 2px solid var(--bordo);
+  border-radius: 0.5rem;
+  max-width: 42rem;
+}
+
+.game-poster h2 {
+  margin: 0 0 0.35rem;
+  font-size: 1.15rem;
+}
+
+.game-poster-fig {
+  margin: 0.65rem 0;
+}
+
+.game-poster-fig img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 0.35rem;
+  border: 1px solid var(--bordo);
+  background: #fff;
+}
