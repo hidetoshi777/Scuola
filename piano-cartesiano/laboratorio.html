@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="color-scheme" content="dark" id="color-scheme">
+  <script>
+    {
+      const t = localStorage.getItem("tema-piano-cartesiano");
+      const tema = t === "light" || t === "dark" ? t : "dark";
+      document.documentElement.dataset.theme = tema;
+      document.getElementById("color-scheme").content = tema;
+    }
+  </script>
+  <link rel="icon" href="../favicon.svg" type="image/svg+xml">
+  <title>Laboratorio · Piano cartesiano | Scuola</title>
+  <meta name="description" content="Cammina sul piano: destra, sinistra, su, giù. Colloca A, B, C e D.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,650&family=IBM+Plex+Mono:wght@600;700&family=Source+Sans+3:wght@500;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body class="page-lab">
+  <a class="skip-link" href="#contenuto">Salta al contenuto</a>
+
+  <div class="quaderno">
+    <div class="margine" aria-hidden="true"></div>
+    <header class="q-top">
+      <div>
+        <p class="q-kicker">Laboratorio · Cammina</p>
+        <p class="q-date">Tu sei il pedone</p>
+      </div>
+      <button type="button" class="theme-toggle" data-theme-toggle aria-pressed="false">Quaderno</button>
+    </header>
+    <nav class="asse-nav" aria-label="Sezioni">
+      <a href="index.html">Home</a>
+      <a href="imparare.html">Studio</a>
+      <a href="laboratorio.html" aria-current="page">Laboratorio</a>
+      <a href="gioco.html">Gioco</a>
+    </nav>
+
+    <main id="contenuto" class="q-main" tabindex="-1">
+      <h1>Collocati: cammina</h1>
+      <p class="lead">Parti da O. Un passo alla volta. Quando sei sul punto, tocca «Ci sono».</p>
+
+      <div class="biglietto" id="lab-ticket">
+        <p id="lab-meta">Punto 1 di 4</p>
+        <p class="coord" id="lab-coord">A = (3, 2)</p>
+        <p id="lab-hint">Prima X, poi Y.</p>
+      </div>
+
+      <p class="pos-live" id="lab-pos" aria-live="polite">(0, 0)</p>
+      <div id="piano-lab" class="piano-host" role="application" aria-label="Piano per camminare"></div>
+
+      <div class="pad" aria-label="Passi">
+        <button type="button" class="btn su" data-dx="0" data-dy="1">Su</button>
+        <button type="button" class="btn sx" data-dx="-1" data-dy="0">Sinistra</button>
+        <button type="button" class="btn btn-primary ci" id="lab-ci">Ci sono</button>
+        <button type="button" class="btn dx" data-dx="1" data-dy="0">Destra</button>
+        <button type="button" class="btn giu" data-dx="0" data-dy="-1">Giù</button>
+      </div>
+      <p class="feedback" id="lab-msg" aria-live="polite"></p>
+      <div class="azioni">
+        <button type="button" class="btn btn-ghost" id="lab-reset">Torna in O</button>
+      </div>
+
+      <div class="gioco-end" id="lab-end" hidden>
+        <h2>I quattro punti sono a posto</h2>
+        <p>A destra in alto, B a sinistra in alto, C a sinistra in basso, D a destra in basso.</p>
+        <div class="azioni">
+          <button type="button" class="btn" id="lab-again">Ancora</button>
+          <a class="btn btn-primary" href="gioco.html">Ora il gioco</a>
+        </div>
+      </div>
+      <p class="print-credit">Realizzato dal Prof. Rossano Bella</p>
+    </main>
+
+    <footer class="site-footer">
+      <p>Laboratorio sul piano cartesiano. Realizzato dal Prof. Rossano Bella.</p>
+    </footer>
+  </div>
+
+  <script src="js/common.js" defer></script>
+  <script src="js/piano.js" defer></script>
+  <script src="js/laboratorio.js" defer></script>
+</body>
+</html>

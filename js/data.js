@@ -298,6 +298,25 @@ window.ATTIVITA_WEB = [
       { label: "Gioco", url: "manutenzione-guasti-preventiva/gioco.html" },
     ],
   },
+  {
+    titolo: "Piano cartesiano",
+    materia: "Matematica",
+    classe: "Terza superiore · professionale",
+    annoProf: 3,
+    pubblicato: "2026-09-21",
+    descrizione:
+      "Assi X e Y, origine, quadranti e i punti A B C D: studio, laboratorio a passi e un gioco in cui ti collocate sul piano.",
+    citazione: "Prima X, poi Y. Mai il contrario.",
+    url: "piano-cartesiano/",
+    copertina: "piano-cartesiano/img/og-share.jpg",
+    tinta: "matematica",
+    adesivo: "st-quadretti",
+    extra: [
+      { label: "Studio", url: "piano-cartesiano/imparare.html" },
+      { label: "Laboratorio", url: "piano-cartesiano/laboratorio.html" },
+      { label: "Gioco", url: "piano-cartesiano/gioco.html" },
+    ],
+  },
 ];
 
 /** Attività web per il raccoglitore professionale (Ferraris AM): richiede `annoProf` 3 o 4. */

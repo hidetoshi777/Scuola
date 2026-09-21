@@ -38,6 +38,7 @@
   --c-religione: #C22766;
   --c-scienze: #0A81A6;
   --c-inglese: #1B7A62;
+  --c-matematica: #C45C12;
 
   /* Le stesse tinte, ma per il disegno dentro l'adesivo: la carta
      fustellata resta chiara anche sulla lavagna, quindi qui NON si
@@ -50,6 +51,7 @@
   --a-religione: #C22766;
   --a-scienze: #0A81A6;
   --a-inglese: #1B7A62;
+  --a-matematica: #C45C12;
 
   --f-display: "Bricolage Grotesque", "Segoe UI", system-ui, sans-serif;
   --f-testo: "Karla", "Segoe UI", system-ui, sans-serif;
@@ -91,6 +93,7 @@ html[data-theme="dark"] {
   --c-religione: #FF7FAC;
   --c-scienze: #63CFEC;
   --c-inglese: #5EE0C0;
+  --c-matematica: #F0A35A;
 }
 
 *, *::before, *::after { box-sizing: border-box; }
