@@ -94,6 +94,7 @@ Sito base: `https://hidetoshi777.github.io/Scuola/`
 | What time is it? · L’orologio | https://hidetoshi777.github.io/Scuola/orologio-inglese/ | [Fumetto](https://hidetoshi777.github.io/Scuola/orologio-inglese/fumetto.html) · [Gioco](https://hidetoshi777.github.io/Scuola/orologio-inglese/gioco.html) |
 | Piano cartesiano | https://hidetoshi777.github.io/Scuola/piano-cartesiano/ | [Studio](https://hidetoshi777.github.io/Scuola/piano-cartesiano/imparare.html) · [Laboratorio](https://hidetoshi777.github.io/Scuola/piano-cartesiano/laboratorio.html) · [Gioco](https://hidetoshi777.github.io/Scuola/piano-cartesiano/gioco.html) |
 | Grandezze e unità | https://hidetoshi777.github.io/Scuola/grandezze-unita/ | [Studio](https://hidetoshi777.github.io/Scuola/grandezze-unita/imparare.html) · [Fumetto](https://hidetoshi777.github.io/Scuola/grandezze-unita/fumetto.html) · [Lab](https://hidetoshi777.github.io/Scuola/grandezze-unita/laboratorio.html) · [Gioco](https://hidetoshi777.github.io/Scuola/grandezze-unita/gioco.html) |
+| **Sicurezza nei luoghi di lavoro** | https://hidetoshi777.github.io/Scuola/sicurezza-luoghi-lavoro/ | [Foglio 1](https://hidetoshi777.github.io/Scuola/sicurezza-luoghi-lavoro/#foglio-1) · [Foglio 2](https://hidetoshi777.github.io/Scuola/sicurezza-luoghi-lavoro/#foglio-2) |
 | **Raccoglitore professionale AM** | https://hidetoshi777.github.io/Scuola/professionale/ | Terza e quarta AM (bollini 3 / 4) |
 
 I vecchi link alla radice (`/gioco.html`, ecc.) reindirizzano ancora alla rotazione terrestre.

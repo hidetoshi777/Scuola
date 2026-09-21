@@ -61,5 +61,12 @@
     "annoProf": 3,
     "url": "grandezze-unita/",
     "materia": "Tecnologie e tecniche di installazione e manutenzione"
+  },
+  {
+    "id": "sicurezza-luoghi-lavoro",
+    "titolo": "Sicurezza nei luoghi di lavoro",
+    "annoProf": 3,
+    "url": "sicurezza-luoghi-lavoro/",
+    "materia": "Educazione civica"
   }
 ]
