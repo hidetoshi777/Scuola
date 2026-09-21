@@ -141,13 +141,13 @@ body.reduced-motion * {
 
 .qe-nav a {
   flex: 1;
-  min-width: 4.5rem;
-  padding: 0.85rem 0.5rem;
+  min-width: 3.4rem;
+  padding: 0.75rem 0.28rem;
   text-align: center;
   text-decoration: none;
   color: #f5e6d0;
   font-weight: 700;
-  font-size: 0.82rem;
+  font-size: 0.78rem;
   border-right: 1px solid rgba(255, 255, 255, 0.12);
   transition: background 0.15s;
 }
