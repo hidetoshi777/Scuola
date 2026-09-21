@@ -317,6 +317,24 @@ window.ATTIVITA_WEB = [
       { label: "Gioco", url: "piano-cartesiano/gioco.html" },
     ],
   },
+  {
+    titolo: "Sicurezza nei luoghi di lavoro",
+    materia: "Educazione civica",
+    classe: "Terza superiore · professionale",
+    annoProf: 3,
+    pubblicato: "2026-09-21",
+    descrizione:
+      "Due fogli A4 orizzontali: D.Lgs 81/2008 vale per tutte le professioni, e il datore di lavoro ha il dovere di mitigare i rischi.",
+    citazione: "Vale per tutte le professioni.",
+    url: "sicurezza-luoghi-lavoro/",
+    copertina: "sicurezza-luoghi-lavoro/img/og-share.jpg",
+    tinta: "edcivica",
+    adesivo: "st-libro-stella",
+    extra: [
+      { label: "Foglio 1", url: "sicurezza-luoghi-lavoro/#foglio-1" },
+      { label: "Foglio 2", url: "sicurezza-luoghi-lavoro/#foglio-2" },
+    ],
+  },
 ];
 
 /** Attività web per il raccoglitore professionale (Ferraris AM): richiede `annoProf` 3 o 4. */
