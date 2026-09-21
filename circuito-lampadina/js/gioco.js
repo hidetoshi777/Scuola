@@ -92,29 +92,54 @@
     });
   }
 
-  function bindQuiz(choiceSelector, correctValue, feedbackEl, okMsg, errMsg) {
-    const btns = document.querySelectorAll(choiceSelector);
+  /**
+   * @param {string} selector
+   * @param {string} attr
+   * @param {string} correctValue
+   * @param {HTMLElement | null} feedbackEl
+   * @param {string} okMsg
+   * @param {string} errMsg
+   */
+  function bindQuiz(selector, attr, correctValue, feedbackEl, okMsg, errMsg) {
+    const btns = document.querySelectorAll(selector);
     let done = false;
     btns.forEach((btn) => {
       btn.addEventListener("click", () => {
         if (done) return;
-        const correct = btn.getAttribute(choiceSelector === "[data-quiz]" ? "data-quiz" : "data-quiz-parti") === correctValue;
+        const picked = btn.getAttribute(attr);
+        const correct = picked === correctValue;
         btns.forEach((b) => {
           b.disabled = true;
-          const val = b.getAttribute(choiceSelector === "[data-quiz]" ? "data-quiz" : "data-quiz-parti");
-          if (val === correctValue) b.classList.add("correct");
+          if (b.getAttribute(attr) === correctValue) b.classList.add("correct");
           else if (b === btn && !correct) b.classList.add("wrong");
         });
         done = true;
-        if (feedbackEl) {
-          feedbackEl.textContent = correct ? okMsg : errMsg;
-        }
+        if (feedbackEl) feedbackEl.textContent = correct ? okMsg : errMsg;
       });
     });
   }
 
   bindQuiz(
+    "[data-quiz-poli]",
+    "data-quiz-poli",
+    "falso",
+    document.getElementById("quiz-poli-feedback"),
+    "Giusto: + e − sono i poli del generatore. La lunghezza del filo riguarda la resistenza R, non il segno.",
+    "Falso non è «vero»: il polo − sta sul generatore, non sul filo più lungo."
+  );
+
+  bindQuiz(
+    "[data-quiz-r]",
+    "data-quiz-r",
+    "aumenta",
+    document.getElementById("quiz-r-feedback"),
+    "Esatto: filo più lungo (a pari sezione e materiale) → di solito resistenza R più alta → corrente più debole.",
+    "No: più lunghezza → più resistenza. I poli +/− non dipendono da quanto è lungo il filo."
+  );
+
+  bindQuiz(
     "[data-quiz-parti]",
+    "data-quiz-parti",
     "filamento",
     document.getElementById("quiz-parti-feedback"),
     "Esatto: il filamento di tungsteno diventa incandescente e fa luce (vedi scheda).",
@@ -123,6 +148,7 @@
 
   bindQuiz(
     "[data-quiz]",
+    "data-quiz",
     "fem",
     document.getElementById("quiz-feedback"),
     "Esatto: E indica la tensione (forza elettromotrice) del generatore — «spinge» le cariche nel circuito chiuso.",

@@ -190,6 +190,18 @@ body::before {
   text-align: center;
 }
 
+.vedi-anche {
+  margin: 1.25rem 0 0;
+  font-size: 0.9rem;
+  color: var(--muted);
+  text-align: center;
+}
+
+.vedi-anche a {
+  color: var(--accent, #5eb8ff);
+  font-weight: 600;
+}
+
 .site-foot {
   margin-top: 2rem;
   text-align: center;

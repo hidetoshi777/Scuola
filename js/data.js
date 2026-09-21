@@ -362,7 +362,7 @@ window.ATTIVITA_WEB = [
     annoProf: 3,
     pubblicato: "2026-09-21",
     descrizione:
-      "Circuito chiuso con generatore E, interruttore e lampadina: scheda con schema ed esercizi, gioco per montare i fili e quiz sulla tensione.",
+      "Circuito chiuso, E, resistenza R e poli +/−: scheda con infografiche ed esercizi, gioco per montare i fili e quiz di ripasso.",
     citazione: "Senza circuito chiuso non c’è luce.",
     url: "circuito-lampadina/",
     copertina: "circuito-lampadina/img/og-share.jpg",

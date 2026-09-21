@@ -6,7 +6,7 @@
   <meta name="color-scheme" content="dark light">
   <link rel="icon" href="../favicon.svg" type="image/svg+xml">
   <title>Gioco · Circuito e lampadina | Scuola</title>
-  <meta name="description" content="Completa il circuito: fili, interruttore e lampadina. Quiz sul simbolo E.">
+  <meta name="description" content="Monta il circuito, quiz su poli, resistenza R, lampadina e simbolo E.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Source+Sans+3:wght@500;600;700;800&display=swap" rel="stylesheet">
@@ -79,6 +79,27 @@
               <p class="game-msg err" id="game-msg" aria-live="polite"></p>
             </div>
           </div>
+        </section>
+
+        <section class="game-quiz" aria-labelledby="quiz-poli">
+          <h2 id="quiz-poli">Quiz · poli e lunghezza filo</h2>
+          <p class="game-quiz-q">Vero o falso? «Il filo più lungo del circuito è il polo negativo (−).»</p>
+          <div class="quiz-choices">
+            <button type="button" data-quiz-poli="vero">Vero</button>
+            <button type="button" data-quiz-poli="falso">Falso</button>
+          </div>
+          <p class="quiz-feedback" id="quiz-poli-feedback" aria-live="polite"></p>
+        </section>
+
+        <section class="game-quiz" aria-labelledby="quiz-r">
+          <h2 id="quiz-r">Quiz · resistenza R</h2>
+          <p class="game-quiz-q">Stesso materiale e stessa sezione: cosa succede alla resistenza se il filo è più lungo?</p>
+          <div class="quiz-choices">
+            <button type="button" data-quiz-r="diminuisce">Diminuisce</button>
+            <button type="button" data-quiz-r="aumenta">Aumenta</button>
+            <button type="button" data-quiz-r="polo">Diventa il polo +</button>
+          </div>
+          <p class="quiz-feedback" id="quiz-r-feedback" aria-live="polite"></p>
         </section>
 
         <section class="game-quiz" aria-labelledby="quiz-parti">
