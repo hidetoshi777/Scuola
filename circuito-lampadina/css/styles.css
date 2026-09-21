@@ -353,6 +353,64 @@ body.reduced-motion * {
   display: block;
 }
 
+.rimando-fogli {
+  margin: 1rem 0 1.25rem;
+  padding: 0.85rem 0.9rem 1rem;
+  background: var(--carta);
+  border: 2px solid var(--fil);
+  border-radius: 0.5rem;
+}
+
+.rimando-fogli h2 {
+  margin: 0 0 0.25rem;
+  font-size: 1.05rem;
+}
+
+.rimando-fogli > p {
+  margin: 0 0 0.75rem;
+  font-size: 0.92rem;
+  color: var(--mute);
+}
+
+.rimando-fogli-grid {
+  display: grid;
+  gap: 0.65rem;
+}
+
+@media (min-width: 540px) {
+  .rimando-fogli-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.rimando-fogli-grid a {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+  font-weight: 700;
+  font-size: 0.88rem;
+  border-radius: 0.4rem;
+}
+
+.rimando-fogli-grid a:focus-visible {
+  outline: 3px solid var(--fil);
+  outline-offset: 2px;
+}
+
+.rimando-fogli-grid img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 0.3rem;
+  border: 1px solid var(--bordo);
+  background: #fff8ea;
+  margin-bottom: 0.4rem;
+}
+
+.rimando-fogli-grid span {
+  color: var(--fil);
+}
+
 .site-footer {
   padding: 1rem;
   text-align: center;
