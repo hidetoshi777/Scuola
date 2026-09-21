@@ -47,5 +47,12 @@
     "annoProf": 4,
     "url": "manutenzione-guasti-preventiva/",
     "materia": "Tecnologie e tecniche di installazione e manutenzione"
+  },
+  {
+    "id": "piano-cartesiano",
+    "titolo": "Piano cartesiano",
+    "annoProf": 3,
+    "url": "piano-cartesiano/",
+    "materia": "Matematica"
   }
 ]

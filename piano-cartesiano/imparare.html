@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="color-scheme" content="dark" id="color-scheme">
+  <script>
+    {
+      const t = localStorage.getItem("tema-piano-cartesiano");
+      const tema = t === "light" || t === "dark" ? t : "dark";
+      document.documentElement.dataset.theme = tema;
+      document.getElementById("color-scheme").content = tema;
+    }
+  </script>
+  <link rel="icon" href="../favicon.svg" type="image/svg+xml">
+  <title>Studio · Piano cartesiano | Scuola</title>
+  <meta name="description" content="Assi X e Y, origine, coordinate, quadranti e i punti A B C D.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,650&family=IBM+Plex+Mono:wght@600;700&family=Source+Sans+3:wght@500;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body class="page-imparare">
+  <a class="skip-link" href="#contenuto">Salta al contenuto</a>
+
+  <div class="quaderno">
+    <div class="margine" aria-hidden="true"></div>
+    <header class="q-top">
+      <div>
+        <p class="q-kicker">Studio · Piano cartesiano</p>
+        <p class="q-date">Terza professionale</p>
+      </div>
+      <button type="button" class="theme-toggle" data-theme-toggle aria-pressed="false">Quaderno</button>
+    </header>
+    <nav class="asse-nav" aria-label="Sezioni">
+      <a href="index.html">Home</a>
+      <a href="imparare.html" aria-current="page">Studio</a>
+      <a href="laboratorio.html">Laboratorio</a>
+      <a href="gioco.html">Gioco</a>
+    </nav>
+
+    <main id="contenuto" class="q-main" tabindex="-1">
+      <h1>Come si legge il piano</h1>
+      <p class="lead">Un foglio a quadretti con due rette. Ogni punto ha un nome: due numeri.</p>
+
+      <div class="imparare-layout">
+        <nav class="indice" aria-label="Indice">
+          <a href="#due-rette">1. Due rette</a>
+          <a href="#origine">2. Origine</a>
+          <a href="#due-numeri">3. Due numeri</a>
+          <a href="#cammina">4. Come si cammina</a>
+          <a href="#segni">5. Più e meno</a>
+          <a href="#stanze">6. Quattro stanze</a>
+          <a href="#lezione">7. A B C D</a>
+          <a href="#ricorda">8. Ricorda così</a>
+        </nav>
+
+        <div>
+          <article class="capitolo" id="due-rette">
+            <h2>1. Due rette</h2>
+            <p>Il piano cartesiano è fatto di <strong>due rette</strong> che si incrociano.</p>
+            <p><span class="mono">X</span> è quella <strong>orizzontale</strong>. Va a destra e a sinistra.</p>
+            <p><span class="mono">Y</span> è quella <strong>verticale</strong>. Va su e giù.</p>
+            <div id="piano-assi" class="piano-host piano-mini"></div>
+          </article>
+
+          <article class="capitolo" id="origine">
+            <h2>2. Origine</h2>
+            <p>Le due rette si incontrano in un punto: <strong>O</strong>.</p>
+            <p>Si chiama <strong>origine</strong>. I suoi numeri sono <span class="mono">(0, 0)</span>.</p>
+            <p>Da qui parti sempre, nella testa: prima a destra o a sinistra, poi su o giù.</p>
+          </article>
+
+          <article class="capitolo" id="due-numeri">
+            <h2>3. Due numeri</h2>
+            <p>Un punto è una coppia: <span class="mono">(x, y)</span>.</p>
+            <div class="biglietto">
+              <p>Primo numero = <span class="mono">X</span></p>
+              <p>Secondo numero = <span class="mono">Y</span></p>
+              <p class="coord">(3, 2)</p>
+              <p>Si legge: «tre, due». Non «due, tre».</p>
+            </div>
+            <p><span class="mono">X</span> dice quanto vai in orizzontale. <span class="mono">Y</span> dice quanto vai in verticale.</p>
+          </article>
+
+          <article class="capitolo" id="cammina">
+            <h2>4. Come si cammina</h2>
+            <p>Esempio: vai sul punto <span class="mono">(3, 2)</span>.</p>
+            <ol class="passi">
+              <li><b>1</b><span>Parti da <span class="mono">O</span>.</span></li>
+              <li><b>2</b><span>Su <span class="mono">X</span>: 3 passi a <strong>destra</strong>.</span></li>
+              <li><b>3</b><span>Su <span class="mono">Y</span>: 2 passi in <strong>alto</strong>.</span></li>
+              <li><b>4</b><span>Sei sul punto. Quello è <span class="mono">(3, 2)</span>.</span></li>
+            </ol>
+            <div class="azioni">
+              <button type="button" class="btn btn-primary" id="btn-cammina-a">Guarda il cammino di A</button>
+            </div>
+            <div id="piano-cammina" class="piano-host piano-mini"></div>
+            <p id="cammina-msg" class="feedback" aria-live="polite"></p>
+          </article>
+
+          <article class="capitolo" id="segni">
+            <h2>5. Più e meno</h2>
+            <p>A destra di <span class="mono">O</span>, <span class="mono">X</span> è <strong>positivo</strong> (+).</p>
+            <p>A sinistra, <span class="mono">X</span> è <strong>negativo</strong> (−).</p>
+            <p>In alto, <span class="mono">Y</span> è <strong>positivo</strong> (+).</p>
+            <p>In basso, <span class="mono">Y</span> è <strong>negativo</strong> (−).</p>
+            <p>Zero sta sugli assi. L’origine è zero e zero.</p>
+          </article>
+
+          <article class="capitolo" id="stanze">
+            <h2>6. Quattro stanze</h2>
+            <p>I due assi tagliano il foglio in quattro parti. Si chiamano <strong>quadranti</strong>.</p>
+            <div class="stanze" aria-label="I quattro quadranti">
+              <div class="stanza s2">
+                <b>(−, +)</b>
+                <span>2° · sinistra, alto</span>
+              </div>
+              <div class="stanza s1">
+                <b>(+, +)</b>
+                <span>1° · destra, alto</span>
+              </div>
+              <div class="stanza s3">
+                <b>(−, −)</b>
+                <span>3° · sinistra, basso</span>
+              </div>
+              <div class="stanza s4">
+                <b>(+, −)</b>
+                <span>4° · destra, basso</span>
+              </div>
+            </div>
+            <p>Guarda i segni, non i nomi. Se <span class="mono">X</span> è meno e <span class="mono">Y</span> è più, sei in alto a sinistra.</p>
+          </article>
+
+          <article class="capitolo" id="lezione">
+            <h2>7. I quattro della lezione</h2>
+            <p>Questi sono i punti del quaderno. Tocca un nome. Il pedone ci va.</p>
+            <ul class="pin-list" id="lezione-list">
+              <li><button type="button" data-id="A"><span class="dot dot-a"></span> A <span class="mono">(3, 2)</span> · 1° quadrante</button></li>
+              <li><button type="button" data-id="B"><span class="dot dot-b"></span> B <span class="mono">(−1, 5)</span> · 2° quadrante</button></li>
+              <li><button type="button" data-id="C"><span class="dot dot-c"></span> C <span class="mono">(−3, −1)</span> · 3° quadrante</button></li>
+              <li><button type="button" data-id="D"><span class="dot dot-d"></span> D <span class="mono">(2, −4)</span> · 4° quadrante</button></li>
+            </ul>
+            <div id="piano-lezione" class="piano-host"></div>
+            <p id="lezione-msg" class="feedback" aria-live="polite"></p>
+          </article>
+
+          <article class="capitolo ricorda" id="ricorda">
+            <h2>8. Ricorda così</h2>
+            <ul class="passi">
+              <li><b>X</b><span>orizzontale · destra + · sinistra −</span></li>
+              <li><b>Y</b><span>verticale · alto + · basso −</span></li>
+              <li><b>O</b><span>origine <span class="mono">(0, 0)</span></span></li>
+              <li><b>(x, y)</b><span>prima X, poi Y</span></li>
+            </ul>
+            <div class="azioni">
+              <a class="btn btn-primary" href="laboratorio.html">Ora cammina tu</a>
+              <a class="btn" href="gioco.html">Gioco</a>
+            </div>
+          </article>
+          <p class="print-credit">Realizzato dal Prof. Rossano Bella</p>
+        </div>
+      </div>
+    </main>
+
+    <footer class="site-footer">
+      <p>Studio sul piano cartesiano. Realizzato dal Prof. Rossano Bella.</p>
+    </footer>
+  </div>
+
+  <script src="js/common.js" defer></script>
+  <script src="js/piano.js" defer></script>
+  <script src="js/imparare.js" defer></script>
+</body>
+</html>
