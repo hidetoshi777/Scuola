@@ -92,28 +92,42 @@
     });
   }
 
-  /* Quiz E */
-  const quizBtns = document.querySelectorAll("[data-quiz]");
-  const quizFeedback = document.getElementById("quiz-feedback");
-  let quizDone = false;
-
-  quizBtns.forEach((btn) => {
-    btn.addEventListener("click", () => {
-      if (quizDone) return;
-      const correct = btn.getAttribute("data-quiz") === "fem";
-      quizBtns.forEach((b) => {
-        b.disabled = true;
-        if (b.getAttribute("data-quiz") === "fem") b.classList.add("correct");
-        else if (b === btn && !correct) b.classList.add("wrong");
+  function bindQuiz(choiceSelector, correctValue, feedbackEl, okMsg, errMsg) {
+    const btns = document.querySelectorAll(choiceSelector);
+    let done = false;
+    btns.forEach((btn) => {
+      btn.addEventListener("click", () => {
+        if (done) return;
+        const correct = btn.getAttribute(choiceSelector === "[data-quiz]" ? "data-quiz" : "data-quiz-parti") === correctValue;
+        btns.forEach((b) => {
+          b.disabled = true;
+          const val = b.getAttribute(choiceSelector === "[data-quiz]" ? "data-quiz" : "data-quiz-parti");
+          if (val === correctValue) b.classList.add("correct");
+          else if (b === btn && !correct) b.classList.add("wrong");
+        });
+        done = true;
+        if (feedbackEl) {
+          feedbackEl.textContent = correct ? okMsg : errMsg;
+        }
       });
-      quizDone = true;
-      if (quizFeedback) {
-        quizFeedback.textContent = correct
-          ? "Esatto: E indica la tensione (forza elettromotrice) del generatore — «spinge» le cariche nel circuito chiuso."
-          : "Riprova sulla scheda: E non è la lampadina né «solo corrente», è la tensione / FEM del generatore.";
-      }
     });
-  });
+  }
+
+  bindQuiz(
+    "[data-quiz-parti]",
+    "filamento",
+    document.getElementById("quiz-parti-feedback"),
+    "Esatto: il filamento di tungsteno diventa incandescente e fa luce (vedi scheda).",
+    "No: vetro e attacco conducono o fissano, ma la luce viene dal filamento."
+  );
+
+  bindQuiz(
+    "[data-quiz]",
+    "fem",
+    document.getElementById("quiz-feedback"),
+    "Esatto: E indica la tensione (forza elettromotrice) del generatore — «spinge» le cariche nel circuito chiuso.",
+    "Riprova sulla scheda: E non è la lampadina né «solo corrente», è la tensione / FEM del generatore."
+  );
 
   refresh();
 })();

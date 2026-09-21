@@ -50,6 +50,28 @@
   margin-bottom: 0.35rem;
 }
 
+.fig-lampadina {
+  margin: 0.5rem 0 0;
+}
+
+.fig-lampadina img {
+  width: 100%;
+  max-width: 28rem;
+  height: auto;
+  display: block;
+  margin: 0 auto;
+  border-radius: 0.35rem;
+  border: 1px solid var(--bordo);
+  background: #fff;
+}
+
+.fig-lampadina figcaption {
+  margin-top: 0.65rem;
+  font-size: 0.88rem;
+  line-height: 1.45;
+  color: var(--testo);
+}
+
 .schema-box {
   margin: 0.75rem 0;
   padding: 0.5rem;
