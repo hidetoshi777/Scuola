@@ -120,6 +120,42 @@
   }
 
   bindQuiz(
+    "[data-quiz-r-def]",
+    "data-quiz-r-def",
+    "ostacolo",
+    document.getElementById("quiz-r-def-feedback"),
+    "Esatto: R misura quanto il materiale ostacola la corrente (unità ohm).",
+    "No: i poli +/− stanno sul generatore; R dipende da materiale, lunghezza e sezione."
+  );
+
+  bindQuiz(
+    "[data-quiz-r-fatt]",
+    "data-quiz-r-fatt",
+    "tre",
+    document.getElementById("quiz-r-fatt-feedback"),
+    "Giusto: materiale, lunghezza e sezione (vedi poster).",
+    "Il colore del cavo non decide la resistenza."
+  );
+
+  bindQuiz(
+    "[data-quiz-ohm-i]",
+    "data-quiz-ohm-i",
+    "2",
+    document.getElementById("quiz-ohm-i-feedback"),
+    "Corretto: I = V / R = 12 / 6 = 2 A.",
+    "Usa I = V ÷ R con V = 12 V e R = 6 Ω."
+  );
+
+  bindQuiz(
+    "[data-quiz-ohm-form]",
+    "data-quiz-ohm-form",
+    "vri",
+    document.getElementById("quiz-ohm-form-feedback"),
+    "Sì: legge di Ohm → V = R × I (tensione = resistenza × corrente).",
+    "La legge corretta è V = R × I; per I usi I = V / R."
+  );
+
+  bindQuiz(
     "[data-quiz-poli]",
     "data-quiz-poli",
     "falso",

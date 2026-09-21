@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="color-scheme" content="dark light">
+  <link rel="icon" href="../favicon.svg" type="image/svg+xml">
+  <title>Legge di Ohm · Circuito e lampadina | Scuola</title>
+  <meta name="description" content="Terza professionale: legge di Ohm V=R×I, unità volt ampere ohm, esempio numerico e lampadina come carico.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Source+Sans+3:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/scheda.css">
+</head>
+<body>
+  <a class="skip-link visually-hidden" href="#contenuto">Salta al contenuto</a>
+
+  <div class="qe-shell">
+    <aside class="qe-rail no-print">
+      <p class="qe-rail-brand">V = R × I</p>
+      <nav class="qe-nav" aria-label="Sezioni">
+        <a href="index.html">Home</a>
+        <a href="scheda.html">Circuito</a>
+        <a href="scheda-ohm.html">Ohm</a>
+        <a href="gioco.html">Gioco</a>
+      </nav>
+    </aside>
+
+    <div class="qe-main-wrap">
+      <header class="qe-top no-print">
+        <p class="qe-kicker">Scheda · Legge di Ohm</p>
+        <button type="button" class="theme-toggle" data-theme-toggle aria-pressed="false">Chiaro</button>
+      </header>
+
+      <main id="contenuto" class="qe-main scheda-wrap" tabindex="-1">
+        <div class="scheda-toolbar no-print">
+          <button type="button" class="btn btn-primary" onclick="window.print()">Stampa scheda</button>
+          <a class="btn btn-secondary" href="scheda.html">Circuito</a>
+          <a class="btn btn-secondary" href="gioco.html">Gioco</a>
+        </div>
+
+        <header class="scheda-head">
+          <div>
+            <h1>Legge di Ohm</h1>
+            <p class="scheda-meta">Terza professionale · Tecnologie elettriche e elettroniche · Prof. Rossano Bella</p>
+          </div>
+        </header>
+
+        <section class="scheda-section" aria-labelledby="formula">
+          <h2 id="formula">Formula e grandezze</h2>
+          <p style="margin:0 0 0.65rem;font-size:1.15rem;font-weight:800" class="mono">V = R × I</p>
+          <table class="tabella-comp">
+            <thead>
+              <tr>
+                <th scope="col">Simbolo</th>
+                <th scope="col">Grandezza</th>
+                <th scope="col">Unità</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong class="mono">V</strong></td>
+                <td><strong>Tensione</strong> (differenza di potenziale)</td>
+                <td>volt (<span class="mono">V</span>)</td>
+              </tr>
+              <tr>
+                <td><strong class="mono">I</strong></td>
+                <td><strong>Corrente</strong> (flusso di cariche nel circuito chiuso)</td>
+                <td>ampere (<span class="mono">A</span>)</td>
+              </tr>
+              <tr>
+                <td><strong class="mono">R</strong></td>
+                <td><strong>Resistenza</strong> (oppone al passaggio della corrente)</td>
+                <td>ohm (<span class="mono">Ω</span>)</td>
+              </tr>
+            </tbody>
+          </table>
+          <p style="margin:0.65rem 0 0;font-size:0.92rem">Mnemonico: <strong>V</strong> in alto, <strong>I</strong> e <strong>R</strong> sotto — copri la grandezza che cerchi e ricavi la formula (cerchio di Ohm).</p>
+        </section>
+
+        <section class="scheda-section" aria-labelledby="poster-ohm">
+          <h2 id="poster-ohm">Poster</h2>
+          <figure class="fig-lampadina">
+            <img src="img/legge-di-ohm.png" alt="Poster legge di Ohm: V uguale R per I, cerchio mnemonico, esempio 12 volt 6 ohm 2 ampere, generatore resistenza e lampada" width="1200" height="900" loading="lazy">
+            <figcaption>
+              Esempio del poster: <span class="mono">V = 12 V</span>, <span class="mono">R = 6 Ω</span> → <span class="mono">I = V / R = 12 / 6 = 2 A</span>.
+            </figcaption>
+          </figure>
+        </section>
+
+        <section class="scheda-section" aria-labelledby="esempio">
+          <h2 id="esempio">Esempio numerico (passo passo)</h2>
+          <ol>
+            <li>Batteria: tensione <strong>V = 12 V</strong>.</li>
+            <li>Carico (es. lampadina modello semplice): resistenza <strong>R = 6 Ω</strong>.</li>
+            <li>Cerco la corrente: <span class="mono">I = V ÷ R = 12 ÷ 6 = 2 A</span>.</li>
+          </ol>
+          <p style="margin:0.65rem 0 0">Se <strong>R</strong> aumenta (filamento più resistivo, filo più lungo…) a pari <strong>V</strong>, la corrente <strong>I</strong> di solito <strong>diminuisce</strong> — la lampadina può accendersi meno forte.</p>
+        </section>
+
+        <section class="scheda-section" aria-labelledby="lamp">
+          <h2 id="lamp">Legame con la lampadina</h2>
+          <p style="margin:0">La lampadina è un <strong>carico</strong>: il filamento ha una resistenza <strong>R</strong>. Con interruttore chiuso e generatore acceso, <strong>V</strong> e <strong>R</strong> fissano quanta <strong>corrente I</strong> passa e quanto si scalda il filamento. Vedi anche <a href="scheda.html#resistenza">resistenza elettrica</a> e <a href="scheda.html">circuito chiuso</a>.</p>
+        </section>
+
+        <section class="scheda-section" aria-labelledby="esercizi-ohm">
+          <h2 id="esercizi-ohm">Esercizi</h2>
+
+          <div class="esercizio">
+            <p><strong>1.</strong> <span class="mono">V = 12 V</span> e <span class="mono">R = 4 Ω</span>. Quanto vale <span class="mono">I</span>?</p>
+            <details class="soluzione-docente">
+              <summary>Soluzione (docente)</summary>
+              <span class="mono">I = V / R = 12 / 4 = 3 A</span>.
+            </details>
+          </div>
+
+          <div class="esercizio">
+            <p><strong>2.</strong> Stessa tensione <span class="mono">V</span>: se <strong>R</strong> raddoppia, la corrente <strong>I</strong> aumenta o diminuisce?</p>
+            <details class="soluzione-docente">
+              <summary>Soluzione (docente)</summary>
+              <strong>Diminuisce</strong> (inversamente proporzionale: più resistenza → meno corrente a pari V).
+            </details>
+          </div>
+
+          <p class="scheda-credito-stampa">Realizzato dal Prof. Rossano Bella</p>
+        </section>
+      </main>
+
+      <footer class="site-footer no-print">
+        <p>Scheda Legge di Ohm. Realizzato dal Prof. Rossano Bella.</p>
+      </footer>
+    </div>
+  </div>
+
+  <script src="js/common.js" defer></script>
+</body>
+</html>
