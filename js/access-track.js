@@ -233,15 +233,35 @@
     return readKeyval(lastSeenKey(path));
   }
 
+  /** Accetta JSON {t,p} oppure il vecchio timestamp ISO puro. */
+  function parseLastSeenOverall(raw) {
+    if (!raw) return null;
+    const text = String(raw);
+    try {
+      const obj = JSON.parse(text);
+      if (obj && obj.t) {
+        return {
+          at: String(obj.t),
+          path: obj.p ? String(obj.p) : null,
+        };
+      }
+    } catch (e) {
+      /* legacy */
+    }
+    return { at: text, path: null };
+  }
+
   function fetchLastSeenOverall() {
-    return readKeyval(LAST_SEEN_OVERALL_KEY);
+    return readKeyval(LAST_SEEN_OVERALL_KEY).then(parseLastSeenOverall);
   }
 
   function recordLastSeen(path) {
     const iso = new Date().toISOString();
+    const p = normalizePath(path);
+    const overall = JSON.stringify({ t: iso, p: p }).slice(0, 300);
     return Promise.all([
-      writeKeyval(lastSeenKey(path), iso),
-      writeKeyval(LAST_SEEN_OVERALL_KEY, iso),
+      writeKeyval(lastSeenKey(p), iso),
+      writeKeyval(LAST_SEEN_OVERALL_KEY, overall),
     ]);
   }
 
