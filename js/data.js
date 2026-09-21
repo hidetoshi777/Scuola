@@ -318,6 +318,26 @@ window.ATTIVITA_WEB = [
     ],
   },
   {
+    titolo: "Grandezze e unità",
+    materia: "Tecnologie e tecniche di installazione e manutenzione",
+    classe: "Terza superiore · professionale",
+    annoProf: 3,
+    pubblicato: "2026-09-21",
+    descrizione:
+      "Grandezze fisiche, SI, fondamentali (m, kg, s) e derivate: area, volume e velocità, con fumetto in officina, laboratorio e percorso nel cortile.",
+    citazione: "Un numero senza unità non dice niente.",
+    url: "grandezze-unita/",
+    copertina: "grandezze-unita/img/og-share.jpg",
+    tinta: "scienze",
+    adesivo: "st-pianeta",
+    extra: [
+      { label: "Studio", url: "grandezze-unita/imparare.html" },
+      { label: "Fumetto", url: "grandezze-unita/fumetto.html" },
+      { label: "Laboratorio", url: "grandezze-unita/laboratorio.html" },
+      { label: "Gioco", url: "grandezze-unita/gioco.html" },
+    ],
+  },
+  {
     titolo: "Sicurezza nei luoghi di lavoro",
     materia: "Educazione civica",
     classe: "Terza superiore · professionale",
