@@ -1,0 +1,145 @@
+.scheda-wrap {
+  max-width: 44rem;
+}
+
+.scheda-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 0.75rem;
+}
+
+.scheda-nota-doc {
+  font-size: 0.85rem;
+  color: var(--mute);
+  margin: 0 0 0.75rem;
+}
+
+.scheda-head h1 {
+  margin: 0;
+  font-size: 1.25rem;
+}
+
+.scheda-meta {
+  font-size: 0.85rem;
+  color: var(--mute);
+  margin: 0.25rem 0 0;
+}
+
+.scheda-section {
+  margin-bottom: 1rem;
+  padding: 0.85rem 1rem;
+  background: var(--carta);
+  border: 1px solid var(--bordo);
+  border-radius: 0.5rem;
+}
+
+.scheda-section h2 {
+  margin: 0 0 0.5rem;
+  font-size: 1rem;
+  color: var(--fil);
+}
+
+.scheda-section ul,
+.scheda-section ol {
+  margin: 0.35rem 0 0;
+  padding-left: 1.2rem;
+}
+
+.scheda-section li {
+  margin-bottom: 0.35rem;
+}
+
+.schema-box {
+  margin: 0.75rem 0;
+  padding: 0.5rem;
+  background: color-mix(in srgb, var(--bg) 60%, var(--carta));
+  border-radius: 0.4rem;
+  border: 1px dashed var(--bordo);
+}
+
+.schema-box svg {
+  width: 100%;
+  max-width: 22rem;
+  height: auto;
+  display: block;
+  margin: 0 auto;
+}
+
+.tabella-comp {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.88rem;
+}
+
+.tabella-comp th,
+.tabella-comp td {
+  border: 1px solid var(--bordo);
+  padding: 0.45rem 0.5rem;
+  text-align: left;
+  vertical-align: top;
+}
+
+.tabella-comp th {
+  background: color-mix(in srgb, var(--blu-e) 15%, var(--carta));
+}
+
+.esercizio {
+  margin-top: 0.65rem;
+  padding-top: 0.65rem;
+  border-top: 1px dashed var(--bordo);
+}
+
+.soluzione-docente summary {
+  cursor: pointer;
+  font-weight: 700;
+  color: var(--blu-e);
+  margin-top: 0.35rem;
+}
+
+.soluzione-docente[open] summary {
+  margin-bottom: 0.35rem;
+}
+
+.scheda-credito-stampa {
+  margin-top: 1.5rem;
+  font-size: 0.65rem;
+  color: var(--mute);
+  text-align: center;
+}
+
+@media print {
+  .no-print {
+    display: none !important;
+  }
+
+  .qe-rail,
+  .qe-top {
+    display: none !important;
+  }
+
+  .qe-shell {
+    display: block;
+  }
+
+  body {
+    background: #fff;
+    color: #000;
+  }
+
+  .scheda-section {
+    break-inside: avoid;
+    border: 1px solid #ccc;
+  }
+
+  .soluzione-docente {
+    display: none !important;
+  }
+
+  .scheda-credito-stampa {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+  }
+}
