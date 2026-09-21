@@ -657,6 +657,14 @@
   color: var(--muted);
 }
 
+.admin-pagina {
+  margin: 0.2rem 0 0;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--text);
+  word-break: break-word;
+}
+
 .admin-stato {
   margin: 0.35rem 0 0;
   font-size: 0.8rem;

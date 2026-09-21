@@ -3,6 +3,7 @@
 
   const segnaleEl = document.getElementById("stats-segnale");
   const ultimaEl = document.getElementById("stats-ultima");
+  const paginaEl = document.getElementById("stats-pagina");
   const statoEl = document.getElementById("stats-stato");
   const refreshBtn = document.querySelector("[data-admin-refresh]");
   const DAY_MS = 24 * 60 * 60 * 1000;
@@ -27,6 +28,40 @@
     return Date.now() - d.getTime() <= DAY_MS;
   }
 
+  function titoloDaPath(path) {
+    if (!path || !window.ScuolaAccess) return null;
+    const normalizzato = window.ScuolaAccess.normalizePath(path);
+    const catalogo =
+      typeof window.ScuolaAccess.catalogoPagine === "function"
+        ? window.ScuolaAccess.catalogoPagine()
+        : [];
+    for (let i = 0; i < catalogo.length; i += 1) {
+      if (catalogo[i].path === normalizzato) return catalogo[i].titolo;
+    }
+    const lista = window.ATTIVITA_WEB || [];
+    for (let j = 0; j < lista.length; j += 1) {
+      const a = lista[j];
+      const base = String(a.url || "")
+        .replace(/^\//, "")
+        .replace(/\/$/, "");
+      if (!base) continue;
+      if (window.ScuolaAccess.normalizePath("/Scuola/" + base) === normalizzato) {
+        return a.titolo || base;
+      }
+      const extras = a.extra || [];
+      for (let k = 0; k < extras.length; k += 1) {
+        const u = String(extras[k].url || "").replace(/^\//, "");
+        if (!u) continue;
+        if (window.ScuolaAccess.normalizePath("/Scuola/" + u) === normalizzato) {
+          return (a.titolo || base) + " · " + (extras[k].label || u);
+        }
+      }
+    }
+    return normalizzato
+      .replace(/^\/Scuola\//, "")
+      .replace(/\//g, " · ");
+  }
+
   async function carica() {
     if (!window.ScuolaAccess || typeof window.ScuolaAccess.fetchLastSeenOverall !== "function") {
       if (statoEl) statoEl.textContent = "Modulo contatore non caricato.";
@@ -41,10 +76,13 @@
 
     try {
       const lastOverall = await window.ScuolaAccess.fetchLastSeenOverall();
-      const presente = !!lastOverall && entro24ore(lastOverall);
+      const at = lastOverall && lastOverall.at;
+      const path = lastOverall && lastOverall.path;
+      const presente = !!at && entro24ore(at);
+      const titolo = titoloDaPath(path);
 
       if (segnaleEl) {
-        if (!lastOverall) {
+        if (!at) {
           segnaleEl.textContent = "Nessuna visita registrata ancora";
           segnaleEl.dataset.stato = "no";
         } else if (presente) {
@@ -57,9 +95,23 @@
       }
 
       if (ultimaEl) {
-        ultimaEl.textContent = lastOverall
-          ? "Ultima visita (sito): " + formatQuando(lastOverall)
-          : "Ultima visita (sito): —";
+        ultimaEl.textContent = at
+          ? "Ultima visita: " + formatQuando(at)
+          : "Ultima visita: —";
+      }
+
+      if (paginaEl) {
+        if (titolo) {
+          paginaEl.textContent = "Pagina: " + titolo;
+          paginaEl.hidden = false;
+        } else if (at) {
+          paginaEl.textContent =
+            "Pagina: non ancora nota (si aggiorna dalla prossima visita)";
+          paginaEl.hidden = false;
+        } else {
+          paginaEl.textContent = "";
+          paginaEl.hidden = true;
+        }
       }
 
       if (statoEl) {
@@ -74,7 +126,11 @@
         segnaleEl.textContent = "Controllo non riuscito";
         segnaleEl.dataset.stato = "errore";
       }
-      if (ultimaEl) ultimaEl.textContent = "Ultima visita (sito): —";
+      if (ultimaEl) ultimaEl.textContent = "Ultima visita: —";
+      if (paginaEl) {
+        paginaEl.textContent = "";
+        paginaEl.hidden = true;
+      }
       if (statoEl) {
         statoEl.textContent = "Il servizio non risponde. Riprova tra poco.";
       }
