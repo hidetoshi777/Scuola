@@ -362,7 +362,7 @@ window.ATTIVITA_WEB = [
     annoProf: 3,
     pubblicato: "2026-09-21",
     descrizione:
-      "Circuito chiuso, resistenza R, legge di Ohm V=R×I, scheda circuito e scheda Ohm, gioco sul banco con quiz.",
+      "Circuito chiuso, resistenza R, legge di Ohm, fogli A4 su resistività (rame, oro, alluminio) e gioco sul banco.",
     citazione: "Senza circuito chiuso non c’è luce.",
     url: "circuito-lampadina/",
     copertina: "circuito-lampadina/img/og-share.jpg",
@@ -371,6 +371,7 @@ window.ATTIVITA_WEB = [
     extra: [
       { label: "Circuito", url: "circuito-lampadina/scheda.html" },
       { label: "Legge di Ohm", url: "circuito-lampadina/scheda-ohm.html" },
+      { label: "Stampe A4", url: "circuito-lampadina/stampe.html" },
       { label: "Gioco", url: "circuito-lampadina/gioco.html" },
     ],
   },
