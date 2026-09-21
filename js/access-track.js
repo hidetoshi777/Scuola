@@ -6,6 +6,8 @@
  * - Ultima visita: timestamp ISO su keyval.org (remoto, cross-device; chiave pubblica ma opaca).
  *
  * L’API Page Views non espone timestamp né breakdown giornaliero nativo.
+ * Le letture (admin) passano da una coda a concorrenza limitata + retry, altrimenti
+ * centinaia di fetch paralleli fanno cadere il servizio gratis.
  */
 (function () {
   const API = "https://page-views-api.ratneshc.com/api/v1";
@@ -14,7 +16,36 @@
   const SKIP_RE = /\/professionale\/admin(\/|$)/i;
   const KEYVAL = "https://api.keyval.org";
   const TZ = "Europe/Rome";
-  const REQUEST_TIMEOUT_MS = 8000;
+  const REQUEST_TIMEOUT_MS = 10000;
+  const READ_CONCURRENCY = 4;
+  const READ_RETRIES = 3;
+  const RETRY_BASE_MS = 450;
+
+  let readActive = 0;
+  const readWaiters = [];
+
+  function sleep(ms) {
+    return new Promise(function (resolve) {
+      window.setTimeout(resolve, ms);
+    });
+  }
+
+  function enqueueRead(task) {
+    return new Promise(function (resolve, reject) {
+      function run() {
+        readActive += 1;
+        Promise.resolve()
+          .then(task)
+          .then(resolve, reject)
+          .finally(function () {
+            readActive -= 1;
+            if (readWaiters.length) readWaiters.shift()();
+          });
+      }
+      if (readActive < READ_CONCURRENCY) run();
+      else readWaiters.push(run);
+    });
+  }
 
   function fetchWithTimeout(url, options) {
     if (typeof AbortController === "undefined") return fetch(url, options);
@@ -117,18 +148,33 @@
     });
   }
 
+  function fetchJsonQueued(url) {
+    return enqueueRead(async function () {
+      let lastError = null;
+      for (let attempt = 0; attempt <= READ_RETRIES; attempt += 1) {
+        try {
+          const response = await fetchWithTimeout(url, {
+            method: "GET",
+            mode: "cors",
+            credentials: "omit",
+            cache: "no-store",
+          });
+          if (!response.ok) throw new Error("HTTP " + response.status);
+          return await response.json();
+        } catch (error) {
+          lastError = error;
+          if (attempt < READ_RETRIES) {
+            await sleep(RETRY_BASE_MS * Math.pow(2, attempt));
+          }
+        }
+      }
+      throw lastError || new Error("fetch failed");
+    });
+  }
+
   function fetchViews(path) {
     const p = normalizePath(path);
-    return fetchWithTimeout(viewsUrl(p), {
-      method: "GET",
-      mode: "cors",
-      credentials: "omit",
-      cache: "no-store",
-    })
-      .then(function (r) {
-        if (!r.ok) throw new Error("HTTP " + r.status);
-        return r.json();
-      })
+    return fetchJsonQueued(viewsUrl(p))
       .then(function (data) {
         if (!data || data.views === null || data.views === undefined) return null;
         const value = Number(data.views);
@@ -139,6 +185,11 @@
       });
   }
 
+  /**
+   * Somma i 24 bucket orari. Se qualche ora fallisce ancora dopo i retry,
+   * somma comunque le ore riuscite (sottostima leggera) invece di annullare tutto.
+   * Restituisce null solo se non arriva nessuna ora.
+   */
   function fetchViews24h(path) {
     const base = normalizePath(path);
     const stamps = last24HourStamps(new Date());
@@ -147,23 +198,18 @@
         return fetchViews(base + "/__h/" + stamp);
       })
     ).then(function (counts) {
-      if (counts.some(function (n) { return n === null; })) return null;
-      return counts.reduce(function (sum, n) {
+      const known = counts.filter(function (n) {
+        return Number.isFinite(n);
+      });
+      if (!known.length) return null;
+      return known.reduce(function (sum, n) {
         return sum + n;
       }, 0);
     });
   }
 
   function readKeyval(key) {
-    return fetchWithTimeout(KEYVAL + "/get/" + encodeURIComponent(key), {
-      method: "GET",
-      mode: "cors",
-      credentials: "omit",
-      cache: "no-store",
-    })
-      .then(function (r) {
-        return r.ok ? r.json() : null;
-      })
+    return fetchJsonQueued(KEYVAL + "/get/" + encodeURIComponent(key))
       .then(function (data) {
         if (!data || data.status !== "SUCCESS" || !data.val) return null;
         return String(data.val);

@@ -7,6 +7,7 @@
   const lastEl = document.getElementById("stats-ultima");
   const statoEl = document.getElementById("stats-stato");
   const refreshBtn = document.querySelector("[data-admin-refresh]");
+  const PAGE_BATCH = 3;
 
   function esc(t) {
     return String(t)
@@ -48,7 +49,7 @@
     }, 0);
     const mancanti = valori.length - noti.length;
     if (mancanti) {
-      return totale + "+ visite " + periodo + " · " + mancanti + " dati mancanti";
+      return totale + "+ visite " + periodo + " · " + mancanti + " ancora in carico";
     }
     if (periodo === "in totale") {
       return totale === 1 ? "1 visita in totale" : totale + " visite in totale";
@@ -58,42 +59,117 @@
       : totale + " visite nelle ultime 24 ore";
   }
 
+  function mapInBatches(items, batchSize, mapper, onProgress) {
+    const out = [];
+    let index = 0;
+
+    function next() {
+      if (index >= items.length) return Promise.resolve(out);
+      const slice = items.slice(index, index + batchSize);
+      index += batchSize;
+      if (onProgress) onProgress(Math.min(index, items.length), items.length);
+      return Promise.all(slice.map(mapper)).then(function (part) {
+        out.push.apply(out, part);
+        return next();
+      });
+    }
+
+    return next();
+  }
+
+  function renderLista(risultati) {
+    if (!lista) return;
+    if (!risultati.length) {
+      lista.innerHTML = "<li class='admin-empty'>Nessuna pagina in elenco.</li>";
+      return;
+    }
+    lista.innerHTML = risultati
+      .map(function (r) {
+        return (
+          "<li class='admin-riga'>" +
+          "<div class='admin-riga-testo'>" +
+          "<strong>" +
+          esc(r.titolo) +
+          "</strong>" +
+          "<span class='admin-meta'>" +
+          esc(r.gruppo) +
+          " · " +
+          esc(r.path) +
+          "</span>" +
+          "<span class='admin-meta'>Ultima visita: " +
+          esc(formatQuando(r.lastSeen)) +
+          "</span>" +
+          "</div>" +
+          "<div class='admin-nums'>" +
+          "<span class='admin-num' title='Ultime 24 ore'>" +
+          "<span class='admin-num-label'>24h</span>" +
+          esc(r.views24h === null ? "—" : String(r.views24h)) +
+          "</span>" +
+          "<span class='admin-num admin-num--muted' title='Totale'>" +
+          "<span class='admin-num-label'>tot</span>" +
+          esc(r.views === null ? "—" : String(r.views)) +
+          "</span>" +
+          "</div>" +
+          "</li>"
+        );
+      })
+      .join("");
+  }
+
+  function aggiornaRiepilogo(risultati, lastOverall) {
+    const valoriTotali = risultati.map(function (r) {
+      return r.views;
+    });
+    const valori24h = risultati.map(function (r) {
+      return r.views24h;
+    });
+    if (totaleEl) totaleEl.textContent = testoTotale(valoriTotali, "in totale");
+    if (totale24El) totale24El.textContent = testoTotale(valori24h, "nelle ultime 24 ore");
+    if (lastEl) {
+      lastEl.textContent = "Ultima visita (sito): " + formatQuando(lastOverall);
+    }
+  }
+
   async function carica() {
     if (!window.ScuolaAccess) {
       if (statoEl) statoEl.textContent = "Modulo contatore non caricato.";
       return;
     }
-    if (statoEl) statoEl.textContent = "Aggiorno i numeri…";
+    if (statoEl) statoEl.textContent = "Aggiorno i numeri (poc’a poco, per non sovraccaricare il servizio)…";
     if (lista) lista.innerHTML = "";
     if (refreshBtn) refreshBtn.disabled = true;
 
     try {
       const pagine = window.ScuolaAccess.catalogoPagine();
-      const [risultati, lastOverall] = await Promise.all([
-        Promise.all(
-          pagine.map(async function (p) {
-            const [views, views24h, lastSeen] = await Promise.all([
-              window.ScuolaAccess.fetchViews(p.path),
-              window.ScuolaAccess.fetchViews24h(p.path),
-              window.ScuolaAccess.fetchLastSeen(p.path),
-            ]);
-            return {
-              titolo: p.titolo,
-              path: p.path,
-              gruppo: p.gruppo,
-              views: views,
-              views24h: views24h,
-              lastSeen: lastSeen,
-            };
-          })
-        ),
-        window.ScuolaAccess.fetchLastSeenOverall(),
-      ]);
+      const lastOverallPromise = window.ScuolaAccess.fetchLastSeenOverall();
 
-      risultati.forEach(function (r) {
-        r.views = valoreNumero(r.views);
-        r.views24h = valoreNumero(r.views24h);
-      });
+      const risultati = await mapInBatches(
+        pagine,
+        PAGE_BATCH,
+        async function (p) {
+          const [views, views24h, lastSeen] = await Promise.all([
+            window.ScuolaAccess.fetchViews(p.path),
+            window.ScuolaAccess.fetchViews24h(p.path),
+            window.ScuolaAccess.fetchLastSeen(p.path),
+          ]);
+          return {
+            titolo: p.titolo,
+            path: p.path,
+            gruppo: p.gruppo,
+            views: valoreNumero(views),
+            views24h: valoreNumero(views24h),
+            lastSeen: lastSeen,
+          };
+        },
+        function (fatti, totale) {
+          if (statoEl) {
+            statoEl.textContent =
+              "Carico " + fatti + " / " + totale + " pagine…";
+          }
+        }
+      );
+
+      const lastOverall = await lastOverallPromise;
 
       risultati.sort(function (a, b) {
         return (
@@ -105,56 +181,8 @@
         );
       });
 
-      const valoriTotali = risultati.map(function (r) { return r.views; });
-      const valori24h = risultati.map(function (r) { return r.views24h; });
-
-      if (totaleEl) {
-        totaleEl.textContent = testoTotale(valoriTotali, "in totale");
-      }
-      if (totale24El) {
-        totale24El.textContent = testoTotale(valori24h, "nelle ultime 24 ore");
-      }
-      if (lastEl) {
-        lastEl.textContent = "Ultima visita (sito): " + formatQuando(lastOverall);
-      }
-
-      if (lista) {
-        if (!risultati.length) {
-          lista.innerHTML = "<li class='admin-empty'>Nessuna pagina in elenco.</li>";
-        } else {
-          lista.innerHTML = risultati
-            .map(function (r) {
-              return (
-                "<li class='admin-riga'>" +
-                "<div class='admin-riga-testo'>" +
-                "<strong>" +
-                esc(r.titolo) +
-                "</strong>" +
-                "<span class='admin-meta'>" +
-                esc(r.gruppo) +
-                " · " +
-                esc(r.path) +
-                "</span>" +
-                "<span class='admin-meta'>Ultima visita: " +
-                esc(formatQuando(r.lastSeen)) +
-                "</span>" +
-                "</div>" +
-                "<div class='admin-nums'>" +
-                "<span class='admin-num' title='Ultime 24 ore'>" +
-                "<span class='admin-num-label'>24h</span>" +
-                esc(r.views24h === null ? "—" : String(r.views24h)) +
-                "</span>" +
-                "<span class='admin-num admin-num--muted' title='Totale'>" +
-                "<span class='admin-num-label'>tot</span>" +
-                esc(r.views === null ? "—" : String(r.views)) +
-                "</span>" +
-                "</div>" +
-                "</li>"
-              );
-            })
-            .join("");
-        }
-      }
+      aggiornaRiepilogo(risultati, lastOverall);
+      renderLista(risultati);
 
       if (statoEl) {
         const ora = new Date();
@@ -163,7 +191,11 @@
         }).length;
         if (mancanti) {
           statoEl.textContent =
-            "Servizio contatori non raggiungibile: i trattini non sono zeri. Riprova tra poco.";
+            "Aggiornato alle " +
+            ora.toLocaleTimeString("it-IT", { hour: "2-digit", minute: "2-digit" }) +
+            " · " +
+            mancanti +
+            " pagine ancora incomplete (il servizio esterno ha saltato qualche risposta). Premi Aggiorna.";
         } else {
           statoEl.textContent =
             "Aggiornato alle " +
