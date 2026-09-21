@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="color-scheme" content="dark light">
+  <link rel="icon" href="../favicon.svg" type="image/svg+xml">
+  <title>Scheda · Circuito e lampadina | Scuola</title>
+  <meta name="description" content="Scheda stampabile: circuito chiuso, generatore E, interruttore, conduttori, lampadina ed esercizi.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Source+Sans+3:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/scheda.css">
+</head>
+<body>
+  <a class="skip-link visually-hidden" href="#contenuto">Salta al contenuto</a>
+
+  <div class="qe-shell">
+    <aside class="qe-rail no-print">
+      <p class="qe-rail-brand">E · CIRCUITO</p>
+      <nav class="qe-nav" aria-label="Sezioni">
+        <a href="index.html">Home</a>
+        <a href="scheda.html">Scheda</a>
+        <a href="gioco.html">Gioco</a>
+      </nav>
+    </aside>
+
+    <div class="qe-main-wrap">
+      <header class="qe-top no-print">
+        <p class="qe-kicker">Scheda · stampa</p>
+        <button type="button" class="theme-toggle" data-theme-toggle aria-pressed="false">Chiaro</button>
+      </header>
+
+      <main id="contenuto" class="qe-main scheda-wrap" tabindex="-1">
+        <div class="scheda-toolbar no-print">
+          <button type="button" class="btn btn-primary" onclick="window.print()">Stampa scheda</button>
+          <a class="btn btn-secondary" href="gioco.html">Gioco</a>
+        </div>
+
+        <p class="scheda-nota-doc no-print">Docente: apri «Soluzione» solo per correggere. In stampa le soluzioni restano nascoste agli alunni.</p>
+
+        <header class="scheda-head">
+          <div>
+            <h1>Circuito semplice con lampadina</h1>
+            <p class="scheda-meta">Terza professionale · Tecnologie elettriche e elettroniche · Prof. Rossano Bella</p>
+          </div>
+        </header>
+
+        <section class="scheda-section" aria-labelledby="comp">
+          <h2 id="comp">Componenti del circuito chiuso</h2>
+          <table class="tabella-comp">
+            <thead>
+              <tr>
+                <th scope="col">Componente</th>
+                <th scope="col">Ruolo</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Generatore</strong> (simbolo <span class="mono">E</span>)</td>
+                <td>Fornisce la <strong>tensione</strong> (forza elettromotrice, FEM): «spinge» le cariche elettriche nel circuito.</td>
+              </tr>
+              <tr>
+                <td><strong>Interruttore</strong></td>
+                <td>Apre o chiude il percorso. Aperto = circuito interrotto, lampadina spenta.</td>
+              </tr>
+              <tr>
+                <td><strong>Conduttori</strong> (fili)</td>
+                <td>Portano la corrente da un componente all’altro. Se manca un filo, il circuito è aperto.</td>
+              </tr>
+              <tr>
+                <td><strong>Lampadina</strong></td>
+                <td>Trasforma l’energia elettrica in luce (e calore) quando passa corrente.</td>
+              </tr>
+            </tbody>
+          </table>
+        </section>
+
+        <section class="scheda-section" aria-labelledby="perche">
+          <h2 id="perche">Perché la lampadina si accende?</h2>
+          <p style="margin:0 0 0.5rem">La lampadina si accende <strong>solo</strong> se:</p>
+          <ol>
+            <li>Tutti i fili collegano i componenti in un <strong>anello chiuso</strong> (circuito chiuso).</li>
+            <li>L’interruttore è <strong>chiuso</strong> (ON).</li>
+            <li>Il generatore con <span class="mono">E</span> è inserito nel circuito.</li>
+          </ol>
+          <p style="margin:0.65rem 0 0">Se il circuito è <strong>aperto</strong> (filo staccato, interruttore aperto, lampadina non collegata), le cariche non fanno il giro completo: <strong>non passa corrente</strong> e la lampadina resta spenta.</p>
+        </section>
+
+        <section class="scheda-section" aria-labelledby="e-fem">
+          <h2 id="e-fem">Cosa indica il simbolo E?</h2>
+          <p style="margin:0"><span class="mono">E</span> indica la <strong>tensione</strong> del generatore, cioè la <strong>forza elettromotrice (FEM)</strong>. In parole semplici: è la «spinta» che fa muovere le cariche nel filo quando il circuito è chiuso. Non è la lampadina e non è la corrente: è ciò che <em>permette</em> alla corrente di circolare.</p>
+        </section>
+
+        <section class="scheda-section" aria-labelledby="schema">
+          <h2 id="schema">Schema semplice</h2>
+          <div class="schema-box">
+            <svg viewBox="0 0 340 120" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="schema-tit schema-desc">
+              <title id="schema-tit">Circuito con generatore E, interruttore e lampadina</title>
+              <desc id="schema-desc">Percorso chiuso: da E passa per l interruttore, la lampadina e torna al generatore</desc>
+              <text x="8" y="16" fill="currentColor" font-size="11">Polo +</text>
+              <rect x="20" y="24" width="50" height="48" rx="4" fill="none" stroke="#4da3ff" stroke-width="2"/>
+              <text x="45" y="54" text-anchor="middle" fill="#4da3ff" font-family="monospace" font-size="20" font-weight="bold">E</text>
+              <text x="28" y="82" fill="currentColor" font-size="10">−</text>
+              <line x1="70" y1="48" x2="110" y2="48" stroke="#c97b4a" stroke-width="3"/>
+              <text x="72" y="42" font-size="9" fill="currentColor">fili</text>
+              <line x1="110" y1="48" x2="110" y2="36" stroke="#888" stroke-width="2"/>
+              <line x1="110" y1="36" x2="130" y2="36" stroke="#888" stroke-width="2"/>
+              <line x1="130" y1="36" x2="130" y2="48" stroke="#888" stroke-width="2"/>
+              <rect x="108" y="40" width="44" height="16" fill="none" stroke="#aaa" stroke-width="1"/>
+              <text x="130" y="52" text-anchor="middle" font-size="8" fill="currentColor">S</text>
+              <line x1="152" y1="48" x2="195" y2="48" stroke="#c97b4a" stroke-width="3"/>
+              <circle cx="230" cy="48" r="26" fill="#fff8cc" stroke="#888" stroke-width="2"/>
+              <path d="M218 48 L230 32 L242 48" fill="none" stroke="#888"/>
+              <line x1="256" y1="48" x2="300" y2="48" stroke="#c97b4a" stroke-width="3"/>
+              <line x1="300" y1="48" x2="300" y2="100" stroke="#c97b4a" stroke-width="3"/>
+              <line x1="300" y1="100" x2="45" y2="100" stroke="#c97b4a" stroke-width="3"/>
+              <line x1="45" y1="100" x2="45" y2="72" stroke="#c97b4a" stroke-width="3"/>
+            </svg>
+          </div>
+        </section>
+
+        <section class="scheda-section" aria-labelledby="esercizi">
+          <h2 id="esercizi">Esercizi</h2>
+
+          <div class="esercizio">
+            <p><strong>1.</strong> L’interruttore è aperto ma tutti i fili sono collegati. La lampadina si accende? Perché?</p>
+            <details class="soluzione-docente">
+              <summary>Soluzione (docente)</summary>
+              <strong>No.</strong> Con l’interruttore aperto il circuito è interrotto: la corrente non passa, anche se i fili ci sono.
+            </details>
+          </div>
+
+          <div class="esercizio">
+            <p><strong>2.</strong> Manca un filo tra generatore e lampadina. Cosa succede?</p>
+            <details class="soluzione-docente">
+              <summary>Soluzione (docente)</summary>
+              Circuito <strong>aperto</strong>: nessun percorso chiuso per le cariche → corrente nulla → lampadina spenta.
+            </details>
+          </div>
+
+          <div class="esercizio">
+            <p><strong>3.</strong> Cosa indica il simbolo <span class="mono">E</span> sul generatore?</p>
+            <details class="soluzione-docente">
+              <summary>Soluzione (docente)</summary>
+              La <strong>tensione</strong> / <strong>forza elettromotrice (FEM)</strong> del generatore: la spinta che fa circolare le cariche nel circuito chiuso.
+            </details>
+          </div>
+
+          <p class="scheda-credito-stampa">Realizzato dal Prof. Rossano Bella</p>
+        </section>
+      </main>
+
+      <footer class="site-footer no-print">
+        <p>Scheda didattica. Realizzato dal Prof. Rossano Bella.</p>
+      </footer>
+    </div>
+  </div>
+
+  <script src="js/common.js" defer></script>
+</body>
+</html>

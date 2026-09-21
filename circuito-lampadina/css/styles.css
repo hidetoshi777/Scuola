@@ -1,0 +1,349 @@
+/* Circuito lampadina — layout quadro elettrico (mobile first) */
+
+:root {
+  --rame: #c97b4a;
+  --rame-scuro: #8b5a32;
+  --fil: #f0c040;
+  --fil-glow: #ffe566;
+  --verde-on: #5ee06a;
+  --rosso-off: #e85d4c;
+  --blu-e: #4da3ff;
+  --bg: #0c0e12;
+  --pannello: #161a22;
+  --carta: #1e2430;
+  --testo: #eef2f8;
+  --mute: #8b95a8;
+  --bordo: #2e3648;
+  --btn: var(--fil);
+  --btn-text: #1a1408;
+  font-family: "Source Sans 3", system-ui, sans-serif;
+  color-scheme: dark;
+}
+
+[data-theme="light"] {
+  --bg: #e8eaef;
+  --pannello: #f4f6fa;
+  --carta: #fff;
+  --testo: #12141a;
+  --mute: #5a6270;
+  --bordo: #c5ccd8;
+  color-scheme: light;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  min-height: 100dvh;
+  background: var(--bg);
+  color: var(--testo);
+  line-height: 1.5;
+}
+
+body.reduced-motion * {
+  animation-duration: 0.01ms !important;
+  transition-duration: 0.01ms !important;
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
+}
+
+.skip-link:focus {
+  position: fixed;
+  z-index: 999;
+  top: 0.5rem;
+  left: 0.5rem;
+  padding: 0.5rem 0.75rem;
+  background: var(--carta);
+  border: 2px solid var(--fil);
+  clip: auto;
+  width: auto;
+  height: auto;
+}
+
+.qe-shell {
+  min-height: 100dvh;
+  display: grid;
+  grid-template-columns: 1fr;
+}
+
+@media (min-width: 720px) {
+  .qe-shell {
+    grid-template-columns: 4.5rem 1fr;
+  }
+}
+
+.qe-rail {
+  display: flex;
+  flex-direction: row;
+  gap: 0;
+  background: linear-gradient(180deg, var(--rame-scuro), #3d2818);
+  border-bottom: 3px solid var(--fil);
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+@media (min-width: 720px) {
+  .qe-rail {
+    flex-direction: column;
+    border-bottom: none;
+    border-right: 3px solid var(--fil);
+    min-height: 100dvh;
+  }
+}
+
+.qe-rail-brand {
+  display: none;
+}
+
+@media (min-width: 720px) {
+  .qe-rail-brand {
+    display: block;
+    writing-mode: vertical-rl;
+    transform: rotate(180deg);
+    padding: 1rem 0.35rem;
+    font-family: "Share Tech Mono", monospace;
+    font-size: 0.75rem;
+    letter-spacing: 0.12em;
+    color: #ffe8c8;
+    text-align: center;
+  }
+}
+
+.qe-nav {
+  display: flex;
+  flex: 1;
+  min-width: 0;
+}
+
+@media (min-width: 720px) {
+  .qe-nav {
+    flex-direction: column;
+    flex: 1;
+  }
+}
+
+.qe-nav a {
+  flex: 1;
+  min-width: 4.5rem;
+  padding: 0.85rem 0.5rem;
+  text-align: center;
+  text-decoration: none;
+  color: #f5e6d0;
+  font-weight: 700;
+  font-size: 0.82rem;
+  border-right: 1px solid rgba(255, 255, 255, 0.12);
+  transition: background 0.15s;
+}
+
+@media (min-width: 720px) {
+  .qe-nav a {
+    border-right: none;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+    padding: 1.1rem 0.35rem;
+  }
+}
+
+.qe-nav a:hover {
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.qe-nav a[aria-current="page"] {
+  background: var(--fil);
+  color: var(--btn-text);
+}
+
+.qe-main-wrap {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.qe-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  padding: 0.65rem 1rem;
+  background: var(--pannello);
+  border-bottom: 1px solid var(--bordo);
+}
+
+.qe-kicker {
+  margin: 0;
+  font-size: 0.78rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--mute);
+}
+
+.qe-main {
+  flex: 1;
+  padding: 1rem 1rem 2rem;
+  max-width: 52rem;
+}
+
+.qe-main h1 {
+  margin: 0.35rem 0 0.5rem;
+  font-family: "Share Tech Mono", monospace;
+  font-size: clamp(1.35rem, 4vw, 1.85rem);
+  line-height: 1.2;
+}
+
+.qe-lead {
+  margin: 0 0 0.75rem;
+  font-size: 1.05rem;
+  max-width: 38rem;
+}
+
+.qe-quote {
+  margin: 0 0 1.25rem;
+  padding: 0.65rem 0.85rem;
+  border-left: 4px solid var(--fil);
+  background: color-mix(in srgb, var(--fil) 12%, var(--carta));
+  font-style: italic;
+  font-size: 1rem;
+}
+
+.theme-toggle {
+  flex-shrink: 0;
+  min-height: 2.75rem;
+  padding: 0.45rem 0.85rem;
+  border: 2px solid var(--bordo);
+  border-radius: 0.35rem;
+  background: var(--carta);
+  color: var(--testo);
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 2.85rem;
+  padding: 0.55rem 1.1rem;
+  border-radius: 0.4rem;
+  font-weight: 800;
+  font-size: 1rem;
+  text-decoration: none;
+  border: 2px solid transparent;
+  cursor: pointer;
+  font-family: inherit;
+}
+
+.btn-primary {
+  background: var(--btn);
+  color: var(--btn-text);
+  border-color: color-mix(in srgb, var(--fil) 70%, #000);
+}
+
+.btn-secondary {
+  background: var(--carta);
+  color: var(--testo);
+  border-color: var(--bordo);
+}
+
+.btn-ghost {
+  background: transparent;
+  border-color: var(--bordo);
+  color: var(--testo);
+}
+
+.qe-path {
+  display: grid;
+  gap: 0.85rem;
+  margin-top: 1.25rem;
+}
+
+@media (min-width: 540px) {
+  .qe-path {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.qe-tile {
+  display: block;
+  padding: 1rem 1.1rem;
+  background: var(--carta);
+  border: 2px solid var(--bordo);
+  border-radius: 0.5rem;
+  text-decoration: none;
+  color: inherit;
+  position: relative;
+  overflow: hidden;
+}
+
+.qe-tile::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, var(--blu-e), var(--fil));
+}
+
+.qe-tile h2 {
+  margin: 0.35rem 0 0.35rem;
+  font-size: 1.15rem;
+}
+
+.qe-tile p {
+  margin: 0;
+  font-size: 0.92rem;
+  color: var(--mute);
+}
+
+.qe-tile-num {
+  font-family: "Share Tech Mono", monospace;
+  font-size: 0.8rem;
+  color: var(--fil);
+}
+
+.qe-demo {
+  margin: 1rem 0;
+  padding: 0.75rem;
+  background: var(--carta);
+  border: 1px solid var(--bordo);
+  border-radius: 0.5rem;
+}
+
+.qe-demo svg {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.site-footer {
+  padding: 1rem;
+  text-align: center;
+  font-size: 0.85rem;
+  color: var(--mute);
+  border-top: 1px solid var(--bordo);
+}
+
+.site-footer p {
+  margin: 0;
+}
+
+.mono {
+  font-family: "Share Tech Mono", monospace;
+}

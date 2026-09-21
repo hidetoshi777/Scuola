@@ -1,5 +1,12 @@
 [
   {
+    "id": "circuito-lampadina",
+    "titolo": "Circuito e lampadina",
+    "annoProf": 3,
+    "url": "circuito-lampadina/",
+    "materia": "Tecnologie elettriche e elettroniche"
+  },
+  {
     "id": "presentazioni-inglese",
     "titolo": "Hello — Presentazioni",
     "annoProf": 3,

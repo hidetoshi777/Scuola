@@ -355,6 +355,24 @@ window.ATTIVITA_WEB = [
       { label: "Foglio 2", url: "sicurezza-luoghi-lavoro/#foglio-2" },
     ],
   },
+  {
+    titolo: "Circuito e lampadina",
+    materia: "Tecnologie elettriche e elettroniche",
+    classe: "Terza superiore · professionale",
+    annoProf: 3,
+    pubblicato: "2026-09-21",
+    descrizione:
+      "Circuito chiuso con generatore E, interruttore e lampadina: scheda con schema ed esercizi, gioco per montare i fili e quiz sulla tensione.",
+    citazione: "Senza circuito chiuso non c’è luce.",
+    url: "circuito-lampadina/",
+    copertina: "circuito-lampadina/img/og-share.jpg",
+    tinta: "scienze",
+    adesivo: "st-pianeta",
+    extra: [
+      { label: "Scheda", url: "circuito-lampadina/scheda.html" },
+      { label: "Gioco", url: "circuito-lampadina/gioco.html" },
+    ],
+  },
 ];
 
 /** Attività web per il raccoglitore professionale (Ferraris AM): richiede `annoProf` 3 o 4. */

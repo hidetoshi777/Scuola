@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="color-scheme" content="dark light">
+  <link rel="icon" href="../favicon.svg" type="image/svg+xml">
+  <title>Gioco · Circuito e lampadina | Scuola</title>
+  <meta name="description" content="Completa il circuito: fili, interruttore e lampadina. Quiz sul simbolo E.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Source+Sans+3:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/gioco.css">
+  <style>
+    .schema-wire { stroke: #f0c040; stroke-width: 3; fill: none; transition: stroke 0.2s, opacity 0.2s; }
+    .schema-wire.seg-off { stroke: #555; stroke-dasharray: 6 4; opacity: 0.5; }
+    .schema-wire.seg-on { stroke: #5ee06a; }
+    [data-seg="sw"].seg-off { stroke: #e85d4c; }
+  </style>
+</head>
+<body>
+  <a class="skip-link visually-hidden" href="#contenuto">Salta al contenuto</a>
+
+  <div class="qe-shell">
+    <aside class="qe-rail">
+      <p class="qe-rail-brand">E · CIRCUITO</p>
+      <nav class="qe-nav" aria-label="Sezioni">
+        <a href="index.html">Home</a>
+        <a href="scheda.html">Scheda</a>
+        <a href="gioco.html">Gioco</a>
+      </nav>
+    </aside>
+
+    <div class="qe-main-wrap">
+      <header class="qe-top">
+        <p class="qe-kicker">Gioco · monta il circuito</p>
+        <button type="button" class="theme-toggle" data-theme-toggle aria-pressed="false">Chiaro</button>
+      </header>
+
+      <main id="contenuto" class="qe-main" tabindex="-1">
+        <h1>Accendi la lampadina</h1>
+        <p class="game-intro">Tocca i fili per metterli o toglierli. Chiudi l’interruttore. Solo con <strong>circuito chiuso</strong> e interruttore <strong>ON</strong> la lampadina si accende.</p>
+
+        <section class="game-stage" aria-labelledby="game-title">
+          <h2 id="game-title" class="visually-hidden">Simulazione sul banco</h2>
+          <img class="game-bg" src="img/sfondo-gioco.png" alt="" width="1376" height="768" decoding="async">
+          <div class="game-bulb" id="game-bulb" role="img" aria-label="Lampadina spenta"></div>
+          <div class="game-overlay">
+            <div class="game-panel">
+              <p class="game-step">Passo 1 · collega i fili</p>
+              <div class="game-wires">
+                <button type="button" class="wire-btn is-on" data-wire="w1" aria-pressed="true"
+                  data-label-on="Filo 1 ✓ E→S" data-label-off="Filo 1 ✗ manca">Filo 1 ✓ E→S</button>
+                <button type="button" class="wire-btn is-on" data-wire="w2" aria-pressed="true"
+                  data-label-on="Filo 2 ✓ S→L" data-label-off="Filo 2 ✗ manca">Filo 2 ✓ S→L</button>
+                <button type="button" class="wire-btn is-on" data-wire="w3" aria-pressed="true"
+                  data-label-on="Filo 3 ✓ L→+" data-label-off="Filo 3 ✗ manca">Filo 3 ✓ L→+</button>
+                <button type="button" class="wire-btn is-on" data-wire="w4" aria-pressed="true"
+                  data-label-on="Filo 4 ✓ ritorno −" data-label-off="Filo 4 ✗ manca">Filo 4 ✓ ritorno −</button>
+              </div>
+              <p class="game-step">Passo 2 · interruttore</p>
+              <div class="game-row">
+                <button type="button" class="switch-btn open" id="game-switch" aria-pressed="false">Interruttore OFF (aperto)</button>
+              </div>
+              <div class="game-schema-mini" aria-hidden="true">
+                <svg viewBox="0 0 300 60" xmlns="http://www.w3.org/2000/svg">
+                  <line class="schema-wire seg-on" data-seg="w1" x1="10" y1="30" x2="70" y2="30"/>
+                  <line class="schema-wire seg-on" data-seg="sw" x1="70" y1="30" x2="90" y2="15"/>
+                  <line class="schema-wire seg-on" data-seg="w2" x1="90" y1="30" x2="150" y2="30"/>
+                  <circle cx="180" cy="30" r="12" fill="none" stroke="#888" stroke-width="2"/>
+                  <line class="schema-wire seg-on" data-seg="w3" x1="192" y1="30" x2="240" y2="30"/>
+                  <line class="schema-wire seg-on" data-seg="w4" x1="240" y1="30" x2="240" y2="50"/>
+                  <line class="schema-wire seg-on" data-seg="w4" x1="240" y1="50" x2="10" y2="50"/>
+                  <line class="schema-wire seg-on" data-seg="w4" x1="10" y1="50" x2="10" y2="30"/>
+                  <text x="35" y="22" font-size="10" fill="#4da3ff" font-family="monospace">E</text>
+                </svg>
+              </div>
+              <p class="game-msg err" id="game-msg" aria-live="polite"></p>
+            </div>
+          </div>
+        </section>
+
+        <section class="game-quiz" aria-labelledby="quiz-t">
+          <h2 id="quiz-t">Quiz · simbolo E</h2>
+          <p class="game-quiz-q">Cosa indica <span class="mono">E</span> sul generatore?</p>
+          <div class="quiz-choices">
+            <button type="button" data-quiz="lamp">La potenza della lampadina</button>
+            <button type="button" data-quiz="fem">La tensione / forza elettromotrice (FEM)</button>
+            <button type="button" data-quiz="corr">Solo la corrente nel filo</button>
+          </div>
+          <p class="quiz-feedback" id="quiz-feedback" aria-live="polite"></p>
+        </section>
+
+        <p style="margin-top:1rem"><a class="btn btn-secondary" href="scheda.html">Torna alla scheda</a></p>
+      </main>
+
+      <footer class="site-footer">
+        <p>Gioco didattico sul circuito chiuso. Realizzato dal Prof. Rossano Bella.</p>
+      </footer>
+    </div>
+  </div>
+
+  <script src="js/common.js" defer></script>
+  <script src="js/gioco.js" defer></script>
+</body>
+</html>

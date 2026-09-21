@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="color-scheme" content="dark" id="color-scheme">
+  <script>
+    {
+      const t = localStorage.getItem("tema-circuito-lampadina");
+      const tema = t === "light" || t === "dark" ? t : "dark";
+      document.documentElement.dataset.theme = tema;
+      document.getElementById("color-scheme").content = tema;
+    }
+  </script>
+  <link rel="icon" href="../favicon.svg" type="image/svg+xml">
+  <title>Circuito e lampadina | Scuola</title>
+  <meta name="description" content="Terza professionale, tecnologie elettriche: circuito chiuso, simbolo E, scheda e gioco per accendere la lampadina.">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="it_IT">
+  <meta property="og:site_name" content="Scuola · Prof. Rossano Bella">
+  <meta property="og:title" content="Circuito e lampadina">
+  <meta property="og:description" content="Generatore E, interruttore, fili e lampadina: solo con il circuito chiuso la luce si accende.">
+  <meta property="og:url" content="https://hidetoshi777.github.io/Scuola/circuito-lampadina/">
+  <meta property="og:image" content="https://hidetoshi777.github.io/Scuola/circuito-lampadina/img/og-share.jpg">
+  <meta property="og:image:alt" content="Banco con batteria, interruttore e lampadina accesa">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Circuito e lampadina">
+  <meta name="twitter:description" content="Scheda e gioco: monta il circuito e capisci il simbolo E.">
+  <meta name="twitter:image" content="https://hidetoshi777.github.io/Scuola/circuito-lampadina/img/og-share.jpg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Source+Sans+3:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <a class="skip-link visually-hidden" href="#contenuto">Salta al contenuto</a>
+
+  <div class="qe-shell">
+    <aside class="qe-rail">
+      <p class="qe-rail-brand">E · CIRCUITO</p>
+      <nav class="qe-nav" aria-label="Sezioni">
+        <a href="index.html">Home</a>
+        <a href="scheda.html">Scheda</a>
+        <a href="gioco.html">Gioco</a>
+      </nav>
+    </aside>
+
+    <div class="qe-main-wrap">
+      <header class="qe-top">
+        <p class="qe-kicker">Terza prof. · Tecnologie elettriche</p>
+        <button type="button" class="theme-toggle" data-theme-toggle aria-pressed="false">Chiaro</button>
+      </header>
+
+      <main id="contenuto" class="qe-main" tabindex="-1">
+        <h1>Circuito e lampadina</h1>
+        <p class="qe-lead">Un filo, un interruttore, un generatore con il simbolo <span class="mono">E</span>. Se il percorso è chiuso, la lampadina si accende.</p>
+        <blockquote class="qe-quote">Senza circuito chiuso non c’è luce.</blockquote>
+
+        <div class="qe-demo" aria-hidden="true">
+          <svg viewBox="0 0 320 100" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Schema semplificato">
+            <rect x="8" y="28" width="44" height="44" rx="4" fill="#2a3344" stroke="#4da3ff" stroke-width="2"/>
+            <text x="30" y="56" text-anchor="middle" fill="#4da3ff" font-family="monospace" font-size="18" font-weight="bold">E</text>
+            <line x1="52" y1="50" x2="90" y2="50" stroke="#f0c040" stroke-width="3"/>
+            <rect x="90" y="38" width="36" height="24" rx="2" fill="#333" stroke="#aaa"/>
+            <line x1="108" y1="38" x2="108" y2="28" stroke="#aaa" stroke-width="2"/>
+            <line x1="126" y1="50" x2="160" y2="50" stroke="#f0c040" stroke-width="3"/>
+            <circle cx="200" cy="50" r="22" fill="#ffe566" stroke="#888"/>
+            <line x1="222" y1="50" x2="280" y2="50" stroke="#f0c040" stroke-width="3"/>
+            <line x1="280" y1="50" x2="280" y2="85" stroke="#f0c040" stroke-width="3"/>
+            <line x1="280" y1="85" x2="30" y2="85" stroke="#f0c040" stroke-width="3"/>
+            <line x1="30" y1="85" x2="30" y2="72" stroke="#f0c040" stroke-width="3"/>
+          </svg>
+        </div>
+
+        <nav class="qe-path" aria-label="Percorso">
+          <a class="qe-tile" href="scheda.html">
+            <span class="qe-tile-num">01</span>
+            <h2>Scheda</h2>
+            <p>Circuito chiuso, ruolo di E, schema e tre esercizi con soluzioni docente.</p>
+          </a>
+          <a class="qe-tile" href="gioco.html">
+            <span class="qe-tile-num">02</span>
+            <h2>Gioco</h2>
+            <p>Monta i fili, chiudi l’interruttore, accendi la lampadina. Poi il quiz su E.</p>
+          </a>
+        </nav>
+      </main>
+
+      <footer class="site-footer">
+        <p>Realizzato dal Prof. Rossano Bella</p>
+      </footer>
+    </div>
+  </div>
+
+  <script src="js/common.js" defer></script>
+</body>
+</html>
