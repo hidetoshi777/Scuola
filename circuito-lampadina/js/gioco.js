@@ -26,15 +26,10 @@
   function updateSchema() {
     schemaPaths.forEach((path) => {
       const id = path.getAttribute("data-seg");
-      const on = wires[id];
+      const on = id === "sw" ? switchClosed : wires[id];
       path.classList.toggle("seg-off", !on);
       path.classList.toggle("seg-on", on);
     });
-    const swSeg = document.querySelector('[data-seg="sw"]');
-    if (swSeg) {
-      swSeg.classList.toggle("seg-off", !switchClosed);
-      swSeg.classList.toggle("seg-on", switchClosed);
-    }
   }
 
   function diagnose() {
