@@ -6,7 +6,7 @@
   <meta name="color-scheme" content="dark light">
   <link rel="icon" href="../favicon.svg" type="image/svg+xml">
   <title>Scheda · Circuito e lampadina | Scuola</title>
-  <meta name="description" content="Scheda stampabile: circuito chiuso, generatore E, interruttore, conduttori, lampadina ed esercizi.">
+  <meta name="description" content="Scheda: circuito chiuso, E, resistenza R, poli +/−, lampadina ed esercizi.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Source+Sans+3:wght@500;600;700;800&display=swap" rel="stylesheet">
@@ -93,6 +93,30 @@
           <p style="margin:0"><span class="mono">E</span> indica la <strong>tensione</strong> del generatore, cioè la <strong>forza elettromotrice (FEM)</strong>. In parole semplici: è la «spinta» che fa muovere le cariche nel filo quando il circuito è chiuso. Non è la lampadina e non è la corrente: è ciò che <em>permette</em> alla corrente di circolare.</p>
         </section>
 
+        <section class="scheda-section" aria-labelledby="poli-lunghezza">
+          <h2 id="poli-lunghezza">Attenzione: lungo/corto non è + / −</h2>
+          <p style="margin:0 0 0.5rem"><strong>Non è vero</strong> che il filo lungo sia «negativo» e quello corto «positivo». Il <strong>+</strong> e il <strong>−</strong> sono i <strong>poli</strong> del generatore / batteria (tensione <span class="mono">E</span>), fissi sui morsetti.</p>
+          <figure class="fig-lampadina">
+            <img src="img/polo-non-e-lunghezza.png" alt="Confronto: idea sbagliata filo lungo uguale negativo, idea giusta poli sulla batteria e resistenza legata a lunghezza e spessore del filo" width="1200" height="900" loading="lazy">
+            <figcaption>
+              La <strong>lunghezza</strong> del filo (e la <strong>sezione</strong>, il <strong>materiale</strong>) riguardano un’altra grandezza: la <strong>resistenza</strong>, non il segno + o −.
+            </figcaption>
+          </figure>
+        </section>
+
+        <section class="scheda-section" aria-labelledby="resistenza">
+          <h2 id="resistenza">Cos’è la resistenza elettrica?</h2>
+          <p style="margin:0 0 0.5rem">Simbolo <strong class="mono">R</strong>, unità <strong>ohm</strong> (<span class="mono">Ω</span>). La resistenza <strong>ostacola</strong> il passaggio della corrente: più resistenza → di solito corrente più debole (a pari tensione).</p>
+          <figure class="fig-lampadina">
+            <img src="img/cos-e-la-resistenza-elettrica.png" alt="Infografica resistenza elettrica: R in ohm, materiale, lunghezza, sezione e filamento della lampadina" width="1200" height="900" loading="lazy">
+            <figcaption>
+              <strong>Aumenta R</strong> (di solito): filo più <strong>lungo</strong>, sezione più <strong>piccola</strong>, materiale meno conduttore.
+              <strong>Diminuisce R</strong>: filo più <strong>corto</strong> e <strong>spesso</strong>, buon conduttore (es. rame).
+              Anche il <strong>filamento</strong> della lampadina ha resistenza: si scalda e fa luce.
+            </figcaption>
+          </figure>
+        </section>
+
         <section class="scheda-section" aria-labelledby="anatomia">
           <h2 id="anatomia">Come è fatta una lampadina</h2>
           <figure class="fig-lampadina">
@@ -163,6 +187,22 @@
             <details class="soluzione-docente">
               <summary>Soluzione (docente)</summary>
               La <strong>tensione</strong> / <strong>forza elettromotrice (FEM)</strong> del generatore: la spinta che fa circolare le cariche nel circuito chiuso.
+            </details>
+          </div>
+
+          <div class="esercizio">
+            <p><strong>4.</strong> «Il filo più lungo è sempre il polo negativo.» Vero o falso?</p>
+            <details class="soluzione-docente">
+              <summary>Soluzione (docente)</summary>
+              <strong>Falso.</strong> + e − sono i poli del generatore. La lunghezza del filo influisce sulla <strong>resistenza R</strong>, non sul segno del polo.
+            </details>
+          </div>
+
+          <div class="esercizio">
+            <p><strong>5.</strong> Stesso materiale e stessa sezione: un filo più lungo ha resistenza maggiore o minore?</p>
+            <details class="soluzione-docente">
+              <summary>Soluzione (docente)</summary>
+              Di solito <strong>maggiore</strong> (più percorso → più ostacoli al passaggio degli elettroni → R più alta).
             </details>
           </div>
 

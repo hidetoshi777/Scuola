@@ -222,6 +222,21 @@ body.reduced-motion * {
   font-size: 1rem;
 }
 
+.qe-richiamo {
+  margin: -0.5rem 0 1rem;
+  padding: 0.65rem 0.85rem;
+  font-size: 0.95rem;
+  background: color-mix(in srgb, var(--blu-e) 12%, var(--carta));
+  border: 1px solid var(--bordo);
+  border-radius: 0.4rem;
+  line-height: 1.45;
+}
+
+.qe-richiamo a {
+  color: var(--fil);
+  font-weight: 700;
+}
+
 .theme-toggle {
   flex-shrink: 0;
   min-height: 2.75rem;
