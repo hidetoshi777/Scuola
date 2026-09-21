@@ -319,7 +319,7 @@ window.ATTIVITA_WEB = [
   },
   {
     titolo: "Grandezze e unità",
-    materia: "Scienze",
+    materia: "Tecnologie e tecniche di installazione e manutenzione",
     classe: "Terza superiore · professionale",
     annoProf: 3,
     pubblicato: "2026-09-21",
