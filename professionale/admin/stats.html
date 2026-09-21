@@ -6,21 +6,20 @@
   <meta name="color-scheme" content="dark">
   <meta name="robots" content="noindex, nofollow">
   <link rel="icon" href="../../favicon.svg" type="image/svg+xml">
-  <title>Statistiche visite</title>
+  <title>Visite · ultime 24 ore</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,600;9..40,700;9..40,800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/admin.css?v=6">
+  <link rel="stylesheet" href="css/admin.css?v=7">
 </head>
 <body class="admin-page" data-theme="dark">
   <main class="admin-wrap admin-wrap--wide">
     <header class="admin-hero">
       <div class="admin-intro">
         <p class="admin-eyebrow">Area riservata</p>
-        <h1>Visite alle pagine</h1>
+        <h1>Qualcuno è entrato?</h1>
         <p class="admin-lead">
-          Conteggi remoti (tutti i dispositivi). Totale, ultime 24 ore e orario dell’ultima visita.
-          Hub professionale e attività collegate.
+          Solo un segnale sulle ultime 24 ore (tutto il sito professionale), niente elenco pagina per pagina.
         </p>
       </div>
 
@@ -47,9 +46,8 @@
     </header>
 
     <div class="admin-toolbar">
-      <div>
-        <p class="admin-totale" id="stats-totale">—</p>
-        <p class="admin-totale-24h" id="stats-totale-24h">—</p>
+      <div class="admin-segnale-box">
+        <p class="admin-totale-24h" id="stats-segnale" data-stato="attesa">—</p>
         <p class="admin-ultima" id="stats-ultima">—</p>
         <p class="admin-stato" id="stats-stato">Caricamento…</p>
       </div>
@@ -58,17 +56,14 @@
         <button type="button" class="admin-btn admin-btn--ghost" data-admin-logout>Esci</button>
       </div>
     </div>
-
-    <ul class="admin-lista" id="stats-lista" aria-live="polite"></ul>
   </main>
   <footer class="admin-footer">
     <p>Realizzato dal Prof. Rossano Bella</p>
   </footer>
   <script src="js/config.js?v=3"></script>
   <script src="js/auth.js?v=3"></script>
-  <script src="../../js/data.js?v=30" defer></script>
-  <script src="../../js/access-track.js?v=5" defer></script>
-  <script src="js/stats.js?v=5" defer></script>
+  <script src="../../js/access-track.js?v=6" defer></script>
+  <script src="js/stats.js?v=6" defer></script>
   <script src="js/school-clock.js?v=4" defer></script>
 </body>
 </html>

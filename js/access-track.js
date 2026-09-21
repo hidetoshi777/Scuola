@@ -17,7 +17,7 @@
   const KEYVAL = "https://api.keyval.org";
   const TZ = "Europe/Rome";
   const REQUEST_TIMEOUT_MS = 10000;
-  const READ_CONCURRENCY = 4;
+  const READ_CONCURRENCY = 6;
   const READ_RETRIES = 3;
   const RETRY_BASE_MS = 450;
 
