@@ -317,6 +317,26 @@ window.ATTIVITA_WEB = [
       { label: "Gioco", url: "piano-cartesiano/gioco.html" },
     ],
   },
+  {
+    titolo: "Grandezze e unità",
+    materia: "Scienze",
+    classe: "Terza superiore · professionale",
+    annoProf: 3,
+    pubblicato: "2026-09-21",
+    descrizione:
+      "Grandezze fisiche, SI, fondamentali (m, kg, s) e derivate: area, volume e velocità, con fumetto in officina, laboratorio e percorso nel cortile.",
+    citazione: "Un numero senza unità non dice niente.",
+    url: "grandezze-unita/",
+    copertina: "grandezze-unita/img/og-share.jpg",
+    tinta: "scienze",
+    adesivo: "st-pianeta",
+    extra: [
+      { label: "Studio", url: "grandezze-unita/imparare.html" },
+      { label: "Fumetto", url: "grandezze-unita/fumetto.html" },
+      { label: "Laboratorio", url: "grandezze-unita/laboratorio.html" },
+      { label: "Gioco", url: "grandezze-unita/gioco.html" },
+    ],
+  },
 ];
 
 /** Attività web per il raccoglitore professionale (Ferraris AM): richiede `annoProf` 3 o 4. */
