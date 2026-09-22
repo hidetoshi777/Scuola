@@ -181,6 +181,25 @@ window.ATTIVITA_WEB = [
     ],
   },
   {
+    titolo: "Letteratura barocca",
+    materia: "Italiano",
+    classe: "Quarta superiore · professionale",
+    annoProf: 4,
+    pubblicato: "2026-09-22",
+    descrizione:
+      "Barocco italiano del Seicento: meraviglia, marinismo e mappa degli autori; scheda stampabile, fumetto-lezione e giro d’Italia.",
+    citazione: "È del poeta il fin la meraviglia.",
+    url: "letteratura-barocca/",
+    copertina: "letteratura-barocca/img/og-share.jpg",
+    tinta: "italiano",
+    adesivo: "st-pennino",
+    extra: [
+      { label: "Scheda", url: "letteratura-barocca/scheda.html" },
+      { label: "Fumetto", url: "letteratura-barocca/fumetto.html" },
+      { label: "Giro d’Italia", url: "letteratura-barocca/gioco.html" },
+    ],
+  },
+  {
     titolo: "Hello — Presentazioni",
     materia: "Inglese",
     classe: "Terza superiore · professionale",

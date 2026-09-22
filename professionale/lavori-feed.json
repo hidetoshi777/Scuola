@@ -1,5 +1,12 @@
 [
   {
+    "id": "letteratura-barocca",
+    "titolo": "Letteratura barocca",
+    "annoProf": 4,
+    "url": "letteratura-barocca/",
+    "materia": "Italiano"
+  },
+  {
     "id": "circuito-lampadina",
     "titolo": "Circuito e lampadina",
     "annoProf": 3,
