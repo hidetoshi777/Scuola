@@ -1,11 +1,11 @@
 (function () {
   const captions = [
-    "Il Barocco italiano è il Seicento. Il poeta vuole stupire.",
-    "Marino, a Napoli: lo scopo è la meraviglia.",
-    "Tre segni: metafore, contrasti, parole ricche.",
-    "Autori e città. La mappa precisa è sulla scheda (Pisa è in Toscana).",
-    "Tassoni: un poema buffo per un secchio. Basile: fiabe del Seicento.",
-    "Poeti: stupire. Galileo: spiegare. Ricorda: Seicento, meraviglia, Marino a Napoli.",
+    "Sara chiede che cos’è il Barocco: Seicento, dopo il Rinascimento. I poeti vogliono stupire.",
+    "Marino vive a Napoli. Lo scopo è la meraviglia: si chiama anche marinismo.",
+    "Tre segni, spiegati piano: metafore, contrasti, parole ricche. A volte è esagerato.",
+    "Ogni autore ha una città. Marino e Basile a Napoli, Tassoni a Modena, e gli altri sulla mappa.",
+    "Tassoni: un poema buffo per un secchio. Basile: fiabe, anche Gatta Cenerentola.",
+    "Galileo è dello stesso secolo, ma spiega. Ricorda: Seicento, meraviglia, Marino a Napoli.",
   ];
 
   const pages = Array.from(document.querySelectorAll(".fumetto-page"));
