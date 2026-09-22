@@ -1,0 +1,230 @@
+.scheda-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+  margin-bottom: 0.75rem;
+}
+
+.scheda-head {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 0.75rem;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.scheda-head img {
+  width: 7.5rem;
+  max-width: 7.5rem;
+  height: auto;
+  border-radius: 0.4rem;
+  border: 2px solid var(--gold);
+}
+
+.scheda-head h1 {
+  margin: 0;
+  font-size: clamp(1.5rem, 5vw, 2.2rem);
+  line-height: 1.05;
+}
+
+.scheda-meta {
+  margin: 0.25rem 0 0;
+  color: var(--mute);
+}
+
+.scheda-block {
+  background: var(--card);
+  border: 1px solid var(--bordo);
+  border-radius: 0.85rem;
+  padding: 0.9rem 1rem;
+  margin-bottom: 0.85rem;
+}
+
+.scheda-block h2 {
+  margin: 0 0 0.45rem;
+  font-size: 1.35rem;
+  color: var(--gold-2);
+}
+
+.scheda-block p,
+.scheda-block li {
+  margin: 0 0 0.4rem;
+}
+
+.scheda-block ul {
+  margin: 0;
+  padding-left: 1.15rem;
+}
+
+.mappa-wrap h2 {
+  margin: 0 0 0.35rem;
+}
+
+.mappa-nota {
+  margin: 0 0 0.6rem;
+  color: var(--mute);
+  font-size: 0.92rem;
+}
+
+.mappa-board {
+  position: relative;
+  aspect-ratio: 640 / 860;
+  max-width: 26rem;
+  margin: 0 auto;
+  background: radial-gradient(circle at 40% 30%, #2a1810, #140a0e 70%);
+  border: 2px solid var(--gold);
+  border-radius: 0.6rem;
+  overflow: hidden;
+}
+
+.mappa-board img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  pointer-events: none;
+}
+
+.pin-btn {
+  position: absolute;
+  width: 2.75rem;
+  height: 2.75rem;
+  border-radius: 50%;
+  border: 2px solid transparent;
+  background: transparent;
+  transform: translate(-50%, -50%);
+  cursor: pointer;
+  padding: 0;
+}
+
+.pin-btn:focus-visible,
+.pin-btn[aria-current="true"] {
+  border-color: var(--gold-2);
+  background: color-mix(in srgb, var(--gold) 35%, transparent);
+  outline: none;
+}
+
+.mappa-live {
+  margin: 0.65rem 0 0;
+  min-height: 1.4rem;
+  font-weight: 700;
+  color: var(--gold-2);
+}
+
+.autori-titolo {
+  margin: 0.4rem 0 0.6rem;
+  font-size: 1.5rem;
+}
+
+.autori-grid {
+  display: grid;
+  gap: 0.7rem;
+}
+
+.autore {
+  display: grid;
+  grid-template-columns: 5.2rem 1fr;
+  gap: 0.7rem;
+  padding: 0.65rem;
+  background: var(--bg-2);
+  border: 1px solid var(--bordo);
+  border-radius: 0.7rem;
+}
+
+.autore.is-on {
+  border-color: var(--gold);
+  box-shadow: 0 0 0 1px var(--gold);
+}
+
+.autore img {
+  width: 5.2rem;
+  height: 6.6rem;
+  object-fit: cover;
+  border-radius: 0.35rem;
+}
+
+.autore h3 {
+  margin: 0 0 0.15rem;
+  font-size: 1.1rem;
+}
+
+.autore .dove {
+  margin: 0;
+  color: var(--gold);
+  font-weight: 800;
+  font-size: 0.88rem;
+}
+
+.contrasto {
+  display: grid;
+  gap: 0.5rem;
+}
+
+.contrasto div {
+  padding: 0.65rem 0.75rem;
+  border-radius: 0.55rem;
+  background: var(--bg-2);
+}
+
+.esercizio label {
+  display: block;
+  margin: 0.25rem 0;
+}
+
+.soluzione-docente summary {
+  cursor: pointer;
+  font-weight: 800;
+  color: var(--gold);
+}
+
+.scheda-credito-stampa {
+  display: none;
+}
+
+@media (min-width: 820px) {
+  .scheda-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 22rem;
+    gap: 1rem;
+    align-items: start;
+  }
+
+  .mappa-col {
+    position: sticky;
+    top: 0.6rem;
+  }
+
+  .autori-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media print {
+  .no-print,
+  .bar-curtain,
+  .bar-top,
+  .site-footer {
+    display: none !important;
+  }
+
+  body {
+    background: #fff !important;
+    color: #111 !important;
+  }
+
+  .scheda-block,
+  .autore,
+  .contrasto div {
+    break-inside: avoid;
+    border-color: #ccc;
+    background: #fff;
+  }
+
+  .scheda-credito-stampa {
+    display: block;
+    margin-top: 0.8rem;
+    font-size: 0.65rem;
+    color: #666;
+    text-align: right;
+  }
+}

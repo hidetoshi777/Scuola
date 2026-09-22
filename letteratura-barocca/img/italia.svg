@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 860" role="img" aria-labelledby="mappa-titolo">
+<title id="mappa-titolo">Italia: dove lavoravano gli autori del Barocco</title>
+<defs>
+<linearGradient id="terra" x1="0" y1="0" x2="1" y2="1">
+<stop offset="0%" stop-color="#c9a45c"/>
+<stop offset="100%" stop-color="#8a5a28"/>
+</linearGradient>
+</defs>
+<path class="italia-terra" d="M471.95,659.01L453.22,715.89L461.00,738.28L450.08,775.45L410.29,748.23L383.83,740.43L311.21,703.69L318.49,666.58L379.38,673.19L432.46,665.32L471.95,659.01Z" fill="url(#terra)" stroke="#f0d78c" stroke-width="1.6" stroke-linejoin="round"/>
+<path class="italia-terra" d="M143.61,443.73L174.83,495.04L167.52,590.63L143.86,586.07L122.64,610.19L102.94,591.03L100.85,503.84L88.98,462.52L117.59,466.14L143.61,443.73Z" fill="url(#terra)" stroke="#f0d78c" stroke-width="1.6" stroke-linejoin="round"/>
+<path class="italia-terra" d="M308.37,42.09L382.78,60.76L377.14,96.35L389.60,127.12L348.18,116.59L305.88,142.24L308.75,178.12L302.38,198.70L319.44,235.50L368.23,271.90L394.40,331.64L452.30,389.88L493.07,389.43L505.75,405.41L491.15,419.80L537.76,445.93L575.96,467.79L620.58,505.48L625.96,518.97L616.24,544.85L587.36,511.11L542.16,499.22L520.26,545.96L557.87,572.75L551.69,610.46L529.96,614.75L502.16,676.73L480.47,682.30L480.67,660.21L491.29,621.44L502.60,606.01L482.28,564.13L466.40,527.68L444.80,518.68L429.44,487.49L396.00,474.35L373.49,445.30L334.99,440.62L294.33,407.99L246.73,360.95L211.35,319.32L195.12,247.88L169.24,239.48L126.90,215.63L102.95,225.39L72.89,258.93L51.26,264.23L57.21,232.86L29.01,223.69L15.61,167.77L33.65,145.76L18.33,118.62L20.48,98.20L42.87,113.68L67.95,110.25L97.13,85.74L106.14,97.19L130.93,94.89L142.20,65.75L180.70,74.81L203.62,62.62L207.75,32.99L239.27,43.26L245.32,29.52L296.75,16.95L308.37,42.09Z" fill="url(#terra)" stroke="#f0d78c" stroke-width="1.6" stroke-linejoin="round"/>
+<polyline class="italia-percorso" points="64.3,164.8 105.7,219.9 232.8,195.3 205.6,262.1 406.8,469.7" fill="none" stroke="#6b1d32" stroke-width="2.4" stroke-dasharray="6 5" opacity="0.85"/>
+<g class="mappa-pin" data-id="tesauro" data-citta="Torino" transform="translate(64.31 164.77)">
+  <circle class="pin-hit" r="22" fill="transparent"/>
+  <circle class="pin-halo" r="11" fill="#140a0e" opacity="0.35"/>
+  <circle class="pin-dot" r="7.5" fill="#f0d78c" stroke="#140a0e" stroke-width="1.6"/>
+  <text class="pin-num" text-anchor="middle" dy="4" font-size="8" font-weight="700" fill="#140a0e" font-family="Georgia, serif">1</text>
+  <text class="pin-label" text-anchor="end" x="-12" y="-8" font-size="11" font-weight="700" fill="#f4ead6" stroke="#140a0e" stroke-width="3" paint-order="stroke" font-family="Georgia, serif">Tesauro</text>
+  <text class="pin-citta" text-anchor="end" x="-12" y="4" font-size="9" fill="#f0d78c" stroke="#140a0e" stroke-width="2.5" paint-order="stroke" font-family="Georgia, serif">Torino</text>
+</g>
+<g class="mappa-pin" data-id="chiabrera" data-citta="Savona" transform="translate(105.68 219.91)">
+  <circle class="pin-hit" r="22" fill="transparent"/>
+  <circle class="pin-halo" r="11" fill="#140a0e" opacity="0.35"/>
+  <circle class="pin-dot" r="7.5" fill="#f0d78c" stroke="#140a0e" stroke-width="1.6"/>
+  <text class="pin-num" text-anchor="middle" dy="4" font-size="8" font-weight="700" fill="#140a0e" font-family="Georgia, serif">2</text>
+  <text class="pin-label" text-anchor="start" x="12" y="14" font-size="11" font-weight="700" fill="#f4ead6" stroke="#140a0e" stroke-width="3" paint-order="stroke" font-family="Georgia, serif">Chiabrera</text>
+  <text class="pin-citta" text-anchor="start" x="12" y="26" font-size="9" fill="#f0d78c" stroke="#140a0e" stroke-width="2.5" paint-order="stroke" font-family="Georgia, serif">Savona</text>
+</g>
+<g class="mappa-pin" data-id="tassoni" data-citta="Modena" transform="translate(232.85 195.34)">
+  <circle class="pin-hit" r="22" fill="transparent"/>
+  <circle class="pin-halo" r="11" fill="#140a0e" opacity="0.35"/>
+  <circle class="pin-dot" r="7.5" fill="#f0d78c" stroke="#140a0e" stroke-width="1.6"/>
+  <text class="pin-num" text-anchor="middle" dy="4" font-size="8" font-weight="700" fill="#140a0e" font-family="Georgia, serif">3</text>
+  <text class="pin-label" text-anchor="start" x="12" y="-6" font-size="11" font-weight="700" fill="#f4ead6" stroke="#140a0e" stroke-width="3" paint-order="stroke" font-family="Georgia, serif">Tassoni</text>
+  <text class="pin-citta" text-anchor="start" x="12" y="6" font-size="9" fill="#f0d78c" stroke="#140a0e" stroke-width="2.5" paint-order="stroke" font-family="Georgia, serif">Modena</text>
+</g>
+<g class="mappa-pin" data-id="galileo" data-citta="Pisa" transform="translate(205.58 262.12)">
+  <circle class="pin-hit" r="22" fill="transparent"/>
+  <circle class="pin-halo" r="11" fill="#140a0e" opacity="0.35"/>
+  <circle class="pin-dot" r="7.5" fill="#f0d78c" stroke="#140a0e" stroke-width="1.6"/>
+  <text class="pin-num" text-anchor="middle" dy="4" font-size="8" font-weight="700" fill="#140a0e" font-family="Georgia, serif">4</text>
+  <text class="pin-label" text-anchor="end" x="-12" y="10" font-size="11" font-weight="700" fill="#f4ead6" stroke="#140a0e" stroke-width="3" paint-order="stroke" font-family="Georgia, serif">Galileo</text>
+  <text class="pin-citta" text-anchor="end" x="-12" y="22" font-size="9" fill="#f0d78c" stroke="#140a0e" stroke-width="2.5" paint-order="stroke" font-family="Georgia, serif">Pisa</text>
+</g>
+<g class="mappa-pin" data-id="napoli" data-citta="Napoli" transform="translate(406.79 469.68)">
+  <circle class="pin-hit" r="22" fill="transparent"/>
+  <circle class="pin-halo" r="11" fill="#140a0e" opacity="0.35"/>
+  <circle class="pin-dot" r="7.5" fill="#f0d78c" stroke="#140a0e" stroke-width="1.6"/>
+  <text class="pin-num" text-anchor="middle" dy="4" font-size="8" font-weight="700" fill="#140a0e" font-family="Georgia, serif">5</text>
+  <text class="pin-label" text-anchor="end" x="-12" y="4" font-size="11" font-weight="700" fill="#f4ead6" stroke="#140a0e" stroke-width="3" paint-order="stroke" font-family="Georgia, serif">Marino · Basile</text>
+  <text class="pin-citta" text-anchor="end" x="-12" y="16" font-size="9" fill="#f0d78c" stroke="#140a0e" stroke-width="2.5" paint-order="stroke" font-family="Georgia, serif">Napoli</text>
+</g>
+</svg>
