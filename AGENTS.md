@@ -96,6 +96,7 @@ Sito base: `https://hidetoshi777.github.io/Scuola/`
 | Grandezze e unità | https://hidetoshi777.github.io/Scuola/grandezze-unita/ | [Studio](https://hidetoshi777.github.io/Scuola/grandezze-unita/imparare.html) · [Fumetto](https://hidetoshi777.github.io/Scuola/grandezze-unita/fumetto.html) · [Lab](https://hidetoshi777.github.io/Scuola/grandezze-unita/laboratorio.html) · [Gioco](https://hidetoshi777.github.io/Scuola/grandezze-unita/gioco.html) |
 | **Sicurezza nei luoghi di lavoro** | https://hidetoshi777.github.io/Scuola/sicurezza-luoghi-lavoro/ | [Foglio 1](https://hidetoshi777.github.io/Scuola/sicurezza-luoghi-lavoro/#foglio-1) · [Foglio 2](https://hidetoshi777.github.io/Scuola/sicurezza-luoghi-lavoro/#foglio-2) |
 | **Raccoglitore professionale AM** | https://hidetoshi777.github.io/Scuola/professionale/ | Terza e quarta AM (bollini 3 / 4) |
+| Galileo · Il cannocchiale | https://hidetoshi777.github.io/Scuola/galileo-cannocchiale/ | Solo gioco, non nel raccoglitore |
 
 I vecchi link alla radice (`/gioco.html`, ecc.) reindirizzano ancora alla rotazione terrestre.
 

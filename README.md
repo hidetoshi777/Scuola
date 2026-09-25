@@ -28,6 +28,12 @@ Realizzato dal Prof. Rossano Bella.
 - Gioco: https://hidetoshi777.github.io/Scuola/acciaio-alluminio-ghisa/gioco.html
 - Densità (allenamento γ): https://hidetoshi777.github.io/Scuola/acciaio-alluminio-ghisa/densita.html
 
+### Galileo · Il cannocchiale
+
+Solo gioco, circa dieci minuti. Non è nel raccoglitore professionale.
+
+- Gioco: https://hidetoshi777.github.io/Scuola/galileo-cannocchiale/
+
 ### Edison · Guerra delle correnti · Quarta professionale (tecnologie elettriche)
 
 - Home: https://hidetoshi777.github.io/Scuola/edison-guerra-correnti/

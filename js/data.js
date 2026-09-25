@@ -394,6 +394,19 @@ window.ATTIVITA_WEB = [
       { label: "Gioco", url: "circuito-lampadina/gioco.html" },
     ],
   },
+  {
+    titolo: "Galileo — Il cannocchiale",
+    materia: "Scienze",
+    classe: "Classe",
+    descrizione:
+      "Otto tappe da fare in circa dieci minuti: Pisa, il cannocchiale, la Luna, le lune di Giove, Venere, la caduta dei gravi, il processo e il Dialogo in italiano.",
+    citazione: "Il libro dell’universo è scritto in lingua matematica.",
+    url: "galileo-cannocchiale/",
+    copertina: "galileo-cannocchiale/img/og-share.jpg",
+    tinta: "scienze",
+    adesivo: "st-pianeta",
+    extra: [{ label: "Gioco", url: "galileo-cannocchiale/" }],
+  },
 ];
 
 /** Attività web per il raccoglitore professionale (Ferraris AM): richiede `annoProf` 3 o 4. */
