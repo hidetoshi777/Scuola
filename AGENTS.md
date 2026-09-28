@@ -30,8 +30,9 @@ La cartella tipo (`index` + `imparare` + `fumetto` + `laboratorio` + `gioco`) va
 - **QA TypeSafe / Jev — OBBLIGATORIO** su ogni **nuovo** lavoro Scuola (e su ogni espansione sostanziale di quiz / Imparare / laboratorio) **prima** di PR/merge/pubblicazione. Non è opzionale.
   - Usa lo skill **TypeSafe** e il modello **Jev** come giudice tipizzato (Choice / Noul / Score), **non** come autore del contenuto.
   - Passaggio minimo: tutte le domande del quiz/`proveGioco` (e, se presenti, cloze / intrusi / item laboratorio a risposta chiusa). Idealmente anche schede Imparare e coerenza testo fumetto/VN ↔ obiettivo della lezione.
-  - Controlla: una sola risposta corretta; distrattori sbagliati ma plausibili; allineamento all’obiettivo; coerenza opzione corretta ↔ spiegazione; semplificazioni da slide che rischiano di essere false.
-  - Se `problema ≠ nessuno` o confidence bassa → correggi o marca «da rivedere a mano»; **non pubblicare** fingendo che sia ok.
+  - Controlla: una sola risposta corretta; distrattori sbagliati ma plausibili; allineamento all’obiettivo; coerenza opzione corretta ↔ spiegazione; affermazioni false.
+  - **Errori no, semplificazioni sì** (decisione del Prof.): una semplificazione adatta al livello della classe va bene anche se un po' «sempliciotta» e **non blocca** la pubblicazione. Si corregge solo ciò che è **falso** o **incoerente** (risposta sbagliata, più risposte giuste, opzione ≠ spiegazione, fatto inventato). Quando Jev segnala una semplificazione, chiediti: è vera al livello a cui è detta? Se sì, resta.
+  - Se Jev trova un errore vero o la confidence è bassa → correggi o marca «da rivedere a mano»; **non pubblicare** fingendo che sia ok.
   - Salva un report JSON nella cartella del lavoro (es. `_qa_jev_quiz.json`) e cita l’esito nel messaggio di commit/PR.
   - Riusa lo script di un lavoro precedente (`_qa_jev_run.py`) adattando path/obiettivo, oppure equivalenti.
   - Chiave API: `typesafe` in `trading_system/config/secrets.toml` (`get_typesafe_api_key()`, o env `TYPESAFE_API_KEY`). Skill: `typesafe-ai`. Docs: https://docs.typesafe.ai/llms.txt.

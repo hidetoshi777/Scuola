@@ -56,7 +56,7 @@ Nuove attività: nuova sottocartella, stessa struttura (home, imparare, laborato
 Per **ogni nuovo lavoro** Scuola (e per ogni espansione sostanziale di quiz / studio / laboratorio), **prima della pubblicazione** è obbligatorio un passaggio di QA con **TypeSafe (modello Jev)**:
 
 - Jev giudica (sì/no, scelta, punteggio); non scrive il materiale.
-- Al minimo: tutte le domande del quiz; segnalare e correggere incongruenze (es. opzione vs spiegazione) e semplificazioni fuorvianti.
+- Al minimo: tutte le domande del quiz; correggere gli errori veri (risposte sbagliate, incongruenze fra opzione e spiegazione). Le semplificazioni adatte al livello della classe vanno bene.
 - Report nella cartella del lavoro (es. `_qa_jev_quiz.json`).
 
 Dettagli operativi per gli agenti: `AGENTS.md`.
