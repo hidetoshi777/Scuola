@@ -50,3 +50,13 @@ edison-guerra-correnti/     → tecnologie elettriche, quarta professionale (fum
 ```
 
 Nuove attività: nuova sottocartella, stessa struttura (home, imparare, laboratorio, gioco).
+
+## QA dei materiali (TypeSafe / Jev) — obbligatorio
+
+Per **ogni nuovo lavoro** Scuola (e per ogni espansione sostanziale di quiz / studio / laboratorio), **prima della pubblicazione** è obbligatorio un passaggio di QA con **TypeSafe (modello Jev)**:
+
+- Jev giudica (sì/no, scelta, punteggio); non scrive il materiale.
+- Al minimo: tutte le domande del quiz; segnalare e correggere incongruenze (es. opzione vs spiegazione) e semplificazioni fuorvianti.
+- Report nella cartella del lavoro (es. `_qa_jev_quiz.json`).
+
+Dettagli operativi per gli agenti: `AGENTS.md`.

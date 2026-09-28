@@ -27,6 +27,16 @@ La cartella tipo (`index` + `imparare` + `fumetto` + `laboratorio` + `gioco`) va
 - **Stampe**: su ogni foglio stampato (fumetti, attestati, schede) il credito **Realizzato dal Prof. Rossano Bella** va in **piccolo** — i materiali non devono circolare anonimi in copisteria.
 - Per i prossimi lavori Scuola, **usa il MCP Canva** (lavori e risorse già presenti nell’account Canva del Prof.) quando servono grafiche, template, export o materiali già realizzati lì: non reinventare da zero se Canva ha già qualcosa di utile.
 - **Inserire i Canva del Prof.**: se per un argomento esiste già un design Canva (presentazione, poster, slide, ecc.), **va messo in una sezione dedicata** del lavoro (es. «Le slide del Prof.» / galleria export), non solo riusato come asset sparso. Prima di inventare grafiche nuove, cerca e riusa quei Canva.
+- **QA TypeSafe / Jev — OBBLIGATORIO** su ogni **nuovo** lavoro Scuola (e su ogni espansione sostanziale di quiz / Imparare / laboratorio) **prima** di PR/merge/pubblicazione. Non è opzionale.
+  - Usa lo skill **TypeSafe** e il modello **Jev** come giudice tipizzato (Choice / Noul / Score), **non** come autore del contenuto.
+  - Passaggio minimo: tutte le domande del quiz/`proveGioco` (e, se presenti, cloze / intrusi / item laboratorio a risposta chiusa). Idealmente anche schede Imparare e coerenza testo fumetto/VN ↔ obiettivo della lezione.
+  - Controlla: una sola risposta corretta; distrattori sbagliati ma plausibili; allineamento all’obiettivo; coerenza opzione corretta ↔ spiegazione; semplificazioni da slide che rischiano di essere false.
+  - Se `problema ≠ nessuno` o confidence bassa → correggi o marca «da rivedere a mano»; **non pubblicare** fingendo che sia ok.
+  - Salva un report JSON nella cartella del lavoro (es. `_qa_jev_quiz.json`) e cita l’esito nel messaggio di commit/PR.
+  - Riusa lo script di un lavoro precedente (`_qa_jev_run.py`) adattando path/obiettivo, oppure equivalenti.
+  - Chiave API: `typesafe` in `trading_system/config/secrets.toml` (`get_typesafe_api_key()`, o env `TYPESAFE_API_KEY`). Skill: `typesafe-ai`. Docs: https://docs.typesafe.ai/llms.txt.
+  - Smoke già fatti: `parti-invariabili` (bug frequenza/tempo trovato e corretto), `manzoni-promessi` (semplificazioni da slide segnalate), `nazismo-fumetto` (Canva).
+  - I lavori pubblicati **prima** di questa regola non sono ancora passati dal QA Jev: da fare quando li si tocca.
 
 ## Preferenze agente
 
@@ -67,8 +77,9 @@ Struttura **corta** (quando il Prof chiede un pezzo): solo i file del pezzo + `i
 
 ## Pubblicazione (sempre così)
 
-Dopo ogni nuova attività:
+Dopo ogni nuova attività (o dopo un’espansione sostanziale dei contenuti):
 
+0. **QA Jev obbligatorio** sui materiali a risposta chiusa (e dove sensato su Imparare/fumetto) — vedi regola in Organizzazione. Senza questo passaggio non si merge.
 1. Registrala sullo **scaffale** (`js/data.js` → `ATTIVITA_WEB`).
 2. Apri una pull request e **fai tu il merge** su `main` (Origin), senza aspettare.
 3. Pubblica su GitHub, così la classe ha l’indirizzo web.
