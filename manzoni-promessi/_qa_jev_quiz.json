@@ -1,0 +1,511 @@
+{
+  "obiettivo": "Alessandro Manzoni: lingua (fiorentino, risciacquatura in Arno), opere (Cinque Maggio, Marzo 1821, Promessi Sposi), romanzo storico, Provvidenza, personaggi — livello scuola superiore, allineato alle slide del Prof.",
+  "results": [
+    {
+      "idx": 0,
+      "q": "Perché Manzoni sceglie il fiorentino?",
+      "correct": "Perché è vivo, nobile e utile all’Italia unita",
+      "tema": "lingua",
+      "status": 200,
+      "latency_ms": 786,
+      "model": "jev-1.13.0",
+      "usage": {
+        "input_tokens": 983,
+        "output_tokens": 165
+      },
+      "unica_corretta": 0.93,
+      "distrattori_ok": 0.37,
+      "allineata": 0.91,
+      "difficolta_score": 0.03,
+      "difficolta_conf": 0.95,
+      "problema": "distrattori_deboli",
+      "problema_conf": 0.35,
+      "problema_probs": {
+        "semplificazione_fuorviante": 0.09,
+        "fuori_obiettivo": 0.0,
+        "ambigua": 0.02,
+        "corretta_sbagliata": 0.0,
+        "nessuno": 0.42,
+        "distrattori_deboli": 0.47000000000000003
+      }
+    },
+    {
+      "idx": 1,
+      "q": "Cosa significa «risciacquare i panni in Arno»?",
+      "correct": "Rivedere la lingua del romanzo sul modello fiorentino",
+      "tema": "lingua",
+      "status": 200,
+      "latency_ms": 400,
+      "model": "jev-1.13.0",
+      "usage": {
+        "input_tokens": 977,
+        "output_tokens": 160
+      },
+      "unica_corretta": 0.95,
+      "distrattori_ok": 0.53,
+      "allineata": 0.95,
+      "difficolta_score": 0.04,
+      "difficolta_conf": 0.94,
+      "problema": "nessuno",
+      "problema_conf": 0.53,
+      "problema_probs": {
+        "nessuno": 0.62,
+        "corretta_sbagliata": 0.0,
+        "ambigua": 0.01,
+        "fuori_obiettivo": 0.0,
+        "distrattori_deboli": 0.28,
+        "semplificazione_fuorviante": 0.09
+      }
+    },
+    {
+      "idx": 2,
+      "q": "Le tre opere principali di Manzoni (Cinque Maggio, Marzo 1821, Promessi Sposi) sono soprattutto…",
+      "correct": "Politiche",
+      "tema": "opere",
+      "status": 200,
+      "latency_ms": 429,
+      "model": "jev-1.13.0",
+      "usage": {
+        "input_tokens": 958,
+        "output_tokens": 166
+      },
+      "unica_corretta": 0.67,
+      "distrattori_ok": 0.42,
+      "allineata": 0.9,
+      "difficolta_score": 0.33,
+      "difficolta_conf": 0.5,
+      "problema": "semplificazione_fuorviante",
+      "problema_conf": 0.49,
+      "problema_probs": {
+        "nessuno": 0.01,
+        "corretta_sbagliata": 0.08,
+        "distrattori_deboli": 0.09,
+        "semplificazione_fuorviante": 0.58,
+        "ambigua": 0.24,
+        "fuori_obiettivo": 0.0
+      }
+    },
+    {
+      "idx": 3,
+      "q": "Il Cinque Maggio parla soprattutto di…",
+      "correct": "Napoleone e la sua conversione",
+      "tema": "opere",
+      "status": 200,
+      "latency_ms": 389,
+      "model": "jev-1.13.0",
+      "usage": {
+        "input_tokens": 951,
+        "output_tokens": 160
+      },
+      "unica_corretta": 0.91,
+      "distrattori_ok": 0.54,
+      "allineata": 0.95,
+      "difficolta_score": 0.02,
+      "difficolta_conf": 0.97,
+      "problema": "nessuno",
+      "problema_conf": 0.31,
+      "problema_probs": {
+        "corretta_sbagliata": 0.01,
+        "distrattori_deboli": 0.2,
+        "nessuno": 0.43,
+        "semplificazione_fuorviante": 0.25,
+        "fuori_obiettivo": 0.0,
+        "ambigua": 0.11
+      }
+    },
+    {
+      "idx": 4,
+      "q": "Marzo 1821 è un elogio di…",
+      "correct": "I rivoluzionari dei moti che vogliono unire l’Italia",
+      "tema": "opere",
+      "status": 200,
+      "latency_ms": 347,
+      "model": "jev-1.13.0",
+      "usage": {
+        "input_tokens": 972,
+        "output_tokens": 166
+      },
+      "unica_corretta": 0.86,
+      "distrattori_ok": 0.44,
+      "allineata": 0.93,
+      "difficolta_score": 0.08,
+      "difficolta_conf": 0.87,
+      "problema": "semplificazione_fuorviante",
+      "problema_conf": 0.38,
+      "problema_probs": {
+        "distrattori_deboli": 0.13,
+        "ambigua": 0.11,
+        "fuori_obiettivo": 0.0,
+        "nessuno": 0.18,
+        "corretta_sbagliata": 0.09,
+        "semplificazione_fuorviante": 0.49
+      }
+    },
+    {
+      "idx": 5,
+      "q": "Perché Manzoni ambienta i Promessi nel Seicento?",
+      "correct": "Per un espediente: eludere la censura austriaca",
+      "tema": "romanzo",
+      "status": 200,
+      "latency_ms": 395,
+      "model": "jev-1.13.0",
+      "usage": {
+        "input_tokens": 990,
+        "output_tokens": 166
+      },
+      "unica_corretta": 0.67,
+      "distrattori_ok": 0.32,
+      "allineata": 0.86,
+      "difficolta_score": 0.19,
+      "difficolta_conf": 0.72,
+      "problema": "semplificazione_fuorviante",
+      "problema_conf": 0.4,
+      "problema_probs": {
+        "corretta_sbagliata": 0.06,
+        "distrattori_deboli": 0.22,
+        "semplificazione_fuorviante": 0.51,
+        "ambigua": 0.18,
+        "nessuno": 0.03,
+        "fuori_obiettivo": 0.0
+      }
+    },
+    {
+      "idx": 6,
+      "q": "Chi sono i protagonisti «nuovi» del romanzo storico manzoniano?",
+      "correct": "Persone comuni come Renzo e Lucia",
+      "tema": "romanzo",
+      "status": 200,
+      "latency_ms": 402,
+      "model": "jev-1.13.0",
+      "usage": {
+        "input_tokens": 959,
+        "output_tokens": 165
+      },
+      "unica_corretta": 0.95,
+      "distrattori_ok": 0.47,
+      "allineata": 0.94,
+      "difficolta_score": 0.07,
+      "difficolta_conf": 0.9,
+      "problema": "distrattori_deboli",
+      "problema_conf": 0.49,
+      "problema_probs": {
+        "nessuno": 0.37,
+        "corretta_sbagliata": 0.0,
+        "semplificazione_fuorviante": 0.05,
+        "fuori_obiettivo": 0.0,
+        "ambigua": 0.01,
+        "distrattori_deboli": 0.57
+      }
+    },
+    {
+      "idx": 7,
+      "q": "Qual è il «motore» del romanzo secondo le slide?",
+      "correct": "La Provvidenza / Dio",
+      "tema": "provvidenza",
+      "status": 200,
+      "latency_ms": 394,
+      "model": "jev-1.13.0",
+      "usage": {
+        "input_tokens": 952,
+        "output_tokens": 160
+      },
+      "unica_corretta": 0.87,
+      "distrattori_ok": 0.67,
+      "allineata": 0.95,
+      "difficolta_score": 0.05,
+      "difficolta_conf": 0.93,
+      "problema": "nessuno",
+      "problema_conf": 0.55,
+      "problema_probs": {
+        "distrattori_deboli": 0.17,
+        "fuori_obiettivo": 0.0,
+        "corretta_sbagliata": 0.01,
+        "ambigua": 0.11,
+        "semplificazione_fuorviante": 0.08,
+        "nessuno": 0.63
+      }
+    },
+    {
+      "idx": 8,
+      "q": "Cosa fa l’Innominato dopo la conversione?",
+      "correct": "Libera Lucia",
+      "tema": "personaggi",
+      "status": 200,
+      "latency_ms": 367,
+      "model": "jev-1.13.0",
+      "usage": {
+        "input_tokens": 954,
+        "output_tokens": 160
+      },
+      "unica_corretta": 0.95,
+      "distrattori_ok": 0.41,
+      "allineata": 0.94,
+      "difficolta_score": 0.03,
+      "difficolta_conf": 0.96,
+      "problema": "nessuno",
+      "problema_conf": 0.54,
+      "problema_probs": {
+        "fuori_obiettivo": 0.0,
+        "nessuno": 0.62,
+        "corretta_sbagliata": 0.01,
+        "ambigua": 0.02,
+        "distrattori_deboli": 0.27,
+        "semplificazione_fuorviante": 0.08
+      }
+    },
+    {
+      "idx": 9,
+      "q": "Come muore Don Rodrigo?",
+      "correct": "Di peste",
+      "tema": "provvidenza",
+      "status": 200,
+      "latency_ms": 379,
+      "model": "jev-1.13.0",
+      "usage": {
+        "input_tokens": 936,
+        "output_tokens": 160
+      },
+      "unica_corretta": 0.92,
+      "distrattori_ok": 0.65,
+      "allineata": 0.92,
+      "difficolta_score": 0.04,
+      "difficolta_conf": 0.94,
+      "problema": "nessuno",
+      "problema_conf": 0.59,
+      "problema_probs": {
+        "nessuno": 0.65,
+        "distrattori_deboli": 0.11,
+        "ambigua": 0.06,
+        "semplificazione_fuorviante": 0.13,
+        "fuori_obiettivo": 0.01,
+        "corretta_sbagliata": 0.04
+      }
+    },
+    {
+      "idx": 10,
+      "q": "Manzoni rompe le unità aristoteliche. Quale affermazione è vera?",
+      "correct": "Tempo lungo, luoghi molti, trama articolata",
+      "tema": "romanzo",
+      "status": 200,
+      "latency_ms": 417,
+      "model": "jev-1.13.0",
+      "usage": {
+        "input_tokens": 986,
+        "output_tokens": 160
+      },
+      "unica_corretta": 0.95,
+      "distrattori_ok": 0.58,
+      "allineata": 0.85,
+      "difficolta_score": 0.17,
+      "difficolta_conf": 0.74,
+      "problema": "nessuno",
+      "problema_conf": 0.51,
+      "problema_probs": {
+        "corretta_sbagliata": 0.01,
+        "semplificazione_fuorviante": 0.15,
+        "fuori_obiettivo": 0.01,
+        "nessuno": 0.59,
+        "distrattori_deboli": 0.21,
+        "ambigua": 0.03
+      }
+    },
+    {
+      "idx": 11,
+      "q": "Secondo Manzoni la letteratura deve essere…",
+      "correct": "Comprensibile e utile (anche politica)",
+      "tema": "lingua",
+      "status": 200,
+      "latency_ms": 379,
+      "model": "jev-1.13.0",
+      "usage": {
+        "input_tokens": 955,
+        "output_tokens": 165
+      },
+      "unica_corretta": 0.89,
+      "distrattori_ok": 0.35,
+      "allineata": 0.88,
+      "difficolta_score": 0.1,
+      "difficolta_conf": 0.85,
+      "problema": "distrattori_deboli",
+      "problema_conf": 0.28,
+      "problema_probs": {
+        "nessuno": 0.27,
+        "semplificazione_fuorviante": 0.23,
+        "fuori_obiettivo": 0.01,
+        "distrattori_deboli": 0.4,
+        "corretta_sbagliata": 0.01,
+        "ambigua": 0.08
+      }
+    }
+  ],
+  "review": [
+    {
+      "idx": 0,
+      "q": "Perché Manzoni sceglie il fiorentino?",
+      "correct": "Perché è vivo, nobile e utile all’Italia unita",
+      "tema": "lingua",
+      "status": 200,
+      "latency_ms": 786,
+      "model": "jev-1.13.0",
+      "usage": {
+        "input_tokens": 983,
+        "output_tokens": 165
+      },
+      "unica_corretta": 0.93,
+      "distrattori_ok": 0.37,
+      "allineata": 0.91,
+      "difficolta_score": 0.03,
+      "difficolta_conf": 0.95,
+      "problema": "distrattori_deboli",
+      "problema_conf": 0.35,
+      "problema_probs": {
+        "semplificazione_fuorviante": 0.09,
+        "fuori_obiettivo": 0.0,
+        "ambigua": 0.02,
+        "corretta_sbagliata": 0.0,
+        "nessuno": 0.42,
+        "distrattori_deboli": 0.47000000000000003
+      }
+    },
+    {
+      "idx": 2,
+      "q": "Le tre opere principali di Manzoni (Cinque Maggio, Marzo 1821, Promessi Sposi) sono soprattutto…",
+      "correct": "Politiche",
+      "tema": "opere",
+      "status": 200,
+      "latency_ms": 429,
+      "model": "jev-1.13.0",
+      "usage": {
+        "input_tokens": 958,
+        "output_tokens": 166
+      },
+      "unica_corretta": 0.67,
+      "distrattori_ok": 0.42,
+      "allineata": 0.9,
+      "difficolta_score": 0.33,
+      "difficolta_conf": 0.5,
+      "problema": "semplificazione_fuorviante",
+      "problema_conf": 0.49,
+      "problema_probs": {
+        "nessuno": 0.01,
+        "corretta_sbagliata": 0.08,
+        "distrattori_deboli": 0.09,
+        "semplificazione_fuorviante": 0.58,
+        "ambigua": 0.24,
+        "fuori_obiettivo": 0.0
+      }
+    },
+    {
+      "idx": 4,
+      "q": "Marzo 1821 è un elogio di…",
+      "correct": "I rivoluzionari dei moti che vogliono unire l’Italia",
+      "tema": "opere",
+      "status": 200,
+      "latency_ms": 347,
+      "model": "jev-1.13.0",
+      "usage": {
+        "input_tokens": 972,
+        "output_tokens": 166
+      },
+      "unica_corretta": 0.86,
+      "distrattori_ok": 0.44,
+      "allineata": 0.93,
+      "difficolta_score": 0.08,
+      "difficolta_conf": 0.87,
+      "problema": "semplificazione_fuorviante",
+      "problema_conf": 0.38,
+      "problema_probs": {
+        "distrattori_deboli": 0.13,
+        "ambigua": 0.11,
+        "fuori_obiettivo": 0.0,
+        "nessuno": 0.18,
+        "corretta_sbagliata": 0.09,
+        "semplificazione_fuorviante": 0.49
+      }
+    },
+    {
+      "idx": 5,
+      "q": "Perché Manzoni ambienta i Promessi nel Seicento?",
+      "correct": "Per un espediente: eludere la censura austriaca",
+      "tema": "romanzo",
+      "status": 200,
+      "latency_ms": 395,
+      "model": "jev-1.13.0",
+      "usage": {
+        "input_tokens": 990,
+        "output_tokens": 166
+      },
+      "unica_corretta": 0.67,
+      "distrattori_ok": 0.32,
+      "allineata": 0.86,
+      "difficolta_score": 0.19,
+      "difficolta_conf": 0.72,
+      "problema": "semplificazione_fuorviante",
+      "problema_conf": 0.4,
+      "problema_probs": {
+        "corretta_sbagliata": 0.06,
+        "distrattori_deboli": 0.22,
+        "semplificazione_fuorviante": 0.51,
+        "ambigua": 0.18,
+        "nessuno": 0.03,
+        "fuori_obiettivo": 0.0
+      }
+    },
+    {
+      "idx": 6,
+      "q": "Chi sono i protagonisti «nuovi» del romanzo storico manzoniano?",
+      "correct": "Persone comuni come Renzo e Lucia",
+      "tema": "romanzo",
+      "status": 200,
+      "latency_ms": 402,
+      "model": "jev-1.13.0",
+      "usage": {
+        "input_tokens": 959,
+        "output_tokens": 165
+      },
+      "unica_corretta": 0.95,
+      "distrattori_ok": 0.47,
+      "allineata": 0.94,
+      "difficolta_score": 0.07,
+      "difficolta_conf": 0.9,
+      "problema": "distrattori_deboli",
+      "problema_conf": 0.49,
+      "problema_probs": {
+        "nessuno": 0.37,
+        "corretta_sbagliata": 0.0,
+        "semplificazione_fuorviante": 0.05,
+        "fuori_obiettivo": 0.0,
+        "ambigua": 0.01,
+        "distrattori_deboli": 0.57
+      }
+    },
+    {
+      "idx": 11,
+      "q": "Secondo Manzoni la letteratura deve essere…",
+      "correct": "Comprensibile e utile (anche politica)",
+      "tema": "lingua",
+      "status": 200,
+      "latency_ms": 379,
+      "model": "jev-1.13.0",
+      "usage": {
+        "input_tokens": 955,
+        "output_tokens": 165
+      },
+      "unica_corretta": 0.89,
+      "distrattori_ok": 0.35,
+      "allineata": 0.88,
+      "difficolta_score": 0.1,
+      "difficolta_conf": 0.85,
+      "problema": "distrattori_deboli",
+      "problema_conf": 0.28,
+      "problema_probs": {
+        "nessuno": 0.27,
+        "semplificazione_fuorviante": 0.23,
+        "fuori_obiettivo": 0.01,
+        "distrattori_deboli": 0.4,
+        "corretta_sbagliata": 0.01,
+        "ambigua": 0.08
+      }
+    }
+  ]
+}
