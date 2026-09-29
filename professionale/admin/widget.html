@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Meteo Meucci · widget</title>
+  <!--
+    Pagina pensata per i widget "sito web" di Android (WebsiteWidget, AnyWidget…),
+    che ne fanno una foto a intervalli regolari: per questo niente orologio (resterebbe
+    indietro fra un aggiornamento e l'altro) e niente tracciamento visite (ogni
+    aggiornamento del widget risulterebbe una visita nel pannello "Qualcuno è entrato?").
+  -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,600;9..40,700;9..40,800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/admin.css?v=8">
+  <style>
+    html {
+      /* tutto scala col riquadro del widget */
+      font-size: min(4.4vw, 8.4vh);
+      background: transparent;
+    }
+
+    body {
+      margin: 0;
+      height: 100vh;
+      overflow: hidden;
+      background: transparent;
+      font-family: "DM Sans", system-ui, sans-serif;
+      color: #eef2f7;
+    }
+
+    .school-clock.w {
+      box-sizing: border-box;
+      height: 100vh;
+      display: grid;
+      grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
+      border-radius: 0;
+      box-shadow: none;
+    }
+
+    .w .school-clock__scene {
+      height: 100%;
+      overflow: hidden;
+    }
+
+    .w .school-clock__scene img {
+      width: 128%;
+      left: 52%;
+      bottom: 4%;
+    }
+
+    .w .school-clock__sun {
+      scale: 0.8;
+      transform-origin: top right;
+    }
+
+    .w-info {
+      position: relative;
+      z-index: 5;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      min-width: 0;
+      padding: 0.9rem 1rem 0.9rem 0.7rem;
+    }
+
+    .w .school-clock__place {
+      margin: 0;
+      font-size: 0.72rem;
+      font-weight: 800;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: #d8e2ec;
+      text-shadow: 0 1px 6px rgb(0 0 0 / 45%);
+    }
+
+    .w-temp {
+      margin: 0.15rem 0 0;
+      font-size: 3.1rem;
+      font-weight: 800;
+      line-height: 1;
+      letter-spacing: -0.04em;
+      color: #fff6e2;
+      text-shadow: 0 2px 14px rgb(0 0 0 / 35%);
+    }
+
+    .w-cond {
+      margin: 0.2rem 0 0;
+      font-size: 1rem;
+      font-weight: 700;
+      line-height: 1.2;
+      color: #f7dcaa;
+      text-shadow: 0 1px 6px rgb(0 0 0 / 45%);
+    }
+
+    .w-det,
+    .w-data {
+      margin: 0.3rem 0 0;
+      font-size: 0.74rem;
+      line-height: 1.3;
+      color: #dbe4ee;
+      text-shadow: 0 1px 6px rgb(0 0 0 / 50%);
+    }
+
+    .w-data {
+      color: #b4c2d0;
+    }
+
+    .w-data::first-letter {
+      text-transform: uppercase;
+    }
+
+    /* il pannello testo ha un velo scuro per restare leggibile su ogni cielo */
+    .w-info::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: -1;
+      background: linear-gradient(to right, transparent, var(--clock-display) 38%);
+    }
+
+    /* riquadro quasi quadrato o verticale: scena sopra, testo sotto */
+    @media (max-aspect-ratio: 13/10) {
+      html { font-size: min(7vw, 4.6vh); }
+
+      .school-clock.w {
+        grid-template-columns: 1fr;
+        grid-template-rows: minmax(0, 1.25fr) auto;
+      }
+
+      .w .school-clock__scene img {
+        width: 118%;
+        left: 50%;
+        bottom: 2%;
+      }
+
+      .w-info {
+        justify-content: flex-start;
+        padding: 0.4rem 1rem 1rem;
+      }
+
+      .w-info::before {
+        background: linear-gradient(to bottom, transparent, var(--clock-display) 30%);
+      }
+    }
+  </style>
+</head>
+<body>
+  <section class="school-clock w" aria-label="Meteo al plesso Meucci">
+    <div class="school-clock__scene" aria-hidden="true">
+      <span class="school-clock__sun"><i></i></span>
+      <span class="school-clock__cloud school-clock__cloud--one"><i></i></span>
+      <span class="school-clock__cloud school-clock__cloud--two"><i></i></span>
+      <span class="school-clock__wind school-clock__wind--one"><i></i></span>
+      <span class="school-clock__wind school-clock__wind--two"><i></i></span>
+      <span class="school-clock__rain school-clock__rain--one"></span>
+      <span class="school-clock__rain school-clock__rain--two"></span>
+      <span class="school-clock__lightning"></span>
+      <img src="img/meucci-isometrica.png?v=2" alt="" width="1100" height="619">
+    </div>
+    <div class="w-info">
+      <p class="school-clock__place">Meucci · Acireale</p>
+      <p class="w-temp" id="w-temp">--°</p>
+      <p class="w-cond" id="w-cond">Meteo in arrivo…</p>
+      <p class="w-det" id="w-det"></p>
+      <p class="w-data" id="w-data"></p>
+    </div>
+  </section>
+  <script src="js/widget.js?v=1"></script>
+</body>
+</html>
