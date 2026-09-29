@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="color-scheme" content="dark">
+  <title>Meteo Meucci · widget per Android</title>
+  <meta name="description" content="Il plesso Meucci sulla Home del telefono: ora, meteo di Acireale e un cielo che cambia con la giornata.">
+  <link rel="icon" href="../favicon.svg" type="image/svg+xml">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Meteo Meucci · widget per Android">
+  <meta property="og:description" content="Il plesso Meucci sulla Home del telefono: ora, meteo di Acireale e un cielo che cambia con la giornata.">
+  <meta property="og:url" content="https://hidetoshi777.github.io/Scuola/meteo-meucci/">
+  <meta property="og:image" content="https://hidetoshi777.github.io/Scuola/meteo-meucci/img/og-share.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Meteo Meucci · widget per Android">
+  <meta name="twitter:description" content="Il plesso Meucci sulla Home del telefono: ora, meteo di Acireale e un cielo che cambia con la giornata.">
+  <meta name="twitter:image" content="https://hidetoshi777.github.io/Scuola/meteo-meucci/img/og-share.jpg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,600;9..40,700;9..40,800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0d131b;
+      --surface: #16202b;
+      --text: #eef2f7;
+      --muted: #a3b1c0;
+      --border: #273442;
+      --accent: #f5a623;
+      --accent-ink: #1a1206;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      min-height: 100dvh;
+      font-family: "DM Sans", system-ui, sans-serif;
+      line-height: 1.5;
+      color: var(--text);
+      background:
+        radial-gradient(ellipse 90% 45% at 50% -10%, rgb(74 163 212 / 28%), transparent),
+        var(--bg);
+    }
+
+    main {
+      max-width: 34rem;
+      margin: 0 auto;
+      padding: 2rem 1rem 2.5rem;
+    }
+
+    .eyebrow {
+      margin: 0;
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--accent);
+    }
+
+    h1 {
+      margin: 0.35rem 0 0;
+      font-size: clamp(1.7rem, 7vw, 2.2rem);
+      font-weight: 800;
+      line-height: 1.15;
+    }
+
+    .lead {
+      margin: 0.6rem 0 0;
+      color: var(--muted);
+    }
+
+    .anteprima {
+      position: relative;
+      margin: 1.5rem 0 0;
+    }
+
+    .anteprima img {
+      display: block;
+      width: 100%;
+      height: auto;
+      filter: drop-shadow(0 1rem 1.6rem rgb(0 0 0 / 45%));
+    }
+
+    .anteprima img + img {
+      position: absolute;
+      inset: 0;
+      opacity: 0;
+      animation: giorno-notte 9s ease-in-out infinite;
+    }
+
+    @keyframes giorno-notte {
+      0%, 38% { opacity: 0; }
+      50%, 88% { opacity: 1; }
+      100% { opacity: 0; }
+    }
+
+    .scarica {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.6rem;
+      width: 100%;
+      margin-top: 1.6rem;
+      padding: 1rem 1.2rem;
+      border-radius: 0.9rem;
+      background: var(--accent);
+      color: var(--accent-ink);
+      font-size: 1.1rem;
+      font-weight: 800;
+      text-decoration: none;
+      box-shadow: 0 0.6rem 1.4rem rgb(245 166 35 / 25%);
+    }
+
+    .scarica:focus-visible {
+      outline: 3px solid #fff;
+      outline-offset: 3px;
+    }
+
+    .scarica small {
+      font-weight: 600;
+      opacity: 0.75;
+    }
+
+    .nota {
+      margin: 0.55rem 0 0;
+      text-align: center;
+      font-size: 0.82rem;
+      color: var(--muted);
+    }
+
+    h2 {
+      margin: 2rem 0 0.7rem;
+      font-size: 1.15rem;
+      font-weight: 800;
+    }
+
+    ol.passi {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      counter-reset: passo;
+      display: grid;
+      gap: 0.6rem;
+    }
+
+    ol.passi li {
+      counter-increment: passo;
+      position: relative;
+      padding: 0.8rem 0.9rem 0.8rem 3.1rem;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 0.7rem;
+    }
+
+    ol.passi li::before {
+      content: counter(passo);
+      position: absolute;
+      left: 0.85rem;
+      top: 0.78rem;
+      display: grid;
+      place-items: center;
+      width: 1.6rem;
+      height: 1.6rem;
+      border-radius: 50%;
+      background: var(--accent);
+      color: var(--accent-ink);
+      font-weight: 800;
+      font-size: 0.85rem;
+    }
+
+    details {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 0.7rem;
+      padding: 0.1rem 0.9rem;
+    }
+
+    details + details {
+      margin-top: 0.5rem;
+    }
+
+    summary {
+      cursor: pointer;
+      padding: 0.7rem 0;
+      font-weight: 700;
+    }
+
+    details p {
+      margin: 0 0 0.8rem;
+      color: var(--muted);
+    }
+
+    ul.fatti {
+      margin: 0;
+      padding-left: 1.2rem;
+      color: var(--muted);
+    }
+
+    ul.fatti li + li {
+      margin-top: 0.3rem;
+    }
+
+    strong {
+      color: var(--text);
+    }
+
+    footer {
+      margin-top: 2.2rem;
+      text-align: center;
+      font-size: 0.8rem;
+      color: var(--muted);
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .anteprima img + img { animation: none; }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <p class="eyebrow">IISS «G. Ferraris» · plesso Meucci</p>
+    <h1>Meteo Meucci sulla Home del telefono</h1>
+    <p class="lead">Un widget per Android con il nostro plesso, l’ora e il meteo di Acireale. Il cielo cambia con la giornata: sole la mattina, luna la sera, nuvole e pioggia quando servono.</p>
+
+    <figure class="anteprima">
+      <img src="img/widget.png" alt="Il widget di giorno: il plesso Meucci sotto il sole, con ora, data, temperatura e vento" width="720" height="338">
+      <img src="img/widget-notte.png" alt="" width="720" height="338">
+    </figure>
+
+    <a class="scarica" href="meteo-meucci.apk" download="meteo-meucci.apk">Scarica l’app <small>2,8 MB</small></a>
+    <p class="nota">Solo per Android · versione 1.0</p>
+
+    <h2>Come installarla</h2>
+    <ol class="passi">
+      <li>Tocca <strong>Scarica l’app</strong>. Se Chrome avvisa che il file «può essere dannoso», tocca <strong>Scarica comunque</strong>: succede con ogni app che non viene dal Play Store.</li>
+      <li>Apri il file scaricato dalla notifica o dalla cartella <strong>Download</strong>. Android chiede di consentire l’installazione da questa fonte: <strong>consenti</strong> e torna indietro.</li>
+      <li>Apri <strong>Meteo Meucci</strong> e tocca <strong>Aggiungi il widget alla Home</strong>. In alternativa: tieni premuto su uno spazio vuoto della Home → Widget → Meteo Meucci.</li>
+    </ol>
+
+    <h2>Se qualcosa si blocca</h2>
+    <details>
+      <summary>Ho aperto il link da WhatsApp o Telegram e non scarica</summary>
+      <p>Le app di messaggistica aprono i link in un loro browser interno, che spesso non gestisce i download. Tocca il menu <strong>⋮</strong> in alto a destra e scegli <strong>Apri in Chrome</strong>, poi scarica da lì.</p>
+    </details>
+    <details>
+      <summary>Play Protect dice «App bloccata» o «App non sicura»</summary>
+      <p>Succede perché l’app non passa dal Play Store. Tocca <strong>Maggiori dettagli</strong> e poi <strong>Installa comunque</strong>. L’app chiede solo l’accesso a Internet, per il meteo.</p>
+    </details>
+    <details>
+      <summary>Non trovo il widget nell’elenco</summary>
+      <p>Apri una volta l’app Meteo Meucci, poi riprova: alcuni telefoni mostrano i widget di un’app solo dopo il primo avvio. La misura consigliata è 4×2; si può ridimensionare.</p>
+    </details>
+
+    <h2>Cosa fa</h2>
+    <ul class="fatti">
+      <li>L’orologio è quello del telefono: scorre da solo e non consuma batteria.</li>
+      <li>Il meteo arriva da Open-Meteo e si aggiorna ogni mezz’ora circa. Senza rete resta l’ultimo dato.</li>
+      <li>Toccando il widget si apre la versione animata.</li>
+      <li>Non raccoglie dati e non chiede altri permessi oltre a Internet.</li>
+    </ul>
+  </main>
+  <footer>
+    <p>Realizzato dal Prof. Rossano Bella</p>
+  </footer>
+</body>
+</html>
