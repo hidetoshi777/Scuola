@@ -10,7 +10,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,600;9..40,700;9..40,800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/admin.css?v=8">
+  <link rel="stylesheet" href="css/admin.css?v=9">
 </head>
 <body class="admin-page" data-theme="dark">
   <main class="admin-wrap admin-wrap--wide">
@@ -57,6 +57,33 @@
         <button type="button" class="admin-btn admin-btn--ghost" data-admin-logout>Esci</button>
       </div>
     </div>
+
+    <section class="admin-giochi" aria-labelledby="admin-giochi-titolo">
+      <h2 id="admin-giochi-titolo">Giochi del Meucci</h2>
+      <div class="admin-giochi__carte">
+        <a class="admin-gioco" href="../../meucci-giochi/parcheggio.html">
+          <img src="../../meucci-giochi/img/parcheggio.jpg?v=3" alt="" width="800" height="600" loading="lazy">
+          <span class="admin-gioco__testo">
+            <strong>Parcheggia la Moke</strong>
+            <span>Tre livelli, l'ultimo in retromarcia.</span>
+          </span>
+        </a>
+        <a class="admin-gioco" href="../../meucci-giochi/puzzle.html">
+          <img src="../../meucci-giochi/img/stili/ghibli.jpg?v=1" alt="" width="1280" height="720" loading="lazy">
+          <span class="admin-gioco__testo">
+            <strong>Puzzle del Meucci</strong>
+            <span>Il plesso in tredici stili, da 12, 24 o 48 pezzi.</span>
+          </span>
+        </a>
+        <a class="admin-gioco" href="../../elettrominzione/">
+          <img src="../../elettrominzione/img/copertina.jpg?v=1" alt="" width="800" height="600" loading="lazy">
+          <span class="admin-gioco__testo">
+            <strong>Elettrominzione</strong>
+            <span>L'ubriaco sul ponte e l'alta tensione sotto.</span>
+          </span>
+        </a>
+      </div>
+    </section>
   </main>
   <footer class="admin-footer">
     <p>Realizzato dal Prof. Rossano Bella</p>
