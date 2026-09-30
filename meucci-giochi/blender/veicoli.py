@@ -204,7 +204,7 @@ MOKE_VERNICE = "#1f6e8e"   # azzurro petrolio della Moke del Meucci (foto del 20
 
 def moke(vernice=MOKE_VERNICE, fasi=("scocca", "frontale", "ruote", "interno", "capote")):
     """Mini Moke classica (serie portoghese anni '80), come quella del plesso: 3,05 × 1,30 m di scocca,
-    passo 2,03, capote grigia chiusa, sedili blu, bull bar bianco. Muso verso +X, guida a sinistra (+Y).
+    passo 2,03, capote grigia aperta sui lati e dietro, sedili blu, bull bar bianco. Muso verso +X, guida a sinistra (+Y).
     `fasi` permette di costruirla a pezzi per trovare in fretta quello che non va."""
     R = radice("Moke")
     C = materiale("Moke carrozzeria", srgb(vernice), rugosita=0.38, vernice=0.5)
@@ -311,18 +311,11 @@ def moke(vernice=MOKE_VERNICE, fasi=("scocca", "frontale", "ruote", "interno", "
             tubo(f"Moke tergi {y}", [(DAV - 0.01, y, 0.9), (DAV - 0.035, y + 0.3, 1.02)], 0.008, SCURO, R)
         tubo("Moke braccio specchio", [(DAV - 0.03, 0.64, 1.05), (DAV - 0.04, 0.8, 1.07)], 0.01, TELAIO, R)
         scatola("Moke specchio", DAV - 0.07, DAV - 0.03, 0.76, 0.9, 1.0, 1.16, SCURO, R, smusso=0.015)
-        # capote grigia chiusa: tetto, fiancate posteriori e retro col lunotto, aperta sulle porte davanti
-        prisma("Moke capote", [(-L2 - 0.02, 1.33), (DAV - 0.04, zt - 0.01), (DAV - 0.02, zt + 0.05), (DAV - 0.2, zt + 0.09), (-1.3, zt + 0.1), (-L2 - 0.04, zt + 0.05)],
+        # capote grigia aperta: solo il tetto di tela, retto da due archi; niente fiancate né telo dietro
+        prisma("Moke capote", [(-L2 + 0.02, 1.34), (DAV - 0.04, zt - 0.01), (DAV - 0.02, zt + 0.05), (DAV - 0.2, zt + 0.09), (-1.3, zt + 0.1), (-L2, zt + 0.05)],
                -0.67, 0.67, TELA, R, smusso=0.035, segmenti=3)
-        for s in (1, -1):
-            lato = prisma(f"Moke telo laterale {s}", [(-L2 - 0.02, 0.6), (-0.62, 0.6), (-0.62, zt), (-L2 - 0.02, 1.33)],
-                          s * 0.645 - 0.012, s * 0.645 + 0.012, TELA, R)
-            taglia(lato, scatola(f"Moke finestrino {s}", -1.3, -0.78, s * 0.645 - 0.1, s * 0.645 + 0.1, 0.92, 1.22, None, R))
-            scatola(f"Moke vetrino {s}", -1.3, -0.78, s * 0.645 - 0.004, s * 0.645 + 0.004, 0.92, 1.22, VETRO, R)
-            tubo(f"Moke montante {s}", [(-0.62, s * 0.66, 0.62), (-0.62, s * 0.66, zt + 0.02)], 0.018, TELAIO, R)
-        retro = scatola("Moke telo posteriore", -L2 - 0.03, -L2, -0.66, 0.66, 0.62, 1.34, TELA, R)
-        taglia(retro, scatola("Moke taglio lunotto", -L2 - 0.1, -L2 + 0.1, -0.42, 0.42, 0.92, 1.24, None, R))
-        scatola("Moke lunotto", -L2 - 0.02, -L2 - 0.01, -0.42, 0.42, 0.92, 1.24, VETRO, R)
+        for x in (-0.62, -1.44):
+            tubo(f"Moke arco {x}", [(x, -0.66, 0.62), (x, -0.66, zt + 0.02), (x, 0.66, zt + 0.02), (x, 0.66, 0.62)], 0.018, TELAIO, R)
     return R
 
 
@@ -430,6 +423,10 @@ def prepara_scena():
     sc = bpy.data.scenes.get(SCENA) or bpy.data.scenes.new(SCENA)
     bpy.context.window.scene = sc
     sc.render.engine = "CYCLES"
+    # GPU se nelle Preferenze ce n'è una attiva (qui OptiX: ~0,7 s a fotogramma contro 6,4 della CPU)
+    cp = bpy.context.preferences.addons["cycles"].preferences
+    if cp.compute_device_type != "NONE" and any(d.use and d.type != "CPU" for d in cp.devices):
+        sc.cycles.device = "GPU"
     sc.cycles.samples = 96
     sc.cycles.use_denoising = True
     sc.render.film_transparent = True

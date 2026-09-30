@@ -40,7 +40,7 @@
   const SPRITE = {};
   Object.entries(window.VEICOLI_SPRITE).forEach(([nome, d]) => {
     SPRITE[nome] = new Image();
-    SPRITE[nome].src = d.img + "?v=1";
+    SPRITE[nome].src = d.img;
   });
 
   /* ---------- il piazzale (metri a terra) ---------- */
