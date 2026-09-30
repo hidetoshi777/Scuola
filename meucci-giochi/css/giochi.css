@@ -336,7 +336,7 @@ body.giochi {
 }
 
 .carta:hover, .carta:focus-visible { transform: translateY(-3px); border-color: var(--accent); }
-.carta img { display: block; width: 100%; aspect-ratio: 4 / 3; object-fit: cover; }
+.carta img { display: block; width: 100%; height: auto; aspect-ratio: 4 / 3; object-fit: cover; }
 .carta-testo { padding: 0.9rem 1rem 1rem; }
 .carta h2 { margin: 0; font-size: 1.15rem; }
 .carta p { margin: 0.3rem 0 0; color: var(--muted); font-size: 0.9rem; }
