@@ -311,9 +311,10 @@ body.puzzle {
 /* ---------- pagina iniziale ---------- */
 
 body.giochi {
+  height: auto;          /* html, body { height: 100% } farebbe ripetere il gradiente sotto la prima schermata */
   min-height: 100dvh;
   background:
-    radial-gradient(ellipse 90% 45% at 50% -10%, rgb(74 163 212 / 26%), transparent),
+    radial-gradient(ellipse 90% 45% at 50% -10%, rgb(74 163 212 / 26%), transparent) no-repeat,
     var(--bg);
 }
 
