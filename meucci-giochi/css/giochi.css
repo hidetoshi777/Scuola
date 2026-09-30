@@ -202,6 +202,44 @@ body.puzzle {
     repeating-linear-gradient(45deg, #121a23 0 14px, #111820 14px 28px);
 }
 
+.galleria {
+  display: flex;
+  gap: 0.45rem;
+  padding: 0.55rem 0.8rem 0.1rem;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.galleria::-webkit-scrollbar { display: none; }
+
+.stile {
+  flex: none;
+  position: relative;
+  width: 5.6rem;
+  padding: 0;
+  overflow: hidden;
+  border: 2px solid transparent;
+  border-radius: 0.55rem;
+  background: var(--surface);
+  cursor: pointer;
+}
+
+.stile img { display: block; width: 100%; aspect-ratio: 16 / 9; object-fit: cover; }
+
+.stile span {
+  display: block;
+  padding: 0.2rem 0.3rem 0.25rem;
+  font-size: 0.64rem;
+  font-weight: 700;
+  color: var(--muted);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.stile.attiva { border-color: var(--accent); }
+.stile.attiva span { color: var(--text); }
+
 .scelte {
   display: flex;
   gap: 0.4rem;
@@ -239,7 +277,7 @@ body.puzzle {
   position: absolute;
   inset: 0;
   border-radius: inherit;
-  background: url("../img/puzzle.jpg?v=1") center / 100% 100%;
+  background: var(--disegno) center / 100% 100%;
   opacity: 0.13;
   filter: grayscale(0.6);
 }
