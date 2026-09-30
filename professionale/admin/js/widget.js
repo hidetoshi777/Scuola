@@ -11,14 +11,17 @@
   const STILI = {
     acquerello: { tipo: "scontornato" },
     mattoncini: { tipo: "scontornato" },
+    pixel: { tipo: "scontornato" },
+    lowpoly: { tipo: "scontornato" },
     progetto: { tipo: "intera", contrasto: 1.45, notturna: false, fondo: "#0a3173" },
     cyberpunk: { tipo: "intera", contrasto: 1, notturna: true, fondo: "#08081a" },
+    vangogh: { tipo: "intera", contrasto: 1, notturna: true, fondo: "linear-gradient(#122f49, #081623)" },
   };
   const nomeStile = new URLSearchParams(location.search).get("stile");
   const stile = STILI[nomeStile] || null;
   if (stile) {
     widgetEl.dataset.stile = nomeStile;
-    const src = "img/stili/" + nomeStile + ".webp?v=1";
+    const src = "img/stili/" + nomeStile + ".webp?v=2";
     if (stile.tipo === "scontornato") {
       widgetEl.querySelector(".school-clock__scene img").src = src;
     } else {

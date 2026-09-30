@@ -148,7 +148,7 @@
       display: block;
     }
 
-    /* Cyberpunk: neon che sfarfallano, pioggia fine continua, bagliore che pulsa */
+    /* Cyberpunk: neon che sfarfallano e bagliore che pulsa */
     .w[data-stile="cyberpunk"] .school-clock__scene {
       animation: neon-sfarfalla 7s steps(1, end) infinite;
     }
@@ -159,15 +159,6 @@
         radial-gradient(ellipse 40% 30% at 70% 45%, rgb(40 220 255 / 18%), transparent 70%);
       mix-blend-mode: screen;
       animation: neon-respira 5s ease-in-out infinite alternate;
-    }
-
-    .w[data-stile="cyberpunk"] .scena-fx::before {
-      content: "";
-      position: absolute;
-      inset: -40% -10% 0;
-      background: repeating-linear-gradient(100deg, transparent 0 18px, rgb(180 220 255 / 22%) 18px 19px, transparent 19px 37px);
-      background-size: 100% 60px;
-      animation: pioggia-neon 0.7s linear infinite;
     }
 
     @keyframes neon-sfarfalla {
@@ -182,11 +173,6 @@
     @keyframes neon-respira {
       from { opacity: 0.55; }
       to { opacity: 1; }
-    }
-
-    @keyframes pioggia-neon {
-      from { transform: translate(0, 0); }
-      to { transform: translate(-10px, 60px); }
     }
 
     /* Progetto tecnico: linea di luce che scorre come uno scanner, griglia che respira */
@@ -222,6 +208,30 @@
     @keyframes griglia-respira {
       from { opacity: 0.25; }
       to { opacity: 0.8; }
+    }
+
+    /* Notte stellata: la luce respira piano e un riflesso caldo scorre sul dipinto */
+    .w[data-stile="vangogh"] .scena-fx::before {
+      content: "";
+      position: absolute;
+      inset: -20% -60%;
+      background: linear-gradient(105deg, transparent 40%, rgb(255 230 150 / 16%) 50%, transparent 60%);
+      mix-blend-mode: screen;
+      animation: velatura 11s ease-in-out infinite;
+    }
+
+    .w[data-stile="vangogh"] .school-clock__scene {
+      animation: cielo-respira 9s ease-in-out infinite alternate;
+    }
+
+    @keyframes velatura {
+      from { transform: translateX(-35%); }
+      to { transform: translateX(35%); }
+    }
+
+    @keyframes cielo-respira {
+      from { filter: brightness(0.96) saturate(1); }
+      to { filter: brightness(1.06) saturate(1.12); }
     }
 
     @media (prefers-reduced-motion: reduce) {
@@ -295,6 +305,6 @@
       <p class="w-data" id="w-data"></p>
     </div>
   </section>
-  <script src="js/widget.js?v=3"></script>
+  <script src="js/widget.js?v=5"></script>
 </body>
 </html>
