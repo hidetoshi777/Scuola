@@ -121,6 +121,132 @@
       background: linear-gradient(to right, transparent, var(--clock-display) 38%);
     }
 
+    /*
+     * Stili con sfondo proprio (?stile=progetto, ?stile=cyberpunk): l'immagine riempie la scena,
+     * sole e nuvole spariscono; pioggia, neve, lampi e vento restano.
+     */
+    .w[data-scena="intera"] {
+      background: var(--scena-fondo, #0d131b);
+    }
+
+    .w[data-scena="intera"] .school-clock__scene {
+      /* stesso colore dei bordi dell'immagine: le bande sopra e sotto spariscono */
+      background: var(--scena-img) center / contain no-repeat, var(--scena-fondo, #0d131b);
+      filter: var(--scena-filtro, none);
+    }
+
+    .scena-fx {
+      display: none;
+      position: absolute;
+      inset: 0;
+      z-index: 3;
+      pointer-events: none;
+      overflow: hidden;
+    }
+
+    .w[data-scena="intera"] .scena-fx {
+      display: block;
+    }
+
+    /* Cyberpunk: neon che sfarfallano, pioggia fine continua, bagliore che pulsa */
+    .w[data-stile="cyberpunk"] .school-clock__scene {
+      animation: neon-sfarfalla 7s steps(1, end) infinite;
+    }
+
+    .w[data-stile="cyberpunk"] .scena-fx {
+      background:
+        radial-gradient(ellipse 45% 35% at 35% 40%, rgb(255 60 220 / 22%), transparent 70%),
+        radial-gradient(ellipse 40% 30% at 70% 45%, rgb(40 220 255 / 18%), transparent 70%);
+      mix-blend-mode: screen;
+      animation: neon-respira 5s ease-in-out infinite alternate;
+    }
+
+    .w[data-stile="cyberpunk"] .scena-fx::before {
+      content: "";
+      position: absolute;
+      inset: -40% -10% 0;
+      background: repeating-linear-gradient(100deg, transparent 0 18px, rgb(180 220 255 / 22%) 18px 19px, transparent 19px 37px);
+      background-size: 100% 60px;
+      animation: pioggia-neon 0.7s linear infinite;
+    }
+
+    @keyframes neon-sfarfalla {
+      0%, 100% { filter: brightness(1) saturate(1.05); }
+      61% { filter: brightness(0.7) saturate(0.9); }
+      62% { filter: brightness(1.15) saturate(1.25); }
+      63% { filter: brightness(0.82); }
+      64% { filter: brightness(1.08) saturate(1.15); }
+      66% { filter: brightness(1) saturate(1.05); }
+    }
+
+    @keyframes neon-respira {
+      from { opacity: 0.55; }
+      to { opacity: 1; }
+    }
+
+    @keyframes pioggia-neon {
+      from { transform: translate(0, 0); }
+      to { transform: translate(-10px, 60px); }
+    }
+
+    /* Progetto tecnico: linea di luce che scorre come uno scanner, griglia che respira */
+    .w[data-stile="progetto"] .scena-fx::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: -12%;
+      width: 12%;
+      background: linear-gradient(to right, transparent, rgb(150 210 255 / 10%) 60%, rgb(220 240 255 / 55%) 94%, transparent);
+      filter: blur(1px);
+      animation: scanner 7s cubic-bezier(0.45, 0, 0.55, 1) infinite;
+    }
+
+    .w[data-stile="progetto"] .scena-fx::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        repeating-linear-gradient(to right, rgb(190 220 255 / 12%) 0 1px, transparent 1px 24px),
+        repeating-linear-gradient(to bottom, rgb(190 220 255 / 12%) 0 1px, transparent 1px 24px);
+      animation: griglia-respira 6s ease-in-out infinite alternate;
+    }
+
+    @keyframes scanner {
+      0% { transform: translateX(0); opacity: 0; }
+      8% { opacity: 1; }
+      92% { opacity: 1; }
+      100% { transform: translateX(950%); opacity: 0; }
+    }
+
+    @keyframes griglia-respira {
+      from { opacity: 0.25; }
+      to { opacity: 0.8; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .w .school-clock__scene,
+      .scena-fx,
+      .scena-fx::before,
+      .scena-fx::after {
+        animation: none !important;
+      }
+    }
+
+    .w[data-scena="intera"]::after,
+    .w[data-scena="intera"] .school-clock__scene img,
+    .w[data-scena="intera"] .school-clock__sun,
+    .w[data-scena="intera"] .school-clock__cloud {
+      display: none;
+    }
+
+    .w[data-scena="intera"] .school-clock__scene::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to right, transparent 55%, rgb(0 0 0 / 35%));
+    }
+
     /* riquadro quasi quadrato o verticale: scena sopra, testo sotto */
     @media (max-aspect-ratio: 13/10) {
       html { font-size: min(7vw, 4.6vh); }
@@ -159,6 +285,7 @@
       <span class="school-clock__rain school-clock__rain--two"></span>
       <span class="school-clock__lightning"></span>
       <img src="img/meucci-isometrica.png?v=2" alt="" width="1100" height="619">
+      <span class="scena-fx"></span>
     </div>
     <div class="w-info">
       <p class="school-clock__place">Meucci · Acireale</p>
@@ -168,6 +295,6 @@
       <p class="w-data" id="w-data"></p>
     </div>
   </section>
-  <script src="js/widget.js?v=1"></script>
+  <script src="js/widget.js?v=3"></script>
 </body>
 </html>

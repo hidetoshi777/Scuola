@@ -6,6 +6,38 @@
   const dataEl = document.getElementById("w-data");
   if (!widgetEl || !tempEl) return;
 
+  // Stile scelto nell'app Android (?stile=...): stessi disegni del widget nativo.
+  // scontornato = l'edificio cambia, il cielo animato resta; intera = scena con sfondo proprio.
+  const STILI = {
+    acquerello: { tipo: "scontornato" },
+    mattoncini: { tipo: "scontornato" },
+    progetto: { tipo: "intera", contrasto: 1.45, notturna: false, fondo: "#0a3173" },
+    cyberpunk: { tipo: "intera", contrasto: 1, notturna: true, fondo: "#08081a" },
+  };
+  const nomeStile = new URLSearchParams(location.search).get("stile");
+  const stile = STILI[nomeStile] || null;
+  if (stile) {
+    widgetEl.dataset.stile = nomeStile;
+    const src = "img/stili/" + nomeStile + ".webp?v=1";
+    if (stile.tipo === "scontornato") {
+      widgetEl.querySelector(".school-clock__scene img").src = src;
+    } else {
+      widgetEl.dataset.scena = "intera";
+      widgetEl.style.setProperty("--scena-img", 'url("' + src + '")');
+      widgetEl.style.setProperty("--scena-fondo", stile.fondo);
+    }
+  }
+
+  // Come nel widget nativo: contrasto dello stile, poi la luce della sera e il buio della notte
+  function filtroScena(period) {
+    if (!stile || stile.tipo !== "intera") return;
+    const parti = [];
+    if (stile.contrasto !== 1) parti.push("contrast(" + stile.contrasto + ")");
+    if (!stile.notturna && period === "sera") parti.push("brightness(0.85) sepia(0.15)");
+    if (!stile.notturna && period === "notte") parti.push("brightness(0.65) saturate(0.85)");
+    widgetEl.style.setProperty("--scena-filtro", parti.length ? parti.join(" ") : "none");
+  }
+
   const zone = "Europe/Rome";
   const weatherUrl =
     "https://api.open-meteo.com/v1/forecast" +
@@ -65,6 +97,7 @@
   async function update() {
     const now = new Date();
     widgetEl.dataset.period = periodFor(Number(hourFormatter.format(now)));
+    filtroScena(widgetEl.dataset.period);
     const controller = new AbortController();
     const timeout = setTimeout(function () { controller.abort(); }, 8000);
     try {
