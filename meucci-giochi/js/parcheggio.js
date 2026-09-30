@@ -4,8 +4,9 @@
  * Il piazzale ha coordinate a terra in metri: u lungo la facciata (verso destra), v verso chi guarda.
  * Il righello sono le strisce gialle dell'immagine: da lì escono i due vettori che portano un punto
  * a terra sui pixel del disegno (A per un metro lungo u, B per un metro lungo v). L'altezza sale di
- * ALTEZZA_PX pixel al metro. La Moke e le auto sono modellini 3D proiettati allo stesso modo:
- * così restano coerenti con la scena in qualunque direzione girino.
+ * ALTEZZA_PX pixel al metro. La Moke e le auto sono sprite resi in Blender (cartella blender/) con
+ * una camera ortografica che guarda lungo la stessa direzione del disegno: il gioco li porta sulla
+ * scena con la sola deformazione 2D che resta della proiezione, così combaciano in ogni direzione.
  */
 (function () {
   "use strict";
@@ -16,8 +17,8 @@
   const ALTEZZA_PX = 30;                  // pixel per metro in altezza
   const IMG_W = 1100, IMG_H = 619;
 
-  const LUNG = 3.1, LARG = 1.55;          // la Moke
-  const PASSO = 2.05, STERZO_MAX = 0.62, V_AVANTI = 3.0, V_RETRO = 1.7;
+  const LUNG = 3.4, LARG = 1.5;           // la Moke, bull bar e ruota di scorta compresi
+  const PASSO = 2.03, STERZO_MAX = 0.62, V_AVANTI = 3.0, V_RETRO = 1.7;
 
   const cv = document.getElementById("piazzale");
   const g = cv.getContext("2d");
@@ -36,6 +37,11 @@
 
   const scena = new Image();
   scena.src = "../professionale/admin/img/meucci-isometrica.png?v=2";
+  const SPRITE = {};
+  Object.entries(window.VEICOLI_SPRITE).forEach(([nome, d]) => {
+    SPRITE[nome] = new Image();
+    SPRITE[nome].src = d.img + "?v=1";
+  });
 
   /* ---------- il piazzale (metri a terra) ---------- */
 
@@ -56,7 +62,7 @@
     {
       nome: "Livello 2 · Accanto ai paletti",
       obiettivo: 1, retro: false,
-      extra: [{ u: 1.35, v: 2.7, a: -Math.PI / 2, colore: "#c0392b" }],
+      extra: [{ u: 1.35, v: 2.7, a: -Math.PI / 2, veicolo: "auto-rossa" }],
       partenza: { u: 13.2, v: 5.3, a: Math.PI },
       suggerimento: "Il primo posto è occupato: infilati nell'altro, tra l'auto rossa e i paletti.",
       par: 24,
@@ -64,7 +70,8 @@
     {
       nome: "Livello 3 · In retromarcia",
       obiettivo: 0, retro: true,
-      extra: [{ u: -1.45, v: 9.2, a: Math.PI / 2, colore: "#e9ecef" }, { u: 4.2, v: 11.0, a: -0.51, colore: "#2d5d8a" }],
+      // gli sprite delle auto sono resi solo negli angoli usati qui: se ne cambi uno, rigenera (blender/)
+      extra: [{ u: -1.45, v: 9.2, a: Math.PI / 2, veicolo: "auto-bianca" }, { u: 4.2, v: 11.0, a: -0.51, veicolo: "auto-blu" }],
       partenza: { u: 9.5, v: 6.6, a: 0 },
       suggerimento: "Stavolta entra in retromarcia: la Moke deve guardare verso il piazzale.",
       par: 32,
@@ -78,7 +85,7 @@
     lv = i;
     const L = LIVELLI[lv];
     auto = { u: L.partenza.u, v: L.partenza.v, a: L.partenza.a, vel: 0, sterzo: 0 };
-    extra = L.extra.map((e) => ({ ...e, l: 4.0, w: 1.75 }));
+    extra = L.extra.map((e) => ({ ...e, l: 3.95, w: 1.75 }));
     rettangoli = DIPINTE.map(([u0, v0, u1, v1]) => ({ u0, v0, u1, v1 }));
     tempo = 0; urti = 0; fermoDa = 0; finito = false; lampo = 0;
     ui.livello.textContent = L.nome;
@@ -205,173 +212,40 @@
   const P = (u, v, z = 0) => [O[0] + u * A[0] + v * B[0], O[1] + u * A[1] + v * B[1] - z * ALTEZZA_PX];
   const poligono = (pts) => { g.beginPath(); pts.forEach(([x, y], i) => (i ? g.lineTo(x, y) : g.moveTo(x, y))); g.closePath(); };
 
-  function sfuma(hex, k) {
-    const n = parseInt(hex.slice(1), 16);
-    const c = [(n >> 16) & 255, (n >> 8) & 255, n & 255].map((x) => Math.round(Math.min(255, x * k)));
-    return `rgb(${c[0]} ${c[1]} ${c[2]})`;
-  }
-
   /*
-   * Modellini 3D: ogni veicolo è un elenco di facce in coordinate locali (f avanti, r a destra, z in alto).
-   * Si proiettano col piano del disegno, si ordinano dal fondo verso chi guarda (algoritmo del pittore)
-   * e si colorano con la luce da sinistra, come nell'illustrazione.
+   * Veicoli: sprite resi in Blender con una camera ortografica che guarda lungo la direzione del disegno
+   * (il nucleo della proiezione P). Quel che resta di P è una trasformazione 2D, W_ORTO, che porta i metri
+   * dell'immagine ortografica (x a destra, y in basso) sui pixel del disegno. Le stesse direzioni sono
+   * scritte in blender/veicoli.py: se cambi A, B o ALTEZZA_PX, gli sprite vanno rigenerati.
    */
-  const LUCE = (() => { const l = [-0.62, 0.18, 0.76], n = Math.hypot(...l); return l.map((x) => x / n); })();
-  const OCCHIO = (() => { const l = [0.24, 0.62, 0.75], n = Math.hypot(...l); return l.map((x) => x / n); })();
-
-  function faccia(punti, colore, opz = {}) { return { punti, colore, alfa: opz.alfa ?? 1, bias: opz.bias || 0, piatto: !!opz.piatto }; }
-
-  function scatola(m, f0, f1, r0, r1, z0, z1, colore, bias = 0) {
-    const v = (f, r, z) => [f, r, z], o = { bias };
-    m.push(
-      faccia([v(f1, r0, z0), v(f1, r1, z0), v(f1, r1, z1), v(f1, r0, z1)], colore, o),
-      faccia([v(f0, r0, z0), v(f0, r0, z1), v(f0, r1, z1), v(f0, r1, z0)], colore, o),
-      faccia([v(f0, r1, z0), v(f0, r1, z1), v(f1, r1, z1), v(f1, r1, z0)], colore, o),
-      faccia([v(f0, r0, z0), v(f1, r0, z0), v(f1, r0, z1), v(f0, r0, z1)], colore, o),
-      faccia([v(f0, r0, z1), v(f1, r0, z1), v(f1, r1, z1), v(f0, r1, z1)], colore, o),
-    );
-  }
-
-  // Profilo laterale (f, z) estruso fra r0 e r1; colori[i] per la fascia che parte dal punto i
-  function estrudi(m, profilo, r0, r1, fianco, colori) {
-    m.push(faccia(profilo.map(([f, z]) => [f, r0, z]), fianco));
-    m.push(faccia(profilo.map(([f, z]) => [f, r1, z]), fianco));
-    profilo.forEach(([f, z], i) => {
-      const [g2, z2] = profilo[(i + 1) % profilo.length];
-      if (colori[i]) m.push(faccia([[f, r0, z], [g2, r0, z2], [g2, r1, z2], [f, r1, z]], colori[i]));
-    });
-  }
-
-  // Ruota (asse lungo r o lungo f): battistrada, fianco e cerchio bianco
-  function ruota(m, asse, cf, cr, cz, raggio, mezza, cerchio, lati = 12) {
-    const P3 = (a, s, t) => (asse === "r" ? [cf + Math.cos(a) * t, cr + s, cz + Math.sin(a) * t] : [cf + s, cr + Math.cos(a) * t, cz + Math.sin(a) * t]);
-    for (let i = 0; i < lati; i++) {
-      const a0 = (i / lati) * 2 * Math.PI, a1 = ((i + 1) / lati) * 2 * Math.PI;
-      m.push(faccia([P3(a0, -mezza, raggio), P3(a1, -mezza, raggio), P3(a1, mezza, raggio), P3(a0, mezza, raggio)], "#1b1d21"));
-    }
-    [-mezza, mezza].forEach((s) => {
-      const giro = (t) => Array.from({ length: lati }, (_, i) => P3((i / lati) * 2 * Math.PI, s, t));
-      m.push(faccia(giro(raggio), "#23262b"));
-      m.push(faccia(giro(raggio * 0.64), cerchio, { bias: 0.004, piatto: true }));
-      m.push(faccia(giro(raggio * 0.2), "#6d737a", { bias: 0.008, piatto: true }));
-    });
-  }
-
-  function disco(m, cf, cr, cz, raggio, colore, bias) {
-    m.push(faccia(Array.from({ length: 10 }, (_, i) => [cf, cr + Math.cos((i / 10) * 2 * Math.PI) * raggio, cz + Math.sin((i / 10) * 2 * Math.PI) * raggio]), colore, { bias, piatto: true }));
-  }
-
-  const MOKE = (() => {
-    const m = [], T = "#1f6f86", L2 = LUNG / 2, W2 = LARG / 2;
-    // ruote sotto il cassone, cerchi bianchi come nelle foto
-    [[1.02, 1], [1.02, -1], [-1.02, 1], [-1.02, -1]].forEach(([f, s]) => ruota(m, "r", f, s * (W2 - 0.14), 0.31, 0.31, 0.12, "#eceeec"));
-    // cassone: fianchi piatti, cofano e pianale dell'abitacolo scuro
-    estrudi(m, [[-L2 + 0.05, 0.3], [-L2 + 0.05, 0.8], [0.5, 0.8], [0.62, 0.86], [L2 - 0.14, 0.86], [L2 - 0.05, 0.8], [L2 - 0.05, 0.3]],
-      -W2 + 0.05, W2 - 0.05, T, [T, "#2a3740", T, T, T, T, "#16505f"]);
-    // longheroni laterali, un filo più scuri
-    [1, -1].forEach((s) => scatola(m, -L2 + 0.25, L2 - 0.3, s > 0 ? W2 - 0.05 : -W2, s > 0 ? W2 : -W2 + 0.05, 0.3, 0.66, "#1a6278"));
-    // griglia, fari, frecce
-    m.push(faccia([[L2 - 0.04, -0.3, 0.38], [L2 - 0.04, 0.3, 0.38], [L2 - 0.04, 0.3, 0.64], [L2 - 0.04, -0.3, 0.64]], "#b9bec2", { bias: 0.004, piatto: true }));
-    for (let k = 0; k < 4; k++) m.push(faccia([[L2 - 0.035, -0.27, 0.42 + k * 0.06], [L2 - 0.035, 0.27, 0.42 + k * 0.06], [L2 - 0.035, 0.27, 0.45 + k * 0.06], [L2 - 0.035, -0.27, 0.45 + k * 0.06]], "#3b4046", { bias: 0.008, piatto: true }));
-    [1, -1].forEach((s) => {
-      disco(m, L2 - 0.035, s * 0.5, 0.66, 0.12, "#c9ccd0", 0.004);
-      disco(m, L2 - 0.03, s * 0.5, 0.66, 0.085, "#fff6d6", 0.008);
-      m.push(faccia([[L2 - 0.035, s * 0.62, 0.46], [L2 - 0.035, s * 0.72, 0.46], [L2 - 0.035, s * 0.72, 0.53], [L2 - 0.035, s * 0.62, 0.53]], "#f29a2e", { bias: 0.006, piatto: true }));
-      m.push(faccia([[-L2 + 0.045, s * 0.55, 0.6], [-L2 + 0.045, s * 0.68, 0.6], [-L2 + 0.045, s * 0.68, 0.7], [-L2 + 0.045, s * 0.55, 0.7]], "#c0392b", { bias: 0.006, piatto: true }));
-    });
-    // paraurti tubolare bianco
-    const B = "#f1f2ef";
-    scatola(m, L2, L2 + 0.08, -W2 + 0.05, W2 - 0.05, 0.33, 0.41, B);
-    scatola(m, L2, L2 + 0.08, -0.38, 0.38, 0.6, 0.67, B);
-    [1, -1].forEach((s) => {
-      scatola(m, L2, L2 + 0.08, s * 0.38 - 0.04, s * 0.38 + 0.04, 0.33, 0.67, B);
-      scatola(m, L2 - 0.12, L2 + 0.08, s > 0 ? W2 - 0.12 : -W2 + 0.05, s > 0 ? W2 - 0.05 : -W2 + 0.12, 0.33, 0.41, B);
-    });
-    // sedili blu
-    const S = "#2f74bf";
-    [1, -1].forEach((s) => {
-      const ra = s > 0 ? 0.08 : -0.62, rb = s > 0 ? 0.62 : -0.08;
-      scatola(m, -0.25, 0.2, ra, rb, 0.8, 0.98, S);
-      scatola(m, -0.4, -0.25, ra, rb, 0.8, 1.3, S);
-    });
-    scatola(m, -1.25, -0.8, -0.62, 0.62, 0.8, 0.95, S);
-    scatola(m, -1.4, -1.27, -0.62, 0.62, 0.8, 1.2, S);
-    // parabrezza col telaio
-    m.push(faccia([[0.52, -W2 + 0.06, 0.86], [0.52, W2 - 0.06, 0.86], [0.52, W2 - 0.06, 1.35], [0.52, -W2 + 0.06, 1.35]], "#bfe3f2", { alfa: 0.35 }));
-    scatola(m, 0.49, 0.55, -W2 + 0.03, W2 - 0.03, 1.33, 1.38, "#aeb4b8");
-    [1, -1].forEach((s) => scatola(m, 0.49, 0.55, s > 0 ? W2 - 0.08 : -W2 + 0.03, s > 0 ? W2 - 0.03 : -W2 + 0.08, 0.86, 1.36, "#aeb4b8"));
-    // capote di tela: tetto, chiusa dietro, aperta sui lati davanti
-    const C = "#d5d9dc";
-    scatola(m, -L2 + 0.02, 0.55, -W2 + 0.01, W2 - 0.01, 1.36, 1.45, C, 1);
-    m.push(faccia([[-L2 + 0.25, -0.01, 1.4505], [0.5, -0.01, 1.4505], [0.5, 0.01, 1.4505], [-L2 + 0.25, 0.01, 1.4505]], "#b9bec2", { bias: 1.01, piatto: true }));
-    scatola(m, -L2 + 0.02, -L2 + 0.06, -W2 + 0.02, W2 - 0.02, 0.8, 1.36, "#c3c8cb");
-    [1, -1].forEach((s) => {
-      scatola(m, -L2 + 0.02, -0.95, s > 0 ? W2 - 0.04 : -W2 + 0.01, s > 0 ? W2 - 0.01 : -W2 + 0.04, 0.8, 1.36, "#c3c8cb");
-      scatola(m, -0.95, -0.89, s > 0 ? W2 - 0.05 : -W2 + 0.01, s > 0 ? W2 - 0.01 : -W2 + 0.05, 0.8, 1.36, "#eceeec");
-    });
-    // ruota di scorta dietro
-    ruota(m, "f", -L2 - 0.08, 0, 0.72, 0.29, 0.09, "#eceeec");
-    return m;
+  const W_ORTO = (() => {
+    const px = [A[0], B[0], 0], py = [A[1], B[1], -ALTEZZA_PX];
+    const croce = (a, b) => [a[1] * b[2] - a[2] * b[1], a[2] * b[0] - a[0] * b[2], a[0] * b[1] - a[1] * b[0]];
+    const scal = (a, b) => a[0] * b[0] + a[1] * b[1] + a[2] * b[2];
+    const unit = (a) => { const n = Math.hypot(...a); return a.map((x) => x / n); };
+    let d = unit(croce(px, py));
+    if (d[2] < 0) d = d.map((x) => -x);                     // verso chi guarda, dall'alto
+    let e1 = unit(croce([0, 0, 1], d));
+    if (scal(px, e1) < 0) e1 = e1.map((x) => -x);           // asse x dell'immagine: verso destra
+    let e2 = croce(d, e1);
+    if (e2[2] < 0) e2 = e2.map((x) => -x);                  // asse y dell'immagine: in alto
+    const giu = e2.map((x) => -x);
+    return [scal(px, e1), scal(py, e1), scal(px, giu), scal(py, giu)];
   })();
 
-  function modelloAuto(colore) {
-    const m = [], L2 = 2.0, W2 = 0.87, V = "#27313b";
-    [[1.3, 1], [1.3, -1], [-1.3, 1], [-1.3, -1]].forEach(([f, s]) => ruota(m, "r", f, s * (W2 - 0.14), 0.33, 0.33, 0.12, "#aab0b6"));
-    estrudi(m, [[-L2, 0.32], [-L2, 0.86], [-1.45, 0.94], [-0.95, 1.36], [0.45, 1.38], [1.15, 0.95], [L2 - 0.05, 0.84], [L2, 0.32]],
-      -W2, W2, colore, [colore, colore, V, colore, V, colore, colore, sfuma(colore, 0.7)]);
-    [1, -1].forEach((s) => {
-      m.push(faccia([[-1.28, s * (W2 + 0.002), 0.97], [-0.9, s * (W2 + 0.002), 1.3], [0.42, s * (W2 + 0.002), 1.32], [1.02, s * (W2 + 0.002), 0.97]], V, { bias: 0.004, piatto: true }));
-      disco(m, L2 + 0.002, s * 0.62, 0.7, 0.11, "#fff6d6", 0.006);
-      m.push(faccia([[-L2 - 0.002, s * 0.5, 0.64], [-L2 - 0.002, s * 0.78, 0.64], [-L2 - 0.002, s * 0.78, 0.76], [-L2 - 0.002, s * 0.5, 0.76]], "#c0392b", { bias: 0.006, piatto: true }));
-    });
-    return m;
-  }
-
-  function ombra(c, l, w) {
-    const pts = spigoli({ ...c, u: c.u + 0.3, v: c.v + 0.12 }, l + 0.25, w + 0.25).map(([u, v]) => P(u, v));
-    poligono(pts);
-    g.fillStyle = "rgb(20 22 30 / 32%)";
-    g.fill();
-  }
-
-  function disegnaModello(c, facce) {
-    const cs = Math.cos(c.a), sn = Math.sin(c.a);
-    const mondo = ([f, r, z]) => [c.u + f * cs - r * sn, c.v + f * sn + r * cs, z];
-    const lista = facce.map((fc) => {
-      const w = fc.punti.map(mondo);
-      // normale della faccia, girata verso chi guarda
-      const [a, b, d] = [w[0], w[1], w[2]];
-      const e1 = [b[0] - a[0], b[1] - a[1], b[2] - a[2]], e2 = [d[0] - a[0], d[1] - a[1], d[2] - a[2]];
-      let n = [e1[1] * e2[2] - e1[2] * e2[1], e1[2] * e2[0] - e1[0] * e2[2], e1[0] * e2[1] - e1[1] * e2[0]];
-      const ln = Math.hypot(...n) || 1;
-      n = n.map((x) => x / ln);
-      const verso = n[0] * OCCHIO[0] + n[1] * OCCHIO[1] + n[2] * OCCHIO[2];
-      if (verso < 0) n = n.map((x) => -x);
-      const luce = 0.58 + 0.42 * Math.max(0, n[0] * LUCE[0] + n[1] * LUCE[1] + n[2] * LUCE[2]);
-      let prof = 0;
-      w.forEach((p) => { prof += p[0] * OCCHIO[0] + p[1] * OCCHIO[1] + p[2] * OCCHIO[2]; });
-      return { w, prof: prof / w.length + fc.bias, fc, luce };
-    });
-    lista.sort((x, y) => x.prof - y.prof);
-    lista.forEach(({ w, fc, luce }) => {
-      poligono(w.map(([u, v, z]) => P(u, v, z)));
-      g.globalAlpha = fc.alfa;
-      g.fillStyle = fc.piatto ? fc.colore : sfuma(fc.colore, luce);
-      g.fill();
-      if (fc.alfa === 1 && !fc.piatto) { g.lineWidth = 0.35; g.strokeStyle = g.fillStyle; g.stroke(); }
-    });
-    g.globalAlpha = 1;
-  }
-
-  function disegnaMoke(c) {
-    ombra(c, LUNG, LARG);
-    disegnaModello(c, MOKE);
-  }
-
-  const modelli = {};
-  function disegnaAuto(e) {
-    ombra(e, e.l, e.w);
-    disegnaModello(e, modelli[e.colore] || (modelli[e.colore] = modelloAuto(e.colore)));
+  function disegnaVeicolo(nome, c) {
+    const d = window.VEICOLI_SPRITE[nome];
+    // il fotogramma reso con l'angolo più vicino
+    let k = 0, meglio = Infinity;
+    d.angoli.forEach((a, i) => { const s = Math.abs(angolo(c.a - a)); if (s < meglio) { meglio = s; k = i; } });
+    const [x, y, w, h, ox, oy] = d.fotogrammi[k];
+    const [sx, sy] = P(c.u, c.v);
+    const s = 1 / d.pxm;
+    g.save();
+    g.transform(W_ORTO[0] * s, W_ORTO[1] * s, W_ORTO[2] * s, W_ORTO[3] * s, sx, sy);
+    g.imageSmoothingQuality = "high";
+    g.drawImage(SPRITE[nome], x, y, w, h, -ox, -oy, w, h);
+    g.restore();
   }
 
   /* ---------- ritagli che stanno davanti alla Moke ---------- */
@@ -448,8 +322,8 @@
     g.beginPath(); g.moveTo(...coda); g.lineTo(...punta); g.strokeStyle = "rgb(255 255 255 / 80%)"; g.lineWidth = 2; g.stroke();
 
     // Moke, auto in più e paletti in ordine di profondità (chi è più in basso sta davanti)
-    const cose = [{ prof: P(auto.u, auto.v)[1], fai: () => disegnaMoke(auto) }];
-    extra.forEach((e) => cose.push({ prof: P(e.u, e.v)[1], fai: () => disegnaAuto(e) }));
+    const cose = [{ prof: P(auto.u, auto.v)[1], fai: () => disegnaVeicolo("moke", auto) }];
+    extra.forEach((e) => cose.push({ prof: P(e.u, e.v)[1], fai: () => disegnaVeicolo(e.veicolo, e) }));
     ritagli.forEach((r) => cose.push({ prof: r.prof, fai: () => g.drawImage(r.c, r.x0, r.y0), paletto: true }));
     cose.sort((a, b) => a.prof - b.prof);
     // i paletti che stanno dietro sono già nel disegno: si ridisegnano solo se qualcosa gli passa dietro
@@ -501,5 +375,10 @@
     camX = mx; camY = my;
     requestAnimationFrame(ciclo);
   }
-  if (scena.complete && scena.naturalWidth) parti(); else scena.addEventListener("load", parti);
+  // si parte quando il piazzale e tutti gli sprite sono caricati
+  const pronta = (im) => new Promise((ok) => {
+    if (im.complete && im.naturalWidth) ok();
+    else { im.addEventListener("load", ok, { once: true }); im.addEventListener("error", ok, { once: true }); }
+  });
+  Promise.all([scena, ...Object.values(SPRITE)].map(pronta)).then(parti);
 })();
