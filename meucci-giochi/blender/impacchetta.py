@@ -8,6 +8,7 @@ La cartella contiene una sottocartella per veicolo (moke/, auto_rossa/, ...) con
 e un file ancora.txt: «x y px_per_m» del pixel dove cade l'origine del veicolo, poi gli angoli.
 Ogni fotogramma viene ritagliato sul contenuto (ombra compresa): l'ancora si sposta di conseguenza.
 """
+import hashlib
 import json
 import sys
 from pathlib import Path
@@ -60,7 +61,8 @@ def impacchetta(cartella):
     file = USCITA_IMG / f"{nome}.webp"
     foglio.save(file, "WEBP", quality=86, alpha_quality=90, method=6)
     print(f"{nome}: {len(angoli)} fotogrammi, foglio {foglio.width}×{foglio.height}, {file.stat().st_size / 1024:.0f} KB")
-    return nome, {"img": f"img/veicoli/{nome}.webp", "pxm": pxm, "angoli": [round(a, 5) for a in angoli], "fotogrammi": fotogrammi}
+    versione = hashlib.sha1(file.read_bytes()).hexdigest()[:8]   # cambia a ogni rigenerazione: niente cache vecchie
+    return nome, {"img": f"img/veicoli/{nome}.webp?v={versione}", "pxm": pxm, "angoli": [round(a, 5) for a in angoli], "fotogrammi": fotogrammi}
 
 
 def main():
