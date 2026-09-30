@@ -417,6 +417,89 @@ def utilitaria(nome="Utilitaria", vernice="#c0392b"):
     return R
 
 
+# ---------------------------------------------------------------- gli alunni
+
+# Ragazzi che escono da scuola (livello 5): maglia, zaino, capelli, pantaloni, scarpe
+ALUNNI = {
+    "Alunno A": ("#c0392b", "#2d4f9e", "#4a2e1c", "#3b5a86", "#f2f2f2"),
+    "Alunno B": ("#f1c232", "#26292e", "#16130f", "#2c3440", "#d64545"),
+    "Alunno C": ("#2e8b57", "#d35400", "#c9a45a", "#6b7078", "#f2f2f2"),
+    "Alunno D": ("#eef0f2", "#7b3fa0", "#221a14", "#3b5a86", "#2a2a2a"),
+}
+PELLE = "#e0b08e"
+
+
+def _pezzo_con_perno(nome, perno, x0, x1, y0, y1, z0, z1, mat, genitore, smusso=0.0):
+    """Scatola in coordinate relative al perno (spalla, anca): si piega ruotando l'oggetto."""
+    ob = scatola(nome, x0, x1, y0, y1, z0, z1, mat, genitore, smusso=smusso, segmenti=3)
+    ob.location = perno
+    return ob
+
+
+def alunno(nome="Alunno A"):
+    """Ragazzo di 1,66 m con lo zaino, muso verso +X. Braccia e gambe hanno il perno alla spalla e all'anca
+    (oggetti «<nome> gamba s/d», «<nome> braccio s/d»): posa_alunno le fa oscillare per il passo."""
+    maglia, zaino, capelli, pantaloni, scarpe = ALUNNI[nome]
+    R = radice(nome)
+    MAGLIA = materiale(nome + " maglia", srgb(maglia), rugosita=0.8)
+    ZAINO = materiale(nome + " zaino", srgb(zaino), rugosita=0.6)
+    CAPELLI = materiale(nome + " capelli", srgb(capelli), rugosita=0.7)
+    PANTALONI = materiale(nome + " pantaloni", srgb(pantaloni), rugosita=0.85)
+    SCARPE = materiale(nome + " scarpe", srgb(scarpe), rugosita=0.5)
+    PELLE_M = materiale("Pelle", srgb(PELLE), rugosita=0.6)
+    ZH = 0.86                                        # anca
+    for s, lato in ((1, "s"), (-1, "d")):
+        gamba = _pezzo_con_perno(f"{nome} gamba {lato}", Vector((0, s * 0.085, ZH)), -0.07, 0.07, -0.065, 0.065, -ZH + 0.07, 0.02, PANTALONI, R, smusso=0.03)
+        scarpa = scatola(f"{nome} scarpa {lato}", -0.08, 0.17, -0.055, 0.055, -ZH, -ZH + 0.085, SCARPE, R, smusso=0.03, segmenti=3)
+        scarpa.parent = gamba
+        braccio = _pezzo_con_perno(f"{nome} braccio {lato}", Vector((0, s * 0.235, 1.36)), -0.05, 0.05, -0.045, 0.045, -0.5, 0.03, MAGLIA, R, smusso=0.03)
+        mano = cilindro(f"{nome} mano {lato}", Vector((0, 0, -0.55)), 0.045, 0.1, "z", PELLE_M, R, lati=16, smusso=0.02)
+        mano.parent = braccio
+    scatola(nome + " bacino", -0.09, 0.09, -0.17, 0.17, 0.78, 0.92, PANTALONI, R, smusso=0.04, segmenti=3)
+    scatola(nome + " busto", -0.1, 0.1, -0.19, 0.19, 0.88, 1.4, MAGLIA, R, smusso=0.07, segmenti=4)
+    cilindro(nome + " collo", Vector((0, 0, 1.43)), 0.045, 0.08, "z", PELLE_M, R, lati=16)
+    bpy.ops.mesh.primitive_uv_sphere_add(segments=32, ring_count=16, radius=0.105, location=(0.005, 0, 1.54))
+    testa = bpy.context.active_object
+    testa.name = nome + " testa"
+    testa.data.materials.append(PELLE_M)
+    bpy.ops.object.shade_smooth()
+    testa.users_collection[0].objects.unlink(testa)
+    R.users_collection[0].objects.link(testa)
+    testa.parent = R
+    # capelli: calotta un filo più grande, tolta la faccia e la nuca bassa
+    bpy.ops.mesh.primitive_uv_sphere_add(segments=32, ring_count=16, radius=0.115, location=(-0.01, 0, 1.56))
+    cap = bpy.context.active_object
+    cap.name = nome + " capelli"
+    cap.data.materials.append(CAPELLI)
+    bpy.ops.object.shade_smooth()
+    cap.users_collection[0].objects.unlink(cap)
+    R.users_collection[0].objects.link(cap)
+    cap.parent = R
+    taglia(cap, scatola(nome + " taglio viso", 0.03, 0.3, -0.3, 0.3, 1.3, 1.585, None, R))
+    taglia(cap, scatola(nome + " taglio nuca", -0.3, 0.3, -0.3, 0.3, 1.2, 1.47, None, R))
+    # zaino con gli spallacci
+    scatola(nome + " zaino", -0.3, -0.1, -0.16, 0.16, 0.92, 1.36, ZAINO, R, smusso=0.06, segmenti=4)
+    scatola(nome + " tasca zaino", -0.33, -0.28, -0.11, 0.11, 0.96, 1.14, ZAINO, R, smusso=0.03, segmenti=3)
+    for s in (1, -1):
+        scatola(f"{nome} spallaccio {s}", -0.11, 0.105, s * 0.1 - 0.025, s * 0.1 + 0.025, 1.3, 1.41, ZAINO, R, smusso=0.01)
+        scatola(f"{nome} spallaccio davanti {s}", 0.095, 0.108, s * 0.1 - 0.025, s * 0.1 + 0.025, 1.02, 1.36, ZAINO, R)
+    return R
+
+
+# pose del passo: 0 gambe unite, 1 avanza la sinistra, 2 avanza la destra (il gioco fa 0, 1, 0, 2)
+PASSO_ALUNNO = (0.0, 1.0, -1.0)
+
+
+def posa_alunno(radice_v, fase):
+    s = PASSO_ALUNNO[fase]
+    nome = radice_v.name
+    gambe, braccia = math.radians(24), math.radians(22)
+    bpy.data.objects[nome + " gamba s"].rotation_euler = (0, -s * gambe, 0)
+    bpy.data.objects[nome + " gamba d"].rotation_euler = (0, s * gambe, 0)
+    bpy.data.objects[nome + " braccio s"].rotation_euler = (0, s * braccia, 0)
+    bpy.data.objects[nome + " braccio d"].rotation_euler = (0, -s * braccia, 0)
+
+
 # ---------------------------------------------------------------- scena, luce, camera
 
 def prepara_scena():
@@ -499,32 +582,43 @@ def inquadra(sc, larghezza_m, altezza_m, px_per_m, centro=(0.0, 0.0)):
 
 # Cosa si rende per il gioco: cartella, veicolo, tinta (None = quella del modello), angoli del gioco
 # (radianti, a=0 muso verso +u, a cresce verso chi guarda) e fotogramma (larghezza, altezza, centro x, y
-# in metri sul piano dell'immagine: contiene veicolo e ombra in ogni direzione). Le auto parcheggiate
-# servono solo negli angoli dei livelli (LIVELLI in js/parcheggio.js).
+# in metri sul piano dell'immagine: contiene veicolo e ombra in ogni direzione) e, per chi cammina, il
+# numero di pose del passo. Le auto parcheggiate servono solo negli angoli dei livelli (LIVELLI in
+# js/parcheggio.js); quelle che girano per il piazzale (livello 4) e gli alunni in tutte le direzioni.
 GIRI = [
     ("moke", "Moke", None, [2 * math.pi * k / 64 for k in range(64)], (4.8, 2.6, 0.55, 0.65)),
     ("auto_rossa", "Utilitaria", "#d91e1e", [-math.pi / 2], (5.4, 2.8, 0.45, 0.65)),
     ("auto_bianca", "Utilitaria", "#e9ecef", [math.pi / 2], (5.4, 2.8, 0.45, 0.65)),
     ("auto_blu", "Utilitaria", "#2d5d8a", [-0.51], (5.4, 2.8, 0.45, 0.65)),
+    ("auto_gialla", "Utilitaria", "#f0b418", [2 * math.pi * k / 32 for k in range(32)], (5.4, 2.8, 0.45, 0.65)),
+    ("auto_grigia", "Utilitaria", "#8a9299", [2 * math.pi * k / 32 for k in range(32)], (5.4, 2.8, 0.45, 0.65)),
+] + [
+    (f"alunno_{x.lower()}", f"Alunno {x}", None, [2 * math.pi * k / 16 for k in range(16)], (2.4, 2.3, 0.65, 0.7), len(PASSO_ALUNNO))
+    for x in "ABCD"
 ]
 PX_PER_M = 96
 
 
 def costruisci():
-    """Scena, luce, camera e i due modelli."""
+    """Scena, luce, camera e i modelli."""
     sc = prepara_scena()
     moke()
     utilitaria("Utilitaria")
+    for nome in ALUNNI:
+        alunno(nome)
     return sc
 
 
 def rendi(cartella, nome, da=0, a=None, campioni=64):
     """Rende i fotogrammi da..a (esclusa) del giro `nome` in <cartella>/<nome>/000.png, 001.png, ...
-    e scrive ancora.txt («x y px_per_m» del pixel dove cade l'origine, poi gli angoli).
+    e scrive ancora.txt («x y px_per_m» del pixel dove cade l'origine, poi gli angoli, poi le pose).
+    Con più pose il fotogramma k è l'angolo k // pose nella posa k % pose.
     A pezzi, perché ogni fotogramma prende qualche secondo e il collegamento MCP non deve restare
     bloccato troppo a lungo. Poi: python impacchetta.py <cartella>."""
     import os
-    _, veicolo, tinta, angoli, (lx, ly, cx, cy) = next(g for g in GIRI if g[0] == nome)
+    giro = next(g for g in GIRI if g[0] == nome)
+    _, veicolo, tinta, angoli, (lx, ly, cx, cy) = giro[:5]
+    pose = giro[5] if len(giro) > 5 else 1
     sc = bpy.context.scene
     ob = bpy.data.objects[veicolo]
     inquadra(sc, lx, ly, PX_PER_M, (cx, cy))
@@ -540,14 +634,18 @@ def rendi(cartella, nome, da=0, a=None, campioni=64):
         bsdf.inputs["Base Color"].default_value = (*srgb(tinta), 1.0)
     dir_giro = os.path.join(cartella, nome)
     os.makedirs(dir_giro, exist_ok=True)
-    for k in range(da, len(angoli) if a is None else a):
-        ob.rotation_euler = (0, 0, -angoli[k])   # il gioco è sinistrorso: v verso chi guarda = -Y
+    for k in range(da, len(angoli) * pose if a is None else a):
+        ob.rotation_euler = (0, 0, -angoli[k // pose])   # il gioco è sinistrorso: v verso chi guarda = -Y
+        if pose > 1:
+            posa_alunno(ob, k % pose)
         sc.render.filepath = os.path.join(dir_giro, f"{k:03d}.png")
         bpy.ops.render.render(write_still=True)
     ob.rotation_euler = (0, 0, 0)
+    if pose > 1:
+        posa_alunno(ob, 0)
     # scala effettiva: la risoluzione è arrotondata, ortho_scale copre il lato più lungo
     r = max(sc.render.resolution_x, sc.render.resolution_y) / sc.camera.data.ortho_scale
     ax = sc.render.resolution_x / 2 - cx * r
     ay = sc.render.resolution_y / 2 + cy * r
     with open(os.path.join(dir_giro, "ancora.txt"), "w", encoding="utf-8") as f:
-        f.write(f"{ax} {ay} {r}\n" + " ".join(repr(x) for x in angoli) + "\n")
+        f.write(f"{ax} {ay} {r}\n" + " ".join(repr(x) for x in angoli) + f"\n{pose}\n")
