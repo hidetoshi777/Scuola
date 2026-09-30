@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="theme-color" content="#0d131b">
+  <title>Puzzle del Meucci</title>
+  <link rel="icon" href="../favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,500;9..40,700;9..40,800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/giochi.css?v=1">
+</head>
+<body class="puzzle">
+  <header class="barra">
+    <a class="indietro" href="./" aria-label="Torna ai giochi">←</a>
+    <div class="barra-titolo">
+      <p class="barra-sopra" id="stato">12 pezzi</p>
+      <h1>Puzzle del Meucci</h1>
+    </div>
+    <p class="barra-dati"><span id="tempo">0:00</span><span id="posati">0/12</span></p>
+  </header>
+
+  <div class="scelte" role="group" aria-label="Difficoltà">
+    <button type="button" class="scelta" data-griglia="4x3">12 pezzi</button>
+    <button type="button" class="scelta" data-griglia="6x4">24 pezzi</button>
+    <button type="button" class="scelta" data-griglia="8x6">48 pezzi</button>
+    <button type="button" class="scelta scelta-occhio" id="sbircia" aria-label="Guarda l'immagine">👁</button>
+  </div>
+
+  <main class="tavolo" id="tavolo">
+    <div class="tavola" id="tavola"></div>
+    <img class="sbirciata" id="sbirciata" src="img/puzzle.jpg?v=1" alt="Il plesso Meucci con la Moke parcheggiata al posto riservato" hidden>
+
+    <div class="esito" id="esito" hidden>
+      <div class="esito-scheda">
+        <p class="esito-stelle">🧩</p>
+        <h2>Completato!</h2>
+        <p id="esito-testo"></p>
+        <div class="esito-azioni">
+          <button type="button" class="bottone secondario" id="guarda">Guarda il disegno</button>
+          <button type="button" class="bottone" id="ancora">Un altro</button>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <script src="js/puzzle.js?v=1"></script>
+</body>
+</html>
