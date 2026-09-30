@@ -10,7 +10,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,500;9..40,700;9..40,800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/giochi.css?v=1">
+  <link rel="stylesheet" href="css/giochi.css?v=2">
 </head>
 <body class="puzzle">
   <header class="barra">
@@ -22,6 +22,7 @@
     <p class="barra-dati"><span id="tempo">0:00</span><span id="posati">0/12</span></p>
   </header>
 
+  <div class="galleria" id="galleria" role="group" aria-label="Stile del disegno"></div>
   <div class="scelte" role="group" aria-label="Difficoltà">
     <button type="button" class="scelta" data-griglia="4x3">12 pezzi</button>
     <button type="button" class="scelta" data-griglia="6x4">24 pezzi</button>
@@ -31,7 +32,7 @@
 
   <main class="tavolo" id="tavolo">
     <div class="tavola" id="tavola"></div>
-    <img class="sbirciata" id="sbirciata" src="img/puzzle.jpg?v=1" alt="Il plesso Meucci con la Moke parcheggiata al posto riservato" hidden>
+    <img class="sbirciata" id="sbirciata" src="" alt="Il disegno completo" hidden>
 
     <div class="esito" id="esito" hidden>
       <div class="esito-scheda">
@@ -46,6 +47,6 @@
     </div>
   </main>
 
-  <script src="js/puzzle.js?v=1"></script>
+  <script src="js/puzzle.js?v=3"></script>
 </body>
 </html>

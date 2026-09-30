@@ -1,12 +1,19 @@
 /*
- * Puzzle del Meucci: pezzi a incastro disegnati su canvas, trascinabili col dito o col mouse.
- * Le posizioni sono in pixel dell'immagine (1200 × 900) rispetto all'angolo della tavola,
+ * Puzzle del Meucci: il plesso nei vari stili del widget, a pezzi a incastro disegnati su canvas,
+ * trascinabili col dito o col mouse.
+ * Le posizioni sono in pixel dell'immagine (1280 × 720) rispetto all'angolo della tavola,
  * così girando il telefono tutto si riadatta senza perdere i pezzi già messi.
  */
 (function () {
   "use strict";
 
-  const IMG_W = 1200, IMG_H = 900;
+  const IMG_W = 1280, IMG_H = 720;
+  const STILI = [
+    ["originale", "Originale"], ["ghibli", "Animazione giapponese"], ["metal", "Heavy metal"], ["pixel", "Pixel art"],
+    ["manifesto", "Manifesto anni '50"], ["cyberpunk", "Cyberpunk"], ["plastilina", "Plastilina"], ["ukiyoe", "Ukiyo-e"],
+    ["acquerello", "Acquerello e china"], ["progetto", "Progetto tecnico"], ["lowpoly", "Low-poly"],
+    ["mattoncini", "Mattoncini"], ["vangogh", "Notte stellata"],
+  ];
   const tavolo = document.getElementById("tavolo");
   const tavola = document.getElementById("tavola");
   const ui = {
@@ -18,8 +25,8 @@
     sbirciata: document.getElementById("sbirciata"),
   };
 
-  const img = new Image();
-  img.src = "img/puzzle.jpg?v=1";
+  let img = new Image(), stile = "originale";
+  const galleria = document.getElementById("galleria");
 
   let cols = 4, rows = 3, pw, ph, S, pad;
   let pezzi = [], z = 10, inizio = 0, fine = 0, timer = 0;
@@ -84,6 +91,33 @@
 
   /* ---------- partita ---------- */
 
+  function scegliStile(id) {
+    stile = STILI.some(([k]) => k === id) ? id : "originale";
+    galleria.querySelectorAll("button").forEach((b) => b.classList.toggle("attiva", b.dataset.stile === stile));
+    const scelto = galleria.querySelector(".attiva");
+    if (scelto) scelto.scrollIntoView({ block: "nearest", inline: "center", behavior: "smooth" });
+    try { localStorage.setItem("meucci-puzzle-stile", stile); } catch (e) { /* facoltativo */ }
+    const src = "img/stili/" + stile + ".jpg?v=1";
+    // indirizzo completo: dentro una variabile CSS verrebbe letto rispetto al foglio di stile
+    tavola.style.setProperty("--disegno", 'url("' + new URL(src, location.href).href + '")');
+    ui.sbirciata.src = src;
+    const nuova = new Image();
+    nuova.onload = () => { img = nuova; nuovaPartita(cols + "x" + rows); };
+    nuova.src = src;
+  }
+
+  STILI.forEach(([id, nome]) => {
+    const b = document.createElement("button");
+    b.type = "button";
+    b.className = "stile";
+    b.dataset.stile = id;
+    b.title = nome;
+    b.setAttribute("aria-label", nome);
+    b.innerHTML = '<img src="img/stili/' + id + '-mini.jpg?v=1" alt="" width="240" height="135"><span>' + nome + "</span>";
+    b.addEventListener("click", () => scegliStile(id));
+    galleria.appendChild(b);
+  });
+
   function nuovaPartita(griglia) {
     [cols, rows] = griglia.split("x").map(Number);
     pw = IMG_W / cols; ph = IMG_H / rows; S = Math.min(pw, ph); pad = 0.28 * S;
@@ -114,7 +148,7 @@
     }
     inizio = 0; fine = 0;
     ui.esito.hidden = true;
-    ui.stato.textContent = cols * rows + " pezzi";
+    ui.stato.textContent = (STILI.find(([k]) => k === stile) || ["", ""])[1] + " · " + cols * rows + " pezzi";
     impagina(true);
     aggiorna();
   }
@@ -240,7 +274,7 @@
   function completato() {
     fine = performance.now();
     const ms = fine - inizio;
-    const chiave = "meucci-puzzle-record-" + cols + "x" + rows;
+    const chiave = "meucci-puzzle-record-" + stile + "-" + cols + "x" + rows;
     let record = null;
     try { record = Number(localStorage.getItem(chiave)) || null; } catch (e) { /* facoltativo */ }
     const nuovo = !record || ms < record;
@@ -263,10 +297,11 @@
   window.addEventListener("resize", () => { clearTimeout(attesa); attesa = setTimeout(() => impagina(false), 120); });
   setInterval(aggiorna, 500);
 
-  function parti() {
-    let g = "4x3";
-    try { g = localStorage.getItem("meucci-puzzle-griglia") || g; } catch (e) { /* facoltativo */ }
-    nuovaPartita(/^\d+x\d+$/.test(g) ? g : "4x3");
-  }
-  if (img.complete && img.naturalWidth) parti(); else img.addEventListener("load", parti);
+  let g = "4x3", s = "originale";
+  try {
+    g = localStorage.getItem("meucci-puzzle-griglia") || g;
+    s = localStorage.getItem("meucci-puzzle-stile") || s;
+  } catch (e) { /* facoltativo */ }
+  if (/^\d+x\d+$/.test(g)) [cols, rows] = g.split("x").map(Number);
+  scegliStile(s);
 })();
