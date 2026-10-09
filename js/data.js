@@ -181,6 +181,26 @@ window.ATTIVITA_WEB = [
     ],
   },
   {
+    titolo: "Present simple o continuous?",
+    materia: "Inglese",
+    classe: "Quarta superiore · professionale",
+    annoProf: 4,
+    pubblicato: "2026-10-09",
+    descrizione:
+      "Ogni giorno o adesso? Studio con mappa da stampare, fumetto in officina (6 tavole), laboratorio con esercizi autocorretti e prova finale, gioco delle due cassette.",
+    citazione: "I repair air conditioners. Right now I’m cleaning a filter.",
+    url: "present-simple-continuous/",
+    copertina: "present-simple-continuous/img/og-share.jpg",
+    tinta: "inglese",
+    adesivo: "st-fumetto",
+    extra: [
+      { label: "Studio", url: "present-simple-continuous/imparare.html" },
+      { label: "Fumetto", url: "present-simple-continuous/fumetto.html" },
+      { label: "Laboratorio", url: "present-simple-continuous/laboratorio.html" },
+      { label: "Gioco", url: "present-simple-continuous/gioco.html" },
+    ],
+  },
+  {
     titolo: "Letteratura barocca",
     materia: "Italiano",
     classe: "Quarta superiore · professionale",

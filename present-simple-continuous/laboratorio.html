@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="color-scheme" content="dark" id="color-scheme">
+  <script>
+    {
+      const t = localStorage.getItem("tema-present-simple-continuous");
+      const tema = t === "light" || t === "dark" ? t : "dark";
+      document.documentElement.dataset.theme = tema;
+      document.getElementById("color-scheme").content = tema;
+    }
+  </script>
+  <link rel="icon" href="../favicon.svg" type="image/svg+xml">
+  <title>Laboratorio · Present simple o continuous? | Scuola</title>
+  <meta name="description" content="Costruisci il verbo, scegli la forma, completa, trova l’errore, lettura su Salvo e prova finale da 20 punti con correzione automatica.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body class="page-lab">
+  <a class="skip-link" href="#contenuto">Salta al contenuto</a>
+
+  <header class="cartellino">
+    <p class="cartellino-titolo"><span class="s">Simple</span> · <span class="c">Continuous</span></p>
+    <span class="timbro" data-timbro aria-hidden="true">NOW</span>
+    <button type="button" class="theme-toggle" data-theme-toggle aria-pressed="false">Chiaro</button>
+  </header>
+
+  <nav class="tabbar" aria-label="Sezioni">
+    <a href="index.html"><span class="ico" aria-hidden="true">⌂</span>Home</a>
+    <a href="imparare.html"><span class="ico" aria-hidden="true">✎</span>Studio</a>
+    <a href="fumetto.html"><span class="ico" aria-hidden="true">▦</span>Fumetto</a>
+    <a href="laboratorio.html" aria-current="page"><span class="ico" aria-hidden="true">⚙</span>Lab</a>
+    <a href="gioco.html"><span class="ico" aria-hidden="true">★</span>Gioco</a>
+  </nav>
+
+  <main id="contenuto" class="foglio" tabindex="-1">
+    <p class="kicker">Laboratorio · sei postazioni</p>
+    <h1>Al banco dei verbi</h1>
+    <p class="lead">Costruisci, scegli, completa, correggi, leggi. Alla fine la prova: si corregge da sola.</p>
+
+    <div class="stazioni">
+      <section class="stazione stazione-larga" id="costruisci">
+        <h2>1. Costruisci il verbo</h2>
+        <p class="consegna">Scegli chi, quale verbo e quando. Guarda come cambia.</p>
+        <div class="leva" role="group" aria-label="Quando succede?">
+          <button type="button" data-modo="sempre" aria-pressed="true">SEMPRE</button>
+          <button type="button" data-modo="adesso" aria-pressed="false">ADESSO</button>
+        </div>
+        <div class="costruttore">
+          <div class="campo">
+            <label for="c-sogg">Chi?</label>
+            <select id="c-sogg"></select>
+          </div>
+          <div class="campo">
+            <label for="c-verbo">Verbo</label>
+            <select id="c-verbo"></select>
+          </div>
+          <div class="campo">
+            <label for="c-forma">Forma</label>
+            <select id="c-forma">
+              <option value="+">+ affermativa</option>
+              <option value="-">− negativa</option>
+              <option value="?">? domanda</option>
+            </select>
+          </div>
+        </div>
+        <p class="uscita" id="c-out" aria-live="polite"></p>
+      </section>
+
+      <section class="stazione" id="scegli">
+        <h2>2. Scegli la forma</h2>
+        <p class="consegna">Tocca la forma giusta. Ti dico subito se va bene.</p>
+        <ol class="esercizio" id="scegli-lista"></ol>
+        <p class="punteggio" id="scegli-punti" aria-live="polite"></p>
+      </section>
+
+      <section class="stazione" id="completa">
+        <h2>3. Completa</h2>
+        <p class="consegna">Scrivi il verbo tra parentesi: simple o continuous? Poi premi «Controlla».</p>
+        <ol class="esercizio" id="completa-lista"></ol>
+        <div class="azioni">
+          <button type="button" class="btn btn-primary" id="completa-check">Controlla</button>
+          <button type="button" class="btn" id="completa-sol">Mostra le soluzioni</button>
+        </div>
+        <p class="punteggio" id="completa-punti" aria-live="polite"></p>
+      </section>
+
+      <section class="stazione" id="errore">
+        <h2>4. Trova l’errore</h2>
+        <p class="consegna">Due frasi: una è sbagliata. Tocca quella <strong>giusta</strong>.</p>
+        <ol class="esercizio" id="errore-lista"></ol>
+        <p class="punteggio" id="errore-punti" aria-live="polite"></p>
+      </section>
+
+      <section class="stazione" id="lettura">
+        <h2>5. Leggi: la settimana di Salvo</h2>
+        <div class="lettura" id="testo-salvo">
+          <p>Salvo is 34 and he <span data-t="s">lives</span> in Acireale. He <span data-t="s">works</span> as a technician: he <span data-t="s">repairs</span> air conditioners. He usually <span data-t="s">starts</span> work at 8 o’clock. Every morning he <span data-t="s">checks</span> his e-mails. He always <span data-t="s">carries</span> his toolbox and his safety gloves. He <span data-t="s">doesn’t work</span> at the weekend.</p>
+          <p>This week is different. Salvo <span data-t="c">isn’t visiting</span> customers: he <span data-t="c">is working</span> in a big hotel in Taormina. Right now he <span data-t="c">is standing</span> on a ladder and he <span data-t="c">is cleaning</span> the filters. His colleague Rita <span data-t="c">is testing</span> the gas pressure. “It’s tiring,” Salvo says, “but I<span data-t="c">’m learning</span> a lot!”</p>
+          <p class="glossario">toolbox = cassetta degli attrezzi · gloves = guanti · ladder = scala · tiring = faticoso</p>
+        </div>
+        <div class="azioni" style="margin-top:0">
+          <button type="button" class="btn" id="mostra-verbi" aria-pressed="false">Colora i verbi</button>
+        </div>
+        <p class="consegna" style="margin-top:0.7rem">Vero o falso?</p>
+        <ol class="esercizio" id="vf-lista"></ol>
+        <p class="punteggio" id="vf-punti" aria-live="polite"></p>
+      </section>
+
+      <section class="stazione" id="parla">
+        <h2>6. Tocca a te</h2>
+        <p class="consegna">Scrivi sul quaderno o dillo a voce. Quattro frasi su di te.</p>
+        <div class="due">
+          <div class="box s">
+            <h3>Di solito…</h3>
+            <p class="en">Every morning I … <br>I usually … <br>I never …</p>
+          </div>
+          <div class="box c">
+            <h3>Adesso…</h3>
+            <p class="en">Right now I’m … <br>The teacher is … <br>My classmates are …</p>
+          </div>
+        </div>
+        <p>Esempio: <span class="en">Every morning I take the bus. Right now I’m writing in English.</span></p>
+        <p><strong>In coppia, al telefono con l’officina:</strong></p>
+        <p class="en">A: Is my car ready?<br>B: Not yet. My colleague is changing the oil.<br>A: What time do you close?<br>B: We usually close at 7.</p>
+      </section>
+
+      <section class="stazione stazione-larga" id="prova">
+        <h2>Prova finale · 20 punti</h2>
+        <p class="consegna">Rispondi a tutto, poi premi «Consegna». Vedi il punteggio, il voto e le correzioni.</p>
+        <ol class="esercizio" id="prova-lista"></ol>
+        <div class="azioni">
+          <button type="button" class="btn btn-primary" id="prova-consegna">Consegna</button>
+          <button type="button" class="btn" id="prova-rifai" hidden>Rifai la prova</button>
+        </div>
+        <div class="voto" id="prova-voto" hidden aria-live="polite"></div>
+      </section>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <p>Realizzato dal Prof. Rossano Bella</p>
+  </footer>
+
+  <script src="js/common.js" defer></script>
+  <script src="js/laboratorio.js" defer></script>
+</body>
+</html>

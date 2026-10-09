@@ -1,0 +1,27 @@
+{
+  "lavoro": "present-simple-continuous",
+  "data": "2026-10-09",
+  "giudice": "revisione manuale (TypeSafe/Jev non disponibile su questa macchina: manca TYPESAFE_API_KEY)",
+  "stato": "Jev da rifare quando la chiave è disponibile",
+  "controllati": {
+    "laboratorio_scegli": 10,
+    "laboratorio_completa": 10,
+    "laboratorio_trova_errore": 8,
+    "laboratorio_vero_falso": 6,
+    "prova_finale": 20,
+    "gioco_parole_spia": 18,
+    "gioco_frasi": 16,
+    "gioco_scegli_verbo": 14
+  },
+  "criteri": [
+    "una sola risposta corretta per item",
+    "distrattori sbagliati ma plausibili (errori tipici: -s mancante, does + -s, verbi di stato con -ing, am/is/are mancante, raddoppio consonante)",
+    "spiegazione coerente con l'opzione corretta",
+    "nel livello 3 del gioco l'aiuto in italiano è solo lessico, per non suggerire il tempo verbale"
+  ],
+  "semplificazioni_accettate": [
+    "this week / these days / today come parole spia del continuous (vero al livello A2 a cui è detto)",
+    "verbi di stato presentati come 'mai -ing' con l'eccezione di have lunch/have a break spiegata a parte"
+  ],
+  "errori_trovati": []
+}

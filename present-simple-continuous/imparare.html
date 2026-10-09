@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="color-scheme" content="dark" id="color-scheme">
+  <script>
+    {
+      const t = localStorage.getItem("tema-present-simple-continuous");
+      const tema = t === "light" || t === "dark" ? t : "dark";
+      document.documentElement.dataset.theme = tema;
+      document.getElementById("color-scheme").content = tema;
+    }
+  </script>
+  <link rel="icon" href="../favicon.svg" type="image/svg+xml">
+  <title>Studio · Present simple o continuous? | Scuola</title>
+  <meta name="description" content="Forma, spelling, quando si usano, parole spia, verbi di stato, errori tipici e mappa da stampare.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body class="page-studio">
+  <a class="skip-link" href="#contenuto">Salta al contenuto</a>
+
+  <header class="cartellino">
+    <p class="cartellino-titolo"><span class="s">Simple</span> · <span class="c">Continuous</span></p>
+    <span class="timbro" data-timbro aria-hidden="true">NOW</span>
+    <button type="button" class="theme-toggle" data-theme-toggle aria-pressed="false">Chiaro</button>
+  </header>
+
+  <nav class="tabbar" aria-label="Sezioni">
+    <a href="index.html"><span class="ico" aria-hidden="true">⌂</span>Home</a>
+    <a href="imparare.html" aria-current="page"><span class="ico" aria-hidden="true">✎</span>Studio</a>
+    <a href="fumetto.html"><span class="ico" aria-hidden="true">▦</span>Fumetto</a>
+    <a href="laboratorio.html"><span class="ico" aria-hidden="true">⚙</span>Lab</a>
+    <a href="gioco.html"><span class="ico" aria-hidden="true">★</span>Gioco</a>
+  </nav>
+
+  <main id="contenuto" class="foglio" tabindex="-1">
+    <p class="kicker">Studio · il cartellino delle regole</p>
+    <h1>Sempre o adesso?</h1>
+    <p class="lead">In italiano diciamo «riparo» sia per <em>ogni giorno</em> sia per <em>adesso</em>. In inglese no: ci sono due tempi diversi.</p>
+
+    <div class="studio-layout">
+      <nav class="indice" aria-label="Indice">
+        <a href="#domanda">1. La domanda</a>
+        <a href="#simple">2. Present simple</a>
+        <a href="#s3">3. La -s di he/she/it</a>
+        <a href="#continuous">4. Present continuous</a>
+        <a href="#ing">5. La forma -ing</a>
+        <a href="#quando">6. Quando uso quale</a>
+        <a href="#spia">7. Parole spia</a>
+        <a href="#cosa-fai">8. «Cosa fai?»</a>
+        <a href="#stato">9. Verbi di stato</a>
+        <a href="#errori">10. Errori tipici</a>
+        <a href="#in-breve">11. In breve</a>
+        <a href="#mappa">12. Mappa da stampare</a>
+        <a href="#ricorda">13. Ricorda così</a>
+      </nav>
+
+      <div>
+        <article class="capitolo" id="domanda">
+          <h2><span class="num">1</span>La domanda</h2>
+          <p>Prima di scegliere il verbo, fatti <strong>una domanda</strong>:</p>
+          <div class="due">
+            <div class="box s">
+              <h3>Succede SEMPRE / DI SOLITO?</h3>
+              <p>→ <strong>Present simple</strong></p>
+              <div class="linea-tempo" aria-hidden="true">
+                <span class="pallino" style="left:8%"></span><span class="pallino" style="left:24%"></span><span class="pallino" style="left:40%"></span><span class="pallino" style="left:60%"></span><span class="pallino" style="left:76%"></span><span class="pallino" style="left:92%"></span>
+                <span class="now">NOW</span>
+                <span class="didascalia">si ripete</span>
+              </div>
+              <p class="en">I check the tools every day.</p>
+              <p class="it">Controllo gli attrezzi ogni giorno.</p>
+            </div>
+            <div class="box c">
+              <h3>Succede ADESSO?</h3>
+              <p>→ <strong>Present continuous</strong></p>
+              <div class="linea-tempo" aria-hidden="true">
+                <span class="barra"></span>
+                <span class="now">NOW</span>
+                <span class="didascalia">è in corso</span>
+              </div>
+              <p class="en">I’m checking the tools now.</p>
+              <p class="it">Sto controllando gli attrezzi adesso.</p>
+            </div>
+          </div>
+          <p>Trucco: il continuous è come <strong>«sto + -ando / -endo»</strong>. <span class="en">I’m working</span> = <em>sto lavorando</em>.</p>
+        </article>
+
+        <article class="capitolo" id="simple">
+          <h2><span class="num">2</span>Present simple</h2>
+          <p>Lo usi per <strong>abitudini</strong>, <strong>orari</strong> e <strong>fatti sempre veri</strong>.</p>
+          <div class="box s">
+            <h3>Come si forma</h3>
+            <div class="forma">
+              <span class="seg">+</span><span class="en">I / you / we / they <mark class="s">work</mark> · he / she / it <mark class="s">works</mark></span>
+              <span class="seg">−</span><span class="en">I <mark class="s">don’t</mark> work · he <mark class="s">doesn’t</mark> work</span>
+              <span class="seg">?</span><span class="en"><mark class="s">Do</mark> you work? · <mark class="s">Does</mark> she work?</span>
+            </div>
+            <p>Risposte brevi: <span class="en">Yes, I do. / No, I don’t.</span> · <span class="en">Yes, she does. / No, she doesn’t.</span></p>
+          </div>
+          <div class="box stop" style="margin-top:0.7rem">
+            <h3>Attenzione</h3>
+            <p>Con <span class="en">doesn’t</span> e <span class="en">does</span> il verbo <strong>perde la -s</strong>.</p>
+            <p><span class="en">He doesn’t <s>works</s> → He doesn’t work.</span><br><span class="en">Does she <s>repairs</s>…? → Does she repair…?</span></p>
+          </div>
+          <p style="margin-top:0.7rem">Esempi in officina:</p>
+          <ul>
+            <li><span class="en">The technician checks the machines every morning.</span> <span class="it">Il tecnico controlla le macchine ogni mattina.</span></li>
+            <li><span class="en">We don’t use the lathe without safety glasses.</span> <span class="it">Non usiamo il tornio senza occhiali.</span></li>
+            <li><span class="en">Does the lesson start at 8? – Yes, it does.</span> <span class="it">La lezione comincia alle 8? – Sì.</span></li>
+          </ul>
+        </article>
+
+        <article class="capitolo" id="s3">
+          <h2><span class="num">3</span>La -s di he/she/it</h2>
+          <p>Solo con <strong>he / she / it</strong> il verbo prende la <strong>-s</strong>.</p>
+          <div class="scroll-x">
+            <table class="tabella">
+              <thead><tr><th>Regola</th><th>Esempi</th></tr></thead>
+              <tbody>
+                <tr><td>quasi tutti: <strong>+ s</strong></td><td class="en">work → works · repair → repairs</td></tr>
+                <tr><td>finisce in -s, -sh, -ch, -x, -o: <strong>+ es</strong></td><td class="en">fix → fixes · wash → washes · go → goes · do → does</td></tr>
+                <tr><td>consonante + y: <strong>y → ies</strong></td><td class="en">study → studies · carry → carries</td></tr>
+                <tr><td>vocale + y: <strong>+ s</strong></td><td class="en">play → plays · stay → stays</td></tr>
+                <tr><td>irregolare</td><td class="en">have → has</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </article>
+
+        <article class="capitolo" id="continuous">
+          <h2><span class="num">4</span>Present continuous</h2>
+          <p>Lo usi per un’azione <strong>in corso adesso</strong> (o in questo periodo).</p>
+          <p>Formula: <strong>am / is / are + verbo-ing</strong>.</p>
+          <div class="box c">
+            <h3>Come si forma</h3>
+            <div class="forma">
+              <span class="seg">+</span><span class="en">I <mark class="c">am</mark> (I’m) working · he <mark class="c">is</mark> (he’s) working · they <mark class="c">are</mark> (they’re) working</span>
+              <span class="seg">−</span><span class="en">I’m <mark class="c">not</mark> working · he <mark class="c">isn’t</mark> working · they <mark class="c">aren’t</mark> working</span>
+              <span class="seg">?</span><span class="en"><mark class="c">Are</mark> you working? · <mark class="c">Is</mark> she working?</span>
+            </div>
+            <p>Risposte brevi: <span class="en">Yes, I am. / No, I’m not.</span> · <span class="en">Yes, he is. / No, he isn’t.</span></p>
+          </div>
+          <div class="box stop" style="margin-top:0.7rem">
+            <h3>Non dimenticare am / is / are</h3>
+            <p><span class="en"><s>I working</s> → I’m working.</span><br><span class="en"><s>She fixing the car</s> → She’s fixing the car.</span></p>
+          </div>
+          <ul style="margin-top:0.7rem">
+            <li><span class="en">Look! Marco is welding the pipe.</span> <span class="it">Guarda! Marco sta saldando il tubo.</span></li>
+            <li><span class="en">Sorry, I can’t talk now. I’m changing a tyre.</span> <span class="it">Scusa, ora non posso: sto cambiando una gomma.</span></li>
+          </ul>
+        </article>
+
+        <article class="capitolo" id="ing">
+          <h2><span class="num">5</span>La forma -ing</h2>
+          <div class="scroll-x">
+            <table class="tabella">
+              <thead><tr><th>Regola</th><th>Esempi</th></tr></thead>
+              <tbody>
+                <tr><td>quasi tutti: <strong>+ ing</strong></td><td class="en">work → working · check → checking · study → studying</td></tr>
+                <tr><td>finisce in -e: <strong>togli la e</strong></td><td class="en">make → making · use → using · change → changing</td></tr>
+                <tr><td>verbi corti tipo stop, cut, run: <strong>raddoppia</strong></td><td class="en">stop → stopping · cut → cutting · run → running</td></tr>
+                <tr><td>finisce in -ie: <strong>ie → ying</strong></td><td class="en">lie → lying · tie → tying</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p>Non si raddoppia con w, x, y: <span class="en">fix → fixing · play → playing</span>.</p>
+        </article>
+
+        <article class="capitolo" id="quando">
+          <h2><span class="num">6</span>Quando uso quale</h2>
+          <div class="due">
+            <div class="box s">
+              <h3>Present simple</h3>
+              <ul>
+                <li><strong>Abitudini</strong>: <span class="en">I check the tools every morning.</span></li>
+                <li><strong>Fatti veri</strong>: <span class="en">Water boils at 100 °C.</span></li>
+                <li><strong>Cose stabili</strong>: <span class="en">My uncle works for a heating company.</span></li>
+                <li><strong>Orari</strong>: <span class="en">The workshop opens at 8:00.</span></li>
+              </ul>
+            </div>
+            <div class="box c">
+              <h3>Present continuous</h3>
+              <ul>
+                <li><strong>Adesso</strong>: <span class="en">Look! He’s welding the frame.</span></li>
+                <li><strong>In questo periodo</strong>: <span class="en">This month I’m doing work experience.</span></li>
+                <li><strong>Cose temporanee</strong>: <span class="en">My car is at the mechanic’s, so I’m taking the bus this week.</span></li>
+                <li><strong>Programmi già decisi</strong>: <span class="en">We’re visiting a factory next Friday.</span></li>
+              </ul>
+            </div>
+          </div>
+          <p>Stesso verbo, due tempi:</p>
+          <ul>
+            <li><span class="en"><mark class="s">I usually go</mark> to school by bus. Today <mark class="c">I’m going</mark> by scooter.</span></li>
+            <li><span class="en">The machine <mark class="s">makes</mark> 200 pieces an hour. Listen! It <mark class="c">is making</mark> a strange noise.</span></li>
+          </ul>
+        </article>
+
+        <article class="capitolo" id="spia">
+          <h2><span class="num">7</span>Parole spia</h2>
+          <p>Queste parole ti dicono quale tempo usare.</p>
+          <h3 class="s-txt">Present simple</h3>
+          <div class="parole s"><span>always</span><span>usually</span><span>often</span><span>sometimes</span><span>never</span><span>every day</span><span>every morning</span><span>on Mondays</span><span>once a week</span><span>at the weekend</span></div>
+          <h3 class="c-txt">Present continuous</h3>
+          <div class="parole c"><span>now</span><span>right now</span><span>at the moment</span><span>today</span><span>this week</span><span>these days</span><span>at present</span><span>Look!</span><span>Listen!</span></div>
+          <p><strong>Dove va always / usually / never?</strong> Prima del verbo: <span class="en">He usually starts at 8.</span> Ma dopo <em>be</em>: <span class="en">He is always on time.</span></p>
+        </article>
+
+        <article class="capitolo" id="cosa-fai">
+          <h2><span class="num">8</span>«Cosa fai?»</h2>
+          <p>In italiano è una domanda sola. In inglese sono due.</p>
+          <div class="due">
+            <div class="box s">
+              <h3>What do you do?</h3>
+              <p>= <em>Che lavoro fai?</em></p>
+              <p class="en">I’m an electrician. I install alarm systems.</p>
+            </div>
+            <div class="box c">
+              <h3>What are you doing?</h3>
+              <p>= <em>Cosa stai facendo adesso?</em></p>
+              <p class="en">I’m checking the fuse box.</p>
+            </div>
+          </div>
+        </article>
+
+        <article class="capitolo" id="stato">
+          <h2><span class="num">9</span>Verbi di stato</h2>
+          <div class="box stop">
+            <h3>STOP: questi verbi non vogliono -ing</h3>
+            <p>Parlano di cosa <strong>pensi, senti, vuoi o hai</strong>. Non sono azioni. Anche adesso, usa il <strong>simple</strong>.</p>
+            <div class="parole stop"><span>like</span><span>love</span><span>hate</span><span>want</span><span>need</span><span>know</span><span>understand</span><span>believe</span><span>remember</span><span>own</span><span>cost</span></div>
+            <p><span class="en"><s>I’m needing a drill.</s> → I need a drill.</span><br>
+            <span class="en"><s>Are you knowing the answer?</s> → Do you know the answer?</span><br>
+            <span class="en"><s>This tool is costing 30 euros.</s> → This tool costs 30 euros.</span></p>
+          </div>
+          <p style="margin-top:0.7rem"><strong>have</strong>: se vuol dire <em>possedere</em> → simple (<span class="en">She has a new van.</span>). Se è un’azione (<em>have lunch, have a break</em>) → va bene -ing (<span class="en">She’s having lunch.</span>).</p>
+        </article>
+
+        <article class="capitolo" id="errori">
+          <h2><span class="num">10</span>Errori tipici</h2>
+          <div class="scroll-x">
+            <table class="tabella">
+              <thead><tr><th>Sbagliato</th><th>Giusto</th><th>Perché</th></tr></thead>
+              <tbody>
+                <tr><td class="en"><s>He work in a garage.</s></td><td class="en">He works in a garage.</td><td>he → + s</td></tr>
+                <tr><td class="en"><s>Does he works?</s></td><td class="en">Does he work?</td><td>dopo does: niente -s</td></tr>
+                <tr><td class="en"><s>I working now.</s></td><td class="en">I’m working now.</td><td>manca am</td></tr>
+                <tr><td class="en"><s>Look! The lift go up.</s></td><td class="en">Look! The lift is going up.</td><td>succede adesso</td></tr>
+                <tr><td class="en"><s>I’m liking this job.</s></td><td class="en">I like this job.</td><td>verbo di stato</td></tr>
+                <tr><td class="en"><s>She is stoping the motor.</s></td><td class="en">She is stopping the motor.</td><td>stop → stopping</td></tr>
+                <tr><td class="en"><s>Every day I’m checking the oil.</s></td><td class="en">Every day I check the oil.</td><td>abitudine → simple</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </article>
+
+        <article class="capitolo" id="in-breve">
+          <h2><span class="num">11</span>In breve</h2>
+          <p>La versione corta. Due righe, tre regole.</p>
+          <div class="semplice">
+            <div class="riga s"><span class="ico" aria-hidden="true">🔁</span><span><b>SEMPRE</b><span class="en">I work. He works.</span><br><span class="it">ogni giorno · di solito</span></span></div>
+            <div class="riga c"><span class="ico" aria-hidden="true">⏱️</span><span><b>ADESSO</b><span class="en">I’m working. He’s working.</span><br><span class="it">ora · in questo momento</span></span></div>
+          </div>
+          <ol>
+            <li><strong>he / she / it</strong> + <strong>s</strong> → <span class="en">he works</span></li>
+            <li>adesso = <strong>am / is / are + -ing</strong> → <span class="en">he is working</span></li>
+            <li><strong>need, like, know</strong>: mai -ing → <span class="en">I need</span></li>
+          </ol>
+        </article>
+
+        <article class="capitolo mappa-stampa" id="mappa">
+          <h2><span class="num">12</span>Mappa da stampare</h2>
+          <p>Tutto in un foglio. Da stampare o da tenere sul telefono.</p>
+          <img src="img/mappa-present.png" alt="Mappa: present simple a sinistra in blu, present continuous a destra in arancio, con forma, spelling, parole spia e verbi di stato" width="1156" height="1365" loading="lazy">
+          <div class="azioni">
+            <a class="btn" href="img/mappa-present.png" download>Scarica la mappa</a>
+          </div>
+        </article>
+
+        <article class="capitolo" id="ricorda">
+          <h2><span class="num">13</span>Ricorda così</h2>
+          <div class="ricorda">
+            <ul>
+              <li><span class="s-txt">Sempre / di solito</span> → present simple: <span class="en">I work, he works</span>.</li>
+              <li><span class="c-txt">Adesso / in questo periodo</span> → present continuous: <span class="en">I’m working</span>.</li>
+              <li><span class="en">don’t / doesn’t</span> e <span class="en">do / does</span> per − e ? del simple.</li>
+              <li><span class="en">am / is / are</span> per − e ? del continuous.</li>
+              <li>Parole spia: <span class="en">every day</span> → simple · <span class="en">right now</span> → continuous.</li>
+              <li><span class="en">need, know, like</span>… niente -ing.</li>
+            </ul>
+          </div>
+          <div class="azioni">
+            <a class="btn btn-primary" href="laboratorio.html">Laboratorio</a>
+            <a class="btn" href="fumetto.html">Fumetto</a>
+            <a class="btn" href="gioco.html">Gioco</a>
+          </div>
+        </article>
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <p>Realizzato dal Prof. Rossano Bella</p>
+  </footer>
+
+  <script src="js/common.js" defer></script>
+</body>
+</html>

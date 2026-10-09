@@ -34,6 +34,14 @@ Solo gioco, circa dieci minuti. Non è nel raccoglitore professionale.
 
 - Gioco: https://hidetoshi777.github.io/Scuola/galileo-cannocchiale/
 
+### Present simple o continuous? · Quarta professionale (inglese)
+
+- Home: https://hidetoshi777.github.io/Scuola/present-simple-continuous/
+- Studio: https://hidetoshi777.github.io/Scuola/present-simple-continuous/imparare.html
+- Fumetto: https://hidetoshi777.github.io/Scuola/present-simple-continuous/fumetto.html
+- Laboratorio: https://hidetoshi777.github.io/Scuola/present-simple-continuous/laboratorio.html
+- Gioco: https://hidetoshi777.github.io/Scuola/present-simple-continuous/gioco.html
+
 ### Edison · Guerra delle correnti · Quarta professionale (tecnologie elettriche)
 
 - Home: https://hidetoshi777.github.io/Scuola/edison-guerra-correnti/

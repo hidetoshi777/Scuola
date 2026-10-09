@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="color-scheme" content="dark" id="color-scheme">
+  <script>
+    {
+      const t = localStorage.getItem("tema-present-simple-continuous");
+      const tema = t === "light" || t === "dark" ? t : "dark";
+      document.documentElement.dataset.theme = tema;
+      document.getElementById("color-scheme").content = tema;
+    }
+  </script>
+  <link rel="icon" href="../favicon.svg" type="image/svg+xml">
+  <title>Fumetto · Present simple o continuous? | Scuola</title>
+  <meta name="description" content="Sei tavole in officina: every day e right now, What do you do? e What are you doing?, domande, this week, ricorda così.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/fumetto.css">
+</head>
+<body class="page-fumetto">
+  <a class="skip-link" href="#contenuto">Salta al contenuto</a>
+
+  <header class="cartellino">
+    <p class="cartellino-titolo"><span class="s">Simple</span> · <span class="c">Continuous</span></p>
+    <span class="timbro" data-timbro aria-hidden="true">NOW</span>
+    <button type="button" class="theme-toggle" data-theme-toggle aria-pressed="false">Chiaro</button>
+  </header>
+
+  <nav class="tabbar" aria-label="Sezioni">
+    <a href="index.html"><span class="ico" aria-hidden="true">⌂</span>Home</a>
+    <a href="imparare.html"><span class="ico" aria-hidden="true">✎</span>Studio</a>
+    <a href="fumetto.html" aria-current="page"><span class="ico" aria-hidden="true">▦</span>Fumetto</a>
+    <a href="laboratorio.html"><span class="ico" aria-hidden="true">⚙</span>Lab</a>
+    <a href="gioco.html"><span class="ico" aria-hidden="true">★</span>Gioco</a>
+  </nav>
+
+  <main id="contenuto" class="foglio" tabindex="-1">
+    <p class="kicker">Fumetto · 6 tavole</p>
+    <h1>Una settimana diversa</h1>
+    <p class="lead">Salvo, tecnico dei condizionatori, e Nico, apprendista. Ogni giorno… e adesso.</p>
+
+    <section class="fumetto-reader" id="fumetto-stage" aria-roledescription="fumetto" aria-label="Present simple e continuous a fumetti">
+      <div class="fumetto-toolbar">
+        <p class="fumetto-status">Tavola <span id="fumetto-num">1</span> di 6</p>
+        <div class="fumetto-toolbar-actions">
+          <button type="button" class="btn fumetto-print" id="fumetto-print">Stampa tutto</button>
+          <button type="button" class="btn fumetto-full" id="fumetto-fullscreen" aria-pressed="false">Schermo intero</button>
+        </div>
+      </div>
+
+      <div class="fumetto-viewport" id="fumetto-viewport">
+          <figure class="fumetto-page is-active" data-page="1">
+            <img src="img/tavole/01-every-day.jpg" alt="Tavola 1: ogni mattina Salvo timbra alle otto e Nico controlla gli attrezzi. I start work at eight every day." width="864" height="1152" fetchpriority="high">
+          </figure>
+          <figure class="fumetto-page" data-page="2" aria-hidden="true">
+            <img src="img/tavole/02-right-now.jpg" alt="Tavola 2: Salvo sulla scala pulisce il filtro. Look! He is cleaning the filter. Nico al telefono: Sorry, I’m working now." width="864" height="1152" loading="lazy">
+          </figure>
+          <figure class="fumetto-page" data-page="3" aria-hidden="true">
+            <img src="img/tavole/03-what-do-you-do.jpg" alt="Tavola 3: un cliente chiede What do you do? e What are you doing? Due domande diverse." width="864" height="1152" loading="lazy">
+          </figure>
+          <figure class="fumetto-page" data-page="4" aria-hidden="true">
+            <img src="img/tavole/04-domande.jpg" alt="Tavola 4: Does it work? No, it doesn’t. Is it making a noise? Yes, it is." width="864" height="1152" loading="lazy">
+          </figure>
+          <figure class="fumetto-page" data-page="5" aria-hidden="true">
+            <img src="img/tavole/05-this-week.jpg" alt="Tavola 5: di solito lavorano ad Acireale, questa settimana sono in un hotel a Taormina." width="864" height="1152" loading="lazy">
+          </figure>
+          <figure class="fumetto-page" data-page="6" aria-hidden="true">
+            <img src="img/tavole/06-ricorda.jpg" alt="Tavola 6: ricorda così. Sempre: I work. Adesso: I’m working. I need, non I’m needing." width="864" height="1152" loading="lazy">
+          </figure>
+      </div>
+
+      <p class="fumetto-caption" id="fumetto-caption" aria-live="polite"></p>
+
+      <div class="fumetto-controls">
+        <button type="button" class="btn fumetto-nav" id="fumetto-prev" disabled>← Indietro</button>
+        <div class="fumetto-dots" id="fumetto-dots" role="tablist" aria-label="Tavole"></div>
+        <button type="button" class="btn btn-primary fumetto-nav" id="fumetto-next">Avanti →</button>
+      </div>
+      <p class="fumetto-hint">Scorri o tocca i lati. Pizzica per ingrandire. «Schermo intero» sul telefono.</p>
+    </section>
+
+    <div class="azioni">
+      <a class="btn btn-primary" href="laboratorio.html">Laboratorio</a>
+      <a class="btn" href="gioco.html">Gioco</a>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <p>Realizzato dal Prof. Rossano Bella</p>
+  </footer>
+
+  <script src="js/common.js" defer></script>
+  <script src="../js/fumetto-zoom.js" defer></script>
+  <script src="../js/fumetto-print.js?v=3" defer></script>
+  <script src="js/fumetto.js" defer></script>
+</body>
+</html>
