@@ -8,12 +8,13 @@
   <title>GPS 1100 · La grande raccolta</title>
   <meta name="description" content="Un countdown molto poco sindacale: precari pixel, trappole assurde e un barattolone fino all'ultima campanella.">
   <meta property="og:title" content="GPS 1100 · La grande raccolta">
-  <meta property="og:description" content="1.100 precari pixel. Un barattolone. Una sola ultima campanella.">
+  <meta property="og:description" content="1.100 precari cartoon. Un barattolone. Una sola ultima campanella.">
   <meta property="og:url" content="https://hidetoshi777.github.io/Scuola/meucci-giochi/gps/">
-  <meta property="og:image" content="https://hidetoshi777.github.io/Scuola/meucci-giochi/gps/copertina.jpg">
+  <meta property="og:image" content="https://hidetoshi777.github.io/Scuola/meucci-giochi/gps/copertina.jpg?v=2">
   <meta name="twitter:card" content="summary_large_image">
   <link rel="icon" href="../../favicon.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="gps.css?v=1">
+  <link rel="preload" as="image" href="scenario.webp">
+  <link rel="stylesheet" href="gps.css?v=2">
 </head>
 <body>
   <main class="cabinet">
@@ -22,22 +23,22 @@
       <div><p class="eyebrow">MEUCCI / PASSATEMPI DEL PROF.</p><h1>GPS <span>1100</span></h1></div>
       <div class="stamp">LA GRANDE<br>RACCOLTA</div>
     </header>
-    <p class="intro">La fila è lunga. La campanella arriverà. Il barattolo è bello grosso.</p>
+    <p class="intro">Un altro anno. Un’altra sede. La stessa attesa.</p>
     <section class="scoreboard" aria-label="Contatori del calendario">
       <div><span>ANCORA DAVANTI</span><strong id="remaining">1.100</strong></div>
       <div><span>NEL BARATTOLO</span><strong id="collected">0</strong></div>
       <div><span>GIORNI ALLA LIBERTÀ</span><strong id="days">—</strong></div>
     </section>
     <div class="mode-line"><span id="mode">● CALENDARIO REALE</span><time id="date-label"></time><button id="pause" type="button" aria-pressed="false">Pausa</button></div>
-    <section class="game" aria-label="Il percorso dei precari pixel e il barattolone">
-      <canvas id="world" role="img" aria-label="Precari pixel camminano sui piani della scuola; botola, timbro e molla li fanno finire nel barattolone. Usa i pulsanti sotto per azionare le trappole."></canvas>
-      <div class="scene-label"><span>UFFICIO SUPPLENZE</span><small>Prendere il numerino. Poi anche un altro.</small></div>
+    <section class="game" aria-label="Il percorso dei precari e il barattolone">
+      <canvas id="world" role="img" aria-label="Precari cartoon camminano sui piani della scuola; timbrone al primo piano, botola al secondo e molla al terzo li fanno finire nel barattolone. Usa i pulsanti sotto per azionare le trappole."></canvas>
+      <div class="scene-label"><span>LA FILA DEI PRECARI</span><small>Un anno alla volta. Una sede alla volta.</small></div>
       <p class="toast" id="toast" role="status">Benvenuto nella fila più paziente d'Italia.</p>
     </section>
     <nav class="tools" aria-label="Trappole cartoon">
-      <button type="button" data-tool="stamp"><span aria-hidden="true">▣</span><strong>Il timbrone</strong><small>Pratica archiviata.</small></button>
-      <button type="button" data-tool="trap"><span aria-hidden="true">▱</span><strong>La botola</strong><small>Scorrimento rapido.</small></button>
-      <button type="button" data-tool="spring"><span aria-hidden="true">↗</span><strong>La molla</strong><small>Trasferimento d'ufficio.</small></button>
+      <button type="button" data-tool="stamp"><span aria-hidden="true">▣</span><strong>Nessuna chiamata</strong><small>Il prossimo anno chi lo sa.</small></button>
+      <button type="button" data-tool="trap"><span aria-hidden="true">▱</span><strong>La precarietà</strong><small>A giugno il contratto scade.</small></button>
+      <button type="button" data-tool="spring"><span aria-hidden="true">↗</span><strong>Sede lontana</strong><small>Chilometri e altre incertezze.</small></button>
     </nav>
     <section class="calendar">
       <div class="calendar-heading"><h2 id="quota">Oggi si supera…</h2><button type="button" id="today">Torna a oggi</button></div>
@@ -56,9 +57,9 @@
       </form>
       <p>Data iniziale: 12 ottobre 2026. Fine lezioni: 9 giugno 2027, secondo il <a href="https://www.usr.sicilia.it/calendario-scolastico-2026-27/" target="_blank" rel="noopener">calendario della Sicilia</a>. Puoi adattarla al tuo istituto.</p>
     </details>
-    <footer><p>Satira da sala professori. Lo scorrimento è inventato: nessun collegamento alle GPS vere.</p><p>I personaggi sul percorso sono un campione animato della fila. I contatori rappresentano tutti i precari pixel.</p><p>Realizzato dal Prof. Rossano Bella</p></footer>
+    <footer><p>Satira da sala professori. Lo scorrimento è inventato: nessun collegamento alle GPS vere.</p><p>I personaggi sul percorso sono un campione animato della fila. I contatori rappresentano tutti i precari cartoon.</p><p>Realizzato dal Prof. Rossano Bella</p></footer>
     <noscript>Attiva JavaScript per animare i precari e calcolare il countdown.</noscript>
   </main>
-  <script src="gps.js?v=1" defer></script>
+  <script src="gps.js?v=2" defer></script>
 </body>
 </html>
