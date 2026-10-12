@@ -54,6 +54,7 @@
     $('quota').textContent = t.remaining === 0 ? 'Fila esaurita. Buone vacanze, Prof!' : `In questa giornata: ${fmt(t.collected-prev.collected)} nel barattolo`;
     $('calendar-note').textContent = preview ? 'Stai giocando con una data futura. “Torna a oggi” ripristina il countdown reale.' : `Dal ${shortDate(start)} al ${shortDate(end)}: ${fmt(config.initial)} precari pixel, distribuiti sui giorni di calendario.`;
     if (target < visual) { visual = target; flights = []; rebuildPile(); }
+    if (paused && target > visual) { visual = target; flights = []; rebuildPile(); }
   }
   function resize() {
     W = window.innerWidth <= 600 ? 620 : 1000; H = W === 620 ? 760 : 660;
@@ -97,7 +98,7 @@
   function tick(dt) {
     time += dt; toolFlash=Math.max(0,toolFlash-dt);
     if (animation) {
-      animation.age += dt;
+      animation.age = (performance.now() - animation.started) / 1000;
       viewDay = animation.from + Math.floor((end-animation.from)*Math.min(1,animation.age/12)); preview=true; update();
       if (animation.age>=12) {animation=null;viewDay=end;update();toast('DRIIIN! Zero davanti. Tutti nel barattolone.');}
     }
@@ -189,7 +190,7 @@
   }
   $('future').addEventListener('input',()=>{preview=true;animation=null;viewDay=start+Number($('future').value);update();});
   $('today').addEventListener('click',()=>{preview=false;animation=null;viewDay=todayDay();target=visual=totals(viewDay).collected;flights=[];rebuildPile();update();toast('Rieccoci a oggi. La fila segue il calendario.');});
-  $('finale').addEventListener('click',()=>{preview=true;setPause(false);viewDay=start;visual=0;flights=[];rebuildPile();update();animation={from:start,age:0};toast('Tutto l’anno in 12 secondi. Tenetevi il fascicolo!');});
+  $('finale').addEventListener('click',()=>{preview=true;setPause(false);viewDay=start;visual=0;flights=[];rebuildPile();update();animation={from:start,age:0,started:performance.now()};toast('Tutto l’anno in 12 secondi. Tenetevi il fascicolo!');});
   $('pause').addEventListener('click',()=>setPause(!paused));
   document.querySelectorAll('[data-tool]').forEach(b=>b.addEventListener('click',()=>fire(b.dataset.tool)));
   $('settings').addEventListener('submit',e=>{
