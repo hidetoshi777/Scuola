@@ -23,6 +23,7 @@
   let start, end, span, viewDay, preview = false, paused = false, animation = null;
   let target = 0, visual = 0, time = 0, last = 0, accumulator = 0, tool = 'stamp', toolFlash = 0;
   let people = [], flights = [], confetti = [], pile = [], returning = [], lastToast = -10;
+  let personSerial = 0;
   const backdrop = new Image(); backdrop.src = 'scenario.webp';
   const canvas = $('world'), ctx = canvas.getContext('2d');
   let W = 1000, H = 760;
@@ -59,6 +60,11 @@
     if (target < visual) { visual = target; flights = []; rebuildPile(); }
     if (paused && target > visual) { visual = target; flights = []; rebuildPile(); }
   }
+  function returnToToday() {
+    preview=false; animation=null; viewDay=todayDay();
+    target=visual=totals(viewDay).collected; flights=[]; confetti=[];
+    rebuildPile(); update();
+  }
   function resize() {
     const oldW = W;
     W = window.innerWidth <= 600 ? 620 : 1000; H = W === 620 ? 900 : 760;
@@ -73,7 +79,7 @@
       traps:{stamp:{x:W*.43,y:levels[0],level:0},trap:{x:W*.60,y:levels[1],level:1},spring:{x:W*.34,y:levels[2],level:2}}};
   }
   function person() {
-    return {x:geometry().left+12,y:geometry().levels[0],level:0,dir:1,speed:42+Math.random()*4,color:colors[Math.floor(Math.random()*colors.length)],hair:hairColors[Math.floor(Math.random()*hairColors.length)],skin:skinColors[Math.floor(Math.random()*skinColors.length)],phase:Math.random()*7,variant:Math.floor(Math.random()*3),falling:false,vy:0,blocked:false};
+    return {x:geometry().left+12,y:geometry().levels[0],level:0,dir:1,speed:42+Math.random()*4,color:colors[Math.floor(Math.random()*colors.length)],hair:hairColors[Math.floor(Math.random()*hairColors.length)],skin:skinColors[Math.floor(Math.random()*skinColors.length)],phase:Math.random()*7,variant:Math.floor(Math.random()*3),woman:personSerial++%5<2,falling:false,vy:0,blocked:false};
   }
   function seedPeople(count) {
     const g=geometry(),perFloor=Math.ceil(count/3);
@@ -82,12 +88,12 @@
   function rebuildPile() {
     const j = geometry().jar, ratio = visual/config.initial;
     const columns=Math.max(5,Math.floor((j.w-34)/16));
-    pile = Array.from({length:Math.ceil(ratio*columns*10)},(_,i)=>({x:j.x+22+(i%columns)*16+Math.sin(i*8)*3,y:j.y+j.h-14-Math.floor(i/columns)*j.h*.075,color:colors[i%colors.length],hair:hairColors[i%hairColors.length],skin:skinColors[i%skinColors.length],variant:i%3,rotation:Math.sin(i*7)*.8}));
+    pile = Array.from({length:Math.ceil(ratio*columns*10)},(_,i)=>({x:j.x+22+(i%columns)*16+Math.sin(i*8)*3,y:j.y+j.h-14-Math.floor(i/columns)*j.h*.075,color:colors[i%colors.length],hair:hairColors[i%hairColors.length],skin:skinColors[i%skinColors.length],variant:i%3,woman:i%5<2,rotation:Math.sin(i*7)*.8}));
   }
   function launch(p, count = 1) {
     const g = geometry(), j = g.jar;
     const x=p.x,y=p.y-16;
-    flights.push({x,y,sx:x,sy:y,ex:j.x+22+Math.random()*(j.w-44),ey:j.y+j.h-18-(visual/config.initial)*j.h*.65,age:0,duration:tool==='spring'?1.55:1.25,color:p.color,hair:p.hair,skin:p.skin,variant:p.variant,count,tool,dir:p.dir});
+    flights.push({x,y,sx:x,sy:y,ex:j.x+22+Math.random()*(j.w-44),ey:j.y+j.h-18-(visual/config.initial)*j.h*.65,age:0,duration:tool==='spring'?1.55:1.25,color:p.color,hair:p.hair,skin:p.skin,variant:p.variant,woman:p.woman,count,tool,dir:p.dir});
     toolFlash = .65;
     if (time-lastToast>2) toast(quips[tool][Math.floor(Math.random()*3)]);
   }
@@ -173,14 +179,22 @@
     ctx.strokeStyle='#142e36';ctx.lineWidth=5;
     ctx.beginPath();ctx.moveTo(-4,-10);ctx.lineTo(-4-stride,-2);ctx.moveTo(3,-10);ctx.lineTo(3+stride,-2);ctx.stroke();
     round(-10-stride,-4,10,5,2,'#18323a','#09232c');round(stride,-4,11,5,2,'#18323a','#09232c');
-    round(-8,-24,16,15,5,p.variant===1?'#f4f0dd':p.color,'#14303c');
-    round(-3,-24,5,12,2,'#f2eed7');ctx.fillStyle='#df6b58';ctx.beginPath();ctx.moveTo(0,-21);ctx.lineTo(-2,-13);ctx.lineTo(2,-14);ctx.fill();
+    round(-8,-24,16,15,5,!p.woman&&p.variant===1?'#f4f0dd':p.color,'#14303c');
+    if(p.woman){
+      // Cardigans with trousers or a skirt, in the same palette as the other teachers.
+      if(p.variant===1){ctx.fillStyle=p.color;ctx.strokeStyle='#14303c';ctx.beginPath();ctx.moveTo(-6,-14);ctx.lineTo(-10,-7);ctx.quadraticCurveTo(0,-4,10,-7);ctx.lineTo(6,-14);ctx.closePath();ctx.fill();ctx.stroke();}
+      round(-3,-23,5,9,2,'#f2eed7');ctx.strokeStyle='#ffffff65';ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(-4,-21);ctx.lineTo(-1,-16);ctx.moveTo(4,-21);ctx.lineTo(1,-16);ctx.stroke();
+    }else{
+      round(-3,-24,5,12,2,'#f2eed7');ctx.fillStyle='#df6b58';ctx.beginPath();ctx.moveTo(0,-21);ctx.lineTo(-2,-13);ctx.lineTo(2,-14);ctx.fill();
+    }
     ctx.strokeStyle=p.skin||'#f4c99a';ctx.lineWidth=4;ctx.beginPath();ctx.moveTo(-7,-20);ctx.lineTo(-10-stride*.3,-12);ctx.moveTo(7,-20);ctx.lineTo(10+stride*.3,-12);ctx.stroke();
-    if(p.variant===2){ctx.fillStyle=p.hair||'#543e31';ctx.beginPath();ctx.ellipse(-2,-33,11,12,0,0,Math.PI*2);ctx.fill();}
+    if(p.woman||p.variant===2){ctx.fillStyle=p.hair||'#543e31';ctx.beginPath();ctx.ellipse(-2,-33,11,p.woman&&p.variant===0?14:12,0,0,Math.PI*2);ctx.fill();}
+    if(p.woman&&p.variant===1){ctx.fillStyle=p.hair;ctx.beginPath();ctx.ellipse(-10,-32,4,9,-.2,0,Math.PI*2);ctx.fill();round(-12,-37,4,3,1,p.color);}
+    if(p.woman&&p.variant===2){ctx.fillStyle=p.hair;ctx.beginPath();ctx.ellipse(-7,-43,5,5,0,0,Math.PI*2);ctx.fill();}
     ctx.fillStyle=p.skin||'#f4c99a';ctx.strokeStyle='#754d37';ctx.lineWidth=1;ctx.beginPath();ctx.ellipse(0,-33,9,10,0,0,Math.PI*2);ctx.fill();ctx.stroke();
     ctx.beginPath();ctx.ellipse(8,-31,4,3,0,0,Math.PI*2);ctx.fill();
     ctx.fillStyle=p.hair||'#543e31';ctx.beginPath();
-    if(p.variant===1){ctx.ellipse(-6,-35,4,8,.2,0,Math.PI*2);ctx.fill();ctx.beginPath();ctx.ellipse(-1,-42,8,3,-.1,0,Math.PI*2);ctx.fill();}
+    if(!p.woman&&p.variant===1){ctx.ellipse(-6,-35,4,8,.2,0,Math.PI*2);ctx.fill();ctx.beginPath();ctx.ellipse(-1,-42,8,3,-.1,0,Math.PI*2);ctx.fill();}
     else{ctx.moveTo(-9,-31);ctx.bezierCurveTo(-15,-48,8,-51,10,-37);ctx.bezierCurveTo(5,-40,1,-36,-5,-37);ctx.lineTo(-7,-31);ctx.closePath();ctx.fill();ctx.strokeStyle='#ffffff25';ctx.beginPath();ctx.moveTo(-7,-41);ctx.quadraticCurveTo(-1,-46,5,-42);ctx.stroke();}
     ctx.fillStyle='#223747';ctx.beginPath();ctx.arc(4,-34,1.6,0,7);ctx.fill();
     if(p.variant===1){ctx.strokeStyle='#496376';ctx.lineWidth=1.4;ctx.strokeRect(0,-37,7,5);}
@@ -278,7 +292,7 @@
     if(!paused&&!document.hidden)tick(dt);draw();requestAnimationFrame(frame);
   }
   $('future').addEventListener('input',()=>{preview=true;animation=null;viewDay=start+Number($('future').value);update();visual=target;flights=[];rebuildPile();});
-  $('today').addEventListener('click',()=>{preview=false;animation=null;viewDay=todayDay();target=visual=totals(viewDay).collected;flights=[];rebuildPile();update();toast('Rieccoci a oggi. La fila segue il calendario.');});
+  $('today').addEventListener('click',()=>{returnToToday();toast('Rieccoci a oggi. La fila segue il calendario.');});
   $('finale').addEventListener('click',()=>{preview=true;setPause(false);viewDay=start;visual=0;flights=[];rebuildPile();update();animation={from:start,age:0,started:performance.now()};toast('Tutto l’anno in 12 secondi. Tenetevi il fascicolo!');});
   $('pause').addEventListener('click',()=>setPause(!paused));
   document.querySelectorAll('[data-tool]').forEach(b=>b.addEventListener('click',()=>fire(b.dataset.tool)));
@@ -289,6 +303,8 @@
     try{localStorage.setItem(KEY,JSON.stringify(config));$('settings-message').textContent='Salvato su questo dispositivo.';}catch(_){$('settings-message').textContent='Applicato. Il browser non consente il salvataggio.';}
   });
   window.addEventListener('resize',resize);
+  // Browsers restore form values after setup and can also cache a whole preview.
+  window.addEventListener('pageshow',e=>{last=0;returnToToday();if(e.persisted){people=seedPeople(Math.min(18,config.initial-target));returning=[];}});
   document.addEventListener('visibilitychange',()=>{last=0;if(!document.hidden&&!preview){viewDay=todayDay();update();}});
   setInterval(()=>{if(!preview&&viewDay!==todayDay()){viewDay=todayDay();update();}},30000);
   setup();resize();selectTool(tool);
