@@ -14,7 +14,7 @@
   <meta name="twitter:card" content="summary_large_image">
   <link rel="icon" href="../../favicon.svg" type="image/svg+xml">
   <link rel="preload" as="image" href="scenario.webp">
-  <link rel="stylesheet" href="gps.css?v=4">
+  <link rel="stylesheet" href="gps.css?v=5">
 </head>
 <body>
   <main class="cabinet">
@@ -29,9 +29,9 @@
       <div><span>NEL BARATTOLO</span><strong id="collected">0</strong></div>
       <div><span>GIORNI ALLA LIBERTÀ</span><strong id="days">—</strong></div>
     </section>
-    <div class="mode-line"><span id="mode">● CALENDARIO REALE</span><time id="date-label"></time><button id="pause" type="button" aria-pressed="false">Pausa</button></div>
+    <div class="mode-line"><span id="mode">● CALENDARIO REALE</span><time id="date-label"></time><button id="sound" type="button" aria-pressed="false">♫ Suoni: spenti</button><button id="pause" type="button" aria-pressed="false">Pausa</button></div>
     <section class="game" aria-label="Il percorso dei precari e il barattolone">
-      <canvas id="world" role="img" aria-label="Precari e precarie cartoon camminano sui piani della scuola. Timbrone e drago sputafuoco al primo piano, botola e nuvola temporalesca al secondo, molla al terzo li fanno finire nel barattolone. Usa i pulsanti sotto per azionare le trappole."></canvas>
+      <canvas id="world" role="img" aria-label="Precari e precarie cartoon attraversano ponticelli e rampe, reagiscono alle trappole e rimbalzano nel barattolone. Un ascensore riporta in cima chi completa il percorso. Timbrone e drago al primo piano, botola e temporale al secondo, molla al terzo. Usa i pulsanti sotto per azionare le trappole; puoi accendere i suoni."></canvas>
       <div class="scene-label"><span>LA FILA DEI PRECARI</span><small>Un anno alla volta. Una sede alla volta.</small></div>
       <p class="toast" id="toast" role="status">Benvenuto nella fila più paziente d'Italia.</p>
     </section>
@@ -62,6 +62,7 @@
     <footer><p>Satira da sala professori. Lo scorrimento è inventato: nessun collegamento alle GPS vere.</p><p>I personaggi sul percorso sono un campione animato della fila. I contatori rappresentano tutti i precari cartoon.</p><p>Realizzato dal Prof. Rossano Bella</p></footer>
     <noscript>Attiva JavaScript per animare i precari e calcolare il countdown.</noscript>
   </main>
-  <script src="gps.js?v=4" defer></script>
+  <script src="gps-audio.js?v=5" defer></script>
+  <script src="gps.js?v=5" defer></script>
 </body>
 </html>
