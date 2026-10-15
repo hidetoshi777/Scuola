@@ -315,8 +315,16 @@
       line-height: 1.4;
       font-weight: 600;
     }
-    .dialogue .continue {
-      margin-top: 10px;
+    .dialogue-actions, .voice-controls {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 8px;
+    }
+    .dialogue-actions { margin-top: 10px; }
+    .voice-controls[hidden] { display: none; }
+    .voice-status { font-size: 0.75rem; color: #b6c6dc; margin-top: 6px; }
+    .dialogue-actions button {
       appearance: none;
       border: 1px solid rgba(56, 189, 248, 0.45);
       background: rgba(56, 189, 248, 0.16);
@@ -326,8 +334,11 @@
       padding: 8px 14px;
       border-radius: 10px;
       cursor: pointer;
-      min-height: 42px;
+      min-height: 44px;
     }
+    .dialogue-actions button:disabled { opacity: 0.5; cursor: default; }
+    .dialogue-actions button:focus-visible { outline: 2px solid #7dd3fc; outline-offset: 3px; }
+    .dialogue .continue { margin-left: auto; }
 
     .repair-modal, .win-modal {
       position: fixed;
@@ -681,7 +692,14 @@
   <div class="dialogue" id="dialogue" role="dialog" aria-modal="true">
     <div class="who" id="dialogue-who">Prof</div>
     <div class="text" id="dialogue-text"></div>
-    <button type="button" class="continue" id="dialogue-continue">Continua</button>
+    <div class="dialogue-actions">
+      <div class="voice-controls" id="voice-controls" hidden>
+        <button type="button" id="voice-toggle" aria-pressed="true">Voce: attiva</button>
+        <button type="button" id="voice-replay">Riascolta</button>
+      </div>
+      <button type="button" class="continue" id="dialogue-continue">Continua</button>
+    </div>
+    <div class="voice-status" id="voice-status" role="status" hidden></div>
   </div>
 
   <div class="repair-modal" id="repair-modal" aria-hidden="true">
@@ -725,6 +743,7 @@
     import { createWalkRig, createXboxPad, PAD } from './js/camera-pad.js';
     import { createTesterMinigame } from './js/minigioco-tester.js';
     import { createTvCredits } from './js/tv-crediti.js';
+    import { createProfVoice } from './js/voce-prof.js';
 
     const wrap = document.getElementById('canvas-wrap');
     const loaderEl = document.getElementById('loader');
@@ -746,6 +765,12 @@
     const repairModal = document.getElementById('repair-modal');
     const winModal = document.getElementById('win-modal');
     const btnRestart = document.getElementById('btn-restart');
+    const profVoice = createProfVoice({
+      toggle: document.getElementById('voice-toggle'),
+      replay: document.getElementById('voice-replay'),
+      controls: document.getElementById('voice-controls'),
+      status: document.getElementById('voice-status')
+    });
 
     let dialogueContinueFn = null;
     let repairHandlers = null;
@@ -889,8 +914,10 @@
         dialogueText.textContent = text;
         dialogueEl.classList.add('open');
         dialogueContinueFn = onContinue;
+        profVoice.show(who, text);
       },
       hideDialogue() {
+        profVoice.hide();
         dialogueEl.classList.remove('open');
         dialogueContinueFn = null;
       },
@@ -1257,6 +1284,7 @@
         return;
       }
       if (e.code === 'Space' && !e.repeat && dialogueEl.classList.contains('open')) {
+        if (e.target.closest?.('button')) return;
         e.preventDefault();
         missionUi.clickDialogueContinue();
         return;
