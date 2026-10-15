@@ -430,9 +430,7 @@ window.ATTIVITA_WEB = [
   {
     titolo: "Plesso Meucci 3D · Atrio e Aula 3 AM",
     materia: "Tecnologia",
-    classe: "Terza superiore · professionale",
-    annoProf: 3,
-    pubblicato: "2026-10-15",
+    classe: "Secondo grado",
     descrizione:
       "Percorso 3D esplorabile dall'atrio di ingresso all'aula 3 AM: 6 tappe guidate, movimento libero, finestre in alluminio, TV interattiva e accensione luci.",
     citazione: "Entra nell’atrio, gira a sinistra: benvenuti in 3 AM.",
