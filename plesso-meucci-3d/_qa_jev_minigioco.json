@@ -1,0 +1,81 @@
+{
+  "obiettivo": "Terza professionale (manutenzione, livello base): provare un fusibile col tester in sicurezza. Tensione staccata, multimetro in prova di continuità (Ω con cicalino), puntali sui due capi metallici, lettura OL = circuito aperto = fusibile interrotto; fusibile buono = il tester suona e segna un valore vicino a 0 Ω.",
+  "items": [
+    {
+      "q": "La corrente è staccata. Su che funzione giri la manopola del tester per provare il fusibile?",
+      "options": [
+        "OFF (spento)",
+        "V~ (tensione)",
+        "A (corrente)",
+        "Ω 🔊 (continuità)"
+      ],
+      "correct": 3,
+      "spiegazioni": {
+        "OFF (spento)": "Così il tester è spento: non misura niente. Gira la manopola su una funzione.",
+        "V~ (tensione)": "Con V~ misuri la tensione: serve per controllare che la corrente sia davvero staccata. Per sapere se il fusibile è interrotto serve la prova di continuità: Ω 🔊.",
+        "A (corrente)": "Con A misuri la corrente, con il circuito acceso. Il fusibile si prova a corrente staccata, con la continuità: Ω 🔊.",
+        "Ω 🔊 (continuità)": "Giusto! Ω 🔊 è la prova di continuità: se il circuito è chiuso, il tester suona."
+      }
+    },
+    {
+      "q": "Il tester (in prova di continuità, puntali sui due capi del fusibile) segna OL e non suona. Che cosa vuol dire?",
+      "options": [
+        "Il fusibile è interrotto: il filo dentro si è bruciato.",
+        "Il fusibile è buono: la corrente passa.",
+        "Il tester è rotto."
+      ],
+      "correct": 0,
+      "spiegazioni": {
+        "Il fusibile è interrotto: il filo dentro si è bruciato.": "Esatto. OL vuol dire circuito aperto: la corrente non passa. Il fusibile va cambiato.",
+        "Il fusibile è buono: la corrente passa.": "No: se la corrente passasse, il tester suonerebbe e segnerebbe un numero vicino a 0.",
+        "Il tester è rotto.": "Il tester funziona: OL vuol dire che fra i due puntali il circuito è aperto."
+      },
+      "finale": "Col fusibile nuovo: il tester suona e segna 0.2 Ω, quasi 0: il circuito è chiuso."
+    }
+  ],
+  "results": [
+    {
+      "idx": 0,
+      "q": "La corrente è staccata. Su che funzione giri la manopola del tester per provare il fusibile?",
+      "status": 200,
+      "latency_ms": 398,
+      "model": "jev-1.13.0",
+      "unica_corretta": 0.97,
+      "spiegazioni_vere": 0.9,
+      "distrattori_ok": 0.83,
+      "allineata": 0.95,
+      "problema": "nessuno",
+      "problema_conf": 0.86,
+      "problema_probs": {
+        "nessuno": 0.88,
+        "ambigua": 0.0,
+        "corretta_sbagliata": 0.0,
+        "spiegazione_falsa": 0.01,
+        "distrattori_deboli": 0.11,
+        "fuori_obiettivo": 0.0
+      }
+    },
+    {
+      "idx": 1,
+      "q": "Il tester (in prova di continuità, puntali sui due capi del fusibile) segna OL e non suona. Che cosa vuol dire?",
+      "status": 200,
+      "latency_ms": 378,
+      "model": "jev-1.13.0",
+      "unica_corretta": 0.93,
+      "spiegazioni_vere": 0.9,
+      "distrattori_ok": 0.78,
+      "allineata": 0.96,
+      "problema": "nessuno",
+      "problema_conf": 0.81,
+      "problema_probs": {
+        "nessuno": 0.84,
+        "ambigua": 0.02,
+        "corretta_sbagliata": 0.0,
+        "spiegazione_falsa": 0.0,
+        "distrattori_deboli": 0.14,
+        "fuori_obiettivo": 0.0
+      }
+    }
+  ],
+  "review": []
+}
