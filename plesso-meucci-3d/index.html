@@ -1,0 +1,631 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="color-scheme" content="dark light">
+  <link rel="icon" href="../favicon.svg" type="image/svg+xml">
+  <title>Plesso Meucci 3D · Atrio e Aula 3 AM | Scuola</title>
+  <meta name="description" content="Esplorazione interattiva in 3D del Plesso Meucci: dall'atrio di ingresso all'aula 3 AM, con tappe guidate, movimento libero e accensione luci.">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="it_IT">
+  <meta property="og:site_name" content="Scuola · Prof. Rossano Bella">
+  <meta property="og:title" content="Plesso Meucci 3D · Atrio e Aula 3 AM">
+  <meta property="og:description" content="Esplora in 3D l'atrio e l'aula 3 AM del Plesso Meucci dal browser o dal telefono.">
+  <meta property="og:url" content="https://hidetoshi777.github.io/Scuola/plesso-meucci-3d/">
+  <meta property="og:image" content="https://hidetoshi777.github.io/Scuola/plesso-meucci-3d/img/og-share.jpg">
+  <meta property="og:image:alt" content="Modello 3D dell'aula 3 AM al Plesso Meucci">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Plesso Meucci 3D · Atrio e Aula 3 AM">
+  <meta name="twitter:description" content="Esplora in 3D l'atrio e l'aula 3 AM del Plesso Meucci dal browser o dal telefono.">
+  <meta name="twitter:image" content="https://hidetoshi777.github.io/Scuola/plesso-meucci-3d/img/og-share.jpg">
+  <style>
+    :root, body[data-theme="dark"] {
+      --bg: #0b1017;
+      --panel: rgba(15, 22, 32, 0.86);
+      --panel-border: rgba(148, 163, 184, 0.24);
+      --text: #f1f5f9;
+      --muted: #94a3b8;
+      --accent: #38bdf8;
+      --btn-bg: rgba(30, 41, 59, 0.78);
+    }
+    body[data-theme="light"] {
+      --bg: #e2e8f0;
+      --panel: rgba(255, 255, 255, 0.88);
+      --panel-border: rgba(15, 23, 42, 0.16);
+      --text: #0f172a;
+      --muted: #475569;
+      --accent: #0284c7;
+      --btn-bg: rgba(241, 245, 249, 0.9);
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body {
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      background: var(--bg);
+      color: var(--text);
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      user-select: none;
+      -webkit-user-select: none;
+    }
+    #canvas-wrap {
+      position: fixed;
+      inset: 0;
+    }
+    canvas {
+      display: block;
+      width: 100%;
+      height: 100%;
+      touch-action: none;
+    }
+
+    .hud-top {
+      position: fixed;
+      top: 12px;
+      left: 12px;
+      right: 12px;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      pointer-events: none;
+      z-index: 10;
+    }
+    .brand-card, .stops-bar, .controls-card {
+      pointer-events: auto;
+      background: var(--panel);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid var(--panel-border);
+      border-radius: 14px;
+      padding: 10px 14px;
+      box-shadow: 0 10px 28px rgba(0, 0, 0, 0.35);
+    }
+    .brand-card h1 {
+      font-size: 0.98rem;
+      font-weight: 700;
+      letter-spacing: 0.01em;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .badge-3am {
+      background: rgba(56, 189, 248, 0.16);
+      color: var(--accent);
+      border: 1px solid rgba(56, 189, 248, 0.4);
+      padding: 2px 8px;
+      border-radius: 999px;
+      font-size: 0.75rem;
+      font-weight: 700;
+    }
+    .brand-card p {
+      font-size: 0.78rem;
+      color: var(--muted);
+      margin-top: 2px;
+    }
+    .brand-quote {
+      font-style: italic;
+      font-size: 0.73rem;
+      color: var(--muted);
+      margin-top: 3px;
+    }
+
+    .stops-bar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      align-items: center;
+    }
+    .stop-btn {
+      appearance: none;
+      border: 1px solid var(--panel-border);
+      background: var(--btn-bg);
+      color: var(--text);
+      font-size: 0.8rem;
+      font-weight: 600;
+      padding: 7px 11px;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: all 0.16s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .stop-btn:hover {
+      border-color: var(--accent);
+    }
+    .stop-btn.active {
+      background: var(--accent);
+      color: #ffffff;
+      border-color: var(--accent);
+      font-weight: 700;
+    }
+    .stop-btn.light-toggle.on {
+      background: rgba(250, 204, 21, 0.22);
+      border-color: #eab308;
+      color: #facc15;
+    }
+    body[data-theme="light"] .stop-btn.light-toggle.on {
+      color: #854d0e;
+    }
+
+    .hud-bottom {
+      position: fixed;
+      bottom: 12px;
+      left: 12px;
+      right: 12px;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 10px;
+      pointer-events: none;
+      z-index: 10;
+    }
+    .controls-card {
+      font-size: 0.78rem;
+      color: var(--muted);
+      line-height: 1.45;
+      max-width: 500px;
+    }
+    .controls-card strong {
+      color: var(--text);
+    }
+    .kbd {
+      display: inline-block;
+      padding: 1px 6px;
+      border-radius: 5px;
+      background: rgba(148, 163, 184, 0.18);
+      border: 1px solid var(--panel-border);
+      color: var(--text);
+      font-family: monospace;
+      font-size: 0.74rem;
+    }
+
+    .touch-pad {
+      pointer-events: auto;
+      display: grid;
+      grid-template-columns: repeat(3, 42px);
+      grid-template-rows: repeat(2, 42px);
+      gap: 5px;
+      background: var(--panel);
+      border: 1px solid var(--panel-border);
+      padding: 8px;
+      border-radius: 14px;
+      backdrop-filter: blur(12px);
+    }
+    .pad-btn {
+      border: 1px solid var(--panel-border);
+      background: var(--btn-bg);
+      color: var(--text);
+      border-radius: 9px;
+      font-size: 1rem;
+      font-weight: 700;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      touch-action: manipulation;
+    }
+    .pad-btn:active {
+      background: var(--accent);
+      color: #ffffff;
+    }
+
+    .credit {
+      width: 100%;
+      text-align: right;
+      font-size: 0.74rem;
+      color: var(--muted);
+      margin-top: 2px;
+      pointer-events: none;
+    }
+
+    #loader {
+      position: fixed;
+      inset: 0;
+      background: #0b1017;
+      color: #f1f5f9;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      z-index: 50;
+      transition: opacity 0.35s ease;
+    }
+    #loader.hidden {
+      opacity: 0;
+      pointer-events: none;
+    }
+    .spinner {
+      width: 38px;
+      height: 38px;
+      border: 3px solid rgba(56, 189, 248, 0.2);
+      border-top-color: #38bdf8;
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    @media (max-width: 680px) {
+      .controls-card { display: none; }
+      .stop-btn { padding: 6px 9px; font-size: 0.74rem; }
+      .brand-quote { display: none; }
+    }
+  </style>
+  <script type="importmap">
+    {
+      "imports": {
+        "three": "https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.module.js",
+        "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.170.0/examples/jsm/"
+      }
+    }
+  </script>
+</head>
+<body data-theme="dark">
+  <div id="loader">
+    <div class="spinner"></div>
+    <div id="loader-text">Caricamento modello 3D Plesso Meucci…</div>
+  </div>
+
+  <div id="canvas-wrap"></div>
+
+  <header class="hud-top">
+    <div class="brand-card">
+      <h1>Plesso Meucci 3D <span class="badge-3am">Atrio + 3 AM</span></h1>
+      <p id="stop-desc">Tappa 3 · Soglia dell'aula</p>
+      <p class="brand-quote">«Entra nell’atrio, gira a sinistra: benvenuti in 3 AM.»</p>
+    </div>
+
+    <nav class="stops-bar" aria-label="Tappe del percorso">
+      <button type="button" class="stop-btn" data-stop="0">1. Ingresso Atrio</button>
+      <button type="button" class="stop-btn" data-stop="1">2. Porta 3 AM</button>
+      <button type="button" class="stop-btn active" data-stop="2">3. Soglia Aula</button>
+      <button type="button" class="stop-btn" data-stop="3">4. Cattedra e TV</button>
+      <button type="button" class="stop-btn" data-stop="4">5. Finestre</button>
+      <button type="button" class="stop-btn" data-stop="5">6. Vista dall'alto</button>
+      <button type="button" class="stop-btn light-toggle" id="btn-lights">💡 Neon: Spenti (3 AM)</button>
+      <button type="button" class="stop-btn" id="btn-theme" aria-pressed="false">Tema chiaro</button>
+    </nav>
+  </header>
+
+  <footer class="hud-bottom">
+    <div class="controls-card">
+      <strong>Esplorazione 3D:</strong> tocca le tappe in alto oppure trascina per guardarti intorno (tasti <span class="kbd">W</span> <span class="kbd">A</span> <span class="kbd">S</span> <span class="kbd">D</span> o frecce per camminare). I muri esterni spariscono da soli quando ruoti la visuale.
+    </div>
+
+    <div class="touch-pad" aria-label="Comandi movimento">
+      <div></div>
+      <button type="button" class="pad-btn" data-move="fwd" title="Avanti" aria-label="Avanti">▲</button>
+      <div></div>
+      <button type="button" class="pad-btn" data-move="left" title="Sinistra" aria-label="Sinistra">◀</button>
+      <button type="button" class="pad-btn" data-move="back" title="Indietro" aria-label="Indietro">▼</button>
+      <button type="button" class="pad-btn" data-move="right" title="Destra" aria-label="Destra">▶</button>
+    </div>
+
+    <div class="credit">Realizzato dal Prof. Rossano Bella</div>
+  </footer>
+
+  <script src="../js/access-track.js?v=4" defer></script>
+  <script type="module">
+    import * as THREE from 'three';
+    import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+    import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
+
+    const wrap = document.getElementById('canvas-wrap');
+    const loaderEl = document.getElementById('loader');
+    const loaderText = document.getElementById('loader-text');
+    const stopDesc = document.getElementById('stop-desc');
+    const btnTheme = document.getElementById('btn-theme');
+
+    const scene = new THREE.Scene();
+    scene.background = new THREE.Color(0x111927);
+    scene.fog = new THREE.FogExp2(0x111927, 0.015);
+
+    // Theme toggle (dark by default)
+    const THEME_KEY = 'tema-meucci-3d';
+    const savedTheme = localStorage.getItem(THEME_KEY);
+    if (savedTheme === 'light') {
+      document.body.dataset.theme = 'light';
+      scene.background.setHex(0xcbd5e1);
+      scene.fog.color.setHex(0xcbd5e1);
+      btnTheme.textContent = 'Tema scuro';
+      btnTheme.setAttribute('aria-pressed', 'true');
+    }
+    btnTheme.addEventListener('click', () => {
+      const isDark = document.body.dataset.theme !== 'light';
+      const next = isDark ? 'light' : 'dark';
+      document.body.dataset.theme = next;
+      localStorage.setItem(THEME_KEY, next);
+      const bgHex = next === 'light' ? 0xcbd5e1 : 0x111927;
+      scene.background.setHex(bgHex);
+      scene.fog.color.setHex(bgHex);
+      btnTheme.textContent = next === 'light' ? 'Tema scuro' : 'Tema chiaro';
+      btnTheme.setAttribute('aria-pressed', String(next === 'light'));
+    });
+
+    const camera = new THREE.PerspectiveCamera(58, window.innerWidth / window.innerHeight, 0.08, 120);
+    const renderer = new THREE.WebGLRenderer({ antialias: true, powerPreference: 'high-performance' });
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    renderer.shadowMap.enabled = true;
+    renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+    renderer.toneMapping = THREE.ACESFilmicToneMapping;
+    renderer.toneMappingExposure = 1.15;
+    wrap.appendChild(renderer.domElement);
+
+    const controls = new OrbitControls(camera, renderer.domElement);
+    controls.enableDamping = true;
+    controls.dampingFactor = 0.07;
+    controls.maxDistance = 35;
+    controls.minDistance = 0.15;
+
+    function b2t(bx, by, bz) {
+      return new THREE.Vector3(bx, bz, -by);
+    }
+
+    const hemi = new THREE.HemisphereLight(0xdbeafe, 0x334155, 0.58);
+    scene.add(hemi);
+
+    const atrioLight = new THREE.PointLight(0xfff7ed, 6.5, 16, 1.4);
+    atrioLight.position.copy(b2t(0.0, 1.5, 3.1));
+    atrioLight.castShadow = true;
+    scene.add(atrioLight);
+
+    const atrioDoorLight = new THREE.PointLight(0xfef3c7, 3.2, 10, 1.5);
+    atrioDoorLight.position.copy(b2t(-2.8, 3.2, 2.4));
+    scene.add(atrioDoorLight);
+
+    const sunLight = new THREE.DirectionalLight(0xfffbeb, 3.2);
+    sunLight.position.copy(b2t(-16.0, 0.5, 5.2));
+    sunLight.target.position.copy(b2t(-7.5, 1.8, 0.8));
+    sunLight.castShadow = true;
+    sunLight.shadow.mapSize.set(2048, 2048);
+    sunLight.shadow.camera.near = 1;
+    sunLight.shadow.camera.far = 25;
+    const d = 8;
+    sunLight.shadow.camera.left = -d;
+    sunLight.shadow.camera.right = d;
+    sunLight.shadow.camera.top = d;
+    sunLight.shadow.camera.bottom = -d;
+    sunLight.shadow.bias = -0.0005;
+    scene.add(sunLight);
+    scene.add(sunLight.target);
+
+    const winBounce = new THREE.PointLight(0xe0f2fe, 2.4, 11, 1.4);
+    winBounce.position.copy(b2t(-10.2, 1.6, 1.9));
+    scene.add(winBounce);
+
+    const aulaNeon1 = new THREE.PointLight(0xf8fafc, 0, 10, 1.3);
+    aulaNeon1.position.copy(b2t(-7.8, 2.55, 3.0));
+    scene.add(aulaNeon1);
+
+    const aulaNeon2 = new THREE.PointLight(0xf8fafc, 0, 10, 1.3);
+    aulaNeon2.position.copy(b2t(-7.8, 0.55, 3.0));
+    scene.add(aulaNeon2);
+
+    let lightsOn = false;
+    const btnLights = document.getElementById('btn-lights');
+    btnLights.addEventListener('click', () => {
+      lightsOn = !lightsOn;
+      aulaNeon1.intensity = lightsOn ? 5.5 : 0;
+      aulaNeon2.intensity = lightsOn ? 5.5 : 0;
+      btnLights.classList.toggle('on', lightsOn);
+      btnLights.textContent = lightsOn ? '💡 Neon: Accesi (4 AM)' : '💡 Neon: Spenti (3 AM)';
+    });
+
+    const STOPS = [
+      {
+        title: "Tappa 1 · Ingresso dall'atrio (prima porta a sinistra = 3 AM)",
+        pos: b2t(1.2, 3.9, 1.62),
+        target: b2t(-3.8, 2.8, 1.50)
+      },
+      {
+        title: "Tappa 2 · Davanti alla porta della 3 AM nell'atrio",
+        pos: b2t(-2.2, 3.2, 1.62),
+        target: b2t(-7.2, 2.6, 1.45)
+      },
+      {
+        title: "Tappa 3 · Soglia dell'aula (vista ampia verso banchi e finestre)",
+        pos: b2t(-4.35, 3.15, 1.65),
+        target: b2t(-9.2, 0.7, 1.25)
+      },
+      {
+        title: "Tappa 4 · Dal fondo aula verso Cattedra, 3 banchetti attaccati e TV",
+        pos: b2t(-7.4, -0.65, 1.65),
+        target: b2t(-7.6, 3.8, 1.32)
+      },
+      {
+        title: "Tappa 5 · Dettaglio finestre scorrevoli in alluminio",
+        pos: b2t(-8.1, 0.5, 1.58),
+        target: b2t(-10.92, 1.9, 1.92)
+      },
+      {
+        title: "Tappa 6 · Vista Isometrica in spaccato (Atrio + Aula 3 AM)",
+        pos: b2t(-3.2, -5.8, 8.8),
+        target: b2t(-5.5, 1.6, 0.8)
+      }
+    ];
+
+    let animState = null;
+    function goToStop(index) {
+      const s = STOPS[index];
+      if (!s) return;
+      stopDesc.textContent = s.title;
+      document.querySelectorAll('.stop-btn[data-stop]').forEach((b, i) => {
+        b.classList.toggle('active', i === index);
+      });
+      animState = {
+        startPos: camera.position.clone(),
+        endPos: s.pos.clone(),
+        startTarget: controls.target.clone(),
+        endTarget: s.target.clone(),
+        t: 0
+      };
+    }
+
+    document.querySelectorAll('.stop-btn[data-stop]').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        goToStop(Number(btn.dataset.stop));
+      });
+    });
+
+    const cutawayGroups = {
+      ceilings: [],
+      aulaBackWall: [],
+      atrioBackWall: [],
+      aulaFrontWall: [],
+      atrioRightWall: [],
+      outsideBackdrop: []
+    };
+
+    const gltfLoader = new GLTFLoader();
+    gltfLoader.load(
+      './meucci-tour.glb?v=2',
+      (gltf) => {
+        const root = gltf.scene;
+        root.traverse((obj) => {
+          if (obj.isMesh) {
+            obj.castShadow = true;
+            obj.receiveShadow = true;
+            const n = obj.name || (obj.parent ? obj.parent.name : '');
+            const mName = obj.material ? obj.material.name : '';
+
+            if (mName.includes('Glass')) {
+              obj.material.transparent = true;
+              obj.material.opacity = 0.25;
+              obj.material.roughness = 0.08;
+              obj.material.metalness = 0.1;
+              obj.castShadow = false;
+            } else if (mName.includes('WinAlu')) {
+              obj.material.metalness = 0.55;
+              obj.material.roughness = 0.32;
+            } else if (mName.includes('Outside_RealPhoto')) {
+              obj.castShadow = false;
+            }
+
+            if (n.includes('Ceiling') || n === 'Beam') {
+              cutawayGroups.ceilings.push(obj);
+            }
+            if (n.includes('Aula3_Wall_NegY') || n.includes('Aula3_WallBack_Raw')) {
+              cutawayGroups.aulaBackWall.push(obj);
+            }
+            if (n.includes('Atrio_Wall_Back')) {
+              cutawayGroups.atrioBackWall.push(obj);
+            }
+            if (n.includes('Aula3_WallCat_')) {
+              cutawayGroups.aulaFrontWall.push(obj);
+            }
+            if (n.includes('Atrio_Wall_Right')) {
+              cutawayGroups.atrioRightWall.push(obj);
+            }
+            if (n.includes('Outside_Foliage') || n.includes('Outside_Retaining') || n.includes('Outside_Pilaster') || n.includes('Outside_PhotoBackdrop')) {
+              cutawayGroups.outsideBackdrop.push(obj);
+            }
+          }
+        });
+        scene.add(root);
+        loaderEl.classList.add('hidden');
+        goToStop(2);
+      },
+      (xhr) => {
+        if (xhr.total) {
+          const pct = Math.round((xhr.loaded / xhr.total) * 100);
+          loaderText.textContent = `Caricamento modello 3D Plesso Meucci… ${pct}%`;
+        }
+      }
+    );
+
+    function updateSmartCutaway() {
+      const bx = camera.position.x;
+      const by = -camera.position.z;
+      const bz = camera.position.y;
+
+      const isHighIso = bz > 3.15;
+      cutawayGroups.ceilings.forEach(o => { o.visible = !isHighIso; });
+
+      const hideAulaBack = by < -1.05;
+      cutawayGroups.aulaBackWall.forEach(o => { o.visible = !hideAulaBack; });
+
+      const hideAtrioBack = by < -4.7;
+      cutawayGroups.atrioBackWall.forEach(o => { o.visible = !hideAtrioBack; });
+
+      const hideAulaFront = by > 4.35 && bx < -3.8;
+      cutawayGroups.aulaFrontWall.forEach(o => { o.visible = !hideAulaFront; });
+
+      const hideAtrioRight = bx > 3.85;
+      cutawayGroups.atrioRightWall.forEach(o => { o.visible = !hideAtrioRight; });
+
+      const hideOutside = bx < -10.95 || isHighIso;
+      cutawayGroups.outsideBackdrop.forEach(o => { o.visible = !hideOutside; });
+    }
+
+    const keys = {};
+    window.addEventListener('keydown', (e) => { keys[e.code] = true; animState = null; });
+    window.addEventListener('keyup', (e) => { keys[e.code] = false; });
+
+    const padState = { fwd: false, back: false, left: false, right: false };
+    document.querySelectorAll('.pad-btn[data-move]').forEach((btn) => {
+      const dir = btn.dataset.move;
+      const start = (e) => { e.preventDefault(); padState[dir] = true; animState = null; };
+      const end = (e) => { e.preventDefault(); padState[dir] = false; };
+      btn.addEventListener('pointerdown', start);
+      btn.addEventListener('pointerup', end);
+      btn.addEventListener('pointerleave', end);
+      btn.addEventListener('pointercancel', end);
+    });
+
+    const clock = new THREE.Clock();
+    const fwdVec = new THREE.Vector3();
+    const rightVec = new THREE.Vector3();
+    const moveVec = new THREE.Vector3();
+
+    function animate() {
+      requestAnimationFrame(animate);
+      const dt = Math.min(clock.getDelta(), 0.1);
+
+      if (animState) {
+        animState.t = Math.min(1, animState.t + dt * 1.8);
+        const k = 1 - Math.pow(1 - animState.t, 3);
+        camera.position.lerpVectors(animState.startPos, animState.endPos, k);
+        controls.target.lerpVectors(animState.startTarget, animState.endTarget, k);
+        if (animState.t >= 1) animState = null;
+      } else {
+        const speed = (keys['ShiftLeft'] || keys['ShiftRight']) ? 5.5 : 2.8;
+        camera.getWorldDirection(fwdVec);
+        fwdVec.y = 0;
+        if (fwdVec.lengthSq() > 0.0001) fwdVec.normalize();
+        rightVec.crossVectors(fwdVec, camera.up).normalize();
+
+        moveVec.set(0, 0, 0);
+        if (keys['KeyW'] || keys['ArrowUp'] || padState.fwd) moveVec.add(fwdVec);
+        if (keys['KeyS'] || keys['ArrowDown'] || padState.back) moveVec.sub(fwdVec);
+        if (keys['KeyD'] || keys['ArrowRight'] || padState.right) moveVec.add(rightVec);
+        if (keys['KeyA'] || keys['ArrowLeft'] || padState.left) moveVec.sub(rightVec);
+        if (keys['KeyE']) moveVec.y += 1;
+        if (keys['KeyQ']) moveVec.y -= 1;
+
+        if (moveVec.lengthSq() > 0) {
+          moveVec.normalize().multiplyScalar(speed * dt);
+          camera.position.add(moveVec);
+          controls.target.add(moveVec);
+        }
+      }
+
+      controls.update();
+      updateSmartCutaway();
+      renderer.render(scene, camera);
+    }
+    animate();
+
+    window.addEventListener('resize', () => {
+      camera.aspect = window.innerWidth / window.innerHeight;
+      camera.updateProjectionMatrix();
+      renderer.setSize(window.innerWidth, window.innerHeight);
+    });
+  </script>
+</body>
+</html>
