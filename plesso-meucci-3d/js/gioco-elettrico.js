@@ -14,6 +14,7 @@ import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 // Prof: "Cartoon Teacher Model" di eduardolira (Sketchfab, CC-BY 4.0), riscalato
 // in Blender a 1,6 m senza la sua animazione. Le pose le facciamo noi sulle ossa.
 const PROF_URL = new URL('../models/prof.glb', import.meta.url).href;
+const PROF_SCALE = 0.78; // 1,6 m nel file → ~1,25 m in aula, meno ingombrante
 const PROF_BONES = {
   spine: 'Bone_39',
   head: 'Bone.001_4',
@@ -34,7 +35,7 @@ export const STEPS = {
 };
 
 const OBJECTIVES = {
-  [STEPS.INTRO]: 'Entra in aula 3 AM e parla col Prof alla cattedra.',
+  [STEPS.INTRO]: 'Entra in aula 3 AM e parla col Prof, accanto alla cattedra sotto la TV.',
   [STEPS.TALK_PROF]: 'Avvicinati al Prof e premi E per parlare.',
   [STEPS.POWER_OFF]: 'Prima regola: togli tensione. Vai al quadretto vicino alla porta.',
   [STEPS.GET_TESTER]: 'Prendi il tester sul banco vicino alle finestre.',
@@ -42,7 +43,7 @@ const OBJECTIVES = {
   [STEPS.REPAIR]: 'Torna al banco di lavoro vicino alla cattedra e ripara.',
   [STEPS.POWER_ON]: 'Riattacca la corrente al quadretto.',
   [STEPS.COLLAUDO]: 'Collaudo: avvicinati alla TV e premi E.',
-  [STEPS.WIN]: 'Missione compiuta! La TV funziona.'
+  [STEPS.WIN]: 'Missione compiuta! Guarda i titoli di coda in TV.'
 };
 
 const STEP_ORDER = Object.values(STEPS);
@@ -501,7 +502,8 @@ export function createElectricGame({ THREE, scene, b2t, ui }) {
   // Scena: oggetti e punti (coordinate Blender → three con b2t)
   // ---------------------------------------------------------------------------
   const SPOTS = {
-    prof: { bx: -8.0, by: 2.85, fallback: 0 },
+    // fra la cattedra e le finestre, sotto la TV: fuori dal passaggio
+    prof: { bx: -10.45, by: 3.9, fallback: 0 },
     tester: { bx: -9.5, by: 0.92, fallback: 0.72 },
     fuse: { bx: -6.4, by: -0.4, fallback: 0.72 },
     bench: { bx: -7.27, by: 3.58, fallback: 0.72 },
@@ -513,7 +515,8 @@ export function createElectricGame({ THREE, scene, b2t, ui }) {
   // (o, se non si carica, il Prof procedurale di riserva)
   const profRoot = new THREE.Group();
   profRoot.position.copy(b2t(SPOTS.prof.bx, SPOTS.prof.by, SPOTS.prof.fallback));
-  profRoot.rotation.y = Math.PI / 2; // all'inizio guarda verso la porta
+  profRoot.rotation.y = 0.9; // all'inizio guarda verso i banchi
+  profRoot.scale.setScalar(PROF_SCALE);
   scene.add(profRoot);
   const prof = buildProf();
   profRoot.add(prof.root);
@@ -600,6 +603,13 @@ export function createElectricGame({ THREE, scene, b2t, ui }) {
   // ---------------------------------------------------------------------------
   // Marker: freccia che rimbalza sopra l'oggetto + anello a terra
   // ---------------------------------------------------------------------------
+  // Grafica ridotta: niente luci sui segnalini (restano emissivi e si vedono lo stesso)
+  let markerLights = true;
+  function setQuality(q) {
+    markerLights = q === 'alta';
+    state.markers.forEach((m) => { m.light.visible = markerLights; });
+  }
+
   function makeMarker(id, color, label, { anchor, offset = 0, radius = 2.4, ring = true, ringScale = 1, arrowY = 0.32 }) {
     const group = new THREE.Group();
     group.userData = { id, label, radius, active: false };
@@ -624,6 +634,7 @@ export function createElectricGame({ THREE, scene, b2t, ui }) {
     }
 
     const light = new THREE.PointLight(color, 0.9, 2.6, 2);
+    light.visible = markerLights;
     light.position.y = arrowY;
     group.add(light);
 
@@ -632,7 +643,7 @@ export function createElectricGame({ THREE, scene, b2t, ui }) {
     return group;
   }
 
-  makeMarker('prof', 0x38bdf8, 'Parla col Prof', { anchor: profRoot, radius: 3.0, ringScale: 2.2, arrowY: 1.95 });
+  makeMarker('prof', 0x38bdf8, 'Parla col Prof', { anchor: profRoot, radius: 3.0, ringScale: 1.7, arrowY: 1.6 });
   makeMarker('switch', 0xfbbf24, 'Interruttore generale', { anchor: panel.group, radius: 2.2, ring: false, arrowY: 0.24 });
   makeMarker('tester', 0x34d399, 'Prendi il tester', { anchor: deskTester.group, radius: 2.3 });
   makeMarker('fuse', 0xf472b6, 'Prendi il fusibile', { anchor: fuseBox, radius: 2.3 });
@@ -674,6 +685,7 @@ export function createElectricGame({ THREE, scene, b2t, ui }) {
     bulb.material.emissive.setHex(lit ? 0xfde68a : 0x000000);
     bulb.material.emissiveIntensity = lit ? (strong ? 1.6 : 1.0) : 0;
     lampLight.intensity = lit ? (strong ? 1.6 : 0.9) : 0;
+    lampLight.visible = lit; // una luce spenta costa comunque in ogni pixel
   }
 
   function refreshProps() {
@@ -704,10 +716,6 @@ export function createElectricGame({ THREE, scene, b2t, ui }) {
     });
     refreshMarkers();
     refreshProps();
-    if (next === STEPS.WIN) {
-      // Lascia partire la sigla TV prima del cartello vittoria
-      setTimeout(() => ui.showWin(), 2800);
-    }
   }
 
   function refreshMarkers() {
@@ -969,7 +977,7 @@ export function createElectricGame({ THREE, scene, b2t, ui }) {
       profRoot.rotation.y += diff * (1 - Math.exp(-dt * 1.8));
     }
     const headYaw = horiz < 9 ? clamp(wrapAngle(targetYaw - profRoot.rotation.y), -0.75, 0.75) : 0;
-    const headY = tmp.y + (profRig ? 1.3 : 1.67);
+    const headY = tmp.y + (profRig ? 1.3 : 1.67) * PROF_SCALE;
     const pitch = horiz < 9 ? clamp(Math.atan2(camPos.y - headY, Math.max(horiz, 0.3)), -0.35, 0.35) : 0;
 
     const talking = dialogueOpen && speaker === 'Prof';
@@ -1100,7 +1108,8 @@ export function createElectricGame({ THREE, scene, b2t, ui }) {
     tick,
     nearestActive,
     attachWorld,
-    colliders: [{ obj: profRoot, r: 0.42 }], // il Prof blocca la camera come un cilindro
+    colliders: [{ obj: profRoot, r: 0.42 * PROF_SCALE }], // il Prof blocca la camera come un cilindro
+    setQuality,
     STEPS
   };
 }
