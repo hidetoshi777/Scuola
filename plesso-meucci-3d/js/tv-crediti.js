@@ -20,6 +20,7 @@ const CREDITS = [
   { gap: 1 },
   { t: 'Prof 3D: «Cartoon Teacher Model» di eduardolira', s: 'tiny' },
   { t: 'licenza CC BY 4.0', s: 'tiny' },
+  { t: 'Voce del Prof: sintesi vocale ElevenLabs', s: 'tiny' },
   { gap: 1 },
   { t: '«Prima regola: non si tocca a caso.»', s: 'quote' },
   { gap: 2 },
