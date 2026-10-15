@@ -428,17 +428,17 @@ window.ATTIVITA_WEB = [
     extra: [{ label: "Gioco", url: "galileo-cannocchiale/" }],
   },
   {
-    titolo: "Plesso Meucci 3D · Atrio e Aula 3 AM",
-    materia: "Tecnologia",
-    classe: "Secondo grado",
+    titolo: "Meucci 3 AM · Circuito interrotto",
+    materia: "Tecnologie elettriche e elettroniche",
+    classe: "Terza professionale",
     descrizione:
-      "Percorso 3D esplorabile dall'atrio di ingresso all'aula 3 AM: 6 tappe guidate, movimento libero, finestre in alluminio, TV interattiva e accensione luci.",
-    citazione: "Entra nell’atrio, gira a sinistra: benvenuti in 3 AM.",
+      "Gioco 3D nell'aula vera: parla col Prof, togli tensione, prendi tester e fusibile, ripara e collauda la TV.",
+    citazione: "Prima regola: non si tocca a caso.",
     url: "plesso-meucci-3d/",
     copertina: "plesso-meucci-3d/img/og-share.jpg",
     tinta: "scienze",
     adesivo: "st-pianeta",
-    extra: [{ label: "Esplora 3D", url: "plesso-meucci-3d/" }],
+    extra: [{ label: "Gioco 3D", url: "plesso-meucci-3d/" }],
   },
 ];
 

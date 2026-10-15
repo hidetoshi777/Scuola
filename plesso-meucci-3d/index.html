@@ -5,19 +5,19 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <meta name="color-scheme" content="dark light">
   <link rel="icon" href="../favicon.svg" type="image/svg+xml">
-  <title>Plesso Meucci 3D · Atrio e Aula 3 AM | Scuola</title>
-  <meta name="description" content="Esplorazione interattiva in 3D del Plesso Meucci: dall'atrio di ingresso all'aula 3 AM, con tappe guidate, movimento libero, TV interattiva e accensione luci.">
+  <title>Meucci 3 AM · Circuito interrotto | Scuola</title>
+  <meta name="description" content="Gioco 3D nell'aula vera del Plesso Meucci: missione elettrica con sicurezza, tester, fusibile e collaudo della TV.">
   <meta property="og:type" content="website">
   <meta property="og:locale" content="it_IT">
   <meta property="og:site_name" content="Scuola · Prof. Rossano Bella">
-  <meta property="og:title" content="Plesso Meucci 3D · Atrio e Aula 3 AM">
-  <meta property="og:description" content="Esplora in 3D l'atrio e l'aula 3 AM del Plesso Meucci dal browser o dal telefono.">
+  <meta property="og:title" content="Meucci 3 AM · Circuito interrotto">
+  <meta property="og:description" content="Entra nell'aula 3 AM, parla col Prof e ripara il circuito: sicurezza, strumenti, collaudo.">
   <meta property="og:url" content="https://hidetoshi777.github.io/Scuola/plesso-meucci-3d/">
   <meta property="og:image" content="https://hidetoshi777.github.io/Scuola/plesso-meucci-3d/img/og-share.jpg">
-  <meta property="og:image:alt" content="Modello 3D dell'aula 3 AM al Plesso Meucci">
+  <meta property="og:image:alt" content="Il Prof cartoon nell'aula 3 AM in 3D, con la cattedra, la TV e il banco di lavoro">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Plesso Meucci 3D · Atrio e Aula 3 AM">
-  <meta name="twitter:description" content="Esplora in 3D l'atrio e l'aula 3 AM del Plesso Meucci dal browser o dal telefono.">
+  <meta name="twitter:title" content="Meucci 3 AM · Circuito interrotto">
+  <meta name="twitter:description" content="Missione elettrica in 3D nell'aula 3 AM del Plesso Meucci.">
   <meta name="twitter:image" content="https://hidetoshi777.github.io/Scuola/plesso-meucci-3d/img/og-share.jpg">
   <style>
     :root, body[data-theme="dark"] {
@@ -187,7 +187,60 @@
       color: #854d0e;
     }
 
-    /* Interactive Proximity Prompt (TV PS1) */
+    .mission-bar {
+      position: fixed;
+      top: 52px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: min(560px, calc(100% - 24px));
+      z-index: 16;
+      background: rgba(15, 22, 32, 0.9);
+      border: 1px solid rgba(56, 189, 248, 0.35);
+      border-radius: 14px;
+      padding: 10px 14px;
+      backdrop-filter: blur(12px);
+      box-shadow: 0 10px 28px rgba(0, 0, 0, 0.4);
+    }
+    .mission-bar .label {
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 3px;
+    }
+    .mission-bar .objective {
+      font-size: 0.92rem;
+      font-weight: 600;
+      line-height: 1.35;
+    }
+    .inv-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 8px;
+    }
+    .inv-chip {
+      font-size: 0.72rem;
+      font-weight: 700;
+      padding: 3px 8px;
+      border-radius: 999px;
+      border: 1px solid var(--panel-border);
+      color: var(--muted);
+      background: rgba(30, 41, 59, 0.55);
+    }
+    .inv-chip.on {
+      color: #ecfdf5;
+      border-color: rgba(52, 211, 153, 0.55);
+      background: rgba(6, 78, 59, 0.55);
+    }
+    .inv-chip.warn {
+      color: #fef3c7;
+      border-color: rgba(251, 191, 36, 0.5);
+      background: rgba(69, 26, 3, 0.45);
+    }
+
+    /* Interactive Proximity Prompt */
     .tv-prompt {
       position: fixed;
       left: 50%;
@@ -224,7 +277,7 @@
       background: #38bdf8;
       color: #082f49;
       font-weight: 800;
-      font-family: monospace;
+      font-family: ui-monospace, Consolas, monospace;
       padding: 3px 9px;
       border-radius: 6px;
       font-size: 0.85rem;
@@ -234,6 +287,129 @@
       background: #f43f5e;
       color: #fff;
       box-shadow: 0 2px 6px rgba(244, 63, 94, 0.4);
+    }
+
+    .dialogue {
+      position: fixed;
+      left: 50%;
+      bottom: 96px;
+      transform: translateX(-50%);
+      width: min(640px, calc(100% - 20px));
+      z-index: 30;
+      background: rgba(8, 15, 28, 0.94);
+      border: 1px solid rgba(148, 163, 184, 0.35);
+      border-radius: 16px;
+      padding: 14px 16px 12px;
+      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.55);
+      display: none;
+    }
+    .dialogue.open { display: block; }
+    .dialogue .who {
+      font-size: 0.75rem;
+      font-weight: 800;
+      color: var(--accent);
+      margin-bottom: 4px;
+    }
+    .dialogue .text {
+      font-size: 1rem;
+      line-height: 1.4;
+      font-weight: 600;
+    }
+    .dialogue .continue {
+      margin-top: 10px;
+      appearance: none;
+      border: 1px solid rgba(56, 189, 248, 0.45);
+      background: rgba(56, 189, 248, 0.16);
+      color: #e0f2fe;
+      font-weight: 700;
+      font-size: 0.85rem;
+      padding: 8px 14px;
+      border-radius: 10px;
+      cursor: pointer;
+      min-height: 42px;
+    }
+
+    .repair-modal, .win-modal {
+      position: fixed;
+      inset: 0;
+      z-index: 40;
+      background: rgba(2, 6, 14, 0.72);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+    }
+    .repair-modal.open, .win-modal.open { display: flex; }
+    .repair-card, .win-card {
+      width: min(420px, 100%);
+      background: #0f172a;
+      border: 1px solid rgba(148, 163, 184, 0.3);
+      border-radius: 18px;
+      padding: 18px;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.55);
+    }
+    .repair-card h2, .win-card h2 {
+      font-size: 1.15rem;
+      margin-bottom: 8px;
+    }
+    .repair-card p, .win-card p {
+      color: var(--muted);
+      font-size: 0.9rem;
+      line-height: 1.45;
+      margin-bottom: 12px;
+    }
+    .repair-status {
+      font-size: 0.85rem;
+      font-weight: 700;
+      margin-bottom: 12px;
+      min-height: 1.3em;
+      color: #fde68a;
+    }
+    .repair-actions {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .repair-actions button, .win-card button {
+      appearance: none;
+      border: 1px solid rgba(56, 189, 248, 0.4);
+      background: rgba(30, 41, 59, 0.9);
+      color: #f8fafc;
+      font-weight: 700;
+      font-size: 0.95rem;
+      padding: 12px 14px;
+      border-radius: 12px;
+      cursor: pointer;
+      min-height: 48px;
+      text-align: left;
+    }
+    .repair-actions button:disabled {
+      opacity: 0.4;
+      cursor: not-allowed;
+    }
+    .repair-actions button.primary, .win-card button.primary {
+      background: rgba(56, 189, 248, 0.22);
+      border-color: #38bdf8;
+    }
+    .power-banner {
+      position: fixed;
+      top: 118px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 15;
+      font-size: 0.72rem;
+      font-weight: 800;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      padding: 4px 10px;
+      border-radius: 999px;
+      display: none;
+    }
+    .power-banner.off {
+      display: block;
+      background: rgba(127, 29, 29, 0.85);
+      color: #fecaca;
+      border: 1px solid rgba(248, 113, 113, 0.5);
     }
 
     .hud-bottom {
@@ -307,6 +483,7 @@
       margin-top: 2px;
       pointer-events: none;
     }
+    .credit a { color: inherit; pointer-events: auto; }
 
     #loader {
       position: fixed;
@@ -340,13 +517,17 @@
       .stop-btn { padding: 6px 9px; font-size: 0.74rem; }
       .brand-quote { display: none; }
       .tv-prompt { bottom: 118px; font-size: 0.8rem; padding: 9px 14px; }
+      .mission-bar { top: 48px; padding: 8px 12px; }
+      .mission-bar .objective { font-size: 0.84rem; }
+      .dialogue { bottom: 108px; }
+      .power-banner { top: 108px; }
     }
   </style>
   <script type="importmap">
     {
       "imports": {
-        "three": "https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.module.js",
-        "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.170.0/examples/jsm/"
+        "three": "https://cdn.jsdelivr.net/npm/three@0.186.1/build/three.module.js",
+        "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.186.1/examples/jsm/"
       }
     }
   </script>
@@ -365,9 +546,9 @@
 
   <header class="hud-top">
     <div class="brand-card">
-      <h1>Plesso Meucci 3D <span class="badge-3am">Atrio + 3 AM</span></h1>
-      <p id="stop-desc">Tappa 3 · Soglia dell'aula</p>
-      <p class="brand-quote">«Entra nell’atrio, gira a sinistra: benvenuti in 3 AM.»</p>
+      <h1>Circuito interrotto <span class="badge-3am">3 AM</span></h1>
+      <p id="stop-desc">Missione · Caso 1</p>
+      <p class="brand-quote">«Prima regola: non si tocca a caso.»</p>
     </div>
 
     <nav class="stops-bar" aria-label="Tappe del percorso">
@@ -383,14 +564,53 @@
     </nav>
   </header>
 
+  <div class="mission-bar" id="mission-bar">
+    <div class="label">Obiettivo</div>
+    <div class="objective" id="mission-objective">Caricamento missione…</div>
+    <div class="inv-row" id="inv-row">
+      <span class="inv-chip" id="chip-power">Corrente: ON</span>
+      <span class="inv-chip" id="chip-tester">Tester</span>
+      <span class="inv-chip" id="chip-fuse">Fusibile</span>
+      <span class="inv-chip" id="chip-fix">Riparazione</span>
+    </div>
+  </div>
+  <div class="power-banner" id="power-banner">Tensione staccata</div>
+
   <button type="button" class="tv-prompt" id="tv-prompt" aria-live="polite">
     <span class="key-badge" id="tv-prompt-key">E</span>
-    <span id="tv-prompt-label">Accendi TV · Sigla PlayStation 1</span>
+    <span id="tv-prompt-label">Interagisci</span>
   </button>
+
+  <div class="dialogue" id="dialogue" role="dialog" aria-modal="true">
+    <div class="who" id="dialogue-who">Prof</div>
+    <div class="text" id="dialogue-text"></div>
+    <button type="button" class="continue" id="dialogue-continue">Continua</button>
+  </div>
+
+  <div class="repair-modal" id="repair-modal" aria-hidden="true">
+    <div class="repair-card">
+      <h2>Banco di lavoro</h2>
+      <p>Diagnosi sulla TV: misura dove è interrotto il circuito, poi metti il fusibile nuovo.</p>
+      <div class="repair-status" id="repair-status">Collega il tester…</div>
+      <div class="repair-actions">
+        <button type="button" class="primary" id="btn-measure">1 · Misura col tester</button>
+        <button type="button" id="btn-replace" disabled>2 · Sostituisci fusibile</button>
+        <button type="button" id="btn-repair-close">Chiudi</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="win-modal" id="win-modal" aria-hidden="true">
+    <div class="win-card">
+      <h2>Collaudo ok!</h2>
+      <p>Hai tolto tensione, trovato gli strumenti, chiuso il circuito e riacceso la TV. Missione compiuta in 3 AM.</p>
+      <button type="button" class="primary" id="btn-restart">Ricomincia (modo mostra)</button>
+    </div>
+  </div>
 
   <footer class="hud-bottom">
     <div class="controls-card">
-      <strong>Comandi (<span class="kbd">H</span> o <span class="kbd">M</span> per chiudere):</strong> muoviti con <span class="kbd">W</span> <span class="kbd">A</span> <span class="kbd">S</span> <span class="kbd">D</span> o frecce (<span class="kbd">R</span>/<span class="kbd">F</span> quota), tasti <span class="kbd">1</span>–<span class="kbd">7</span> per le tappe, <span class="kbd">L</span> per i neon. Avvicinati alla <strong>TV</strong> e premi <span class="kbd">E</span> per avviare la <strong>PlayStation 1</strong>!
+      <strong>Missione:</strong> muoviti con <span class="kbd">W</span> <span class="kbd">A</span> <span class="kbd">S</span> <span class="kbd">D</span>, guarda trascinando col mouse (o con le frecce), avvicinati alle frecce luminose e premi <span class="kbd">E</span> (o tocca il tasto). Menu tappe: <span class="kbd">H</span>. Va anche col pad Xbox.
     </div>
 
     <div class="touch-pad" aria-label="Comandi movimento">
@@ -402,7 +622,7 @@
       <button type="button" class="pad-btn" data-move="right" title="Destra" aria-label="Destra">▶</button>
     </div>
 
-    <div class="credit">Realizzato dal Prof. Rossano Bella</div>
+    <div class="credit">Realizzato dal Prof. Rossano Bella · Prof 3D: <a href="https://sketchfab.com/3d-models/cartoon-teacher-model-2e824e4c1d224fb8824937f134f1592f" target="_blank" rel="noopener">«Cartoon Teacher Model»</a> di eduardolira, <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener">CC BY 4.0</a> (riscalato e riposizionato)</div>
   </footer>
 
   <script src="../js/access-track.js?v=4" defer></script>
@@ -410,6 +630,8 @@
     import * as THREE from 'three';
     import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
     import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
+    import { createElectricGame } from './js/gioco-elettrico.js';
+    import { createWalkRig, createXboxPad, PAD } from './js/camera-pad.js';
 
     const wrap = document.getElementById('canvas-wrap');
     const loaderEl = document.getElementById('loader');
@@ -418,6 +640,26 @@
     const btnTheme = document.getElementById('btn-theme');
     const tvPrompt = document.getElementById('tv-prompt');
     const tvPromptLabel = document.getElementById('tv-prompt-label');
+    const missionObjective = document.getElementById('mission-objective');
+    const chipPower = document.getElementById('chip-power');
+    const chipTester = document.getElementById('chip-tester');
+    const chipFuse = document.getElementById('chip-fuse');
+    const chipFix = document.getElementById('chip-fix');
+    const powerBanner = document.getElementById('power-banner');
+    const dialogueEl = document.getElementById('dialogue');
+    const dialogueWho = document.getElementById('dialogue-who');
+    const dialogueText = document.getElementById('dialogue-text');
+    const dialogueContinue = document.getElementById('dialogue-continue');
+    const repairModal = document.getElementById('repair-modal');
+    const repairStatus = document.getElementById('repair-status');
+    const btnMeasure = document.getElementById('btn-measure');
+    const btnReplace = document.getElementById('btn-replace');
+    const btnRepairClose = document.getElementById('btn-repair-close');
+    const winModal = document.getElementById('win-modal');
+    const btnRestart = document.getElementById('btn-restart');
+
+    let dialogueContinueFn = null;
+    let repairHandlers = null;
 
     const scene = new THREE.Scene();
     scene.background = new THREE.Color(0x111927);
@@ -459,6 +701,9 @@
     controls.dampingFactor = 0.07;
     controls.maxDistance = 35;
     controls.minDistance = 0.15;
+
+    // Camera a piedi con collisioni; OrbitControls resta solo per la vista dall'alto
+    const walk = createWalkRig({ THREE, camera, controls, dom: renderer.domElement });
 
     function b2t(bx, by, bz) {
       return new THREE.Vector3(bx, bz, -by);
@@ -512,6 +757,105 @@
       aulaNeon2.intensity = lightsOn ? 5.5 : 0;
       btnLights.classList.toggle('on', lightsOn);
       btnLights.textContent = lightsOn ? '💡 Neon: Accesi (4 AM)' : '💡 Neon: Spenti (3 AM)';
+    });
+
+    const missionUi = {
+      setObjective(text) {
+        missionObjective.textContent = text;
+        stopDesc.textContent = 'Missione · Caso 1';
+      },
+      setInventory({ tester, fuse, powerOn, repaired }) {
+        chipTester.classList.toggle('on', !!tester);
+        chipTester.textContent = tester ? 'Tester ✓' : 'Tester';
+        chipFuse.classList.toggle('on', !!fuse);
+        chipFuse.textContent = fuse ? 'Fusibile ✓' : 'Fusibile';
+        chipPower.classList.toggle('on', !!powerOn);
+        chipPower.classList.toggle('warn', !powerOn);
+        chipPower.textContent = powerOn ? 'Corrente: ON' : 'Corrente: OFF';
+        chipFix.classList.toggle('on', !!repaired);
+        chipFix.textContent = repaired ? 'Riparato ✓' : 'Riparazione';
+      },
+      setPowerVisual(on) {
+        powerBanner.classList.toggle('off', !on);
+        if (!on) {
+          lightsOn = false;
+          aulaNeon1.intensity = 0;
+          aulaNeon2.intensity = 0;
+          btnLights.classList.remove('on');
+          btnLights.textContent = '💡 Neon: Spenti (sicurezza)';
+        }
+      },
+      setPrompt(visible, label) {
+        tvPrompt.classList.toggle('visible', visible);
+        if (label) tvPromptLabel.textContent = label;
+        tvPrompt.classList.remove('tv-on');
+      },
+      showDialogue(who, text, onContinue) {
+        dialogueWho.textContent = who;
+        dialogueText.textContent = text;
+        dialogueEl.classList.add('open');
+        dialogueContinueFn = onContinue;
+      },
+      hideDialogue() {
+        dialogueEl.classList.remove('open');
+        dialogueContinueFn = null;
+      },
+      clickDialogueContinue() {
+        if (dialogueContinueFn) dialogueContinueFn();
+      },
+      openRepair(handlers) {
+        repairHandlers = handlers;
+        repairModal.classList.add('open');
+        repairModal.setAttribute('aria-hidden', 'false');
+        missionUi.updateRepair({
+          repairMeasured: handlers.measured,
+          repairReplaced: handlers.replaced,
+          hasTester: handlers.hasTester,
+          hasFuse: handlers.hasFuse
+        });
+      },
+      updateRepair(stateLike) {
+        const measured = stateLike.repairMeasured ?? stateLike.measured;
+        const replaced = stateLike.repairReplaced ?? stateLike.replaced;
+        const hasTester = stateLike.hasTester !== false;
+        const hasFuse = stateLike.hasFuse !== false;
+        if (!measured) {
+          repairStatus.textContent = hasTester
+            ? 'Tester pronto. Premi «Misura».'
+            : 'Serve il tester.';
+        } else if (!replaced) {
+          repairStatus.textContent = 'Esito: circuito interrotto (fusibile bruciato).';
+        } else {
+          repairStatus.textContent = 'Fusibile nuovo montato. Circuito ok.';
+        }
+        btnMeasure.disabled = !hasTester || !!measured;
+        btnReplace.disabled = !measured || !hasFuse || !!replaced;
+      },
+      closeRepair() {
+        repairModal.classList.remove('open');
+        repairModal.setAttribute('aria-hidden', 'true');
+        repairHandlers = null;
+      },
+      showWin() {
+        winModal.classList.add('open');
+        winModal.setAttribute('aria-hidden', 'false');
+      },
+      hideWin() {
+        winModal.classList.remove('open');
+        winModal.setAttribute('aria-hidden', 'true');
+      }
+    };
+
+    dialogueContinue.addEventListener('click', () => missionUi.clickDialogueContinue());
+    btnMeasure.addEventListener('click', () => repairHandlers && repairHandlers.onMeasure());
+    btnReplace.addEventListener('click', () => repairHandlers && repairHandlers.onReplace());
+    btnRepairClose.addEventListener('click', () => repairHandlers && repairHandlers.onClose());
+
+    const electricGame = createElectricGame({
+      THREE,
+      scene,
+      b2t,
+      ui: missionUi
     });
 
     // =========================================================================
@@ -828,6 +1172,10 @@
     }
 
     function toggleTV() {
+      if (!tvState.isOn && !electricGame.canBootTV()) {
+        electricGame.onTVBlocked();
+        return;
+      }
       tvState.isOn = !tvState.isOn;
       if (tvState.isOn) {
         tvState.startTime = performance.now();
@@ -836,7 +1184,8 @@
         tvScreenMat.needsUpdate = true;
         playPS1StartupAudio();
         tvPrompt.classList.add('tv-on');
-        tvPromptLabel.textContent = 'Spegni TV (PlayStation 1 in esecuzione)';
+        tvPromptLabel.textContent = 'Spegni TV (PlayStation 1)';
+        electricGame.onTVSuccessBoot();
       } else {
         stopPS1Audio();
         tvScreenMat.map = null;
@@ -844,11 +1193,31 @@
         tvScreenMat.needsUpdate = true;
         tvGlowLight.intensity = 0;
         tvPrompt.classList.remove('tv-on');
-        tvPromptLabel.textContent = 'Accendi TV · Sigla PlayStation 1';
+        tvPromptLabel.textContent = 'Accendi TV · Collaudo';
       }
     }
 
-    tvPrompt.addEventListener('click', toggleTV);
+    function doInteract() {
+      const result = electricGame.interact(camera.position);
+      if (result && (result.kind === 'pickup' || result.kind === 'switch')) pad.rumble();
+      if (result && result.kind === 'tv-ready') {
+        toggleTV();
+        return;
+      }
+      if (result) return;
+      // Vicino alla TV in fase collaudo / dopo vittoria
+      const distToTV = camera.position.distanceTo(tvWorldPos);
+      if (distToTV < 5.2) {
+        toggleTV();
+      }
+    }
+
+    tvPrompt.addEventListener('click', doInteract);
+    btnRestart.addEventListener('click', () => {
+      if (tvState.isOn) toggleTV();
+      electricGame.reset();
+      goToStop(0);
+    });
 
     // Also allow clicking directly on the 3D TV screen mesh with the mouse/touch
     const raycaster = new THREE.Raycaster();
@@ -865,7 +1234,7 @@
       raycaster.setFromCamera(pointer, camera);
       const hits = raycaster.intersectObject(tvScreenMesh, false);
       if (hits.length > 0) {
-        toggleTV();
+        doInteract();
       }
     });
 
@@ -898,30 +1267,27 @@
       {
         title: "Tappa 6 · Vista Isometrica in spaccato (Atrio + Aula 3 AM)",
         pos: b2t(-3.2, -5.8, 8.8),
-        target: b2t(-5.5, 1.6, 0.8)
+        target: b2t(-5.5, 1.6, 0.8),
+        orbit: true
       },
       {
         title: "Davanti alla TV · Premi E per avviare la PlayStation 1",
-        pos: b2t(-9.5, 2.35, 1.68),
+        pos: b2t(-9.5, 2.75, 1.6),
         target: b2t(-9.5, 4.28, 1.72)
       }
     ];
 
-    let animState = null;
-    function goToStop(index) {
+    let currentStop = 0;
+    function goToStop(index, instant = false) {
       const s = STOPS[index];
       if (!s) return;
+      currentStop = index;
       stopDesc.textContent = s.title;
       document.querySelectorAll('.stop-btn[data-stop]').forEach((b, i) => {
         b.classList.toggle('active', i === index);
       });
-      animState = {
-        startPos: camera.position.clone(),
-        endPos: s.pos.clone(),
-        startTarget: controls.target.clone(),
-        endTarget: s.target.clone(),
-        t: 0
-      };
+      if (instant && !s.orbit) walk.setPose(s.pos, s.target);
+      else walk.flyTo(s.pos, s.target, !!s.orbit);
     }
 
     document.querySelectorAll('.stop-btn[data-stop]').forEach((btn) => {
@@ -986,7 +1352,10 @@
         });
         scene.add(root);
         loaderEl.classList.add('hidden');
-        goToStop(2);
+        electricGame.attachWorld(root);
+        walk.setWorld(root, electricGame.colliders);
+        goToStop(0, true);
+        electricGame.reset();
       },
       (xhr) => {
         if (xhr.total) {
@@ -1042,21 +1411,23 @@
         return;
       }
       if (e.code === 'KeyE' && !e.repeat) {
-        const distToTV = camera.position.distanceTo(tvWorldPos);
-        if (distToTV < 5.2 || tvState.isOn) {
-          toggleTV();
-          return;
-        }
+        doInteract();
+        return;
       }
+      if (e.code === 'Space' && !e.repeat && dialogueEl.classList.contains('open')) {
+        e.preventDefault();
+        missionUi.clickDialogueContinue();
+        return;
+      }
+      if (e.code.startsWith('Arrow')) e.preventDefault();
       keys[e.code] = true;
-      animState = null;
     });
     window.addEventListener('keyup', (e) => { keys[e.code] = false; });
 
     const padState = { fwd: false, back: false, left: false, right: false };
     document.querySelectorAll('.pad-btn[data-move]').forEach((btn) => {
       const dir = btn.dataset.move;
-      const start = (e) => { e.preventDefault(); padState[dir] = true; animState = null; };
+      const start = (e) => { e.preventDefault(); padState[dir] = true; };
       const end = (e) => { e.preventDefault(); padState[dir] = false; };
       btn.addEventListener('pointerdown', start);
       btn.addEventListener('pointerup', end);
@@ -1064,50 +1435,118 @@
       btn.addEventListener('pointercancel', end);
     });
 
+    // ---- Pad Xbox 360 ------------------------------------------------------
+    const tvPromptKey = document.getElementById('tv-prompt-key');
+    const controlsCard = document.querySelector('.controls-card');
+    const controlsHelpKeyboard = controlsCard.innerHTML;
+    const controlsHelpPad =
+      '<strong>Pad:</strong> levetta sinistra muovi (premuta = corri), levetta destra guarda, ' +
+      '<span class="kbd">A</span> interagisci, <span class="kbd">B</span> chiudi, ' +
+      '<span class="kbd">X</span> neon, <span class="kbd">Y</span> vista dall\'alto, ' +
+      '<span class="kbd">LB</span>/<span class="kbd">RB</span> tappe, <span class="kbd">Back</span> vai alla TV, ' +
+      '<span class="kbd">Start</span> menu.';
+
+    function onPadPress(button) {
+      const repairOpen = repairModal.classList.contains('open');
+      const winOpen = winModal.classList.contains('open');
+      switch (button) {
+        case PAD.A:
+          if (winOpen) btnRestart.click();
+          else if (repairOpen) (btnReplace.disabled ? btnMeasure : btnReplace).click();
+          else doInteract();
+          break;
+        case PAD.B:
+          if (repairOpen) btnRepairClose.click();
+          else if (dialogueEl.classList.contains('open')) missionUi.clickDialogueContinue();
+          else if (document.body.classList.contains('hud-open')) toggleHud();
+          break;
+        case PAD.X:
+          btnLights.click();
+          break;
+        case PAD.Y:
+          if (currentStop === 5) walk.backToWalk();
+          else goToStop(5);
+          break;
+        case PAD.LB:
+          goToStop((currentStop + STOPS.length - 1) % STOPS.length);
+          break;
+        case PAD.RB:
+          goToStop((currentStop + 1) % STOPS.length);
+          break;
+        case PAD.BACK:
+          goToStop(6);
+          break;
+        case PAD.START:
+          toggleHud();
+          break;
+        case PAD.R3:
+          walk.lookDelta(0, walk.rig.pitch); // sguardo dritto
+          break;
+      }
+    }
+
+    const pad = createXboxPad({
+      onPress: onPadPress,
+      onConnect: () => {
+        tvPromptKey.textContent = 'A';
+        controlsCard.innerHTML = controlsHelpPad;
+      },
+      onDisconnect: () => {
+        tvPromptKey.textContent = 'E';
+        controlsCard.innerHTML = controlsHelpKeyboard;
+      }
+    });
+
     const clock = new THREE.Clock();
-    const fwdVec = new THREE.Vector3();
-    const rightVec = new THREE.Vector3();
-    const moveVec = new THREE.Vector3();
+    const input = { strafe: 0, forward: 0, turn: 0, tilt: 0, run: false };
+
+    function readInput() {
+      const k = (c) => (keys[c] ? 1 : 0);
+      input.forward = k('KeyW') + k('ArrowUp') - k('KeyS') - k('ArrowDown') + (padState.fwd ? 1 : 0) - (padState.back ? 1 : 0);
+      input.strafe = k('KeyD') - k('KeyA') + (padState.right ? 1 : 0) - (padState.left ? 1 : 0);
+      input.turn = (k('ArrowRight') - k('ArrowLeft')) * 2.2; // frecce laterali = girarsi
+      input.tilt = 0;
+      input.run = !!(keys['ShiftLeft'] || keys['ShiftRight']);
+      input.forward = Math.max(-1, Math.min(1, input.forward));
+      input.strafe = Math.max(-1, Math.min(1, input.strafe));
+
+      const p = pad.poll();
+      if (p) {
+        if (Math.abs(p.forward) > Math.abs(input.forward)) input.forward = p.forward;
+        if (Math.abs(p.strafe) > Math.abs(input.strafe)) input.strafe = p.strafe;
+        input.turn += p.turn;
+        input.tilt += p.tilt;
+        input.run = input.run || p.run;
+      }
+      // a dialogo o riparazione aperti non si cammina
+      if (dialogueEl.classList.contains('open') || repairModal.classList.contains('open')) {
+        input.forward = input.strafe = 0;
+      }
+      return input;
+    }
 
     function animate(nowMs) {
       requestAnimationFrame(animate);
       const dt = Math.min(clock.getDelta(), 0.1);
 
-      if (animState) {
-        animState.t = Math.min(1, animState.t + dt * 1.8);
-        const k = 1 - Math.pow(1 - animState.t, 3);
-        camera.position.lerpVectors(animState.startPos, animState.endPos, k);
-        controls.target.lerpVectors(animState.startTarget, animState.endTarget, k);
-        if (animState.t >= 1) animState = null;
-      } else {
-        const speed = (keys['ShiftLeft'] || keys['ShiftRight']) ? 5.5 : 2.8;
-        camera.getWorldDirection(fwdVec);
-        fwdVec.y = 0;
-        if (fwdVec.lengthSq() > 0.0001) fwdVec.normalize();
-        rightVec.crossVectors(fwdVec, camera.up).normalize();
+      walk.update(dt, readInput());
 
-        moveVec.set(0, 0, 0);
-        if (keys['KeyW'] || keys['ArrowUp'] || padState.fwd) moveVec.add(fwdVec);
-        if (keys['KeyS'] || keys['ArrowDown'] || padState.back) moveVec.sub(fwdVec);
-        if (keys['KeyD'] || keys['ArrowRight'] || padState.right) moveVec.add(rightVec);
-        if (keys['KeyA'] || keys['ArrowLeft'] || padState.left) moveVec.sub(rightVec);
-        if (keys['KeyR']) moveVec.y += 1;
-        if (keys['KeyF']) moveVec.y -= 1;
+      electricGame.tick(dt, camera.position);
 
-        if (moveVec.lengthSq() > 0) {
-          moveVec.normalize().multiplyScalar(speed * dt);
-          camera.position.add(moveVec);
-          controls.target.add(moveVec);
+      // Collaudo: prompt TV se vicino e missione pronta
+      if (electricGame.canBootTV() || tvState.isOn) {
+        const distToTV = camera.position.distanceTo(tvWorldPos);
+        const nearTv = distToTV < 4.8 && camera.position.y < 3.1;
+        if (nearTv || tvState.isOn) {
+          tvPrompt.classList.add('visible');
+          tvPromptLabel.textContent = tvState.isOn
+            ? 'Spegni TV (PlayStation 1)'
+            : 'Accendi TV · Collaudo';
+          tvPrompt.classList.toggle('tv-on', tvState.isOn);
         }
       }
 
-      // Check proximity to TV to show/hide "Premi E per accendere TV" prompt
-      const distToTV = camera.position.distanceTo(tvWorldPos);
-      const insideAulaNearTV = distToTV < 4.8 && camera.position.y < 3.1;
-      tvPrompt.classList.toggle('visible', insideAulaNearTV || tvState.isOn);
-
       updateTVScreen(nowMs || performance.now());
-      controls.update();
       updateSmartCutaway();
       renderer.render(scene, camera);
     }
