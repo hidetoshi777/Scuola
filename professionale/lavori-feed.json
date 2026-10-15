@@ -1,5 +1,12 @@
 [
   {
+    "id": "plesso-meucci-3d",
+    "titolo": "Plesso Meucci 3D · Atrio e Aula 3 AM",
+    "annoProf": 3,
+    "url": "plesso-meucci-3d/",
+    "materia": "Tecnologia"
+  },
+  {
     "id": "present-simple-continuous",
     "titolo": "Present simple o continuous?",
     "annoProf": 4,

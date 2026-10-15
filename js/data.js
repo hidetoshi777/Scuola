@@ -427,6 +427,21 @@ window.ATTIVITA_WEB = [
     adesivo: "st-pianeta",
     extra: [{ label: "Gioco", url: "galileo-cannocchiale/" }],
   },
+  {
+    titolo: "Plesso Meucci 3D · Atrio e Aula 3 AM",
+    materia: "Tecnologia",
+    classe: "Terza superiore · professionale",
+    annoProf: 3,
+    pubblicato: "2026-10-15",
+    descrizione:
+      "Percorso 3D esplorabile dall'atrio di ingresso all'aula 3 AM: 6 tappe guidate, movimento libero, finestre in alluminio, TV interattiva e accensione luci.",
+    citazione: "Entra nell’atrio, gira a sinistra: benvenuti in 3 AM.",
+    url: "plesso-meucci-3d/",
+    copertina: "plesso-meucci-3d/img/og-share.jpg",
+    tinta: "scienze",
+    adesivo: "st-pianeta",
+    extra: [{ label: "Esplora 3D", url: "plesso-meucci-3d/" }],
+  },
 ];
 
 /** Attività web per il raccoglitore professionale (Ferraris AM): richiede `annoProf` 3 o 4. */
