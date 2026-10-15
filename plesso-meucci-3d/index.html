@@ -82,6 +82,42 @@
       border-radius: 14px;
       padding: 10px 14px;
       box-shadow: 0 10px 28px rgba(0, 0, 0, 0.35);
+      transition: opacity 0.2s ease, transform 0.2s ease;
+    }
+    body:not(.hud-open) .brand-card,
+    body:not(.hud-open) .stops-bar,
+    body:not(.hud-open) .controls-card {
+      opacity: 0;
+      pointer-events: none;
+      transform: translateY(-8px);
+    }
+    .hud-toggle-pill {
+      position: fixed;
+      top: 12px;
+      right: 12px;
+      z-index: 15;
+      appearance: none;
+      border: 1px solid var(--panel-border);
+      background: var(--panel);
+      color: var(--muted);
+      font-size: 0.75rem;
+      font-weight: 600;
+      padding: 6px 11px;
+      border-radius: 999px;
+      cursor: pointer;
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      opacity: 0.65;
+      transition: opacity 0.16s ease, border-color 0.16s ease;
+    }
+    .hud-toggle-pill:hover,
+    body.hud-open .hud-toggle-pill {
+      opacity: 1;
+      color: var(--text);
+      border-color: var(--accent);
     }
     .brand-card h1 {
       font-size: 0.98rem;
@@ -323,6 +359,10 @@
 
   <div id="canvas-wrap"></div>
 
+  <button type="button" class="hud-toggle-pill" id="btn-hud-toggle" title="Mostra/Nascondi menu e comandi (Tasto H o M)">
+    <span class="kbd">H</span> Menu
+  </button>
+
   <header class="hud-top">
     <div class="brand-card">
       <h1>Plesso Meucci 3D <span class="badge-3am">Atrio + 3 AM</span></h1>
@@ -350,7 +390,7 @@
 
   <footer class="hud-bottom">
     <div class="controls-card">
-      <strong>Esplorazione 3D:</strong> muoviti con <span class="kbd">W</span> <span class="kbd">A</span> <span class="kbd">S</span> <span class="kbd">D</span> o frecce (<span class="kbd">R</span>/<span class="kbd">F</span> quota). Avvicinati alla <strong>TV a sinistra della cattedra</strong> e premi <span class="kbd">E</span> (o clicca lo schermo) per accenderla con la sigla <strong>PlayStation 1</strong>!
+      <strong>Comandi (<span class="kbd">H</span> o <span class="kbd">M</span> per chiudere):</strong> muoviti con <span class="kbd">W</span> <span class="kbd">A</span> <span class="kbd">S</span> <span class="kbd">D</span> o frecce (<span class="kbd">R</span>/<span class="kbd">F</span> quota), tasti <span class="kbd">1</span>–<span class="kbd">7</span> per le tappe, <span class="kbd">L</span> per i neon. Avvicinati alla <strong>TV</strong> e premi <span class="kbd">E</span> per avviare la <strong>PlayStation 1</strong>!
     </div>
 
     <div class="touch-pad" aria-label="Comandi movimento">
@@ -981,7 +1021,26 @@
     }
 
     const keys = {};
+    const btnHudToggle = document.getElementById('btn-hud-toggle');
+    function toggleHud() {
+      document.body.classList.toggle('hud-open');
+    }
+    btnHudToggle.addEventListener('click', toggleHud);
+
     window.addEventListener('keydown', (e) => {
+      if ((e.code === 'KeyH' || e.code === 'KeyM' || e.code === 'Tab') && !e.repeat) {
+        if (e.code === 'Tab') e.preventDefault();
+        toggleHud();
+        return;
+      }
+      if (e.code >= 'Digit1' && e.code <= 'Digit7' && !e.repeat) {
+        goToStop(Number(e.code.replace('Digit', '')) - 1);
+        return;
+      }
+      if (e.code === 'KeyL' && !e.repeat) {
+        btnLights.click();
+        return;
+      }
       if (e.code === 'KeyE' && !e.repeat) {
         const distToTV = camera.position.distanceTo(tvWorldPos);
         if (distToTV < 5.2 || tvState.isOn) {
