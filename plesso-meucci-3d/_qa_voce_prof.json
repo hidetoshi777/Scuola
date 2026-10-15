@@ -1,0 +1,120 @@
+{
+  "esito": "ok",
+  "audio": [
+    {
+      "file": "prof-585bddc3faac.mp3",
+      "seconds": 5.568
+    },
+    {
+      "file": "prof-aadf2a6d85ad.mp3",
+      "seconds": 6.744
+    },
+    {
+      "file": "prof-f7d3b24bd346.mp3",
+      "seconds": 6.024
+    },
+    {
+      "file": "prof-c36e20681a69.mp3",
+      "seconds": 7.104
+    },
+    {
+      "file": "prof-17c1d509a882.mp3",
+      "seconds": 6.912
+    },
+    {
+      "file": "prof-a6e225b79e14.mp3",
+      "seconds": 8.04
+    },
+    {
+      "file": "prof-2c9b61201053.mp3",
+      "seconds": 5.88
+    },
+    {
+      "file": "prof-91eb7dabde41.mp3",
+      "seconds": 6.744
+    },
+    {
+      "file": "prof-e57a0357aca0.mp3",
+      "seconds": 5.112
+    },
+    {
+      "file": "prof-4905d933b6c4.mp3",
+      "seconds": 6.48
+    },
+    {
+      "file": "prof-4ba6c0d14f58.mp3",
+      "seconds": 4.056
+    },
+    {
+      "file": "prof-b65c20248e68.mp3",
+      "seconds": 6.408
+    },
+    {
+      "file": "prof-b91515b7b036.mp3",
+      "seconds": 3.768
+    },
+    {
+      "file": "prof-94058fd00c56.mp3",
+      "seconds": 3.936
+    },
+    {
+      "file": "prof-0e9c8325d243.mp3",
+      "seconds": 4.104
+    },
+    {
+      "file": "prof-6a8c93a0e315.mp3",
+      "seconds": 3.264
+    },
+    {
+      "file": "prof-c4d8872134e0.mp3",
+      "seconds": 4.704
+    },
+    {
+      "file": "prof-4bdbf7b3e402.mp3",
+      "seconds": 5.184
+    },
+    {
+      "file": "prof-ea3b09defb89.mp3",
+      "seconds": 2.664
+    }
+  ],
+  "mobile_390": {
+    "overflow": false,
+    "dialogue": {
+      "left": 10,
+      "right": 380,
+      "top": 567.21875,
+      "bottom": 736
+    },
+    "buttons": [
+      {
+        "text": "Voce: attiva",
+        "width": 105.34375,
+        "height": 44
+      },
+      {
+        "text": "Ferma audio",
+        "width": 110.875,
+        "height": 44
+      },
+      {
+        "text": "Continua",
+        "width": 88.9375,
+        "height": 44
+      }
+    ]
+  },
+  "verifiche": [
+    "riproduzione MP3",
+    "ferma e riascolta",
+    "voce on/off",
+    "stop alla chiusura",
+    "cambio battuta senza sovrapposizione",
+    "solo voce Prof",
+    "preferenza conservata dopo ricarica",
+    "nessun errore JavaScript"
+  ],
+  "contenuti_didattici": "Invariati; QA Jev esistente: _qa_jev_minigioco.json, review vuota.",
+  "sha256_minigioco": "8d23d046b40b854a147b0154df0996048ba87a90df0ad60a815d23e3243ddde9",
+  "screenshot": "G:\\temp\\meucci-voce-mobile.png"
+}
