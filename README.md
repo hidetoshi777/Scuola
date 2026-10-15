@@ -28,6 +28,20 @@ Realizzato dal Prof. Rossano Bella.
 - Gioco: https://hidetoshi777.github.io/Scuola/acciaio-alluminio-ghisa/gioco.html
 - Densità (allenamento γ): https://hidetoshi777.github.io/Scuola/acciaio-alluminio-ghisa/densita.html
 
+### Galileo · Il cannocchiale
+
+Solo gioco, circa dieci minuti. Non è nel raccoglitore professionale.
+
+- Gioco: https://hidetoshi777.github.io/Scuola/galileo-cannocchiale/
+
+### Present simple o continuous? · Quarta professionale (inglese)
+
+- Home: https://hidetoshi777.github.io/Scuola/present-simple-continuous/
+- Studio: https://hidetoshi777.github.io/Scuola/present-simple-continuous/imparare.html
+- Fumetto: https://hidetoshi777.github.io/Scuola/present-simple-continuous/fumetto.html
+- Laboratorio: https://hidetoshi777.github.io/Scuola/present-simple-continuous/laboratorio.html
+- Gioco: https://hidetoshi777.github.io/Scuola/present-simple-continuous/gioco.html
+
 ### Edison · Guerra delle correnti · Quarta professionale (tecnologie elettriche)
 
 - Home: https://hidetoshi777.github.io/Scuola/edison-guerra-correnti/
@@ -44,3 +58,13 @@ edison-guerra-correnti/     → tecnologie elettriche, quarta professionale (fum
 ```
 
 Nuove attività: nuova sottocartella, stessa struttura (home, imparare, laboratorio, gioco).
+
+## QA dei materiali (TypeSafe / Jev) — obbligatorio
+
+Per **ogni nuovo lavoro** Scuola (e per ogni espansione sostanziale di quiz / studio / laboratorio), **prima della pubblicazione** è obbligatorio un passaggio di QA con **TypeSafe (modello Jev)**:
+
+- Jev giudica (sì/no, scelta, punteggio); non scrive il materiale.
+- Al minimo: tutte le domande del quiz; correggere gli errori veri (risposte sbagliate, incongruenze fra opzione e spiegazione). Le semplificazioni adatte al livello della classe vanno bene.
+- Report nella cartella del lavoro (es. `_qa_jev_quiz.json`).
+
+Dettagli operativi per gli agenti: `AGENTS.md`.

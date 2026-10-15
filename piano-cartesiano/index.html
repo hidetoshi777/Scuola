@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="color-scheme" content="dark" id="color-scheme">
+  <script>
+    {
+      const t = localStorage.getItem("tema-piano-cartesiano");
+      const tema = t === "light" || t === "dark" ? t : "dark";
+      document.documentElement.dataset.theme = tema;
+      document.getElementById("color-scheme").content = tema;
+    }
+  </script>
+  <link rel="icon" href="../favicon.svg" type="image/svg+xml">
+  <title>Piano cartesiano | Scuola</title>
+  <meta name="description" content="Assi, origine, quadranti e punti A B C D: studio e un gioco in cui ti collocate sul piano.">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="it_IT">
+  <meta property="og:site_name" content="Scuola · Prof. Rossano Bella">
+  <meta property="og:title" content="Piano cartesiano">
+  <meta property="og:description" content="Due assi, quattro quadranti. Prendi un punto e collocati.">
+  <meta property="og:url" content="https://hidetoshi777.github.io/Scuola/piano-cartesiano/">
+  <meta property="og:image" content="https://hidetoshi777.github.io/Scuola/piano-cartesiano/img/og-share.jpg">
+  <meta property="og:image:alt" content="Piano cartesiano dipinto nel cortile, con i punti A B C D">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Piano cartesiano">
+  <meta name="twitter:description" content="Due assi, quattro quadranti. Prendi un punto e collocati.">
+  <meta name="twitter:image" content="https://hidetoshi777.github.io/Scuola/piano-cartesiano/img/og-share.jpg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,650&family=IBM+Plex+Mono:wght@600;700&family=Source+Sans+3:wght@500;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body class="page-home">
+  <a class="skip-link" href="#contenuto">Salta al contenuto</a>
+
+  <div class="quaderno">
+    <div class="margine" aria-hidden="true"></div>
+    <header class="q-top">
+      <div>
+        <p class="q-kicker">Matematica · Terza professionale</p>
+        <p class="q-date">Lezione · 21 settembre</p>
+      </div>
+      <button type="button" class="theme-toggle" data-theme-toggle aria-pressed="false">Quaderno</button>
+    </header>
+    <nav class="asse-nav" aria-label="Sezioni">
+      <a href="index.html" aria-current="page">Home</a>
+      <a href="imparare.html">Studio</a>
+      <a href="laboratorio.html">Laboratorio</a>
+      <a href="gioco.html">Gioco</a>
+    </nav>
+
+    <main id="contenuto" class="q-main" tabindex="-1">
+      <div class="home-grid">
+        <div>
+          <h1>Piano cartesiano</h1>
+          <p class="lead">Due rette. Un punto. Due numeri. Tu ti metti lì.</p>
+          <blockquote class="quote">Prima X, poi Y. Mai il contrario.</blockquote>
+          <p>Tocca A, B, C o D. Il pedone cammina: prima sull’asse <span class="mono">X</span>, poi sull’asse <span class="mono">Y</span>.</p>
+          <ul class="pin-list" id="pin-list">
+            <li><button type="button" data-id="A"><span class="dot dot-a"></span> A <span class="mono">(3, 2)</span></button></li>
+            <li><button type="button" data-id="B"><span class="dot dot-b"></span> B <span class="mono">(−1, 5)</span></button></li>
+            <li><button type="button" data-id="C"><span class="dot dot-c"></span> C <span class="mono">(−3, −1)</span></button></li>
+            <li><button type="button" data-id="D"><span class="dot dot-d"></span> D <span class="mono">(2, −4)</span></button></li>
+          </ul>
+          <p class="feedback" id="home-msg" aria-live="polite"></p>
+          <div class="azioni">
+            <a class="btn btn-primary" href="imparare.html">Studio</a>
+            <a class="btn" href="laboratorio.html">Cammina</a>
+            <a class="btn btn-ghost" href="gioco.html">Collocati</a>
+          </div>
+        </div>
+        <div>
+          <div id="piano-home" class="piano-host" role="application" aria-label="Piano cartesiano con i punti della lezione"></div>
+          <p class="q-date" style="margin-top:.5rem;text-align:center">Tocca anche una casella sul piano.</p>
+        </div>
+      </div>
+    </main>
+
+    <footer class="site-footer">
+      <p>Realizzato dal Prof. Rossano Bella</p>
+    </footer>
+  </div>
+
+  <script src="js/common.js" defer></script>
+  <script src="js/piano.js" defer></script>
+  <script src="js/home.js" defer></script>
+</body>
+</html>

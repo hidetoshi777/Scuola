@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="theme-color" content="#0b0f1a">
+  <meta name="color-scheme" content="dark">
+  <title>Elettrominzione · il gioco</title>
+  <meta name="description" content="Un ubriaco, un ponte, l'alta tensione: svuota la vescica senza folgorarti. Da una straordinaria idea dell'Ing. Rosario Leotta.">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Elettrominzione · il gioco">
+  <meta property="og:description" content="Un ubriaco, un ponte, l'alta tensione. Da una straordinaria idea dell'Ing. Rosario Leotta.">
+  <meta property="og:url" content="https://hidetoshi777.github.io/Scuola/elettrominzione/">
+  <meta property="og:image" content="https://hidetoshi777.github.io/Scuola/elettrominzione/img/og-share.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="https://hidetoshi777.github.io/Scuola/elettrominzione/img/og-share.jpg">
+  <link rel="icon" href="../favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bungee&family=DM+Sans:opsz,wght@9..40,500;9..40,700;9..40,800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/gioco.css?v=1">
+</head>
+<body>
+  <main class="palco" id="palco">
+    <canvas id="scena" aria-label="Il ponte sul fiume, l'ubriaco e la linea dell'alta tensione"></canvas>
+
+    <header class="hud" id="hud" hidden>
+      <div class="hud-livello">
+        <p class="hud-sopra" id="hud-livello">Livello 1</p>
+        <p class="hud-kv" id="hud-kv">132 kV</p>
+      </div>
+      <div class="vescica" aria-label="Vescica">
+        <span class="vescica-etichetta">Vescica</span>
+        <span class="vescica-barra"><span id="vescica-livello"></span></span>
+      </div>
+      <button type="button" class="tasto-piccolo" id="audio" aria-label="Audio">🔊</button>
+    </header>
+
+    <p class="fumetto" id="fumetto" hidden></p>
+
+    <!-- titolo -->
+    <section class="schermata titolo" id="titolo">
+      <div class="titolo-scatola">
+        <canvas class="scintille" id="scintille" aria-hidden="true"></canvas>
+        <h1 class="titolo-gioco" data-testo="ELETTROMINZIONE">ELETTROMINZIONE</h1>
+      </div>
+      <p class="titolo-sotto">Un ponte. Tre birre di troppo. L'alta tensione.</p>
+      <p class="titolo-autore">da una straordinaria idea<br>dell'<strong>Ing. Rosario Leotta</strong></p>
+      <button type="button" class="bottone grande" id="gioca">Gioca</button>
+      <label class="interruttore">
+        <input type="checkbox" id="fisica-reale">
+        <span>Fisica reale: il getto si spezza in gocce dopo 15 cm</span>
+      </label>
+      <p class="firma">Realizzato dal Prof. Rossano Bella</p>
+    </section>
+
+    <!-- cartellini: livello, folgorazione, vittoria, fine -->
+    <section class="schermata cartellino" id="cartellino" hidden>
+      <div class="scheda">
+        <p class="scheda-sopra" id="c-sopra"></p>
+        <h2 id="c-titolo"></h2>
+        <div id="c-corpo"></div>
+        <div class="scheda-azioni" id="c-azioni"></div>
+      </div>
+    </section>
+  </main>
+
+  <nav class="comandi" id="comandi" hidden aria-label="Comandi">
+    <div class="comandi-mira">
+      <button type="button" class="tasto" data-tasto="su" aria-label="Mira più in alto">▲</button>
+      <button type="button" class="tasto" data-tasto="giu" aria-label="Mira più in basso">▼</button>
+    </div>
+    <button type="button" class="tasto tasto-pipi" data-tasto="pipi" aria-label="Tieni premuto per fare pipì">PIPÌ<small>tieni premuto</small></button>
+  </nav>
+
+  <script src="js/scena-dati.js?v=1"></script>
+  <script src="js/gioco.js?v=1"></script>
+</body>
+</html>

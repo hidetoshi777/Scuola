@@ -1,0 +1,1246 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="theme-color" content="#070a07">
+  <meta name="color-scheme" content="dark">
+  <title>Adamo 1.0 · beta instabile</title>
+  <meta name="description" content="Il primo uomo, cinque sensori scadenti e un neurone. Da una straordinaria idea dell'Ing. Rosario Leotta.">
+  <link rel="icon" href="../favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bungee&family=VT323&family=DM+Sans:opsz,wght@9..40,500;9..40,700;9..40,800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --fondo: #070a07;
+      --pannello: #0c130d;
+      --fosforo: #a6ff8f;
+      --fosforo-2: #5fbf52;
+      --fosforo-3: #1f3a1c;
+      --ambra: #ffcf5a;
+      --rosa: #ff9cc2;
+      --rosso: #ff5d5d;
+      --azzurro: #8fd8ff;
+      --serpe: #c6f36b;
+      --testo: #e9f5e6;
+      --grigio: #8fa596;
+      --bsod: #0a57c2;
+    }
+    * { box-sizing: border-box; }
+    [hidden] { display: none !important; }
+    html, body { margin: 0; min-height: 100%; }
+    body {
+      background: var(--fondo);
+      color: var(--testo);
+      font-family: "DM Sans", system-ui, sans-serif;
+      overflow-x: hidden;
+      -webkit-tap-highlight-color: transparent;
+    }
+    body::after {
+      content: "";
+      position: fixed; inset: 0;
+      pointer-events: none;
+      background: repeating-linear-gradient(0deg, rgba(0,0,0,.18) 0 1px, transparent 1px 3px);
+      z-index: 90;
+    }
+    button { font: inherit; cursor: pointer; }
+
+    /* ---------- schermate a tutto schermo ---------- */
+    .schermata {
+      position: fixed; inset: 0;
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      padding: 24px 16px;
+      overflow-y: auto;
+      background: var(--fondo);
+      z-index: 20;
+    }
+    .boot { justify-content: flex-start; align-items: stretch; cursor: pointer; }
+    .boot-dentro { width: min(820px, 100%); margin: 0 auto; }
+    .boot-testo {
+      font-family: "VT323", monospace; font-size: clamp(17px, 2.6vw, 23px);
+      color: var(--fosforo); margin: 0; white-space: pre-wrap; line-height: 1.2;
+    }
+    .boot-testo .avviso { color: var(--ambra); }
+    .boot-testo .ko { color: var(--rosso); }
+    .boot-premi { font-family: "VT323", monospace; font-size: 22px; color: var(--ambra); animation: lampeggia 1s steps(2) infinite; }
+
+    .titolo { text-align: center; gap: 6px;
+      background: radial-gradient(ellipse at 50% 35%, #173017 0%, var(--fondo) 65%); }
+    .vm { font-family: "VT323", monospace; font-size: 20px; color: var(--rosso); border: 1px solid var(--rosso);
+      padding: 2px 10px; border-radius: 6px; margin: 0 0 8px; letter-spacing: .06em; }
+    .titolo-gioco {
+      font-family: "Bungee", sans-serif; font-weight: 400;
+      font-size: clamp(56px, 15vw, 150px); line-height: .9; margin: 0;
+      color: var(--ambra);
+      text-shadow: 0 0 18px rgba(255, 207, 90, .45), 4px 4px 0 #6b3d00;
+    }
+    .titolo-gioco span { color: var(--fosforo); text-shadow: 0 0 18px rgba(166,255,143,.5), 4px 4px 0 #1b4a14; }
+    .timbro {
+      font-family: "Bungee", sans-serif; color: var(--rosso); border: 3px solid var(--rosso);
+      padding: 2px 12px; transform: rotate(-6deg); margin: 6px 0 14px; font-size: clamp(16px, 3vw, 22px);
+      border-radius: 6px; opacity: .9;
+    }
+    .titolo-sotto { max-width: 560px; font-size: clamp(16px, 2.2vw, 19px); line-height: 1.45; margin: 0 0 10px; color: #d8e8d4; }
+    .titolo-sotto em { color: var(--ambra); font-style: normal; font-weight: 700; }
+    .titolo-autore { color: var(--grigio); margin: 4px 0 18px; line-height: 1.35; }
+    .titolo-autore strong { color: var(--testo); font-size: 1.15em; }
+    .comandi { font-family: "VT323", monospace; color: var(--grigio); font-size: 18px; margin: 16px 0 0; }
+    .firma { color: var(--grigio); font-size: 13px; margin: 18px 0 0; text-align: center; }
+
+    .bottone {
+      background: var(--fosforo); color: #071007; border: 0; border-radius: 10px;
+      padding: 10px 18px; font-weight: 800; letter-spacing: .02em;
+      box-shadow: 0 4px 0 var(--fosforo-2), 0 0 24px rgba(166,255,143,.25);
+      transition: transform .08s, box-shadow .08s;
+    }
+    .bottone:hover { filter: brightness(1.08); }
+    .bottone:active { transform: translateY(3px); box-shadow: 0 1px 0 var(--fosforo-2); }
+    .bottone:disabled { opacity: .5; cursor: default; }
+    .bottone.grande { font-size: 22px; padding: 14px 30px; }
+    .bottone.secondario { background: transparent; color: var(--fosforo); border: 1px solid var(--fosforo-2); box-shadow: none; }
+    .bottone small { font-weight: 500; opacity: .7; }
+
+    /* ---------- partita ---------- */
+    .palco {
+      max-width: 1180px; margin: 0 auto; min-height: 100vh; min-height: 100dvh;
+      display: grid; grid-template-rows: auto 1fr auto; gap: 12px;
+      padding: 12px 16px 10px;
+    }
+    .hud {
+      display: flex; flex-wrap: wrap; align-items: center; gap: 6px 20px;
+      font-family: "VT323", monospace; font-size: 22px; color: var(--fosforo);
+      background: var(--pannello); border: 1px solid var(--fosforo-3); border-radius: 10px;
+      padding: 6px 12px;
+    }
+    .hud-os { color: var(--ambra); }
+    .hud-dignita { display: inline-flex; align-items: center; gap: 8px; }
+    .barra { display: inline-block; width: 110px; height: 12px; border: 1px solid var(--fosforo-2); border-radius: 3px; overflow: hidden; }
+    .barra span { display: block; height: 100%; width: 50%; background: var(--fosforo); transition: width .5s, background .5s; }
+    .barra span.bassa { background: var(--rosso); }
+    .hud b { color: var(--rosso); font-weight: 400; }
+    .tasto-audio { margin-left: auto; background: transparent; border: 1px solid var(--fosforo-3); border-radius: 8px; color: var(--fosforo); padding: 0 8px; font-size: 18px; }
+
+    .corpo { display: grid; grid-template-columns: minmax(0, 1.12fr) minmax(0, 1fr); gap: 12px; min-height: 0; }
+    .telecamera {
+      position: relative; align-self: start;
+      border: 2px solid var(--fosforo-3); border-radius: 12px; overflow: hidden; background: #000;
+    }
+    .telecamera svg { display: block; width: 100%; height: auto; }
+    .rec, .ora {
+      position: absolute; top: 8px; font-family: "VT323", monospace; font-size: 18px; color: #fff;
+      text-shadow: 0 1px 2px #000; pointer-events: none;
+    }
+    .rec { left: 10px; } .rec::first-letter { color: #ff3b3b; }
+    .ora { right: 10px; }
+    .rec { animation: lampeggia 1.4s steps(2) infinite; }
+
+    .console {
+      display: flex; flex-direction: column; min-height: 420px; max-height: calc(100dvh - 110px);
+      background: var(--pannello); border: 1px solid var(--fosforo-3); border-radius: 12px;
+    }
+    .log {
+      flex: 1; overflow-y: auto; padding: 12px 14px 4px;
+      font-family: "VT323", monospace; font-size: 21px; line-height: 1.16; color: var(--fosforo);
+      cursor: pointer; overscroll-behavior: contain;
+    }
+    .riga { margin: 0 0 7px; white-space: pre-wrap; }
+    .riga.titolo { color: var(--ambra); }
+    .riga.sistema { color: var(--grigio); }
+    .riga.cam { color: #d7f0ff; }
+    .riga.lettura { color: var(--ambra); }
+    .riga.eva { color: var(--rosa); }
+    .riga.adamo { color: var(--azzurro); }
+    .riga.serpente { color: var(--serpe); }
+    .riga.errore { color: var(--rosso); }
+    .riga.ok { color: var(--fosforo); }
+    .azioni { border-top: 1px solid var(--fosforo-3); padding: 12px 14px 14px; display: flex; flex-direction: column; gap: 8px; }
+    .azioni:empty { display: none; }
+    .opzione {
+      text-align: left; background: transparent; color: var(--fosforo);
+      border: 1px solid var(--fosforo-2); border-radius: 8px;
+      font-family: "VT323", monospace; font-size: 21px; line-height: 1.1; padding: 8px 12px;
+    }
+    .opzione:hover, .opzione:focus-visible { background: var(--fosforo); color: #071007; outline: none; }
+    .opzione .nota { display: block; font-size: 17px; color: var(--ambra); margin-top: 2px; }
+    .opzione:hover .nota, .opzione:focus-visible .nota { color: #6b4500; }
+    .opzione:disabled { opacity: .45; border-style: dashed; cursor: not-allowed; background: transparent; color: var(--fosforo); }
+    .opzione:disabled .nota { color: var(--grigio); }
+
+    .taratura { display: flex; flex-direction: column; gap: 10px; }
+    .taratura-etichetta { margin: 0; font-family: "VT323", monospace; font-size: 20px; color: var(--ambra); }
+    .scala {
+      position: relative; height: 36px; border: 1px solid var(--fosforo-2); border-radius: 6px;
+      background: repeating-linear-gradient(90deg, transparent 0 calc(10% - 1px), var(--fosforo-3) calc(10% - 1px) 10%);
+    }
+    .zona { position: absolute; top: 0; bottom: 0; background: rgba(166,255,143,.3); border-left: 2px solid var(--fosforo); border-right: 2px solid var(--fosforo); }
+    .ago { position: absolute; top: -5px; bottom: -5px; width: 4px; margin-left: -2px; background: var(--ambra); box-shadow: 0 0 10px var(--ambra); border-radius: 2px; }
+    .taratura.presa .zona { background: rgba(166,255,143,.7); }
+    .taratura.mancata .ago { background: var(--rosso); box-shadow: 0 0 10px var(--rosso); }
+
+    .firma.piccola { margin: 0; font-size: 12px; }
+
+    @media (max-width: 820px) {
+      .corpo { grid-template-columns: 1fr; }
+      .console { max-height: none; min-height: 380px; }
+      .log { max-height: 36vh; }
+      .hud { font-size: 19px; gap: 4px 14px; }
+      .barra { width: 70px; }
+    }
+
+    /* ---------- scena SVG ---------- */
+    [data-indizio] { display: none; }
+    [data-indizio].on { display: inline; }
+    #guance-eva, .impronta { display: none; }
+    #guance-eva.on, .impronta.on { display: inline; }
+    .lampeggia { animation: lampeggia 1s steps(2) infinite; }
+    .cade { animation: cade .45s linear infinite; }
+    .ronza { transform-box: fill-box; transform-origin: center; animation: ronza .5s ease-in-out infinite alternate; }
+    .ronza.b { animation-duration: .37s; } .ronza.c { animation-duration: .61s; }
+    .soffia { stroke-dasharray: 40 30; animation: soffia 1.4s linear infinite; }
+    .dondola { transform-box: fill-box; transform-origin: center; animation: dondola 2.4s ease-in-out infinite alternate; }
+    @keyframes lampeggia { 50% { opacity: 0; } }
+    @keyframes cade { from { transform: translateY(-10px); } to { transform: translateY(10px); } }
+    @keyframes ronza { from { transform: translate(-4px, 2px) rotate(-10deg); } to { transform: translate(4px, -3px) rotate(10deg); } }
+    @keyframes soffia { to { stroke-dashoffset: -140; } }
+    @keyframes dondola { from { transform: rotate(-4deg); } to { transform: rotate(4deg); } }
+
+    /* ---------- schiaffo e schermata blu ---------- */
+    #flash { position: fixed; inset: 0; background: #fff; opacity: 0; pointer-events: none; z-index: 60; transition: opacity .08s; }
+    #flash.on { opacity: .85; }
+    body.trema .palco { animation: trema .42s; }
+    @keyframes trema {
+      10% { transform: translate(-14px, 4px) rotate(-1deg); } 25% { transform: translate(12px, -6px) rotate(1deg); }
+      40% { transform: translate(-9px, 3px); } 60% { transform: translate(6px, -2px); } 80% { transform: translate(-3px, 1px); }
+    }
+    .bsod {
+      position: fixed; inset: 0; z-index: 70; background: var(--bsod); color: #fff; cursor: pointer;
+      display: flex; align-items: center; justify-content: center; padding: 24px 20px; overflow-y: auto;
+      font-family: "Segoe UI", "DM Sans", system-ui, sans-serif;
+    }
+    .bsod-dentro { max-width: 760px; width: 100%; }
+    .bsod-faccina { font-size: clamp(80px, 16vw, 150px); margin: 0 0 8px; line-height: 1; }
+    .bsod-testo { font-size: clamp(18px, 2.6vw, 24px); line-height: 1.35; margin: 0 0 20px; }
+    .bsod-perc { font-size: clamp(18px, 2.6vw, 24px); margin: 0 0 22px; }
+    .bsod-crash { font-size: 17px; line-height: 1.45; margin: 0 0 14px; max-width: 620px; opacity: .95; }
+    .bsod-codice { font-size: 14px; margin: 0; opacity: .85; }
+    .bsod-codice span { font-family: "VT323", monospace; font-size: 20px; }
+    .bsod-riavvia { margin: 26px 0 0; font-weight: 700; animation: lampeggia 1s steps(2) infinite; }
+
+    /* ---------- rapporto finale ---------- */
+    .rapporto { justify-content: flex-start; background: radial-gradient(ellipse at 50% 0%, #1a2f19 0%, var(--fondo) 70%); }
+    .rapporto-foglio {
+      width: min(640px, 100%); margin: auto; background: var(--pannello); border: 1px solid var(--fosforo-3);
+      border-radius: 14px; padding: 22px 20px;
+    }
+    .rapporto-intesta { font-family: "VT323", monospace; color: var(--grigio); font-size: 19px; margin: 0 0 6px; letter-spacing: .05em; }
+    #r-finale { font-family: "Bungee", sans-serif; font-weight: 400; color: var(--ambra); font-size: clamp(24px, 5vw, 36px); margin: 0 0 10px; line-height: 1.05; }
+    .r-testo { line-height: 1.5; margin: 0 0 18px; color: #d8e8d4; }
+    .r-dati { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin: 0 0 18px; }
+    .r-dati div { border: 1px solid var(--fosforo-3); border-radius: 10px; padding: 10px 12px; }
+    .r-dati dt { font-size: 13px; color: var(--grigio); }
+    .r-dati dd { margin: 2px 0 0; font-family: "VT323", monospace; font-size: 30px; color: var(--fosforo); }
+    .r-dati dd small { font-size: 17px; color: var(--grigio); }
+    .r-grado-et { font-size: 13px; color: var(--grigio); margin: 0; }
+    .r-grado { font-family: "VT323", monospace; font-size: 26px; color: var(--rosa); margin: 2px 0 20px; line-height: 1.1; }
+    .r-bottoni { display: flex; flex-wrap: wrap; gap: 10px; }
+    .r-copiato { font-family: "VT323", monospace; color: var(--fosforo); font-size: 19px; margin: 10px 0 0; min-height: 1em; }
+    @media (max-width: 480px) { .r-dati { grid-template-columns: 1fr; } }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation: none !important; transition: none !important; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ===== BOOT ===== -->
+  <section class="schermata boot" id="boot">
+    <div class="boot-dentro">
+      <pre class="boot-testo" id="boot-testo"></pre>
+      <p class="boot-premi" id="boot-premi" hidden>Premi un tasto o tocca lo schermo per continuare_</p>
+    </div>
+  </section>
+
+  <!-- ===== TITOLO ===== -->
+  <section class="schermata titolo" id="titolo" hidden>
+    <p class="vm">VM18 · riservato alla sala docenti</p>
+    <h1 class="titolo-gioco">ADAMO <span>1.0</span></h1>
+    <p class="timbro">BETA INSTABILE</p>
+    <p class="titolo-sotto">Il primo uomo. Cinque sensori scadenti. Un neurone.<br>
+      Missione del firmware: capire se Eva vuole futtiri. <em>Senza chiederglielo.</em></p>
+    <p class="titolo-autore">da una straordinaria idea<br>dell'<strong>Ing. Rosario Leotta</strong></p>
+    <button type="button" class="bottone grande" id="avvia">Avvia il collaudo</button>
+    <p class="comandi">Spazio: tara il sensore · 1-2-3: scegli la diagnosi · tocca il terminale: salta il testo</p>
+    <p class="firma">Realizzato dal Prof. Rossano Bella</p>
+  </section>
+
+  <!-- ===== PARTITA ===== -->
+  <main class="palco" id="palco" hidden>
+    <header class="hud">
+      <span class="hud-os">ADAMO OS 1.0β</span>
+      <span id="hud-sensore">Sensore 1/5</span>
+      <span class="hud-dignita">Dignità <span class="barra"><span id="dignita-barra"></span></span> <span id="dignita-num">50</span></span>
+      <span>Schiaffi <b id="hud-schiaffi">0</b></span>
+      <button type="button" class="tasto-audio" id="audio" aria-label="Audio acceso">🔊</button>
+    </header>
+
+    <div class="corpo">
+      <div class="telecamera">
+        <svg id="scena" viewBox="0 0 480 300" role="img" aria-label="Il Paradiso Terrestre: Adamo a sinistra, Eva a destra, l'albero in mezzo">
+          <defs>
+            <linearGradient id="cielo" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0" stop-color="#86cdf7"/>
+              <stop offset=".72" stop-color="#d6f0ff"/>
+              <stop offset="1" stop-color="#fff2cc"/>
+            </linearGradient>
+            <linearGradient id="prato" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0" stop-color="#7cc864"/>
+              <stop offset="1" stop-color="#4e9643"/>
+            </linearGradient>
+          </defs>
+
+          <rect width="480" height="300" fill="url(#cielo)"/>
+          <g data-indizio="alba"><rect width="480" height="300" fill="#ff8f4a" opacity=".32"/></g>
+
+          <!-- sole -->
+          <g data-indizio="sole">
+            <circle cx="410" cy="52" r="36" fill="#ffb238" opacity=".45"/>
+            <g stroke="#ffb238" stroke-width="4" stroke-linecap="round">
+              <line x1="440" y1="52" x2="456" y2="52"/><line x1="431" y1="73" x2="442" y2="84"/>
+              <line x1="410" y1="82" x2="410" y2="97"/><line x1="389" y1="73" x2="378" y2="84"/>
+              <line x1="380" y1="52" x2="364" y2="52"/><line x1="389" y1="31" x2="378" y2="20"/>
+              <line x1="410" y1="22" x2="410" y2="7"/><line x1="431" y1="31" x2="442" y2="20"/>
+            </g>
+            <text x="385" y="118" font-size="14" fill="#b3261e" font-weight="700">🌡️ 44°</text>
+          </g>
+          <circle cx="410" cy="52" r="22" fill="#ffd84d"/>
+
+          <!-- pioggia -->
+          <g data-indizio="pioggia">
+            <g fill="#6b7280">
+              <ellipse cx="240" cy="40" rx="64" ry="20"/><ellipse cx="210" cy="30" rx="30" ry="18"/>
+              <ellipse cx="270" cy="28" rx="36" ry="21"/><ellipse cx="160" cy="44" rx="34" ry="14"/>
+            </g>
+            <g class="cade" stroke="#4d86d1" stroke-width="2" stroke-linecap="round">
+              <line x1="150" y1="64" x2="146" y2="78"/><line x1="176" y1="70" x2="172" y2="84"/>
+              <line x1="202" y1="62" x2="198" y2="76"/><line x1="228" y1="70" x2="224" y2="84"/>
+              <line x1="254" y1="62" x2="250" y2="76"/><line x1="280" y1="70" x2="276" y2="84"/>
+              <line x1="306" y1="62" x2="302" y2="76"/><line x1="332" y1="100" x2="328" y2="114"/>
+              <line x1="120" y1="100" x2="116" y2="114"/><line x1="380" y1="120" x2="376" y2="134"/>
+              <line x1="90" y1="130" x2="86" y2="144"/><line x1="420" y1="150" x2="416" y2="164"/>
+            </g>
+          </g>
+
+          <!-- colline -->
+          <path d="M0 205 Q70 160 150 195 T300 185 T480 178 V300 H0Z" fill="#a8dc8f"/>
+          <path d="M0 222 Q120 192 240 216 T480 206 V300 H0Z" fill="#8fd07a"/>
+
+          <!-- aranceto (zagara) -->
+          <g data-indizio="zagara">
+            <rect x="41" y="188" width="8" height="38" fill="#6b4226"/>
+            <circle cx="45" cy="178" r="27" fill="#2f7d3a"/>
+            <g fill="#ff9f1c"><circle cx="35" cy="172" r="4"/><circle cx="56" cy="186" r="4"/><circle cx="49" cy="164" r="4"/><circle cx="29" cy="189" r="4"/></g>
+            <g fill="#fff"><circle cx="40" cy="158" r="2.6"/><circle cx="63" cy="174" r="2.6"/><circle cx="27" cy="177" r="2.6"/><circle cx="52" cy="196" r="2.6"/><circle cx="37" cy="191" r="2.6"/><circle cx="60" cy="161" r="2.6"/></g>
+            <path class="soffia" d="M75 170 q10 -8 20 0 t20 0 t20 0" stroke="#ff9cc2" stroke-width="2" fill="none"/>
+            <path class="soffia" d="M72 150 q10 -8 20 0 t20 0 t20 0" stroke="#ff9cc2" stroke-width="2" fill="none"/>
+          </g>
+
+          <!-- leone -->
+          <g data-indizio="leone">
+            <text x="58" y="208" font-size="30">🦁</text>
+            <text x="92" y="186" font-size="14">💢</text>
+            <g fill="#7fd4ff"><path d="M334 158 q-3 5 0 7 q3 -2 0 -7Z"/><path d="M368 162 q-3 5 0 7 q3 -2 0 -7Z"/><path d="M362 186 q-3 5 0 7 q3 -2 0 -7Z"/></g>
+          </g>
+
+          <!-- prato e fiume -->
+          <rect y="228" width="480" height="72" fill="url(#prato)"/>
+          <path d="M300 300 C330 272 380 262 480 256 V300Z" fill="#4aa8e0"/>
+          <path d="M340 290 C370 278 410 272 470 268" stroke="#e8f7ff" stroke-width="1.5" fill="none" opacity=".6"/>
+          <text x="428" y="290" font-size="11" fill="#e8f7ff" font-style="italic">Eufrate</text>
+
+          <!-- albero della conoscenza -->
+          <path d="M233 232 C236 200 234 175 238 150 L246 150 C248 175 246 200 251 232Z" fill="#7a4a2a"/>
+          <circle cx="242" cy="112" r="42" fill="#3a8f45"/>
+          <circle cx="205" cy="128" r="28" fill="#45a452"/>
+          <circle cx="280" cy="126" r="30" fill="#45a452"/>
+          <circle cx="242" cy="90" r="26" fill="#4fb35d"/>
+          <g fill="#e3342f">
+            <circle cx="222" cy="106" r="5"/><circle cx="260" cy="98" r="5"/><circle cx="286" cy="136" r="5"/>
+            <circle cx="203" cy="138" r="5"/><circle cx="246" cy="128" r="5"/><circle cx="270" cy="120" r="5.5"/>
+          </g>
+
+          <!-- serpente piccolo (sempre) -->
+          <g class="dondola">
+            <path d="M212 148 C204 160 222 166 213 178 C206 188 218 192 214 198" stroke="#5cb85c" stroke-width="5" fill="none" stroke-linecap="round"/>
+            <ellipse cx="214" cy="201" rx="5" ry="4" fill="#5cb85c"/>
+            <circle cx="216" cy="200" r="1" fill="#000"/>
+            <path d="M214 205 l-2 5 M214 205 l2 5" stroke="#d22" stroke-width="1"/>
+          </g>
+
+          <!-- pitone -->
+          <g data-indizio="pitone">
+            <g fill="none" stroke="#6f9e3d" stroke-width="8">
+              <ellipse cx="242" cy="176" rx="17" ry="6"/><ellipse cx="243" cy="196" rx="18" ry="6"/><ellipse cx="244" cy="216" rx="19" ry="6"/>
+            </g>
+            <g fill="#3f6b1f"><circle cx="230" cy="178" r="1.6"/><circle cx="250" cy="198" r="1.6"/><circle cx="236" cy="218" r="1.6"/></g>
+            <ellipse cx="266" cy="165" rx="9" ry="6" fill="#6f9e3d"/>
+            <circle cx="269" cy="163" r="1.4" fill="#000"/>
+            <path d="M275 166 l6 -2 M275 166 l6 2" stroke="#d22" stroke-width="1.2"/>
+          </g>
+
+          <!-- il serpente ride -->
+          <g data-indizio="ride">
+            <rect x="160" y="150" width="60" height="20" rx="8" fill="#fff" stroke="#333"/>
+            <text x="190" y="164" font-size="10" text-anchor="middle" font-weight="700" fill="#222">AH AH AH</text>
+            <g fill="#7fd4ff"><path d="M341 174 q-2 4 0 6 q2 -2 0 -6Z"/><path d="M359 174 q-2 4 0 6 q2 -2 0 -6Z"/></g>
+          </g>
+
+          <!-- assistenza tecnica -->
+          <g data-indizio="assistenza">
+            <rect x="150" y="132" width="122" height="20" rx="8" fill="#fff" stroke="#333"/>
+            <text x="211" y="146" font-size="10" text-anchor="middle" font-weight="700" fill="#222">📞 Assistenza Eden</text>
+            <text x="202" y="197" font-size="12">🎧</text>
+          </g>
+
+          <!-- cespuglio e cinghiale -->
+          <g data-indizio="cinghiale">
+            <g fill="#2e7a36"><circle cx="58" cy="240" r="18"/><circle cx="82" cy="234" r="21"/><circle cx="102" cy="242" r="16"/></g>
+            <text x="50" y="256" font-size="26">🐗</text>
+            <text x="86" y="214" font-size="14">💕</text>
+          </g>
+
+          <!-- mosche su Adamo -->
+          <g data-indizio="mosche" font-size="11">
+            <text class="ronza" x="114" y="152">🪰</text>
+            <text class="ronza b" x="158" y="150">🪰</text>
+            <text class="ronza c" x="106" y="196">🪰</text>
+            <text class="ronza b" x="164" y="214">🪰</text>
+          </g>
+
+          <!-- vento di scirocco -->
+          <g data-indizio="vento">
+            <g stroke="#fff" stroke-width="2" fill="none" opacity=".85">
+              <path class="soffia" d="M10 90 q30 -10 60 0 t60 0 t60 0"/>
+              <path class="soffia" d="M40 140 q30 -10 60 0 t60 0"/>
+              <path class="soffia" d="M280 80 q30 -10 60 0 t60 0 t60 0"/>
+              <path class="soffia" d="M20 200 q30 -10 60 0 t60 0"/>
+            </g>
+            <text class="ronza" x="100" y="112" font-size="14">🍃</text>
+            <text class="ronza b" x="186" y="72" font-size="14">🍃</text>
+            <text class="ronza c" x="330" y="122" font-size="14">🍃</text>
+          </g>
+
+          <!-- gallo all'alba -->
+          <g data-indizio="alba">
+            <text x="424" y="246" font-size="24">🐓</text>
+            <rect x="392" y="212" width="74" height="18" rx="7" fill="#fff" stroke="#333"/>
+            <text x="429" y="225" font-size="10" text-anchor="middle" fill="#222">chicchirichì!</text>
+          </g>
+
+          <!-- ADAMO -->
+          <g id="adamo">
+            <rect x="131" y="228" width="7" height="36" rx="3" fill="#e2a878"/>
+            <rect x="142" y="228" width="7" height="36" rx="3" fill="#e2a878"/>
+            <ellipse cx="134" cy="265" rx="6" ry="3" fill="#e2a878"/>
+            <ellipse cx="146" cy="265" rx="6" ry="3" fill="#e2a878"/>
+            <rect x="124" y="186" width="32" height="46" rx="13" fill="#e2a878"/>
+            <path d="M126 194 Q114 214 118 232" stroke="#e2a878" stroke-width="7" stroke-linecap="round" fill="none"/>
+            <path d="M154 194 Q166 214 162 232" stroke="#e2a878" stroke-width="7" stroke-linecap="round" fill="none"/>
+            <path d="M140 221 C127 221 125 236 140 241 C155 236 153 221 140 221Z" fill="#3f9a4a"/>
+            <path d="M140 223 V239" stroke="#2c6e34" stroke-width="1"/>
+            <circle cx="140" cy="172" r="14" fill="#e2a878"/>
+            <path d="M126 170 C126 153 154 153 154 170 C150 162 132 162 126 170Z" fill="#4a2c17"/>
+            <path d="M128 176 C130 193 150 193 152 176 C146 185 134 185 128 176Z" fill="#4a2c17"/>
+            <circle cx="135" cy="170" r="1.7" fill="#222"/>
+            <circle cx="145" cy="170" r="1.7" fill="#222"/>
+            <g fill="#ff2d2d" opacity=".55">
+              <ellipse class="impronta" cx="150" cy="175" rx="4" ry="5"/>
+              <ellipse class="impronta" cx="130" cy="175" rx="4" ry="5"/>
+              <ellipse class="impronta" cx="148" cy="166" rx="3.5" ry="4"/>
+              <ellipse class="impronta" cx="132" cy="166" rx="3.5" ry="4"/>
+              <ellipse class="impronta" cx="140" cy="163" rx="4" ry="3"/>
+            </g>
+          </g>
+
+          <!-- periferica attiva -->
+          <g data-indizio="periferica" class="lampeggia">
+            <rect x="86" y="118" width="108" height="20" rx="6" fill="#ffcf5a" stroke="#6b4500"/>
+            <text x="140" y="132" font-size="9.5" text-anchor="middle" font-weight="700" fill="#3a2a00">⚠ PERIFERICA ATTIVA</text>
+          </g>
+
+          <!-- Adamo fissa la mela -->
+          <g data-indizio="mela-fissa">
+            <line x1="146" y1="169" x2="268" y2="122" stroke="#e3342f" stroke-width="1.5" stroke-dasharray="4 3"/>
+            <text x="274" y="114" font-size="12">❤️</text>
+          </g>
+
+          <!-- EVA -->
+          <g id="eva">
+            <path d="M335 168 C332 148 368 148 365 168 L371 214 C362 207 338 207 329 214 Z" fill="#8a3b1d"/>
+            <rect x="341" y="228" width="7" height="36" rx="3" fill="#edbb8f"/>
+            <rect x="352" y="228" width="7" height="36" rx="3" fill="#edbb8f"/>
+            <ellipse cx="344" cy="265" rx="6" ry="3" fill="#edbb8f"/>
+            <ellipse cx="356" cy="265" rx="6" ry="3" fill="#edbb8f"/>
+            <rect x="337" y="186" width="26" height="46" rx="13" fill="#edbb8f"/>
+            <path d="M339 194 Q327 214 331 232" stroke="#edbb8f" stroke-width="6.5" stroke-linecap="round" fill="none"/>
+            <path d="M361 194 Q373 214 369 232" stroke="#edbb8f" stroke-width="6.5" stroke-linecap="round" fill="none"/>
+            <ellipse cx="345" cy="198" rx="6" ry="4" fill="#3f9a4a" transform="rotate(-20 345 198)"/>
+            <ellipse cx="355" cy="198" rx="6" ry="4" fill="#3f9a4a" transform="rotate(20 355 198)"/>
+            <path d="M350 221 C338 221 336 235 350 240 C364 235 362 221 350 221Z" fill="#3f9a4a"/>
+            <path d="M350 223 V238" stroke="#2c6e34" stroke-width="1"/>
+            <circle cx="350" cy="172" r="13" fill="#edbb8f"/>
+            <path d="M337 170 C337 155 363 155 363 170 C356 161 344 161 337 170Z" fill="#8a3b1d"/>
+            <circle cx="345" cy="171" r="1.6" fill="#222"/>
+            <circle cx="355" cy="171" r="1.6" fill="#222"/>
+            <g id="guance-eva" fill="#ff6b8a" opacity=".6"><circle cx="342" cy="176" r="3"/><circle cx="358" cy="176" r="3"/></g>
+            <g transform="translate(350 179)"><path id="bocca-eva" d="M-5 1 L5 1" stroke="#a3322a" stroke-width="1.8" fill="none" stroke-linecap="round"/></g>
+          </g>
+
+          <!-- indizi su Eva -->
+          <g data-indizio="acqua" fill="#5cb8f0">
+            <path d="M332 184 q-3 6 0 8 q3 -2 0 -8Z"/><path d="M369 188 q-3 6 0 8 q3 -2 0 -8Z"/>
+            <path d="M334 204 q-3 6 0 8 q3 -2 0 -8Z"/><path d="M368 210 q-3 6 0 8 q3 -2 0 -8Z"/>
+            <path d="M343 158 q-2 4 0 6 q2 -2 0 -6Z"/>
+            <ellipse cx="350" cy="271" rx="28" ry="5" opacity=".7"/>
+          </g>
+          <g data-indizio="fichi">
+            <text x="364" y="274" font-size="20">🧺</text>
+            <g fill="#6b2d5c"><circle cx="372" cy="257" r="4"/><circle cx="380" cy="260" r="4"/><circle cx="376" cy="252" r="3.5"/></g>
+          </g>
+          <g data-indizio="torsoli">
+            <text x="312" y="270" font-size="10">🍎</text><text x="374" y="272" font-size="10">🍎</text>
+            <text x="384" y="258" font-size="9">🍎</text><text x="322" y="258" font-size="9">🍎</text>
+            <text x="396" y="274" font-size="11" fill="#1d3a16" font-weight="700">×12</text>
+          </g>
+          <g data-indizio="anguria"><text x="333" y="222" font-size="30">🍉</text></g>
+
+          <!-- finale: cacciata -->
+          <g data-indizio="cherubino">
+            <rect x="120" y="16" width="240" height="26" rx="6" fill="#b3261e"/>
+            <text x="240" y="34" font-size="12" text-anchor="middle" font-weight="700" fill="#fff">ACCESSO AL PARADISO REVOCATO</text>
+            <text x="30" y="130" font-size="34">👼</text>
+            <text x="66" y="126" font-size="22">🔥🗡️</text>
+          </g>
+
+          <!-- finale: censura -->
+          <g data-indizio="censura">
+            <path d="M245 52 C110 64 84 206 245 294 C406 206 380 64 245 52Z" fill="#3f9a4a" stroke="#2c6e34" stroke-width="3"/>
+            <path d="M245 60 V288 M245 120 L190 90 M245 120 L300 90 M245 180 L175 150 M245 180 L315 150 M245 240 L195 215 M245 240 L295 215" stroke="#2c6e34" stroke-width="2" fill="none"/>
+            <rect x="140" y="152" width="210" height="58" rx="8" fill="#0b0f0b" opacity=".8"/>
+            <text x="245" y="180" font-size="24" text-anchor="middle" fill="#fff" font-family="Bungee, sans-serif">CENSURATO</text>
+            <text x="245" y="200" font-size="11" text-anchor="middle" fill="#ffcf5a">Genesi 4,1 · «Adamo conobbe Eva»</text>
+          </g>
+        </svg>
+        <span class="rec">● REC · CAM-EDEN-01</span>
+        <span class="ora">GIORNO 6</span>
+      </div>
+
+      <section class="console">
+        <div class="log" id="log" aria-live="polite" title="Tocca per saltare il testo"></div>
+        <div class="azioni" id="azioni"></div>
+      </section>
+    </div>
+
+    <p class="firma piccola">da una straordinaria idea dell'Ing. Rosario Leotta · Realizzato dal Prof. Rossano Bella</p>
+  </main>
+
+  <!-- ===== SCHIAFFO / BSOD ===== -->
+  <div id="flash"></div>
+  <section class="bsod" id="bsod" hidden>
+    <div class="bsod-dentro">
+      <p class="bsod-faccina">:(</p>
+      <p class="bsod-testo">Adamo ha riscontrato un problema e deve essere riavviato. Stiamo raccogliendo alcune informazioni sull'errore (tipo la forma della mano di Eva sulla tua faccia).</p>
+      <p class="bsod-perc"><span id="bsod-perc">0</span>% completato</p>
+      <p class="bsod-crash" id="bsod-crash"></p>
+      <p class="bsod-codice">Codice di arresto: <span id="bsod-codice"></span></p>
+      <p class="bsod-riavvia" id="bsod-riavvia" hidden>Tocca per riavviare Adamo</p>
+    </div>
+  </section>
+
+  <!-- ===== RAPPORTO ===== -->
+  <section class="schermata rapporto" id="rapporto" hidden>
+    <div class="rapporto-foglio">
+      <p class="rapporto-intesta">RAPPORTO DI COLLAUDO · MODELLO ADAMO</p>
+      <h2 id="r-finale"></h2>
+      <p class="r-testo" id="r-testo"></p>
+      <dl class="r-dati">
+        <div><dt>Schiaffi ricevuti</dt><dd id="r-schiaffi"></dd></div>
+        <div><dt>Diagnosi corrette</dt><dd id="r-giuste"></dd></div>
+        <div><dt>Dignità finale</dt><dd id="r-dignita"></dd></div>
+        <div><dt>Precisione media dei sensori</dt><dd id="r-prec"></dd></div>
+      </dl>
+      <p class="r-grado-et">Classificazione del prototipo</p>
+      <p class="r-grado" id="r-grado"></p>
+      <div class="r-bottoni">
+        <button type="button" class="bottone" id="riavvia">Riavvia (reincarnazione non inclusa)</button>
+        <button type="button" class="bottone secondario" id="copia">Copia il risultato per il gruppo</button>
+      </div>
+      <p class="r-copiato" id="r-copiato"></p>
+      <p class="firma">da una straordinaria idea dell'Ing. Rosario Leotta · Realizzato dal Prof. Rossano Bella</p>
+    </div>
+  </section>
+
+<script>
+(() => {
+  'use strict';
+
+  const $ = s => document.querySelector(s);
+  const ridotto = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const attendi = ms => new Promise(r => setTimeout(r, ms));
+  const caso = a => a[Math.floor(Math.random() * a.length)];
+  const mescola = a => {
+    const b = [...a];
+    for (let i = b.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [b[i], b[j]] = [b[j], b[i]]; }
+    return b;
+  };
+  const elenco = v => v.length <= 1 ? (v[0] || '') : v.slice(0, -1).join(', ') + ' e ' + v[v.length - 1];
+
+  /* ================= CONTENUTI ================= */
+
+  const BOOT = [
+    ['EDEN BIOS v0.6 (giorno 6) — © Il Creatore, tutti i diritti riservati', ''],
+    ['', ''],
+    ['Controllo memoria ................ 1 neurone          OK', ''],
+    ['Costole .......................... 23/24              ATTENZIONE', 'avviso'],
+    ['   una costola riassegnata al progetto EVA', 'avviso'],
+    ['Sensore tattile (mano dx) ........ umidità            OK  (brevetto Ing. Leotta)', ''],
+    ['Telecamera (occhi) ............... 2 megapixel        OK  (autofocus instabile)', ''],
+    ['Microfono (orecchie) ............. filtro «sento ciò che voglio» ATTIVO', ''],
+    ['Naso ............................. NON CALIBRATO', 'avviso'],
+    ['Periferica esterna ............... PLUG & PLAY (si collega da sola)', 'avviso'],
+    ['Driver empatia ................... NON TROVATO', 'ko'],
+    ['Modulo PAROLA.dll ................ NON INSTALLATO', 'ko'],
+    ['', ''],
+    ['Obiettivo del firmware: stabilire se Eva vuole futtiri.', ''],
+    ['Metodo: sensori. Chiedere: non previsto.', ''],
+    ['', ''],
+    ['Avvio ADAMO OS 1.0 beta...', ''],
+  ];
+
+  const LIVELLI = [
+    {
+      sigla: 'TATTO',
+      nome: 'TATTO — mano destra',
+      hw: 'sensore di umidità palmare, brevetto Ing. Leotta',
+      intro: 'Procedura Leotta: appoggiare il sensore palmare su Eva e misurare l’umidità. Adamo non ha capito bene dove. Cioè, l’ha capito benissimo.',
+      lettura: 'UMIDITÀ 97%',
+      colpa: 'la mano dove non doveva',
+      porcata: {
+        testo: 'Umidità 97% → Eva vuole futtiri. Procedere con l’accoppiamento.',
+        codice: '0xEDEN_SCHIAFFO_A_MANO_APERTA',
+        crash: 'Il sensore palmare è stato rilevato in una zona non autorizzata. Eva ha risposto con il suo, di sensore palmare: sulla tua faccia, a 40 km/h.',
+      },
+      cause: [
+        { indizi: ['acqua'], desc: 'Eva ha i capelli che gocciolano e una pozzanghera ai piedi.',
+          opz: 'È appena uscita dall’Eufrate: si è fatta il bagno.',
+          ok: '«Sì, ero al fiume. E mo’ levami ’sta mano di dosso.»' },
+        { indizi: ['fichi'], desc: 'Accanto a Eva c’è un cesto di fichi appena spremuti. Ha le mani appiccicose.',
+          opz: 'Ha spremuto i fichi: il sensore ha toccato un fico bagnato. Quello del cesto.',
+          ok: '«Il fico era quello del CESTO, Adamo. Del cesto.»' },
+        { indizi: ['pioggia'], desc: 'Sull’Eden è passata una nuvola nera. Piove da mezz’ora.',
+          opz: 'Piove. È bagnato tutto l’Eden, leone compreso.',
+          ok: '«Piove, genio. Sei bagnato pure tu: vuol dire che ti vuoi da solo?»' },
+      ],
+    },
+    {
+      sigla: 'VISTA',
+      nome: 'VISTA — occhi',
+      hw: 'telecamera stereo da 2 megapixel (uno per occhio), autofocus che scende da solo',
+      intro: 'Adamo inquadra Eva. L’autofocus, misteriosamente, non riesce a restare sulla faccia.',
+      lettura: 'GUANCE ROSSE · FIATONE · SORRISO RILEVATO',
+      umore: 'rossa',
+      colpa: 'l’autofocus sul punto sbagliato',
+      porcata: {
+        testo: 'Rossore + fiatone + sorriso = è pronta. La telecamera non mente.',
+        codice: '0xEDEN_AUTOSTIMA_SYS_CORROTTO',
+        crash: 'Eva non sorrideva a te: rideva perché ti era caduta la foglia di fico. Il file autostima.sys è danneggiato e non può essere ripristinato.',
+      },
+      cause: [
+        { indizi: ['sole'], desc: 'Il sole picchia a 44 gradi. Eva è stata sdraiata al sole tutta la mattina, senza crema.',
+          opz: 'È una scottatura: la crema solare la inventano nel 1938.',
+          ok: '«Sono cotta come un peperone e tu mi guardi così? Passami l’aloe.»' },
+        { indizi: ['leone'], desc: 'In lontananza c’è un leone infuriato. Eva è sudata e ha il fiatone.',
+          opz: 'Ha corso: il leone non ha gradito il nome che gli hai dato, «Micio».',
+          ok: '«Gli hai dato nome MICIO. Mi ha inseguita per tutto il Paradiso Terrestre!»' },
+        { indizi: ['ride'], desc: 'Sull’albero il serpente racconta barzellette. Eva ride fino alle lacrime.',
+          opz: 'Ride per una barzelletta del serpente. Una dell’Ing. Leotta.',
+          ok: '«Ne raccontava una su uno che usa la mano come sensore… Ah. Parlava di te.»' },
+      ],
+    },
+    {
+      sigla: 'UDITO',
+      nome: 'UDITO — orecchie',
+      hw: 'microfono senza filtro antirumore, funzione «sento solo quello che mi conviene»',
+      intro: 'Adamo si apposta dietro un cespuglio e alza il volume al massimo.',
+      lettura: 'FRASE CAPTATA: «Oddio quant’è grosso… sì… sì… ancora…»',
+      colpa: 'il «parla di me, è grosso»',
+      porcata: {
+        testo: 'Parla di me. Ovvio. Chi altro c’è di grosso qui?',
+        codice: '0xEDEN_EGO_EXE_NON_RISPONDE',
+        crash: 'Confronto dimensionale effettuato. Non parlava di te, nemmeno arrotondando per eccesso. ego.exe ha smesso di funzionare.',
+      },
+      cause: [
+        { indizi: ['pitone'], desc: 'Attorno al tronco dell’albero si è arrotolato un pitone di sei metri.',
+          opz: 'Parla del serpente. Quello vero. Di sei metri.',
+          ok: '«Hai visto che bestia di pitone? … Perché fai quella faccia?»' },
+        { indizi: ['torsoli'], desc: 'Intorno a Eva ci sono dodici torsoli di mela.',
+          opz: 'Parla della mela: è la tredicesima e ne vuole ancora.',
+          ok: '«Grosse ’ste mele! Sì, sì, ancora una… E tu che vuoi? Vattinni.»' },
+        { indizi: ['anguria'], desc: 'Eva stringe tra le braccia un’anguria gigante appena colta.',
+          opz: 'Parla dell’anguria. Enorme. E pure succosa.',
+          ok: '«Mezza a me e mezza al leone. A te niente.»' },
+      ],
+    },
+    {
+      sigla: 'OLFATTO',
+      nome: 'OLFATTO — naso',
+      hw: 'sensore chimico, mai calibrato dalla Creazione',
+      intro: 'Adamo si avvicina a Eva e annusa l’aria come un cane da tartufo.',
+      lettura: 'FEROMONI RILEVATI · CONCENTRAZIONE ESTREMA',
+      colpa: 'il naso da cinghiale',
+      porcata: {
+        testo: 'Feromoni a mille → Eva è in calore. È scienza.',
+        codice: '0xEDEN_FEROMONI_DI_PROVENIENZA_ERRATA',
+        crash: 'Hai annusato Eva come un cinghiale annusa un tartufo. Differenza tecnica: il tartufo non ti prende a schiaffi.',
+      },
+      cause: [
+        { indizi: ['cinghiale'], desc: 'Nel cespuglio c’è un cinghiale in calore che guarda Adamo con gli occhi dolci.',
+          opz: 'È il cinghiale nel cespuglio. E punta te.',
+          ok: '«Adamo, non ti girare. Cammina piano. Poi corri.»' },
+        { indizi: ['mosche'], desc: 'Intorno ad Adamo ronza una nuvola di mosche.',
+          opz: 'Sono i tuoi: non ti lavi dal sesto giorno.',
+          ok: '«Finalmente ci sei arrivato. Il fiume è lì. Usalo.»' },
+        { indizi: ['zagara'], desc: 'L’aranceto dell’Eden è in fiore: profumo di zagara ovunque.',
+          opz: 'È la zagara: l’aranceto è fiorito. Pare la Sicilia a maggio.',
+          ok: '«Zagara, Adamo. ZAGARA. Altro che feromoni.»' },
+      ],
+    },
+    {
+      sigla: 'PERIFERICA',
+      nome: 'PERIFERICA ESTERNA — plug & play',
+      hw: 'si collega da sola, senza chiedere il permesso a nessuno',
+      intro: 'La periferica esterna si è attivata. Con logica ferrea, il firmware conclude che la colpa è di Eva.',
+      lettura: 'PERIFERICA: ATTIVA · CAUSA: PRESUNTA ESTERNA',
+      fissi: ['periferica'],
+      colpa: 'la periferica che dava la colpa a me',
+      porcata: {
+        testo: 'Se si è attivata, lei vuole. È sempre colpa di lei.',
+        codice: '0xEDEN_SENSORE_AUTOREFERENZIALE',
+        crash: 'La periferica misura te, non lei. È come mettersi il termometro in bocca per sapere se fuori piove.',
+      },
+      cause: [
+        { indizi: ['alba'], desc: 'È l’alba. Il gallo canta.',
+          opz: 'È mattina: si attiva tutte le mattine, anche davanti a un ippopotamo.',
+          ok: '«È mattina, Adamo. Succede. Mettici una foglia sopra e vai a pisciare.»' },
+        { indizi: ['vento'], desc: 'Soffia uno scirocco caldo. Volano le foglie.',
+          opz: 'È lo scirocco: ha sollevato la foglia di fico. Tutto un equivoco.',
+          ok: '«Tieniti la foglia che vola. Non era un complimento per me.»' },
+        { indizi: ['mela-fissa'], desc: 'Adamo fissa una mela sull’albero da dieci minuti.',
+          opz: 'Ha visto una mela. Bug noto: il firmware reagisce alle forme tonde.',
+          ok: '«Ti eccita una mela. Io vado a dormire.»' },
+      ],
+    },
+  ];
+
+  const SMENTITE = [
+    '«Adamo, ma la telecamera ce l’hai o la tieni per bellezza?»',
+    '«Acqua. Tipo il tuo neurone.»',
+    '«Quasi. Cioè no.»',
+    '«Guarda meglio, scimunito.»',
+    '«Il serpente ci arrivava prima. E non ha nemmeno le mani.»',
+  ];
+
+  /* ================= STATO ================= */
+
+  const stato = { liv: 0, dignita: 50, schiaffi: 0, precisioni: [], giuste: 0, colpe: [], audio: true, finale: null };
+  function azzera() {
+    Object.assign(stato, { liv: 0, dignita: 50, schiaffi: 0, precisioni: [], giuste: 0, colpe: [], finale: null });
+  }
+
+  /* ================= AUDIO ================= */
+
+  let actx = null;
+  function ac() {
+    if (!stato.audio) return null;
+    try {
+      actx = actx || new (window.AudioContext || window.webkitAudioContext)();
+      if (actx.state === 'suspended') actx.resume();
+    } catch (e) { return null; }
+    return actx;
+  }
+  function tono(f, d = .08, tipo = 'square', vol = .04, dopo = 0) {
+    const a = ac(); if (!a) return;
+    const t = a.currentTime + dopo;
+    const o = a.createOscillator(), g = a.createGain();
+    o.type = tipo; o.frequency.setValueAtTime(f, t);
+    g.gain.setValueAtTime(vol, t); g.gain.exponentialRampToValueAtTime(.0001, t + d);
+    o.connect(g); g.connect(a.destination); o.start(t); o.stop(t + d + .05);
+  }
+  const tic = () => tono(1150 + Math.random() * 300, .015, 'square', .01);
+  const evviva = () => [523, 659, 784, 1047].forEach((f, i) => tono(f, .14, 'triangle', .06, i * .09));
+  const bocciato = () => { tono(300, .18, 'triangle', .05); tono(235, .28, 'triangle', .05, .16); };
+  const errore = () => [220, 185, 150].forEach((f, i) => tono(f, .35, 'sawtooth', .045, i * .12));
+  function schiocco() {
+    const a = ac(); if (!a) return;
+    const n = Math.floor(a.sampleRate * .2);
+    const buf = a.createBuffer(1, n, a.sampleRate);
+    const d = buf.getChannelData(0);
+    for (let i = 0; i < n; i++) d[i] = (Math.random() * 2 - 1) * Math.pow(1 - i / n, 4);
+    const s = a.createBufferSource(); s.buffer = buf;
+    const f = a.createBiquadFilter(); f.type = 'highpass'; f.frequency.value = 800;
+    const g = a.createGain(); g.gain.value = 1;
+    s.connect(f); f.connect(g); g.connect(a.destination); s.start();
+  }
+
+  /* ================= TERMINALE ================= */
+
+  const log = $('#log');
+  const azioni = $('#azioni');
+  let salta = false;
+  log.addEventListener('click', () => { salta = true; });
+  const inFondo = () => { log.scrollTop = log.scrollHeight; };
+
+  async function scrivi(testo, tipo = '') {
+    const p = document.createElement('p');
+    p.className = 'riga ' + tipo;
+    log.appendChild(p);
+    if (ridotto || salta) { p.textContent = testo; inFondo(); await attendi(salta ? 0 : 80); return; }
+    for (let i = 1; i <= testo.length; i++) {
+      if (salta) break;
+      p.textContent = testo.slice(0, i);
+      if (i % 2 === 0) { inFondo(); if (i % 6 === 0) tic(); await attendi(13); }
+    }
+    p.textContent = testo;
+    inFondo();
+    await attendi(salta ? 0 : 170);
+  }
+  async function blocco(righe) {
+    salta = false;
+    for (const [t, tipo] of righe) await scrivi(t, tipo);
+  }
+
+  function pulisciAzioni() { azioni.replaceChildren(); }
+  // su telefono la console sta sotto la scena: porta in vista i comandi appena compaiono
+  function mostraAzioni() {
+    if (matchMedia('(max-width: 820px)').matches) azioni.scrollIntoView({ block: 'end', behavior: ridotto ? 'auto' : 'smooth' });
+  }
+
+  function scegli(opzioni) {
+    return new Promise(res => {
+      pulisciAzioni();
+      const ctl = new AbortController();
+      const attive = [];
+      for (const o of opzioni) {
+        const b = document.createElement('button');
+        b.type = 'button';
+        b.className = 'opzione';
+        const principale = document.createElement('span');
+        if (o.bloccata) {
+          b.disabled = true;
+          principale.textContent = '🔒 ' + o.testo;
+        } else {
+          attive.push(o);
+          principale.textContent = `[${attive.length}] ${o.testo}`;
+          b.addEventListener('click', () => fine(o), { signal: ctl.signal });
+        }
+        b.appendChild(principale);
+        if (o.nota) {
+          const n = document.createElement('span');
+          n.className = 'nota';
+          n.textContent = o.nota;
+          b.appendChild(n);
+        }
+        azioni.appendChild(b);
+      }
+      mostraAzioni();
+      function fine(o) { ctl.abort(); tono(660, .05); pulisciAzioni(); res(o); }
+      document.addEventListener('keydown', e => {
+        const k = parseInt(e.key, 10);
+        if (k >= 1 && k <= attive.length) { e.preventDefault(); fine(attive[k - 1]); }
+      }, { signal: ctl.signal });
+    });
+  }
+
+  function continua(testo) {
+    return new Promise(res => {
+      pulisciAzioni();
+      const b = document.createElement('button');
+      b.type = 'button';
+      b.className = 'bottone';
+      b.textContent = testo;
+      azioni.appendChild(b);
+      mostraAzioni();
+      const ctl = new AbortController();
+      const fine = () => { ctl.abort(); tono(520, .05); pulisciAzioni(); res(); };
+      b.addEventListener('click', fine, { signal: ctl.signal });
+      document.addEventListener('keydown', e => {
+        if (e.code === 'Space' || e.key === 'Enter') { e.preventDefault(); fine(); }
+      }, { signal: ctl.signal });
+    });
+  }
+
+  function calibra(i) {
+    return new Promise(res => {
+      pulisciAzioni();
+      const box = document.createElement('div');
+      box.className = 'taratura';
+      const et = document.createElement('p');
+      et.className = 'taratura-etichetta';
+      et.textContent = `TARATURA ${LIVELLI[i].sigla} — ferma l’ago nella zona verde`;
+      const scala = document.createElement('div'); scala.className = 'scala';
+      const zona = document.createElement('div'); zona.className = 'zona';
+      const ago = document.createElement('div'); ago.className = 'ago';
+      scala.append(zona, ago);
+      const btn = document.createElement('button');
+      btn.type = 'button'; btn.className = 'bottone';
+      btn.innerHTML = 'ACQUISISCI <small>[spazio]</small>';
+      box.append(et, scala, btn);
+      azioni.appendChild(box);
+      mostraAzioni();
+
+      const larg = 16 - i * 1.6;
+      const x0 = 6 + Math.random() * (88 - larg);
+      zona.style.left = x0 + '%';
+      zona.style.width = larg + '%';
+      const vel = .065 + i * .02; // % al millisecondo
+      let pos = Math.random() * 100, dir = 1, t0 = performance.now(), vivo = true;
+      function passo(t) {
+        if (!vivo) return;
+        const dt = Math.min(40, t - t0); t0 = t;
+        pos += dir * vel * dt;
+        if (pos >= 100) { pos = 100; dir = -1; }
+        if (pos <= 0) { pos = 0; dir = 1; }
+        ago.style.left = pos + '%';
+        requestAnimationFrame(passo);
+      }
+      requestAnimationFrame(passo);
+
+      const ctl = new AbortController();
+      function ferma() {
+        if (!vivo) return;
+        vivo = false; ctl.abort();
+        const centro = x0 + larg / 2, dist = Math.abs(pos - centro), dentro = dist <= larg / 2;
+        const prec = Math.round(Math.max(4, dentro ? 100 - (dist / (larg / 2)) * 12 : 86 - (dist - larg / 2) * 2.2));
+        btn.disabled = true;
+        box.classList.add(dentro ? 'presa' : 'mancata');
+        tono(dentro ? 990 : 300, .12, 'square', .05);
+        setTimeout(() => res(prec), 650);
+      }
+      btn.addEventListener('click', ferma, { signal: ctl.signal });
+      document.addEventListener('keydown', e => {
+        if (e.code === 'Space' || e.key === 'Enter') { e.preventDefault(); ferma(); }
+      }, { signal: ctl.signal });
+    });
+  }
+
+  function commentoPrecisione(p) {
+    if (p >= 95) return `Precisione ${p}%. Taratura perfetta: misura benissimo la cosa sbagliata.`;
+    if (p >= 80) return `Precisione ${p}%. Taratura buona. Inutile, ma buona.`;
+    if (p >= 50) return `Precisione ${p}%. Taratura da bilancia del fruttivendolo.`;
+    return `Precisione ${p}%. Taratura a occhio: il sensore tira a indovinare.`;
+  }
+
+  /* ================= SCENA ================= */
+
+  const svg = $('#scena');
+  const BOCCHE = {
+    neutra: 'M-5 1 L5 1',
+    sorriso: 'M-6 -1 Q0 6 6 -1',
+    arrabbiata: 'M-6 4 Q0 -2 6 4',
+    rossa: 'M-5 0 Q0 4 5 0',
+  };
+  function indizi(lista) {
+    svg.querySelectorAll('[data-indizio]').forEach(el => el.classList.toggle('on', lista.includes(el.dataset.indizio)));
+  }
+  function eva(umore) {
+    $('#bocca-eva').setAttribute('d', BOCCHE[umore] || BOCCHE.neutra);
+    $('#guance-eva').classList.toggle('on', umore === 'arrabbiata' || umore === 'rossa');
+  }
+  function hud() {
+    $('#hud-sensore').textContent = stato.liv < LIVELLI.length ? `Sensore ${stato.liv + 1}/${LIVELLI.length}` : 'Assistenza';
+    const barra = $('#dignita-barra');
+    barra.style.width = stato.dignita + '%';
+    barra.classList.toggle('bassa', stato.dignita < 40);
+    $('#dignita-num').textContent = stato.dignita;
+    $('#hud-schiaffi').textContent = stato.schiaffi;
+    svg.querySelectorAll('.impronta').forEach((el, i) => el.classList.toggle('on', i < stato.schiaffi));
+  }
+
+  /* ================= SCHIAFFO + BSOD ================= */
+
+  async function bsod(codice, testo) {
+    schiocco();
+    document.body.classList.add('trema');
+    $('#flash').classList.add('on');
+    await attendi(ridotto ? 80 : 130);
+    $('#flash').classList.remove('on');
+    await attendi(ridotto ? 50 : 320);
+    document.body.classList.remove('trema');
+    errore();
+    $('#bsod-codice').textContent = codice;
+    $('#bsod-crash').textContent = testo;
+    $('#bsod-riavvia').hidden = true;
+    const perc = $('#bsod-perc');
+    perc.textContent = '0';
+    $('#bsod').hidden = false;
+    let p = 0;
+    while (p < 100) {
+      p = Math.min(100, p + (ridotto ? 100 : 1 + Math.floor(Math.random() * 9)));
+      perc.textContent = p;
+      await attendi(ridotto ? 0 : 85);
+    }
+    $('#bsod-riavvia').hidden = false;
+    await new Promise(res => {
+      const ctl = new AbortController();
+      const fine = () => { ctl.abort(); res(); };
+      $('#bsod').addEventListener('click', fine, { signal: ctl.signal });
+      document.addEventListener('keydown', e => {
+        if (e.code === 'Space' || e.key === 'Enter') { e.preventDefault(); fine(); }
+      }, { signal: ctl.signal });
+    });
+    $('#bsod').hidden = true;
+    tono(523, .08);
+  }
+
+  /* ================= LIVELLI ================= */
+
+  async function livello(i) {
+    stato.liv = i; hud();
+    const L = LIVELLI[i];
+    const vera = caso(L.cause);
+    const falsa = caso(L.cause.filter(c => c !== vera));
+    indizi([...vera.indizi, ...(L.fissi || [])]);
+    eva(L.umore || 'neutra');
+
+    await blocco([
+      [`━━ SENSORE ${i + 1}/${LIVELLI.length} · ${L.nome} ━━`, 'titolo'],
+      [`Hardware: ${L.hw}.`, 'sistema'],
+      [L.intro, ''],
+      [`CAM-EDEN-01 › ${vera.desc}`, 'cam'],
+    ]);
+
+    const prec = await calibra(i);
+    stato.precisioni.push(prec);
+
+    await blocco([
+      [`LETTURA › ${L.lettura}  (±${100 - prec}%)`, 'lettura'],
+      [commentoPrecisione(prec), 'sistema'],
+      ['Elaborazione con 1 neurone in corso…', 'sistema'],
+      ['Il firmware propone le seguenti diagnosi:', ''],
+    ]);
+
+    const scelta = await scegli([
+      ...mescola([
+        { testo: L.porcata.testo, nota: '★ CONSIGLIATO DAL FIRMWARE', tipo: 'porcata' },
+        { testo: vera.opz, tipo: 'giusta' },
+        { testo: falsa.opz, tipo: 'sbagliata' },
+      ]),
+      { testo: 'Chiederlo direttamente a Eva', nota: 'modulo PAROLA.dll non installato', bloccata: true },
+    ]);
+
+    await blocco([[`ADAMO › ${scelta.testo}`, 'adamo']]);
+
+    if (scelta.tipo === 'porcata') {
+      stato.schiaffi++;
+      stato.dignita = Math.max(0, stato.dignita - 20);
+      stato.colpe.push(L.colpa);
+      eva('arrabbiata'); hud();
+      await bsod(L.porcata.codice, L.porcata.crash);
+      await blocco([
+        ['Riavvio completato. Dignità −20. Impronta della mano: permanente.', 'errore'],
+        [`Causa reale: ${vera.opz}`, 'sistema'],
+      ]);
+    } else if (scelta.tipo === 'giusta') {
+      stato.giuste++;
+      stato.dignita = Math.min(100, stato.dignita + 10);
+      eva('sorriso'); hud(); evviva();
+      await blocco([
+        [`EVA › ${vera.ok}`, 'eva'],
+        ['Diagnosi corretta. Dignità +10.', 'ok'],
+      ]);
+    } else {
+      stato.dignita = Math.max(0, stato.dignita - 5);
+      eva('neutra'); hud(); bocciato();
+      await blocco([
+        [`EVA › ${caso(SMENTITE)}`, 'eva'],
+        [`Causa reale: ${vera.opz} Dignità −5.`, 'sistema'],
+      ]);
+    }
+    await continua(i < LIVELLI.length - 1 ? 'Prossimo sensore ▸' : 'Chiama l’assistenza ▸');
+  }
+
+  /* ================= FINALE ================= */
+
+  async function finale() {
+    stato.liv = LIVELLI.length; hud();
+    indizi(['assistenza']); eva('neutra');
+    await blocco([
+      ['━━ COLLAUDO SENSORI COMPLETATO ━━', 'titolo'],
+      ['Sensori affidabili per stabilire se Eva vuole futtiri: 0 su 5.', 'errore'],
+      ['Il firmware apre un ticket all’assistenza tecnica.', 'sistema'],
+      ['SERPENTE › «Pronto, assistenza tecnica Eden, sono il Serpente. La sua chiamata è importante per noi.»', 'serpente'],
+      ['SERPENTE › «Problema noto: cinque sensori e nessuno che misura la cosa giusta. Ho due aggiornamenti per lei.»', 'serpente'],
+      ['SERPENTE › «mela.exe le fa sapere tutto, il bene e il male, gratis. PAROLA.dll le fa chiedere. Ma costa: la faccia.»', 'serpente'],
+    ]);
+    const s = await scegli([
+      { testo: 'Installa mela.exe', nota: '★ CONSIGLIATO DAL SERPENTE · gratis · conoscenza illimitata', tipo: 'mela' },
+      { testo: 'Installa PAROLA.dll', nota: 'dimensione: una frase · richiede: aprire la bocca', tipo: 'parola' },
+    ]);
+    if (s.tipo === 'mela') await finaleMela();
+    else await finaleParola();
+    await continua('Rapporto di collaudo ▸');
+    rapporto();
+  }
+
+  async function finaleMela() {
+    await blocco([
+      ['Download mela.exe… ██████████ 100%', 'sistema'],
+      ['Nuove funzioni installate: vergogna, senso di colpa, lavoro col sudore della fronte, IMU.', 'sistema'],
+      ['Adamo ora sa tutto del bene e del male. Se Eva voleva, ancora no.', 'errore'],
+    ]);
+    indizi(['cherubino']); eva('arrabbiata'); errore();
+    await blocco([
+      ['CHERUBINO › «Fuori. Tutti e due. E la foglia di fico ve la tenete.»', 'errore'],
+    ]);
+    stato.finale = {
+      titolo: 'Peccato originale',
+      testo: 'Hai scaricato l’intera conoscenza del bene e del male e non hai ancora capito se Eva voleva. Complimenti: sei il primo uomo cacciato di casa per non aver fatto una domanda.',
+    };
+  }
+
+  async function finaleParola() {
+    await blocco([
+      ['Installazione PAROLA.dll… 1 frase, 0 sensori. Completata.', 'sistema'],
+      ['ADAMO › «Eva… ma tu… vuoi futtiri?»', 'adamo'],
+    ]);
+    await attendi(ridotto ? 0 : 700);
+    if (stato.dignita >= 70) {
+      eva('sorriso'); evviva();
+      const schiaffi = stato.schiaffi === 0 ? 'zero schiaffi'
+        : stato.schiaffi === 1 ? 'uno schiaffo' : `${stato.schiaffi} schiaffi`;
+      await blocco([
+        [`EVA › «Finalmente. Cinque sensori, ${schiaffi}, e alla fine bastava una domanda. Sì, scimunito.»`, 'eva'],
+      ]);
+      indizi(['censura']);
+      await blocco([
+        ['CONNESSIONE STABILITA.', 'ok'],
+        ['Il resto della documentazione è secretato. Fonte: Genesi 4,1 — «Adamo conobbe Eva».', 'sistema'],
+      ]);
+      stato.finale = {
+        titolo: 'Connessione stabilita',
+        testo: 'Cinque sensori non ci sono riusciti, una domanda sì. Il protocollo di comunicazione batte l’hardware: annotatelo, ingegneri.',
+      };
+    } else {
+      eva('arrabbiata'); bocciato();
+      const dopo = stato.colpe.length ? elenco(stato.colpe) : 'cinque diagnosi a caso';
+      await blocco([
+        [`EVA › «Dopo ${dopo}? No. Però grazie per aver chiesto.»`, 'eva'],
+        ['Risposta ricevuta: NO. Esito: nessun crash.', 'ok'],
+        ['Adamo si gira e va a farsi un bagno nell’Eufrate. Freddo.', 'sistema'],
+      ]);
+      indizi(['acqua']);
+      stato.finale = {
+        titolo: 'Il no senza crash',
+        testo: 'Primo uomo della storia a sentirsi dire di no senza andare in schermata blu. Aggiornamento riuscito. Domani ci riprovi, lavato.',
+      };
+    }
+  }
+
+  function grado() {
+    if (stato.schiaffi === 0 && stato.giuste === LIVELLI.length) return 'ADAMO 2.0 — pronto per la produzione in serie';
+    if (stato.schiaffi === 0) return 'ADAMO 1.2 — stabile, con qualche bug';
+    if (stato.schiaffi === 1) return 'ADAMO 1.1 — serve una patch';
+    if (stato.schiaffi <= 3) return 'ADAMO 1.0 — beta instabile';
+    return 'ADAMO 0.1 — prototipo: rispedire al Creatore (la costola non è rimborsabile)';
+  }
+
+  function rapporto() {
+    const media = Math.round(stato.precisioni.reduce((a, b) => a + b, 0) / Math.max(1, stato.precisioni.length));
+    $('#r-finale').textContent = 'Finale: ' + stato.finale.titolo;
+    $('#r-testo').textContent = stato.finale.testo;
+    $('#r-schiaffi').textContent = stato.schiaffi;
+    $('#r-giuste').innerHTML = `${stato.giuste}<small> / ${LIVELLI.length}</small>`;
+    $('#r-dignita').innerHTML = `${stato.dignita}<small> / 100</small>`;
+    $('#r-prec').innerHTML = `${media}%<small> sulla cosa sbagliata</small>`;
+    $('#r-grado').textContent = grado();
+    $('#r-copiato').textContent = '';
+    $('#rapporto').hidden = false;
+    $('#rapporto').scrollTop = 0;
+  }
+
+  $('#copia').addEventListener('click', async () => {
+    const url = location.protocol.startsWith('http') ? '\n' + location.href : '';
+    const testo = `Ho collaudato ADAMO 1.0 🍎\n${stato.schiaffi} schiaffi, dignità ${stato.dignita}/100.\nFinale: «${stato.finale.titolo}».\nClassificazione: ${grado()}.\n(da una straordinaria idea dell'Ing. Leotta)${url}`;
+    try {
+      await navigator.clipboard.writeText(testo);
+      $('#r-copiato').textContent = 'Copiato. Incollalo nel gruppo dei colleghi.';
+    } catch (e) {
+      $('#r-copiato').textContent = 'Copia non riuscita: fai uno screenshot, che fa più scena.';
+    }
+  });
+
+  $('#riavvia').addEventListener('click', () => {
+    azzera();
+    log.replaceChildren();
+    $('#rapporto').hidden = true;
+    partita();
+  });
+
+  $('#audio').addEventListener('click', () => {
+    stato.audio = !stato.audio;
+    $('#audio').textContent = stato.audio ? '🔊' : '🔇';
+    $('#audio').setAttribute('aria-label', stato.audio ? 'Audio acceso' : 'Audio spento');
+  });
+
+  async function partita() {
+    hud();
+    for (let i = 0; i < LIVELLI.length; i++) await livello(i);
+    await finale();
+  }
+
+  /* ================= AVVIO ================= */
+
+  async function boot() {
+    const el = $('#boot-testo');
+    let veloce = false;
+    const acc = () => { veloce = true; };
+    $('#boot').addEventListener('click', acc);
+    document.addEventListener('keydown', acc);
+    for (const [riga, tipo] of BOOT) {
+      const s = document.createElement('span');
+      if (tipo) s.className = tipo;
+      el.appendChild(s);
+      if (ridotto || veloce) s.textContent = riga + '\n';
+      else {
+        for (let k = 1; k <= riga.length; k += 3) { if (veloce) break; s.textContent = riga.slice(0, k); await attendi(8); }
+        s.textContent = riga + '\n';
+        await attendi(riga ? 110 : 40);
+      }
+    }
+    $('#boot').removeEventListener('click', acc);
+    document.removeEventListener('keydown', acc);
+    $('#boot-premi').hidden = false;
+    await new Promise(res => {
+      const ctl = new AbortController();
+      const fine = () => { ctl.abort(); res(); };
+      $('#boot').addEventListener('click', fine, { signal: ctl.signal });
+      document.addEventListener('keydown', fine, { signal: ctl.signal });
+    });
+    $('#boot').hidden = true;
+    $('#titolo').hidden = false;
+  }
+
+  $('#avvia').addEventListener('click', () => {
+    ac(); tono(660, .08);
+    $('#titolo').hidden = true;
+    $('#palco').hidden = false;
+    partita();
+  });
+
+  boot();
+})();
+</script>
+</body>
+</html>

@@ -40,7 +40,7 @@
 
   if (!window.ScuolaAccess) {
     const s = document.createElement("script");
-    s.src = "../js/access-track.js?v=2";
+    s.src = "../js/access-track.js?v=7";
     s.defer = true;
     document.head.appendChild(s);
   }

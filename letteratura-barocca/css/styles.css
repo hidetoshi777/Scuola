@@ -1,0 +1,338 @@
+/* Barocco italiano — locandina / palcoscenico (mobile first) */
+
+:root {
+  --bg: #140a0e;
+  --bg-2: #1e1016;
+  --card: #25141c;
+  --gold: #d4a34a;
+  --gold-2: #f0d78c;
+  --burgundy: #7a2438;
+  --cream: #f4ead6;
+  --mute: #cbb89a;
+  --ink: #f4ead6;
+  --bordo: #8a6a32;
+  --btn-text: #140a0e;
+  font-family: "Nunito Sans", system-ui, sans-serif;
+  color-scheme: dark;
+}
+
+[data-theme="light"] {
+  --bg: #f4ead6;
+  --bg-2: #efe2c8;
+  --card: #fff8ea;
+  --ink: #2a1610;
+  --mute: #6a5344;
+  --bordo: #b8944a;
+  --cream: #2a1610;
+  --btn-text: #140a0e;
+  color-scheme: light;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  min-height: 100dvh;
+  background: var(--bg);
+  color: var(--ink);
+  line-height: 1.45;
+}
+
+body.reduced-motion * {
+  animation-duration: 0.01ms !important;
+  transition-duration: 0.01ms !important;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+a {
+  color: var(--gold-2);
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
+}
+
+.skip-link:focus {
+  position: fixed;
+  z-index: 999;
+  top: 0.5rem;
+  left: 0.5rem;
+  padding: 0.5rem 0.75rem;
+  background: var(--card);
+  border: 2px solid var(--gold);
+  clip: auto;
+  width: auto;
+  height: auto;
+  color: var(--ink);
+}
+
+.bar-frame {
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  max-width: 72rem;
+  margin: 0 auto;
+}
+
+.bar-curtain {
+  height: 0.55rem;
+  background: repeating-linear-gradient(
+    90deg,
+    #5a1828 0 12px,
+    #8a2a3c 12px 24px
+  );
+}
+
+.bar-top {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  padding: 0.55rem 0.85rem;
+  background: var(--bg-2);
+  border-bottom: 1px solid var(--bordo);
+}
+
+.bar-brand {
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-weight: 700;
+  font-size: 1.15rem;
+  color: var(--gold-2);
+  text-decoration: none;
+  letter-spacing: 0.04em;
+}
+
+.bar-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+}
+
+.bar-nav a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 2.6rem;
+  padding: 0.25rem 0.7rem;
+  border: 1px dashed var(--bordo);
+  border-radius: 999px;
+  text-decoration: none;
+  color: var(--ink);
+  font-weight: 700;
+  font-size: 0.92rem;
+}
+
+.bar-nav a[aria-current="page"] {
+  background: var(--gold);
+  color: var(--btn-text);
+  border-style: solid;
+}
+
+.theme-toggle,
+.btn {
+  font: inherit;
+  cursor: pointer;
+  border-radius: 999px;
+  min-height: 2.6rem;
+  padding: 0.3rem 0.9rem;
+}
+
+.theme-toggle {
+  background: transparent;
+  border: 1px solid var(--bordo);
+  color: var(--ink);
+}
+
+.btn-primary {
+  background: var(--gold);
+  color: var(--btn-text);
+  border: 0;
+  font-weight: 800;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn-secondary {
+  background: transparent;
+  color: var(--ink);
+  border: 1px solid var(--bordo);
+  font-weight: 700;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.bar-main {
+  flex: 1;
+  padding: 0.9rem 0.85rem 1.5rem;
+}
+
+.kicker {
+  margin: 0;
+  color: var(--gold);
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-size: 0.72rem;
+}
+
+h1,
+h2,
+.serif {
+  font-family: "Cormorant Garamond", Georgia, serif;
+}
+
+.site-footer {
+  padding: 0.85rem;
+  border-top: 1px solid var(--bordo);
+  color: var(--mute);
+  font-size: 0.88rem;
+}
+
+.site-footer p {
+  margin: 0.2rem 0;
+}
+
+/* —— Home: locandina + palco —— */
+.page-home .bar-main {
+  display: grid;
+  gap: 1rem;
+}
+
+.locandina {
+  position: relative;
+  overflow: hidden;
+  border: 3px solid var(--gold);
+  border-radius: 0.4rem 0.4rem 1.1rem 1.1rem;
+  min-height: 18rem;
+}
+
+.locandina img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  min-height: 18rem;
+  max-height: 28rem;
+}
+
+.locandina-copy {
+  position: absolute;
+  inset: auto 0 0;
+  padding: 1.1rem 0.9rem 1.2rem;
+  background: linear-gradient(
+    180deg,
+    transparent 0%,
+    rgba(12, 6, 8, 0.72) 28%,
+    rgba(12, 6, 8, 0.94) 100%
+  );
+  color: #f4ead6;
+}
+
+.locandina-copy h1 {
+  margin: 0.2rem 0 0.35rem;
+  font-size: clamp(1.8rem, 7vw, 3rem);
+  line-height: 0.95;
+  text-shadow: 0 2px 12px #000;
+}
+
+.locandina-copy .lead {
+  margin: 0 0 0.5rem;
+  font-size: 1.02rem;
+}
+
+.locandina-copy blockquote {
+  margin: 0;
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-size: 1.15rem;
+  font-style: italic;
+  color: var(--gold-2);
+}
+
+.atti {
+  display: grid;
+  gap: 0.65rem;
+}
+
+.atto {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 0.75rem;
+  align-items: center;
+  padding: 0.8rem 0.9rem;
+  background: var(--card);
+  border: 1px solid var(--bordo);
+  border-radius: 0.9rem;
+  text-decoration: none;
+  color: inherit;
+  min-height: 4.4rem;
+}
+
+.atto-num {
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: var(--gold);
+  min-width: 2.4rem;
+}
+
+.atto h2 {
+  margin: 0;
+  font-size: 1.2rem;
+}
+
+.atto p {
+  margin: 0.15rem 0 0;
+  color: var(--mute);
+  font-size: 0.92rem;
+}
+
+@media (min-width: 800px) {
+  .page-home .bar-main {
+    grid-template-columns: 1.15fr 0.85fr;
+    align-items: stretch;
+  }
+
+  .locandina {
+    min-height: 28rem;
+  }
+
+  .locandina img {
+    min-height: 28rem;
+    max-height: none;
+    height: 100%;
+  }
+
+  .atti {
+    align-content: start;
+  }
+}
+
+@media (max-width: 520px) {
+  .bar-nav a {
+    flex: 1 1 calc(50% - 0.35rem);
+    justify-content: center;
+  }
+}

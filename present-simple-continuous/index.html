@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="color-scheme" content="dark" id="color-scheme">
+  <script>
+    {
+      const t = localStorage.getItem("tema-present-simple-continuous");
+      const tema = t === "light" || t === "dark" ? t : "dark";
+      document.documentElement.dataset.theme = tema;
+      document.getElementById("color-scheme").content = tema;
+    }
+  </script>
+  <link rel="icon" href="../favicon.svg" type="image/svg+xml">
+  <title>Present simple o continuous? | Scuola</title>
+  <meta name="description" content="Present simple e present continuous per la quarta professionale: studio, fumetto in officina, laboratorio con esercizi autocorretti e gioco.">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="it_IT">
+  <meta property="og:site_name" content="Scuola · Prof. Rossano Bella">
+  <meta property="og:title" content="Present simple o continuous?">
+  <meta property="og:description" content="Ogni giorno o adesso? I repair air conditioners. Right now I’m cleaning a filter.">
+  <meta property="og:url" content="https://hidetoshi777.github.io/Scuola/present-simple-continuous/">
+  <meta property="og:image" content="https://hidetoshi777.github.io/Scuola/present-simple-continuous/img/og-share.jpg">
+  <meta property="og:image:alt" content="Officina di climatizzazione: a sinistra la routine di ogni giorno, a destra il tecnico al lavoro adesso">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Present simple o continuous?">
+  <meta name="twitter:description" content="Ogni giorno o adesso? I repair air conditioners. Right now I’m cleaning a filter.">
+  <meta name="twitter:image" content="https://hidetoshi777.github.io/Scuola/present-simple-continuous/img/og-share.jpg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body class="page-home">
+  <a class="skip-link" href="#contenuto">Salta al contenuto</a>
+
+  <header class="cartellino">
+    <p class="cartellino-titolo"><span class="s">Simple</span> · <span class="c">Continuous</span></p>
+    <span class="timbro" data-timbro aria-hidden="true">NOW</span>
+    <button type="button" class="theme-toggle" data-theme-toggle aria-pressed="false">Chiaro</button>
+  </header>
+
+  <nav class="tabbar" aria-label="Sezioni">
+    <a href="index.html" aria-current="page"><span class="ico" aria-hidden="true">⌂</span>Home</a>
+    <a href="imparare.html"><span class="ico" aria-hidden="true">✎</span>Studio</a>
+    <a href="fumetto.html"><span class="ico" aria-hidden="true">▦</span>Fumetto</a>
+    <a href="laboratorio.html"><span class="ico" aria-hidden="true">⚙</span>Lab</a>
+    <a href="gioco.html"><span class="ico" aria-hidden="true">★</span>Gioco</a>
+  </nav>
+
+  <main id="contenuto" class="foglio" tabindex="-1">
+    <p class="kicker">Inglese · Quarta professionale AM</p>
+    <div class="hero">
+      <img src="img/home.jpg" alt="Officina di climatizzazione: a sinistra il tecnico timbra il cartellino come ogni mattina, a destra è sulla scala e pulisce un filtro adesso" width="1376" height="768" fetchpriority="high">
+      <div class="hero-copy">
+        <h1>Present simple o continuous?</h1>
+        <p class="lead">Ogni giorno o adesso? In inglese cambia il verbo.</p>
+      </div>
+    </div>
+
+    <blockquote class="citazione">
+      <span class="s-txt">I repair air conditioners.</span>
+      <span class="c-txt">Right now I’m cleaning a filter.</span>
+    </blockquote>
+
+    <section class="interruttore" aria-labelledby="leva-titolo">
+      <h2 id="leva-titolo">Sposta la leva</h2>
+      <p>Stessa persona, stesso verbo. Cambia solo il <strong>quando</strong>.</p>
+      <div class="leva" role="group" aria-label="Quando succede?">
+        <button type="button" data-modo="sempre" aria-pressed="true">SEMPRE</button>
+        <button type="button" data-modo="adesso" aria-pressed="false">ADESSO</button>
+      </div>
+      <p class="frase-viva" id="frase-viva" aria-live="polite"></p>
+      <div class="azioni">
+        <button type="button" class="btn" id="altra-frase">Altra frase ↻</button>
+      </div>
+    </section>
+
+    <h2>Da dove parto?</h2>
+    <div class="porte">
+      <a class="porta" href="imparare.html"><span class="ico" aria-hidden="true">✎</span><span><b>Studio</b><span class="desc">Le regole, con esempi in officina.</span></span></a>
+      <a class="porta" href="fumetto.html"><span class="ico" aria-hidden="true">▦</span><span><b>Fumetto</b><span class="desc">Salvo e Nico al lavoro: sei tavole.</span></span></a>
+      <a class="porta" href="laboratorio.html"><span class="ico" aria-hidden="true">⚙</span><span><b>Laboratorio</b><span class="desc">Costruisci i verbi, esercizi e prova finale.</span></span></a>
+      <a class="porta" href="gioco.html"><span class="ico" aria-hidden="true">★</span><span><b>Gioco</b><span class="desc">Due cassette: SEMPRE o ADESSO?</span></span></a>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <p>Realizzato dal Prof. Rossano Bella</p>
+  </footer>
+
+  <script src="js/common.js" defer></script>
+  <script src="js/home.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,735 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="theme-color" content="#101726">
+  <title>Di ruolo · La bacheca e la carta</title>
+  <meta name="description" content="Due minigiochi sullo stesso countdown: la bacheca che timbra i precari e la carta di ruolo che pesa più del mazzo.">
+  <meta property="og:title" content="Di ruolo · La bacheca e la carta">
+  <meta property="og:description" content="Targhetta fissa in testa. Una carta sola sul tavolo. Gli stessi 1.100 fino all'ultima campanella.">
+  <meta property="og:url" content="https://hidetoshi777.github.io/Scuola/meucci-giochi/di-ruolo/">
+  <meta property="og:image" content="https://hidetoshi777.github.io/Scuola/meucci-giochi/di-ruolo/copertina.jpg?v=1">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" href="../../favicon.svg" type="image/svg+xml">
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #101726;
+      --panel: #1a2334;
+      --ink: #edf4f1;
+      --muted: #a3b1bf;
+      --lime: #d9f482;
+      --pink: #ef9aad;
+      --line: #354154;
+      --cream: #f4efe2;
+      --gold: #e6c36a;
+      --gold-deep: #8a6428;
+    }
+    * { box-sizing: border-box; }
+    html, body { margin: 0; }
+    body {
+      font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+      color: var(--ink);
+      background: radial-gradient(ellipse at 50% 0, #293341 0, var(--bg) 65%);
+    }
+    button, input { font: inherit; }
+    button { cursor: pointer; }
+    button:focus-visible, a:focus-visible, input:focus-visible {
+      outline: 3px solid var(--lime);
+      outline-offset: 4px;
+    }
+    .cabinet { max-width: 1100px; margin: auto; padding: 24px 24px 32px; }
+    .masthead { display: flex; gap: 18px; align-items: center; }
+    .back {
+      color: var(--ink);
+      text-decoration: none;
+      border: 1px solid var(--line);
+      border-radius: 50%;
+      width: 46px;
+      height: 46px;
+      display: grid;
+      place-items: center;
+      font-size: 24px;
+      flex-shrink: 0;
+    }
+    .eyebrow {
+      font: 700 10px/1.5 ui-monospace, monospace;
+      letter-spacing: 2px;
+      color: var(--muted);
+      margin: 0 0 4px;
+    }
+    h1 {
+      font: 900 clamp(40px, 8vw, 68px)/.95 system-ui;
+      margin: 0;
+      letter-spacing: -3px;
+    }
+    h1 span { color: var(--lime); }
+    .stamp {
+      margin-left: auto;
+      transform: rotate(-6deg);
+      border: 2px solid #b7d684;
+      padding: 8px 12px;
+      color: var(--lime);
+      font: 900 12px/1.25 ui-monospace, monospace;
+      text-align: center;
+      letter-spacing: 1px;
+    }
+    .intro { color: var(--muted); margin: 18px 0 14px; line-height: 1.5; }
+    .schede { display: flex; gap: 8px; margin: 0 0 16px; }
+    .schede button {
+      border: 1px solid var(--line);
+      background: var(--panel);
+      color: var(--ink);
+      border-radius: 999px;
+      min-height: 44px;
+      padding: 8px 16px;
+      font-weight: 800;
+    }
+    .schede button[aria-selected="true"] {
+      background: #303d36;
+      border-color: var(--lime);
+      color: var(--lime);
+    }
+    .scoreboard {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      background: #111b29;
+      overflow: hidden;
+    }
+    .scoreboard div { padding: 18px 22px; }
+    .scoreboard div + div { border-left: 1px solid var(--line); }
+    .scoreboard span {
+      display: block;
+      font: 700 10px/1.5 ui-monospace, monospace;
+      letter-spacing: 1px;
+      color: var(--muted);
+    }
+    .scoreboard strong {
+      display: block;
+      font: 800 clamp(28px, 5vw, 48px)/1.2 ui-monospace, monospace;
+      letter-spacing: -2px;
+    }
+    .scoreboard div:first-child strong { color: var(--lime); }
+    .scoreboard div:nth-child(2) strong { color: var(--pink); }
+    .mode-line {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 12px 2px;
+      font: 700 11px/1.5 ui-monospace, monospace;
+      color: var(--lime);
+    }
+    .mode-line time { color: var(--muted); margin-left: auto; letter-spacing: 1px; }
+    .game {
+      position: relative;
+      overflow: hidden;
+      border: 1px solid #526c67;
+      border-radius: 14px;
+      background: #151f31;
+      box-shadow: 0 12px 60px #0005, inset 0 0 0 3px #cce4aa14;
+      min-height: 520px;
+    }
+    .scene-label { position: absolute; top: 16px; left: 20px; z-index: 2; pointer-events: none; }
+    .scene-label span {
+      font: 800 12px ui-monospace, monospace;
+      color: #ecdfb1;
+      letter-spacing: 2px;
+      text-shadow: 0 2px 4px #000;
+    }
+    .scene-label small {
+      display: block;
+      color: #c0cfc6;
+      font-size: 11px;
+      margin-top: 5px;
+      text-shadow: 0 2px 4px #000;
+    }
+    .frase {
+      margin: 0 0 12px;
+      color: #e9f4c2;
+      font-weight: 700;
+      font-size: 15px;
+    }
+
+    .bacheca {
+      display: grid;
+      grid-template-columns: 1fr 150px;
+      gap: 18px;
+      padding: 72px 22px 78px;
+      align-items: start;
+    }
+    .targa {
+      grid-column: 1 / -1;
+      justify-self: center;
+      width: min(440px, 100%);
+      text-align: center;
+      color: #2a1c08;
+      background:
+        radial-gradient(circle at 30% 20%, #f3de9a, transparent 42%),
+        linear-gradient(160deg, #f0d48a, #c4963e 55%, #8d6424);
+      border-radius: 10px;
+      padding: 14px 18px 12px;
+      box-shadow: 0 10px 0 #5c4216, 0 16px 28px #0006;
+      position: relative;
+    }
+    .targa::before, .targa::after {
+      content: "";
+      position: absolute;
+      top: 10px;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 35% 35%, #eee, #6d5630 60%, #2c2418);
+    }
+    .targa::before { left: 10px; }
+    .targa::after { right: 10px; }
+    .targa .sopra {
+      margin: 0;
+      font: 700 10px/1 ui-monospace, monospace;
+      letter-spacing: 2px;
+    }
+    .targa h2 { margin: 4px 0 0; font: 900 28px/1 system-ui; letter-spacing: -1px; }
+    .targa p { margin: 4px 0 0; font-weight: 700; font-size: 13px; }
+    .gia {
+      margin: 0 0 8px;
+      color: #c0cfc6;
+      font: 700 11px/1.4 ui-monospace, monospace;
+      letter-spacing: .4px;
+    }
+    .righe { display: flex; flex-direction: column; gap: 8px; min-width: 0; }
+    .riga {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      min-height: 52px;
+      padding: 6px 10px;
+      background: var(--cream);
+      color: #1c2430;
+      border-radius: 6px;
+      position: relative;
+      box-shadow: 0 1px 0 #0003;
+    }
+    .riga.attesa { opacity: .72; }
+    .riga.oggi { outline: 2px solid var(--lime); outline-offset: 1px; }
+    .peg { width: 34px; flex: none; display: grid; justify-items: center; }
+    .peg .testa { width: 14px; height: 14px; border-radius: 50%; background: #e2b394; }
+    .peg .corpo { width: 22px; height: 12px; border-radius: 6px 6px 3px 3px; background: var(--shirt); margin-top: -2px; }
+    .riga .num { font: 800 13px/1 ui-monospace, monospace; letter-spacing: -0.5px; }
+    .riga .ep { font-size: 13px; font-weight: 700; color: #3d4a44; }
+    .timbro {
+      margin-left: auto;
+      border: 3px solid #c4364a;
+      color: #c4364a;
+      font: 900 12px/1 ui-monospace, monospace;
+      letter-spacing: 1px;
+      padding: 4px 6px;
+      border-radius: 4px;
+      transform: rotate(-12deg);
+    }
+    .timbro.entra { animation: slam .42s cubic-bezier(.2, 1.4, .4, 1) both; }
+    .posto {
+      margin-left: auto;
+      font: 700 10px/1 ui-monospace, monospace;
+      letter-spacing: 1px;
+      color: #8a7560;
+    }
+    @keyframes slam {
+      0% { transform: rotate(-18deg) scale(1.7); opacity: 0; }
+      100% { transform: rotate(-12deg) scale(1); opacity: 1; }
+    }
+    .vuota {
+      margin: 24px 0;
+      color: var(--lime);
+      font-weight: 800;
+      font-size: 18px;
+    }
+
+    .vaso { width: 132px; justify-self: center; margin-top: 8px; }
+    .coperchio {
+      height: 16px;
+      margin: 0 14px;
+      border-radius: 5px 5px 0 0;
+      background: linear-gradient(#9db89a, #4e6e56);
+    }
+    .vetro {
+      position: relative;
+      height: 168px;
+      border: 3px solid #d5e2cf;
+      border-top: none;
+      border-radius: 8px 8px 54px 54px;
+      background: linear-gradient(180deg, #1a2a2488, #1c2c2888);
+      overflow: hidden;
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+      padding: 10px;
+    }
+    .livello {
+      position: absolute;
+      left: 0; right: 0; bottom: 0;
+      height: calc(var(--p) * 1%);
+      background: linear-gradient(180deg, #f3b7c4, #d46b84);
+    }
+    .etichetta {
+      position: relative;
+      width: 100%;
+      background: var(--cream);
+      color: #1a1206;
+      border-radius: 4px;
+      text-align: center;
+      padding: 8px 4px;
+    }
+    .etichetta b { display: block; font: 800 10px/1.2 ui-monospace, monospace; letter-spacing: 1px; }
+    .etichetta strong { display: block; margin-top: 3px; font-size: 14px; }
+
+    .tavolo {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 210px 146px;
+      gap: 12px;
+      align-items: center;
+      padding: 78px 22px 78px;
+      min-height: 520px;
+      background:
+        radial-gradient(ellipse at 50% 80%, #1d4036 0, transparent 55%),
+        #151f31;
+    }
+    .mano {
+      display: flex;
+      justify-content: center;
+      align-items: flex-end;
+      height: 250px;
+      min-width: 0;
+      position: relative;
+      padding: 0 8px;
+    }
+    .mini {
+      width: 142px;
+      height: 188px;
+      margin: 0 6px;
+      flex: none;
+      padding: 10px 10px 8px;
+      background: var(--cream);
+      color: #1c2430;
+      border-radius: 10px;
+      box-shadow: 0 8px 0 #0c1218;
+      display: flex;
+      flex-direction: column;
+      transform: rotate(var(--r));
+      transform-origin: 50% 130%;
+    }
+    .mini .angolo { font: 800 12px ui-monospace, monospace; color: #9a3d4e; }
+    .mini strong { margin: auto 0; font-size: 16px; line-height: 1.15; letter-spacing: -0.3px; }
+    .fantasma {
+      position: absolute;
+      left: var(--x);
+      top: 80px;
+      width: 72px;
+      height: 100px;
+      border-radius: 8px;
+      background: var(--cream);
+      box-shadow: 0 6px 0 #0c1218;
+      animation: alVaso .65s ease-in forwards;
+      z-index: 3;
+    }
+    @keyframes alVaso {
+      to { transform: translate(280px, 30px) rotate(16deg) scale(.3); opacity: 0; }
+    }
+    .carta-ruolo {
+      justify-self: center;
+      width: min(210px, 100%);
+      min-height: 250px;
+      padding: 16px 14px 14px;
+      border-radius: 14px;
+      color: #f6edd4;
+      background:
+        radial-gradient(circle at 50% 0, #234638, transparent 50%),
+        linear-gradient(180deg, #173028, #0e1c18);
+      border: 3px solid var(--gold);
+      box-shadow: 0 16px 0 #0a100e, 0 22px 30px #0007;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .carta-ruolo.pesa { animation: pesa .35s ease-out; }
+    @keyframes pesa {
+      0% { transform: translateY(0); }
+      40% { transform: translateY(7px); }
+      100% { transform: translateY(0); }
+    }
+    .sigillo {
+      width: 54px;
+      height: 54px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      font: 800 9px/1.1 ui-monospace, monospace;
+      letter-spacing: 0.5px;
+      color: #3a2808;
+      background: radial-gradient(circle at 35% 30%, #ffe7a8, var(--gold) 45%, var(--gold-deep));
+      box-shadow: inset 0 0 0 3px #8a642866;
+    }
+    .carta-ruolo h2 { margin: 12px 0 0; font: 900 28px/1 system-ui; letter-spacing: -1px; }
+    .carta-ruolo p { margin: 8px 0 0; color: #d9cba8; font-size: 14px; line-height: 1.35; }
+    .carta-ruolo .peso {
+      margin-top: auto;
+      font: 800 11px/1.2 ui-monospace, monospace;
+      letter-spacing: 1px;
+      color: var(--gold);
+    }
+    .mazzo-vuoto { color: var(--muted); font-weight: 700; padding-top: 80px; }
+
+    .calendar { padding: 18px 0 0; }
+    .calendar label {
+      display: flex;
+      justify-content: space-between;
+      gap: 8px;
+      font-size: 13px;
+      font-weight: 700;
+    }
+    .calendar label span { font-weight: 400; color: var(--pink); }
+    input[type="range"] { width: 100%; accent-color: var(--lime); min-height: 44px; margin: 4px 0; }
+    .range-ends {
+      display: flex;
+      justify-content: space-between;
+      font: 11px ui-monospace, monospace;
+      color: var(--muted);
+    }
+    .comandi { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
+    .comandi button, .calendar button {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      color: var(--ink);
+      background: #263345;
+      min-height: 44px;
+      padding: 10px 14px;
+    }
+    .comandi button.lime { color: #1a1206; background: var(--lime); border-color: var(--lime); font-weight: 800; }
+    .comandi button:disabled { opacity: .4; cursor: default; }
+    footer { color: #8697ab; text-align: center; font-size: 11px; line-height: 1.6; padding: 18px 0 0; }
+    footer p { margin: 6px 0; }
+
+    @media (max-width: 720px) {
+      .cabinet { padding: 18px 12px 28px; }
+      .masthead { gap: 12px; }
+      h1 { letter-spacing: -2px; }
+      .stamp { font-size: 9px; padding: 6px; }
+      .scoreboard div { padding: 12px 10px; }
+      .scoreboard span { font-size: 8px; letter-spacing: 0; }
+      .scoreboard strong { font-size: 26px; }
+      .bacheca, .tavolo { grid-template-columns: 1fr; padding: 56px 12px 24px; }
+      .tavolo { grid-template-areas: "ruolo" "mano" "vaso"; }
+      .tavolo .mano { grid-area: mano; height: 200px; }
+      .tavolo .carta-ruolo { grid-area: ruolo; }
+      .tavolo .vaso { grid-area: vaso; justify-self: center; }
+      .targa h2 { font-size: 22px; }
+      .riga { min-height: 46px; }
+      .frase { font-size: 14px; }
+      .mini { width: 104px; height: 146px; margin: 0 4px; }
+      .mini:nth-child(n + 4) { display: none; }
+      .mini strong { font-size: 12px; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .timbro.entra, .fantasma, .carta-ruolo.pesa { animation: none; }
+    }
+  </style>
+</head>
+<body>
+  <main class="cabinet">
+    <header class="masthead">
+      <a class="back" href="../../professionale/admin/stats.html" aria-label="Torna all'area del Prof.">←</a>
+      <div>
+        <p class="eyebrow">MEUCCI / PASSATEMPI DEL PROF.</p>
+        <h1 id="titolo">La <span>bacheca</span></h1>
+      </div>
+      <p class="stamp">DI RUOLO<br>PRIMA DI TUTTI</p>
+    </header>
+    <p class="intro" id="intro">In testa, fissa, la targhetta. Sotto, la fila che si timbra un giorno alla volta.</p>
+
+    <div class="schede" role="tablist" aria-label="Scene">
+      <button type="button" role="tab" id="tab-bacheca" aria-selected="true" aria-controls="vista">1 · La bacheca</button>
+      <button type="button" role="tab" id="tab-carta" aria-selected="false" aria-controls="vista">3 · La carta</button>
+    </div>
+
+    <section class="scoreboard" aria-label="Contatori del calendario">
+      <div><span>ANCORA DAVANTI</span><strong id="davanti">1.087</strong></div>
+      <div><span>NEL BARATTOLO</span><strong id="vaso-n">13</strong></div>
+      <div><span>GIORNI ALLA LIBERTÀ</span><strong id="giorni">237</strong></div>
+    </section>
+    <p class="mode-line"><span id="modo">● CALENDARIO REALE</span><time id="data" datetime="2026-10-15">15 OTT 2026</time></p>
+    <p class="frase" id="frase"></p>
+
+    <section class="game" id="vista" aria-live="polite">
+      <div class="scene-label">
+        <span id="etichetta">LA BACHECA</span>
+        <small id="sottotitolo">Loro scalano. Tu eri già arrivato.</small>
+      </div>
+      <div id="palco"></div>
+    </section>
+
+    <div class="calendar">
+      <label for="quando">Sbircia un giorno <span id="quota-label"></span></label>
+      <input id="quando" type="range" min="0" max="240" value="3" aria-valuemin="0" aria-valuemax="240">
+      <div class="range-ends"><span>12 ott 2026</span><span>9 giu 2027</span></div>
+      <div class="comandi">
+        <button type="button" id="prima">Il giorno prima</button>
+        <button type="button" id="oggi">Torna a oggi</button>
+        <button type="button" class="lime" id="dopo">Il giorno dopo</button>
+        <button type="button" id="fine">Ultima campanella</button>
+      </div>
+    </div>
+
+    <footer>
+      <p>Stessi numeri di GPS 1100: 1.100 precari cartoon dal 12 ottobre 2026 al 9 giugno 2027. Lo scorrimento è inventato, nessun collegamento alle GPS vere.</p>
+      <p>Satira da sala professori. Due scene, lo stesso countdown.</p>
+      <p>Realizzato dal Prof. Rossano Bella</p>
+    </footer>
+  </main>
+
+  <script>
+    const INIZIO = "2026-10-12";
+    const FINE = "2027-06-09";
+    const TOTALE = 1100;
+    const MESI = ["gen", "feb", "mar", "apr", "mag", "giu", "lug", "ago", "set", "ott", "nov", "dic"];
+    const EPITETI = [
+      "sede a 90 km",
+      "annuale, forse",
+      "MAD in attesa",
+      "punteggio in salita",
+      "nessuna chiamata",
+      "completa l'anno",
+      "supplenza breve",
+      "fino al 30 giugno",
+      "master a pagamento",
+      "specializzazione a rate",
+      "tre plessi, un contratto",
+      "lontano da casa",
+      "corsi online da 800 €",
+      "24 CFU da rifare",
+      "cattedra spezzata",
+      "trasferta senza rimborso",
+      "GPS aggiornata ieri",
+      "seconda fascia, terza sede",
+      "chiamata alle 7:41",
+      "accettata e rinunciata",
+      "titolo culturale in più",
+      "corso TFA in coda",
+      "due regioni, zero certezza",
+      "punteggio al millesimo",
+      "supplenza fino a…",
+      "convocazione via SMS",
+      "scuola di montagna",
+      "scuola di mare",
+      "orario spezzato",
+      "compresenza fantasma",
+      "ricorso in attesa",
+      "graduatoria provinciale",
+      "altra provincia, altro viaggio",
+      "contratto al 30/06",
+      "proroga? vedremo",
+      "titolare rientra a marzo",
+    ];
+    const TITOLI = [
+      "Master a pagamento",
+      "Specializzazione a rate",
+      "24 CFU da rifare",
+      "Anni di servizio",
+      "Corso da 800 €",
+      "Titolo culturale",
+      "TFA in coda",
+      "Certificazione",
+      "Punteggio al millesimo",
+      "Supplenza breve",
+      "Cattedra spezzata",
+      "Trasferta senza rimborso",
+    ];
+    const MAGLIE = ["#3d7ea6", "#c46b4a", "#6a8f4e", "#8a6bb5", "#c4a15a", "#4e8f8a", "#b55b6e", "#5d6e8a"];
+
+    const ordinal = (iso) => {
+      const [y, m, d] = iso.split("-").map(Number);
+      return Math.floor(Date.UTC(y, m - 1, d) / 86400000);
+    };
+    const start = ordinal(INIZIO);
+    const end = ordinal(FINE);
+    const span = end - start;
+    const oggiReale = (() => {
+      const n = new Date();
+      return Math.floor(Date.UTC(n.getFullYear(), n.getMonth(), n.getDate()) / 86400000);
+    })();
+    const oggi = Math.max(start, Math.min(end, oggiReale));
+
+    const fmt = (n) => n.toLocaleString("it-IT");
+    const iso = (day) => new Date(day * 86400000).toISOString().slice(0, 10);
+    const breve = (day) => {
+      const d = new Date(day * 86400000);
+      return `${d.getUTCDate()} ${MESI[d.getUTCMonth()]} ${d.getUTCFullYear()}`;
+    };
+    const raccolti = (day) => {
+      const elapsed = Math.max(0, Math.min(span, day - start));
+      return Math.floor(TOTALE * elapsed / span);
+    };
+    const quota = (day) => raccolti(day) - raccolti(day - 1);
+
+    let vista = "bacheca";
+    let giorno = oggi;
+    let anima = true;
+
+    const $ = (id) => document.getElementById(id);
+
+    function vasoHtml(n) {
+      const p = Math.max(4, Math.round(n / TOTALE * 100));
+      return `<div class="vaso" aria-hidden="true">
+        <div class="coperchio"></div>
+        <div class="vetro">
+          <div class="livello" style="--p:${p}"></div>
+          <div class="etichetta"><b>PRECARI<br>IN CONSERVA</b><strong>${fmt(n)} / ${fmt(TOTALE)}</strong></div>
+        </div>
+      </div>`;
+    }
+
+    function disegnaBacheca(nelVaso, diOggi) {
+      if (nelVaso >= TOTALE) {
+        $("palco").innerHTML = `<div class="bacheca"><article class="targa">
+          <p class="sopra">SALA PROFESSORI · MEUCCI</p>
+          <h2>DI RUOLO</h2>
+          <p>Prof. Bella · prima di tutti e 1.100</p>
+        </article><p class="vuota">Nessuna riga rimasta. La targhetta è sempre stata qui.</p>${vasoHtml(nelVaso)}</div>`;
+        return;
+      }
+      const da = Math.max(1, nelVaso - 3);
+      const a = Math.min(TOTALE, da + 8);
+      const ieri = nelVaso - diOggi;
+      const gia = da > 1 ? `<p class="gia">Righe 1–${fmt(da - 1)} già nel barattolo.</p>` : "";
+      let righe = "";
+      for (let i = da; i <= a; i++) {
+        const fatto = i <= nelVaso;
+        const fresco = fatto && i > ieri;
+        const maglia = MAGLIE[i % MAGLIE.length];
+        righe += `<div class="riga${fatto ? "" : " attesa"}${fresco ? " oggi" : ""}">
+          <span class="peg" aria-hidden="true"><span class="testa"></span><span class="corpo" style="--shirt:${maglia}"></span></span>
+          <span class="num">n. ${String(i).padStart(4, "0")}</span>
+          <span class="ep">${EPITETI[i % EPITETI.length]}</span>
+          ${fatto
+            ? `<span class="timbro${anima && fresco ? " entra" : ""}">SUPERATO</span>`
+            : `<span class="posto">IN FILA</span>`}
+        </div>`;
+      }
+      $("palco").innerHTML = `<div class="bacheca"><article class="targa">
+        <p class="sopra">SALA PROFESSORI · MEUCCI</p>
+        <h2>DI RUOLO</h2>
+        <p>Prof. Bella · prima di tutti e 1.100</p>
+      </article><div class="righe">${gia}${righe}</div>${vasoHtml(nelVaso)}</div>`;
+    }
+
+    function disegnaCarta(nelVaso, diOggi) {
+      const restano = TOTALE - nelVaso;
+      let carte = "";
+      const visibili = Math.min(3, restano);
+      for (let k = 0; k < visibili; k++) {
+        const n = nelVaso + 1 + k;
+        const r = (k - (visibili - 1) / 2) * 6;
+        carte += `<article class="mini" style="--r:${r}deg">
+          <span class="angolo">${n}</span>
+          <strong>${TITOLI[n % TITOLI.length]}</strong>
+          <span class="angolo">${n}</span>
+        </article>`;
+      }
+      if (!visibili) carte = `<p class="mazzo-vuoto">Il mazzo è finito.</p>`;
+      const fantasmi = anima && diOggi
+        ? Array.from({ length: Math.min(diOggi, 5) }, (_, i) =>
+          `<span class="fantasma" style="--x:${48 + i * 28}px;animation-delay:${i * 60}ms"></span>`).join("")
+        : "";
+      $("palco").innerHTML = `<div class="tavolo">
+        <div class="mano">${carte}${fantasmi}</div>
+        <article class="carta-ruolo${anima && diOggi ? " pesa" : ""}">
+          <div class="sigillo">DI<br>RUOLO</div>
+          <h2>DI RUOLO</h2>
+          <p>Fuori graduatoria,<br>dunque prima.</p>
+          <span class="peso">PESA PIÙ DEL MAZZO</span>
+        </article>
+        ${vasoHtml(nelVaso)}
+      </div>`;
+    }
+
+    function aggiorna() {
+      const nelVaso = raccolti(giorno);
+      const davanti = TOTALE - nelVaso;
+      const diOggi = quota(giorno);
+      const futuro = giorno > oggi;
+      const passato = giorno < oggi;
+
+      $("davanti").textContent = fmt(davanti);
+      $("vaso-n").textContent = fmt(nelVaso);
+      $("giorni").textContent = fmt(end - giorno);
+      $("data").textContent = breve(giorno).toUpperCase();
+      $("data").dateTime = iso(giorno);
+      $("modo").textContent = futuro ? "◷ ANTEPRIMA DEL FUTURO" : passato ? "◷ GIORNO GIÀ TIMBRATO" : "● CALENDARIO REALE";
+      $("modo").style.color = giorno === oggi ? "#d9f482" : "#ef9aad";
+      $("quando").value = String(giorno - start);
+      $("quando").setAttribute("aria-valuenow", String(giorno - start));
+      $("quota-label").textContent = nelVaso >= TOTALE
+        ? "fila esaurita"
+        : `in questa giornata: ${fmt(diOggi)} nel barattolo`;
+
+      const dopo = Math.min(end, giorno + 1);
+      $("dopo").textContent = giorno >= end ? "Il giorno dopo" : `Il giorno dopo · ${fmt(quota(dopo))}`;
+      $("prima").disabled = giorno <= start;
+      $("dopo").disabled = giorno >= end;
+      $("oggi").disabled = giorno === oggi;
+      $("fine").disabled = giorno >= end;
+
+      if (vista === "bacheca") {
+        $("titolo").innerHTML = "La <span>bacheca</span>";
+        $("intro").textContent = "In testa, fissa, la targhetta. Sotto, la fila che si timbra un giorno alla volta.";
+        $("etichetta").textContent = "LA BACHECA";
+        $("sottotitolo").textContent = "Loro scalano. Tu eri già arrivato.";
+        $("frase").textContent = nelVaso >= TOTALE
+          ? "1.100 su 1.100. La targhetta è ancora in testa. Buone vacanze, Prof."
+          : `Oggi ne hai superati ${fmt(diOggi)}. La targhetta non si è mossa.`;
+        disegnaBacheca(nelVaso, diOggi);
+      } else {
+        $("titolo").innerHTML = "La <span>carta</span>";
+        $("intro").textContent = "Loro calano titoli. Tu cali una carta sola, e il mazzo finisce nel barattolo.";
+        $("etichetta").textContent = "LA CARTA CHE NON SI BATTE";
+        $("sottotitolo").textContent = "Una carta. Pesa più di tutto il mazzo.";
+        $("frase").textContent = nelVaso >= TOTALE
+          ? "Mazzo finito. La carta di ruolo è ancora sul tavolo."
+          : `Oggi il mazzo perde ${fmt(diOggi)} carte. La tua resta sul tavolo.`;
+        disegnaCarta(nelVaso, diOggi);
+      }
+      anima = false;
+    }
+
+    function vai(day, conAnima) {
+      giorno = Math.max(start, Math.min(end, day));
+      anima = conAnima;
+      aggiorna();
+    }
+
+    $("tab-bacheca").addEventListener("click", () => {
+      vista = "bacheca";
+      $("tab-bacheca").setAttribute("aria-selected", "true");
+      $("tab-carta").setAttribute("aria-selected", "false");
+      anima = false;
+      aggiorna();
+    });
+    $("tab-carta").addEventListener("click", () => {
+      vista = "carta";
+      $("tab-carta").setAttribute("aria-selected", "true");
+      $("tab-bacheca").setAttribute("aria-selected", "false");
+      anima = false;
+      aggiorna();
+    });
+    $("prima").addEventListener("click", () => vai(giorno - 1, true));
+    $("dopo").addEventListener("click", () => vai(giorno + 1, true));
+    $("oggi").addEventListener("click", () => vai(oggi, true));
+    $("fine").addEventListener("click", () => vai(end, false));
+    $("quando").addEventListener("input", () => vai(start + Number($("quando").value), false));
+
+    aggiorna();
+  </script>
+</body>
+</html>

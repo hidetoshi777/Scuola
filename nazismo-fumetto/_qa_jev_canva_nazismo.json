@@ -1,0 +1,376 @@
+{
+  "canva": {
+    "titolo": "Il Nazismo",
+    "design_id": "DAGe-xaxEtU",
+    "edit_url": "https://www.canva.com/d/CSGZIMt6736dOG0",
+    "autore": "Prof. Rossano Bella"
+  },
+  "results": [
+    {
+      "id": "crisi_1929_riparazioni",
+      "sezione": "Ragioni ascesa",
+      "testo": "La crisi del 1929 e gli enormi risarcimenti chiesti dai vincitori della prima guerra mondiale portarono a una devastazione economica.",
+      "status": 200,
+      "latency_ms": 454,
+      "model": "jev-1.13.0",
+      "usage": {
+        "input_tokens": 765,
+        "output_tokens": 135
+      },
+      "fattualmente_ok": 0.8,
+      "semplificazione_rischiosa": 0.76,
+      "gravita_score": 1.22,
+      "gravita_conf": 0.42,
+      "problema": "nessuno",
+      "problema_conf": 0.29,
+      "problema_probs": {
+        "errore_fatto": 0.02,
+        "manca_contesto": 0.31,
+        "iperbole": 0.04,
+        "anacronismo": 0.0,
+        "nessuno": 0.41,
+        "semplificazione_fuorviante": 0.22
+      }
+    },
+    {
+      "id": "inflazione_bambini",
+      "sezione": "Ragioni ascesa",
+      "testo": "I bambini fanno pile di denaro, tanto era alta l’inflazione (il denaro non valeva niente). [Nella slide segue il discorso sulla crisi del 1929.]",
+      "status": 200,
+      "latency_ms": 364,
+      "model": "jev-1.13.0",
+      "usage": {
+        "input_tokens": 770,
+        "output_tokens": 141
+      },
+      "fattualmente_ok": 0.37,
+      "semplificazione_rischiosa": 0.82,
+      "gravita_score": 1.75,
+      "gravita_conf": 0.62,
+      "problema": "semplificazione_fuorviante",
+      "problema_conf": 0.18,
+      "problema_probs": {
+        "semplificazione_fuorviante": 0.32,
+        "iperbole": 0.24,
+        "nessuno": 0.0,
+        "anacronismo": 0.13,
+        "manca_contesto": 0.14,
+        "errore_fatto": 0.17
+      }
+    },
+    {
+      "id": "weimar_imposta",
+      "sezione": "Ragioni ascesa",
+      "testo": "La Repubblica di Weimar imposta dai vincitori della prima guerra mondiale (a Versailles) era formalmente democratica, ma debolissima.",
+      "status": 200,
+      "latency_ms": 397,
+      "model": "jev-1.13.0",
+      "usage": {
+        "input_tokens": 763,
+        "output_tokens": 135
+      },
+      "fattualmente_ok": 0.79,
+      "semplificazione_rischiosa": 0.76,
+      "gravita_score": 1.2,
+      "gravita_conf": 0.51,
+      "problema": "nessuno",
+      "problema_conf": 0.21,
+      "problema_probs": {
+        "anacronismo": 0.0,
+        "nessuno": 0.33,
+        "semplificazione_fuorviante": 0.29,
+        "errore_fatto": 0.03,
+        "manca_contesto": 0.33,
+        "iperbole": 0.02
+      }
+    },
+    {
+      "id": "hitler_elezioni_democratiche",
+      "sezione": "Presa del potere / vs Mussolini",
+      "testo": "Mussolini prende il potere con la Marcia su Roma, quasi un colpo di Stato. Hitler vince democraticamente le elezioni.",
+      "status": 200,
+      "latency_ms": 439,
+      "model": "jev-1.13.0",
+      "usage": {
+        "input_tokens": 764,
+        "output_tokens": 141
+      },
+      "fattualmente_ok": 0.58,
+      "semplificazione_rischiosa": 0.84,
+      "gravita_score": 1.55,
+      "gravita_conf": 0.32,
+      "problema": "semplificazione_fuorviante",
+      "problema_conf": 0.54,
+      "problema_probs": {
+        "errore_fatto": 0.07,
+        "iperbole": 0.0,
+        "anacronismo": 0.0,
+        "manca_contesto": 0.25,
+        "nessuno": 0.06,
+        "semplificazione_fuorviante": 0.62
+      }
+    },
+    {
+      "id": "hitler_imperatore",
+      "sezione": "Presa del potere",
+      "testo": "Dopo le elezioni, Hitler smantella la democrazia: partito unico, repressione degli oppositori e potere concentrato. Hitler diventa praticamente un imperatore assoluto. Mussolini dovrà sempre mediare con il Re.",
+      "status": 200,
+      "latency_ms": 371,
+      "model": "jev-1.13.0",
+      "usage": {
+        "input_tokens": 786,
+        "output_tokens": 135
+      },
+      "fattualmente_ok": 0.67,
+      "semplificazione_rischiosa": 0.8,
+      "gravita_score": 1.48,
+      "gravita_conf": 0.21,
+      "problema": "iperbole",
+      "problema_conf": 0.41,
+      "problema_probs": {
+        "semplificazione_fuorviante": 0.23,
+        "errore_fatto": 0.03,
+        "nessuno": 0.09,
+        "iperbole": 0.51,
+        "manca_contesto": 0.14,
+        "anacronismo": 0.0
+      }
+    },
+    {
+      "id": "lebensraum",
+      "sezione": "Mein Kampf",
+      "testo": "Secondo Hitler la Germania doveva espandersi a Est per conquistare terre, risorse e dominio politico sull’Europa (Lebensraum / spazio vitale).",
+      "status": 200,
+      "latency_ms": 398,
+      "model": "jev-1.13.0",
+      "usage": {
+        "input_tokens": 763,
+        "output_tokens": 135
+      },
+      "fattualmente_ok": 0.94,
+      "semplificazione_rischiosa": 0.54,
+      "gravita_score": 0.46,
+      "gravita_conf": 0.32,
+      "problema": "nessuno",
+      "problema_conf": 0.76,
+      "problema_probs": {
+        "nessuno": 0.81,
+        "iperbole": 0.0,
+        "manca_contesto": 0.16,
+        "anacronismo": 0.0,
+        "errore_fatto": 0.0,
+        "semplificazione_fuorviante": 0.03
+      }
+    },
+    {
+      "id": "norimberga",
+      "sezione": "Shoah",
+      "testo": "Con le leggi di Norimberga (1935) gli ebrei furono esclusi dalla vita pubblica: niente cittadinanza piena, matrimoni misti proibiti, discriminazione quotidiana.",
+      "status": 200,
+      "latency_ms": 704,
+      "model": "jev-1.13.0",
+      "usage": {
+        "input_tokens": 776,
+        "output_tokens": 135
+      },
+      "fattualmente_ok": 0.89,
+      "semplificazione_rischiosa": 0.6,
+      "gravita_score": 0.92,
+      "gravita_conf": 0.53,
+      "problema": "nessuno",
+      "problema_conf": 0.7,
+      "problema_probs": {
+        "iperbole": 0.02,
+        "semplificazione_fuorviante": 0.12,
+        "manca_contesto": 0.1,
+        "nessuno": 0.75,
+        "errore_fatto": 0.01,
+        "anacronismo": 0.0
+      }
+    },
+    {
+      "id": "campi_distinzione",
+      "sezione": "Shoah",
+      "testo": "Campi di sterminio (es. Auschwitz-Birkenau, Treblinka, Sobibor) creati per uccidere su larga scala, soprattutto in Polonia. Campi di concentramento (es. Dachau, primo grande campo in Germania) per prigionieri politici e «nemici» del regime, con altissima mortalità ma non solo camere a gas come scopo unico.",
+      "status": 200,
+      "latency_ms": 342,
+      "model": "jev-1.13.0",
+      "usage": {
+        "input_tokens": 813,
+        "output_tokens": 135
+      },
+      "fattualmente_ok": 0.93,
+      "semplificazione_rischiosa": 0.49,
+      "gravita_score": 0.43,
+      "gravita_conf": 0.35,
+      "problema": "nessuno",
+      "problema_conf": 0.93,
+      "problema_probs": {
+        "anacronismo": 0.0,
+        "nessuno": 0.95,
+        "manca_contesto": 0.03,
+        "semplificazione_fuorviante": 0.01,
+        "iperbole": 0.0,
+        "errore_fatto": 0.01
+      }
+    },
+    {
+      "id": "dachau_prima",
+      "sezione": "Shoah",
+      "testo": "Dachau fu il primo grande campo aperto in Germania, ancora prima della conquista nazista dell’Europa dell’Est.",
+      "status": 200,
+      "latency_ms": 375,
+      "model": "jev-1.13.0",
+      "usage": {
+        "input_tokens": 751,
+        "output_tokens": 135
+      },
+      "fattualmente_ok": 0.7,
+      "semplificazione_rischiosa": 0.71,
+      "gravita_score": 1.2,
+      "gravita_conf": 0.35,
+      "problema": "nessuno",
+      "problema_conf": 0.3,
+      "problema_probs": {
+        "anacronismo": 0.02,
+        "semplificazione_fuorviante": 0.13,
+        "iperbole": 0.02,
+        "manca_contesto": 0.24,
+        "errore_fatto": 0.18,
+        "nessuno": 0.41
+      }
+    },
+    {
+      "id": "italia_neutrale_franco",
+      "sezione": "Rapporti con Mussolini",
+      "testo": "L’Italia sarebbe potuta restare neutrale come ad esempio fece la Spagna di Franco. Ma dinanzi a una Germania che pareva invincibile, troppa era la tentazione per tirarsi indietro.",
+      "status": 200,
+      "latency_ms": 356,
+      "model": "jev-1.13.0",
+      "usage": {
+        "input_tokens": 777,
+        "output_tokens": 141
+      },
+      "fattualmente_ok": 0.45,
+      "semplificazione_rischiosa": 0.8,
+      "gravita_score": 1.62,
+      "gravita_conf": 0.44,
+      "problema": "semplificazione_fuorviante",
+      "problema_conf": 0.48,
+      "problema_probs": {
+        "manca_contesto": 0.21,
+        "nessuno": 0.01,
+        "errore_fatto": 0.07,
+        "semplificazione_fuorviante": 0.57,
+        "iperbole": 0.13,
+        "anacronismo": 0.01
+      }
+    }
+  ],
+  "review": [
+    {
+      "id": "inflazione_bambini",
+      "sezione": "Ragioni ascesa",
+      "testo": "I bambini fanno pile di denaro, tanto era alta l’inflazione (il denaro non valeva niente). [Nella slide segue il discorso sulla crisi del 1929.]",
+      "status": 200,
+      "latency_ms": 364,
+      "model": "jev-1.13.0",
+      "usage": {
+        "input_tokens": 770,
+        "output_tokens": 141
+      },
+      "fattualmente_ok": 0.37,
+      "semplificazione_rischiosa": 0.82,
+      "gravita_score": 1.75,
+      "gravita_conf": 0.62,
+      "problema": "semplificazione_fuorviante",
+      "problema_conf": 0.18,
+      "problema_probs": {
+        "semplificazione_fuorviante": 0.32,
+        "iperbole": 0.24,
+        "nessuno": 0.0,
+        "anacronismo": 0.13,
+        "manca_contesto": 0.14,
+        "errore_fatto": 0.17
+      }
+    },
+    {
+      "id": "hitler_elezioni_democratiche",
+      "sezione": "Presa del potere / vs Mussolini",
+      "testo": "Mussolini prende il potere con la Marcia su Roma, quasi un colpo di Stato. Hitler vince democraticamente le elezioni.",
+      "status": 200,
+      "latency_ms": 439,
+      "model": "jev-1.13.0",
+      "usage": {
+        "input_tokens": 764,
+        "output_tokens": 141
+      },
+      "fattualmente_ok": 0.58,
+      "semplificazione_rischiosa": 0.84,
+      "gravita_score": 1.55,
+      "gravita_conf": 0.32,
+      "problema": "semplificazione_fuorviante",
+      "problema_conf": 0.54,
+      "problema_probs": {
+        "errore_fatto": 0.07,
+        "iperbole": 0.0,
+        "anacronismo": 0.0,
+        "manca_contesto": 0.25,
+        "nessuno": 0.06,
+        "semplificazione_fuorviante": 0.62
+      }
+    },
+    {
+      "id": "hitler_imperatore",
+      "sezione": "Presa del potere",
+      "testo": "Dopo le elezioni, Hitler smantella la democrazia: partito unico, repressione degli oppositori e potere concentrato. Hitler diventa praticamente un imperatore assoluto. Mussolini dovrà sempre mediare con il Re.",
+      "status": 200,
+      "latency_ms": 371,
+      "model": "jev-1.13.0",
+      "usage": {
+        "input_tokens": 786,
+        "output_tokens": 135
+      },
+      "fattualmente_ok": 0.67,
+      "semplificazione_rischiosa": 0.8,
+      "gravita_score": 1.48,
+      "gravita_conf": 0.21,
+      "problema": "iperbole",
+      "problema_conf": 0.41,
+      "problema_probs": {
+        "semplificazione_fuorviante": 0.23,
+        "errore_fatto": 0.03,
+        "nessuno": 0.09,
+        "iperbole": 0.51,
+        "manca_contesto": 0.14,
+        "anacronismo": 0.0
+      }
+    },
+    {
+      "id": "italia_neutrale_franco",
+      "sezione": "Rapporti con Mussolini",
+      "testo": "L’Italia sarebbe potuta restare neutrale come ad esempio fece la Spagna di Franco. Ma dinanzi a una Germania che pareva invincibile, troppa era la tentazione per tirarsi indietro.",
+      "status": 200,
+      "latency_ms": 356,
+      "model": "jev-1.13.0",
+      "usage": {
+        "input_tokens": 777,
+        "output_tokens": 141
+      },
+      "fattualmente_ok": 0.45,
+      "semplificazione_rischiosa": 0.8,
+      "gravita_score": 1.62,
+      "gravita_conf": 0.44,
+      "problema": "semplificazione_fuorviante",
+      "problema_conf": 0.48,
+      "problema_probs": {
+        "manca_contesto": 0.21,
+        "nessuno": 0.01,
+        "errore_fatto": 0.07,
+        "semplificazione_fuorviante": 0.57,
+        "iperbole": 0.13,
+        "anacronismo": 0.01
+      }
+    }
+  ]
+}

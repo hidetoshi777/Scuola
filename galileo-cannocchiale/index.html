@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="color-scheme" content="dark light">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <title>Il cannocchiale · Galileo Galilei | Scuola</title>
+  <meta name="description" content="Otto tappe sul cannocchiale di Galileo: Pisa, la Luna, le lune di Giove, Venere, la caduta dei gravi e il processo del 1633.">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="it_IT">
+  <meta property="og:site_name" content="Scuola · Prof. Rossano Bella">
+  <meta property="og:title" content="Il cannocchiale · Galileo Galilei">
+  <meta property="og:description" content="Otto tappe: guarda nel cannocchiale e rispondi. Circa dieci minuti.">
+  <meta property="og:url" content="https://hidetoshi777.github.io/Scuola/galileo-cannocchiale/">
+  <meta property="og:image" content="https://hidetoshi777.github.io/Scuola/galileo-cannocchiale/img/og-share.jpg">
+  <meta property="og:image:alt" content="Ritratto di Galileo Galilei">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Il cannocchiale · Galileo Galilei">
+  <meta name="twitter:description" content="Otto tappe sul cielo di Galileo.">
+  <meta name="twitter:image" content="https://hidetoshi777.github.io/Scuola/galileo-cannocchiale/img/og-share.jpg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@550;700&family=Fraunces:ital,opsz,wght@0,9..144,560;0,9..144,650;1,9..144,560&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/gioco.css">
+</head>
+<body>
+  <a class="skip-link visually-hidden" href="#contenuto">Salta al contenuto</a>
+  <div class="notte">
+    <header class="barra">
+      <p class="marca">Galileo · il cannocchiale</p>
+      <button type="button" class="theme-toggle" data-theme-toggle aria-pressed="false">Chiaro</button>
+    </header>
+
+    <main id="contenuto" class="palco" tabindex="-1">
+      <section class="apertura" id="start">
+        <div class="ritratto-wrap">
+          <img src="img/ritratto.jpg" alt="Ritratto di Galileo Galilei dipinto da Justus Sustermans nel 1636" width="640" height="813">
+          <div>
+            <h1>Guarda nel cannocchiale</h1>
+            <p class="citazione">«Il libro dell’universo è scritto in lingua matematica.»</p>
+          </div>
+        </div>
+        <p class="istruzioni">Otto domande. Una alla volta. Leggete la frase giusta e toccatela. Ci vogliono circa dieci minuti.</p>
+        <p class="credito-img">Ritratto di Justus Sustermans, 1636. Pubblico dominio.</p>
+        <button type="button" class="btn btn-oro" id="inizia">Si comincia</button>
+      </section>
+
+      <section id="play" hidden>
+        <div class="lente-blocco">
+          <div class="lente" aria-hidden="true">
+            <div class="vista" id="vista"></div>
+          </div>
+          <p class="meta">
+            <span>Tappa <strong id="tappa">1 di 8</strong></span>
+            <span>Punti <strong id="punti">0</strong></span>
+            <span>Tempo <strong class="tempo" id="tempo">10:00</strong></span>
+          </p>
+        </div>
+        <h2 class="domanda" id="domanda"></h2>
+        <div class="scelte" id="scelte" role="group" aria-label="Risposte"></div>
+        <p class="esito" id="esito" hidden></p>
+        <button type="button" class="btn btn-oro" id="avanti" hidden>Avanti</button>
+      </section>
+
+      <section class="fine" id="fine" hidden>
+        <h2>Cielo chiuso</h2>
+        <p class="voto" id="voto"></p>
+        <ul class="ricorda" id="ricorda"></ul>
+        <button type="button" class="btn btn-oro" id="rigioca">Rigioca</button>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <p>Realizzato dal Prof. Rossano Bella.</p>
+    </footer>
+  </div>
+  <script src="js/common.js" defer></script>
+  <script src="js/gioco.js" defer></script>
+</body>
+</html>

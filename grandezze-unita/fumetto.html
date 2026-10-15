@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="color-scheme" content="dark" id="color-scheme">
+  <script>
+    {
+      const t = localStorage.getItem("tema-grandezze-unita");
+      const tema = t === "light" || t === "dark" ? t : "dark";
+      document.documentElement.dataset.theme = tema;
+      document.getElementById("color-scheme").content = tema;
+    }
+  </script>
+  <link rel="icon" href="../favicon.svg" type="image/svg+xml">
+  <title>Fumetto · Grandezze e unità | Scuola</title>
+  <meta name="description" content="Sei tavole: numero e unità, m kg s, SI, area e volume, velocità, ricorda così.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@600;700&family=IBM+Plex+Sans:wght@500;700&family=Oswald:wght@500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/fumetto.css">
+</head>
+<body class="page-fumetto">
+  <a class="skip-link" href="#contenuto">Salta al contenuto</a>
+
+  <div class="banco">
+    <header class="nastro">
+      <nav class="nastro-nav" aria-label="Sezioni">
+        <a href="index.html">Home</a>
+        <a href="imparare.html">Studio</a>
+        <a href="fumetto.html" aria-current="page">Fumetto</a>
+        <a href="laboratorio.html">Lab</a>
+        <a href="gioco.html">Gioco</a>
+      </nav>
+      <button type="button" class="theme-toggle" data-theme-toggle aria-pressed="false">Chiaro</button>
+    </header>
+
+    <main id="contenuto" class="lastra" tabindex="-1">
+      <div class="lastra-inner">
+        <p class="kicker">Fumetto · 6 tavole</p>
+        <h1>In officina</h1>
+        <p class="lead">Marco e il maestro misurano un tubo, poi lo scooter nel cortile.</p>
+
+        <section class="fumetto-reader" id="fumetto-stage" aria-roledescription="fumetto" aria-label="Grandezze e unità a fumetti">
+          <div class="fumetto-toolbar">
+            <p class="fumetto-status">Tavola <span id="fumetto-num">1</span> di 6</p>
+            <div class="fumetto-toolbar-actions">
+              <button type="button" class="btn fumetto-print" id="fumetto-print">Stampa tutto</button>
+              <button type="button" class="btn fumetto-full" id="fumetto-fullscreen" aria-pressed="false">Schermo intero</button>
+            </div>
+          </div>
+
+          <div class="fumetto-viewport" id="fumetto-viewport">
+            <figure class="fumetto-page is-active" data-page="1">
+              <img src="img/tavole/01-numero-unita.png" alt="Tavola 1: il tubo si misura in centimetri, non «così»" width="864" height="1152" fetchpriority="high">
+            </figure>
+            <figure class="fumetto-page" data-page="2" aria-hidden="true">
+              <img src="img/tavole/02-tre-fondamentali.png" alt="Tavola 2: lunghezza in metri, massa in chilogrammi, tempo in secondi" width="864" height="1152" loading="lazy">
+            </figure>
+            <figure class="fumetto-page" data-page="3" aria-hidden="true">
+              <img src="img/tavole/03-sistema-si.png" alt="Tavola 3: il Sistema Internazionale usa le stesse unità per tutti" width="864" height="1152" loading="lazy">
+            </figure>
+            <figure class="fumetto-page" data-page="4" aria-hidden="true">
+              <img src="img/tavole/04-derivate.png" alt="Tavola 4: area in metri quadrati e volume in metri cubi" width="864" height="1152" loading="lazy">
+            </figure>
+            <figure class="fumetto-page" data-page="5" aria-hidden="true">
+              <img src="img/tavole/05-velocita.png" alt="Tavola 5: velocità uguale spazio diviso tempo, 10 metri al secondo" width="864" height="1152" loading="lazy">
+            </figure>
+            <figure class="fumetto-page" data-page="6" aria-hidden="true">
+              <img src="img/tavole/06-ricorda.png" alt="Tavola 6: sempre numero e unità; fondamentali e derivate" width="864" height="1152" loading="lazy">
+            </figure>
+          </div>
+
+          <p class="fumetto-caption" id="fumetto-caption" aria-live="polite"></p>
+
+          <div class="fumetto-controls">
+            <button type="button" class="btn fumetto-nav" id="fumetto-prev" disabled>← Indietro</button>
+            <div class="fumetto-dots" id="fumetto-dots" role="tablist" aria-label="Tavole"></div>
+            <button type="button" class="btn btn-primary fumetto-nav" id="fumetto-next">Avanti →</button>
+          </div>
+          <p class="fumetto-hint">Scorri o tocca i lati. Pizzica per ingrandire. «Schermo intero» sul telefono.</p>
+        </section>
+
+        <div class="azioni">
+          <a class="btn btn-primary" href="laboratorio.html">Laboratorio</a>
+          <a class="btn" href="gioco.html">Gioco</a>
+        </div>
+      </div>
+    </main>
+
+    <footer class="site-footer">
+      <p>Realizzato dal Prof. Rossano Bella</p>
+    </footer>
+  </div>
+
+  <script src="js/common.js" defer></script>
+  <script src="../js/fumetto-zoom.js" defer></script>
+  <script src="../js/fumetto-print.js?v=3" defer></script>
+  <script src="js/fumetto.js" defer></script>
+</body>
+</html>

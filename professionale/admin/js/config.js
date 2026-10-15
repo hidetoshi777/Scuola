@@ -6,8 +6,8 @@
  *   printf '%s' 'nuova-password' | sha256sum
  * Incolla l'hash a 64 caratteri in PASSWORD_SHA256 qui sotto (senza spazi).
  *
- * Tracking: Page Views API pubblica (nessuna chiave). Site id = hidetoshi777.github.io
- * Percorsi normalizzati come /Scuola/...
+ * Tracking: ultima visita su keyval.org (segnale 24 ore nel pannello admin).
+ * Site id Page Views (opzionale, per track) = hidetoshi777.github.io · percorsi /Scuola/...
  */
 window.PROF_ADMIN_CONFIG = {
   PASSWORD_SHA256:

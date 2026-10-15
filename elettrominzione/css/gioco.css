@@ -1,0 +1,314 @@
+:root {
+  --notte: #0b0f1a;
+  --pannello: rgb(14 20 34 / 88%);
+  --bordo: rgb(255 255 255 / 12%);
+  --testo: #eef2f8;
+  --tenue: #a9b4c7;
+  --giallo: #ffd84a;
+  --elettrico: #7fe3ff;
+  --rosso: #ff5a4f;
+  --verde: #6fdc8c;
+  color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  height: 100%;
+  background: var(--notte);
+  color: var(--testo);
+  font-family: "DM Sans", system-ui, sans-serif;
+  -webkit-tap-highlight-color: transparent;
+  overscroll-behavior: none;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  height: 100dvh;
+}
+
+[hidden] { display: none !important; }
+
+/* ---------- palco ---------- */
+
+.palco {
+  position: relative;
+  flex: 1;
+  min-height: 0;
+  overflow: hidden;
+}
+
+#scena {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+  touch-action: none;
+}
+
+.hud {
+  position: absolute;
+  top: max(10px, env(safe-area-inset-top));
+  left: 12px;
+  right: 12px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  pointer-events: none;
+}
+
+.hud > * { pointer-events: auto; }
+
+.hud-livello {
+  background: var(--pannello);
+  border: 1px solid var(--bordo);
+  border-radius: 12px;
+  padding: 6px 12px;
+  backdrop-filter: blur(6px);
+}
+
+.hud-sopra { margin: 0; font-size: 0.72rem; color: var(--tenue); text-transform: uppercase; letter-spacing: 0.06em; font-weight: 700; }
+.hud-kv { margin: 0; font-family: "Bungee", sans-serif; font-size: 1.05rem; color: var(--elettrico); text-shadow: 0 0 8px rgb(127 227 255 / 60%); }
+
+.vescica {
+  flex: 1;
+  max-width: 320px;
+  background: var(--pannello);
+  border: 1px solid var(--bordo);
+  border-radius: 12px;
+  padding: 6px 12px;
+  display: grid;
+  gap: 4px;
+  backdrop-filter: blur(6px);
+}
+
+.vescica-etichetta { font-size: 0.72rem; color: var(--tenue); text-transform: uppercase; letter-spacing: 0.06em; font-weight: 700; }
+.vescica-barra { display: block; height: 10px; border-radius: 6px; background: rgb(255 255 255 / 10%); overflow: hidden; }
+#vescica-livello { display: block; height: 100%; width: 100%; background: linear-gradient(90deg, #f5c518, #ffe57a); border-radius: 6px; transition: width 0.12s linear; }
+
+.tasto-piccolo {
+  margin-left: auto;
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  border: 1px solid var(--bordo);
+  background: var(--pannello);
+  color: var(--testo);
+  font-size: 1.2rem;
+  cursor: pointer;
+}
+
+.fumetto {
+  position: absolute;
+  left: 50%;
+  top: calc(max(10px, env(safe-area-inset-top)) + 66px);
+  transform: translateX(-50%);
+  margin: 0;
+  max-width: min(92%, 520px);
+  background: var(--pannello);
+  border: 1px solid var(--bordo);
+  border-radius: 14px;
+  padding: 10px 14px;
+  font-size: 0.95rem;
+  line-height: 1.35;
+  text-align: center;
+  backdrop-filter: blur(6px);
+  transition: opacity 0.4s;
+}
+
+.fumetto.sparito { opacity: 0; }
+
+/* ---------- schermate sopra la scena ---------- */
+
+.schermata {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-content: center;
+  justify-items: center;
+  gap: 14px;
+  padding: 20px 16px;
+  text-align: center;
+  background: radial-gradient(ellipse at 50% 40%, rgb(11 15 26 / 45%), rgb(11 15 26 / 88%));
+  overflow-y: auto;
+}
+
+.titolo-scatola { position: relative; padding: 18px 8px; }
+
+.scintille {
+  position: absolute;
+  inset: -30px -40px;
+  width: calc(100% + 80px);
+  height: calc(100% + 60px);
+  pointer-events: none;
+}
+
+.titolo-gioco {
+  position: relative;
+  margin: 0;
+  font-family: "Bungee", sans-serif;
+  font-weight: 400;
+  font-size: clamp(1.7rem, 8.2vw, 4.6rem);
+  line-height: 1;
+  letter-spacing: 0.02em;
+  background: linear-gradient(180deg, #fffbe0 0%, #ffe45c 38%, #ffb400 62%, #fff3a6 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  filter: drop-shadow(0 0 6px rgb(127 227 255 / 90%)) drop-shadow(0 0 22px rgb(80 170 255 / 55%));
+  animation: ronzio 2.6s infinite steps(1);
+}
+
+/* la scritta «prende la corrente»: sfarfallii brevi, come un neon che scarica */
+@keyframes ronzio {
+  0%, 18%, 22%, 61%, 64%, 100% { filter: drop-shadow(0 0 6px rgb(127 227 255 / 90%)) drop-shadow(0 0 22px rgb(80 170 255 / 55%)); opacity: 1; }
+  19%, 62% { filter: drop-shadow(0 0 14px rgb(200 245 255 / 100%)) drop-shadow(0 0 40px rgb(120 200 255 / 90%)) brightness(1.5); }
+  20% { opacity: 0.55; }
+  63% { opacity: 0.8; transform: translateX(1px); }
+}
+
+.titolo-sotto { margin: 0; font-size: 1.05rem; color: var(--tenue); font-weight: 700; }
+
+.titolo-autore {
+  margin: 4px 0 6px;
+  font-size: 1rem;
+  line-height: 1.4;
+  color: var(--testo);
+}
+
+.titolo-autore strong {
+  color: var(--giallo);
+  font-size: 1.15rem;
+  text-shadow: 0 0 10px rgb(255 216 74 / 45%);
+}
+
+.bottone {
+  font: inherit;
+  font-weight: 800;
+  border: 0;
+  border-radius: 14px;
+  padding: 12px 22px;
+  min-height: 48px;
+  cursor: pointer;
+  background: linear-gradient(180deg, #ffe16a, #f5b800);
+  color: #1a1400;
+  box-shadow: 0 6px 24px rgb(245 184 0 / 30%);
+}
+
+.bottone.grande { font-size: 1.25rem; padding: 14px 44px; }
+.bottone.secondario { background: rgb(255 255 255 / 10%); color: var(--testo); box-shadow: none; border: 1px solid var(--bordo); }
+
+.interruttore {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  max-width: 360px;
+  font-size: 0.88rem;
+  color: var(--tenue);
+  text-align: left;
+  cursor: pointer;
+}
+
+.interruttore input { width: 22px; height: 22px; accent-color: var(--elettrico); flex: none; }
+
+.firma { margin: 8px 0 0; font-size: 0.78rem; color: var(--tenue); opacity: 0.8; }
+
+/* ---------- cartellino ---------- */
+
+.scheda {
+  width: min(560px, 100%);
+  background: var(--pannello);
+  border: 1px solid var(--bordo);
+  border-radius: 18px;
+  padding: 18px 18px 16px;
+  text-align: left;
+  backdrop-filter: blur(8px);
+  box-shadow: 0 20px 60px rgb(0 0 0 / 50%);
+}
+
+.scheda-sopra { margin: 0; font-size: 0.78rem; color: var(--tenue); text-transform: uppercase; letter-spacing: 0.08em; font-weight: 800; }
+.scheda h2 { margin: 4px 0 10px; font-family: "Bungee", sans-serif; font-weight: 400; font-size: clamp(1.3rem, 5vw, 1.9rem); line-height: 1.1; color: var(--giallo); }
+.scheda h2.zap { color: var(--elettrico); text-shadow: 0 0 12px rgb(127 227 255 / 70%); }
+.scheda p { margin: 0 0 10px; line-height: 1.45; }
+.scheda .piccolo { font-size: 0.85rem; color: var(--tenue); }
+.stelle { font-size: 1.9rem; letter-spacing: 0.1em; color: var(--giallo); margin: 0 0 6px; }
+
+.conti {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 4px 12px;
+  margin: 6px 0 12px;
+  padding: 10px 12px;
+  border-radius: 12px;
+  background: rgb(255 255 255 / 5%);
+  font-size: 0.92rem;
+}
+
+.conti dt { color: var(--tenue); }
+.conti dd { margin: 0; font-weight: 700; font-variant-numeric: tabular-nums; }
+
+/* soglie della corrente nel corpo, in scala logaritmica */
+.soglie { margin: 4px 0 12px; }
+.soglie-barra { position: relative; height: 14px; border-radius: 7px; background: linear-gradient(90deg, #2e7d4f 0%, #9ccc3a 28%, #f5c518 45%, #ff8a1f 60%, #e53935 75%, #7a0e0e 100%); }
+.soglie-segno { position: absolute; top: -6px; width: 3px; height: 26px; background: #fff; border-radius: 2px; box-shadow: 0 0 8px #fff; transform: translateX(-50%); }
+.soglie-etichette { position: relative; height: 34px; font-size: 0.7rem; color: var(--tenue); }
+.soglie-etichette span { position: absolute; top: 4px; transform: translateX(-50%); white-space: nowrap; text-align: center; line-height: 1.15; }
+
+.scheda-azioni { display: flex; gap: 10px; justify-content: flex-end; flex-wrap: wrap; margin-top: 6px; }
+
+/* ---------- comandi ---------- */
+
+.comandi {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 14px max(12px, env(safe-area-inset-bottom));
+  background: #0e1422;
+  border-top: 1px solid var(--bordo);
+}
+
+.comandi-mira { display: flex; gap: 10px; }
+
+.tasto {
+  font: inherit;
+  font-weight: 800;
+  min-width: 64px;
+  min-height: 64px;
+  border-radius: 16px;
+  border: 1px solid var(--bordo);
+  background: #1a2336;
+  color: var(--testo);
+  font-size: 1.5rem;
+  touch-action: none;
+  user-select: none;
+  -webkit-user-select: none;
+  cursor: pointer;
+}
+
+.tasto.premuto { background: #2a3857; transform: translateY(1px); }
+
+.tasto-pipi {
+  min-width: 150px;
+  display: grid;
+  line-height: 1.1;
+  font-family: "Bungee", sans-serif;
+  font-weight: 400;
+  font-size: 1.35rem;
+  color: #1a1400;
+  background: linear-gradient(180deg, #ffe16a, #f5b800);
+  border: 0;
+}
+
+.tasto-pipi small { font-family: "DM Sans", sans-serif; font-size: 0.68rem; font-weight: 700; opacity: 0.75; }
+.tasto-pipi.premuto { background: linear-gradient(180deg, #ffd21f, #d99f00); }
+
+@media (orientation: landscape) and (max-height: 520px) {
+  /* telefono in orizzontale: comandi sopra la scena, negli angoli */
+  .comandi { position: fixed; left: 0; right: 0; bottom: 0; background: none; border: 0; pointer-events: none; }
+  .comandi > * { pointer-events: auto; }
+  .tasto { background: rgb(26 35 54 / 80%); }
+}

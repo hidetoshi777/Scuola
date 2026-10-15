@@ -1,10 +1,9 @@
 (function () {
   const timeEl = document.getElementById("school-clock-time");
   const dateEl = document.getElementById("school-clock-date");
-  const periodEl = document.getElementById("school-clock-period");
   const weatherEl = document.getElementById("school-clock-weather");
   const widgetEl = document.querySelector(".school-clock");
-  if (!timeEl || !dateEl || !periodEl || !weatherEl || !widgetEl) return;
+  if (!timeEl || !dateEl || !weatherEl || !widgetEl) return;
 
   const zone = "Europe/Rome";
   const weatherUrl =
@@ -35,19 +34,16 @@
   });
 
   function periodFor(hour) {
-    if (hour >= 5 && hour < 9) {
-      return { id: "mattina-presto", label: "Mattina presto", icon: "◜" };
+    if (hour >= 5 && hour < 12) {
+      return { id: "mattina", label: "Mattina" };
     }
-    if (hour >= 9 && hour < 14) {
-      return { id: "mezzogiorno", label: "Mezzogiorno", icon: "☀" };
+    if (hour >= 12 && hour < 18) {
+      return { id: "giorno", label: "Giorno" };
     }
-    if (hour >= 14 && hour < 18) {
-      return { id: "pomeriggio", label: "Pomeriggio", icon: "◒" };
+    if (hour >= 18 && hour < 21) {
+      return { id: "sera", label: "Sera" };
     }
-    if (hour >= 18 && hour < 22) {
-      return { id: "sera", label: "Sera", icon: "◝" };
-    }
-    return { id: "notte", label: "Notte", icon: "☾" };
+    return { id: "notte", label: "Notte" };
   }
 
   function weatherFor(code) {
@@ -143,7 +139,6 @@
     const period = periodFor(hour);
     if (widgetEl.dataset.period !== period.id) {
       widgetEl.dataset.period = period.id;
-      periodEl.textContent = period.icon + " " + period.label;
       currentPeriod = period.label;
       updateAccessibleLabel();
     }

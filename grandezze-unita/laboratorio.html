@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="color-scheme" content="dark" id="color-scheme">
+  <script>
+    {
+      const t = localStorage.getItem("tema-grandezze-unita");
+      const tema = t === "light" || t === "dark" ? t : "dark";
+      document.documentElement.dataset.theme = tema;
+      document.getElementById("color-scheme").content = tema;
+    }
+  </script>
+  <link rel="icon" href="../favicon.svg" type="image/svg+xml">
+  <title>Laboratorio · Grandezze e unità | Scuola</title>
+  <meta name="description" content="Convertitore di unità, calcolo della velocità e abbinamento grandezza-unità.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@600;700&family=IBM+Plex+Sans:wght@500;700&family=Oswald:wght@500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body class="page-lab">
+  <a class="skip-link" href="#contenuto">Salta al contenuto</a>
+
+  <div class="banco">
+    <header class="nastro">
+      <nav class="nastro-nav" aria-label="Sezioni">
+        <a href="index.html">Home</a>
+        <a href="imparare.html">Studio</a>
+        <a href="fumetto.html">Fumetto</a>
+        <a href="laboratorio.html" aria-current="page">Lab</a>
+        <a href="gioco.html">Gioco</a>
+      </nav>
+      <button type="button" class="theme-toggle" data-theme-toggle aria-pressed="false">Chiaro</button>
+    </header>
+
+    <main id="contenuto" class="lastra" tabindex="-1">
+      <div class="lastra-inner">
+        <p class="kicker">Laboratorio · tre stazioni</p>
+        <h1>Prova sul banco</h1>
+        <p class="lead">Cambia unità. Calcola la velocità. Abbina la grandezza giusta.</p>
+
+        <div class="stazioni">
+          <section class="stazione" id="stazione-conv">
+            <h2>1. Cambia unità</h2>
+            <div class="tab-row" role="group" aria-label="Tipo di conversione">
+              <button type="button" class="btn btn-primary" data-conv="lunghezza" aria-pressed="true">Lunghezza</button>
+              <button type="button" class="btn" data-conv="velocita" aria-pressed="false">Velocità</button>
+            </div>
+            <div class="campo">
+              <label for="conv-valore">Numero</label>
+              <input id="conv-valore" type="number" inputmode="decimal" value="80" step="any">
+            </div>
+            <div class="campo" id="campo-unita">
+              <label for="conv-unita">Unità di partenza</label>
+              <select id="conv-unita">
+                <option value="m">m</option>
+                <option value="cm" selected>cm</option>
+                <option value="mm">mm</option>
+                <option value="km">km</option>
+              </select>
+            </div>
+            <p class="risultato" id="conv-out" aria-live="polite"></p>
+          </section>
+
+          <section class="stazione" id="stazione-vel">
+            <h2>2. Calcola v</h2>
+            <p><span class="mono">v = s / t</span></p>
+            <div class="campo">
+              <label for="vel-s">Spazio s (metri)</label>
+              <input id="vel-s" type="number" inputmode="decimal" value="90" min="0" step="any">
+            </div>
+            <div class="campo">
+              <label for="vel-t">Tempo t (secondi)</label>
+              <input id="vel-t" type="number" inputmode="decimal" value="9" min="0" step="any">
+            </div>
+            <p class="risultato" id="vel-out" aria-live="polite"></p>
+          </section>
+
+          <section class="stazione stazione-larga" id="stazione-match">
+            <h2>3. Quale unità?</h2>
+            <p class="match-q" id="match-q"></p>
+            <div class="match-opts" id="match-opts"></div>
+            <p class="feedback" id="match-msg" aria-live="polite"></p>
+            <div class="azioni">
+              <button type="button" class="btn" id="match-next">Altra domanda</button>
+            </div>
+          </section>
+        </div>
+      </div>
+    </main>
+
+    <footer class="site-footer">
+      <p>Realizzato dal Prof. Rossano Bella</p>
+    </footer>
+  </div>
+
+  <script src="js/common.js" defer></script>
+  <script src="js/laboratorio.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="color-scheme" content="dark light">
+  <link rel="icon" href="../favicon.svg" type="image/svg+xml">
+  <title>Stampe A4 · Resistenza e resistività | Scuola</title>
+  <meta name="description" content="Due fogli A4 orizzontali: resistenza e legge di Ohm, fili di rame oro alluminio e resistività.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Source+Sans+3:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/scheda.css">
+  <link rel="stylesheet" href="css/stampe-print.css" media="print">
+</head>
+<body>
+  <a class="skip-link visually-hidden" href="#contenuto">Salta ai fogli</a>
+
+  <div class="qe-shell">
+    <aside class="qe-rail no-print">
+      <p class="qe-rail-brand">A4 · OHM</p>
+      <nav class="qe-nav" aria-label="Sezioni">
+        <a href="index.html">Home</a>
+        <a href="scheda.html">Circuito</a>
+        <a href="scheda-ohm.html">Ohm</a>
+        <a href="stampe.html">Stampe</a>
+        <a href="gioco.html">Gioco</a>
+      </nav>
+    </aside>
+
+    <div class="qe-main-wrap">
+      <header class="qe-top no-print">
+        <p class="qe-kicker">Stampe · A4 orizzontale</p>
+        <button type="button" class="theme-toggle" data-theme-toggle aria-pressed="false">Chiaro</button>
+      </header>
+
+      <main id="contenuto" class="qe-main stampe-wrap" tabindex="-1">
+        <div class="scheda-toolbar no-print">
+          <button type="button" class="btn btn-primary" id="btn-stampa-tutto">Stampa i due fogli</button>
+          <a class="btn btn-secondary" href="scheda-ohm.html">Scheda Ohm</a>
+        </div>
+
+        <header class="scheda-head no-print">
+          <div>
+            <h1>Resistenza, Ohm e resistività</h1>
+            <p class="scheda-meta">Due fogli A4 orizzontali da stampare · Terza professionale</p>
+          </div>
+        </header>
+
+        <p class="stampe-lead no-print">
+          La <strong>resistenza</strong> si oppone alla corrente. Il <strong>generatore ideale</strong> non si scarica mai.
+          Se cambi solo il materiale del filo (rame, oro, alluminio) cambia la resistenza: questa proprietà si chiama <strong>resistività</strong>.
+        </p>
+
+        <ol class="stampe-lista">
+          <li class="stampe-foglio" id="foglio-1">
+            <p class="stampe-num no-print">Foglio 1 di 2 · A4 orizzontale</p>
+            <h2 class="no-print">Resistenza e legge di Ohm</h2>
+            <figure>
+              <img
+                src="img/foglio-1-resistenza-ohm.jpg"
+                alt="Foglio 1: la resistenza si oppone al passaggio di corrente; il generatore ideale non si scarica mai e resta a 12 volt; legge di Ohm U uguale R per I."
+                width="1280"
+                height="720"
+                loading="eager"
+                data-viewer
+              >
+            </figure>
+            <div class="stampe-azioni no-print">
+              <button type="button" class="btn btn-secondary" data-zoom="foglio-1">Schermo intero</button>
+              <button type="button" class="btn btn-secondary" data-print="foglio-1">Stampa questo</button>
+              <a class="btn btn-secondary" href="img/foglio-1-resistenza-ohm.jpg" target="_blank" rel="noopener">Apri immagine</a>
+            </div>
+            <p class="print-credit">Realizzato dal Prof. Rossano Bella</p>
+          </li>
+
+          <li class="stampe-foglio" id="foglio-2">
+            <p class="stampe-num no-print">Foglio 2 di 2 · A4 orizzontale</p>
+            <h2 class="no-print">Materiale e resistività</h2>
+            <figure>
+              <img
+                src="img/foglio-2-resistivita.jpg"
+                alt="Foglio 2: stessa batteria 12 volt, stessa lunghezza e sezione; fili di rame, oro e alluminio; al cambiare del materiale cambia la resistenza; questa proprietà si chiama resistività."
+                width="1280"
+                height="720"
+                loading="lazy"
+                data-viewer
+              >
+            </figure>
+            <div class="stampe-azioni no-print">
+              <button type="button" class="btn btn-secondary" data-zoom="foglio-2">Schermo intero</button>
+              <button type="button" class="btn btn-secondary" data-print="foglio-2">Stampa questo</button>
+              <a class="btn btn-secondary" href="img/foglio-2-resistivita.jpg" target="_blank" rel="noopener">Apri immagine</a>
+            </div>
+            <p class="print-credit">Realizzato dal Prof. Rossano Bella</p>
+          </li>
+        </ol>
+      </main>
+
+      <footer class="site-footer no-print">
+        <p>Realizzato dal Prof. Rossano Bella</p>
+      </footer>
+    </div>
+  </div>
+
+  <dialog class="stampe-viewer no-print" id="viewer" aria-label="Foglio a schermo intero">
+    <div class="stampe-viewer-inner">
+      <div class="stampe-viewer-bar">
+        <button type="button" class="btn btn-secondary" id="viewer-close">Chiudi</button>
+        <button type="button" class="btn btn-primary" id="viewer-print">Stampa</button>
+      </div>
+      <img id="viewer-img" src="img/foglio-1-resistenza-ohm.jpg" alt="" width="1280" height="720">
+    </div>
+  </dialog>
+
+  <script src="js/common.js" defer></script>
+  <script>
+    (function () {
+      const root = document.body;
+      const viewer = document.getElementById("viewer");
+      const viewerImg = document.getElementById("viewer-img");
+
+      function apri(src) {
+        if (!viewer || !viewerImg) return;
+        viewerImg.src = src;
+        if (viewer.showModal) viewer.showModal();
+        else window.open(src, "_blank", "noopener");
+      }
+
+      document.querySelectorAll("[data-viewer]").forEach((img) => {
+        img.addEventListener("click", () => apri(img.getAttribute("src")));
+      });
+      document.querySelectorAll("[data-zoom]").forEach((btn) => {
+        btn.addEventListener("click", () => {
+          const card = document.getElementById(btn.getAttribute("data-zoom"));
+          const img = card && card.querySelector("img");
+          if (img) apri(img.getAttribute("src"));
+        });
+      });
+
+      document.getElementById("btn-stampa-tutto")?.addEventListener("click", () => {
+        root.removeAttribute("data-print");
+        window.print();
+      });
+      document.querySelectorAll("[data-print]").forEach((btn) => {
+        btn.addEventListener("click", () => {
+          root.setAttribute("data-print", btn.getAttribute("data-print"));
+          window.print();
+        });
+      });
+      window.addEventListener("afterprint", () => root.removeAttribute("data-print"));
+      document.getElementById("viewer-print")?.addEventListener("click", () => {
+        const src = viewerImg && viewerImg.getAttribute("src") || "";
+        root.setAttribute("data-print", src.indexOf("foglio-2") >= 0 ? "foglio-2" : "foglio-1");
+        window.print();
+      });
+      document.getElementById("viewer-close")?.addEventListener("click", () => viewer?.close());
+      viewer?.addEventListener("click", (ev) => {
+        if (ev.target === viewer) viewer.close();
+      });
+    })();
+  </script>
+</body>
+</html>

@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="color-scheme" content="dark" id="color-scheme">
+  <script>
+    {
+      const t = localStorage.getItem("tema-grandezze-unita");
+      const tema = t === "light" || t === "dark" ? t : "dark";
+      document.documentElement.dataset.theme = tema;
+      document.getElementById("color-scheme").content = tema;
+    }
+  </script>
+  <link rel="icon" href="../favicon.svg" type="image/svg+xml">
+  <title>Studio · Grandezze e unità | Scuola</title>
+  <meta name="description" content="Grandezze fisiche, SI, fondamentali (m, kg, s) e derivate: area, volume, velocità.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@600;700&family=IBM+Plex+Sans:wght@500;700&family=Oswald:wght@500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body class="page-imparare">
+  <a class="skip-link" href="#contenuto">Salta al contenuto</a>
+
+  <div class="banco">
+    <header class="nastro">
+      <nav class="nastro-nav" aria-label="Sezioni">
+        <a href="index.html">Home</a>
+        <a href="imparare.html" aria-current="page">Studio</a>
+        <a href="fumetto.html">Fumetto</a>
+        <a href="laboratorio.html">Lab</a>
+        <a href="gioco.html">Gioco</a>
+      </nav>
+      <button type="button" class="theme-toggle" data-theme-toggle aria-pressed="false">Chiaro</button>
+    </header>
+
+    <main id="contenuto" class="lastra" tabindex="-1">
+      <div class="lastra-inner">
+        <p class="kicker">Studio · Banco da misura</p>
+        <h1>Come si misura</h1>
+        <p class="lead">Una grandezza è una cosa che puoi misurare. Poi scrivi un numero e un’unità.</p>
+
+        <div class="imparare-layout">
+          <nav class="indice" aria-label="Indice">
+            <a href="#grandezza">1. Grandezza</a>
+            <a href="#numero">2. Numero + unità</a>
+            <a href="#tre">3. Tre basi</a>
+            <a href="#si">4. Il SI</a>
+            <a href="#multipli">5. Multipli</a>
+            <a href="#derivate">6. Derivate</a>
+            <a href="#velocita">7. Velocità</a>
+            <a href="#kmh">8. km/h</a>
+            <a href="#ricorda">9. Ricorda così</a>
+          </nav>
+
+          <div>
+            <article class="capitolo" id="grandezza">
+              <h2>1. Grandezza</h2>
+              <p>Una <strong>grandezza fisica</strong> è una cosa che si può misurare.</p>
+              <p>Esempi in officina:</p>
+              <ul>
+                <li>quanto è <strong>lungo</strong> un tubo</li>
+                <li>quanto <strong>pesa</strong> un pezzo (la massa)</li>
+                <li>quanto <strong>tempo</strong> ci vuole per un giro</li>
+              </ul>
+              <p>Se non si può misurare, non è una grandezza.</p>
+            </article>
+
+            <article class="capitolo" id="numero">
+              <h2>2. Numero + unità</h2>
+              <p>Misurare = dare un <strong>numero</strong> e un’<strong>unità</strong>.</p>
+              <p>Se scrivi solo <span class="mono">5</span>, non si capisce.</p>
+              <p>Cinque metri? Cinque chili? Cinque secondi?</p>
+              <div class="esempio">
+                <p>Giusto: <span class="formula">80 cm</span></p>
+                <p>Sbagliato: <span class="formula">80</span></p>
+              </div>
+              <p>Regola: numero e unità <strong>sempre insieme</strong>.</p>
+            </article>
+
+            <article class="capitolo" id="tre">
+              <h2>3. Tre basi</h2>
+              <p>Tre grandezze si chiamano <strong>fondamentali</strong>.</p>
+              <p>Le altre nascono da queste.</p>
+              <div class="piastra">
+                <div class="chip" data-kind="m">
+                  <b>m</b>
+                  <p><strong>Lunghezza</strong> · metro. Quanto è lungo.</p>
+                </div>
+                <div class="chip" data-kind="kg">
+                  <b>kg</b>
+                  <p><strong>Massa</strong> · chilogrammo. Quanta materia c’è.</p>
+                </div>
+                <div class="chip" data-kind="s">
+                  <b>s</b>
+                  <p><strong>Tempo</strong> · secondo. Quanto dura.</p>
+                </div>
+              </div>
+              <p>Strumenti: metro a nastro, bilancia, cronometro.</p>
+            </article>
+
+            <article class="capitolo" id="si">
+              <h2>4. Il SI</h2>
+              <p><strong>SI</strong> = Sistema Internazionale.</p>
+              <p>Tutto il mondo usa le stesse unità: metro, chilogrammo, secondo.</p>
+              <p>Così un pezzo da <span class="mono">2 m</span> è <span class="mono">2 m</span> anche in un’altra officina.</p>
+              <p>Niente “passi”, niente “così, più o meno”.</p>
+            </article>
+
+            <article class="capitolo" id="multipli">
+              <h2>5. Multipli</h2>
+              <p>A volte il metro è troppo grande, o troppo piccolo. Si cambiano i multipli.</p>
+              <div class="piastra">
+                <div class="chip"><b>km</b><p>1 km = 1000 m · strade, viaggi</p></div>
+                <div class="chip"><b>cm</b><p>1 m = 100 cm · pezzi da banco</p></div>
+                <div class="chip"><b>mm</b><p>1 cm = 10 mm · spessori, viti</p></div>
+                <div class="chip" data-kind="kg"><b>g</b><p>1 kg = 1000 g · pezzi piccoli</p></div>
+                <div class="chip" data-kind="s"><b>min</b><p>1 min = 60 s</p></div>
+                <div class="chip" data-kind="s"><b>h</b><p>1 h = 60 min = 3600 s</p></div>
+              </div>
+            </article>
+
+            <article class="capitolo" id="derivate">
+              <h2>6. Derivate</h2>
+              <p>Le grandezze <strong>derivate</strong> si calcolano con le fondamentali.</p>
+              <div class="contrasto">
+                <div>
+                  <h3>Fondamentali</h3>
+                  <p>Le misuri con uno strumento.</p>
+                  <p><span class="mono">m · kg · s</span></p>
+                </div>
+                <div>
+                  <h3>Derivate</h3>
+                  <p>Le ottieni con una formula.</p>
+                  <p><span class="mono">m² · m³ · m/s</span></p>
+                </div>
+              </div>
+              <div class="piastra">
+                <div class="chip" data-kind="der">
+                  <b>m²</b>
+                  <p><strong>Area</strong> = lunghezza × larghezza.</p>
+                </div>
+                <div class="chip" data-kind="der">
+                  <b>m³</b>
+                  <p><strong>Volume</strong> = lunghezza × larghezza × altezza.</p>
+                </div>
+                <div class="chip" data-kind="der">
+                  <b>m/s</b>
+                  <p><strong>Velocità</strong> = spazio ÷ tempo.</p>
+                </div>
+              </div>
+              <div class="esempio">
+                <p>Lamiera 2 m per 1 m.</p>
+                <p class="formula">A = 2 m × 1 m = 2 m²</p>
+              </div>
+              <div class="esempio">
+                <p>Serbatoio 1 m × 1 m × 1 m.</p>
+                <p class="formula">V = 1 m³</p>
+              </div>
+            </article>
+
+            <article class="capitolo" id="velocita">
+              <h2>7. Velocità</h2>
+              <p>La velocità dice <strong>quanto spazio in quanto tempo</strong>.</p>
+              <p class="formula mono">v = s / t</p>
+              <p><span class="mono">s</span> = spazio (metri). <span class="mono">t</span> = tempo (secondi).</p>
+              <p>Unità SI: <strong>metri al secondo</strong> · <span class="mono">m/s</span>.</p>
+              <div class="esempio">
+                <p>Lo scooter fa 90 m in 9 s.</p>
+                <p class="formula">v = 90 m / 9 s = 10 m/s</p>
+                <p>Dieci metri ogni secondo.</p>
+              </div>
+            </article>
+
+            <article class="capitolo" id="kmh">
+              <h2>8. km/h</h2>
+              <p>In strada si usa <strong>chilometri all’ora</strong>: <span class="mono">km/h</span>.</p>
+              <p>Stessa velocità. Unità diversa.</p>
+              <p>Da <span class="mono">m/s</span> a <span class="mono">km/h</span>: <strong>moltiplica per 3,6</strong>.</p>
+              <div class="esempio">
+                <p class="formula">10 m/s × 3,6 = 36 km/h</p>
+              </div>
+              <p>Da <span class="mono">km/h</span> a <span class="mono">m/s</span>: <strong>dividi per 3,6</strong>.</p>
+              <div class="esempio">
+                <p class="formula">36 km/h ÷ 3,6 = 10 m/s</p>
+              </div>
+            </article>
+
+            <article class="capitolo" id="ricorda">
+              <h2>9. Ricorda così</h2>
+              <div class="ricorda">
+                <ul>
+                  <li>Grandezza = cosa che misuri.</li>
+                  <li>Sempre <strong>numero + unità</strong>.</li>
+                  <li>Basi: <span class="mono">m, kg, s</span>.</li>
+                  <li>Derivate: area, volume, velocità.</li>
+                  <li>Velocità: <span class="mono">v = s / t</span>.</li>
+                  <li><span class="mono">m/s → km/h</span>: × 3,6.</li>
+                </ul>
+              </div>
+              <div class="azioni">
+                <a class="btn btn-primary" href="laboratorio.html">Laboratorio</a>
+                <a class="btn" href="fumetto.html">Fumetto</a>
+                <a class="btn btn-ghost" href="gioco.html">Gioco</a>
+              </div>
+            </article>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <footer class="site-footer">
+      <p>Realizzato dal Prof. Rossano Bella</p>
+    </footer>
+  </div>
+
+  <script src="js/common.js" defer></script>
+</body>
+</html>

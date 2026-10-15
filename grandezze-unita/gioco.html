@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="color-scheme" content="dark" id="color-scheme">
+  <script>
+    {
+      const t = localStorage.getItem("tema-grandezze-unita");
+      const tema = t === "light" || t === "dark" ? t : "dark";
+      document.documentElement.dataset.theme = tema;
+      document.getElementById("color-scheme").content = tema;
+    }
+  </script>
+  <link rel="icon" href="../favicon.svg" type="image/svg+xml">
+  <title>Gioco · Grandezze e unità | Scuola</title>
+  <meta name="description" content="Percorso nel cortile dell’officina: cinque tappe su unità, fondamentali, derivate e velocità.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@600;700&family=IBM+Plex+Sans:wght@500;700&family=Oswald:wght@500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body class="page-gioco">
+  <a class="skip-link" href="#contenuto">Salta al contenuto</a>
+
+  <div class="banco">
+    <header class="nastro">
+      <nav class="nastro-nav" aria-label="Sezioni">
+        <a href="index.html">Home</a>
+        <a href="imparare.html">Studio</a>
+        <a href="fumetto.html">Fumetto</a>
+        <a href="laboratorio.html">Lab</a>
+        <a href="gioco.html" aria-current="page">Gioco</a>
+      </nav>
+      <button type="button" class="theme-toggle" data-theme-toggle aria-pressed="false">Chiaro</button>
+    </header>
+
+    <main id="contenuto" class="lastra" tabindex="-1">
+      <div class="lastra-inner">
+        <p class="kicker">Gioco · nastro nel cortile</p>
+        <h1>Segui il metro</h1>
+        <p class="lead">Cinque tappe sul nastro giallo. A ogni disco: una domanda.</p>
+
+        <div class="gioco-hud" aria-live="polite">
+          <span>Tappa <strong id="hud-stop">1</strong>/5</span>
+          <span>Punti <strong id="hud-score">0</strong></span>
+          <button type="button" class="btn" id="btn-restart">Ricomincia</button>
+        </div>
+
+        <div class="mappa-officina" id="mappa" aria-label="Cortile dell’officina con nastro da misura">
+          <img src="img/gioco-mappa.png" alt="" width="1376" height="768" decoding="async">
+        </div>
+
+        <section class="tappa" id="tappa" aria-live="polite">
+          <p class="kicker" id="tappa-meta"></p>
+          <h2 id="tappa-titolo"></h2>
+          <p id="tappa-q"></p>
+          <ul class="scelte" id="scelte"></ul>
+          <p class="feedback" id="tappa-msg"></p>
+          <div class="azioni">
+            <button type="button" class="btn btn-primary" id="btn-next" hidden>Tappa successiva →</button>
+          </div>
+        </section>
+
+        <div class="gioco-end" id="gioco-end" hidden>
+          <h2>Nastro finito</h2>
+          <p id="end-text"></p>
+          <div class="azioni">
+            <button type="button" class="btn btn-primary" id="btn-again">Un altro giro</button>
+            <a class="btn" href="laboratorio.html">Laboratorio</a>
+            <a class="btn" href="imparare.html">Studio</a>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <footer class="site-footer">
+      <p>Realizzato dal Prof. Rossano Bella</p>
+    </footer>
+  </div>
+
+  <script src="js/common.js" defer></script>
+  <script src="js/gioco.js" defer></script>
+</body>
+</html>

@@ -6,21 +6,20 @@
   <meta name="color-scheme" content="dark">
   <meta name="robots" content="noindex, nofollow">
   <link rel="icon" href="../../favicon.svg" type="image/svg+xml">
-  <title>Statistiche visite</title>
+  <title>Visite · ultime 24 ore</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,600;9..40,700;9..40,800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/admin.css?v=5">
+  <link rel="stylesheet" href="css/admin.css?v=9">
 </head>
 <body class="admin-page" data-theme="dark">
   <main class="admin-wrap admin-wrap--wide">
     <header class="admin-hero">
       <div class="admin-intro">
         <p class="admin-eyebrow">Area riservata</p>
-        <h1>Visite alle pagine</h1>
+        <h1>Qualcuno è entrato?</h1>
         <p class="admin-lead">
-          Conteggi remoti (tutti i dispositivi). Totale, ultime 24 ore e orario dell’ultima visita.
-          Hub professionale e attività collegate.
+          Solo un segnale sulle ultime 24 ore e quale pagina è stata visitata per ultima.
         </p>
       </div>
 
@@ -34,11 +33,10 @@
           <span class="school-clock__rain school-clock__rain--one"></span>
           <span class="school-clock__rain school-clock__rain--two"></span>
           <span class="school-clock__lightning"></span>
-          <img src="img/meucci-isometrica.png" alt="" width="900" height="540">
+          <img src="img/meucci-isometrica.png?v=2" alt="" width="1100" height="619">
         </div>
         <div class="school-clock__display">
           <p class="school-clock__place">Plesso Meucci · Acireale</p>
-          <p class="school-clock__period" id="school-clock-period">Ora locale</p>
           <time class="school-clock__time" id="school-clock-time">--:--:--</time>
           <p class="school-clock__date" id="school-clock-date">Ora locale</p>
           <p class="school-clock__weather" id="school-clock-weather" aria-live="polite">Meteo in aggiornamento…</p>
@@ -48,10 +46,10 @@
     </header>
 
     <div class="admin-toolbar">
-      <div>
-        <p class="admin-totale" id="stats-totale">—</p>
-        <p class="admin-totale-24h" id="stats-totale-24h">—</p>
+      <div class="admin-segnale-box">
+        <p class="admin-totale-24h" id="stats-segnale" data-stato="attesa">—</p>
         <p class="admin-ultima" id="stats-ultima">—</p>
+        <p class="admin-pagina" id="stats-pagina" hidden></p>
         <p class="admin-stato" id="stats-stato">Caricamento…</p>
       </div>
       <div class="admin-azioni">
@@ -60,16 +58,69 @@
       </div>
     </div>
 
-    <ul class="admin-lista" id="stats-lista" aria-live="polite"></ul>
+    <section class="admin-giochi" aria-labelledby="admin-giochi-titolo">
+      <h2 id="admin-giochi-titolo">Giochi del Meucci</h2>
+      <div class="admin-giochi__carte">
+        <a class="admin-gioco" href="../../plesso-meucci-3d/">
+          <img src="../../plesso-meucci-3d/img/og-share.jpg?v=1" alt="Modello 3D dell'atrio e dell'aula 3 AM del Plesso Meucci" width="1200" height="630" loading="lazy">
+          <span class="admin-gioco__testo">
+            <strong>Plesso Meucci 3D · Atrio e Aula 3 AM</strong>
+            <span>Percorso 3D esplorabile nel browser con 6 tappe guidate, movimento libero e controllo luci.</span>
+          </span>
+        </a>
+        <a class="admin-gioco" href="../../meucci-giochi/gps/">
+          <img src="../../meucci-giochi/gps/copertina.jpg?v=4" alt="Precari cartoon, drago sputafuoco e il barattolone delle GPS" width="1052" height="800" loading="lazy">
+          <span class="admin-gioco__testo">
+            <strong>GPS 1100 · La grande raccolta</strong>
+            <span>La fila dei precari si svuota. Il barattolone si riempie. Fino all'ultima campanella.</span>
+          </span>
+        </a>
+        <a class="admin-gioco" href="../../meucci-giochi/di-ruolo/">
+          <img src="../../meucci-giochi/di-ruolo/copertina.jpg?v=1" alt="Targhetta di ruolo, carta sul tavolo e barattolo dei precari" width="1200" height="900" loading="lazy">
+          <span class="admin-gioco__testo">
+            <strong>Di ruolo · La bacheca e la carta</strong>
+            <span>Due scene sullo stesso countdown: bacheca e carta di ruolo.</span>
+          </span>
+        </a>
+        <a class="admin-gioco" href="../../meucci-giochi/parcheggio.html">
+          <img src="../../meucci-giochi/img/parcheggio.jpg?v=3" alt="" width="800" height="600" loading="lazy">
+          <span class="admin-gioco__testo">
+            <strong>Parcheggia la Moke</strong>
+            <span>Tre livelli, l'ultimo in retromarcia.</span>
+          </span>
+        </a>
+        <a class="admin-gioco" href="../../meucci-giochi/puzzle.html">
+          <img src="../../meucci-giochi/img/stili/ghibli.jpg?v=1" alt="" width="1280" height="720" loading="lazy">
+          <span class="admin-gioco__testo">
+            <strong>Puzzle del Meucci</strong>
+            <span>Il plesso in tredici stili, da 12, 24 o 48 pezzi.</span>
+          </span>
+        </a>
+        <a class="admin-gioco" href="../../elettrominzione/">
+          <img src="../../elettrominzione/img/copertina.jpg?v=1" alt="" width="800" height="600" loading="lazy">
+          <span class="admin-gioco__testo">
+            <strong>Elettrominzione</strong>
+            <span>L'ubriaco sul ponte e l'alta tensione sotto.</span>
+          </span>
+        </a>
+        <a class="admin-gioco" href="../../adamo/">
+          <img src="../../adamo/copertina.jpg?v=1" alt="" width="800" height="600" loading="lazy">
+          <span class="admin-gioco__testo">
+            <strong>Adamo 1.0</strong>
+            <span>Cinque sensori scadenti e un neurone. VM18.</span>
+          </span>
+        </a>
+      </div>
+    </section>
   </main>
   <footer class="admin-footer">
     <p>Realizzato dal Prof. Rossano Bella</p>
   </footer>
   <script src="js/config.js?v=3"></script>
   <script src="js/auth.js?v=3"></script>
-  <script src="../../js/data.js?v=37" defer></script>
-  <script src="../../js/access-track.js?v=4" defer></script>
-  <script src="js/stats.js?v=4" defer></script>
-  <script src="js/school-clock.js?v=3" defer></script>
+  <script src="../../js/data.js?v=45" defer></script>
+  <script src="../../js/access-track.js?v=7" defer></script>
+  <script src="js/stats.js?v=7" defer></script>
+  <script src="js/school-clock.js?v=4" defer></script>
 </body>
 </html>

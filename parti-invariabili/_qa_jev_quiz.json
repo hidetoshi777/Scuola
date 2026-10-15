@@ -1,0 +1,819 @@
+{
+  "obiettivo": "Le parti invariabili del discorso in italiano: avverbio, preposizione, congiunzione, interiezione — riconoscimento e distinzione per prima superiore.",
+  "results": [
+    {
+      "idx": 0,
+      "q": "Quale di queste parole è un avverbio?",
+      "correct": "velocemente",
+      "tag": "avverbio",
+      "status": 200,
+      "latency_ms": 461,
+      "model": "jev-1.13.0",
+      "usage": {
+        "input_tokens": 902,
+        "output_tokens": 157
+      },
+      "unica_corretta": 0.98,
+      "distrattori_ok": 0.52,
+      "allineata": 0.96,
+      "difficolta_score": 0.11,
+      "difficolta_conf": 0.83,
+      "problema": "nessuno",
+      "problema_conf": 0.81,
+      "problema_probs": {
+        "nessuno": 0.85,
+        "corretta_sbagliata": 0.0,
+        "fuori_obiettivo": 0.0,
+        "spiegazione_debole": 0.0,
+        "ambigua": 0.0,
+        "distrattori_deboli": 0.15
+      }
+    },
+    {
+      "idx": 1,
+      "q": "«Di», «a», «da», «in» sono…",
+      "correct": "preposizioni proprie",
+      "tag": "preposizione",
+      "status": 200,
+      "latency_ms": 336,
+      "model": "jev-1.13.0",
+      "usage": {
+        "input_tokens": 912,
+        "output_tokens": 157
+      },
+      "unica_corretta": 0.95,
+      "distrattori_ok": 0.7,
+      "allineata": 0.97,
+      "difficolta_score": 0.01,
+      "difficolta_conf": 0.98,
+      "problema": "nessuno",
+      "problema_conf": 0.86,
+      "problema_probs": {
+        "nessuno": 0.88,
+        "spiegazione_debole": 0.03,
+        "corretta_sbagliata": 0.0,
+        "distrattori_deboli": 0.08,
+        "fuori_obiettivo": 0.0,
+        "ambigua": 0.01
+      }
+    },
+    {
+      "idx": 2,
+      "q": "In «Studio perché voglio imparare», «perché» è…",
+      "correct": "una congiunzione subordinante",
+      "tag": "congiunzione",
+      "status": 200,
+      "latency_ms": 424,
+      "model": "jev-1.13.0",
+      "usage": {
+        "input_tokens": 929,
+        "output_tokens": 157
+      },
+      "unica_corretta": 0.9,
+      "distrattori_ok": 0.77,
+      "allineata": 0.97,
+      "difficolta_score": 1.21,
+      "difficolta_conf": 0.62,
+      "problema": "nessuno",
+      "problema_conf": 0.65,
+      "problema_probs": {
+        "fuori_obiettivo": 0.0,
+        "distrattori_deboli": 0.04,
+        "corretta_sbagliata": 0.01,
+        "spiegazione_debole": 0.01,
+        "nessuno": 0.72,
+        "ambigua": 0.22
+      }
+    },
+    {
+      "idx": 3,
+      "q": "«Ah, che sorpresa!» — «Ah» è…",
+      "correct": "un’interiezione propria",
+      "tag": "interiezione",
+      "status": 200,
+      "latency_ms": 464,
+      "model": "jev-1.13.0",
+      "usage": {
+        "input_tokens": 910,
+        "output_tokens": 157
+      },
+      "unica_corretta": 0.94,
+      "distrattori_ok": 0.62,
+      "allineata": 0.98,
+      "difficolta_score": 0.34,
+      "difficolta_conf": 0.48,
+      "problema": "nessuno",
+      "problema_conf": 0.76,
+      "problema_probs": {
+        "nessuno": 0.8,
+        "fuori_obiettivo": 0.0,
+        "spiegazione_debole": 0.06,
+        "corretta_sbagliata": 0.01,
+        "distrattori_deboli": 0.05,
+        "ambigua": 0.08
+      }
+    },
+    {
+      "idx": 4,
+      "q": "Le parti invariabili del discorso…",
+      "correct": "non si flettono",
+      "tag": "teoria",
+      "status": 200,
+      "latency_ms": 391,
+      "model": "jev-1.13.0",
+      "usage": {
+        "input_tokens": 916,
+        "output_tokens": 162
+      },
+      "unica_corretta": 0.97,
+      "distrattori_ok": 0.43,
+      "allineata": 0.87,
+      "difficolta_score": 0.0,
+      "difficolta_conf": 1.0,
+      "problema": "distrattori_deboli",
+      "problema_conf": 0.42,
+      "problema_probs": {
+        "spiegazione_debole": 0.01,
+        "fuori_obiettivo": 0.0,
+        "nessuno": 0.46,
+        "corretta_sbagliata": 0.0,
+        "ambigua": 0.0,
+        "distrattori_deboli": 0.53
+      }
+    },
+    {
+      "idx": 5,
+      "q": "«Nel», «del», «sul» sono…",
+      "correct": "preposizioni articolate",
+      "tag": "preposizione",
+      "status": 200,
+      "latency_ms": 400,
+      "model": "jev-1.13.0",
+      "usage": {
+        "input_tokens": 906,
+        "output_tokens": 157
+      },
+      "unica_corretta": 0.97,
+      "distrattori_ok": 0.58,
+      "allineata": 0.97,
+      "difficolta_score": 0.05,
+      "difficolta_conf": 0.92,
+      "problema": "nessuno",
+      "problema_conf": 0.87,
+      "problema_probs": {
+        "ambigua": 0.0,
+        "spiegazione_debole": 0.02,
+        "corretta_sbagliata": 0.0,
+        "nessuno": 0.9,
+        "fuori_obiettivo": 0.0,
+        "distrattori_deboli": 0.08
+      }
+    },
+    {
+      "idx": 6,
+      "q": "«E», «ma», «oppure» sono congiunzioni…",
+      "correct": "coordinanti",
+      "tag": "congiunzione",
+      "status": 200,
+      "latency_ms": 448,
+      "model": "jev-1.13.0",
+      "usage": {
+        "input_tokens": 910,
+        "output_tokens": 157
+      },
+      "unica_corretta": 0.95,
+      "distrattori_ok": 0.66,
+      "allineata": 0.95,
+      "difficolta_score": 0.06,
+      "difficolta_conf": 0.9,
+      "problema": "nessuno",
+      "problema_conf": 0.72,
+      "problema_probs": {
+        "spiegazione_debole": 0.02,
+        "fuori_obiettivo": 0.0,
+        "nessuno": 0.76,
+        "corretta_sbagliata": 0.01,
+        "distrattori_deboli": 0.19,
+        "ambigua": 0.02
+      }
+    },
+    {
+      "idx": 7,
+      "q": "In «Corro spesso al parco», «spesso» è…",
+      "correct": "un avverbio di frequenza",
+      "tag": "avverbio",
+      "status": 200,
+      "latency_ms": 396,
+      "model": "jev-1.13.0",
+      "usage": {
+        "input_tokens": 920,
+        "output_tokens": 160
+      },
+      "unica_corretta": 0.91,
+      "distrattori_ok": 0.62,
+      "allineata": 0.97,
+      "difficolta_score": 0.72,
+      "difficolta_conf": 0.57,
+      "problema": "spiegazione_debole",
+      "problema_conf": 0.93,
+      "problema_probs": {
+        "distrattori_deboli": 0.0,
+        "fuori_obiettivo": 0.0,
+        "ambigua": 0.01,
+        "spiegazione_debole": 0.94,
+        "nessuno": 0.05,
+        "corretta_sbagliata": 0.0
+      }
+    },
+    {
+      "idx": 8,
+      "q": "Quale gruppo è una locuzione prepositiva?",
+      "correct": "a causa di",
+      "tag": "preposizione",
+      "status": 200,
+      "latency_ms": 362,
+      "model": "jev-1.13.0",
+      "usage": {
+        "input_tokens": 906,
+        "output_tokens": 157
+      },
+      "unica_corretta": 0.95,
+      "distrattori_ok": 0.72,
+      "allineata": 0.95,
+      "difficolta_score": 0.37,
+      "difficolta_conf": 0.44,
+      "problema": "nessuno",
+      "problema_conf": 0.66,
+      "problema_probs": {
+        "nessuno": 0.72,
+        "fuori_obiettivo": 0.0,
+        "corretta_sbagliata": 0.01,
+        "distrattori_deboli": 0.11,
+        "spiegazione_debole": 0.1,
+        "ambigua": 0.06
+      }
+    },
+    {
+      "idx": 9,
+      "q": "In «Benché piova, esco», «benché» introduce…",
+      "correct": "una concessione",
+      "tag": "congiunzione",
+      "status": 200,
+      "latency_ms": 367,
+      "model": "jev-1.13.0",
+      "usage": {
+        "input_tokens": 920,
+        "output_tokens": 157
+      },
+      "unica_corretta": 0.98,
+      "distrattori_ok": 0.76,
+      "allineata": 0.94,
+      "difficolta_score": 0.88,
+      "difficolta_conf": 0.82,
+      "problema": "nessuno",
+      "problema_conf": 0.94,
+      "problema_probs": {
+        "fuori_obiettivo": 0.0,
+        "distrattori_deboli": 0.04,
+        "corretta_sbagliata": 0.0,
+        "spiegazione_debole": 0.01,
+        "nessuno": 0.95,
+        "ambigua": 0.0
+      }
+    },
+    {
+      "idx": 10,
+      "q": "«Bravo!» gridato a fine spettacolo è…",
+      "correct": "un’interiezione impropria",
+      "tag": "interiezione",
+      "status": 200,
+      "latency_ms": 345,
+      "model": "jev-1.13.0",
+      "usage": {
+        "input_tokens": 928,
+        "output_tokens": 157
+      },
+      "unica_corretta": 0.82,
+      "distrattori_ok": 0.69,
+      "allineata": 0.92,
+      "difficolta_score": 1.74,
+      "difficolta_conf": 0.61,
+      "problema": "nessuno",
+      "problema_conf": 0.28,
+      "problema_probs": {
+        "nessuno": 0.4,
+        "fuori_obiettivo": 0.01,
+        "ambigua": 0.39,
+        "spiegazione_debole": 0.11,
+        "distrattori_deboli": 0.05,
+        "corretta_sbagliata": 0.04
+      }
+    },
+    {
+      "idx": 11,
+      "q": "Quale parola NON è invariabile?",
+      "correct": "rapido",
+      "tag": "teoria",
+      "status": 200,
+      "latency_ms": 379,
+      "model": "jev-1.13.0",
+      "usage": {
+        "input_tokens": 906,
+        "output_tokens": 157
+      },
+      "unica_corretta": 0.97,
+      "distrattori_ok": 0.71,
+      "allineata": 0.95,
+      "difficolta_score": 0.26,
+      "difficolta_conf": 0.61,
+      "problema": "nessuno",
+      "problema_conf": 0.84,
+      "problema_probs": {
+        "nessuno": 0.87,
+        "distrattori_deboli": 0.08,
+        "ambigua": 0.02,
+        "fuori_obiettivo": 0.0,
+        "spiegazione_debole": 0.02,
+        "corretta_sbagliata": 0.01
+      }
+    },
+    {
+      "idx": 12,
+      "q": "In «Cammina lungo il fiume», «lungo» è…",
+      "correct": "una preposizione impropria",
+      "tag": "preposizione",
+      "status": 200,
+      "latency_ms": 396,
+      "model": "jev-1.13.0",
+      "usage": {
+        "input_tokens": 925,
+        "output_tokens": 157
+      },
+      "unica_corretta": 0.91,
+      "distrattori_ok": 0.85,
+      "allineata": 0.96,
+      "difficolta_score": 1.14,
+      "difficolta_conf": 0.73,
+      "problema": "nessuno",
+      "problema_conf": 0.67,
+      "problema_probs": {
+        "fuori_obiettivo": 0.0,
+        "spiegazione_debole": 0.03,
+        "nessuno": 0.72,
+        "corretta_sbagliata": 0.02,
+        "distrattori_deboli": 0.04,
+        "ambigua": 0.19
+      }
+    },
+    {
+      "idx": 13,
+      "q": "«Cioè» e «infatti» sono congiunzioni…",
+      "correct": "dichiarative",
+      "tag": "congiunzione",
+      "status": 200,
+      "latency_ms": 352,
+      "model": "jev-1.13.0",
+      "usage": {
+        "input_tokens": 915,
+        "output_tokens": 157
+      },
+      "unica_corretta": 0.84,
+      "distrattori_ok": 0.61,
+      "allineata": 0.93,
+      "difficolta_score": 0.51,
+      "difficolta_conf": 0.24,
+      "problema": "nessuno",
+      "problema_conf": 0.24,
+      "problema_probs": {
+        "nessuno": 0.37,
+        "spiegazione_debole": 0.08,
+        "ambigua": 0.2,
+        "distrattori_deboli": 0.2,
+        "corretta_sbagliata": 0.14,
+        "fuori_obiettivo": 0.01
+      }
+    },
+    {
+      "idx": 14,
+      "q": "Quale avverbio esprime dubbio?",
+      "correct": "forse",
+      "tag": "avverbio",
+      "status": 200,
+      "latency_ms": 391,
+      "model": "jev-1.13.0",
+      "usage": {
+        "input_tokens": 900,
+        "output_tokens": 157
+      },
+      "unica_corretta": 0.95,
+      "distrattori_ok": 0.64,
+      "allineata": 0.92,
+      "difficolta_score": 0.03,
+      "difficolta_conf": 0.96,
+      "problema": "nessuno",
+      "problema_conf": 0.92,
+      "problema_probs": {
+        "corretta_sbagliata": 0.0,
+        "distrattori_deboli": 0.06,
+        "fuori_obiettivo": 0.0,
+        "ambigua": 0.01,
+        "nessuno": 0.93,
+        "spiegazione_debole": 0.0
+      }
+    },
+    {
+      "idx": 15,
+      "q": "In «Non ci vado né oggi né domani», «né» è…",
+      "correct": "una congiunzione copulativa",
+      "tag": "congiunzione",
+      "status": 200,
+      "latency_ms": 388,
+      "model": "jev-1.13.0",
+      "usage": {
+        "input_tokens": 926,
+        "output_tokens": 157
+      },
+      "unica_corretta": 0.75,
+      "distrattori_ok": 0.76,
+      "allineata": 0.97,
+      "difficolta_score": 1.11,
+      "difficolta_conf": 0.71,
+      "problema": "nessuno",
+      "problema_conf": 0.31,
+      "problema_probs": {
+        "corretta_sbagliata": 0.17,
+        "spiegazione_debole": 0.08,
+        "fuori_obiettivo": 0.0,
+        "nessuno": 0.42,
+        "ambigua": 0.26,
+        "distrattori_deboli": 0.07
+      }
+    },
+    {
+      "idx": 16,
+      "q": "«Patatrac» è…",
+      "correct": "un’onomatopea",
+      "tag": "interiezione",
+      "status": 200,
+      "latency_ms": 374,
+      "model": "jev-1.13.0",
+      "usage": {
+        "input_tokens": 918,
+        "output_tokens": 157
+      },
+      "unica_corretta": 0.83,
+      "distrattori_ok": 0.64,
+      "allineata": 0.91,
+      "difficolta_score": 0.34,
+      "difficolta_conf": 0.49,
+      "problema": "nessuno",
+      "problema_conf": 0.36,
+      "problema_probs": {
+        "distrattori_deboli": 0.05,
+        "spiegazione_debole": 0.02,
+        "fuori_obiettivo": 0.07,
+        "nessuno": 0.47,
+        "ambigua": 0.36,
+        "corretta_sbagliata": 0.03
+      }
+    },
+    {
+      "idx": 17,
+      "q": "Quante sono le parti invariabili del discorso?",
+      "correct": "4",
+      "tag": "teoria",
+      "status": 200,
+      "latency_ms": 367,
+      "model": "jev-1.13.0",
+      "usage": {
+        "input_tokens": 897,
+        "output_tokens": 157
+      },
+      "unica_corretta": 0.83,
+      "distrattori_ok": 0.65,
+      "allineata": 0.71,
+      "difficolta_score": 0.0,
+      "difficolta_conf": 1.0,
+      "problema": "nessuno",
+      "problema_conf": 0.63,
+      "problema_probs": {
+        "distrattori_deboli": 0.06,
+        "corretta_sbagliata": 0.02,
+        "nessuno": 0.7,
+        "spiegazione_debole": 0.01,
+        "fuori_obiettivo": 0.0,
+        "ambigua": 0.21
+      }
+    }
+  ],
+  "review": [
+    {
+      "idx": 0,
+      "q": "Quale di queste parole è un avverbio?",
+      "correct": "velocemente",
+      "tag": "avverbio",
+      "status": 200,
+      "latency_ms": 461,
+      "model": "jev-1.13.0",
+      "usage": {
+        "input_tokens": 902,
+        "output_tokens": 157
+      },
+      "unica_corretta": 0.98,
+      "distrattori_ok": 0.52,
+      "allineata": 0.96,
+      "difficolta_score": 0.11,
+      "difficolta_conf": 0.83,
+      "problema": "nessuno",
+      "problema_conf": 0.81,
+      "problema_probs": {
+        "nessuno": 0.85,
+        "corretta_sbagliata": 0.0,
+        "fuori_obiettivo": 0.0,
+        "spiegazione_debole": 0.0,
+        "ambigua": 0.0,
+        "distrattori_deboli": 0.15
+      }
+    },
+    {
+      "idx": 3,
+      "q": "«Ah, che sorpresa!» — «Ah» è…",
+      "correct": "un’interiezione propria",
+      "tag": "interiezione",
+      "status": 200,
+      "latency_ms": 464,
+      "model": "jev-1.13.0",
+      "usage": {
+        "input_tokens": 910,
+        "output_tokens": 157
+      },
+      "unica_corretta": 0.94,
+      "distrattori_ok": 0.62,
+      "allineata": 0.98,
+      "difficolta_score": 0.34,
+      "difficolta_conf": 0.48,
+      "problema": "nessuno",
+      "problema_conf": 0.76,
+      "problema_probs": {
+        "nessuno": 0.8,
+        "fuori_obiettivo": 0.0,
+        "spiegazione_debole": 0.06,
+        "corretta_sbagliata": 0.01,
+        "distrattori_deboli": 0.05,
+        "ambigua": 0.08
+      }
+    },
+    {
+      "idx": 4,
+      "q": "Le parti invariabili del discorso…",
+      "correct": "non si flettono",
+      "tag": "teoria",
+      "status": 200,
+      "latency_ms": 391,
+      "model": "jev-1.13.0",
+      "usage": {
+        "input_tokens": 916,
+        "output_tokens": 162
+      },
+      "unica_corretta": 0.97,
+      "distrattori_ok": 0.43,
+      "allineata": 0.87,
+      "difficolta_score": 0.0,
+      "difficolta_conf": 1.0,
+      "problema": "distrattori_deboli",
+      "problema_conf": 0.42,
+      "problema_probs": {
+        "spiegazione_debole": 0.01,
+        "fuori_obiettivo": 0.0,
+        "nessuno": 0.46,
+        "corretta_sbagliata": 0.0,
+        "ambigua": 0.0,
+        "distrattori_deboli": 0.53
+      }
+    },
+    {
+      "idx": 5,
+      "q": "«Nel», «del», «sul» sono…",
+      "correct": "preposizioni articolate",
+      "tag": "preposizione",
+      "status": 200,
+      "latency_ms": 400,
+      "model": "jev-1.13.0",
+      "usage": {
+        "input_tokens": 906,
+        "output_tokens": 157
+      },
+      "unica_corretta": 0.97,
+      "distrattori_ok": 0.58,
+      "allineata": 0.97,
+      "difficolta_score": 0.05,
+      "difficolta_conf": 0.92,
+      "problema": "nessuno",
+      "problema_conf": 0.87,
+      "problema_probs": {
+        "ambigua": 0.0,
+        "spiegazione_debole": 0.02,
+        "corretta_sbagliata": 0.0,
+        "nessuno": 0.9,
+        "fuori_obiettivo": 0.0,
+        "distrattori_deboli": 0.08
+      }
+    },
+    {
+      "idx": 6,
+      "q": "«E», «ma», «oppure» sono congiunzioni…",
+      "correct": "coordinanti",
+      "tag": "congiunzione",
+      "status": 200,
+      "latency_ms": 448,
+      "model": "jev-1.13.0",
+      "usage": {
+        "input_tokens": 910,
+        "output_tokens": 157
+      },
+      "unica_corretta": 0.95,
+      "distrattori_ok": 0.66,
+      "allineata": 0.95,
+      "difficolta_score": 0.06,
+      "difficolta_conf": 0.9,
+      "problema": "nessuno",
+      "problema_conf": 0.72,
+      "problema_probs": {
+        "spiegazione_debole": 0.02,
+        "fuori_obiettivo": 0.0,
+        "nessuno": 0.76,
+        "corretta_sbagliata": 0.01,
+        "distrattori_deboli": 0.19,
+        "ambigua": 0.02
+      }
+    },
+    {
+      "idx": 7,
+      "q": "In «Corro spesso al parco», «spesso» è…",
+      "correct": "un avverbio di frequenza",
+      "tag": "avverbio",
+      "status": 200,
+      "latency_ms": 396,
+      "model": "jev-1.13.0",
+      "usage": {
+        "input_tokens": 920,
+        "output_tokens": 160
+      },
+      "unica_corretta": 0.91,
+      "distrattori_ok": 0.62,
+      "allineata": 0.97,
+      "difficolta_score": 0.72,
+      "difficolta_conf": 0.57,
+      "problema": "spiegazione_debole",
+      "problema_conf": 0.93,
+      "problema_probs": {
+        "distrattori_deboli": 0.0,
+        "fuori_obiettivo": 0.0,
+        "ambigua": 0.01,
+        "spiegazione_debole": 0.94,
+        "nessuno": 0.05,
+        "corretta_sbagliata": 0.0
+      }
+    },
+    {
+      "idx": 10,
+      "q": "«Bravo!» gridato a fine spettacolo è…",
+      "correct": "un’interiezione impropria",
+      "tag": "interiezione",
+      "status": 200,
+      "latency_ms": 345,
+      "model": "jev-1.13.0",
+      "usage": {
+        "input_tokens": 928,
+        "output_tokens": 157
+      },
+      "unica_corretta": 0.82,
+      "distrattori_ok": 0.69,
+      "allineata": 0.92,
+      "difficolta_score": 1.74,
+      "difficolta_conf": 0.61,
+      "problema": "nessuno",
+      "problema_conf": 0.28,
+      "problema_probs": {
+        "nessuno": 0.4,
+        "fuori_obiettivo": 0.01,
+        "ambigua": 0.39,
+        "spiegazione_debole": 0.11,
+        "distrattori_deboli": 0.05,
+        "corretta_sbagliata": 0.04
+      }
+    },
+    {
+      "idx": 13,
+      "q": "«Cioè» e «infatti» sono congiunzioni…",
+      "correct": "dichiarative",
+      "tag": "congiunzione",
+      "status": 200,
+      "latency_ms": 352,
+      "model": "jev-1.13.0",
+      "usage": {
+        "input_tokens": 915,
+        "output_tokens": 157
+      },
+      "unica_corretta": 0.84,
+      "distrattori_ok": 0.61,
+      "allineata": 0.93,
+      "difficolta_score": 0.51,
+      "difficolta_conf": 0.24,
+      "problema": "nessuno",
+      "problema_conf": 0.24,
+      "problema_probs": {
+        "nessuno": 0.37,
+        "spiegazione_debole": 0.08,
+        "ambigua": 0.2,
+        "distrattori_deboli": 0.2,
+        "corretta_sbagliata": 0.14,
+        "fuori_obiettivo": 0.01
+      }
+    },
+    {
+      "idx": 14,
+      "q": "Quale avverbio esprime dubbio?",
+      "correct": "forse",
+      "tag": "avverbio",
+      "status": 200,
+      "latency_ms": 391,
+      "model": "jev-1.13.0",
+      "usage": {
+        "input_tokens": 900,
+        "output_tokens": 157
+      },
+      "unica_corretta": 0.95,
+      "distrattori_ok": 0.64,
+      "allineata": 0.92,
+      "difficolta_score": 0.03,
+      "difficolta_conf": 0.96,
+      "problema": "nessuno",
+      "problema_conf": 0.92,
+      "problema_probs": {
+        "corretta_sbagliata": 0.0,
+        "distrattori_deboli": 0.06,
+        "fuori_obiettivo": 0.0,
+        "ambigua": 0.01,
+        "nessuno": 0.93,
+        "spiegazione_debole": 0.0
+      }
+    },
+    {
+      "idx": 16,
+      "q": "«Patatrac» è…",
+      "correct": "un’onomatopea",
+      "tag": "interiezione",
+      "status": 200,
+      "latency_ms": 374,
+      "model": "jev-1.13.0",
+      "usage": {
+        "input_tokens": 918,
+        "output_tokens": 157
+      },
+      "unica_corretta": 0.83,
+      "distrattori_ok": 0.64,
+      "allineata": 0.91,
+      "difficolta_score": 0.34,
+      "difficolta_conf": 0.49,
+      "problema": "nessuno",
+      "problema_conf": 0.36,
+      "problema_probs": {
+        "distrattori_deboli": 0.05,
+        "spiegazione_debole": 0.02,
+        "fuori_obiettivo": 0.07,
+        "nessuno": 0.47,
+        "ambigua": 0.36,
+        "corretta_sbagliata": 0.03
+      }
+    },
+    {
+      "idx": 17,
+      "q": "Quante sono le parti invariabili del discorso?",
+      "correct": "4",
+      "tag": "teoria",
+      "status": 200,
+      "latency_ms": 367,
+      "model": "jev-1.13.0",
+      "usage": {
+        "input_tokens": 897,
+        "output_tokens": 157
+      },
+      "unica_corretta": 0.83,
+      "distrattori_ok": 0.65,
+      "allineata": 0.71,
+      "difficolta_score": 0.0,
+      "difficolta_conf": 1.0,
+      "problema": "nessuno",
+      "problema_conf": 0.63,
+      "problema_probs": {
+        "distrattori_deboli": 0.06,
+        "corretta_sbagliata": 0.02,
+        "nessuno": 0.7,
+        "spiegazione_debole": 0.01,
+        "fuori_obiettivo": 0.0,
+        "ambigua": 0.21
+      }
+    }
+  ]
+}

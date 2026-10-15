@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="color-scheme" content="dark" id="color-scheme">
+  <script>
+    {
+      const t = localStorage.getItem("tema-grandezze-unita");
+      const tema = t === "light" || t === "dark" ? t : "dark";
+      document.documentElement.dataset.theme = tema;
+      document.getElementById("color-scheme").content = tema;
+    }
+  </script>
+  <link rel="icon" href="../favicon.svg" type="image/svg+xml">
+  <title>Grandezze e unità | Scuola</title>
+  <meta name="description" content="Grandezze fisiche, unità SI, fondamentali e derivate: metro, chilogrammo, secondo, area, volume e velocità.">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="it_IT">
+  <meta property="og:site_name" content="Scuola · Prof. Rossano Bella">
+  <meta property="og:title" content="Grandezze e unità">
+  <meta property="og:description" content="Un numero senza unità non dice niente. Metro, chilogrammo, secondo, poi velocità.">
+  <meta property="og:url" content="https://hidetoshi777.github.io/Scuola/grandezze-unita/">
+  <meta property="og:image" content="https://hidetoshi777.github.io/Scuola/grandezze-unita/img/og-share.jpg">
+  <meta property="og:image:alt" content="Banco da officina con metro, bilancia e cronometro">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Grandezze e unità">
+  <meta name="twitter:description" content="Un numero senza unità non dice niente. Metro, chilogrammo, secondo, poi velocità.">
+  <meta name="twitter:image" content="https://hidetoshi777.github.io/Scuola/grandezze-unita/img/og-share.jpg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@600;700&family=IBM+Plex+Sans:wght@500;700&family=Oswald:wght@500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body class="page-home">
+  <a class="skip-link" href="#contenuto">Salta al contenuto</a>
+
+  <div class="banco">
+    <header class="nastro">
+      <nav class="nastro-nav" aria-label="Sezioni">
+        <a href="index.html" aria-current="page">Home</a>
+        <a href="imparare.html">Studio</a>
+        <a href="fumetto.html">Fumetto</a>
+        <a href="laboratorio.html">Lab</a>
+        <a href="gioco.html">Gioco</a>
+      </nav>
+      <button type="button" class="theme-toggle" data-theme-toggle aria-pressed="false">Chiaro</button>
+    </header>
+
+    <main id="contenuto" class="lastra" tabindex="-1">
+      <div class="lastra-inner">
+        <p class="kicker">Terza professionale · Tecnologie di installazione e manutenzione</p>
+        <div class="hero-banco">
+          <img src="img/home-banco.png" alt="Banco da officina: metro a nastro, bilancia e cronometro" width="1376" height="768">
+          <div class="hero-copy">
+            <h1>Grandezze e unità</h1>
+            <p class="lead">In officina si misura. Non si indovina.</p>
+            <blockquote class="quote">Un numero senza unità non dice niente.</blockquote>
+          </div>
+        </div>
+
+        <p>Tocca uno strumento. Ti dice cosa misura.</p>
+        <div class="ganci" id="ganci">
+          <button type="button" class="gancio" data-kind="m" aria-pressed="false">
+            <span class="simbolo">m</span>
+            <p>Metro a nastro</p>
+          </button>
+          <button type="button" class="gancio" data-kind="kg" aria-pressed="false">
+            <span class="simbolo">kg</span>
+            <p>Bilancia</p>
+          </button>
+          <button type="button" class="gancio" data-kind="s" aria-pressed="false">
+            <span class="simbolo">s</span>
+            <p>Cronometro</p>
+          </button>
+        </div>
+        <p class="gancio-msg" id="gancio-msg" aria-live="polite"></p>
+
+        <div class="azioni">
+          <a class="btn btn-primary" href="imparare.html">Studio</a>
+          <a class="btn" href="fumetto.html">Fumetto</a>
+          <a class="btn" href="laboratorio.html">Laboratorio</a>
+          <a class="btn btn-ghost" href="gioco.html">Gioco</a>
+        </div>
+      </div>
+    </main>
+
+    <footer class="site-footer">
+      <p>Realizzato dal Prof. Rossano Bella</p>
+    </footer>
+  </div>
+
+  <script src="js/common.js" defer></script>
+  <script src="js/home.js" defer></script>
+</body>
+</html>

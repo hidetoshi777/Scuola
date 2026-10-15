@@ -1,0 +1,125 @@
+.gioco-board {
+  position: relative;
+  max-width: 26rem;
+  margin: 0 auto;
+  aspect-ratio: 640 / 860;
+  background:
+    linear-gradient(180deg, rgba(20, 10, 14, 0.28), rgba(20, 10, 14, 0.55)),
+    url("../img/mappa-italia-fondo.jpg") center / cover;
+  border: 3px solid var(--gold);
+  border-radius: 0.7rem;
+  overflow: hidden;
+}
+
+.gioco-board .italia {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  pointer-events: none;
+}
+
+.gioco-pin {
+  position: absolute;
+  width: 2.8rem;
+  height: 2.8rem;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  border: 2px solid var(--gold-2);
+  background: color-mix(in srgb, var(--burgundy) 80%, #000);
+  color: var(--gold-2);
+  font-weight: 800;
+  cursor: pointer;
+  padding: 0;
+}
+
+.gioco-pin:disabled {
+  opacity: 0.38;
+  cursor: not-allowed;
+}
+
+.gioco-pin.is-here {
+  background: var(--gold);
+  color: var(--btn-text);
+  box-shadow: 0 0 0 4px color-mix(in srgb, var(--gold) 40%, transparent);
+}
+
+.gioco-pin.is-done {
+  background: #2f6b3a;
+  border-color: #8fe0a8;
+  color: #fff;
+}
+
+.gioco-card {
+  margin-top: 0.85rem;
+  padding: 0.9rem 1rem;
+  background: var(--card);
+  border: 1px solid var(--bordo);
+  border-radius: 0.85rem;
+}
+
+.gioco-card h2 {
+  margin: 0 0 0.45rem;
+  font-size: 1.25rem;
+}
+
+.gioco-opzioni {
+  display: grid;
+  gap: 0.45rem;
+}
+
+.gioco-opzioni button {
+  text-align: left;
+  min-height: 2.8rem;
+  padding: 0.55rem 0.75rem;
+  border-radius: 0.65rem;
+  border: 1px solid var(--bordo);
+  background: var(--bg-2);
+  color: var(--ink);
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.gioco-opzioni button.is-ok {
+  border-color: #8fe0a8;
+  background: #1d3b28;
+  color: #e8ffe9;
+}
+
+.gioco-opzioni button.is-no {
+  border-color: #c45;
+  background: #3a1520;
+}
+
+.gioco-feedback {
+  margin: 0.55rem 0 0;
+  font-weight: 700;
+}
+
+.gioco-next {
+  margin-top: 0.65rem;
+}
+
+@media (min-width: 880px) {
+  .gioco-layout {
+    display: grid;
+    grid-template-columns: 26rem minmax(0, 1fr);
+    gap: 1rem;
+    align-items: start;
+  }
+
+  .gioco-card {
+    margin-top: 0;
+  }
+}
+
+[data-theme="light"] .gioco-opzioni button.is-ok {
+  background: #d9f5e2;
+  color: #143;
+}
+
+[data-theme="light"] .gioco-opzioni button.is-no {
+  background: #f8d4d4;
+  color: #411;
+}
