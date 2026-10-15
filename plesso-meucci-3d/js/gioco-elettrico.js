@@ -10,11 +10,17 @@
 
 import { RoundedBoxGeometry } from 'three/addons/geometries/RoundedBoxGeometry.js';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
+import { BATTUTE_PROF } from './battute-prof.js';
 
 // Prof: "Cartoon Teacher Model" di eduardolira (Sketchfab, CC-BY 4.0), riscalato
 // in Blender a 1,6 m senza la sua animazione. Le pose le facciamo noi sulle ossa.
 const PROF_URL = new URL('../models/prof.glb', import.meta.url).href;
-const PROF_SCALE = 0.78; // 1,6 m nel file → ~1,25 m in aula, meno ingombrante
+const PROF_SCALE = 0.78;
+
+// Voce del Prof: mp3 generati con ElevenLabs da _voce_prof.py (voce «Prof Meucci 3 AM»)
+const VOCE_URL = new URL('../audio/prof/', import.meta.url).href;
+const VOCE_KEY = 'meucci3d-voce';
+const profLine = (key) => ({ who: 'Prof', text: BATTUTE_PROF[key], voce: key }); // 1,6 m nel file → ~1,25 m in aula, meno ingombrante
 const PROF_BONES = {
   spine: 'Bone_39',
   head: 'Bone.001_4',
@@ -763,22 +769,58 @@ export function createElectricGame({ THREE, scene, b2t, ui }) {
   const DIALOGUES = {
     first: [
       { who: 'Tu', text: 'Prof, la TV non dà segni di vita!' },
-      { who: 'Prof', text: 'Niente panico. Prima regola: non si tocca a caso.' },
-      {
-        who: 'Prof',
-        text: 'Stacca la corrente al quadretto vicino alla porta. Poi prendi tester e fusibile.'
-      }
+      profLine('panico'),
+      profLine('stacca')
     ],
-    powerOff: [{ who: 'Prof', text: 'Bene: tensione tolta. Ora il tester vicino alle finestre.' }],
+    powerOff: [profLine('tensioneTolta')],
     tester: [{ who: 'Tu', text: 'Tester preso. Serve anche il fusibile di ricambio.' }],
     fuse: [{ who: 'Tu', text: 'Fusibile trovato. Torno al banco di lavoro.' }],
-    repaired: [
-      { who: 'Prof', text: 'Circuito chiuso di nuovo. Riattacca la corrente, poi collaudiamo la TV.' }
-    ],
-    powerOn: [{ who: 'Prof', text: 'Corrente ok. Vai alla TV e premi E: è il collaudo finale!' }],
-    tvBroken: [{ who: 'Prof', text: 'Ancora niente. Segui la missione: sicurezza, strumenti, riparazione.' }],
-    needPowerOff: [{ who: 'Prof', text: 'Aspetta: prima togli tensione. Sicurezza sempre.' }]
+    repaired: [profLine('circuitoChiuso')],
+    powerOn: [profLine('correnteOk')],
+    tvBroken: [profLine('ancoraNiente')],
+    needPowerOff: [profLine('aspetta')]
   };
+
+  // ---- Voce -----------------------------------------------------------------
+  let voiceOn = true;
+  try { voiceOn = localStorage.getItem(VOCE_KEY) !== 'off'; } catch (_) { /* storage bloccato */ }
+  let voice = null;      // Audio della battuta in corso
+  let voiceBlocked = null; // battuta fermata dal blocco dell'autoplay: riparte al primo tocco
+  let voiceTimer = 0;
+
+  function stopVoice() {
+    clearTimeout(voiceTimer);
+    if (voice) { voice.pause(); voice = null; }
+    voiceBlocked = null;
+  }
+
+  function playVoice(key, delayMs = 0) {
+    stopVoice();
+    if (!key || !voiceOn) return;
+    const a = new Audio(VOCE_URL + key + '.mp3');
+    voice = a;
+    const go = () => a.play().catch(() => { if (voice === a) voiceBlocked = a; });
+    if (delayMs) voiceTimer = setTimeout(go, delayMs);
+    else go();
+  }
+
+  // Il browser non fa parlare la pagina prima di un gesto: la battuta d'apertura parte al primo tocco
+  const unlockVoice = () => {
+    if (voiceBlocked && voiceBlocked === voice) voiceBlocked.play().catch(() => {});
+    voiceBlocked = null;
+  };
+  window.addEventListener('pointerdown', unlockVoice, true);
+  window.addEventListener('keydown', unlockVoice, true);
+
+  function voicePlaying() {
+    return !!(voice && !voice.paused && !voice.ended);
+  }
+
+  function setVoice(on) {
+    voiceOn = on;
+    try { localStorage.setItem(VOCE_KEY, on ? 'on' : 'off'); } catch (_) { /* storage bloccato */ }
+    if (!on) stopVoice();
+  }
 
   let dialogueQueue = [];
   let dialogueOpen = false;
@@ -790,12 +832,15 @@ export function createElectricGame({ THREE, scene, b2t, ui }) {
       if (!dialogueQueue.length) {
         dialogueOpen = false;
         speaker = null;
+        stopVoice();
         ui.hideDialogue();
         if (onDone) onDone();
         return;
       }
       const line = dialogueQueue.shift();
       speaker = line.who;
+      if (line.voce) playVoice(line.voce);
+      else stopVoice();
       ui.showDialogue(line.who, line.text, advance);
     };
     advance();
@@ -900,7 +945,10 @@ export function createElectricGame({ THREE, scene, b2t, ui }) {
   }
 
   function onTVSuccessBoot() {
-    if (state.step === STEPS.COLLAUDO) setStep(STEPS.WIN);
+    if (state.step === STEPS.COLLAUDO) {
+      setStep(STEPS.WIN);
+      playVoice('evviva', 1600); // dopo la fanfara della TV
+    }
   }
 
   // ---------------------------------------------------------------------------
@@ -980,7 +1028,8 @@ export function createElectricGame({ THREE, scene, b2t, ui }) {
     const headY = tmp.y + (profRig ? 1.3 : 1.67) * PROF_SCALE;
     const pitch = horiz < 9 ? clamp(Math.atan2(camPos.y - headY, Math.max(horiz, 0.3)), -0.35, 0.35) : 0;
 
-    const talking = dialogueOpen && speaker === 'Prof';
+    // parla mentre la sua voce suona; senza voce, mentre la sua battuta è a schermo
+    const talking = voicePlaying() || (!voice && dialogueOpen && speaker === 'Prof');
     const cheering = state.step === STEPS.WIN;
 
     if (profRig) {
@@ -1070,6 +1119,7 @@ export function createElectricGame({ THREE, scene, b2t, ui }) {
     dialogueOpen = false;
     dialogueQueue = [];
     speaker = null;
+    stopVoice();
     pickups.length = 0;
     restoreProp(deskTester.group, homes.tester);
     deskTester.group.rotation.y = -0.5;
@@ -1082,10 +1132,7 @@ export function createElectricGame({ THREE, scene, b2t, ui }) {
     ui.hideWin();
     ui.setPowerVisual(true);
     setStep(STEPS.TALK_PROF);
-    showDialogue([
-      { who: 'Prof', text: 'Benvenuto in 3 AM. La TV è guasta: ti guido passo passo.' },
-      { who: 'Prof', text: 'Entra, vieni alla cattedra e premi E quando vedi il tasto.' }
-    ]);
+    showDialogue([profLine('benvenuto'), profLine('vieni')]);
   }
 
   /** Da chiamare quando il GLB è in scena: appoggia oggetti e Prof sulle superfici vere. */
@@ -1110,6 +1157,8 @@ export function createElectricGame({ THREE, scene, b2t, ui }) {
     attachWorld,
     colliders: [{ obj: profRoot, r: 0.42 * PROF_SCALE }], // il Prof blocca la camera come un cilindro
     setQuality,
+    setVoice,
+    isVoiceOn: () => voiceOn,
     STEPS
   };
 }

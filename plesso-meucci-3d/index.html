@@ -656,6 +656,7 @@
       <button type="button" class="stop-btn" data-stop="6">🎮 Vai alla TV</button>
       <button type="button" class="stop-btn light-toggle" id="btn-lights">💡 Neon: Spenti (3 AM)</button>
       <button type="button" class="stop-btn" id="btn-theme" aria-pressed="false">Tema chiaro</button>
+      <button type="button" class="stop-btn" id="btn-voice" aria-pressed="true">🔊 Voce del Prof: Sì</button>
       <button type="button" class="stop-btn" id="btn-quality" title="Grafica più leggera per i computer senza scheda video">⚙️ Grafica: Alta</button>
     </nav>
   </header>
@@ -1248,6 +1249,11 @@
         goToStop(Number(e.code.replace('Digit', '')) - 1);
         return;
       }
+      if (e.code === 'KeyV' && !e.repeat) {
+        btnVoice.click();
+        showToast(electricGame.isVoiceOn() ? 'Voce del Prof: sì' : 'Voce del Prof: no');
+        return;
+      }
       if (e.code === 'KeyL' && !e.repeat) {
         btnLights.click();
         return;
@@ -1395,6 +1401,18 @@
       electricGame.setQuality(q);
       btnQuality.textContent = '⚙️ Grafica: ' + QUALITY_LABEL[q];
     }
+
+    const btnVoice = document.getElementById('btn-voice');
+    function refreshVoiceBtn() {
+      const on = electricGame.isVoiceOn();
+      btnVoice.textContent = on ? '🔊 Voce del Prof: Sì' : '🔇 Voce del Prof: No';
+      btnVoice.setAttribute('aria-pressed', String(on));
+    }
+    btnVoice.addEventListener('click', () => {
+      electricGame.setVoice(!electricGame.isVoiceOn());
+      refreshVoiceBtn();
+    });
+    refreshVoiceBtn();
 
     btnQuality.addEventListener('click', () => {
       const next = QUALITIES[(QUALITIES.indexOf(quality) + 1) % QUALITIES.length];
