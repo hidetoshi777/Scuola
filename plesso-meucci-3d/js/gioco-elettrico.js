@@ -43,14 +43,14 @@ export const STEPS = {
 
 const OBJECTIVES = {
   [STEPS.INTRO]: 'Entra in aula 3 AM e parla col Prof, accanto alla cattedra sotto la TV.',
-  [STEPS.TALK_PROF]: 'Avvicinati al Prof e premi Spazio per parlare.',
+  [STEPS.TALK_PROF]: 'Avvicinati al Prof e usa il tasto azione per parlare.',
   [STEPS.POWER_OFF]: 'Prima regola: togli tensione. Vai al quadretto vicino alla porta.',
   [STEPS.GET_TESTER]: 'Prendi il tester sul banco vicino alle finestre.',
   [STEPS.GET_FUSE]: 'Prendi il fusibile di ricambio sul banco in fondo.',
   [STEPS.REPAIR]: 'Torna al banco di lavoro vicino alla cattedra e ripara.',
   [STEPS.REWIRE]: 'Il guasto era nella spina: rifalla al banco di lavoro.',
   [STEPS.POWER_ON]: 'Riattacca la corrente al quadretto.',
-  [STEPS.COLLAUDO]: 'Collaudo: avvicinati alla TV e premi Spazio.',
+  [STEPS.COLLAUDO]: 'Collaudo: avvicinati alla TV e accendila.',
   [STEPS.WIN]: 'Missione compiuta! Guarda i titoli di coda in TV.'
 };
 
