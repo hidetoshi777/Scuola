@@ -509,7 +509,7 @@ export function createElectricGame({ THREE, scene, b2t, ui }) {
   // ---------------------------------------------------------------------------
   const SPOTS = {
     // fra la cattedra e le finestre, sotto la TV: fuori dal passaggio
-    prof: { bx: -10.45, by: 3.9, fallback: 0 },
+    prof: { bx: -10.3, by: 3.9, fallback: 0 },
     tester: { bx: -9.5, by: 0.92, fallback: 0.72 },
     fuse: { bx: -6.4, by: -0.4, fallback: 0.72 },
     bench: { bx: -7.27, by: 3.58, fallback: 0.72 },
@@ -995,8 +995,9 @@ export function createElectricGame({ THREE, scene, b2t, ui }) {
     turnBone(r.head, 'x', -pose.pitch + pose.talk * Math.sin(t * 5.2) * 0.07);
 
     // Braccia: dalla T-pose giù lungo i fianchi; esultando, su al cielo
-    const wiggle = Math.sin(t * 9) * 0.25 * pose.cheer;
-    const down = 1.2 * (1 - pose.cheer) - (0.75 + wiggle) * pose.cheer;
+    // esultando le braccia vanno quasi dritte in su: larghe di lato entravano nella finestra
+    const wiggle = Math.sin(t * 9) * 0.12 * pose.cheer;
+    const down = 1.2 * (1 - pose.cheer) - (1.32 + wiggle) * pose.cheer;
     const [negUp, negLow] = r.armNeg;
     const [posUp, posLow] = r.armPos;
     turnBone(negUp, 'z', down);

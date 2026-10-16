@@ -1120,6 +1120,53 @@
       outsideBackdrop: []
     };
 
+    // Nel modello lo schienale delle sedie è un pannello staccato dal sedile:
+    // le due gambe posteriori salgono fino allo schienale, come nelle sedie vere da aula.
+    function fixChairBacks(root) {
+      root.updateMatrixWorld(true);
+      const chairs = {};
+      root.traverse((o) => {
+        const m = /^SChair_(\d+)_(back|leg\d)$/.exec(o.name || '');
+        if (!m) return;
+        const c = (chairs[m[1]] ||= { legs: [] });
+        if (m[2] === 'back') c.back = o;
+        else c.legs.push(o);
+      });
+      const box = new THREE.Box3();
+      const center = new THREE.Vector3();
+      const backCenter = new THREE.Vector3();
+      const pos = new THREE.Vector3();
+      let fixed = 0;
+      Object.values(chairs).forEach(({ back, legs }) => {
+        if (!back || legs.length < 4) return;
+        const backBox = new THREE.Box3().setFromObject(back);
+        backBox.getCenter(backCenter);
+        const rear = legs
+          .map((l) => {
+            box.setFromObject(l).getCenter(center);
+            return { l, d: Math.hypot(center.x - backCenter.x, center.z - backCenter.z) };
+          })
+          .sort((a, b) => a.d - b.d)
+          .slice(0, 2);
+        rear.forEach(({ l }) => {
+          box.setFromObject(l);
+          const bottom = box.min.y;
+          const target = backBox.max.y - 0.01;
+          if (target <= box.max.y + 0.005) return;
+          l.scale.y *= (target - bottom) / (box.max.y - bottom);
+          l.updateMatrixWorld(true);
+          box.setFromObject(l);
+          l.getWorldPosition(pos);
+          pos.y += bottom - box.min.y; // il piede resta a terra
+          l.parent.worldToLocal(pos);
+          l.position.copy(pos);
+          l.updateMatrixWorld(true);
+          fixed++;
+        });
+      });
+      return fixed;
+    }
+
     const gltfLoader = new GLTFLoader();
     gltfLoader.load(
       './meucci-tour.glb?v=3',
@@ -1167,6 +1214,7 @@
         });
         scene.add(root);
         loaderEl.classList.add('hidden');
+        fixChairBacks(root);
         electricGame.attachWorld(root);
         walk.setWorld(root, electricGame.colliders);
         fpsProbe.armAt = performance.now() + 2500; // dopo la compilazione degli shader

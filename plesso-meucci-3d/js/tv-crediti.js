@@ -39,6 +39,9 @@ const STYLE = {
 const GAP = 22;
 const TITLE_CARD_S = 4.2; // cartello "Collaudo OK" prima dei titoli
 const SCROLL_PX_S = 30;
+const INSET = 12;       // margine nero attorno al "programma", come una TV vera
+const SAFE = 26;        // le scritte svaniscono prima di arrivare al bordo
+const FADE = 34;
 
 export function createTvCredits({ canvas, imageUrl, onEnd }) {
   const ctx = canvas.getContext('2d');
@@ -129,12 +132,15 @@ export function createTvCredits({ canvas, imageUrl, onEnd }) {
 
     ctx.textAlign = 'center';
     ctx.textBaseline = 'middle';
+    const lo = INSET + SAFE;
+    const hi = H - INSET - SAFE;
     for (const r of rows) {
       const ry = top + r.y;
-      if (ry < -40 || ry > H + 40) continue;
-      // dissolvenza ai bordi alto/basso
-      const edge = Math.min(1, Math.min(ry, H - ry) / 46);
-      ctx.globalAlpha = Math.max(0, edge);
+      // dissolvenza: la riga intera (non solo il centro) deve stare nella fascia sicura
+      const room = Math.min(ry - r.st.h / 2 - lo, hi - (ry + r.st.h / 2));
+      const edge = Math.min(1, room / FADE);
+      if (edge <= 0) continue;
+      ctx.globalAlpha = edge;
       ctx.font = r.st.font;
       ctx.fillStyle = r.st.color;
       ctx.fillText(r.t, W / 2, ry);
@@ -160,6 +166,12 @@ export function createTvCredits({ canvas, imageUrl, onEnd }) {
     /** Disegna il fotogramma; restituisce il colore del bagliore della TV nella stanza. */
     draw(nowMs) {
       const t = (nowMs - startMs) / 1000;
+      ctx.fillStyle = '#020305';
+      ctx.fillRect(0, 0, W, H);
+      ctx.save();
+      ctx.beginPath();
+      ctx.rect(INSET, INSET, W - INSET * 2, H - INSET * 2);
+      ctx.clip();
       drawBackground(t);
       if (t < TITLE_CARD_S) {
         drawTitleCard(t);
@@ -167,6 +179,7 @@ export function createTvCredits({ canvas, imageUrl, onEnd }) {
         drawCredits(t - TITLE_CARD_S);
       }
       drawScanlines();
+      ctx.restore();
       return t < TITLE_CARD_S ? 0xbbf7d0 : 0x93c5fd;
     }
   };
