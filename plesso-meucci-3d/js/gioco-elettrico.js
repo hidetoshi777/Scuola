@@ -35,6 +35,7 @@ export const STEPS = {
   GET_TESTER: 'get_tester',
   GET_FUSE: 'get_fuse',
   REPAIR: 'repair',
+  REWIRE: 'rewire',
   POWER_ON: 'power_on',
   COLLAUDO: 'collaudo',
   WIN: 'win'
@@ -47,6 +48,7 @@ const OBJECTIVES = {
   [STEPS.GET_TESTER]: 'Prendi il tester sul banco vicino alle finestre.',
   [STEPS.GET_FUSE]: 'Prendi il fusibile di ricambio sul banco in fondo.',
   [STEPS.REPAIR]: 'Torna al banco di lavoro vicino alla cattedra e ripara.',
+  [STEPS.REWIRE]: 'Il guasto era nella spina: rifalla al banco di lavoro.',
   [STEPS.POWER_ON]: 'Riattacca la corrente al quadretto.',
   [STEPS.COLLAUDO]: 'Collaudo: avvicinati alla TV e premi E.',
   [STEPS.WIN]: 'Missione compiuta! Guarda i titoli di coda in TV.'
@@ -64,6 +66,7 @@ export function createElectricGame({ THREE, scene, b2t, ui }) {
     hasTester: false,
     hasFuse: false,
     repaired: false,
+    rewired: false,
     talked: false,
     repairMeasured: false,
     repairReplaced: false,
@@ -443,6 +446,23 @@ export function createElectricGame({ THREE, scene, b2t, ui }) {
   // ---------------------------------------------------------------------------
   // Banco di lavoro: tavoletta con portafusibile, morsettiera e lampada di prova
   // ---------------------------------------------------------------------------
+  function buildPlug(burnt) {
+    const g = new THREE.Group();
+    const body = mat(burnt ? 0xcfc6b6 : 0xf5f5f4, { roughness: 0.5 });
+    part(new RoundedBoxGeometry(0.04, 0.026, 0.055, 2, 0.008), body, 0, 0.013, 0, g);
+    const steel = mat(0xcbd5e1, { metalness: 0.9, roughness: 0.25 });
+    for (const x of [-0.011, 0, 0.011]) {
+      const pin = part(new THREE.CylinderGeometry(0.0022, 0.0022, 0.022, 8), steel, x, 0.013, -0.037, g);
+      pin.rotation.x = Math.PI / 2;
+    }
+    tube([[0, 0.013, 0.027], [0.01, 0.008, 0.06], [0.05, 0.004, 0.08], [0.09, 0.004, 0.07]], 0.0035, mat(0x334155), g);
+    if (burnt) {
+      const scorch = part(new THREE.SphereGeometry(0.016, 12, 8), mat(0x1c1917, { roughness: 1 }), 0.004, 0.022, 0.016, g);
+      scorch.scale.set(1, 0.35, 1.1);
+    }
+    return g;
+  }
+
   function buildBench() {
     const g = new THREE.Group();
     const wood = mat(0xb4895a, { roughness: 0.8 });
@@ -501,7 +521,17 @@ export function createElectricGame({ THREE, scene, b2t, ui }) {
     tube([[0.09, 0.03, 0.06], [0.12, 0.024, 0.0], [0.12, 0.024, -0.05]], 0.0035, cableBlue, g);
     tube([[-0.12, 0.03, 0.07], [-0.17, 0.024, 0.02], [-0.18, 0.022, -0.12], [-0.2, 0.0, -0.14]], 0.0035, cableBrown, g);
 
-    return { group: g, blownFuse, newFuse, bulb, lampLight };
+    // spina della TV: quella vecchia annerita dal cortocircuito, quella rifatta
+    const oldPlug = buildPlug(true);
+    const newPlug = buildPlug(false);
+    [oldPlug, newPlug].forEach((pl) => {
+      pl.position.set(-0.02, 0.02, -0.06);
+      pl.rotation.y = 0.5;
+      g.add(pl);
+    });
+    newPlug.visible = false;
+
+    return { group: g, blownFuse, newFuse, bulb, lampLight, oldPlug, newPlug };
   }
 
   // ---------------------------------------------------------------------------
@@ -701,6 +731,8 @@ export function createElectricGame({ THREE, scene, b2t, ui }) {
     else benchTester.setReading('0.2Ω');
 
     bench.newFuse.visible = state.repairReplaced;
+    bench.oldPlug.visible = !state.rewired;
+    bench.newPlug.visible = state.rewired;
     if (state.repairReplaced) {
       bench.blownFuse.position.copy(oldFuseSpot);
       bench.blownFuse.rotation.y = 0.8;
@@ -718,7 +750,7 @@ export function createElectricGame({ THREE, scene, b2t, ui }) {
       tester: state.hasTester,
       fuse: state.hasFuse,
       powerOn: state.powerOn,
-      repaired: state.repaired
+      repaired: state.rewired
     });
     refreshMarkers();
     refreshProps();
@@ -730,7 +762,7 @@ export function createElectricGame({ THREE, scene, b2t, ui }) {
       switch: state.step === STEPS.POWER_OFF || state.step === STEPS.POWER_ON,
       tester: state.step === STEPS.GET_TESTER && !state.hasTester,
       fuse: state.step === STEPS.GET_FUSE && !state.hasFuse,
-      bench: state.step === STEPS.REPAIR && !state.repaired,
+      bench: (state.step === STEPS.REPAIR && !state.repaired) || (state.step === STEPS.REWIRE && !state.rewired),
       tv: state.step === STEPS.COLLAUDO
     };
     state.markers.forEach((m) => {
@@ -775,7 +807,8 @@ export function createElectricGame({ THREE, scene, b2t, ui }) {
     powerOff: [profLine('tensioneTolta')],
     tester: [{ who: 'Tu', text: 'Tester preso. Serve anche il fusibile di ricambio.' }],
     fuse: [{ who: 'Tu', text: 'Fusibile trovato. Torno al banco di lavoro.' }],
-    repaired: [profLine('circuitoChiuso')],
+    repaired: [profLine('causa'), profLine('rifaiSpina')],
+    rewired: [profLine('spinaFatta')],
     powerOn: [profLine('correnteOk')],
     tvBroken: [profLine('ancoraNiente')],
     needPowerOff: [profLine('aspetta')]
@@ -921,7 +954,25 @@ export function createElectricGame({ THREE, scene, b2t, ui }) {
           refreshProps();
           ui.updateRepair(state);
           ui.closeRepair();
-          showDialogue(DIALOGUES.repaired, () => setStep(STEPS.POWER_ON));
+          showDialogue(DIALOGUES.repaired, () => setStep(STEPS.REWIRE));
+        },
+        onClose: () => ui.closeRepair()
+      });
+      return { kind: 'repair' };
+    }
+
+    if (id === 'bench' && state.step === STEPS.REWIRE) {
+      if (state.powerOn) {
+        showDialogue(DIALOGUES.needPowerOff);
+        return { kind: 'blocked' };
+      }
+      ui.openPlug({
+        done: state.rewired,
+        onDone: () => {
+          state.rewired = true;
+          refreshProps();
+          ui.closeRepair();
+          showDialogue(DIALOGUES.rewired, () => setStep(STEPS.POWER_ON));
         },
         onClose: () => ui.closeRepair()
       });
@@ -937,7 +988,7 @@ export function createElectricGame({ THREE, scene, b2t, ui }) {
 
   /** La TV si accende solo a collaudo (o dopo vittoria). */
   function canBootTV() {
-    return state.repaired && state.powerOn && (state.step === STEPS.COLLAUDO || state.step === STEPS.WIN);
+    return state.repaired && state.rewired && state.powerOn && (state.step === STEPS.COLLAUDO || state.step === STEPS.WIN);
   }
 
   function onTVBlocked() {
@@ -1114,6 +1165,7 @@ export function createElectricGame({ THREE, scene, b2t, ui }) {
     state.hasTester = false;
     state.hasFuse = false;
     state.repaired = false;
+    state.rewired = false;
     state.talked = false;
     state.repairMeasured = false;
     state.repairReplaced = false;
