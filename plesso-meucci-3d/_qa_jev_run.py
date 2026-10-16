@@ -1,4 +1,4 @@
-"""QA TypeSafe/Jev sul minigioco del tester (Meucci 3 AM · Circuito interrotto)."""
+"""QA TypeSafe/Jev sui minigiochi del banco (Meucci 3 AM · Circuito interrotto): tester e spina."""
 from __future__ import annotations
 
 import json
@@ -18,7 +18,10 @@ OBIETTIVO = (
     "Terza professionale (manutenzione, livello base): provare un fusibile col tester "
     "in sicurezza. Tensione staccata, multimetro in prova di continuità (Ω con cicalino), "
     "puntali sui due capi metallici, lettura OL = circuito aperto = fusibile interrotto; "
-    "fusibile buono = il tester suona e segna un valore vicino a 0 Ω."
+    "fusibile buono = il tester suona e segna un valore vicino a 0 Ω. "
+    "Poi rifare la spina della TV (causa del guasto: fase e neutro bruciati che si toccano, cortocircuito): "
+    "colori CEI dei conduttori (marrone fase L, blu neutro N, giallo-verde terra al morsetto centrale), "
+    "viti e fermacavo, prova di continuità finale fra gli spinotti L e N col cavo staccato dalla TV."
 )
 
 ITEMS = [
@@ -52,6 +55,51 @@ ITEMS = [
             "Il tester è rotto.": "Il tester funziona: OL vuol dire che fra i due puntali il circuito è aperto.",
         },
         "finale": "Col fusibile nuovo: il tester suona e segna 0.2 Ω, quasi 0: il circuito è chiuso.",
+    },
+    {
+        "q": "Nella spina vecchia il marrone e il blu sono bruciati e si toccano. Perché è saltato il fusibile?",
+        "options": [
+            "Fase e neutro si toccavano: cortocircuito.",
+            "Mancava il filo di terra.",
+            "Il fusibile era troppo grande.",
+        ],
+        "correct": 0,
+        "spiegazioni": {
+            "Fase e neutro si toccavano: cortocircuito.": "Esatto: nel cortocircuito passa troppa corrente e il "
+            "fusibile salta per proteggere l'impianto.",
+            "Mancava il filo di terra.": "No: la terra protegge le persone se un guasto mette in tensione la "
+            "carcassa. Qui invece si toccavano fase e neutro: cortocircuito.",
+            "Il fusibile era troppo grande.": "No: un fusibile troppo grande non salta, anzi è pericoloso. Qui i "
+            "fili si toccavano: cortocircuito.",
+        },
+        "finale": "Prof: «Prima di ridare corrente, rifai la spina. Il guasto si toglie alla radice, non basta "
+        "cambiare il fusibile.»",
+    },
+    {
+        "q": "Spina nuova da cablare, con tre morsetti in fila: L (fase), ⏚ al centro (terra), N (neutro). "
+        "Dove va il filo giallo-verde?",
+        "options": ["Sul morsetto L", "Sul morsetto centrale ⏚", "Sul morsetto N"],
+        "correct": 1,
+        "spiegazioni": {
+            "Sul morsetto L": "Il marrone è la fase: va sul morsetto L.",
+            "Sul morsetto centrale ⏚": "Il giallo-verde è sempre la terra: in questa spina va al morsetto centrale ⏚.",
+            "Sul morsetto N": "Il blu è il neutro: va sul morsetto N.",
+        },
+        "finale": "Dopo i fili: «Il fermacavo stringe la guaina: se tiri il cavo, i fili non si staccano dai "
+        "morsetti.» e «Vite stretta: il filo non si sfila.»",
+    },
+    {
+        "q": "Spina rifatta e cavo staccato dalla TV. Metti i puntali sugli spinotti L e N, in prova di "
+        "continuità. Che cosa deve segnare il tester?",
+        "options": ["OL: fase e neutro non si toccano più.", "Quasi 0 Ω e suona.", "230 V."],
+        "correct": 0,
+        "spiegazioni": {
+            "OL: fase e neutro non si toccano più.": "Giusto: niente più cortocircuito. Ora si può ridare corrente.",
+            "Quasi 0 Ω e suona.": "No: vorrebbe dire che fase e neutro si toccano ancora. Il fusibile salterebbe "
+            "di nuovo.",
+            "230 V.": "No: la spina non è nella presa e il tester è in continuità. Qui si controlla solo che i fili "
+            "non si tocchino.",
+        },
     },
 ]
 

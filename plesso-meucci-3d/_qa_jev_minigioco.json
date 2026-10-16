@@ -1,5 +1,5 @@
 {
-  "obiettivo": "Terza professionale (manutenzione, livello base): provare un fusibile col tester in sicurezza. Tensione staccata, multimetro in prova di continuità (Ω con cicalino), puntali sui due capi metallici, lettura OL = circuito aperto = fusibile interrotto; fusibile buono = il tester suona e segna un valore vicino a 0 Ω.",
+  "obiettivo": "Terza professionale (manutenzione, livello base): provare un fusibile col tester in sicurezza. Tensione staccata, multimetro in prova di continuità (Ω con cicalino), puntali sui due capi metallici, lettura OL = circuito aperto = fusibile interrotto; fusibile buono = il tester suona e segna un valore vicino a 0 Ω. Poi rifare la spina della TV (causa del guasto: fase e neutro bruciati che si toccano, cortocircuito): colori CEI dei conduttori (marrone fase L, blu neutro N, giallo-verde terra al morsetto centrale), viti e fermacavo, prova di continuità finale fra gli spinotti L e N col cavo staccato dalla TV.",
   "items": [
     {
       "q": "La corrente è staccata. Su che funzione giri la manopola del tester per provare il fusibile?",
@@ -31,6 +31,50 @@
         "Il tester è rotto.": "Il tester funziona: OL vuol dire che fra i due puntali il circuito è aperto."
       },
       "finale": "Col fusibile nuovo: il tester suona e segna 0.2 Ω, quasi 0: il circuito è chiuso."
+    },
+    {
+      "q": "Nella spina vecchia il marrone e il blu sono bruciati e si toccano. Perché è saltato il fusibile?",
+      "options": [
+        "Fase e neutro si toccavano: cortocircuito.",
+        "Mancava il filo di terra.",
+        "Il fusibile era troppo grande."
+      ],
+      "correct": 0,
+      "spiegazioni": {
+        "Fase e neutro si toccavano: cortocircuito.": "Esatto: nel cortocircuito passa troppa corrente e il fusibile salta per proteggere l'impianto.",
+        "Mancava il filo di terra.": "No: la terra protegge le persone se un guasto mette in tensione la carcassa. Qui invece si toccavano fase e neutro: cortocircuito.",
+        "Il fusibile era troppo grande.": "No: un fusibile troppo grande non salta, anzi è pericoloso. Qui i fili si toccavano: cortocircuito."
+      },
+      "finale": "Prof: «Prima di ridare corrente, rifai la spina. Il guasto si toglie alla radice, non basta cambiare il fusibile.»"
+    },
+    {
+      "q": "Spina nuova da cablare, con tre morsetti in fila: L (fase), ⏚ al centro (terra), N (neutro). Dove va il filo giallo-verde?",
+      "options": [
+        "Sul morsetto L",
+        "Sul morsetto centrale ⏚",
+        "Sul morsetto N"
+      ],
+      "correct": 1,
+      "spiegazioni": {
+        "Sul morsetto L": "Il marrone è la fase: va sul morsetto L.",
+        "Sul morsetto centrale ⏚": "Il giallo-verde è sempre la terra: in questa spina va al morsetto centrale ⏚.",
+        "Sul morsetto N": "Il blu è il neutro: va sul morsetto N."
+      },
+      "finale": "Dopo i fili: «Il fermacavo stringe la guaina: se tiri il cavo, i fili non si staccano dai morsetti.» e «Vite stretta: il filo non si sfila.»"
+    },
+    {
+      "q": "Spina rifatta e cavo staccato dalla TV. Metti i puntali sugli spinotti L e N, in prova di continuità. Che cosa deve segnare il tester?",
+      "options": [
+        "OL: fase e neutro non si toccano più.",
+        "Quasi 0 Ω e suona.",
+        "230 V."
+      ],
+      "correct": 0,
+      "spiegazioni": {
+        "OL: fase e neutro non si toccano più.": "Giusto: niente più cortocircuito. Ora si può ridare corrente.",
+        "Quasi 0 Ω e suona.": "No: vorrebbe dire che fase e neutro si toccano ancora. Il fusibile salterebbe di nuovo.",
+        "230 V.": "No: la spina non è nella presa e il tester è in continuità. Qui si controlla solo che i fili non si tocchino."
+      }
     }
   ],
   "results": [
@@ -38,44 +82,129 @@
       "idx": 0,
       "q": "La corrente è staccata. Su che funzione giri la manopola del tester per provare il fusibile?",
       "status": 200,
-      "latency_ms": 398,
+      "latency_ms": 363,
       "model": "jev-1.13.0",
       "unica_corretta": 0.97,
-      "spiegazioni_vere": 0.9,
-      "distrattori_ok": 0.83,
-      "allineata": 0.95,
+      "spiegazioni_vere": 0.91,
+      "distrattori_ok": 0.84,
+      "allineata": 0.96,
       "problema": "nessuno",
-      "problema_conf": 0.86,
+      "problema_conf": 0.82,
       "problema_probs": {
-        "nessuno": 0.88,
+        "nessuno": 0.85,
         "ambigua": 0.0,
         "corretta_sbagliata": 0.0,
         "spiegazione_falsa": 0.01,
-        "distrattori_deboli": 0.11,
-        "fuori_obiettivo": 0.0
+        "distrattori_deboli": 0.13,
+        "fuori_obiettivo": 0.01
       }
     },
     {
       "idx": 1,
       "q": "Il tester (in prova di continuità, puntali sui due capi del fusibile) segna OL e non suona. Che cosa vuol dire?",
       "status": 200,
-      "latency_ms": 378,
+      "latency_ms": 320,
       "model": "jev-1.13.0",
-      "unica_corretta": 0.93,
-      "spiegazioni_vere": 0.9,
-      "distrattori_ok": 0.78,
+      "unica_corretta": 0.94,
+      "spiegazioni_vere": 0.91,
+      "distrattori_ok": 0.77,
       "allineata": 0.96,
       "problema": "nessuno",
       "problema_conf": 0.81,
       "problema_probs": {
         "nessuno": 0.84,
-        "ambigua": 0.02,
+        "ambigua": 0.01,
         "corretta_sbagliata": 0.0,
         "spiegazione_falsa": 0.0,
         "distrattori_deboli": 0.14,
+        "fuori_obiettivo": 0.01
+      }
+    },
+    {
+      "idx": 2,
+      "q": "Nella spina vecchia il marrone e il blu sono bruciati e si toccano. Perché è saltato il fusibile?",
+      "status": 200,
+      "latency_ms": 369,
+      "model": "jev-1.13.0",
+      "unica_corretta": 0.98,
+      "spiegazioni_vere": 0.91,
+      "distrattori_ok": 0.69,
+      "allineata": 0.62,
+      "problema": "nessuno",
+      "problema_conf": 0.66,
+      "problema_probs": {
+        "nessuno": 0.72,
+        "ambigua": 0.0,
+        "corretta_sbagliata": 0.0,
+        "spiegazione_falsa": 0.01,
+        "distrattori_deboli": 0.19,
+        "fuori_obiettivo": 0.08
+      }
+    },
+    {
+      "idx": 3,
+      "q": "Spina nuova da cablare, con tre morsetti in fila: L (fase), ⏚ al centro (terra), N (neutro). Dove va il filo giallo-verde?",
+      "status": 200,
+      "latency_ms": 329,
+      "model": "jev-1.13.0",
+      "unica_corretta": 0.98,
+      "spiegazioni_vere": 0.92,
+      "distrattori_ok": 0.63,
+      "allineata": 0.83,
+      "problema": "nessuno",
+      "problema_conf": 0.69,
+      "problema_probs": {
+        "nessuno": 0.74,
+        "ambigua": 0.02,
+        "corretta_sbagliata": 0.01,
+        "spiegazione_falsa": 0.01,
+        "distrattori_deboli": 0.19,
+        "fuori_obiettivo": 0.03
+      }
+    },
+    {
+      "idx": 4,
+      "q": "Spina rifatta e cavo staccato dalla TV. Metti i puntali sugli spinotti L e N, in prova di continuità. Che cosa deve segnare il tester?",
+      "status": 200,
+      "latency_ms": 311,
+      "model": "jev-1.13.0",
+      "unica_corretta": 0.94,
+      "spiegazioni_vere": 0.92,
+      "distrattori_ok": 0.85,
+      "allineata": 0.94,
+      "problema": "nessuno",
+      "problema_conf": 0.87,
+      "problema_probs": {
+        "nessuno": 0.89,
+        "ambigua": 0.02,
+        "corretta_sbagliata": 0.03,
+        "spiegazione_falsa": 0.02,
+        "distrattori_deboli": 0.04,
         "fuori_obiettivo": 0.0
       }
     }
   ],
-  "review": []
+  "review": [
+    {
+      "idx": 2,
+      "q": "Nella spina vecchia il marrone e il blu sono bruciati e si toccano. Perché è saltato il fusibile?",
+      "status": 200,
+      "latency_ms": 369,
+      "model": "jev-1.13.0",
+      "unica_corretta": 0.98,
+      "spiegazioni_vere": 0.91,
+      "distrattori_ok": 0.69,
+      "allineata": 0.62,
+      "problema": "nessuno",
+      "problema_conf": 0.66,
+      "problema_probs": {
+        "nessuno": 0.72,
+        "ambigua": 0.0,
+        "corretta_sbagliata": 0.0,
+        "spiegazione_falsa": 0.01,
+        "distrattori_deboli": 0.19,
+        "fuori_obiettivo": 0.08
+      }
+    }
+  ]
 }
