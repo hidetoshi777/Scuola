@@ -272,6 +272,8 @@ export function createEnrollmentPosters({ THREE, scene, maxAnisotropy = 8 }) {
       if (!poster) return;
       openId = id;
       overlay.show(poster);
+      const stage = overlay.root.querySelector('.poster-view-stage');
+      if (stage) stage.scrollTop = 0;
     }
   };
   const overlay = buildOverlay(posters, api);
@@ -307,6 +309,12 @@ export function createEnrollmentPosters({ THREE, scene, maxAnisotropy = 8 }) {
       posters.forEach((p) => {
         if (p.place === 'aula') p.group.visible = visible;
       });
+    },
+    scroll(dir, dt) {
+      if (!dir) return;
+      const stage = overlay.root.querySelector('.poster-view-stage');
+      if (!stage) return;
+      stage.scrollTop -= dir * 780 * dt;
     }
   };
 }

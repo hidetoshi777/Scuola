@@ -154,6 +154,7 @@
       gap: 6px;
       align-items: center;
     }
+    button[hidden] { display: none !important; }
     .stop-btn {
       appearance: none;
       border: 1px solid var(--panel-border);
@@ -763,20 +764,13 @@
       <p class="brand-quote">«Prima regola: non si tocca a caso.»</p>
     </div>
 
-    <nav class="stops-bar" aria-label="Tappe del percorso">
-      <button type="button" class="stop-btn" data-stop="0">1. Ingresso Atrio</button>
-      <button type="button" class="stop-btn" data-stop="1">2. Porta 3 AM</button>
-      <button type="button" class="stop-btn active" data-stop="2">3. Soglia Aula</button>
-      <button type="button" class="stop-btn" data-stop="3">4. Cattedra e TV</button>
-      <button type="button" class="stop-btn" data-stop="4">5. Finestre</button>
-      <button type="button" class="stop-btn" data-stop="5">6. Vista dall'alto</button>
-      <button type="button" class="stop-btn" data-stop="6">🎮 Vai alla TV</button>
-      <button type="button" class="stop-btn light-toggle" id="btn-lights">💡 Neon: Spenti (3 AM)</button>
-      <button type="button" class="stop-btn" id="btn-theme" aria-pressed="false">Tema chiaro</button>
+    <nav class="stops-bar" aria-label="Impostazioni">
       <button type="button" class="stop-btn" id="btn-voice" aria-pressed="true">🔊 Voce del Prof: Sì</button>
-      <button type="button" class="stop-btn" id="btn-quality" title="Grafica più leggera per i computer senza scheda video">⚙️ Grafica: Alta</button>
+      <button type="button" class="stop-btn" id="btn-quality" title="Grafica più leggera per i computer senza scheda video">⚙️ Grafica: Media</button>
     </nav>
   </header>
+  <button type="button" class="stop-btn light-toggle" id="btn-lights" hidden>💡 Neon: Spenti (3 AM)</button>
+  <button type="button" class="stop-btn" id="btn-theme" aria-pressed="false" hidden>Tema chiaro</button>
 
   <div class="mission-bar" id="mission-bar">
     <div class="label">Obiettivo</div>
@@ -1534,9 +1528,9 @@
     const controlsHelpPad =
       '<strong>Pad:</strong> levetta sinistra muovi (premuta = corri), levetta destra guarda, ' +
       '<span class="kbd">A</span> interagisci, <span class="kbd">B</span> chiudi, ' +
-      '<span class="kbd">X</span> neon, <span class="kbd">Y</span> vista dall\'alto, ' +
+      '<span class="kbd">X</span> neon, ' +
       '<span class="kbd">LB</span>/<span class="kbd">RB</span> tappe, <span class="kbd">Back</span> vai alla TV, ' +
-      '<span class="kbd">Start</span> menu.';
+      '<span class="kbd">Start</span> menu. Nel manifesto: levetta o croce per scorrere. Nel banco: croce e <span class="kbd">A</span>.';
 
     function onPadPress(button) {
       const repairOpen = repairModal.classList.contains('open');
@@ -1555,22 +1549,22 @@
           else if (dialogueEl.classList.contains('open')) missionUi.clickDialogueContinue();
           else if (document.body.classList.contains('hud-open')) toggleHud();
           break;
-        case PAD.UP:
         case PAD.LEFT:
           if (posters.isOpen()) posters.step(-1);
           else if (repairOpen) modalFocusMove(-1);
           break;
-        case PAD.DOWN:
         case PAD.RIGHT:
           if (posters.isOpen()) posters.step(1);
           else if (repairOpen) modalFocusMove(1);
           break;
+        case PAD.UP:
+          if (repairOpen) modalFocusMove(-1);
+          break;
+        case PAD.DOWN:
+          if (repairOpen) modalFocusMove(1);
+          break;
         case PAD.X:
           btnLights.click();
-          break;
-        case PAD.Y:
-          if (currentStop === 5) walk.backToWalk();
-          else goToStop(5);
           break;
         case PAD.LB:
           goToStop((currentStop + STOPS.length - 1) % STOPS.length);
@@ -1615,7 +1609,7 @@
     let savedQuality = null;
     try { savedQuality = localStorage.getItem(QUALITY_KEY); } catch (_) { /* storage bloccato */ }
     const urlQuality = new URLSearchParams(location.search).get('q');
-    let quality = QUALITIES.includes(urlQuality) ? urlQuality : QUALITIES.includes(savedQuality) ? savedQuality : 'alta';
+    let quality = QUALITIES.includes(urlQuality) ? urlQuality : QUALITIES.includes(savedQuality) ? savedQuality : 'media';
     let autoQuality = !QUALITIES.includes(urlQuality) && !QUALITIES.includes(savedQuality);
     let shadowTick = 0;
 
@@ -1715,6 +1709,7 @@
         input.tilt += p.tilt;
         input.run = input.run || p.run;
       }
+      input.posterStick = posters.isOpen() ? input.forward : 0;
       // a dialogo o riparazione aperti non si cammina
       if (dialogueEl.classList.contains('open') || repairModal.classList.contains('open') || posters.isOpen()) {
         input.forward = input.strafe = 0;
@@ -1725,8 +1720,9 @@
     function animate(nowMs) {
       requestAnimationFrame(animate);
       const dt = Math.min(clock.getDelta(), 0.1);
-
-      walk.update(dt, readInput());
+      const input = readInput();
+      if (posters.isOpen()) posters.scroll(input.posterStick || 0, dt);
+      walk.update(dt, input);
       probeFps(nowMs || performance.now());
       if (quality === 'media') {
         shadowTick = (shadowTick + 1) % 3;
