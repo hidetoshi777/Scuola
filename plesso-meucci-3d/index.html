@@ -907,7 +907,8 @@
     });
 
     const camera = new THREE.PerspectiveCamera(58, window.innerWidth / window.innerHeight, 0.08, 120);
-    const renderer = new THREE.WebGLRenderer({ antialias: true, powerPreference: 'high-performance' });
+    // default, non high-performance: su Windows la scheda dedicata presenta fuori sync e l'immagine strappa
+    const renderer = new THREE.WebGLRenderer({ antialias: true, powerPreference: 'default' });
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
     renderer.setSize(window.innerWidth, window.innerHeight);
     renderer.shadowMap.enabled = true;

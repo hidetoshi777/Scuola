@@ -32,116 +32,6 @@ function paint(draw) {
   return canvas;
 }
 
-function drawIscriviti(ctx, w, h) {
-  ctx.fillStyle = '#0c1424';
-  ctx.fillRect(0, 0, w, h);
-  ctx.fillStyle = '#f59e0b';
-  ctx.fillRect(0, 0, 28, h);
-
-  ctx.fillStyle = '#94a3b8';
-  font(ctx, 34, 700);
-  ctx.textAlign = 'left';
-  ctx.fillText('IIS GALILEO FERRARIS', 72, 110);
-  ctx.fillStyle = '#e2e8f0';
-  font(ctx, 40, 700);
-  ctx.fillText('PLESSO MEUCCI  ·  ACIREALE', 72, 168);
-
-  ctx.strokeStyle = '#f59e0b';
-  ctx.lineWidth = 4;
-  ctx.beginPath();
-  ctx.moveTo(72, 210);
-  ctx.lineTo(w - 72, 210);
-  ctx.stroke();
-
-  ctx.fillStyle = '#fbbf24';
-  font(ctx, 132, 800);
-  ctx.fillText('ISCRIVITI', 72, 390);
-  ctx.fillStyle = '#f8fafc';
-  font(ctx, 52, 700);
-  ctx.fillText('al professionale', 76, 470);
-
-  font(ctx, 64, 800);
-  ctx.fillText('Manutenzione', 72, 600);
-  ctx.fillText('e assistenza', 72, 678);
-  ctx.fillText('tecnica', 72, 756);
-
-  const chips = ['Elettricità', 'Meccanica', 'Impianti'];
-  let x = 72;
-  chips.forEach((label) => {
-    font(ctx, 32, 700);
-    const tw = ctx.measureText(label).width;
-    roundRect(ctx, x, 820, tw + 48, 64, 12);
-    ctx.fillStyle = '#172033';
-    ctx.fill();
-    ctx.fillStyle = '#fde68a';
-    ctx.fillText(label, x + 24, 862);
-    x += tw + 68;
-  });
-
-  ctx.fillStyle = '#111c33';
-  ctx.fillRect(28, 980, w - 28, h - 980);
-  ctx.fillStyle = '#f8fafc';
-  font(ctx, 48, 800);
-  ctx.fillText('5 anni  ·  diploma', 72, 1070);
-  font(ctx, 36, 600);
-  ctx.fillStyle = '#cbd5e1';
-  ctx.fillText('Si lavora in laboratorio:', 72, 1160);
-  ctx.fillText('corrente, macchine, impianti.', 72, 1216);
-  ctx.fillStyle = '#fbbf24';
-  font(ctx, 40, 800);
-  ctx.fillText('Via Galvani 5', 72, 1340);
-  ctx.fillStyle = '#e2e8f0';
-  font(ctx, 32, 600);
-  ctx.fillText('Iscrizione online  ·  095 6136030', 72, 1400);
-  ctx.fillStyle = '#64748b';
-  font(ctx, 22, 500);
-  ctx.fillText('Realizzato dal Prof. Rossano Bella', 72, 1540);
-}
-
-function drawLaboratorio(ctx, w, h) {
-  ctx.fillStyle = '#10241f';
-  ctx.fillRect(0, 0, w, h);
-
-  ctx.fillStyle = '#5eead4';
-  font(ctx, 32, 700);
-  ctx.textAlign = 'left';
-  ctx.fillText('CORSO AM  ·  PLESSO MEUCCI', 64, 100);
-  ctx.fillStyle = '#f8fafc';
-  font(ctx, 92, 800);
-  ctx.fillText('IN OFFICINA', 64, 230);
-  font(ctx, 44, 600);
-  ctx.fillStyle = '#99f6e4';
-  ctx.fillText('Si impara sulle cose vere.', 64, 300);
-
-  const rows = [
-    ['ELETTRICITÀ', 'Impianti, quadri, sicurezza'],
-    ['ELETTRONICA', 'Circuiti e componenti'],
-    ['MECCANICA', 'Macchine e officina'],
-    ['IMPIANTI', 'Montaggio e collaudo']
-  ];
-  rows.forEach((row, i) => {
-    const y = 380 + i * 250;
-    ctx.fillStyle = i % 2 === 0 ? '#134e4a' : '#1c1917';
-    roundRect(ctx, 48, y, w - 96, 220, 18);
-    ctx.fill();
-    ctx.fillStyle = i % 2 === 0 ? '#fef3c7' : '#fde68a';
-    ctx.fillRect(48, y, 16, 220);
-    ctx.fillStyle = '#f8fafc';
-    font(ctx, 64, 800);
-    ctx.fillText(row[0], 96, y + 100);
-    ctx.fillStyle = '#99f6e4';
-    font(ctx, 32, 600);
-    ctx.fillText(row[1], 96, y + 160);
-  });
-
-  ctx.fillStyle = '#5eead4';
-  font(ctx, 28, 700);
-  ctx.fillText('Manutenzione e assistenza tecnica', 64, 1460);
-  ctx.fillStyle = '#64748b';
-  font(ctx, 22, 500);
-  ctx.fillText('Realizzato dal Prof. Rossano Bella', 64, 1548);
-}
-
 function drawOrario(ctx, w, h) {
   ctx.fillStyle = '#f6f1e7';
   ctx.fillRect(0, 0, w, h);
@@ -226,10 +116,22 @@ function drawOrario(ctx, w, h) {
   ctx.fillText('elettronica, meccanica e impianti.  ·  Prof. Rossano Bella', 64, 1556);
 }
 
-function hang(THREE, scene, spec, canvas, maxAnisotropy) {
+function makeTexture(THREE, spec, maxAnisotropy) {
+  if (spec.image) {
+    const tex = new THREE.TextureLoader().load(spec.image);
+    tex.colorSpace = THREE.SRGBColorSpace;
+    tex.anisotropy = maxAnisotropy;
+    return { tex, canvas: null, url: spec.image };
+  }
+  const canvas = paint(spec.draw);
   const tex = new THREE.CanvasTexture(canvas);
   tex.colorSpace = THREE.SRGBColorSpace;
   tex.anisotropy = maxAnisotropy;
+  return { tex, canvas, url: '' };
+}
+
+function hang(THREE, scene, spec, maxAnisotropy) {
+  const { tex, canvas, url } = makeTexture(THREE, spec, maxAnisotropy);
   const group = new THREE.Group();
   group.position.set(spec.x, spec.y, spec.z);
   group.rotation.y = spec.rotY;
@@ -252,7 +154,7 @@ function hang(THREE, scene, spec, canvas, maxAnisotropy) {
 
   group.add(frame, face);
   scene.add(group);
-  return { ...spec, group, face, canvas, url: '' };
+  return { ...spec, group, face, canvas, url };
 }
 
 function buildOverlay(posters, api) {
@@ -318,10 +220,10 @@ export function createEnrollmentPosters({ THREE, scene, maxAnisotropy = 8 }) {
       y: 1.5,
       z: 1.072,
       rotY: Math.PI,
-      w: 0.74,
-      h: 1.05,
-      frame: 0x14532d,
-      draw: drawLaboratorio
+      w: 0.78,
+      h: 1.04,
+      frame: 0x111111,
+      image: 'img/manifesto-officina.jpg'
     },
     {
       id: 'orario',
@@ -344,14 +246,14 @@ export function createEnrollmentPosters({ THREE, scene, maxAnisotropy = 8 }) {
       y: 1.5,
       z: -2.22,
       rotY: Math.PI / 2,
-      w: 0.68,
-      h: 1.02,
-      frame: 0x1c1917,
-      draw: drawIscriviti
+      w: 0.72,
+      h: 0.96,
+      frame: 0x111111,
+      image: 'img/manifesto-iscriviti.jpg'
     }
   ];
 
-  const posters = specs.map((spec) => hang(THREE, scene, spec, paint(spec.draw), maxAnisotropy));
+  const posters = specs.map((spec) => hang(THREE, scene, spec, maxAnisotropy));
   const byId = Object.fromEntries(posters.map((p) => [p.id, p]));
   let openId = null;
   const api = {
