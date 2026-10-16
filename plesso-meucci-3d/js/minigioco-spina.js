@@ -201,6 +201,14 @@ export function createPlugMinigame(root) {
       btnMain.hidden = false;
       btnMain.textContent = 'Fatto: torna dal Prof';
     }
+    focusPlayable();
+  }
+
+  function focusPlayable() {
+    const list = [...root.querySelectorAll('button')].filter((b) => !b.disabled && !b.hidden && b.offsetParent);
+    if (!list.length || list.includes(document.activeElement)) return;
+    const filo = step === 'fili' && !selected ? list.find((b) => b.classList.contains('sp-wire')) : null;
+    (filo || list[0]).focus();
   }
 
   wireBtns.forEach((b) => {

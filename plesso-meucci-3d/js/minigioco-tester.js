@@ -242,6 +242,12 @@ export function createTesterMinigame(root) {
       btnMain.hidden = false;
       btnMain.textContent = 'Fatto: torna dal Prof';
     }
+    focusPlayable();
+  }
+
+  function focusPlayable() {
+    const list = [...root.querySelectorAll('button')].filter((b) => !b.disabled && !b.hidden && b.offsetParent);
+    if (list.length && !list.includes(document.activeElement)) list[0].focus();
   }
 
   dialBtns.forEach((b) => {
