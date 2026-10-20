@@ -181,6 +181,21 @@ window.ATTIVITA_WEB = [
     ],
   },
   {
+    titolo: "Le Repubbliche marinare",
+    materia: "Storia",
+    classe: "Terza superiore · professionale",
+    annoProf: 3,
+    pubblicato: "2026-10-20",
+    descrizione:
+      "Mappa interattiva di Amalfi, Pisa, Genova e Venezia: governo, commerci, rotte verso l’Oriente, rivali, battaglie e mini quiz.",
+    citazione: "Dal mare arrivano le spezie e la seta.",
+    url: "repubbliche-marinare/",
+    copertina: "repubbliche-marinare/img/og-share.jpg",
+    tinta: "storia",
+    adesivo: "st-libro-aperto",
+    extra: [],
+  },
+  {
     titolo: "Present simple o continuous?",
     materia: "Inglese",
     classe: "Quarta superiore · professionale",

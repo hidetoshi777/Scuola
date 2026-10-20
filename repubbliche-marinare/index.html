@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Le Repubbliche marinare · mappa interattiva</title>
+<meta name="description" content="Mappa interattiva delle 4 Repubbliche marinare: Amalfi, Pisa, Genova e Venezia. Rotte, governo, rivali, battaglie e mini quiz.">
+<meta property="og:title" content="Le Repubbliche marinare · mappa interattiva">
+<meta property="og:description" content="Amalfi, Pisa, Genova e Venezia: rotte, commerci, battaglie e quiz.">
+<meta property="og:image" content="img/og-share.jpg">
+<link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin="">
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
+<style>
+:root{--bg:#0f1722;--panel:#18222f;--ink:#eef2f6;--muted:#a9b6c4;--line:#2b3a4c;
+ --amalfi:#e0a100;--pisa:#d0342c;--genova:#2f7fd8;--venezia:#1f9d6b}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.5 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+header{padding:14px 16px 8px}
+header p.kicker{margin:0;color:var(--muted);font-size:.85rem;letter-spacing:.06em;text-transform:uppercase}
+h1{margin:2px 0 4px;font-size:1.6rem}
+header p{margin:0;color:var(--muted)}
+.wrap{display:grid;grid-template-columns:1fr;gap:12px;padding:0 12px 12px}
+#map{height:58vh;min-height:320px;border-radius:14px;border:1px solid var(--line)}
+.panel{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:14px 16px}
+.panel h2{margin:0 0 6px;font-size:1.3rem;display:flex;align-items:center;gap:8px}
+.dot{display:inline-grid;place-items:center;width:30px;height:30px;border-radius:50%;color:#fff;font-weight:800;font-size:.95rem;border:2px solid #fff;flex:none}
+dl{margin:8px 0 0}
+dt{font-weight:700;color:var(--muted);font-size:.85rem;text-transform:uppercase;letter-spacing:.04em;margin-top:10px}
+dd{margin:2px 0 0}
+.btns{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+button{font:inherit;cursor:pointer;border-radius:999px;border:2px solid var(--line);background:#223042;color:var(--ink);padding:9px 14px;min-height:44px}
+button:hover{border-color:#4b6380}
+button.on{color:#111;font-weight:700}
+.hint{color:var(--muted)}
+.cityrow{display:flex;flex-wrap:wrap;gap:8px;margin-top:6px}
+.cityrow button{display:flex;align-items:center;gap:8px}
+.cityrow .dot{width:24px;height:24px;font-size:.8rem}
+section{margin:0 12px 12px}
+.battles{display:grid;gap:10px}
+.battle{border-left:5px solid var(--line);padding:6px 12px;background:#141d28;border-radius:8px}
+.q{margin:12px 0;padding:12px;border:1px solid var(--line);border-radius:12px;background:#141d28}
+.q p{margin:0 0 8px;font-weight:700}
+.fb{margin-top:8px;min-height:1.5em;font-weight:700}
+.ok{color:#5fd39a}.no{color:#ff8a80}
+.score{font-weight:800;font-size:1.1rem}
+.marker{display:grid;place-items:center;width:36px;height:36px;border-radius:50%;color:#fff;font-weight:800;font-size:16px;border:3px solid #fff;box-shadow:0 2px 6px rgba(0,0,0,.5)}
+.leaflet-tooltip.tip{font-weight:700}
+.note{font-size:.85rem;color:var(--muted)}
+@media(min-width:900px){
+ .wrap{grid-template-columns:1.6fr 1fr;align-items:start}
+ #map{height:72vh}
+ .panel#card{position:sticky;top:12px;max-height:72vh;overflow:auto}
+ .two{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+ .two section{margin:0}
+ .twowrap{margin:0 12px 12px}
+}
+</style>
+</head>
+<body>
+<header>
+ <p class="kicker">Storia · classe 3ª AM</p>
+ <h1>Le Repubbliche marinare</h1>
+ <p>Quattro città di mare, ricche grazie al <b>commercio</b>. Tocca una città sulla mappa!</p>
+</header>
+
+<div class="wrap">
+ <div id="map" role="region" aria-label="Mappa del Mediterraneo"></div>
+ <div class="panel" id="card" aria-live="polite">
+  <h2>Scegli una città</h2>
+  <p class="hint">Tocca un cerchio colorato sulla mappa, oppure un nome qui sotto.</p>
+  <div class="cityrow" id="cityrow"></div>
+  <div class="btns" style="margin-top:14px"><button type="button" id="allroutes">Mostra tutte le rotte</button><button type="button" id="noroutes">Nascondi le rotte</button></div>
+  <p class="note">Le rotte sono semplificate: le navi seguivano le coste e facevano molte tappe.</p>
+ </div>
+</div>
+
+<div class="twowrap"><div class="two">
+<section class="panel">
+ <h2>⚔️ Le battaglie</h2>
+ <div class="battles">
+  <div class="battle" style="border-color:var(--genova)"><b>Meloria, 1284</b><br>Battaglia sul mare vicino a Livorno: <b>Genova vince su Pisa</b>. Da qui Pisa comincia a perdere potere.</div>
+  <div class="battle" style="border-color:var(--venezia)"><b>Guerra di Chioggia, 1378-1381</b><br><b>Venezia contro Genova</b>. I Genovesi arrivano fino a Chioggia, vicino a Venezia, ma alla fine <b>vince Venezia</b>.</div>
+ </div>
+</section>
+<section class="panel">
+ <h2>🧭 Che cosa vuol dire?</h2>
+ <p><b>Repubblica marinara</b>: una città di mare che si <b>governa da sola</b> e diventa ricca con le <b>navi</b> e il <b>commercio</b>.</p>
+ <p>Dall'<b>Oriente</b> arrivano <b>spezie</b> (pepe, cannella), <b>seta</b> e oggetti preziosi.</p>
+</section>
+</div></div>
+
+<section class="panel" id="quiz">
+ <h2>❓ Mini quiz</h2>
+ <p class="hint">Tocca la città giusta. Se serve, guarda prima la mappa!</p>
+ <div id="qs"></div>
+ <p class="score" id="score"></p>
+ <button type="button" id="restart">Ricomincia il quiz</button>
+</section>
+
+<script>
+const C = {
+ amalfi:{nome:"Amalfi",col:"#e0a100",ll:[40.634,14.602],
+  periodo:"IX-XI secolo (dall'800 al 1000 circa): è la prima a diventare ricca.",
+  governo:"Un <b>duca</b>, scelto tra le famiglie più importanti.",
+  commerci:"Commercia con <b>Costantinopoli</b>, <b>Alessandria d'Egitto</b> e <b>Palermo</b>: porta in Italia spezie, seta e oro.",
+  curioso:"Le <b>Tavole amalfitane</b> sono tra le prime leggi del mare: regole per navi e marinai.",
+  rivale:"<b>Pisa</b>, che nel 1135 e nel 1137 attacca e saccheggia Amalfi. Prima (1131) Amalfi era già passata sotto i <b>Normanni</b>.",
+  rotte:[[[40.634,14.602],[40.35,14.4],[39.2,13.9],[38.4,13.6],[38.13,13.36]],
+   [[40.634,14.602],[40.3,14.6],[39.2,15.4],[38.25,15.65],[37.6,16.3],[36.9,18.5],[36.3,22.6],[35.0,26.0],[31.2,29.9]],
+   [[36.3,22.6],[37.2,24.2],[38.6,25.6],[39.9,26.1],[40.3,26.6],[40.8,28.0],[41.0,28.97]]],
+  mete:[["Palermo",[38.13,13.36]],["Alessandria",[31.2,29.9]],["Costantinopoli",[41.0,28.97]]]},
+ pisa:{nome:"Pisa",col:"#d0342c",ll:[43.716,10.401],
+  periodo:"XI-XIII secolo (dal 1000 al 1200 circa).",
+  governo:"Un <b>Comune</b>: prima i <b>consoli</b>, poi il <b>podestà</b>.",
+  commerci:"Domina gran parte della <b>Sardegna</b> e la <b>Corsica</b> e commercia con il <b>Nord Africa</b> (Tunisi) e con l'Oriente.",
+  curioso:"Con i soldi del commercio costruisce la <b>Piazza dei Miracoli</b>, con la famosa <b>Torre pendente</b> (iniziata nel 1173).",
+  rivale:"<b>Genova</b>, che la sconfigge alla <b>Meloria</b> nel <b>1284</b>.",
+  rotte:[[[43.716,10.401],[43.6,10.25],[43.0,9.9],[42.7,9.6]],
+   [[43.6,10.25],[42.4,10.0],[41.3,9.95],[40.2,9.85],[39.3,9.75],[38.6,9.7],[37.6,10.0],[36.85,10.3]]],
+  mete:[["Corsica",[42.7,9.45]],["Sardegna",[40.1,9.0]],["Tunisi",[36.8,10.18]]]},
+ genova:{nome:"Genova",col:"#2f7fd8",ll:[44.407,8.934],
+  periodo:"XII-XIV secolo (dal 1100 al 1300 circa).",
+  governo:"Prima i <b>consoli</b>, poi dal <b>1339</b> un <b>doge</b>.",
+  commerci:"Arriva fino al <b>Mar Nero</b>, dove ha la colonia di <b>Caffa</b> (in Crimea), e commercia con la <b>Spagna</b>.",
+  curioso:"Nel 1407 nasce il <b>Banco di San Giorgio</b>, una delle prime banche. Ed è genovese <b>Cristoforo Colombo</b>!",
+  rivale:"Prima <b>Pisa</b> (vince alla Meloria, 1284), poi <b>Venezia</b> (perde a Chioggia, 1378-1381).",
+  rotte:[[[44.407,8.934],[43.9,9.2],[42.8,9.75],[41.6,10.3],[40.3,11.8],[38.8,14.6],[38.25,15.65],[37.6,16.3],[36.9,18.5],[36.3,22.6],[37.2,24.2],[38.6,25.6],[39.9,26.1],[40.3,26.6],[40.8,28.0],[41.0,28.97],[41.3,29.15],[42.4,30.8],[43.9,33.6],[44.9,35.38]],
+   [[44.407,8.934],[43.6,7.6],[42.6,5.2],[41.9,3.4],[41.38,2.17]]],
+  mete:[["Caffa (Mar Nero)",[45.03,35.38]],["Costantinopoli",[41.0,28.97]],["Spagna (Barcellona)",[41.38,2.17]]]},
+ venezia:{nome:"Venezia",col:"#1f9d6b",ll:[45.438,12.335],
+  periodo:"XIII-XV secolo (dal 1200 al 1400 circa). È la più potente e dura fino al <b>1797</b>.",
+  governo:"Il <b>doge</b>, eletto <b>a vita</b>, con l'aiuto dei consigli delle famiglie nobili.",
+  commerci:"Commercia con <b>Costantinopoli</b> e <b>Alessandria d'Egitto</b>: spezie, seta, cotone.",
+  curioso:"Ogni anno il doge getta un <b>anello</b> in mare: è lo <b>Sposalizio del mare</b>. Le navi si costruiscono all'<b>Arsenale</b>.",
+  rivale:"<b>Genova</b>, sconfitta nella <b>guerra di Chioggia</b> (1378-1381).",
+  rotte:[[[45.438,12.335],[44.6,13.0],[43.0,15.0],[41.6,17.4],[40.3,19.0],[38.8,19.9],[37.4,20.7],[36.3,22.6],[37.2,24.2],[38.6,25.6],[39.9,26.1],[40.3,26.6],[40.8,28.0],[41.0,28.97]],
+   [[36.3,22.6],[35.0,26.0],[31.2,29.9]]],
+  mete:[["Costantinopoli",[41.0,28.97]],["Alessandria",[31.2,29.9]]]}
+};
+const map = L.map("map",{zoomSnap:.5}).setView([40.5,17],5);
+L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png",{
+ attribution:'&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',maxZoom:10,minZoom:3}).addTo(map);
+function fit(){ if(window.innerWidth<600) map.fitBounds([[36.5,7.5],[46,20]]); else map.fitBounds([[30.5,1.5],[46.5,36]],{padding:[10,10]});}
+fit(); window.addEventListener("resize",()=>map.invalidateSize());
+const layers={}, shown=new Set();
+for(const [k,c] of Object.entries(C)){
+ const icon=L.divIcon({className:"",html:`<div class="marker" style="background:${c.col}">${c.nome[0]}</div>`,iconSize:[36,36],iconAnchor:[18,18]});
+ L.marker(c.ll,{icon,title:c.nome,keyboard:true}).addTo(map).bindTooltip(c.nome,{direction:"top",offset:[0,-16],className:"tip"}).on("click",()=>pick(k));
+ const g=L.layerGroup();
+ c.rotte.forEach(r=>L.polyline(r,{color:c.col,weight:4,dashArray:"9 8",opacity:.95}).addTo(g));
+ c.mete.forEach(([n,ll])=>L.circleMarker(ll,{radius:6,color:c.col,fillColor:"#fff",fillOpacity:1,weight:3}).bindTooltip(n,{className:"tip"}).addTo(g));
+ layers[k]=g;
+}
+function showRoute(k,on){ if(on){layers[k].addTo(map);shown.add(k)} else {map.removeLayer(layers[k]);shown.delete(k)} }
+const START=document.getElementById("card").innerHTML;
+function bindStart(){cityButtons(document.getElementById("cityrow"));
+ document.getElementById("allroutes").onclick=()=>Object.keys(C).forEach(k=>showRoute(k,true));
+ document.getElementById("noroutes").onclick=()=>Object.keys(C).forEach(k=>showRoute(k,false));}
+const dot=(c)=>`<span class="dot" style="background:${c.col}">${c.nome[0]}</span>`;
+function cityButtons(el){ for(const [k,c] of Object.entries(C)){const b=document.createElement("button");b.type="button";b.innerHTML=dot(c)+c.nome;b.onclick=()=>pick(k);el.appendChild(b);} }
+bindStart();
+function pick(k){
+ const c=C[k], card=document.getElementById("card");
+ card.innerHTML=`<h2>${dot(c)} ${c.nome}</h2>
+ <dl><dt>Massimo splendore</dt><dd>${c.periodo}</dd>
+ <dt>Chi governa</dt><dd>${c.governo}</dd>
+ <dt>Commerci e rotte</dt><dd>${c.commerci}</dd>
+ <dt>Lo sapevi?</dt><dd>${c.curioso}</dd>
+ <dt>Rivale</dt><dd>${c.rivale}</dd></dl>
+ <div class="btns"><button type="button" id="rt" class="${shown.has(k)?'on':''}" style="${shown.has(k)?'background:'+c.col:''}">${shown.has(k)?'Nascondi la rotta':'Mostra la rotta'}</button><button type="button" id="back">Tutte le città</button></div>`;
+ card.querySelector("#rt").onclick=()=>{showRoute(k,!shown.has(k)); if(shown.has(k)) map.fitBounds(layers[k].getLayers().filter(l=>l.getBounds).reduce((b,l)=>b.extend(l.getBounds()),L.latLngBounds([c.ll,c.ll])),{padding:[30,30]}); pick(k);};
+ card.querySelector("#back").onclick=()=>{card.innerHTML=START;bindStart();};
+ if(window.innerWidth<900) card.scrollIntoView({behavior:"smooth",block:"start"});
+}
+// ---------- quiz ----------
+const Q=[
+ {t:"Quale città è la più a sud, vicino a Napoli, e fu la prima a diventare ricca?",a:"amalfi",s:"Giusto: Amalfi, sulla costa vicino a Napoli."},
+ {t:"Quale città dominava la Sardegna e la Corsica?",a:"pisa",s:"Giusto: Pisa."},
+ {t:"Quale città vinse la battaglia della Meloria (1284)?",a:"genova",s:"Giusto: Genova sconfisse Pisa."},
+ {t:"Quale città vinse la guerra di Chioggia (1378-1381)?",a:"venezia",s:"Giusto: Venezia sconfisse Genova."}
+];
+let state, active;
+function buildQuiz(){
+ state=Q.map(()=>null); active=0;
+ const box=document.getElementById("qs"); box.innerHTML="";
+ Q.forEach((q,i)=>{
+  const d=document.createElement("div"); d.className="q"; d.id="q"+i;
+  d.innerHTML=`<p>${i+1}. ${q.t}</p><div class="cityrow"></div><div class="fb" aria-live="polite"></div>`;
+  for(const [k,c] of Object.entries(C)){const b=document.createElement("button");b.type="button";b.innerHTML=dot(c)+c.nome;b.onclick=()=>answer(i,k);d.querySelector(".cityrow").appendChild(b);}
+  d.onclick=(e)=>{ if(e.target===d||e.target.tagName==="P"){active=i;mark();} };
+  box.appendChild(d);
+ });
+ mark(); score();
+}
+function mark(){ Q.forEach((q,i)=>document.getElementById("q"+i).style.borderColor = i===active?"#ffd166":""); }
+function answer(i,k){
+ if(state[i]!==null) return;
+ const q=Q[i], fb=document.querySelector(`#q${i} .fb`);
+ state[i]= k===q.a;
+ fb.className="fb "+(state[i]?"ok":"no");
+ fb.textContent = state[i]? "✔ "+q.s : `✘ No, era ${C[q.a].nome}. ${q.s.replace("Giusto: ","")}`;
+ const nx=state.findIndex(v=>v===null); active = nx; mark(); score();
+}
+function score(){ const done=state.filter(v=>v!==null).length, ok=state.filter(v=>v).length;
+ document.getElementById("score").textContent = done===Q.length ? `Risultato: ${ok} su ${Q.length} ${ok===Q.length?'🏆 Perfetto!':''}` : `Risposte: ${done} su ${Q.length}`; }
+document.getElementById("restart").onclick=buildQuiz;
+buildQuiz();
+</script>
+</body>
+</html>
