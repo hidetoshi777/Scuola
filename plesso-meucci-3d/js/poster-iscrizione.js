@@ -210,7 +210,7 @@ function buildOverlay(posters, api) {
 
 export function createEnrollmentPosters({ THREE, scene, maxAnisotropy = 8 }) {
   // Coordinate già in three (Y su). Muro fondo aula: faccia interna z ≈ 1.10.
-  // Parete atrio verso la 3 AM: faccia x ≈ −3.90, accanto alla porta.
+  // Parete atrio verso la 3 AM: faccia x ≈ −3.90, oltre la bacheca con le foto.
   const specs = [
     {
       id: 'laboratorio',
@@ -242,9 +242,10 @@ export function createEnrollmentPosters({ THREE, scene, maxAnisotropy = 8 }) {
       id: 'iscriviti',
       title: 'Iscrizioni',
       place: 'atrio',
+      // a sinistra della bacheca: accanto alla porta ora ci sono cartello FSE e manifesti veri
       x: -3.868,
       y: 1.5,
-      z: -2.22,
+      z: 1.85,
       rotY: Math.PI / 2,
       w: 0.72,
       h: 0.96,

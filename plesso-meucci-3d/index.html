@@ -968,6 +968,9 @@
     const atrioLight = new THREE.PointLight(0xfff7ed, 6.5, 16, 1.4);
     atrioLight.position.copy(b2t(0.0, 1.5, 3.1));
     atrioLight.castShadow = true;
+    // senza bias i muri dell'atrio si riempivano di puntini (acne dell'ombra) in grafica alta
+    atrioLight.shadow.bias = -0.002;
+    atrioLight.shadow.normalBias = 0.03;
     scene.add(atrioLight);
 
     const atrioDoorLight = new THREE.PointLight(0xfef3c7, 3.2, 10, 1.5);
@@ -1244,8 +1247,8 @@
     const STOPS = [
       {
         title: "Tappa 1 · Ingresso dall'atrio (prima porta a sinistra = 3 AM)",
-        pos: b2t(1.2, 3.9, 1.62),
-        target: b2t(-3.8, 2.8, 1.50)
+        pos: b2t(1.0, 2.0, 1.62),
+        target: b2t(-3.9, 2.9, 1.45)
       },
       {
         title: "Tappa 2 · Davanti alla porta della 3 AM nell'atrio",
@@ -1378,7 +1381,7 @@
 
     const gltfLoader = new GLTFLoader();
     gltfLoader.load(
-      './meucci-tour.glb?v=3',
+      './meucci-tour.glb?v=4',
       (gltf) => {
         const root = gltf.scene;
         root.traverse((obj) => {
