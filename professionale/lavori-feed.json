@@ -1,5 +1,12 @@
 [
   {
+    "id": "trigonometria",
+    "titolo": "Trigonometria di base",
+    "annoProf": 3,
+    "url": "trigonometria/",
+    "materia": "Matematica"
+  },
+  {
     "id": "repubbliche-marinare",
     "titolo": "Le Repubbliche marinare",
     "annoProf": 3,

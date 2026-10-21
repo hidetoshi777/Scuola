@@ -181,6 +181,21 @@ window.ATTIVITA_WEB = [
     ],
   },
   {
+    titolo: "Trigonometria di base",
+    materia: "Matematica",
+    classe: "Terza superiore · professionale",
+    annoProf: 3,
+    pubblicato: "2026-10-21",
+    descrizione:
+      "Seno, coseno e tangente sulla circonferenza goniometrica: video-lezione passo passo e scheda in bianco e nero da stampare.",
+    citazione: "Il seno è quanto sale, il coseno quanto va avanti.",
+    url: "trigonometria/",
+    copertina: "trigonometria/img/og-share.jpg",
+    tinta: "matematica",
+    adesivo: "st-quadretti",
+    extra: [{ label: "Scheda PDF", url: "trigonometria/media/trigonometria-bn.pdf" }],
+  },
+  {
     titolo: "Le Repubbliche marinare",
     materia: "Storia",
     classe: "Terza superiore · professionale",
