@@ -1718,7 +1718,6 @@
     document.addEventListener('visibilitychange', () => { fpsProbe.t0 = 0; });
     applyQuality(quality);
 
-    const clock = new THREE.Clock();
     const input = { strafe: 0, forward: 0, turn: 0, tilt: 0, run: false };
 
     function readInput() {
@@ -1747,9 +1746,14 @@
       return input;
     }
 
+    // Il passo di ogni fotogramma si misura sul tempo del fotogramma (regolare, agganciato
+    // al refresh), non sull'orologio JS: quello oscilla di ±10 ms e, girandosi, la vista
+    // ruotava di 0,9° in un fotogramma e di 3,6° nel successivo (sfarfallio sui bordi).
+    let lastFrameMs = 0;
     function animate(nowMs) {
       requestAnimationFrame(animate);
-      const dt = Math.min(clock.getDelta(), 0.1);
+      const dt = lastFrameMs ? Math.min(Math.max(nowMs - lastFrameMs, 0) / 1000, 0.1) : 1 / 60;
+      lastFrameMs = nowMs;
       const input = readInput();
       if (posters.isOpen()) posters.scroll(input.posterStick || 0, dt);
       walk.update(dt, input);

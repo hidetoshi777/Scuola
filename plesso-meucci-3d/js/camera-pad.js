@@ -23,8 +23,17 @@ export function createWalkRig({ THREE, camera, controls, dom }) {
     cylinders: [],
     floors: [],
     fly: null,
-    savedWalk: null
+    savedWalk: null,
+    turnVel: 0,
+    tiltVel: 0
   };
+  // sguardo trascinato col mouse/dito non ancora applicato (vedi update)
+  const pendingLook = { x: 0, y: 0 };
+
+  function stopLookMotion() {
+    pendingLook.x = pendingLook.y = 0;
+    rig.turnVel = rig.tiltVel = 0;
+  }
 
   const ray = new THREE.Raycaster();
   const origin = new THREE.Vector3();
@@ -128,6 +137,7 @@ export function createWalkRig({ THREE, camera, controls, dom }) {
   }
 
   function setPose(pos, target) {
+    stopLookMotion();
     camera.position.copy(pos);
     const { yaw, pitch } = lookFrom(pos, target);
     rig.yaw = yaw;
@@ -138,6 +148,7 @@ export function createWalkRig({ THREE, camera, controls, dom }) {
 
   /** Volo animato verso una tappa; orbit=true per la vista dall'alto. */
   function flyTo(pos, target, orbit = false) {
+    stopLookMotion();
     // parti dall'orientamento reale della camera (in orbita lo decide OrbitControls)
     camera.getWorldDirection(tmpDir);
     rig.yaw = Math.atan2(-tmpDir.x, -tmpDir.z);
@@ -189,8 +200,13 @@ export function createWalkRig({ THREE, camera, controls, dom }) {
   });
   dom.addEventListener('pointermove', (e) => {
     if (!drag || e.pointerId !== drag.id) return;
-    const k = e.pointerType === 'touch' ? 0.006 : 0.0042;
-    lookDelta((e.clientX - drag.x) * k, (e.clientY - drag.y) * k);
+    // Non si gira subito: il mouse arriva a una cadenza sua (2 o 3 letture per fotogramma)
+    // e applicarlo qui dava passi irregolari. Si accumula e update() lo distribuisce.
+    if (rig.mode === 'walk' && !rig.fly) {
+      const k = e.pointerType === 'touch' ? 0.006 : 0.0042;
+      pendingLook.x += (e.clientX - drag.x) * k;
+      pendingLook.y += (e.clientY - drag.y) * k;
+    }
     drag.x = e.clientX;
     drag.y = e.clientY;
   });
@@ -236,9 +252,30 @@ export function createWalkRig({ THREE, camera, controls, dom }) {
       return;
     }
 
-    if (input.turn || input.tilt) {
-      rig.yaw -= input.turn * dt;
-      rig.pitch -= input.tilt * dt;
+    // Frecce e levetta: la rotazione parte e si ferma in ~0,1 s invece che di colpo
+    const kTurn = 1 - Math.exp(-dt / 0.08);
+    rig.turnVel += ((input.turn || 0) - rig.turnVel) * kTurn;
+    rig.tiltVel += ((input.tilt || 0) - rig.tiltVel) * kTurn;
+    if (Math.abs(rig.turnVel) < 1e-3 && !input.turn) rig.turnVel = 0;
+    if (Math.abs(rig.tiltVel) < 1e-3 && !input.tilt) rig.tiltVel = 0;
+    // Trascinamento: ogni fotogramma recupera la stessa quota del residuo (~40 ms di
+    // ritardo), così a mano costante la vista gira di passi uguali
+    let dYaw = rig.turnVel * dt;
+    let dPitch = rig.tiltVel * dt;
+    if (pendingLook.x || pendingLook.y) {
+      const kLook = 1 - Math.exp(-dt / 0.04);
+      const lx = pendingLook.x * kLook;
+      const ly = pendingLook.y * kLook;
+      pendingLook.x -= lx;
+      pendingLook.y -= ly;
+      if (Math.abs(pendingLook.x) < 1e-5) pendingLook.x = 0;
+      if (Math.abs(pendingLook.y) < 1e-5) pendingLook.y = 0;
+      dYaw += lx;
+      dPitch += ly;
+    }
+    if (dYaw || dPitch) {
+      rig.yaw -= dYaw;
+      rig.pitch -= dPitch;
       applyLook();
     }
 
