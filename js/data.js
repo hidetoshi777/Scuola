@@ -183,8 +183,8 @@ window.ATTIVITA_WEB = [
   {
     titolo: "Trigonometria di base",
     materia: "Matematica",
-    classe: "Terza superiore · professionale",
-    annoProf: 3,
+    classe: "Quarta superiore · professionale",
+    annoProf: 4,
     pubblicato: "2026-10-21",
     descrizione:
       "Seno, coseno e tangente sulla circonferenza goniometrica: video-lezione passo passo e scheda in bianco e nero da stampare.",
