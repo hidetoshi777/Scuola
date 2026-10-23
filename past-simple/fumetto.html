@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="color-scheme" content="dark" id="color-scheme">
+  <script>
+    {
+      const t = localStorage.getItem("tema-past-simple");
+      const tema = t === "light" || t === "dark" ? t : "dark";
+      document.documentElement.dataset.theme = tema;
+      document.getElementById("color-scheme").content = tema;
+    }
+  </script>
+  <link rel="icon" href="../favicon.svg" type="image/svg+xml">
+  <title>Fumetto · Past simple | Scuola</title>
+  <meta name="description" content="Sei tavole in officina moto: was/were, verbi in -ed, verbi irregolari, ieri e la settimana scorsa, didn’t e Did…?, ricorda così.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/fumetto.css">
+</head>
+<body class="page-fumetto">
+  <a class="skip-link" href="#contenuto">Salta al contenuto</a>
+
+  <header class="cartellino">
+    <p class="cartellino-titolo"><span class="s">Oggi</span> · <span class="c">Ieri</span></p>
+    <span class="timbro" data-timbro aria-hidden="true">YESTERDAY</span>
+    <button type="button" class="theme-toggle" data-theme-toggle aria-pressed="false">Chiaro</button>
+  </header>
+
+  <nav class="tabbar" aria-label="Sezioni">
+    <a href="index.html"><span class="ico" aria-hidden="true">⌂</span>Home</a>
+    <a href="imparare.html"><span class="ico" aria-hidden="true">✎</span>Studio</a>
+    <a href="fumetto.html" aria-current="page"><span class="ico" aria-hidden="true">▦</span>Fumetto</a>
+    <a href="laboratorio.html"><span class="ico" aria-hidden="true">⚙</span>Lab</a>
+    <a href="gioco.html"><span class="ico" aria-hidden="true">★</span>Gioco</a>
+  </nav>
+
+  <main id="contenuto" class="foglio" tabindex="-1">
+    <p class="kicker">Fumetto · 6 tavole</p>
+    <h1>Il weekend di Tony</h1>
+    <p class="lead">Tony e Anna lavorano in un’officina di moto. Lunedì Tony racconta cosa ha fatto.</p>
+
+    <section class="fumetto-reader" id="fumetto-stage" aria-roledescription="fumetto" aria-label="Past simple a fumetti">
+      <div class="fumetto-toolbar">
+        <p class="fumetto-status">Tavola <span id="fumetto-num">1</span> di 6</p>
+        <div class="fumetto-toolbar-actions">
+          <button type="button" class="btn fumetto-print" id="fumetto-print">Stampa tutto</button>
+          <button type="button" class="btn fumetto-full" id="fumetto-fullscreen" aria-pressed="false">Schermo intero</button>
+        </div>
+      </div>
+
+      <div class="fumetto-viewport" id="fumetto-viewport">
+          <figure class="fumetto-page is-active" data-page="1">
+            <img src="img/tavole/01-lunedi.jpg" alt="Tavola 1: lunedì in officina. Anna chiede a Tony: How was your weekend? It was great! What did you do? Two days ago I repaired a motorbike." width="1280" height="720" fetchpriority="high">
+          </figure>
+          <figure class="fumetto-page" data-page="2" aria-hidden="true">
+            <img src="img/tavole/02-regolari.jpg" alt="Tavola 2: sabato mattina. I cleaned the engine and I changed the oil. I worked all morning. I repaired the brakes." width="1280" height="720" loading="lazy">
+          </figure>
+          <figure class="fumetto-page" data-page="3" aria-hidden="true">
+            <img src="img/tavole/03-irregolari.jpg" alt="Tavola 3: sabato pomeriggio. I went to the market. I bought a new helmet. I saw an old motorbike. I took a photo." width="1280" height="720" loading="lazy">
+          </figure>
+          <figure class="fumetto-page" data-page="4" aria-hidden="true">
+            <img src="img/tavole/04-ieri.jpg" alt="Tavola 4: ieri e la settimana scorsa. Yesterday I had lunch with my family. We were happy. Last week I was at the beach. I came home late." width="1280" height="720" loading="lazy">
+          </figure>
+          <figure class="fumetto-page" data-page="5" aria-hidden="true">
+            <img src="img/tavole/05-domande.jpg" alt="Tavola 5: domande e negative. Did you play football? No, I didn’t. Did you watch a film? Yes, I did." width="1280" height="720" loading="lazy">
+          </figure>
+          <figure class="fumetto-page" data-page="6" aria-hidden="true">
+            <img src="img/tavole/06-ricorda.jpg" alt="Tavola 6: ricorda. Past simple? Easy! was/were, + -ed, irregolari, didn’t + verbo base, Did you go?" width="1280" height="720" loading="lazy">
+          </figure>
+      </div>
+
+      <p class="fumetto-caption" id="fumetto-caption" aria-live="polite"></p>
+
+      <div class="fumetto-controls">
+        <button type="button" class="btn fumetto-nav" id="fumetto-prev" disabled>← Indietro</button>
+        <div class="fumetto-dots" id="fumetto-dots" role="tablist" aria-label="Tavole"></div>
+        <button type="button" class="btn btn-primary fumetto-nav" id="fumetto-next">Avanti →</button>
+      </div>
+      <p class="fumetto-hint">Scorri o tocca i lati. Pizzica per ingrandire. «Schermo intero» sul telefono.</p>
+    </section>
+
+    <div class="azioni">
+      <a class="btn btn-primary" href="laboratorio.html">Laboratorio</a>
+      <a class="btn" href="gioco.html">Gioco</a>
+      <a class="btn fumetto-bn" href="stampa/fumetto-bn.pdf" download>Fumetto in bianco e nero (PDF)</a>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <p>Scuola · Inglese · terza professionale AM</p>
+  </footer>
+
+  <script src="js/common.js" defer></script>
+  <script src="../js/fumetto-zoom.js" defer></script>
+  <script src="js/fumetto-print.js?v=1" defer></script>
+  <script src="js/fumetto.js" defer></script>
+</body>
+</html>

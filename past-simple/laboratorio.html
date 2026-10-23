@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="color-scheme" content="dark" id="color-scheme">
+  <script>
+    {
+      const t = localStorage.getItem("tema-past-simple");
+      const tema = t === "light" || t === "dark" ? t : "dark";
+      document.documentElement.dataset.theme = tema;
+      document.getElementById("color-scheme").content = tema;
+    }
+  </script>
+  <link rel="icon" href="../favicon.svg" type="image/svg+xml">
+  <title>Laboratorio · Past simple | Scuola</title>
+  <meta name="description" content="Costruisci i verbi al passato, scegli, completa, correggi, leggi il sabato di Tony e fai la prova finale autocorretta.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body class="page-lab">
+  <a class="skip-link" href="#contenuto">Salta al contenuto</a>
+
+  <header class="cartellino">
+    <p class="cartellino-titolo"><span class="s">Oggi</span> · <span class="c">Ieri</span></p>
+    <span class="timbro" data-timbro aria-hidden="true">YESTERDAY</span>
+    <button type="button" class="theme-toggle" data-theme-toggle aria-pressed="false">Chiaro</button>
+  </header>
+
+  <nav class="tabbar" aria-label="Sezioni">
+    <a href="index.html"><span class="ico" aria-hidden="true">⌂</span>Home</a>
+    <a href="imparare.html"><span class="ico" aria-hidden="true">✎</span>Studio</a>
+    <a href="fumetto.html"><span class="ico" aria-hidden="true">▦</span>Fumetto</a>
+    <a href="laboratorio.html" aria-current="page"><span class="ico" aria-hidden="true">⚙</span>Lab</a>
+    <a href="gioco.html"><span class="ico" aria-hidden="true">★</span>Gioco</a>
+  </nav>
+
+  <main id="contenuto" class="foglio" tabindex="-1">
+    <p class="kicker">Laboratorio · sei postazioni</p>
+    <h1>Al banco dei verbi</h1>
+    <p class="lead">Costruisci, scegli, completa, correggi, leggi. Alla fine la prova: si corregge da sola.</p>
+
+    <div class="stazioni">
+      <section class="stazione stazione-larga" id="costruisci">
+        <h2>1. Costruisci il verbo</h2>
+        <p class="consegna">Scegli chi, quale verbo e quando. Guarda come cambia.</p>
+        <div class="leva" role="group" aria-label="Quando succede?">
+          <button type="button" data-modo="sempre" aria-pressed="false">OGGI</button>
+          <button type="button" data-modo="adesso" aria-pressed="true">IERI</button>
+        </div>
+        <div class="costruttore">
+          <div class="campo">
+            <label for="c-sogg">Chi?</label>
+            <select id="c-sogg"></select>
+          </div>
+          <div class="campo">
+            <label for="c-verbo">Verbo</label>
+            <select id="c-verbo"></select>
+          </div>
+          <div class="campo">
+            <label for="c-forma">Forma</label>
+            <select id="c-forma">
+              <option value="+">+ affermativa</option>
+              <option value="-">− negativa</option>
+              <option value="?">? domanda</option>
+            </select>
+          </div>
+        </div>
+        <p class="uscita is-adesso" id="c-out" aria-live="polite"></p>
+      </section>
+
+      <section class="stazione" id="scegli">
+        <h2>2. Scegli la forma</h2>
+        <p class="consegna">Tocca la forma giusta. Ti dico subito se va bene.</p>
+        <ol class="esercizio" id="scegli-lista"></ol>
+        <p class="punteggio" id="scegli-punti" aria-live="polite"></p>
+      </section>
+
+      <section class="stazione" id="completa">
+        <h2>3. Completa</h2>
+        <p class="consegna">Scrivi il verbo tra parentesi al passato. Poi premi «Controlla».</p>
+        <ol class="esercizio" id="completa-lista"></ol>
+        <div class="azioni">
+          <button type="button" class="btn btn-primary" id="completa-check">Controlla</button>
+          <button type="button" class="btn" id="completa-sol">Mostra le soluzioni</button>
+        </div>
+        <p class="punteggio" id="completa-punti" aria-live="polite"></p>
+      </section>
+
+      <section class="stazione" id="errore">
+        <h2>4. Trova l’errore</h2>
+        <p class="consegna">Due frasi: una è sbagliata. Tocca quella <strong>giusta</strong>.</p>
+        <ol class="esercizio" id="errore-lista"></ol>
+        <p class="punteggio" id="errore-punti" aria-live="polite"></p>
+      </section>
+
+      <section class="stazione" id="lettura">
+        <h2>5. Leggi: il sabato di Tony</h2>
+        <div class="lettura" id="testo-tony">
+          <p>Last Saturday Tony <span data-t="c">was</span> in the workshop all morning. He <span data-t="c">repaired</span> an old motorbike. He <span data-t="c">cleaned</span> the engine and he <span data-t="c">changed</span> the oil. In the afternoon he <span data-t="c">went</span> to the market and he <span data-t="c">bought</span> a new helmet. He <span data-t="c">saw</span> an old motorbike and he <span data-t="c">took</span> a photo.</p>
+          <p>He <span data-t="s">didn’t play</span> football and he <span data-t="s">didn’t watch</span> TV. On Sunday he <span data-t="c">had</span> lunch with his family. They <span data-t="c">were</span> happy.</p>
+          <p class="glossario">engine = motore · oil = olio · helmet = casco · market = mercato · photo = foto</p>
+        </div>
+        <div class="azioni" style="margin-top:0">
+          <button type="button" class="btn" id="mostra-verbi" aria-pressed="false">Colora i verbi</button>
+        </div>
+        <p class="consegna" style="margin-top:0.7rem">Arancio = passato · Blu = didn’t + verbo base. Vero o falso?</p>
+        <ol class="esercizio" id="vf-lista"></ol>
+        <p class="punteggio" id="vf-punti" aria-live="polite"></p>
+      </section>
+
+      <section class="stazione" id="parla">
+        <h2>6. Tocca a te</h2>
+        <p class="consegna">Scrivi sul quaderno o dillo a voce. Quattro frasi su di te.</p>
+        <div class="due">
+          <div class="box c">
+            <h3>Ieri ho…</h3>
+            <p class="en">Yesterday I … <br>Last week I … <br>Two days ago I …</p>
+          </div>
+          <div class="box">
+            <h3>Ieri non ho…</h3>
+            <p class="en">I didn’t … <br>I wasn’t … <br>We didn’t …</p>
+          </div>
+        </div>
+        <p>Esempio: <span class="en">Yesterday I went to school. I didn’t play football.</span></p>
+        <p><strong>In coppia, in officina:</strong></p>
+        <p class="en">A: What did you do at the weekend?<br>B: I went to the market. I bought a helmet.<br>A: Did you play football?<br>B: No, I didn’t. I was tired.</p>
+      </section>
+
+      <section class="stazione stazione-larga" id="prova">
+        <h2>Prova finale · 20 punti</h2>
+        <p class="consegna">Rispondi a tutto, poi premi «Consegna». Vedi il punteggio, il voto e le correzioni.</p>
+        <ol class="esercizio" id="prova-lista"></ol>
+        <div class="azioni">
+          <button type="button" class="btn btn-primary" id="prova-consegna">Consegna</button>
+          <button type="button" class="btn" id="prova-rifai" hidden>Rifai la prova</button>
+        </div>
+        <div class="voto" id="prova-voto" hidden aria-live="polite"></div>
+      </section>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <p>Scuola · Inglese · terza professionale AM</p>
+  </footer>
+
+  <script src="js/common.js" defer></script>
+  <script src="js/laboratorio.js" defer></script>
+</body>
+</html>

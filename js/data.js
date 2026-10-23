@@ -181,6 +181,27 @@ window.ATTIVITA_WEB = [
     ],
   },
   {
+    titolo: "Past simple: cosa hai fatto ieri?",
+    materia: "Inglese",
+    classe: "Terza superiore · professionale",
+    annoProf: 3,
+    pubblicato: "2026-10-23",
+    descrizione:
+      "Ieri ho riparato una moto: was/were, verbi in -ed, verbi irregolari, didn’t e Did…? Studio, fumetto in officina (6 tavole), laboratorio autocorretto, gioco delle due cassette e scheda da stampare.",
+    citazione: "Yesterday I repaired a motorbike.",
+    url: "past-simple/",
+    copertina: "past-simple/img/og-share.jpg",
+    tinta: "inglese",
+    adesivo: "st-fumetto",
+    extra: [
+      { label: "Studio", url: "past-simple/imparare.html" },
+      { label: "Fumetto", url: "past-simple/fumetto.html" },
+      { label: "Laboratorio", url: "past-simple/laboratorio.html" },
+      { label: "Gioco", url: "past-simple/gioco.html" },
+      { label: "Scheda PDF", url: "past-simple/stampa/scheda-past-simple.pdf" },
+    ],
+  },
+  {
     titolo: "Trigonometria di base",
     materia: "Matematica",
     classe: "Quarta superiore · professionale",

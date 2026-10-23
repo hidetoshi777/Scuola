@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="color-scheme" content="dark" id="color-scheme">
+  <script>
+    {
+      const t = localStorage.getItem("tema-past-simple");
+      const tema = t === "light" || t === "dark" ? t : "dark";
+      document.documentElement.dataset.theme = tema;
+      document.getElementById("color-scheme").content = tema;
+    }
+  </script>
+  <link rel="icon" href="../favicon.svg" type="image/svg+xml">
+  <title>Past simple: cosa hai fatto ieri? | Scuola</title>
+  <meta name="description" content="Past simple per la terza professionale: studio, fumetto in officina moto, laboratorio con esercizi autocorretti, gioco e scheda da stampare.">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="it_IT">
+  <meta property="og:site_name" content="Scuola">
+  <meta property="og:title" content="Past simple: cosa hai fatto ieri?">
+  <meta property="og:description" content="Yesterday I repaired a motorbike. Was/were, -ed, verbi irregolari, didn’t e Did…? con fumetto, laboratorio e gioco.">
+  <meta property="og:url" content="https://hidetoshi777.github.io/Scuola/past-simple/">
+  <meta property="og:image" content="https://hidetoshi777.github.io/Scuola/past-simple/img/og-share.jpg">
+  <meta property="og:image:alt" content="Tre scene a fumetto in officina moto: Anna e Tony parlano del weekend">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Past simple: cosa hai fatto ieri?">
+  <meta name="twitter:description" content="Yesterday I repaired a motorbike. Was/were, -ed, verbi irregolari, didn’t e Did…?">
+  <meta name="twitter:image" content="https://hidetoshi777.github.io/Scuola/past-simple/img/og-share.jpg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body class="page-home">
+  <a class="skip-link" href="#contenuto">Salta al contenuto</a>
+
+  <header class="cartellino">
+    <p class="cartellino-titolo"><span class="s">Oggi</span> · <span class="c">Ieri</span></p>
+    <span class="timbro" data-timbro aria-hidden="true">YESTERDAY</span>
+    <button type="button" class="theme-toggle" data-theme-toggle aria-pressed="false">Chiaro</button>
+  </header>
+
+  <nav class="tabbar" aria-label="Sezioni">
+    <a href="index.html" aria-current="page"><span class="ico" aria-hidden="true">⌂</span>Home</a>
+    <a href="imparare.html"><span class="ico" aria-hidden="true">✎</span>Studio</a>
+    <a href="fumetto.html"><span class="ico" aria-hidden="true">▦</span>Fumetto</a>
+    <a href="laboratorio.html"><span class="ico" aria-hidden="true">⚙</span>Lab</a>
+    <a href="gioco.html"><span class="ico" aria-hidden="true">★</span>Gioco</a>
+  </nav>
+
+  <main id="contenuto" class="foglio" tabindex="-1">
+    <p class="kicker">Inglese · Terza professionale AM</p>
+    <div class="hero">
+      <img src="img/home.jpg" alt="Tre scene a fumetto: Anna e Tony in officina moto, Tony al mercato con il casco, Anna e Tony con il pollice alzato davanti a una moto riparata" width="1376" height="768" fetchpriority="high">
+      <div class="hero-copy">
+        <h1>Past simple: cosa hai fatto ieri?</h1>
+        <p class="lead">Ieri ho riparato una moto. In inglese il verbo cambia.</p>
+      </div>
+    </div>
+
+    <blockquote class="citazione">
+      <span class="s-txt">Every day I repair motorbikes.</span>
+      <span class="c-txt">Yesterday I repaired a motorbike.</span>
+    </blockquote>
+
+    <section class="interruttore" aria-labelledby="leva-titolo">
+      <h2 id="leva-titolo">Sposta la leva</h2>
+      <p>Stessa persona, stesso verbo. Cambia solo il <strong>quando</strong>.</p>
+      <div class="leva" role="group" aria-label="Quando succede?">
+        <button type="button" data-modo="sempre" aria-pressed="true">OGGI</button>
+        <button type="button" data-modo="adesso" aria-pressed="false">IERI</button>
+      </div>
+      <p class="frase-viva" id="frase-viva" aria-live="polite"></p>
+      <div class="azioni">
+        <button type="button" class="btn" id="altra-frase">Altra frase ↻</button>
+      </div>
+    </section>
+
+    <h2>Da dove parto?</h2>
+    <div class="porte">
+      <a class="porta" href="imparare.html"><span class="ico" aria-hidden="true">✎</span><span><b>Studio</b><span class="desc">Le regole, con esempi in officina, e la scheda da stampare.</span></span></a>
+      <a class="porta" href="fumetto.html"><span class="ico" aria-hidden="true">▦</span><span><b>Fumetto</b><span class="desc">Il weekend di Tony: sei tavole.</span></span></a>
+      <a class="porta" href="laboratorio.html"><span class="ico" aria-hidden="true">⚙</span><span><b>Laboratorio</b><span class="desc">Costruisci i verbi, esercizi e prova finale.</span></span></a>
+      <a class="porta" href="gioco.html"><span class="ico" aria-hidden="true">★</span><span><b>Gioco</b><span class="desc">Due cassette: OGGI o IERI?</span></span></a>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <p>Scuola · Inglese · terza professionale AM</p>
+  </footer>
+
+  <script src="js/common.js" defer></script>
+  <script src="js/home.js" defer></script>
+</body>
+</html>

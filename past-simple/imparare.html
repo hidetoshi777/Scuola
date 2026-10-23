@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="color-scheme" content="dark" id="color-scheme">
+  <script>
+    {
+      const t = localStorage.getItem("tema-past-simple");
+      const tema = t === "light" || t === "dark" ? t : "dark";
+      document.documentElement.dataset.theme = tema;
+      document.getElementById("color-scheme").content = tema;
+    }
+  </script>
+  <link rel="icon" href="../favicon.svg" type="image/svg+xml">
+  <title>Studio · Past simple | Scuola</title>
+  <meta name="description" content="Past simple: quando si usa, was/were, verbi in -ed, verbi irregolari, didn’t e Did…?, parole del tempo, errori tipici e scheda da stampare.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body class="page-studio">
+  <a class="skip-link" href="#contenuto">Salta al contenuto</a>
+
+  <header class="cartellino">
+    <p class="cartellino-titolo"><span class="s">Oggi</span> · <span class="c">Ieri</span></p>
+    <span class="timbro" data-timbro aria-hidden="true">YESTERDAY</span>
+    <button type="button" class="theme-toggle" data-theme-toggle aria-pressed="false">Chiaro</button>
+  </header>
+
+  <nav class="tabbar" aria-label="Sezioni">
+    <a href="index.html"><span class="ico" aria-hidden="true">⌂</span>Home</a>
+    <a href="imparare.html" aria-current="page"><span class="ico" aria-hidden="true">✎</span>Studio</a>
+    <a href="fumetto.html"><span class="ico" aria-hidden="true">▦</span>Fumetto</a>
+    <a href="laboratorio.html"><span class="ico" aria-hidden="true">⚙</span>Lab</a>
+    <a href="gioco.html"><span class="ico" aria-hidden="true">★</span>Gioco</a>
+  </nav>
+
+  <main id="contenuto" class="foglio" tabindex="-1">
+    <p class="kicker">Studio · il cartellino delle regole</p>
+    <h1>Ieri: il past simple</h1>
+    <p class="lead">In italiano: «ho riparato», «ero», «sono andato». In inglese basta un solo tempo: il <strong>past simple</strong>.</p>
+
+    <div class="studio-layout">
+      <nav class="indice" aria-label="Indice">
+        <a href="#quando">1. Quando lo uso</a>
+        <a href="#be">2. was / were</a>
+        <a href="#ed">3. Verbi regolari: -ed</a>
+        <a href="#irr">4. Verbi irregolari</a>
+        <a href="#neg">5. didn’t</a>
+        <a href="#dom">6. Did…?</a>
+        <a href="#tempo">7. Parole del tempo</a>
+        <a href="#errori">8. Errori tipici</a>
+        <a href="#in-breve">9. In breve</a>
+        <a href="#scheda">10. Scheda da stampare</a>
+        <a href="#ricorda">11. Ricorda così</a>
+      </nav>
+
+      <div>
+        <article class="capitolo" id="quando">
+          <h2><span class="num">1</span>Quando lo uso</h2>
+          <p>Il past simple parla di <strong>azioni finite nel passato</strong>. Sono iniziate e finite. Di solito c’è una parola del tempo.</p>
+          <div class="due">
+            <div class="box s">
+              <h3>OGGI · present simple</h3>
+              <div class="linea-tempo" aria-hidden="true">
+                <span class="barra" style="left:62%;width:30%;background:var(--sempre)"></span>
+                <span class="now">NOW</span>
+                <span class="didascalia">si ripete adesso</span>
+              </div>
+              <p class="en">I repair motorbikes every day.</p>
+              <p class="it">Riparo moto ogni giorno.</p>
+            </div>
+            <div class="box c">
+              <h3>IERI · past simple</h3>
+              <div class="linea-tempo" aria-hidden="true">
+                <span class="pallino" style="left:20%;background:var(--adesso)"></span>
+                <span class="now">NOW</span>
+                <span class="didascalia">è finita</span>
+              </div>
+              <p class="en">Yesterday I repaired a motorbike.</p>
+              <p class="it">Ieri ho riparato una moto.</p>
+            </div>
+          </div>
+          <p>Parole del tempo: <span class="en">yesterday · last week · two days ago · in 2020</span>.</p>
+        </article>
+
+        <article class="capitolo" id="be">
+          <h2><span class="num">2</span>was / were</h2>
+          <p>Il verbo <span class="en">to be</span> (essere) ha due forme al passato.</p>
+          <div class="scroll-x">
+            <table class="tabella">
+              <thead><tr><th>Chi?</th><th>Passato</th><th>Significa</th></tr></thead>
+              <tbody>
+                <tr><td class="en">I / he / she / it</td><td class="en"><mark class="c">was</mark></td><td>ero · era</td></tr>
+                <tr><td class="en">you / we / they</td><td class="en"><mark class="c">were</mark></td><td>eri · eravamo · erano</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <ul>
+            <li><span class="en">I <mark class="c">was</mark> at home yesterday.</span> <span class="it">Ieri ero a casa.</span></li>
+            <li><span class="en">She <mark class="c">was</mark> tired.</span> <span class="it">Era stanca.</span></li>
+            <li><span class="en">They <mark class="c">were</mark> in Rome last week.</span> <span class="it">Erano a Roma la settimana scorsa.</span></li>
+          </ul>
+          <div class="box c">
+            <h3>Negativa e domanda</h3>
+            <p class="en"><mark class="c">wasn’t</mark> / <mark class="c">weren’t</mark> · <mark class="c">Was</mark> he tired? · <mark class="c">Were</mark> you at home?</p>
+            <p>Con <em>be</em> non serve <span class="en">did</span>.</p>
+          </div>
+        </article>
+
+        <article class="capitolo" id="ed">
+          <h2><span class="num">3</span>Verbi regolari: + -ed</h2>
+          <p>Quasi tutti i verbi fanno il passato con <strong>-ed</strong>. Vale per tutte le persone: <strong>niente -s</strong>.</p>
+          <div class="box c">
+            <h3>Come si forma</h3>
+            <p class="en">play → <mark class="c">played</mark> · watch → <mark class="c">watched</mark> · work → <mark class="c">worked</mark> · repair → <mark class="c">repaired</mark></p>
+            <p class="en">I played · he played · they played</p>
+          </div>
+          <div class="scroll-x">
+            <table class="tabella">
+              <thead><tr><th>Regola</th><th>Esempi</th></tr></thead>
+              <tbody>
+                <tr><td>quasi tutti: <strong>+ ed</strong></td><td class="en">work → worked · clean → cleaned · repair → repaired</td></tr>
+                <tr><td>finisce in -e: <strong>+ d</strong></td><td class="en">use → used · live → lived</td></tr>
+                <tr><td>consonante + y: <strong>y → ied</strong></td><td class="en">study → studied · carry → carried</td></tr>
+                <tr><td>verbi corti: <strong>raddoppia</strong></td><td class="en">stop → stopped · plan → planned</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </article>
+
+        <article class="capitolo" id="irr">
+          <h2><span class="num">4</span>Verbi irregolari</h2>
+          <p>Alcuni verbi cambiano forma. Non hanno regola: si <strong>imparano</strong>. Sono pochi e comuni.</p>
+          <div class="scroll-x">
+            <table class="tabella">
+              <thead><tr><th>Base</th><th>Passato</th><th>Significa</th></tr></thead>
+              <tbody>
+                <tr><td class="en">go</td><td class="en">went</td><td>andare</td></tr>
+                <tr><td class="en">have</td><td class="en">had</td><td>avere</td></tr>
+                <tr><td class="en">do</td><td class="en">did</td><td>fare</td></tr>
+                <tr><td class="en">see</td><td class="en">saw</td><td>vedere</td></tr>
+                <tr><td class="en">make</td><td class="en">made</td><td>fare / creare</td></tr>
+                <tr><td class="en">take</td><td class="en">took</td><td>prendere</td></tr>
+                <tr><td class="en">buy</td><td class="en">bought</td><td>comprare</td></tr>
+                <tr><td class="en">come</td><td class="en">came</td><td>venire</td></tr>
+                <tr><td class="en">eat</td><td class="en">ate</td><td>mangiare</td></tr>
+                <tr><td class="en">drive</td><td class="en">drove</td><td>guidare</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <ul>
+            <li><span class="en">I <mark class="c">went</mark> to the market.</span> <span class="it">Sono andato al mercato.</span></li>
+            <li><span class="en">I <mark class="c">bought</mark> a new helmet.</span> <span class="it">Ho comprato un casco nuovo.</span></li>
+            <li><span class="en">He <mark class="c">took</mark> a photo.</span> <span class="it">Ha fatto una foto.</span></li>
+          </ul>
+        </article>
+
+        <article class="capitolo" id="neg">
+          <h2><span class="num">5</span>La negativa: didn’t</h2>
+          <div class="box c">
+            <h3>didn’t + verbo base</h3>
+            <p class="en">I <mark class="c">didn’t play</mark> football. · She <mark class="c">didn’t watch</mark> TV. · We <mark class="c">didn’t go</mark> out.</p>
+            <p><span class="en">didn’t</span> = <span class="en">did not</span>. Vale per tutti: I, you, he, she, it, we, they.</p>
+          </div>
+          <div class="box stop" style="margin-top:0.7rem">
+            <h3>Attenzione</h3>
+            <p>Dopo <span class="en">didn’t</span> il verbo <strong>torna base</strong>. Il passato è già dentro <span class="en">did</span>.</p>
+            <p><span class="en">He didn’t <s>went</s> → He didn’t go.</span><br><span class="en">I didn’t <s>played</s> → I didn’t play.</span></p>
+          </div>
+        </article>
+
+        <article class="capitolo" id="dom">
+          <h2><span class="num">6</span>Le domande: Did…?</h2>
+          <div class="box c">
+            <h3>Did + soggetto + verbo base</h3>
+            <p class="en"><mark class="c">Did</mark> you <mark class="c">play</mark> football? · <mark class="c">Did</mark> she <mark class="c">watch</mark> TV? · <mark class="c">Did</mark> they <mark class="c">go</mark> out?</p>
+            <p>Risposte brevi: <span class="en">Yes, I did. / No, I didn’t.</span> · <span class="en">Yes, she did. / No, she didn’t.</span></p>
+          </div>
+          <p style="margin-top:0.7rem">Domanda con una parola in più:</p>
+          <ul>
+            <li><span class="en">What did you do yesterday?</span> <span class="it">Cosa hai fatto ieri?</span></li>
+            <li><span class="en">Where did you go?</span> <span class="it">Dove sei andato?</span></li>
+          </ul>
+          <p>Con <em>be</em> si gira: <span class="en">Were you at home?</span> (senza Did).</p>
+        </article>
+
+        <article class="capitolo" id="tempo">
+          <h2><span class="num">7</span>Parole del tempo</h2>
+          <p>Queste parole ti dicono: «usa il past simple».</p>
+          <div class="parole c"><span>yesterday</span><span>yesterday morning</span><span>last night</span><span>last week</span><span>last Saturday</span><span>last year</span><span>two days ago</span><span>a week ago</span><span>in 2020</span></div>
+          <p><strong>Dove vanno?</strong> Di solito alla fine della frase: <span class="en">I repaired a motorbike <mark class="c">yesterday</mark>.</span> Oppure all’inizio: <span class="en"><mark class="c">Yesterday</mark> I repaired a motorbike.</span></p>
+          <p><span class="en">ago</span> = <em>fa</em>, si mette dopo: <span class="en">two days ago</span> = due giorni fa.</p>
+        </article>
+
+        <article class="capitolo" id="errori">
+          <h2><span class="num">8</span>Errori tipici</h2>
+          <div class="scroll-x">
+            <table class="tabella">
+              <thead><tr><th>Sbagliato</th><th>Giusto</th><th>Perché</th></tr></thead>
+              <tbody>
+                <tr><td class="en"><s>I goed to school.</s></td><td class="en">I went to school.</td><td>go è irregolare</td></tr>
+                <tr><td class="en"><s>He didn’t went.</s></td><td class="en">He didn’t go.</td><td>dopo didn’t: verbo base</td></tr>
+                <tr><td class="en"><s>Did you played?</s></td><td class="en">Did you play?</td><td>dopo Did: verbo base</td></tr>
+                <tr><td class="en"><s>We was at school.</s></td><td class="en">We were at school.</td><td>we → were</td></tr>
+                <tr><td class="en"><s>Yesterday I am at home.</s></td><td class="en">Yesterday I was at home.</td><td>ieri → passato</td></tr>
+                <tr><td class="en"><s>I stoped the engine.</s></td><td class="en">I stopped the engine.</td><td>raddoppia la p</td></tr>
+                <tr><td class="en"><s>He studyed English.</s></td><td class="en">He studied English.</td><td>y → ied</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </article>
+
+        <article class="capitolo" id="in-breve">
+          <h2><span class="num">9</span>In breve</h2>
+          <p>La versione corta. Due righe, tre regole.</p>
+          <div class="semplice">
+            <div class="riga s"><span class="ico" aria-hidden="true">🔁</span><span><b>OGGI</b><span class="en">I repair. He repairs.</span><br><span class="it">ogni giorno · di solito</span></span></div>
+            <div class="riga c"><span class="ico" aria-hidden="true">⏪</span><span><b>IERI</b><span class="en">I repaired. He repaired.</span><br><span class="it">ieri · la settimana scorsa · due giorni fa</span></span></div>
+          </div>
+          <ol>
+            <li>regolari: <strong>+ ed</strong> → <span class="en">worked</span> · irregolari: da imparare → <span class="en">went</span></li>
+            <li>negativa e domanda: <strong>didn’t / Did + verbo base</strong> → <span class="en">I didn’t go</span></li>
+            <li><strong>be</strong>: <span class="en">was / were</span></li>
+          </ol>
+        </article>
+
+        <article class="capitolo mappa-stampa" id="scheda">
+          <h2><span class="num">10</span>Scheda da stampare</h2>
+          <p>Due pagine in bianco e nero, da stampare <strong>fronte-retro</strong>. C’è anche la pagina con le soluzioni.</p>
+          <img src="img/scheda-1.png" alt="Scheda pagina 1: quando si usa il past simple, was e were, verbi regolari in -ed, tabella dei verbi irregolari" width="1654" height="2339" loading="lazy">
+          <img src="img/scheda-2.png" alt="Scheda pagina 2: negativa con didn’t, domande con Did, da ricordare, tre esercizi" width="1654" height="2339" loading="lazy" style="margin-top:1rem">
+          <div class="azioni">
+            <a class="btn btn-primary" href="stampa/scheda-past-simple.pdf" download>Scheda (PDF, 2 pagine)</a>
+            <a class="btn" href="stampa/soluzioni-past-simple.pdf" download>Soluzioni (PDF)</a>
+            <a class="btn" href="stampa/fumetto-bn.pdf" download>Fumetto B/N (PDF)</a>
+          </div>
+        </article>
+
+        <article class="capitolo" id="ricorda">
+          <h2><span class="num">11</span>Ricorda così</h2>
+          <div class="ricorda">
+            <ul>
+              <li><span class="c-txt">Ieri / la settimana scorsa / … fa</span> → past simple.</li>
+              <li>Regolari: <span class="en">+ ed</span> (<span class="en">worked</span>). Irregolari: <span class="en">go → went</span>.</li>
+              <li><span class="en">was / were</span> per il verbo <em>essere</em>.</li>
+              <li><span class="en">didn’t</span> e <span class="en">Did</span> + <strong>verbo base</strong>: <span class="en">I didn’t go</span>, <span class="en">Did you go?</span></li>
+              <li>Nessuna -s al passato: <span class="en">he played</span>.</li>
+            </ul>
+          </div>
+          <div class="azioni">
+            <a class="btn btn-primary" href="laboratorio.html">Laboratorio</a>
+            <a class="btn" href="fumetto.html">Fumetto</a>
+            <a class="btn" href="gioco.html">Gioco</a>
+          </div>
+        </article>
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <p>Scuola · Inglese · terza professionale AM</p>
+  </footer>
+
+  <script src="js/common.js" defer></script>
+</body>
+</html>

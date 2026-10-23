@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="color-scheme" content="dark" id="color-scheme">
+  <script>
+    {
+      const t = localStorage.getItem("tema-past-simple");
+      const tema = t === "light" || t === "dark" ? t : "dark";
+      document.documentElement.dataset.theme = tema;
+      document.getElementById("color-scheme").content = tema;
+    }
+  </script>
+  <link rel="icon" href="../favicon.svg" type="image/svg+xml">
+  <title>Gioco · Past simple | Scuola</title>
+  <meta name="description" content="Le due cassette: parole spia, frasi e verbi da mettere in OGGI o IERI, a tempo, con ripasso degli errori.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body class="page-gioco">
+  <a class="skip-link" href="#contenuto">Salta al contenuto</a>
+
+  <header class="cartellino">
+    <p class="cartellino-titolo"><span class="s">Oggi</span> · <span class="c">Ieri</span></p>
+    <span class="timbro" data-timbro aria-hidden="true">YESTERDAY</span>
+    <button type="button" class="theme-toggle" data-theme-toggle aria-pressed="false">Chiaro</button>
+  </header>
+
+  <nav class="tabbar" aria-label="Sezioni">
+    <a href="index.html"><span class="ico" aria-hidden="true">⌂</span>Home</a>
+    <a href="imparare.html"><span class="ico" aria-hidden="true">✎</span>Studio</a>
+    <a href="fumetto.html"><span class="ico" aria-hidden="true">▦</span>Fumetto</a>
+    <a href="laboratorio.html"><span class="ico" aria-hidden="true">⚙</span>Lab</a>
+    <a href="gioco.html" aria-current="page"><span class="ico" aria-hidden="true">★</span>Gioco</a>
+  </nav>
+
+  <main id="contenuto" class="foglio" tabindex="-1">
+    <p class="kicker">Gioco · le due cassette</p>
+    <h1>Metti in cassetta</h1>
+    <p class="lead">Arriva una carta. Mettila nella cassetta giusta: <span class="s-txt">OGGI</span> o <span class="c-txt">IERI</span>. Hai 90 secondi.</p>
+
+    <div class="livelli" role="group" aria-label="Livello">
+      <button type="button" class="btn btn-blu" data-livello="0" aria-pressed="true">1 · Parole spia</button>
+      <button type="button" class="btn" data-livello="1" aria-pressed="false">2 · Frasi</button>
+      <button type="button" class="btn" data-livello="2" aria-pressed="false">3 · Scegli il verbo</button>
+    </div>
+
+    <div class="hud" aria-live="polite">
+      <span>Carta <strong id="hud-n">1</strong>/<span id="hud-tot">12</span></span>
+      <span>Punti <strong id="hud-punti">0</strong></span>
+      <span>Serie <strong id="hud-serie">0</strong></span>
+      <span class="tempo">⏱ <strong id="hud-tempo">90</strong> s</span>
+      <button type="button" class="btn" id="btn-via">Via!</button>
+    </div>
+    <div class="barra-tempo" aria-hidden="true"><span id="barra"></span></div>
+
+    <div class="nastro-carte">
+      <div class="carta" id="carta">
+        <span class="en" id="carta-en">Premi «Via!»</span>
+        <span class="it" id="carta-it">Poi tocca una cassetta. Con la tastiera: ← e →.</span>
+      </div>
+    </div>
+
+    <div class="cassette">
+      <button type="button" class="cassetta s" id="cassa-s" disabled>
+        <span id="cassa-s-label">OGGI</span>
+        <small id="cassa-s-sub">present simple</small>
+        <span class="conta" id="cassa-s-n">0</span>
+      </button>
+      <button type="button" class="cassetta c" id="cassa-c" disabled>
+        <span id="cassa-c-label">IERI</span>
+        <small id="cassa-c-sub">past simple</small>
+        <span class="conta" id="cassa-c-n">0</span>
+      </button>
+    </div>
+    <p class="spiega" id="spiega" aria-live="polite"></p>
+
+    <section class="fine-gioco" id="fine" hidden>
+      <h2 id="fine-titolo">Fine turno</h2>
+      <p id="fine-testo"></p>
+      <div id="fine-ripasso"></div>
+      <div class="azioni">
+        <button type="button" class="btn btn-primary" id="btn-ancora">Un altro turno</button>
+        <a class="btn" href="imparare.html">Studio</a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p>Scuola · Inglese · terza professionale AM</p>
+  </footer>
+
+  <script src="js/common.js" defer></script>
+  <script src="js/gioco.js" defer></script>
+</body>
+</html>
