@@ -1,5 +1,12 @@
 [
   {
+    "id": "marino-adone",
+    "titolo": "Giovan Battista Marino e l’Adone",
+    "annoProf": 4,
+    "url": "marino-adone/",
+    "materia": "Italiano"
+  },
+  {
     "id": "past-simple",
     "titolo": "Past simple: cosa hai fatto ieri?",
     "annoProf": 3,

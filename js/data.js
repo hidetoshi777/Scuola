@@ -252,6 +252,24 @@ window.ATTIVITA_WEB = [
     ],
   },
   {
+    titolo: "Giovan Battista Marino e l’Adone",
+    materia: "Italiano",
+    classe: "Quarta superiore · professionale",
+    annoProf: 4,
+    pubblicato: "2026-10-29",
+    descrizione:
+      "Il poeta del Barocco: due slide a colori da proiettare (vita, meraviglia, marinismo, opere) e il fumetto dell’Adone in quattro tavole.",
+    citazione: "È del poeta il fin la meraviglia.",
+    url: "marino-adone/",
+    copertina: "marino-adone/img/og-share.jpg",
+    tinta: "italiano",
+    adesivo: "st-pennino",
+    extra: [
+      { label: "Slide", url: "marino-adone/#slide" },
+      { label: "Fumetto", url: "marino-adone/fumetto.html" },
+    ],
+  },
+  {
     titolo: "Letteratura barocca",
     materia: "Italiano",
     classe: "Quarta superiore · professionale",
