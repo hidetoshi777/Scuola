@@ -344,6 +344,27 @@ canvas#slug-canvas {
   filter: brightness(1.25);
 }
 
+/* Telefono: HUD sopra lo schermo (non sopra il gioco) e pulsanti a griglia 2x2 */
+@media (max-width: 600px) {
+  .hud-top {
+    position: static;
+    flex-wrap: wrap;
+    gap: 6px 14px;
+    padding: 8px 10px;
+    background: #0a0e17;
+    border-bottom: 1px solid var(--line);
+  }
+  .hud-bar-wrap { width: 96px; }
+  .hud-val { font-size: 12px; }
+  .action-btns {
+    display: grid;
+    grid-template-columns: repeat(2, 60px);
+    gap: 8px;
+  }
+  .act-btn, .act-btn#btn-moke { width: 60px; height: 60px; }
+  .act-btn#btn-moke { border-radius: 50%; }
+}
+
 /* Info Cards & Lore */
 .info-section {
   margin-top: 24px;
