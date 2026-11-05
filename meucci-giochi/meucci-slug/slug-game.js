@@ -2173,6 +2173,7 @@
     boss.maxHealth = bc.hp; boss.health = bc.hp;
     boss.attackTimer = 2; boss.attackCount = 0; boss.phase = 0;
     boss.defeated = false;
+    boss.announced = false;
 
     scalzati = idx === 0 ? 0 : LEVELS[idx - 1].target;
     bullets = [];
@@ -2189,7 +2190,7 @@
     $('victory-screen').classList.add('hidden');
     $('title-screen').classList.add('hidden');
 
-    audio?.announce('start');
+    audio?.announce('start' + level.id);
     audio?.startMusic();
   }
 
@@ -2634,6 +2635,7 @@
             player.invincibleTimer = 1.0;
             audio?.play('hit');
             addText('-18 TRANQUILLITÀ', player.x, player.y - 70, '#ef4444');
+            audio?.announce('hit');
           }
         }
       } else if (en.type === 'sniper') {
@@ -2677,6 +2679,7 @@
           player.invincibleTimer = 1.0;
           audio?.play('hit');
           addText('-15 PUNTI', player.x, player.y - 65, '#ef4444');
+          audio?.announce('hit');
         }
         eb.life = 0;
       }
@@ -2685,6 +2688,7 @@
 
     // Update Boss Fight
     if (player.x > level.arenaX - 150 && !boss.defeated) {
+      if (!boss.announced) { boss.announced = true; audio?.announce('boss' + level.id); }
       boss.phase += dt * 3;
       boss.attackTimer -= dt;
       if (boss.attackTimer <= 0) level.boss.attack();
@@ -2694,7 +2698,7 @@
         addExplosion(boss.x, boss.y - boss.h / 2, 48, true);
         score += 5000;
         scalzati = level.target;
-        audio?.announce('complete');
+        audio?.announce('complete' + level.id);
         setTimeout(showVictory, 1800);
       }
     }
@@ -2708,12 +2712,15 @@
           player.health = Math.min(player.maxHealth, player.health + 30);
           score += 500;
           addText(p.type === 'arancino' ? 'ARANCINO! +30 TRANQUILLITÀ' : '+30 TRANQUILLITÀ ☕', player.x, player.y - 70, '#d9f482');
+          audio?.announce(p.type);
         } else if (p.type === 'cedolino') {
           score += 2000;
           addText('STIPENDIO ACCREDITATO! +2000', player.x, player.y - 70, '#facc15');
+          audio?.announce('cedolino');
         } else if (p.type === 'bomb') {
           player.bombs += 5;
           addText('+5 DECRETI ESCLUSIONE', player.x, player.y - 70, '#ef4444');
+          audio?.announce('bomb');
         } else {
           player.weapon = p.type;
           player.ammo = WEAPONS[p.type].ammo;
@@ -3126,18 +3133,54 @@
     lastTime = now;
 
     pollGamepad();
-    update(dt);
+    if (!pausedByRotation()) update(dt);
     draw();
 
     requestAnimationFrame(gameLoop);
   }
 
+  // ---------- Schermo intero in orizzontale ----------
+  const playArea = $('play-area');
+  const portrait = window.matchMedia('(orientation: portrait)');
+  let fsActive = false;
+  const fsElement = () => document.fullscreenElement || document.webkitFullscreenElement;
+  function fsUi(on) {
+    fsActive = on;
+    playArea?.classList.toggle('is-fs', on);
+    document.body.classList.toggle('fs-lock', on);
+    $('fs-btn').textContent = on ? '⛶ Esci da schermo intero' : '⛶ Schermo intero';
+  }
+  function enterFullscreen() {
+    if (fsActive || !playArea) return;
+    fsUi(true);
+    // dove l'API c'e' (Android, PC, iPad) si va a pieno schermo e si blocca l'orizzontale;
+    // sull'iPhone resta il pieno schermo della pagina e l'invito a girare il telefono
+    const req = playArea.requestFullscreen || playArea.webkitRequestFullscreen;
+    if (!req) return;
+    try {
+      Promise.resolve(req.call(playArea, { navigationUI: 'hide' }))
+        .then(() => screen.orientation?.lock?.('landscape'))
+        .catch(() => {});
+    } catch (_) {}
+  }
+  function exitFullscreen() {
+    fsUi(false);
+    try { screen.orientation?.unlock?.(); } catch (_) {}
+    if (fsElement()) (document.exitFullscreen || document.webkitExitFullscreen).call(document);
+  }
+  ['fullscreenchange', 'webkitfullscreenchange'].forEach(ev => document.addEventListener(ev, () => {
+    if (!fsElement() && fsActive) fsUi(false);
+  }));
+  const pausedByRotation = () => fsActive && portrait.matches;
+
   // Setup Button Events
-  $('start-btn')?.addEventListener('click', () => { audio?.arm(); startLevel(0); });
-  $('start2-btn')?.addEventListener('click', () => { audio?.arm(); startLevel(1); });
-  $('restart-btn')?.addEventListener('click', () => { audio?.arm(); startLevel(LEVELS.indexOf(level)); });
-  $('victory-next-btn')?.addEventListener('click', () => { audio?.arm(); startLevel(level.win.next, true); });
-  $('victory-restart-btn')?.addEventListener('click', () => { audio?.arm(); startLevel(0); });
+  $('start-btn')?.addEventListener('click', () => { audio?.arm(); enterFullscreen(); startLevel(0); });
+  $('start2-btn')?.addEventListener('click', () => { audio?.arm(); enterFullscreen(); startLevel(1); });
+  $('restart-btn')?.addEventListener('click', () => { audio?.arm(); enterFullscreen(); startLevel(LEVELS.indexOf(level)); });
+  $('victory-next-btn')?.addEventListener('click', () => { audio?.arm(); enterFullscreen(); startLevel(level.win.next, true); });
+  $('victory-restart-btn')?.addEventListener('click', () => { audio?.arm(); enterFullscreen(); startLevel(0); });
+  $('fs-btn')?.addEventListener('click', () => (fsActive ? exitFullscreen() : enterFullscreen()));
+  $('fs-exit')?.addEventListener('click', exitFullscreen);
   $('pause-btn')?.addEventListener('click', togglePause);
 
   $('sound-btn')?.addEventListener('click', () => {
