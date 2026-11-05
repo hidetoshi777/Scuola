@@ -29,7 +29,103 @@
   let lift = {phase:'idle',y:0,riders:[]}, jarKick = 0;
   let personSerial = 0;
   const backdrop = new Image(); backdrop.src = 'scenario.webp';
-  const canvas = $('world'), ctx = canvas.getContext('2d');
+  const canvas = $('world');
+  let ctx = canvas.getContext('2d');
+  let selectedPerson = null;
+
+  function haptic(pattern) {
+    if (typeof navigator !== 'undefined' && typeof navigator.vibrate === 'function') {
+      try { navigator.vibrate(pattern); } catch (_) {}
+    }
+  }
+
+  function getSeason(day) {
+    const d = new Date(day * DAY);
+    const m = d.getUTCMonth(), dt = d.getUTCDate();
+    if ((m === 11 && dt >= 15) || (m === 0 && dt <= 6)) return 'xmas';
+    if ((m === 0 && dt >= 22) || (m === 1 && dt <= 15)) return 'scrutini';
+    if ((m === 4 && dt >= 20) || m === 5) return 'summer';
+    return 'normal';
+  }
+
+  const SURNAMES = ['Barbagallo', 'Pappalardo', 'Privitera', 'Russo', 'Grasso', 'Bella', 'Musumeci', 'Torrisi', 'Giuffrida', 'Caruso', 'Costanzo', 'Lanzafame', 'Gullotta', 'Mancuso', 'Faro', 'Leonardi', 'Pennisi', 'Maugeri'];
+  const NAMES_M = ['Salvatore', 'Rosario', 'Calogero', 'Carmelo', 'Alfio', 'Giuseppe', 'Gaetano', 'Sebastiano', 'Orazio', 'Antonino', 'Mario', 'Vincenzo'];
+  const NAMES_F = ['Carmela', 'Concetta', 'Agata', 'Maria', 'Grazia', 'Santina', 'Graziella', 'Lucia', 'Francesca', 'Giuseppa', 'Rosaria', 'Elena'];
+  const CLASSES = [
+    { code: 'A-28', name: 'Matematica e Scienze' },
+    { code: 'A-18', name: 'Filosofia e Scienze Umane' },
+    { code: 'A-60', name: 'Tecnologia nella Scuola Media' },
+    { code: 'B-15', name: 'Laboratorio Elettrotecnico' },
+    { code: 'A-11', name: 'Discipline Letterarie e Latino' },
+    { code: 'A-46', name: 'Scienze Giuridico-Economiche' },
+    { code: 'A-26', name: 'Matematica' },
+    { code: 'ADSS', name: 'Sostegno Scuola Secondaria II Grado' },
+    { code: 'A-50', name: 'Scienze Naturali, Chimiche e Bio' }
+  ];
+  const TITLES = [
+    'Master da 1500 ore completato alle ore 23:58 della notte di scadenza.',
+    'Certificazione informatica di 4 domande con risposta multipla identica.',
+    'Certificazione di lingua inglese C2 rilasciata da università telematica delle Svalbard.',
+    'Corso di perfezionamento avanzato sulla "Didattica della cattedra pieghevole".',
+    'Diploma di dattilografia conseguito nel 1997 con timbro a ceralacca.',
+    'Esperto del registro elettronico, ma dimentica la password ad ogni primo del mese.',
+    'Attestato antincendio alto rischio (usato per accendere la stufetta in sala professori).'
+  ];
+  const LOGISTICS = [
+    'Paternò-Acireale alle ore 06:45 con Fiat Panda a metano del 2004.',
+    '92 km di statale quotidiani con cantiere e senso unico alternato perenne.',
+    '2 pullman FCE e un monopattino elettrico per uno spezzone di 4 ore.',
+    'Pendolare dell’Etna: tiene sempre pala da neve e catene nel bagagliaio.',
+    'Co-titolare su 3 plessi diversi a 30 km di distanza l’uno dall’altro.',
+    'Condivide il viaggio con colleghi che parlano solo di ricostruzione di carriera.'
+  ];
+  const MOODS = [
+    'Prega ogni notte per una maternità fino al 30 giugno.',
+    'Aggiorna la casella PEC ogni 45 secondi anche durante i pranzi di famiglia.',
+    'Ha il terrore di essere scavallato da chi ha depositato ricorso cautelare al TAR.',
+    'Considerato rinunciatario nel 2022 perché non ha spuntato il quadratino B.',
+    'Custodisce gelosamente 25 risme di carta A4 nel cofano della Mini Moke.',
+    'Ha già scaricato e compilato la modulistica per le ferie non godute.'
+  ];
+
+  function generateDossier(p) {
+    const seed = Math.abs((p.id !== undefined ? p.id : 42) + 19);
+    const isWoman = Boolean(p.woman);
+    const name = (isWoman ? NAMES_F[seed % NAMES_F.length] : NAMES_M[seed % NAMES_M.length]) + ' ' + SURNAMES[(seed * 3) % SURNAMES.length];
+    const cls = CLASSES[(seed * 2) % CLASSES.length];
+    const score = (22.5 + ((seed * 7) % 55) * 0.5).toFixed(1) + ' pt';
+    const pos = '#' + fmt(Math.max(1, Math.min(config.initial, Math.floor(config.initial * 0.95 - (seed * 23) % config.initial))));
+    const titleDesc = TITLES[seed % TITLES.length];
+    const logDesc = LOGISTICS[(seed * 5) % LOGISTICS.length];
+    const moodDesc = MOODS[(seed * 7) % MOODS.length];
+    return { name, cls: `${cls.code} · ${cls.name}`, score, pos, titleDesc, logDesc, moodDesc };
+  }
+
+  function openDossier(p) {
+    haptic(25);
+    selectedPerson = p;
+    const data = generateDossier(p);
+    const setT = (id, val) => { const el = $(id); if (el) el.textContent = val; };
+    setT('dossier-name', data.name);
+    setT('dossier-class', data.cls);
+    setT('dossier-score', `${data.score} (${data.pos})`);
+    setT('dossier-title-desc', data.titleDesc);
+    setT('dossier-logistics', data.logDesc);
+    setT('dossier-mood', data.moodDesc);
+    const dCanvas = $('dossier-canvas');
+    if (dCanvas) {
+      const dctx = dCanvas.getContext('2d');
+      dctx.clearRect(0, 0, dCanvas.width, dCanvas.height);
+      const savedCtx = ctx;
+      ctx = dctx;
+      sprite({ ...p, x: 35, y: 58, blocked: true, reaction: null, dir: 1 }, 1.35, 0);
+      ctx = savedCtx;
+    }
+    const modal = $('dossier-modal');
+    if (modal && typeof modal.showModal === 'function') {
+      modal.showModal();
+    }
+  }
   let W = 1000, H = 760;
   const colors = ['#d9f482','#ef9aad','#94c9ed','#c6a5ec','#eeb879','#89d3bf'];
   const hairColors=['#543e31','#b48a53','#38362f','#b1b0a3','#92583a'];
@@ -110,13 +206,13 @@
     const previous=impact?pile:[];
     pile = Array.from({length:Math.ceil(ratio*columns*10)},(_,i)=>{
       const homeX=j.x+22+(i%columns)*16+Math.sin(i*8)*3,homeY=j.y+j.h-14-Math.floor(i/columns)*j.h*.075;
-      const p=previous[i]||{x:homeX,y:homeY,color:colors[i%colors.length],hair:hairColors[i%hairColors.length],skin:skinColors[i%skinColors.length],variant:i%3,woman:i%5<2,rotation:Math.sin(i*7)*.8,vx:0,vy:0,spin:0};
+      const p=previous[i]||{id:i,x:homeX,y:homeY,color:colors[i%colors.length],hair:hairColors[i%hairColors.length],skin:skinColors[i%skinColors.length],variant:i%3,woman:i%5<2,rotation:Math.sin(i*7)*.8,vx:0,vy:0,spin:0};
       return Object.assign(p,{homeX,homeY,homeRotation:Math.sin(i*7)*.8});
     });
     if(!impact){landings=[];jarKick=0;return;}
     const slot=Math.max(0,pile.length-1),rest=pile[slot];
     if(rest){Object.assign(rest,{color:impact.color,hair:impact.hair,skin:impact.skin,variant:impact.variant,woman:impact.woman,ruffled:impact.tool==='storm',scorched:impact.tool==='dragon',hiddenUntil:time+1.25});}
-    landings.push({...impact,x:impact.ex,y:impact.ey,homeX:rest?rest.homeX:impact.ex,homeY:rest?rest.homeY:j.y+j.h-14,vx:(Math.random()-.5)*45,vy:-75,rotation:0,spin:(Math.random()-.5)*5,age:0,bounces:0,ruffled:impact.tool==='storm',scorched:impact.tool==='dragon'});
+    landings.push({...impact,id:impact.id!==undefined?impact.id:personSerial++,x:impact.ex,y:impact.ey,homeX:rest?rest.homeX:impact.ex,homeY:rest?rest.homeY:j.y+j.h-14,vx:(Math.random()-.5)*45,vy:-75,rotation:0,spin:(Math.random()-.5)*5,age:0,bounces:0,ruffled:impact.tool==='storm',scorched:impact.tool==='dragon'});
     jarKick=Math.min(1,jarKick+.55);
     pile.forEach(p=>{const force=Math.exp(-Math.abs(p.x-impact.ex)/65);p.vy-=force*20;p.vx+=(p.x<impact.ex?-1:1)*force*10;p.spin+=(Math.random()-.5)*force*3;});
   }
@@ -167,7 +263,7 @@
     document.querySelectorAll('[data-tool]').forEach(b=>{b.classList.toggle('active',b.dataset.tool===tool);b.setAttribute('aria-pressed',String(b.dataset.tool===tool));});
   }
   function fire(next) {
-    window.GpsAudio?.arm();people.forEach(p=>p.warnedTrap=null);
+    haptic(35);window.GpsAudio?.arm();people.forEach(p=>p.warnedTrap=null);
     selectTool(next); animation = null;
     if (paused) setPause(false);
     if (!preview) { preview = true; viewDay = Math.max(start, Math.min(end, todayDay())); }
@@ -182,7 +278,7 @@
     if (animation) {
       animation.age = (performance.now() - animation.started) / 1000;
       viewDay = animation.from + Math.floor((end-animation.from)*Math.min(1,animation.age/12)); preview=true; update();
-      if (animation.age>=12) {animation=null;viewDay=end;update();visual=target;flights=[];people=[];returning=[];lift={phase:'idle',y:geometry().lift.bottom,riders:[]};rebuildPile();window.GpsAudio?.play('bell');toast('DRIIIN! Zero davanti. Tutti nel barattolone.');}
+      if (animation.age>=12) {animation=null;viewDay=end;update();visual=target;flights=[];people=[];returning=[];lift={phase:'idle',y:geometry().lift.bottom,riders:[]};rebuildPile();window.GpsAudio?.play('bell');haptic([60,40,60,40,150]);toast('DRIIIN! Zero davanti. Tutti nel barattolone.');}
     }
     const remaining = config.initial-target, desired = remaining ? Math.min(27,remaining) : target>visual ? 12 : 0;
     accumulator+=dt;
@@ -237,7 +333,7 @@
       const lift=f.tool==='spring'?H*.29:f.tool==='storm'?H*.23:f.tool==='dragon'?H*.15:f.tool==='stamp'?H*.09:0;
       f.x=f.sx+(f.ex-f.sx)*t+(f.tool==='storm'&&f.age<f.hit?Math.sin(f.age*65)*6:0);f.y=f.sy+(f.ey-f.sy)*t-Math.sin(t*Math.PI)*lift;
       if (t===1) {
-        visual=Math.min(target,visual+f.count);flights.splice(i,1);rebuildPile(f);window.GpsAudio?.play('jar');
+        visual=Math.min(target,visual+f.count);flights.splice(i,1);rebuildPile(f);window.GpsAudio?.play('jar');haptic([15,25]);
         for(let k=0;k<5;k++)confetti.push({x:f.x,y:f.y,vx:(Math.random()-.5)*100,vy:-40-Math.random()*70,life:.8,color:f.tool==='dragon'?'#ffc05b':f.tool==='storm'?'#a7eaff':f.color});
       }
     }
@@ -282,6 +378,24 @@
     if(p.variant===1){ctx.strokeStyle='#496376';ctx.lineWidth=1.4;ctx.strokeRect(0,-37,7,5);}
     ctx.strokeStyle='#925a42';ctx.lineWidth=1;ctx.beginPath();if(startled){ctx.fillStyle='#6e4339';ctx.ellipse(4,-27,2.4,3,0,0,7);ctx.fill();}else{ctx.moveTo(2,-27);ctx.quadraticCurveTo(4,-25,6,-27);ctx.stroke();}
     if(p.scorched){ctx.fillStyle='#59574a99';[[-3,-31],[1,-29],[-5,-18]].forEach(([x,y])=>{ctx.beginPath();ctx.arc(x,y,1.7,0,7);ctx.fill();});}
+    const season = getSeason(viewDay);
+    if(season === 'xmas'){
+      ctx.save();
+      ctx.fillStyle='#dc2626';ctx.beginPath();ctx.moveTo(-8,-43);ctx.lineTo(8,-43);ctx.quadraticCurveTo(12,-54,15,-57);ctx.lineTo(2,-50);ctx.closePath();ctx.fill();
+      ctx.fillStyle='#ffffff';ctx.beginPath();ctx.roundRect(-9,-45,18,4,2);ctx.fill();
+      ctx.beginPath();ctx.arc(15,-57,3.5,0,Math.PI*2);ctx.fill();
+      ctx.restore();
+    }else if(season === 'scrutini'){
+      ctx.save();
+      round(-13,-24,7,13,2,'#b91c1c','#7f1d1d');
+      ctx.fillStyle='#ffffff';ctx.fillRect(-11,-26,4,3);
+      ctx.restore();
+    }else if(season === 'summer' || target >= config.initial){
+      ctx.save();
+      round(0,-36,8,5,1.5,'#111827','#374151');
+      ctx.strokeStyle='#1f2937';ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(-1,-34);ctx.lineTo(0,-34);ctx.stroke();
+      ctx.restore();
+    }
     ctx.restore();
     if(p.reaction==='fear'){round(p.x-7,p.y-67,16,19,5,'#f6e8bc','#bb8053');text('!',p.x+1,p.y-53,15,'#9a523c','center');}
   }
@@ -449,6 +563,32 @@
     const label=ctx.createLinearGradient(0,-35,0,35);label.addColorStop(0,'#f4e7bd');label.addColorStop(1,'#dcca99');round(-w*.37,-34,w*.74,67,5,label,'#a28d63');
     text('PRECARI',0,-15,W===620?15:19,'#354e42','center');text('IN CONSERVA',0,1,W===620?10:12,'#687752','center');text(fmt(target)+' / '+fmt(config.initial),0,20,13,'#3d5746','center');ctx.restore();
     ctx.save();ctx.translate(x-22,y+h-12);ctx.rotate(-.3);round(-28,-10,55,13,6,'#a58650','#d9bc78');for(let i=-20;i<25;i+=7)rect(i,-7,2,7,'#6f643e');ctx.restore();
+    const overflowRatio = (visual / config.initial - 0.85) / 0.15;
+    if (overflowRatio > 0) {
+      const count = Math.min(6, Math.floor(overflowRatio * 6) + 1);
+      for (let k = 0; k < count; k++) {
+        const isLeft = k % 2 === 0;
+        const px = isLeft ? x + w * 0.19 - 14 - k * 8 : x + w * 0.81 + 14 + k * 8;
+        const py = y + 22 + k * 22;
+        sprite({
+          id: 8800 + k,
+          x: px,
+          y: py,
+          color: colors[(k * 3) % colors.length],
+          hair: hairColors[k % hairColors.length],
+          skin: skinColors[k % skinColors.length],
+          variant: k % 3,
+          woman: k % 2 === 1,
+          reaction: 'surprise',
+          phase: 0,
+          blocked: true
+        }, 0.45, isLeft ? -0.35 : 0.35);
+      }
+      if (visual >= config.initial) {
+        round(x + w * 0.5 - 55, y - 52, 110, 24, 6, '#fef08a', '#ca8a04');
+        text('COLMO!', x + w * 0.5, y - 36, 13, '#854d0e', 'center');
+      }
+    }
     ctx.restore();
   }
   function draw() {
@@ -467,6 +607,15 @@
     elevator(g);
     people.forEach(p=>sprite(p,W===620?1.15:1));
     jar(j);
+    if(selectedPerson && typeof selectedPerson.x === 'number' && typeof selectedPerson.y === 'number'){
+      ctx.save();
+      ctx.strokeStyle='#d9f482';ctx.lineWidth=2.5;
+      const pulse = 18 + Math.sin(time*8)*3;
+      ctx.beginPath();ctx.arc(selectedPerson.x, selectedPerson.y-16, pulse, 0, Math.PI*2);ctx.stroke();
+      round(selectedPerson.x-22, selectedPerson.y-48, 44, 16, 4, '#111b29e0', '#d9f482');
+      text('DOSSIER', selectedPerson.x, selectedPerson.y-36, 9, '#d9f482', 'center');
+      ctx.restore();
+    }
     flights.forEach(flightSprite);confetti.forEach(p=>{ctx.fillStyle=p.color;ctx.beginPath();ctx.arc(p.x,p.y,2.5,0,7);ctx.fill();});
     const rem=config.initial-target;
     text('LA TUA FILA',W*.085,H*.735,12,'#d9e6b2');text(fmt(rem),W*.085,H*.807,W===620?52:62,'#d9f482');
@@ -482,7 +631,147 @@
   $('future').addEventListener('input',()=>{preview=true;animation=null;viewDay=start+Number($('future').value);update();visual=target;flights=[];rebuildPile();});
   $('today').addEventListener('click',()=>{returnToToday();toast('Rieccoci a oggi. La fila segue il calendario.');});
   $('finale').addEventListener('click',()=>{window.GpsAudio?.arm();preview=true;setPause(false);viewDay=start;visual=0;flights=[];rebuildPile();update();animation={from:start,age:0,started:performance.now()};toast('Tutto l’anno in 12 secondi. Tenetevi il fascicolo!');});
+  
+  async function shareStatusCard() {
+    haptic(30);
+    const t = totals(viewDay);
+    const rem = config.initial - t.collected;
+    const cardW = 1000, cardH = 560;
+    const off = document.createElement('canvas');
+    off.width = cardW; off.height = cardH;
+    const octx = off.getContext('2d');
+    
+    // Background gradient
+    const bgGrad = octx.createRadialGradient(cardW/2, 0, 50, cardW/2, cardH/2, cardW*0.7);
+    bgGrad.addColorStop(0, '#1c283a'); bgGrad.addColorStop(1, '#0e1624');
+    octx.fillStyle = bgGrad; octx.fillRect(0, 0, cardW, cardH);
+    
+    // Outer border
+    octx.strokeStyle = '#526c67'; octx.lineWidth = 4;
+    octx.strokeRect(16, 16, cardW - 32, cardH - 32);
+    
+    // Header
+    octx.fillStyle = '#a3b1bf'; octx.font = '700 13px ui-monospace, monospace';
+    octx.fillText('MEUCCI / PASSATEMPI DEL PROF.', 44, 52);
+    
+    octx.fillStyle = '#d9f482'; octx.font = '900 38px system-ui, sans-serif';
+    octx.fillText('GPS 1100 · LA GRANDE RACCOLTA', 44, 96);
+    
+    octx.fillStyle = '#edf4f1'; octx.font = '600 16px ui-monospace, monospace';
+    octx.fillText('Situazione al: ' + shortDate(viewDay), 44, 130);
+    
+    // Statistics boxes
+    const drawBox = (x, y, w, h, lbl, val, col) => {
+      octx.fillStyle = '#111b29'; octx.fillRect(x, y, w, h);
+      octx.strokeStyle = '#354154'; octx.lineWidth = 2; octx.strokeRect(x, y, w, h);
+      octx.fillStyle = '#a3b1bf'; octx.font = '700 12px ui-monospace, monospace';
+      octx.fillText(lbl, x + 16, y + 26);
+      octx.fillStyle = col; octx.font = '900 32px ui-monospace, monospace';
+      octx.fillText(val, x + 16, y + 66);
+    };
+    drawBox(44, 160, 270, 85, 'NEL BARATTOLO', fmt(t.collected), '#ef9aad');
+    drawBox(44, 260, 270, 85, 'ANCORA DAVANTI', fmt(t.remaining), '#d9f482');
+    drawBox(44, 360, 270, 85, 'GIORNI ALLA LIBERTÀ', fmt(t.days), '#edf4f1');
+    
+    // Jar preview crop
+    const g = geometry(), j = g.jar;
+    const dpr = canvas.width / W;
+    const sx = Math.max(0, (j.x - 25) * dpr), sy = Math.max(0, (j.y - 25) * dpr);
+    const sw = Math.min(canvas.width - sx, (j.w + 50) * dpr), sh = Math.min(canvas.height - sy, (j.h + 40) * dpr);
+    
+    octx.fillStyle = '#151f31'; octx.fillRect(344, 160, 612, 285);
+    octx.strokeStyle = '#416152'; octx.lineWidth = 2; octx.strokeRect(344, 160, 612, 285);
+    try {
+      octx.drawImage(canvas, sx, sy, sw, sh, 360, 172, 580, 260);
+    } catch (_) {}
+    
+    // Satirical Stamp
+    octx.save();
+    octx.translate(cardW - 140, 75); octx.rotate(-0.1);
+    octx.strokeStyle = '#ef9aad'; octx.lineWidth = 3;
+    octx.strokeRect(-80, -22, 160, 44);
+    octx.fillStyle = '#ef9aad'; octx.font = '900 14px ui-monospace, monospace';
+    octx.textAlign = 'center'; octx.fillText('LA GRANDE RACCOLTA', 0, 6);
+    octx.restore();
+    
+    // Footer
+    octx.fillStyle = '#8fafa3'; octx.font = '700 12px ui-monospace, monospace';
+    octx.textAlign = 'left';
+    octx.fillText('Plesso Meucci · Acireale — hidetoshi777.github.io/Scuola/meucci-giochi/gps/', 44, 498);
+    octx.fillStyle = '#d9f482';
+    octx.fillText(rem === 0 ? 'Fila esaurita! Buone vacanze, Prof!' : 'Un anno alla volta. Una sede alla volta.', 44, 524);
+    
+    const fallbackDownload = blob => {
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url; a.download = `gps-1100-${iso(viewDay)}.png`;
+      document.body.appendChild(a); a.click(); document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+      toast('Immagine scaricata! Condividila con i colleghi.');
+    };
+
+    const finishShare = blob => {
+      if (!blob) {
+        if (navigator.share) {
+          navigator.share({
+            title: 'GPS 1100 · La grande raccolta',
+            text: `GPS 1100 (Meucci): ${fmt(t.collected)} precari nel barattolo, ne mancano ${fmt(t.remaining)}! https://hidetoshi777.github.io/Scuola/meucci-giochi/gps/`
+          }).catch(()=>{});
+        }
+        return;
+      }
+      const file = new File([blob], `gps-1100-${iso(viewDay)}.png`, { type: 'image/png' });
+      if (navigator.canShare && navigator.canShare({ files: [file] })) {
+        navigator.share({
+          title: 'GPS 1100 · La grande raccolta',
+          text: `GPS 1100 (Meucci): ${fmt(t.collected)} precari nel barattolo, ne mancano ${fmt(t.remaining)}!`,
+          files: [file]
+        }).then(() => toast('Condiviso con successo!')).catch(err => {
+          if (err.name !== 'AbortError') fallbackDownload(blob);
+        });
+      } else {
+        fallbackDownload(blob);
+      }
+    };
+    
+    try {
+      off.toBlob(finishShare, 'image/png');
+    } catch (_) {
+      finishShare(null);
+    }
+  }
+
   $('pause').addEventListener('click',()=>setPause(!paused));
+  $('share')?.addEventListener('click', shareStatusCard);
+  $('dossier-close')?.addEventListener('click', () => { $('dossier-modal')?.close(); selectedPerson = null; });
+  $('dossier-modal')?.addEventListener('click', e => { if (e.target === $('dossier-modal')) { $('dossier-modal').close(); selectedPerson = null; } });
+  canvas.addEventListener('click', e => {
+    const rect = canvas.getBoundingClientRect();
+    const scaleX = W / rect.width;
+    const scaleY = H / rect.height;
+    const clickX = (e.clientX - rect.left) * scaleX;
+    const clickY = (e.clientY - rect.top) * scaleY;
+    let targetPerson = null;
+    for (const p of people) {
+      if (Math.hypot(p.x - clickX, (p.y - 18) - clickY) < 32) { targetPerson = p; break; }
+    }
+    if (!targetPerson && lift && lift.riders) {
+      for (const r of lift.riders) {
+        if (Math.hypot(r.x - clickX, (r.y - 18) - clickY) < 32) { targetPerson = r.person; break; }
+      }
+    }
+    if (!targetPerson) {
+      const g = geometry(), j = g.jar;
+      if (clickX >= j.x - 20 && clickX <= j.x + j.w + 20 && clickY >= j.y && clickY <= j.y + j.h + 20) {
+        for (let i = pile.length - 1; i >= 0; i--) {
+          const p = pile[i];
+          if (Math.hypot(p.x - clickX, p.y - clickY) < 22) { targetPerson = p; break; }
+        }
+        if (!targetPerson && pile.length > 0) targetPerson = pile[pile.length - 1];
+      }
+    }
+    if (targetPerson) openDossier(targetPerson);
+  });
   document.querySelectorAll('[data-tool]').forEach(b=>b.addEventListener('click',()=>fire(b.dataset.tool)));
   $('settings').addEventListener('submit',e=>{
     e.preventDefault();const next={initial:Number($('initial').value),start:$('start').value,end:$('end').value};
