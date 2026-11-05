@@ -1,0 +1,148 @@
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <meta name="theme-color" content="#0a0e17">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Meucci Slug · Fuga dal Ruolo 1.100</title>
+  <meta name="description" content="Un run-and-gun arcade corrosivo: il Prof. Bella, di ruolo al 1.100, si fa largo tra orde di precari disperati con la Mini Moke armata e il Timbro di Ruolo.">
+  <meta property="og:title" content="Meucci Slug · Fuga dal Ruolo 1.100">
+  <meta property="og:description" content="1.100 precari. Un solo docente di ruolo. Nessuna pietà sul piazzale del Meucci.">
+  <meta property="og:image" content="copertina.jpg">
+  <link rel="icon" href="../../favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="slug.css">
+</head>
+<body>
+  <main class="cabinet">
+    <header class="masthead">
+      <a class="back-btn" href="../" aria-label="Torna ai giochi del Meucci">←</a>
+      <div>
+        <p class="eyebrow">MEUCCI / ARCADE CLASSICS</p>
+        <h1>MEUCCI <span>SLUG</span></h1>
+      </div>
+      <div class="badge-ruolo">
+        STATUS: DI RUOLO
+        <small>POSIZIONE GPS: 1.100</small>
+      </div>
+    </header>
+
+    <div class="control-bar">
+      <button id="sound-btn" type="button">♫ Suoni: Attivi</button>
+      <button id="pause-btn" type="button">Pausa</button>
+      <button id="crt-btn" type="button">📺 CRT: Spento</button>
+      <span id="gamepad-status" class="gamepad-tag">🎮 Gamepad: Non rilevato</span>
+    </div>
+
+    <section class="game-viewport" aria-label="Schermo di gioco Meucci Slug">
+      <!-- In-Game HUD -->
+      <div class="hud-top">
+        <div class="hud-group">
+          <span class="hud-label">TRANQUILLITÀ RUOLO</span>
+          <div class="hud-bar-wrap"><div id="hud-health" class="hud-bar-fill"></div></div>
+        </div>
+        <div class="hud-group">
+          <span class="hud-label">PUNTI</span>
+          <span id="hud-score" class="hud-val">0</span>
+        </div>
+        <div class="hud-group">
+          <span class="hud-label">ARMA</span>
+          <span class="hud-val"><strong id="hud-weapon">TIMBRO DI RUOLO</strong> [<span id="hud-ammo">∞</span>]</span>
+        </div>
+        <div class="hud-group">
+          <span class="hud-label">DECRETI ESCLUSIONE</span>
+          <span id="hud-bombs" class="hud-val">10</span>
+        </div>
+        <div class="hud-group">
+          <span class="hud-label">PRECARI SCALZATI</span>
+          <span id="hud-scalzati" class="hud-val" style="color:#d9f482">0 / 1.100</span>
+        </div>
+      </div>
+
+      <!-- Canvas Engine -->
+      <canvas id="slug-canvas" role="img" aria-label="Meucci Slug: il Prof. Bella corre e spara contro le ondate di precari fino all'aula 3 AM"></canvas>
+      <div id="crt-overlay" class="crt-overlay"></div>
+
+      <!-- Start Overlay Screen -->
+      <div id="title-screen" class="screen-overlay">
+        <div class="title-card">
+          <h2>MEUCCI SLUG</h2>
+          <p>Sei il <strong>Prof. Rossano Bella</strong>. In graduatoria GPS sei al numero <strong>1.100</strong>, ma sei <strong>DI RUOLO</strong> e quindi intoccabile! L'orda dei precari delle GPS vuole la tua cattedra. Fatti largo con il Timbro di Ruolo e la Mini Moke armata fino all'aula 3 AM!</p>
+          <button id="start-btn" class="start-btn" type="button">▶ MISSIONE 1: START</button>
+        </div>
+      </div>
+
+      <!-- Game Over Screen -->
+      <div id="game-over-screen" class="screen-overlay hidden">
+        <div class="title-card">
+          <h2 style="color:#ef4444">GRADUATORIA PERSA!</h2>
+          <p>Le istanze dei precari e i ricorsi al TAR hanno travolto la cattedra.<br>Punti conquistati: <strong id="gameover-score">0</strong></p>
+          <button id="restart-btn" class="start-btn" type="button">↺ RITENTA L'AVANZATA</button>
+        </div>
+      </div>
+
+      <!-- Victory Screen -->
+      <div id="victory-screen" class="screen-overlay hidden">
+        <div class="title-card">
+          <h2 style="color:#d9f482">MISSION COMPLETE!</h2>
+          <p>Tutti i 1.100 precari sono stati scalzati! Hai raggiunto l'aula 3 AM e la presa di servizio è firmata. Il posto fisso è tuo!<br>Punteggio finale: <strong id="victory-score">0</strong></p>
+          <button id="victory-restart-btn" class="start-btn" type="button">★ GIOCA ANCORA</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Mobile Touch Controls -->
+    <div class="touch-controls">
+      <div class="dpad">
+        <button id="dpad-up" class="dpad-btn" type="button">▲</button>
+        <button id="dpad-left" class="dpad-btn" type="button">◀</button>
+        <button id="dpad-down" class="dpad-btn" type="button">▼</button>
+        <button id="dpad-right" class="dpad-btn" type="button">▶</button>
+      </div>
+      <div class="action-btns">
+        <button id="btn-fire" class="act-btn" type="button">SPARO<small>[B]</small></button>
+        <button id="btn-jump" class="act-btn" type="button">SALTO<small>[A]</small></button>
+        <button id="btn-bomb" class="act-btn" type="button">DECRETO<small>[C]</small></button>
+        <button id="btn-moke" class="act-btn" type="button">MOKE<small>[E]</small></button>
+      </div>
+    </div>
+
+    <!-- Lore & Guide -->
+    <section class="info-section">
+      <div class="info-card">
+        <h3>🏛️ Il Paradosso del Ruolo 1.100</h3>
+        <p>Se dipendesse dalle graduatorie GPS provinciali, il Prof. Bella non lavorerebbe mai: è al posto <strong>1.100</strong>. Ma avendo vinto il concorso a cattedra ordinaria, salta tutta la fila con la corazza d'acciaio del tempo indeterminato!</p>
+      </div>
+
+      <div class="info-card">
+        <h3>💣 L'Arsenale del Docente</h3>
+        <p><strong>[H] Heavy Concorso:</strong> Raffica continua di domande a crocette.<br>
+        <strong>[S] Shotgun Ferie:</strong> Sventagliata distruttiva di vacanze retribuite.<br>
+        <strong>[R] Ricorso Respinto:</strong> Missili guidati di sentenze del Consiglio di Stato.<br>
+        <strong>Moke Slug:</strong> Sali sulla Mini Moke blindata per travolgere i precari!</p>
+      </div>
+
+      <div class="info-card">
+        <h3>🎮 Comandi di Gioco</h3>
+        <div class="keys-list">
+          <div><kbd>←</kbd> <kbd>→</kbd> / <kbd>A</kbd> <kbd>D</kbd></div><div>Movimento laterale</div>
+          <div><kbd>↑</kbd> <kbd>↓</kbd> / <kbd>W</kbd> <kbd>S</kbd></div><div>Mira in alto / Accovacciati</div>
+          <div><kbd>J</kbd> / <kbd>Z</kbd> / <kbd>Invio</kbd></div><div>Sparo Timbro di Ruolo</div>
+          <div><kbd>K</kbd> / <kbd>X</kbd> / <kbd>Spazio</kbd></div><div>Salto acrobatico</div>
+          <div><kbd>L</kbd> / <kbd>C</kbd></div><div>Decreto Esclusione (Bomba)</div>
+          <div><kbd>E</kbd></div><div>Entra / Esci dalla Mini Moke</div>
+          <div><kbd>Gamepad</kbd></div><div>Compatibile Pad Xbox e PlayStation</div>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <p>Satira da sala professori. Dedicato al corpo docente e alla leggendaria burocrazia scolastica italiana.</p>
+      <p>Realizzato dal Prof. Rossano Bella · Plesso Meucci di Acireale</p>
+    </footer>
+  </main>
+
+  <script src="slug-audio.js" defer></script>
+  <script src="slug-game.js" defer></script>
+</body>
+</html>
