@@ -67,8 +67,11 @@
       <div id="title-screen" class="screen-overlay">
         <div class="title-card">
           <h2>MEUCCI SLUG</h2>
-          <p>Sei il <strong>Prof. Rossano Bella</strong>. In graduatoria GPS sei al numero <strong>1.100</strong>, ma sei <strong>DI RUOLO</strong> e quindi intoccabile! L'orda dei precari delle GPS vuole la tua cattedra. Fatti largo con il Timbro di Ruolo e la Mini Moke armata fino all'aula 3 AM!</p>
-          <button id="start-btn" class="start-btn" type="button">▶ MISSIONE 1: START</button>
+          <p>Sei il <strong>Prof. Rossano Bella</strong>. In graduatoria GPS sei al numero <strong>1.100</strong>, ma sei <strong>DI RUOLO</strong> e quindi intoccabile! L'orda dei precari delle GPS vuole la tua cattedra. Fatti largo con il Timbro di Ruolo e la Mini Moke armata fino all'aula 3 AM, poi fino all'Ufficio Scolastico di Catania!</p>
+          <div class="mission-btns">
+            <button id="start-btn" class="start-btn" type="button">▶ MISSIONE 1: IL MEUCCI</button>
+            <button id="start2-btn" class="start-btn start-btn-alt" type="button">▶ MISSIONE 2: CATANIA</button>
+          </div>
         </div>
       </div>
 
@@ -84,9 +87,12 @@
       <!-- Victory Screen -->
       <div id="victory-screen" class="screen-overlay hidden">
         <div class="title-card">
-          <h2 style="color:#d9f482">MISSION COMPLETE!</h2>
-          <p>Tutti i 1.100 precari sono stati scalzati! Hai raggiunto l'aula 3 AM e la presa di servizio è firmata. Il posto fisso è tuo!<br>Punteggio finale: <strong id="victory-score">0</strong></p>
-          <button id="victory-restart-btn" class="start-btn" type="button">★ GIOCA ANCORA</button>
+          <h2 id="victory-title" style="color:#d9f482">MISSION COMPLETE!</h2>
+          <p><span id="victory-text"></span><br>Punteggio: <strong id="victory-score">0</strong></p>
+          <div class="mission-btns">
+            <button id="victory-next-btn" class="start-btn" type="button">▶ MISSIONE 2: CATANIA</button>
+            <button id="victory-restart-btn" class="start-btn start-btn-alt" type="button">★ GIOCA ANCORA</button>
+          </div>
         </div>
       </div>
     </section>
@@ -119,7 +125,8 @@
         <p><strong>[H] Heavy Concorso:</strong> Raffica continua di domande a crocette.<br>
         <strong>[S] Shotgun Ferie:</strong> Sventagliata distruttiva di vacanze retribuite.<br>
         <strong>[R] Ricorso Respinto:</strong> Missili guidati di sentenze del Consiglio di Stato.<br>
-        <strong>Moke Slug:</strong> Sali sulla Mini Moke blindata per travolgere i precari!</p>
+        <strong>Moke Slug:</strong> Sali sulla Mini Moke blindata per travolgere i precari!<br>
+        <strong>Arancino:</strong> nella Missione 2 ridà 30 punti di tranquillità, come il caffè.</p>
       </div>
 
       <div class="info-card">
