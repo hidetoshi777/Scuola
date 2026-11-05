@@ -1,4 +1,4 @@
-/* Meucci Slug - Audio Engine (Web Audio API Synthesizer & Speech Announcer) */
+/* Meucci Slug - Audio Engine (Web Audio API Synthesizer & voci ElevenLabs) */
 (() => {
   'use strict';
 
@@ -26,25 +26,83 @@
     return buf;
   }
 
-  function speak(text) {
-    if (muted || typeof window === 'undefined' || !('speechSynthesis' in window)) return;
-    try {
-      window.speechSynthesis.cancel();
-      const u = new SpeechSynthesisUtterance(text);
-      u.lang = 'it-IT';
-      u.rate = 1.15;
-      u.pitch = 0.85; // Deep arcade voice
-      window.speechSynthesis.speak(u);
-    } catch (_) {}
+  // Voci registrate con ElevenLabs (generate da _voce_slug.py): annunciatore arcade + Prof. Bella
+  const VOCI = ['start1', 'start2', 'heavy', 'shotgun', 'rocket', 'laser', 'moke', 'bomb', 'cedolino',
+    'boss1', 'boss2', 'complete1', 'complete2', 'gameover',
+    'prof_start1', 'prof_start2', 'prof_moke', 'prof_coffee', 'prof_arancino',
+    'prof_hit1', 'prof_hit2', 'prof_hit3', 'prof_win1', 'prof_win2'];
+  const vocePath = k => 'assets/voce/' + k + '.mp3';
+  // gli mp3 si scaricano subito; si decodificano quando esiste l'AudioContext (dopo il primo tocco)
+  const voceRaw = {};
+  VOCI.forEach(k => {
+    voceRaw[k] = fetch(vocePath(k)).then(r => (r.ok ? r.arrayBuffer() : null)).catch(() => null);
+  });
+  const voceBuf = {};
+  let voceSrc = null, voceEl = null, voceTimer = null, lastQuip = 0, quipIdx = 0;
+
+  function decodeVoce(k) {
+    if (!voceBuf[k]) {
+      voceBuf[k] = voceRaw[k].then(ab => (ab ? new Promise(res => ctx.decodeAudioData(ab.slice(0), res, () => res(null))) : null));
+    }
+    return voceBuf[k];
+  }
+  function stopVoce() {
+    if (voceSrc) { try { voceSrc.stop(); } catch (_) {} voceSrc = null; }
+    if (voceEl) { voceEl.pause(); voceEl = null; }
+  }
+  // ripiego con <audio> (es. pagina aperta da file, dove fetch e' bloccato)
+  function playEl(k) {
+    stopVoce();
+    const a = new Audio(vocePath(k));
+    a.volume = 0.95;
+    a.onended = () => { if (voceEl === a) voceEl = null; };
+    a.play().catch(() => {});
+    voceEl = a;
+  }
+  function voce(k) {
+    if (muted || !voceRaw[k]) return;
+    clearTimeout(voceTimer);
+    initCtx();
+    if (!ctx) { playEl(k); return; }
+    const t0 = performance.now();
+    decodeVoce(k).then(buf => {
+      if (muted || performance.now() - t0 > 1500) return;
+      if (!buf) { playEl(k); return; }
+      stopVoce();
+      const src = ctx.createBufferSource();
+      const g = ctx.createGain();
+      src.buffer = buf;
+      g.gain.value = 0.95;
+      src.connect(g);
+      g.connect(ctx.destination);
+      src.onended = () => { if (voceSrc === src) voceSrc = null; };
+      src.start();
+      voceSrc = src;
+    });
+  }
+  // la battuta del Prof arriva quando l'annunciatore ha finito (al massimo 4 s di attesa)
+  function poi(k, ms) {
+    clearTimeout(voceTimer);
+    const t0 = performance.now();
+    const tick = () => {
+      if (voceSrc || voceEl) {
+        if (performance.now() - t0 < ms + 4000) voceTimer = setTimeout(tick, 120);
+        return;
+      }
+      voce(k);
+    };
+    voceTimer = setTimeout(tick, ms);
   }
 
   const MeucciSlugAudio = {
     arm() {
       initCtx();
+      if (ctx) VOCI.forEach(decodeVoce);
     },
 
     toggleMute() {
       muted = !muted;
+      if (muted) { stopVoce(); clearTimeout(voceTimer); }
       if (muted && ctx && ctx.state === 'running') ctx.suspend();
       if (!muted && ctx && ctx.state === 'suspended') ctx.resume();
       return muted;
@@ -187,15 +245,19 @@
       }
     },
 
-    announce(weapon) {
-      if (weapon === 'start') speak('Missione uno. Partenza!');
-      else if (weapon === 'heavy') speak('Heavy Concorso!');
-      else if (weapon === 'shotgun') speak('Ferie di agosto!');
-      else if (weapon === 'rocket') speak('Ricorso respinto!');
-      else if (weapon === 'laser') speak('Laser del Tester!');
-      else if (weapon === 'moke') speak('Moke Slug!');
-      else if (weapon === 'complete') speak('Missione compiuta! Il ruolo è salvo!');
-      else if (weapon === 'gameover') speak('Game Over! Fila riassegnata.');
+    announce(what) {
+      if (/^start\d$/.test(what)) { voce(what); poi('prof_' + what, 500); }
+      else if (/^complete\d$/.test(what)) { voce(what); poi('prof_win' + what.slice(-1), 500); }
+      else if (what === 'moke') { voce('moke'); poi('prof_moke', 400); }
+      else if (what === 'coffee' || what === 'arancino') voce('prof_' + what);
+      else if (what === 'hit') {
+        // battuta del Prof quando lo colpiscono: rara, e mai sopra un'altra voce
+        const now = performance.now();
+        if (voceSrc || voceEl || now - lastQuip < 7000 || Math.random() < 0.4) return;
+        lastQuip = now;
+        voce('prof_hit' + (1 + (quipIdx++ % 3)));
+      }
+      else voce(what);
     },
 
     startMusic() {

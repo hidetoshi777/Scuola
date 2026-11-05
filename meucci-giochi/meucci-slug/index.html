@@ -31,9 +31,11 @@
       <button id="sound-btn" type="button">♫ Suoni: Attivi</button>
       <button id="pause-btn" type="button">Pausa</button>
       <button id="crt-btn" type="button">📺 CRT: Spento</button>
+      <button id="fs-btn" type="button">⛶ Schermo intero</button>
       <span id="gamepad-status" class="gamepad-tag">🎮 Gamepad: Non rilevato</span>
     </div>
 
+    <div id="play-area" class="play-area">
     <section class="game-viewport" aria-label="Schermo di gioco Meucci Slug">
       <!-- In-Game HUD -->
       <div class="hud-top">
@@ -111,6 +113,14 @@
         <button id="btn-bomb" class="act-btn" type="button">DECRETO<small>[C]</small></button>
         <button id="btn-moke" class="act-btn" type="button">MOKE<small>[E]</small></button>
       </div>
+    </div>
+
+    <button id="fs-exit" class="fs-exit" type="button" aria-label="Esci dallo schermo intero">✕</button>
+    <div class="rotate-hint" aria-live="polite">
+      <span class="rotate-icon">📱</span>
+      <strong>Gira il telefono in orizzontale</strong>
+      <small>Il gioco riparte da solo</small>
+    </div>
     </div>
 
     <!-- Lore & Guide -->

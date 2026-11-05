@@ -432,3 +432,90 @@ footer {
   color: #64748b;
   font-size: 11px;
 }
+
+/* ---------- Schermo intero (si attiva da solo quando parte una missione) ---------- */
+.fs-exit, .rotate-hint { display: none; }
+@media (pointer: coarse) {
+  .touch-controls { display: flex; }
+}
+body.fs-lock { overflow: hidden; }
+.play-area.is-fs {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  background: #000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.play-area.is-fs .game-viewport {
+  /* il 16:9 piu' grande che entra nello schermo, senza deformare */
+  width: min(100vw, 177.78vh);
+  height: min(100vh, 56.25vw);
+  width: min(100vw, 177.78dvh);
+  height: min(100dvh, 56.25vw);
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+}
+.play-area.is-fs canvas#slug-canvas { height: 100%; width: 100%; }
+.play-area.is-fs .hud-top {
+  position: absolute;
+  flex-wrap: nowrap;
+  padding: 6px 12px;
+  background: linear-gradient(180deg, rgba(8, 12, 19, 0.85) 0%, rgba(8, 12, 19, 0) 100%);
+  border: 0;
+}
+/* i comandi touch stanno sopra il gioco, ai lati in basso, semitrasparenti */
+.play-area.is-fs .touch-controls {
+  position: absolute;
+  left: 0; right: 0; bottom: 0;
+  margin: 0;
+  padding: 0 max(14px, env(safe-area-inset-right)) max(12px, env(safe-area-inset-bottom)) max(14px, env(safe-area-inset-left));
+  background: none;
+  border: 0;
+  pointer-events: none;
+  z-index: 12;
+}
+.play-area.is-fs .touch-controls .dpad,
+.play-area.is-fs .touch-controls .action-btns { pointer-events: auto; opacity: 0.72; }
+.play-area.is-fs .dpad { grid-template-columns: repeat(3, 42px); grid-template-rows: repeat(3, 42px); }
+.play-area.is-fs .action-btns { display: grid; grid-template-columns: repeat(2, 52px); gap: 7px; }
+.play-area.is-fs .act-btn, .play-area.is-fs .act-btn#btn-moke { width: 52px; height: 52px; border-radius: 50%; font-size: 11px; }
+.play-area.is-fs .fs-exit {
+  display: grid;
+  place-items: center;
+  position: absolute;
+  top: max(8px, env(safe-area-inset-top));
+  right: max(8px, env(safe-area-inset-right));
+  width: 36px; height: 36px;
+  border-radius: 50%;
+  background: rgba(15, 23, 42, 0.8);
+  border: 1px solid var(--line);
+  color: var(--ink);
+  font-size: 16px;
+  z-index: 20;
+}
+@media (orientation: portrait) {
+  .play-area.is-fs .rotate-hint {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    position: absolute;
+    inset: 0;
+    z-index: 25;
+    background: rgba(5, 8, 14, 0.96);
+    color: var(--ink);
+    text-align: center;
+    padding: 24px;
+    font: 700 16px system-ui, sans-serif;
+  }
+  .rotate-icon { font-size: 54px; animation: gira 1.6s ease-in-out infinite; }
+  .rotate-hint small { color: var(--muted); font-weight: 600; }
+}
+@keyframes gira {
+  0%, 20% { transform: rotate(0deg); }
+  55%, 100% { transform: rotate(-90deg); }
+}
