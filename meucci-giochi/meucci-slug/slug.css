@@ -266,6 +266,17 @@ canvas#slug-canvas {
   transform: translateY(-2px) scale(1.03);
   box-shadow: 0 12px 30px rgba(217, 244, 130, 0.6);
 }
+.mission-btns {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  justify-content: center;
+}
+.start-btn-alt {
+  background: linear-gradient(180deg, #7dd3fc, #38bdf8);
+  color: #082f49;
+  box-shadow: 0 8px 24px rgba(56, 189, 248, 0.35);
+}
 
 /* Touch Controls (Mobile) */
 .touch-controls {
@@ -363,6 +374,13 @@ canvas#slug-canvas {
   }
   .act-btn, .act-btn#btn-moke { width: 60px; height: 60px; }
   .act-btn#btn-moke { border-radius: 50%; }
+  /* schermate iniziale e finali: devono stare nello schermo di gioco */
+  .screen-overlay { padding: 10px 12px; overflow-y: auto; justify-content: flex-start; }
+  .title-card { margin: auto 0; }
+  .title-card h2 { font-size: 26px; margin-bottom: 6px; }
+  .title-card p { font-size: 12px; line-height: 1.35; margin-bottom: 10px; }
+  .start-btn { font-size: 12px; padding: 9px 12px; letter-spacing: 0; }
+  .mission-btns { gap: 8px; }
 }
 
 /* Info Cards & Lore */
