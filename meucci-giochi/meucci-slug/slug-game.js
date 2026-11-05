@@ -14,6 +14,20 @@
   // Audio helper shorthand
   const audio = window.MeucciSlugAudio;
 
+  // Sprite Sheets Asset Loader
+  const sprites = {
+    prof: new Image(),
+    moke: new Image(),
+    precari: new Image(),
+    boss: new Image(),
+    items: new Image()
+  };
+  sprites.prof.src = 'assets/prof-sheet.png';
+  sprites.moke.src = 'assets/moke-slug.png';
+  sprites.precari.src = 'assets/precari-sheet.png';
+  sprites.boss.src = 'assets/boss-copier.png';
+  sprites.items.src = 'assets/items-sheet.png';
+
   // Input State
   const input = {
     left: false, right: false, up: false, down: false,
@@ -826,45 +840,77 @@
       ctx.translate(dx, dy);
     }
 
-    // 1. SKY & SUNSET
-    const sky = ctx.createLinearGradient(0, 0, 0, 380);
-    sky.addColorStop(0, '#1a1f33');
-    sky.addColorStop(0.55, '#c25838');
-    sky.addColorStop(1, '#facc15');
+    // 1. SKY & SUNSET GRADIENT (Arcade Warm Glow)
+    const sky = ctx.createLinearGradient(0, 0, 0, 420);
+    sky.addColorStop(0, '#0c1022');
+    sky.addColorStop(0.35, '#35183f');
+    sky.addColorStop(0.65, '#c2410c');
+    sky.addColorStop(0.88, '#f59e0b');
+    sky.addColorStop(1, '#fde047');
     ctx.fillStyle = sky;
     ctx.fillRect(0, 0, W, H);
 
-    // 2. PARALLAX LAYER 1: MT. ETNA (Slowest)
-    const etnaOffset = (camera.x * 0.12) % W;
-    ctx.fillStyle = '#42253b';
+    // Arcade Clouds drifting
+    const cloudOffset = (Date.now() * 0.015) % W;
+    ctx.fillStyle = 'rgba(254, 215, 170, 0.25)';
+    for (let cx = -200 + cloudOffset; cx < W + 400; cx += 280) {
+      ctx.beginPath();
+      ctx.arc(cx, 110, 38, 0, Math.PI * 2);
+      ctx.arc(cx + 35, 95, 48, 0, Math.PI * 2);
+      ctx.arc(cx + 75, 105, 36, 0, Math.PI * 2);
+      ctx.fill();
+    }
+
+    // 2. PARALLAX LAYER 1: PINETA & SILHOUETTE DI ROMA (Far - 0.12x)
+    const farOffset = (camera.x * 0.12) % 400;
+    ctx.fillStyle = '#26122d';
+    for (let px = -200 - farOffset; px < W + 400; px += 180) {
+      // Umbrella pine trees (Pini marittimi di Ostia/Casal Palocco)
+      ctx.fillRect(px + 45, 230, 8, 140);
+      ctx.beginPath();
+      ctx.ellipse(px + 49, 230, 45, 22, 0, 0, Math.PI * 2);
+      ctx.fill();
+    }
+    // Distant school dome / roofs
+    ctx.fillStyle = '#371c3b';
     ctx.beginPath();
-    ctx.moveTo(-200 - etnaOffset, 390);
-    ctx.lineTo(250 - etnaOffset, 160);
-    ctx.lineTo(340 - etnaOffset, 160);
-    ctx.lineTo(750 - etnaOffset, 390);
+    ctx.moveTo(0, 370);
+    ctx.lineTo(160, 260);
+    ctx.lineTo(260, 260);
+    ctx.lineTo(420, 370);
     ctx.fill();
 
-    // Etna volcanic smoke
-    volcanoSmoke.forEach((sm, i) => {
-      const sx = sm.x - etnaOffset;
-      const sy = sm.y + Math.sin(Date.now() * 0.002 + sm.phase) * 6;
-      ctx.fillStyle = 'rgba(75, 45, 65, 0.75)';
-      ctx.beginPath();
-      ctx.arc(sx, sy, sm.rad, 0, Math.PI * 2);
-      ctx.fill();
-    });
+    // 3. PARALLAX LAYER 2: MEUCCI FACADE & CAMPUS GATES (Medium - 0.35x)
+    const bldgOffset = (camera.x * 0.35) % 640;
+    for (let bx = -240 - bldgOffset; bx < W + 640; bx += 320) {
+      // Building block
+      ctx.fillStyle = '#1e2438';
+      ctx.fillRect(bx, 210, 290, 190);
+      ctx.fillStyle = '#2d3752';
+      ctx.fillRect(bx + 10, 215, 270, 15); // Roof trim
 
-    // 3. PARALLAX LAYER 2: MEUCCI BUILDINGS & FENCES (Medium)
-    const bldgOffset = (camera.x * 0.35) % 600;
-    for (let bx = -200 - bldgOffset; bx < W + 600; bx += 320) {
-      ctx.fillStyle = '#1e293b';
-      ctx.fillRect(bx, 240, 280, 160);
-      // Windows
-      ctx.fillStyle = '#fef08a';
-      for (let wx = bx + 20; wx < bx + 260; wx += 45) {
-        for (let wy = 260; wy < 380; wy += 35) {
-          ctx.fillRect(wx, wy, 26, 18);
+      // Illuminated classroom windows with silhouettes
+      for (let wx = bx + 22; wx < bx + 270; wx += 52) {
+        for (let wy = 245; wy < 380; wy += 42) {
+          ctx.fillStyle = (wx + wy) % 7 === 0 ? '#fbbf24' : '#fef08a';
+          ctx.fillRect(wx, wy, 34, 24);
+          ctx.strokeStyle = '#0f172a';
+          ctx.lineWidth = 2;
+          ctx.strokeRect(wx, wy, 34, 24);
+          // Window cross
+          ctx.beginPath();
+          ctx.moveTo(wx + 17, wy); ctx.lineTo(wx + 17, wy + 24);
+          ctx.moveTo(wx, wy + 12); ctx.lineTo(wx + 34, wy + 12);
+          ctx.stroke();
         }
+      }
+
+      // Neon sign on main facade
+      if (bx > 100 && bx < 500) {
+        const flicker = Math.sin(Date.now() * 0.02) > -0.8;
+        ctx.fillStyle = flicker ? '#38bdf8' : '#0369a1';
+        ctx.font = '900 13px ui-monospace, monospace';
+        ctx.fillText('⚡ ISTITUTO TECNICO MEUCCI ⚡', bx + 35, 226);
       }
     }
 
@@ -872,275 +918,387 @@
     ctx.save();
     ctx.translate(-camera.x, 0);
 
-    // Floor (Asfalto piazzale & linoleum corridoio)
+    // Floor Base (Piazzale in asfalto & Linoleum corridoio)
     const floorGrad = ctx.createLinearGradient(0, FLOOR_Y, 0, H);
     floorGrad.addColorStop(0, '#334155');
-    floorGrad.addColorStop(0.15, '#1e293b');
-    floorGrad.addColorStop(1, '#0f172a');
+    floorGrad.addColorStop(0.08, '#1e293b');
+    floorGrad.addColorStop(1, '#090d16');
     ctx.fillStyle = floorGrad;
     ctx.fillRect(0, FLOOR_Y, STAGE_LENGTH, H - FLOOR_Y);
 
-    // Floor lines & parking yellow spots in courtyard
-    for (let px = 100; px < 1600; px += 240) {
-      ctx.strokeStyle = '#facc15';
-      ctx.lineWidth = 5;
-      ctx.strokeRect(px, FLOOR_Y + 12, 160, 60);
+    // Courtyard yellow parking stalls "RISERVATO PROF. BELLA" (0 - 1600)
+    for (let px = 80; px < 1600; px += 260) {
+      ctx.strokeStyle = '#eab308';
+      ctx.lineWidth = 4;
+      ctx.strokeRect(px, FLOOR_Y + 14, 180, 64);
+      // Stencil text
+      ctx.fillStyle = '#fde047';
+      ctx.font = '900 12px ui-monospace, monospace';
+      ctx.fillText('POSTO RUOLO 1.100', px + 12, FLOOR_Y + 38);
+      ctx.font = '700 10px ui-monospace, monospace';
+      ctx.fillStyle = '#cbd5e1';
+      ctx.fillText('RISERVATO PROF. BELLA', px + 12, FLOOR_Y + 56);
+      // Streetlamp casting warm cone of light
+      ctx.fillStyle = '#64748b';
+      ctx.fillRect(px - 20, FLOOR_Y - 140, 6, 140);
       ctx.fillStyle = '#facc15';
-      ctx.font = '900 13px ui-monospace, monospace';
-      ctx.fillText('RISERVATO PROF. BELLA', px + 8, FLOOR_Y + 36);
+      ctx.beginPath();
+      ctx.arc(px - 17, FLOOR_Y - 140, 7, 0, Math.PI * 2);
+      ctx.fill();
+      // Light cone
+      ctx.fillStyle = 'rgba(254, 240, 138, 0.07)';
+      ctx.beginPath();
+      ctx.moveTo(px - 17, FLOOR_Y - 135);
+      ctx.lineTo(px + 90, FLOOR_Y);
+      ctx.lineTo(px - 120, FLOOR_Y);
+      ctx.closePath();
+      ctx.fill();
     }
 
-    // School hallway floor transition (x > 1600)
+    // Entrance Gate Banner at x = 1600
+    ctx.fillStyle = '#1e3a8a';
+    ctx.fillRect(1580, FLOOR_Y - 220, 280, 48);
+    ctx.strokeStyle = '#facc15';
+    ctx.lineWidth = 3;
+    ctx.strokeRect(1580, FLOOR_Y - 220, 280, 48);
+    ctx.fillStyle = '#ffffff';
+    ctx.font = '900 15px ui-monospace, monospace';
+    ctx.fillText('ENTRATA CORRIDOIO MEUCCI', 1600, FLOOR_Y - 198);
+    ctx.fillStyle = '#facc15';
+    ctx.font = '700 11px ui-monospace, monospace';
+    ctx.fillText('ZONA DI RUOLO · VIETATO AI 60 CFU', 1605, FLOOR_Y - 182);
+
+    // School hallway checker floor (x > 1600)
     for (let tx = 1600; tx < STAGE_LENGTH; tx += 48) {
-      ctx.fillStyle = (tx / 48) % 2 === 0 ? '#38485e' : '#273547';
-      ctx.fillRect(tx, FLOOR_Y, 48, 12);
+      ctx.fillStyle = (tx / 48) % 2 === 0 ? '#38485e' : '#233044';
+      ctx.fillRect(tx, FLOOR_Y, 48, 14);
+      // Hallway wall lockers in background
+      if (tx < 3500) {
+        ctx.fillStyle = '#1e40af';
+        ctx.fillRect(tx, FLOOR_Y - 110, 44, 96);
+        ctx.strokeStyle = '#172554';
+        ctx.lineWidth = 1;
+        ctx.strokeRect(tx, FLOOR_Y - 110, 44, 96);
+        // Locker vent slits
+        ctx.fillStyle = '#0f172a';
+        ctx.fillRect(tx + 12, FLOOR_Y - 100, 20, 3);
+        ctx.fillRect(tx + 12, FLOOR_Y - 94, 20, 3);
+        ctx.fillRect(tx + 12, FLOOR_Y - 88, 20, 3);
+      }
     }
 
-    // Draw Platforms
+    // Boss Arena Arch & Red Carpet (x > 3600)
+    ctx.fillStyle = '#991b1b';
+    ctx.fillRect(3600, FLOOR_Y + 2, 800, 12);
+    ctx.fillStyle = '#facc15';
+    ctx.font = '900 18px ui-monospace, monospace';
+    ctx.fillText('ARCHIVIO GPS · UFFICIO DEL SUPER-RICORRISTA', 3650, FLOOR_Y - 210);
+
+    // Draw Platforms (Classroom Desks & Metallic Catwalks)
     platforms.forEach((p, idx) => {
-      ctx.fillStyle = idx % 2 === 0 ? '#475569' : '#334155';
+      // Desk / platform surface
+      const woodGrad = ctx.createLinearGradient(p.x, p.y, p.x, p.y + p.h);
+      woodGrad.addColorStop(0, '#b45309');
+      woodGrad.addColorStop(0.3, '#d97706');
+      woodGrad.addColorStop(1, '#78350f');
+      ctx.fillStyle = woodGrad;
       ctx.fillRect(p.x, p.y, p.w, p.h);
-      ctx.strokeStyle = '#64748b';
+      // Yellow hazard edge
+      ctx.strokeStyle = '#facc15';
       ctx.lineWidth = 2;
       ctx.strokeRect(p.x, p.y, p.w, p.h);
-      // Legs / supports
-      ctx.fillStyle = '#1e293b';
-      ctx.fillRect(p.x + 8, p.y + p.h, 8, FLOOR_Y - (p.y + p.h));
-      ctx.fillRect(p.x + p.w - 16, p.y + p.h, 8, FLOOR_Y - (p.y + p.h));
-      // Platform label
-      ctx.fillStyle = '#cbd5e1';
-      ctx.font = '700 9px ui-monospace, monospace';
-      ctx.fillText(p.label, p.x + 10, p.y + 12);
+
+      // Steel legs reaching floor
+      ctx.fillStyle = '#334155';
+      ctx.fillRect(p.x + 8, p.y + p.h, 7, FLOOR_Y - (p.y + p.h));
+      ctx.fillRect(p.x + p.w - 15, p.y + p.h, 7, FLOOR_Y - (p.y + p.h));
+
+      // Label plaque
+      ctx.fillStyle = '#0f172a';
+      ctx.fillRect(p.x + 10, p.y + 3, p.w - 20, p.h - 6);
+      ctx.fillStyle = '#fde047';
+      ctx.font = '900 9px ui-monospace, monospace';
+      ctx.fillText(p.label, p.x + 16, p.y + 12);
     });
 
-    // Draw Pickups
+    // Draw Pickups (Using items-sheet.png)
     pickups.forEach(p => {
-      const bob = Math.sin(Date.now() * 0.006 + p.x) * 5;
-      ctx.fillStyle = p.type === 'coffee' ? '#78350f' : p.type === 'cedolino' ? '#047857' : '#d97706';
-      ctx.fillRect(p.x - 16, p.y - 16 + bob, 32, 28);
-      ctx.strokeStyle = '#facc15';
-      ctx.lineWidth = 2;
-      ctx.strokeRect(p.x - 16, p.y - 16 + bob, 32, 28);
-      ctx.fillStyle = '#ffffff';
-      ctx.font = '900 12px ui-monospace, monospace';
-      ctx.textAlign = 'center';
-      ctx.fillText(p.label, p.x, p.y + 3 + bob);
-      ctx.textAlign = 'left';
+      const bob = Math.sin(Date.now() * 0.007 + p.x) * 5;
+      const py = p.y + bob;
+
+      // Golden pulsing glow
+      ctx.fillStyle = 'rgba(250, 204, 21, 0.25)';
+      ctx.beginPath();
+      ctx.arc(p.x, py, 22, 0, Math.PI * 2);
+      ctx.fill();
+
+      let itemIndex = 0;
+      if (p.type === 'heavy') itemIndex = 0;
+      else if (p.type === 'shotgun') itemIndex = 1;
+      else if (p.type === 'rocket') itemIndex = 2;
+      else if (p.type === 'laser') itemIndex = 3;
+      else if (p.type === 'cedolino') itemIndex = 4;
+      else if (p.type === 'coffee') itemIndex = 5;
+
+      if (sprites.items.complete && sprites.items.naturalWidth > 0) {
+        ctx.drawImage(sprites.items, itemIndex * 36, 0, 36, 36, p.x - 18, py - 18, 36, 36);
+      } else {
+        // Fallback
+        ctx.fillStyle = p.type === 'coffee' ? '#78350f' : p.type === 'cedolino' ? '#047857' : '#d97706';
+        ctx.fillRect(p.x - 16, py - 16, 32, 28);
+        ctx.strokeStyle = '#facc15';
+        ctx.lineWidth = 2;
+        ctx.strokeRect(p.x - 16, py - 16, 32, 28);
+        ctx.fillStyle = '#ffffff';
+        ctx.font = '900 12px ui-monospace, monospace';
+        ctx.textAlign = 'center';
+        ctx.fillText(p.label, p.x, py + 3);
+        ctx.textAlign = 'left';
+      }
     });
 
-    // Draw Moke Vehicle
+    // Draw Moke Slug Vehicle (Using moke-slug.png)
     if (!moke.occupied) {
-      // Prompt above Moke
+      // Prompt banner above Moke
       ctx.fillStyle = '#d9f482';
-      ctx.font = '900 11px ui-monospace, monospace';
-      ctx.fillText('▼ PREMI [E] PER SALIRE SULLA MOKE', moke.x - 90, moke.y - 75);
+      ctx.font = '900 12px ui-monospace, monospace';
+      ctx.fillText('▼ PREMI [E] PER SALIRE SULLA MOKE SLUG', moke.x - 110, moke.y - 88);
     }
-    // Moke Body
+
     ctx.save();
     ctx.translate(moke.x, moke.y);
     ctx.scale(moke.dir, 1);
-    ctx.fillStyle = '#065f46';
-    ctx.fillRect(-55, -45, 110, 38);
-    // Rollbar
-    ctx.strokeStyle = '#cbd5e1';
-    ctx.lineWidth = 4;
-    ctx.strokeRect(-25, -70, 60, 28);
-    // Cannons
-    ctx.fillStyle = '#64748b';
-    ctx.fillRect(15, -64, 45, 8);
-    ctx.fillRect(15, -52, 45, 8);
-    // Wheels
-    ctx.fillStyle = '#1e293b';
+
+    // Ground Shadow under Moke
+    ctx.fillStyle = 'rgba(0, 0, 0, 0.4)';
     ctx.beginPath();
-    ctx.arc(-35, -4, 16, 0, Math.PI * 2);
-    ctx.arc(35, -4, 16, 0, Math.PI * 2);
+    ctx.ellipse(0, 0, 58, 10, 0, 0, Math.PI * 2);
     ctx.fill();
-    ctx.strokeStyle = '#94a3b8';
-    ctx.lineWidth = 3;
-    ctx.stroke();
-    // Headlight beam if moving
-    ctx.fillStyle = 'rgba(250, 204, 21, 0.2)';
-    ctx.beginPath();
-    ctx.moveTo(55, -35);
-    ctx.lineTo(240, -60);
-    ctx.lineTo(240, 0);
-    ctx.closePath();
-    ctx.fill();
+
+    if (sprites.moke.complete && sprites.moke.naturalWidth > 0) {
+      // Determine Moke frame: 0: normal, 1: firing, 2: ramming, 3: damaged
+      let mokeFrame = 0;
+      if (moke.health < 40) mokeFrame = 3;
+      else if (Math.abs(moke.vx) > 260) mokeFrame = 2;
+      else if (moke.occupied && input.fire) mokeFrame = 1;
+
+      ctx.drawImage(sprites.moke, mokeFrame * 160, 0, 160, 96, -74, -82, 148, 88);
+    } else {
+      // Procedural Fallback
+      ctx.fillStyle = '#065f46';
+      ctx.fillRect(-55, -45, 110, 38);
+      ctx.strokeStyle = '#cbd5e1';
+      ctx.lineWidth = 4;
+      ctx.strokeRect(-25, -70, 60, 28);
+      ctx.fillStyle = '#64748b';
+      ctx.fillRect(15, -64, 45, 8);
+      ctx.fillRect(15, -52, 45, 8);
+      ctx.fillStyle = '#1e293b';
+      ctx.beginPath();
+      ctx.arc(-35, -4, 16, 0, Math.PI * 2);
+      ctx.arc(35, -4, 16, 0, Math.PI * 2);
+      ctx.fill();
+    }
     ctx.restore();
 
-    // Draw Enemies (Precari)
+    // Draw Enemies (Precari using precari-sheet.png)
     enemies.forEach(en => {
       ctx.save();
       ctx.translate(en.x, en.y);
       ctx.scale(en.dir, 1);
-      const stride = Math.sin(en.phase) * 6;
 
-      // Legs
-      ctx.strokeStyle = '#334155';
-      ctx.lineWidth = 5;
+      // Shadow under enemy feet
+      ctx.fillStyle = 'rgba(0, 0, 0, 0.35)';
       ctx.beginPath();
-      ctx.moveTo(-4, -12); ctx.lineTo(-6 - stride, 0);
-      ctx.moveTo(4, -12); ctx.lineTo(6 + stride, 0);
-      ctx.stroke();
-
-      // Body (Suit or cardigan)
-      ctx.fillStyle = en.type === 'shielder' ? '#1e3a5f' : en.type === 'sniper' ? '#7c2d12' : '#be185d';
-      ctx.fillRect(-10, -42, 20, 30);
-
-      // Head
-      ctx.fillStyle = '#fbcfe8';
-      ctx.beginPath();
-      ctx.arc(0, -48, 10, 0, Math.PI * 2);
+      ctx.ellipse(0, 0, 16, 5, 0, 0, Math.PI * 2);
       ctx.fill();
 
-      // Hair
-      ctx.fillStyle = '#451a03';
-      ctx.fillRect(-8, -58, 16, 6);
-
-      // Shield or Item
-      if (en.type === 'shielder') {
-        // Giant legal shield
-        ctx.fillStyle = '#f8fafc';
-        ctx.fillRect(8, -50, 16, 50);
-        ctx.strokeStyle = '#dc2626';
-        ctx.lineWidth = 2;
-        ctx.strokeRect(8, -50, 16, 50);
-        ctx.fillStyle = '#dc2626';
-        ctx.font = '900 8px ui-monospace, monospace';
-        ctx.fillText('TAR', 11, -25);
+      if (sprites.precari.complete && sprites.precari.naturalWidth > 0) {
+        // Archetype row: Runner=0, Sniper=1, Shielder=2
+        const row = en.type === 'runner' ? 0 : en.type === 'sniper' ? 1 : 2;
+        let col = 0;
+        if (en.type === 'runner') {
+          col = Math.floor(en.phase) % 4;
+        } else if (en.type === 'sniper') {
+          col = (en.shootTimer < 0.25 ? 2 : 0) + (Math.floor(en.phase) % 2);
+        } else { // shielder
+          col = Math.floor(en.phase) % 4;
+        }
+        ctx.drawImage(sprites.precari, col * 64, row * 64, 64, 64, -30, -58, 60, 60);
       } else {
-        // Holding 60 CFU sheet waving in hand
-        ctx.fillStyle = '#ffffff';
-        ctx.fillRect(8, -36 - stride, 12, 16);
-        ctx.strokeStyle = '#000';
-        ctx.lineWidth = 1;
-        ctx.strokeRect(8, -36 - stride, 12, 16);
+        // Fallback
+        const stride = Math.sin(en.phase) * 6;
+        ctx.strokeStyle = '#334155';
+        ctx.lineWidth = 5;
+        ctx.beginPath();
+        ctx.moveTo(-4, -12); ctx.lineTo(-6 - stride, 0);
+        ctx.moveTo(4, -12); ctx.lineTo(6 + stride, 0);
+        ctx.stroke();
+        ctx.fillStyle = en.type === 'shielder' ? '#1e3a5f' : en.type === 'sniper' ? '#7c2d12' : '#be185d';
+        ctx.fillRect(-10, -42, 20, 30);
+        ctx.fillStyle = '#fbcfe8';
+        ctx.beginPath();
+        ctx.arc(0, -48, 10, 0, Math.PI * 2);
+        ctx.fill();
       }
       ctx.restore();
     });
 
-    // Draw Boss (La Fotocopiatrice & Il Super Ricorrista)
+    // Draw Boss (La Fotocopiatrice & Il Super-Ricorrista using boss-copier.png)
     if (!boss.defeated) {
       ctx.save();
       ctx.translate(boss.x, boss.y);
-      // Boss Chassis
-      ctx.fillStyle = '#1e293b';
-      ctx.fillRect(-boss.w / 2, -boss.h / 2, boss.w, boss.h);
-      ctx.strokeStyle = '#ef4444';
-      ctx.lineWidth = 4;
-      ctx.strokeRect(-boss.w / 2, -boss.h / 2, boss.w, boss.h);
-      // Glass Scanner Bed (glowing cyan)
-      ctx.fillStyle = 'rgba(56, 189, 248, 0.4)';
-      ctx.fillRect(-boss.w / 2 + 20, -boss.h / 2 + 15, boss.w - 40, 30);
-      // Piston Stamp Arm
-      const pY = Math.sin(boss.phase) * 20;
-      ctx.fillStyle = '#dc2626';
-      ctx.fillRect(-40, -boss.h / 2 - 40 + pY, 80, 40);
-      ctx.fillStyle = '#ffffff';
-      ctx.font = '900 14px ui-monospace, monospace';
-      ctx.fillText('RICORSO TAR GIGANTE', -75, -boss.h / 2 - 50);
 
-      // Boss HP Bar
+      // Boss Shadow
+      ctx.fillStyle = 'rgba(0, 0, 0, 0.5)';
+      ctx.beginPath();
+      ctx.ellipse(0, 0, 95, 14, 0, 0, Math.PI * 2);
+      ctx.fill();
+
+      if (sprites.boss.complete && sprites.boss.naturalWidth > 0) {
+        const isFiring = boss.state === 'attack' || (boss.phase % 2 > 1.2);
+        const col = isFiring ? 1 : 0;
+        ctx.drawImage(sprites.boss, col * 220, 0, 220, 170, -110, -165, 220, 170);
+
+        // Pulsing Cyan Scanner Laser Beam
+        const scanOffset = Math.sin(Date.now() * 0.008) * 45;
+        ctx.fillStyle = 'rgba(56, 189, 248, 0.2)';
+        ctx.fillRect(-60 + scanOffset, -150, 25, 150);
+        ctx.strokeStyle = '#38bdf8';
+        ctx.lineWidth = 2;
+        ctx.strokeRect(-60 + scanOffset, -150, 25, 150);
+      } else {
+        // Fallback
+        ctx.fillStyle = '#1e293b';
+        ctx.fillRect(-boss.w / 2, -boss.h / 2, boss.w, boss.h);
+        ctx.strokeStyle = '#ef4444';
+        ctx.lineWidth = 4;
+        ctx.strokeRect(-boss.w / 2, -boss.h / 2, boss.w, boss.h);
+      }
+
+      // Boss HP Bar with Arcade Metal Frame
       const hpRatio = Math.max(0, boss.health / boss.maxHealth);
-      ctx.fillStyle = '#000';
-      ctx.fillRect(-100, -boss.h / 2 - 25, 200, 10);
+      ctx.fillStyle = '#0f172a';
+      ctx.fillRect(-112, -boss.h / 2 - 40, 224, 18);
+      ctx.strokeStyle = '#facc15';
+      ctx.lineWidth = 2;
+      ctx.strokeRect(-112, -boss.h / 2 - 40, 224, 18);
+      // Red fill
       ctx.fillStyle = '#ef4444';
-      ctx.fillRect(-100, -boss.h / 2 - 25, 200 * hpRatio, 10);
+      ctx.fillRect(-110, -boss.h / 2 - 38, 220 * hpRatio, 14);
+      // Boss Name Plaque
+      ctx.fillStyle = '#fde047';
+      ctx.font = '900 11px ui-monospace, monospace';
+      ctx.fillText('⚠ FOTOCOPIATRICE INCEPPATA & SUPER-RICORRISTA', -105, -boss.h / 2 - 45);
+
       ctx.restore();
     }
 
-    // Draw Player (Prof. Bella)
+    // Draw Player (Prof. Bella using prof-sheet.png from Blender 3D)
     if (!player.inVehicle) {
       ctx.save();
       ctx.translate(player.x, player.y);
       ctx.scale(player.dir, 1);
 
       // Flash when invincible
-      if (player.invincibleTimer <= 0 || Math.floor(Date.now() / 80) % 2 === 0) {
-        const stride = player.crouch ? 0 : Math.sin(player.phase) * 6;
+      const isVisible = player.invincibleTimer <= 0 || Math.floor(Date.now() / 80) % 2 === 0;
 
-        // Legs
-        ctx.strokeStyle = '#1e293b';
-        ctx.lineWidth = 5;
+      if (isVisible) {
+        // Ground Shadow
+        ctx.fillStyle = 'rgba(0, 0, 0, 0.35)';
         ctx.beginPath();
-        if (player.crouch) {
-          ctx.moveTo(-6, -8); ctx.lineTo(-14, 0);
-          ctx.moveTo(6, -8); ctx.lineTo(14, 0);
-        } else {
-          ctx.moveTo(-4, -14); ctx.lineTo(-6 - stride, 0);
-          ctx.moveTo(4, -14); ctx.lineTo(6 + stride, 0);
-        }
-        ctx.stroke();
-
-        // Shoes
-        ctx.fillStyle = '#0f172a';
-        ctx.fillRect(-12 - stride, -4, 10, 5);
-        ctx.fillRect(4 + stride, -4, 10, 5);
-
-        // Body (Giacca blu con camicia e cravatta rossa)
-        const bodyH = player.crouch ? 22 : 32;
-        const bodyY = player.crouch ? -32 : -46;
-        ctx.fillStyle = '#1d4ed8'; // Giacca blu
-        ctx.fillRect(-12, bodyY, 24, bodyH);
-        ctx.fillStyle = '#f8fafc'; // Camicia
-        ctx.fillRect(-4, bodyY, 8, bodyH - 8);
-        ctx.fillStyle = '#dc2626'; // Cravatta rossa
-        ctx.fillRect(-2, bodyY + 4, 4, 14);
-
-        // Head
-        const headY = player.crouch ? -44 : -58;
-        ctx.fillStyle = '#fed7aa'; // Carnagione
-        ctx.beginPath();
-        ctx.arc(0, headY, 11, 0, Math.PI * 2);
+        ctx.ellipse(0, 0, 18, 5, 0, 0, Math.PI * 2);
         ctx.fill();
 
-        // Occhiali da prof
-        ctx.strokeStyle = '#0f172a';
-        ctx.lineWidth = 1.5;
-        ctx.strokeRect(2, headY - 4, 7, 6);
+        if (sprites.prof.complete && sprites.prof.naturalWidth > 0) {
+          let col = 0, row = 0;
+          if (player.grounded) {
+            if (Math.abs(player.vx) > 10) {
+              // Run cycle (Row 0, cols 0-7)
+              row = 0;
+              col = Math.floor(player.phase) % 8;
+            } else {
+              // Idle / Shooting
+              row = 1;
+              if (player.fireTimer > 0.04) {
+                col = 7; // Muzzle flash
+              } else {
+                col = Math.floor(Date.now() / 250) % 4; // Idle 0-3
+              }
+            }
+          } else {
+            // Jump in air
+            row = 1;
+            col = player.vy < 0 ? 4 : 5; // Jump Up or Jump Down
+          }
 
-        // Capelli
-        ctx.fillStyle = '#475569';
-        ctx.fillRect(-8, headY - 12, 16, 5);
-
-        // Arm holding weapon / Timbro del Ruolo
-        ctx.fillStyle = '#dc2626'; // Red stamp
-        let armX = 12, armY = player.crouch ? -24 : -34;
-        if (input.up) { armX = 4; armY = -68; }
-        ctx.fillRect(armX, armY, 14, 14);
-        ctx.strokeStyle = '#facc15';
-        ctx.lineWidth = 1.5;
-        ctx.strokeRect(armX, armY, 14, 14);
+          // Draw 128x128 sprite centered over player feet
+          ctx.drawImage(sprites.prof, col * 128, row * 128, 128, 128, -42, -74, 84, 84);
+        } else {
+          // Fallback
+          const stride = player.crouch ? 0 : Math.sin(player.phase) * 6;
+          ctx.strokeStyle = '#1e293b';
+          ctx.lineWidth = 5;
+          ctx.beginPath();
+          ctx.moveTo(-4, -14); ctx.lineTo(-6 - stride, 0);
+          ctx.moveTo(4, -14); ctx.lineTo(6 + stride, 0);
+          ctx.stroke();
+          ctx.fillStyle = '#1d4ed8';
+          ctx.fillRect(-12, -46, 24, 32);
+          ctx.fillStyle = '#fed7aa';
+          ctx.beginPath();
+          ctx.arc(0, -58, 11, 0, Math.PI * 2);
+          ctx.fill();
+        }
       }
       ctx.restore();
     }
 
-    // Draw Bullets
+    // Dynamic Bullets & Explosions (Additive Lighting)
+    ctx.save();
+    ctx.globalCompositeOperation = 'lighter';
+
+    // Player Bullets
     bullets.forEach(b => {
       ctx.fillStyle = b.color;
       if (b.type === 'bomb') {
         ctx.beginPath();
-        ctx.arc(b.x, b.y, 8, 0, Math.PI * 2);
+        ctx.arc(b.x, b.y, 9, 0, Math.PI * 2);
         ctx.fill();
-        ctx.strokeStyle = '#ffffff';
+        ctx.strokeStyle = '#fef08a';
         ctx.stroke();
       } else if (b.type === 'rocket') {
-        ctx.fillRect(b.x - 12, b.y - 5, 24, 10);
+        ctx.fillRect(b.x - 14, b.y - 6, 28, 12);
+        // Rocket exhaust plume
+        ctx.fillStyle = '#ea580c';
+        ctx.fillRect(b.x - 22, b.y - 3, 8, 6);
+      } else if (b.type === 'laser') {
+        ctx.fillStyle = '#38bdf8';
+        ctx.fillRect(b.x - 24, b.y - 4, 48, 8);
+        ctx.fillStyle = '#ffffff';
+        ctx.fillRect(b.x - 18, b.y - 2, 36, 4);
       } else {
-        ctx.fillRect(b.x - 6, b.y - 3, 12, 6);
+        // Heavy Machine Gun / Timbro bullet with arcade glow
+        ctx.fillRect(b.x - 8, b.y - 4, 16, 8);
+        ctx.fillStyle = '#ffffff';
+        ctx.fillRect(b.x - 4, b.y - 2, 8, 4);
       }
     });
 
-    // Draw Enemy Bullets
+    // Enemy Paper Bullets
     enemyBullets.forEach(eb => {
       ctx.fillStyle = '#ffffff';
       ctx.beginPath();
-      ctx.moveTo(eb.x - 8, eb.y);
-      ctx.lineTo(eb.x + 8, eb.y - 4);
-      ctx.lineTo(eb.x + 8, eb.y + 4);
+      ctx.moveTo(eb.x - 10, eb.y);
+      ctx.lineTo(eb.x + 10, eb.y - 5);
+      ctx.lineTo(eb.x + 10, eb.y + 5);
       ctx.closePath();
       ctx.fill();
+      ctx.fillStyle = '#ef4444';
+      ctx.fillRect(eb.x - 2, eb.y - 2, 6, 4); // Red official stamp
     });
+
+    ctx.restore(); // Exit lighter mode
 
     // Draw Particles
     particles.forEach(p => {
@@ -1161,7 +1319,7 @@
     // Draw Floating Texts
     floatingTexts.forEach(ft => {
       ctx.fillStyle = ft.color;
-      ctx.font = '900 13px ui-monospace, monospace';
+      ctx.font = '900 14px ui-monospace, monospace';
       ctx.fillText(ft.text, ft.x, ft.y);
     });
 
