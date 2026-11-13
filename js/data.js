@@ -202,6 +202,21 @@ window.ATTIVITA_WEB = [
     ],
   },
   {
+    titolo: "Cavitazione e NPSH",
+    materia: "Tecnologia",
+    classe: "Quarta superiore · professionale",
+    annoProf: 4,
+    pubblicato: "2026-11-13",
+    descrizione:
+      "Cavitazione nelle pompe e NPSH: video-lezione passo passo e scheda da stampare con esercizio sull’altezza massima.",
+    citazione: "Se scende sotto la pressione di vapore, nascono le bolle.",
+    url: "cavitazione-npsh/",
+    copertina: "cavitazione-npsh/img/og-share.jpg",
+    tinta: "scienze",
+    adesivo: "st-pianeta",
+    extra: [{ label: "Scheda PDF", url: "cavitazione-npsh/media/cavitazione-npsh.pdf" }],
+  },
+  {
     titolo: "Trigonometria di base",
     materia: "Matematica",
     classe: "Quarta superiore · professionale",

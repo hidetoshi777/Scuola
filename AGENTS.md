@@ -108,6 +108,7 @@ Sito base: `https://hidetoshi777.github.io/Scuola/`
 | Piano cartesiano | https://hidetoshi777.github.io/Scuola/piano-cartesiano/ | [Studio](https://hidetoshi777.github.io/Scuola/piano-cartesiano/imparare.html) · [Laboratorio](https://hidetoshi777.github.io/Scuola/piano-cartesiano/laboratorio.html) · [Gioco](https://hidetoshi777.github.io/Scuola/piano-cartesiano/gioco.html) |
 | Grandezze e unità | https://hidetoshi777.github.io/Scuola/grandezze-unita/ | [Studio](https://hidetoshi777.github.io/Scuola/grandezze-unita/imparare.html) · [Fumetto](https://hidetoshi777.github.io/Scuola/grandezze-unita/fumetto.html) · [Lab](https://hidetoshi777.github.io/Scuola/grandezze-unita/laboratorio.html) · [Gioco](https://hidetoshi777.github.io/Scuola/grandezze-unita/gioco.html) |
 | **Sicurezza nei luoghi di lavoro** | https://hidetoshi777.github.io/Scuola/sicurezza-luoghi-lavoro/ | [Foglio 1](https://hidetoshi777.github.io/Scuola/sicurezza-luoghi-lavoro/#foglio-1) · [Foglio 2](https://hidetoshi777.github.io/Scuola/sicurezza-luoghi-lavoro/#foglio-2) |
+| **Cavitazione e NPSH** | https://hidetoshi777.github.io/Scuola/cavitazione-npsh/ | [Video](https://hidetoshi777.github.io/Scuola/cavitazione-npsh/) · [Scheda PDF](https://hidetoshi777.github.io/Scuola/cavitazione-npsh/media/cavitazione-npsh.pdf) |
 | **Raccoglitore professionale AM** | https://hidetoshi777.github.io/Scuola/professionale/ | Terza e quarta AM (bollini 3 / 4) |
 | Galileo · Il cannocchiale | https://hidetoshi777.github.io/Scuola/galileo-cannocchiale/ | Solo gioco, non nel raccoglitore |
 
