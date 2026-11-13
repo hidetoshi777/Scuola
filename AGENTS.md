@@ -41,6 +41,7 @@ La cartella tipo (`index` + `imparare` + `fumetto` + `laboratorio` + `gioco`) va
 
 ## Preferenze agente
 
+- **Video-lezioni**: poco testo a schermo (titolo o una frase); immagini/schemi al centro; la voce ElevenLabs **spiega**, non legge le slide. Dettaglio in `.cursor/rules/video-lezioni.mdc`.
 - **Mobile first (sempre)**: forte attenzione all’uso su **cellulare**. Layout, dialoghi, bottoni, immagini e touch devono funzionare bene su schermi stretti (leggibilità, aree cliccabili grandi, niente overflow orizzontale, stage VN usabile col pollice). Controllare almeno a ~390px di larghezza prima di pubblicare.
 - **Visual novel su telefono**: scena/ritratto e testo devono stare **nello stesso viewport** (immagine in alto ~40%, dialogo sotto con scroll interno se serve). Evitare layout dove le immagini restano «sopra» fuori schermo mentre si legge solo il fumetto. I **ritratti** sul cellulare restano **piccoli** (angolo scena, non mezza faccia a tutto schermo).
 - **Niente verifiche lunghe**: dopo le modifiche, commit/push e basta. Il Prof. prova lui sul browser e dice se qualcosa non va. Evitare walkthrough video, computer-use prolungato e suite di test manuali elaborate, salvo richiesta esplicita. Un controllo rapido mobile (viewport stretto) resta comunque dovuto.

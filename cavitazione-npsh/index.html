@@ -80,6 +80,14 @@ video{width:100%;height:auto;border-radius:10px;background:#000;display:block}
 .faq details[open] summary::before{content:"−"}
 .faq .a{margin:0;padding:0 14px 14px 3.1rem;color:var(--muted);font-size:1rem}
 .faq .a strong{color:var(--acc)}
+.faq .a + .a{padding-top:0;margin-top:-6px}
+.formula{
+  display:block;margin:8px 0 0;padding:10px 12px;border-radius:8px;
+  background:#0c141c;border:1px solid var(--line);color:var(--acc2);
+  font-family:ui-monospace,Consolas,"Courier New",monospace;font-size:.92rem;
+  overflow-x:auto;white-space:nowrap;line-height:1.4;
+}
+.formula-note{display:block;margin-top:6px;font-size:.88rem;color:var(--muted)}
 footer.cred{margin-top:8px;color:var(--muted);font-size:.85rem;text-align:center}
 @media(min-width:760px){.pages{grid-template-columns:1fr 1fr}}
 </style>
@@ -101,12 +109,11 @@ footer.cred{margin-top:8px;color:var(--muted);font-size:.85rem;text-align:center
       <a href="media/cavitazione-npsh-video.mp4">Scaricalo qui</a>.
     </video>
     <ul class="steps">
+      <li>~2:30</li>
+      <li>Immagini + voce</li>
       <li>Cavitazione</li>
-      <li>Danni alle pale</li>
-      <li>NPSH disponibile / richiesto</li>
-      <li>Regola d’oro</li>
-      <li>Esercizio z<sub>max</sub></li>
-      <li>Interrogazione</li>
+      <li>NPSH</li>
+      <li>z<sub>max</sub></li>
     </ul>
   </section>
 
@@ -132,6 +139,20 @@ footer.cred{margin-top:8px;color:var(--muted);font-size:.85rem;text-align:center
       <details>
         <summary>Prevalenza e NPSH: differenza?</summary>
         <p class="a">La <strong>prevalenza</strong> dice quanto spinge la pompa. L’<strong>NPSH</strong> riguarda solo l’aspirazione: è il margine prima della cavitazione.</p>
+      </details>
+      <details>
+        <summary>Formula dell’NPSH disponibile</summary>
+        <p class="a">Tutti i pezzi sono in <strong>metri</strong> (una pressione divisa per ρ·g diventa un’altezza).</p>
+        <p class="a"><code class="formula">NPSH<sub>disp</sub> = p<sub>a</sub>/(ρg) + z<sub>a</sub> − h<sub>f</sub> + v<sub>a</sub>²/(2g) − p<sub>v</sub>/(ρg)</code>
+          <span class="formula-note">p<sub>a</sub> pressione sul serbatoio · z<sub>a</sub> dislivello · h<sub>f</sub> perdite · v<sub>a</sub> velocità in ingresso · p<sub>v</sub> pressione di vapore</span>
+        </p>
+      </details>
+      <details>
+        <summary>Formule dell’esercizio (passi)</summary>
+        <p class="a"><code class="formula">A = π D² / 4 &nbsp;·&nbsp; V = Q / A &nbsp;·&nbsp; V²/(2g) &nbsp;·&nbsp; (p − p<sub>v</sub>)/(ρg)</code></p>
+        <p class="a"><code class="formula">z<sub>max</sub> = (p − p<sub>v</sub>)/(ρg) + V²/(2g) − h<sub>f</sub> − NPSH<sub>r</sub></code>
+          <span class="formula-note">Nel nostro caso: 20,18 + 1,32 − 1,00 − 2,00 = <strong>18,51 m</strong></span>
+        </p>
       </details>
       <details>
         <summary>Risultato dell’esercizio?</summary>
