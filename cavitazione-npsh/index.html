@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Cavitazione e NPSH · Meccanica</title>
+<meta name="description" content="Video-lezione e scheda da stampare: cavitazione nelle pompe, NPSH disponibile e richiesto, esercizio sull’altezza massima.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Cavitazione e NPSH · Meccanica">
+<meta property="og:description" content="Video-lezione passo passo e scheda da stampare per la quarta professionale.">
+<meta property="og:url" content="https://hidetoshi777.github.io/Scuola/cavitazione-npsh/">
+<meta property="og:image" content="https://hidetoshi777.github.io/Scuola/cavitazione-npsh/img/og-share.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Cavitazione e NPSH · Meccanica">
+<meta name="twitter:description" content="Video-lezione passo passo e scheda da stampare.">
+<meta name="twitter:image" content="https://hidetoshi777.github.io/Scuola/cavitazione-npsh/img/og-share.jpg">
+<link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<style>
+:root{
+  --bg:#0c141c;--panel:#15202b;--ink:#eef3f7;--muted:#9aafc0;--line:#2a3d4f;
+  --acc:#7dd3c0;--acc2:#ffd166;--pump:#4a90c8;
+}
+*{box-sizing:border-box}
+body{
+  margin:0;background:
+    radial-gradient(ellipse 80% 50% at 10% -10%,rgba(125,211,192,.12),transparent 50%),
+    radial-gradient(ellipse 60% 40% at 100% 0%,rgba(74,144,200,.15),transparent 45%),
+    var(--bg);
+  color:var(--ink);font:17px/1.55 "Segoe UI",system-ui,-apple-system,sans-serif;
+}
+.shell{max-width:960px;margin:0 auto;padding:18px 14px 48px}
+.mast{
+  display:grid;gap:10px;margin-bottom:18px;
+  border-left:4px solid var(--acc);padding:4px 0 4px 14px;
+}
+.kicker{margin:0;color:var(--muted);font-size:.8rem;letter-spacing:.08em;text-transform:uppercase}
+h1{margin:0;font-size:clamp(1.45rem,4vw,1.95rem);line-height:1.15;font-weight:800}
+.quote{margin:0;color:var(--acc2);font-style:italic;font-size:1.05rem}
+.intro{color:var(--muted);margin:0}
+.panel{
+  background:var(--panel);border:1px solid var(--line);border-radius:4px 16px 16px 4px;
+  padding:14px;margin:0 0 16px;
+}
+.panel h2{font-size:1.2rem;margin:0 0 10px;display:flex;align-items:center;gap:8px}
+.panel h2 .n{
+  display:inline-flex;align-items:center;justify-content:center;
+  width:1.7rem;height:1.7rem;border-radius:8px;background:var(--pump);color:#fff;
+  font-size:.85rem;font-weight:800;
+}
+video{width:100%;height:auto;border-radius:10px;background:#000;display:block}
+.steps{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0 0;padding:0;list-style:none}
+.steps li{
+  background:#1c2c3a;border:1px solid var(--line);border-radius:8px;
+  padding:6px 12px;font-size:.9rem;color:var(--muted);
+}
+.btn{
+  display:inline-flex;align-items:center;gap:8px;min-height:46px;padding:10px 18px;
+  border-radius:10px;background:var(--acc);color:#0c141c;font-weight:800;text-decoration:none;
+}
+.btn.alt{background:transparent;color:var(--ink);border:2px solid var(--line)}
+.row{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+.pages{display:grid;grid-template-columns:1fr;gap:14px;margin-top:12px}
+.pages figure{margin:0;background:#fff;border-radius:10px;overflow:hidden;border:1px solid var(--line)}
+.pages img{width:100%;height:auto;display:block}
+.pages figcaption{background:#1c2c3a;color:var(--muted);font-size:.9rem;padding:6px 10px}
+footer.cred{margin-top:8px;color:var(--muted);font-size:.85rem;text-align:center}
+@media(min-width:760px){.pages{grid-template-columns:1fr 1fr}}
+</style>
+</head>
+<body>
+<main class="shell">
+  <header class="mast">
+    <p class="kicker">Tecnologia · Quarta professionale</p>
+    <h1>Cavitazione e NPSH</h1>
+    <p class="quote">«Se scende sotto la pressione di vapore, nascono le bolle.»</p>
+    <p class="intro">Guarda la video-lezione, poi ripassa con la scheda da stampare: cos’è la cavitazione, cos’è l’NPSH e un esercizio sull’altezza massima della pompa.</p>
+  </header>
+
+  <section class="panel" aria-labelledby="t-video">
+    <h2 id="t-video"><span class="n" aria-hidden="true">1</span> La video-lezione</h2>
+    <video controls preload="metadata" playsinline poster="img/poster.jpg">
+      <source src="media/cavitazione-npsh-video.mp4" type="video/mp4">
+      Il tuo browser non riesce a mostrare il video.
+      <a href="media/cavitazione-npsh-video.mp4">Scaricalo qui</a>.
+    </video>
+    <ul class="steps">
+      <li>Cavitazione</li>
+      <li>Danni alle pale</li>
+      <li>NPSH disponibile / richiesto</li>
+      <li>Regola d’oro</li>
+      <li>Esercizio z<sub>max</sub></li>
+      <li>Interrogazione</li>
+    </ul>
+  </section>
+
+  <section class="panel" aria-labelledby="t-scheda">
+    <h2 id="t-scheda"><span class="n" aria-hidden="true">2</span> La scheda da stampare</h2>
+    <div class="row">
+      <a class="btn" href="media/cavitazione-npsh.pdf" download>Scarica la scheda (PDF, 4 pagine)</a>
+      <a class="btn alt" href="media/cavitazione-npsh.pdf" target="_blank" rel="noopener">Apri il PDF</a>
+    </div>
+    <div class="pages">
+      <figure>
+        <img src="img/scheda-1.png" alt="Pagina 1: che cos’è la cavitazione" loading="lazy" width="1654" height="2341">
+        <figcaption>Pag. 1 · Cavitazione</figcaption>
+      </figure>
+      <figure>
+        <img src="img/scheda-2.png" alt="Pagina 2: che cos’è l’NPSH" loading="lazy" width="1654" height="2341">
+        <figcaption>Pag. 2 · NPSH</figcaption>
+      </figure>
+      <figure>
+        <img src="img/scheda-3.png" alt="Pagina 3: esercizio passo passo" loading="lazy" width="1654" height="2341">
+        <figcaption>Pag. 3 · Esercizio</figcaption>
+      </figure>
+      <figure>
+        <img src="img/scheda-4.png" alt="Pagina 4: risultato e domande" loading="lazy" width="1654" height="2341">
+        <figcaption>Pag. 4 · Risultato e domande</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <footer class="cred">Realizzato dal Prof. Rossano Bella</footer>
+</main>
+</body>
+</html>
