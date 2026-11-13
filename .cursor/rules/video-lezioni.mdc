@@ -1,0 +1,26 @@
+---
+description: Preferenze per video-lezioni Scuola (slide + ElevenLabs)
+alwaysApply: true
+---
+
+# Video-lezioni Scuola
+
+Quando si crea o rifà una **video-lezione** (stile trigonometria / cavitazione-npsh):
+
+## Cosa fare
+
+- **Poco testo a schermo**: titolo corto o una sola frase-chiave, non elenchi lunghi.
+- **Immagini al centro**: schemi, illustrazioni, foto di contesto, vignette didattiche — la slide deve far *vedere* il concetto.
+- **Voce ≠ testo**: la narrazione ElevenLabs **spiega**, non legge pedissequamente quanto scritto sulla slide. Se basta leggere, il video non serve.
+- Voce chiara, terra terra (professionale AM); stessa pipeline ElevenLabs già usata nei lavori Scuola quando possibile.
+- Slide scure, leggibili; credito Prof. in piccolo ok in coda o in watermark discreto.
+
+## Cosa evitare
+
+- Slide-elenco con 4–6 bullet che la voce ripete parola per parola.
+- Pareti di testo / formule dense senza schema a fianco.
+- Video fatto solo da pagine PDF zoommate (il PDF resta per la stampa; il video è un pezzo a sé).
+
+## Formato tipico
+
+Homepage = video + (opzionale) FAQ breve + scheda PDF da stampare. Non inventare Studio/Lab/Gioco se non chiesti.
