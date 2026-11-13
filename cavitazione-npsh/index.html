@@ -63,6 +63,23 @@ video{width:100%;height:auto;border-radius:10px;background:#000;display:block}
 .pages figure{margin:0;background:#fff;border-radius:10px;overflow:hidden;border:1px solid var(--line)}
 .pages img{width:100%;height:auto;display:block}
 .pages figcaption{background:#1c2c3a;color:var(--muted);font-size:.9rem;padding:6px 10px}
+.faq{display:grid;gap:8px;margin:0}
+.faq details{
+  background:#1c2c3a;border:1px solid var(--line);border-radius:10px;overflow:hidden;
+}
+.faq summary{
+  list-style:none;cursor:pointer;padding:12px 14px;font-weight:700;min-height:48px;
+  display:flex;align-items:center;gap:10px;user-select:none;
+}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::before{
+  content:"+";flex:0 0 auto;width:1.4rem;height:1.4rem;border-radius:6px;
+  background:var(--pump);color:#fff;font-weight:800;font-size:.95rem;
+  display:inline-flex;align-items:center;justify-content:center;line-height:1;
+}
+.faq details[open] summary::before{content:"−"}
+.faq .a{margin:0;padding:0 14px 14px 3.1rem;color:var(--muted);font-size:1rem}
+.faq .a strong{color:var(--acc)}
 footer.cred{margin-top:8px;color:var(--muted);font-size:.85rem;text-align:center}
 @media(min-width:760px){.pages{grid-template-columns:1fr 1fr}}
 </style>
@@ -93,8 +110,38 @@ footer.cred{margin-top:8px;color:var(--muted);font-size:.85rem;text-align:center
     </ul>
   </section>
 
+  <section class="panel" aria-labelledby="t-faq">
+    <h2 id="t-faq"><span class="n" aria-hidden="true">2</span> FAQ · da ripassare in fretta</h2>
+    <div class="faq">
+      <details>
+        <summary>Che cos’è la cavitazione?</summary>
+        <p class="a">All’ingresso della pompa la pressione scende sotto la <strong>pressione di vapore</strong>: nascono bolle di vapore. Poi le bolle scoppiano e rovinano le pale.</p>
+      </details>
+      <details>
+        <summary>Che danni provoca?</summary>
+        <p class="a"><strong>Rumore</strong> (la pompa «sgrana»), vibrazioni, <strong>erosione</strong> delle pale, meno efficienza: la pompa spinge di meno.</p>
+      </details>
+      <details>
+        <summary>Che cos’è l’NPSH?</summary>
+        <p class="a">È la <strong>riserva di pressione</strong> all’ingresso della pompa. Dice quanto margine c’è, in aspirazione, prima che il liquido inizi a «bollire».</p>
+      </details>
+      <details>
+        <summary>Qual è la regola d’oro?</summary>
+        <p class="a"><strong>NPSH disponibile ≥ NPSH richiesto</strong>. Se il disponibile è più piccolo, arrivano le bolle.</p>
+      </details>
+      <details>
+        <summary>Prevalenza e NPSH: differenza?</summary>
+        <p class="a">La <strong>prevalenza</strong> dice quanto spinge la pompa. L’<strong>NPSH</strong> riguarda solo l’aspirazione: è il margine prima della cavitazione.</p>
+      </details>
+      <details>
+        <summary>Risultato dell’esercizio?</summary>
+        <p class="a">z<sub>max</sub> = <strong>18,51 m</strong> sopra il pelo libero. Meglio lasciare 0,5–1 m di margine (circa 17,5 m).</p>
+      </details>
+    </div>
+  </section>
+
   <section class="panel" aria-labelledby="t-scheda">
-    <h2 id="t-scheda"><span class="n" aria-hidden="true">2</span> La scheda da stampare</h2>
+    <h2 id="t-scheda"><span class="n" aria-hidden="true">3</span> La scheda da stampare</h2>
     <div class="row">
       <a class="btn" href="media/cavitazione-npsh.pdf" download>Scarica la scheda (PDF, 4 pagine)</a>
       <a class="btn alt" href="media/cavitazione-npsh.pdf" target="_blank" rel="noopener">Apri il PDF</a>
