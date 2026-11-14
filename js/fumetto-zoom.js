@@ -47,6 +47,14 @@
         return viewport.querySelector(".fumetto-page.is-active img");
       }
 
+      function isRotated() {
+        const reader = viewport.closest(".fumetto-reader, #fumetto-stage");
+        const fs = document.fullscreenElement || document.webkitFullscreenElement;
+        const immersive = !!(reader && (reader.classList.contains("is-immersive") || fs === reader));
+        if (!immersive) return false;
+        return window.matchMedia("(orientation: portrait) and (max-width: 900px)").matches;
+      }
+
       function clampPan() {
         if (scale <= 1.02) {
           tx = 0;
@@ -54,8 +62,11 @@
           return;
         }
         const rect = viewport.getBoundingClientRect();
-        const maxX = (rect.width * (scale - 1)) / 2 + 24;
-        const maxY = (rect.height * (scale - 1)) / 2 + 24;
+        const rot = isRotated();
+        const vw = rot ? rect.height : rect.width;
+        const vh = rot ? rect.width : rect.height;
+        const maxX = (vw * (scale - 1)) / 2 + 24;
+        const maxY = (vh * (scale - 1)) / 2 + 24;
         tx = Math.max(-maxX, Math.min(maxX, tx));
         ty = Math.max(-maxY, Math.min(maxY, ty));
       }
@@ -74,8 +85,13 @@
 
       function zoomAround(nextScale, clientX, clientY, animated) {
         const rect = viewport.getBoundingClientRect();
-        const px = clientX - rect.left - rect.width / 2;
-        const py = clientY - rect.top - rect.height / 2;
+        const rot = isRotated();
+        const px = rot
+          ? clientY - rect.top - rect.height / 2
+          : clientX - rect.left - rect.width / 2;
+        const py = rot
+          ? -(clientX - rect.left - rect.width / 2)
+          : clientY - rect.top - rect.height / 2;
         const prev = scale || 1;
         scale = Math.max(MIN, Math.min(MAX, nextScale));
         if (scale <= 1.02) {
@@ -190,8 +206,15 @@
 
         if (touches.length === 1 && pan0 && isZoomed()) {
           event.preventDefault();
-          tx = pan0.tx + (touches[0].clientX - pan0.x);
-          ty = pan0.ty + (touches[0].clientY - pan0.y);
+          const dx = touches[0].clientX - pan0.x;
+          const dy = touches[0].clientY - pan0.y;
+          if (isRotated()) {
+            tx = pan0.tx + dy;
+            ty = pan0.ty - dx;
+          } else {
+            tx = pan0.tx + dx;
+            ty = pan0.ty + dy;
+          }
           apply(false);
         }
       }
@@ -259,8 +282,15 @@
           downMeta.moved = true;
         }
         if (pan0 && isZoomed()) {
-          tx = pan0.tx + (event.clientX - pan0.x);
-          ty = pan0.ty + (event.clientY - pan0.y);
+          const dx = event.clientX - pan0.x;
+          const dy = event.clientY - pan0.y;
+          if (isRotated()) {
+            tx = pan0.tx + dy;
+            ty = pan0.ty - dx;
+          } else {
+            tx = pan0.tx + dx;
+            ty = pan0.ty + dy;
+          }
           apply(false);
         }
       }

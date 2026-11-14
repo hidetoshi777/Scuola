@@ -150,7 +150,8 @@
 
 /* Schermo intero / fallback iOS .is-immersive */
 .fumetto-reader.is-immersive,
-.fumetto-reader:fullscreen {
+.fumetto-reader:fullscreen,
+.fumetto-reader:-webkit-full-screen {
   position: fixed;
   inset: 0;
   z-index: 9999;
@@ -165,7 +166,8 @@
 }
 
 .fumetto-reader.is-immersive .fumetto-viewport,
-.fumetto-reader:fullscreen .fumetto-viewport {
+.fumetto-reader:fullscreen .fumetto-viewport,
+.fumetto-reader:-webkit-full-screen .fumetto-viewport {
   max-height: none;
   height: 100%;
   aspect-ratio: auto;
@@ -173,8 +175,28 @@
 
 .fumetto-reader.is-immersive .fumetto-controls,
 .fumetto-reader.is-immersive .fumetto-hint,
-.fumetto-reader:fullscreen .fumetto-hint {
+.fumetto-reader:fullscreen .fumetto-hint,
+.fumetto-reader:-webkit-full-screen .fumetto-hint {
   display: none;
+}
+
+@media (orientation: portrait) and (max-width: 900px) {
+  .fumetto-reader.is-immersive,
+  .fumetto-reader:fullscreen,
+  .fumetto-reader:-webkit-full-screen {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    right: auto;
+    bottom: auto;
+    width: 100dvh;
+    height: 100vw;
+    max-width: none;
+    max-height: none;
+    margin: 0;
+    transform: translate(-50%, -50%) rotate(90deg);
+    transform-origin: center center;
+  }
 }
 
 html.fumetto-immersive-lock,
