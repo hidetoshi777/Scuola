@@ -1,0 +1,2311 @@
+{
+  "items_checked": 124,
+  "review": [
+    {
+      "id": "frase_w_lights",
+      "tipo": "traduzione",
+      "en": "traffic lights",
+      "it": "semaforo",
+      "latency_ms": 281,
+      "status": 200,
+      "model": "jev-1.14.0",
+      "ok": 0.6,
+      "problema": "traduzione_errata",
+      "problema_probs": {
+        "nessuno": 0.43,
+        "inglese_errato": 0.05,
+        "traduzione_errata": 0.49,
+        "innaturale": 0.03
+      }
+    }
+  ],
+  "results": [
+    {
+      "id": "frase_w_pharmacy",
+      "tipo": "traduzione",
+      "en": "pharmacy",
+      "it": "farmacia",
+      "latency_ms": 308,
+      "status": 200,
+      "model": "jev-1.14.0",
+      "ok": 0.96,
+      "problema": "nessuno",
+      "problema_probs": {
+        "nessuno": 1.0,
+        "inglese_errato": 0.0,
+        "traduzione_errata": 0.0,
+        "innaturale": 0.0
+      }
+    },
+    {
+      "id": "frase_w_church",
+      "tipo": "traduzione",
+      "en": "church",
+      "it": "chiesa",
+      "latency_ms": 320,
+      "status": 200,
+      "model": "jev-1.14.0",
+      "ok": 0.96,
+      "problema": "nessuno",
+      "problema_probs": {
+        "nessuno": 1.0,
+        "inglese_errato": 0.0,
+        "traduzione_errata": 0.0,
+        "innaturale": 0.0
+      }
+    },
+    {
+      "id": "frase_w_hospital",
+      "tipo": "traduzione",
+      "en": "hospital",
+      "it": "ospedale",
+      "latency_ms": 351,
+      "status": 200,
+      "model": "jev-1.14.0",
+      "ok": 0.96,
+      "problema": "nessuno",
+      "problema_probs": {
+        "nessuno": 1.0,
+        "inglese_errato": 0.0,
+        "traduzione_errata": 0.0,
+        "innaturale": 0.0
+      }
+    },
+    {
+      "id": "frase_w_bank",
+      "tipo": "traduzione",
+      "en": "bank",
+      "it": "banca",
+      "latency_ms": 382,
+      "status": 200,
+      "model": "jev-1.14.0",
+      "ok": 0.95,
+      "problema": "nessuno",
+      "problema_probs": {
+        "nessuno": 1.0,
+        "inglese_errato": 0.0,
+        "traduzione_errata": 0.0,
+        "innaturale": 0.0
+      }
+    },
+    {
+      "id": "frase_w_school",
+      "tipo": "traduzione",
+      "en": "school",
+      "it": "scuola",
+      "latency_ms": 328,
+      "status": 200,
+      "model": "jev-1.14.0",
+      "ok": 0.96,
+      "problema": "nessuno",
+      "problema_probs": {
+        "nessuno": 0.99,
+        "inglese_errato": 0.0,
+        "traduzione_errata": 0.01,
+        "innaturale": 0.0
+      }
+    },
+    {
+      "id": "frase_w_park",
+      "tipo": "traduzione",
+      "en": "park",
+      "it": "parco",
+      "latency_ms": 334,
+      "status": 200,
+      "model": "jev-1.14.0",
+      "ok": 0.77,
+      "problema": "nessuno",
+      "problema_probs": {
+        "nessuno": 0.67,
+        "inglese_errato": 0.08,
+        "traduzione_errata": 0.21,
+        "innaturale": 0.04
+      }
+    },
+    {
+      "id": "frase_w_cinema",
+      "tipo": "traduzione",
+      "en": "cinema",
+      "it": "cinema",
+      "latency_ms": 283,
+      "status": 200,
+      "model": "jev-1.14.0",
+      "ok": 0.81,
+      "problema": "nessuno",
+      "problema_probs": {
+        "nessuno": 0.85,
+        "inglese_errato": 0.09,
+        "traduzione_errata": 0.04,
+        "innaturale": 0.02
+      }
+    },
+    {
+      "id": "frase_w_postoffice",
+      "tipo": "traduzione",
+      "en": "post office",
+      "it": "ufficio postale",
+      "latency_ms": 316,
+      "status": 200,
+      "model": "jev-1.14.0",
+      "ok": 0.97,
+      "problema": "nessuno",
+      "problema_probs": {
+        "nessuno": 0.98,
+        "inglese_errato": 0.01,
+        "traduzione_errata": 0.0,
+        "innaturale": 0.01
+      }
+    },
+    {
+      "id": "frase_w_supermarket",
+      "tipo": "traduzione",
+      "en": "supermarket",
+      "it": "supermercato",
+      "latency_ms": 293,
+      "status": 200,
+      "model": "jev-1.14.0",
+      "ok": 0.96,
+      "problema": "nessuno",
+      "problema_probs": {
+        "nessuno": 0.99,
+        "inglese_errato": 0.01,
+        "traduzione_errata": 0.0,
+        "innaturale": 0.0
+      }
+    },
+    {
+      "id": "frase_w_restaurant",
+      "tipo": "traduzione",
+      "en": "restaurant",
+      "it": "ristorante",
+      "latency_ms": 312,
+      "status": 200,
+      "model": "jev-1.14.0",
+      "ok": 0.96,
+      "problema": "nessuno",
+      "problema_probs": {
+        "nessuno": 1.0,
+        "inglese_errato": 0.0,
+        "traduzione_errata": 0.0,
+        "innaturale": 0.0
+      }
+    },
+    {
+      "id": "frase_w_cafe",
+      "tipo": "traduzione",
+      "en": "café",
+      "it": "bar (caffè)",
+      "latency_ms": 290,
+      "status": 200,
+      "model": "jev-1.14.0",
+      "ok": 0.77,
+      "problema": "nessuno",
+      "problema_probs": {
+        "nessuno": 0.6,
+        "inglese_errato": 0.01,
+        "traduzione_errata": 0.31,
+        "innaturale": 0.08
+      }
+    },
+    {
+      "id": "frase_w_hotel",
+      "tipo": "traduzione",
+      "en": "hotel",
+      "it": "albergo",
+      "latency_ms": 335,
+      "status": 200,
+      "model": "jev-1.14.0",
+      "ok": 0.94,
+      "problema": "nessuno",
+      "problema_probs": {
+        "nessuno": 1.0,
+        "inglese_errato": 0.0,
+        "traduzione_errata": 0.0,
+        "innaturale": 0.0
+      }
+    },
+    {
+      "id": "frase_w_station",
+      "tipo": "traduzione",
+      "en": "train station",
+      "it": "stazione dei treni",
+      "latency_ms": 315,
+      "status": 200,
+      "model": "jev-1.14.0",
+      "ok": 0.97,
+      "problema": "nessuno",
+      "problema_probs": {
+        "nessuno": 0.99,
+        "inglese_errato": 0.0,
+        "traduzione_errata": 0.0,
+        "innaturale": 0.01
+      }
+    },
+    {
+      "id": "frase_w_police",
+      "tipo": "traduzione",
+      "en": "police station",
+      "it": "stazione di polizia",
+      "latency_ms": 316,
+      "status": 200,
+      "model": "jev-1.14.0",
+      "ok": 0.97,
+      "problema": "nessuno",
+      "problema_probs": {
+        "nessuno": 0.99,
+        "inglese_errato": 0.0,
+        "traduzione_errata": 0.0,
+        "innaturale": 0.01
+      }
+    },
+    {
+      "id": "frase_w_busstop",
+      "tipo": "traduzione",
+      "en": "bus stop",
+      "it": "fermata dell'autobus",
+      "latency_ms": 267,
+      "status": 200,
+      "model": "jev-1.14.0",
+      "ok": 0.97,
+      "problema": "nessuno",
+      "problema_probs": {
+        "nessuno": 0.99,
+        "inglese_errato": 0.0,
+        "traduzione_errata": 0.0,
+        "innaturale": 0.01
+      }
+    },
+    {
+      "id": "frase_w_lights",
+      "tipo": "traduzione",
+      "en": "traffic lights",
+      "it": "semaforo",
+      "latency_ms": 281,
+      "status": 200,
+      "model": "jev-1.14.0",
+      "ok": 0.6,
+      "problema": "traduzione_errata",
+      "problema_probs": {
+        "nessuno": 0.43,
+        "inglese_errato": 0.05,
+        "traduzione_errata": 0.49,
+        "innaturale": 0.03
+      }
+    },
+    {
+      "id": "frase_w_zebra",
+      "tipo": "traduzione",
+      "en": "zebra crossing",
+      "it": "strisce pedonali",
+      "latency_ms": 301,
+      "status": 200,
+      "model": "jev-1.14.0",
+      "ok": 0.93,
+      "problema": "nessuno",
+      "problema_probs": {
+        "nessuno": 0.96,
+        "inglese_errato": 0.01,
+        "traduzione_errata": 0.01,
+        "innaturale": 0.02
+      }
+    },
+    {
+      "id": "frase_w_bakery",
+      "tipo": "traduzione",
+      "en": "bakery",
+      "it": "panetteria",
+      "latency_ms": 302,
+      "status": 200,
+      "model": "jev-1.14.0",
+      "ok": 0.95,
+      "problema": "nessuno",
+      "problema_probs": {
+        "nessuno": 0.98,
+        "inglese_errato": 0.0,
+        "traduzione_errata": 0.01,
+        "innaturale": 0.01
+      }
+    },
+    {
+      "id": "frase_w_museum",
+      "tipo": "traduzione",
+      "en": "museum",
+      "it": "museo",
+      "latency_ms": 287,
+      "status": 200,
+      "model": "jev-1.14.0",
+      "ok": 0.95,
+      "problema": "nessuno",
+      "problema_probs": {
+        "nessuno": 0.99,
+        "inglese_errato": 0.01,
+        "traduzione_errata": 0.0,
+        "innaturale": 0.0
+      }
+    },
+    {
+      "id": "frase_w_library",
+      "tipo": "traduzione",
+      "en": "library",
+      "it": "biblioteca",
+      "latency_ms": 316,
+      "status": 200,
+      "model": "jev-1.14.0",
+      "ok": 0.96,
+      "problema": "nessuno",
+      "problema_probs": {
+        "nessuno": 1.0,
+        "inglese_errato": 0.0,
+        "traduzione_errata": 0.0,
+        "innaturale": 0.0
+      }
+    },
+    {
+      "id": "frase_w_crossroads",
+      "tipo": "traduzione",
+      "en": "crossroads",
+      "it": "incrocio",
+      "latency_ms": 278,
+      "status": 200,
+      "model": "jev-1.14.0",
+      "ok": 0.88,
+      "problema": "nessuno",
+      "problema_probs": {
+        "nessuno": 0.82,
+        "inglese_errato": 0.05,
+        "traduzione_errata": 0.02,
+        "innaturale": 0.11
+      }
+    },
+    {
+      "id": "frase_q_pharmacy",
+      "tipo": "traduzione",
+      "en": "Excuse me, where is the pharmacy?",
+      "it": "Scusi, dov'è la farmacia?",
+      "latency_ms": 270,
+      "status": 200,
+      "model": "jev-1.14.0",
+      "ok": 0.97,
+      "problema": "nessuno",
+      "problema_probs": {
+        "nessuno": 1.0,
+        "inglese_errato": 0.0,
+        "traduzione_errata": 0.0,
+        "innaturale": 0.0
+      }
+    },
+    {
+      "id": "frase_q_church",
+      "tipo": "traduzione",
+      "en": "Excuse me, where is the church?",
+      "it": "Scusi, dov'è la chiesa?",
+      "latency_ms": 288,
+      "status": 200,
+      "model": "jev-1.14.0",
+      "ok": 0.97,
+      "problema": "nessuno",
+      "problema_probs": {
+        "nessuno": 1.0,
+        "inglese_errato": 0.0,
+        "traduzione_errata": 0.0,
+        "innaturale": 0.0
+      }
+    },
+    {
+      "id": "frase_q_hospital",
+      "tipo": "traduzione",
+      "en": "Excuse me, where is the hospital?",
+      "it": "Scusi, dov'è l'ospedale?",
+      "latency_ms": 279,
+      "status": 200,
+      "model": "jev-1.14.0",
+      "ok": 0.98,
+      "problema": "nessuno",
+      "problema_probs": {
+        "nessuno": 1.0,
+        "inglese_errato": 0.0,
+        "traduzione_errata": 0.0,
+        "innaturale": 0.0
+      }
+    },
+    {
+      "id": "frase_q_bank",
+      "tipo": "traduzione",
+      "en": "Excuse me, where is the bank?",
+      "it": "Scusi, dov'è la banca?",
+      "latency_ms": 328,
+      "status": 200,
+      "model": "jev-1.14.0",
+      "ok": 0.97,
+      "problema": "nessuno",
+      "problema_probs": {
+        "nessuno": 1.0,
+        "inglese_errato": 0.0,
+        "traduzione_errata": 0.0,
+        "innaturale": 0.0
+      }
+    },
+    {
+      "id": "frase_q_school",
+      "tipo": "traduzione",
+      "en": "Excuse me, where is the school?",
+      "it": "Scusi, dov'è la scuola?",
+      "latency_ms": 272,
+      "status": 200,
+      "model": "jev-1.14.0",
+      "ok": 0.97,
+      "problema": "nessuno",
+      "problema_probs": {
+        "nessuno": 1.0,
+        "inglese_errato": 0.0,
+        "traduzione_errata": 0.0,
+        "innaturale": 0.0
+      }
+    },
+    {
+      "id": "frase_q_park",
+      "tipo": "traduzione",
+      "en": "Excuse me, where is the park?",
+      "it": "Scusi, dov'è il parco?",
+      "latency_ms": 287,
+      "status": 200,
+      "model": "jev-1.14.0",
+      "ok": 0.97,
+      "problema": "nessuno",
+      "problema_probs": {
+        "nessuno": 1.0,
+        "inglese_errato": 0.0,
+        "traduzione_errata": 0.0,
+        "innaturale": 0.0
+      }
+    },
+    {
+      "id": "frase_q_cinema",
+      "tipo": "traduzione",
+      "en": "Excuse me, where is the cinema?",
+      "it": "Scusi, dov'è il cinema?",
+      "latency_ms": 278,
+      "status": 200,
+      "model": "jev-1.14.0",
+      "ok": 0.97,
+      "problema": "nessuno",
+      "problema_probs": {
+        "nessuno": 1.0,
+        "inglese_errato": 0.0,
+        "traduzione_errata": 0.0,
+        "innaturale": 0.0
+      }
+    },
+    {
+      "id": "frase_q_postoffice",
+      "tipo": "traduzione",
+      "en": "Excuse me, where is the post office?",
+      "it": "Scusi, dov'è l'ufficio postale?",
+      "latency_ms": 280,
+      "status": 200,
+      "model": "jev-1.14.0",
+      "ok": 0.97,
+      "problema": "nessuno",
+      "problema_probs": {
+        "nessuno": 1.0,
+        "inglese_errato": 0.0,
+        "traduzione_errata": 0.0,
+        "innaturale": 0.0
+      }
+    },
+    {
+      "id": "frase_q_supermarket",
+      "tipo": "traduzione",
+      "en": "Excuse me, where is the supermarket?",
+      "it": "Scusi, dov'è il supermercato?",
+      "latency_ms": 299,
+      "status": 200,
+      "model": "jev-1.14.0",
+      "ok": 0.98,
+      "problema": "nessuno",
+      "problema_probs": {
+        "nessuno": 1.0,
+        "inglese_errato": 0.0,
+        "traduzione_errata": 0.0,
+        "innaturale": 0.0
+      }
+    },
+    {
+      "id": "frase_q_restaurant",
+      "tipo": "traduzione",
+      "en": "Excuse me, where is the restaurant?",
+      "it": "Scusi, dov'è il ristorante?",
+      "latency_ms": 285,
+      "status": 200,
+      "model": "jev-1.14.0",
+      "ok": 0.98,
+      "problema": "nessuno",
+      "problema_probs": {
+        "nessuno": 1.0,
+        "inglese_errato": 0.0,
+        "traduzione_errata": 0.0,
+        "innaturale": 0.0
+      }
+    },
+    {
+      "id": "frase_q_cafe",
+      "tipo": "traduzione",
+      "en": "Excuse me, where is the café?",
+      "it": "Scusi, dov'è il bar?",
+      "latency_ms": 283,
+      "status": 200,
+      "model": "jev-1.14.0",
+      "ok": 0.76,
+      "problema": "nessuno",
+      "problema_probs": {
+        "nessuno": 0.57,
+        "inglese_errato": 0.0,
+        "traduzione_errata": 0.42,
+        "innaturale": 0.01
+      }
+    },
+    {
+      "id": "frase_q_hotel",
+      "tipo": "traduzione",
+      "en": "Excuse me, where is the hotel?",
+      "it": "Scusi, dov'è l'albergo?",
+      "latency_ms": 297,
+      "status": 200,
+      "model": "jev-1.14.0",
+      "ok": 0.98,
+      "problema": "nessuno",
+      "problema_probs": {
+        "nessuno": 1.0,
+        "inglese_errato": 0.0,
+        "traduzione_errata": 0.0,
+        "innaturale": 0.0
+      }
+    },
+    {
+      "id": "frase_t_thanks",
+      "tipo": "traduzione",
+      "en": "Thank you!",
+      "it": "Grazie!",
+      "latency_ms": 325,
+      "status": 200,
+      "model": "jev-1.14.0",
+      "ok": 0.98,
+      "problema": "nessuno",
+      "problema_probs": {
+        "nessuno": 1.0,
+        "inglese_errato": 0.0,
+        "traduzione_errata": 0.0,
+        "innaturale": 0.0
+      }
+    },
+    {
+      "id": "frase_t_thanks2",
+      "tipo": "traduzione",
+      "en": "Thank you very much!",
+      "it": "Grazie mille!",
+      "latency_ms": 284,
+      "status": 200,
+      "model": "jev-1.14.0",
+      "ok": 0.98,
+      "problema": "nessuno",
+      "problema_probs": {
+        "nessuno": 1.0,
+        "inglese_errato": 0.0,
+        "traduzione_errata": 0.0,
+        "innaturale": 0.0
+      }
+    },
+    {
+      "id": "frase_t_noroad",
+      "tipo": "traduzione",
+      "en": "Oh no! There's no road here!",
+      "it": "Oh no! Qui non c'è una strada!",
+      "latency_ms": 300,
+      "status": 200,
+      "model": "jev-1.14.0",
+      "ok": 0.79,
+      "problema": "nessuno",
+      "problema_probs": {
+        "nessuno": 0.61,
+        "inglese_errato": 0.05,
+        "traduzione_errata": 0.01,
+        "innaturale": 0.33
+      }
+    },
+    {
+      "id": "frase_t_wrong",
+      "tipo": "traduzione",
+      "en": "Hmm... this is the wrong place.",
+      "it": "Mmm... questo è il posto sbagliato.",
+      "latency_ms": 277,
+      "status": 200,
+      "model": "jev-1.14.0",
+      "ok": 0.94,
+      "problema": "nessuno",
+      "problema_probs": {
+        "nessuno": 0.88,
+        "inglese_errato": 0.01,
+        "traduzione_errata": 0.01,
+        "innaturale": 0.1
+      }
+    },
+    {
+      "id": "frase_t_near",
+      "tipo": "traduzione",
+      "en": "Excuse me, is there a bank near here?",
+      "it": "Scusi, c'è una banca qui vicino?",
+      "latency_ms": 285,
+      "status": 200,
+      "model": "jev-1.14.0",
+      "ok": 0.97,
+      "problema": "nessuno",
+      "problema_probs": {
+        "nessuno": 1.0,
+        "inglese_errato": 0.0,
+        "traduzione_errata": 0.0,
+        "innaturale": 0.0
+      }
+    },
+    {
+      "id": "frase_t_get",
+      "tipo": "traduzione",
+      "en": "Excuse me, how can I get to the train station?",
+      "it": "Scusi, come arrivo alla stazione dei treni?",
+      "latency_ms": 296,
+      "status": 200,
+      "model": "jev-1.14.0",
+      "ok": 0.97,
+      "problema": "nessuno",
+      "problema_probs": {
+        "nessuno": 1.0,
+        "inglese_errato": 0.0,
+        "traduzione_errata": 0.0,
+        "innaturale": 0.0
+      }
+    },
+    {
+      "id": "frase_c_straight",
+      "tipo": "traduzione",
+      "en": "Go straight on.",
+      "it": "Vai dritto.",
+      "latency_ms": 265,
+      "status": 200,
+      "model": "jev-1.14.0",
+      "ok": 0.96,
+      "problema": "nessuno",
+      "problema_probs": {
+        "nessuno": 0.97,
+        "inglese_errato": 0.0,
+        "traduzione_errata": 0.0,
+        "innaturale": 0.03
+      }
+    },
+    {
+      "id": "frase_c_left",
+      "tipo": "traduzione",
+      "en": "Turn left.",
+      "it": "Gira a sinistra.",
+      "latency_ms": 287,
+      "status": 200,
+      "model": "jev-1.14.0",
+      "ok": 0.97,
+      "problema": "nessuno",
+      "problema_probs": {
+        "nessuno": 1.0,
+        "inglese_errato": 0.0,
+        "traduzione_errata": 0.0,
+        "innaturale": 0.0
+      }
+    },
+    {
+      "id": "frase_c_right",
+      "tipo": "traduzione",
+      "en": "Turn right.",
+      "it": "Gira a destra.",
+      "latency_ms": 331,
+      "status": 200,
+      "model": "jev-1.14.0",
+      "ok": 0.98,
+      "problema": "nessuno",
+      "problema_probs": {
+        "nessuno": 1.0,
+        "inglese_errato": 0.0,
+        "traduzione_errata": 0.0,
+        "innaturale": 0.0
+      }
+    },
+    {
+      "id": "frase_c_onleft",
+      "tipo": "traduzione",
+      "en": "It's on the left.",
+      "it": "È a sinistra.",
+      "latency_ms": 297,
+      "status": 200,
+      "model": "jev-1.14.0",
+      "ok": 0.96,
+      "problema": "nessuno",
+      "problema_probs": {
+        "nessuno": 1.0,
+        "inglese_errato": 0.0,
+        "traduzione_errata": 0.0,
+        "innaturale": 0.0
+      }
+    },
+    {
+      "id": "frase_c_onright",
+      "tipo": "traduzione",
+      "en": "It's on the right.",
+      "it": "È a destra.",
+      "latency_ms": 284,
+      "status": 200,
+      "model": "jev-1.14.0",
+      "ok": 0.97,
+      "problema": "nessuno",
+      "problema_probs": {
+        "nessuno": 1.0,
+        "inglese_errato": 0.0,
+        "traduzione_errata": 0.0,
+        "innaturale": 0.0
+      }
+    },
+    {
+      "id": "frase_l_welcome",
+      "tipo": "traduzione",
+      "en": "You're welcome!",
+      "it": "Prego!",
+      "latency_ms": 291,
+      "status": 200,
+      "model": "jev-1.14.0",
+      "ok": 0.9,
+      "problema": "nessuno",
+      "problema_probs": {
+        "nessuno": 0.93,
+        "inglese_errato": 0.0,
+        "traduzione_errata": 0.05,
+        "innaturale": 0.02
+      }
+    },
+    {
+      "id": "frase_l_first",
+      "tipo": "traduzione",
+      "en": "Take the first left.",
+      "it": "Prendi la prima a sinistra.",
+      "latency_ms": 306,
+      "status": 200,
+      "model": "jev-1.14.0",
+      "ok": 0.96,
+      "problema": "nessuno",
+      "problema_probs": {
+        "nessuno": 0.99,
+        "inglese_errato": 0.0,
+        "traduzione_errata": 0.0,
+        "innaturale": 0.01
+      }
+    },
+    {
+      "id": "frase_l_second",
+      "tipo": "traduzione",
+      "en": "Take the second right.",
+      "it": "Prendi la seconda a destra.",
+      "latency_ms": 334,
+      "status": 200,
+      "model": "jev-1.14.0",
+      "ok": 0.96,
+      "problema": "nessuno",
+      "problema_probs": {
+        "nessuno": 0.99,
+        "inglese_errato": 0.0,
+        "traduzione_errata": 0.0,
+        "innaturale": 0.01
+      }
+    },
+    {
+      "id": "frase_l_past",
+      "tipo": "traduzione",
+      "en": "Go past the church.",
+      "it": "Supera la chiesa (vai oltre).",
+      "latency_ms": 301,
+      "status": 200,
+      "model": "jev-1.14.0",
+      "ok": 0.94,
+      "problema": "nessuno",
+      "problema_probs": {
+        "nessuno": 0.96,
+        "inglese_errato": 0.0,
+        "traduzione_errata": 0.01,
+        "innaturale": 0.03
+      }
+    },
+    {
+      "id": "frase_l_lights",
+      "tipo": "traduzione",
+      "en": "At the traffic lights, turn left.",
+      "it": "Al semaforo, gira a sinistra.",
+      "latency_ms": 278,
+      "status": 200,
+      "model": "jev-1.14.0",
+      "ok": 0.93,
+      "problema": "nessuno",
+      "problema_probs": {
+        "nessuno": 0.89,
+        "inglese_errato": 0.03,
+        "traduzione_errata": 0.01,
+        "innaturale": 0.07
+      }
+    },
+    {
+      "id": "frase_l_end",
+      "tipo": "traduzione",
+      "en": "At the end of the road, turn right.",
+      "it": "Alla fine della strada, gira a destra.",
+      "latency_ms": 262,
+      "status": 200,
+      "model": "jev-1.14.0",
+      "ok": 0.95,
+      "problema": "nessuno",
+      "problema_probs": {
+        "nessuno": 0.94,
+        "inglese_errato": 0.01,
+        "traduzione_errata": 0.0,
+        "innaturale": 0.05
+      }
+    },
+    {
+      "id": "frase_l_cross",
+      "tipo": "traduzione",
+      "en": "Cross the road.",
+      "it": "Attraversa la strada.",
+      "latency_ms": 311,
+      "status": 200,
+      "model": "jev-1.14.0",
+      "ok": 0.96,
+      "problema": "nessuno",
+      "problema_probs": {
+        "nessuno": 0.98,
+        "inglese_errato": 0.0,
+        "traduzione_errata": 0.0,
+        "innaturale": 0.02
+      }
+    },
+    {
+      "id": "frase_l_next",
+      "tipo": "traduzione",
+      "en": "It's next to the bank.",
+      "it": "È accanto alla banca.",
+      "latency_ms": 319,
+      "status": 200,
+      "model": "jev-1.14.0",
+      "ok": 0.97,
+      "problema": "nessuno",
+      "problema_probs": {
+        "nessuno": 1.0,
+        "inglese_errato": 0.0,
+        "traduzione_errata": 0.0,
+        "innaturale": 0.0
+      }
+    },
+    {
+      "id": "frase_l_opp",
+      "tipo": "traduzione",
+      "en": "It's opposite the church.",
+      "it": "È di fronte alla chiesa.",
+      "latency_ms": 267,
+      "status": 200,
+      "model": "jev-1.14.0",
+      "ok": 0.91,
+      "problema": "nessuno",
+      "problema_probs": {
+        "nessuno": 0.9,
+        "inglese_errato": 0.04,
+        "traduzione_errata": 0.02,
+        "innaturale": 0.04
+      }
+    },
+    {
+      "id": "frase_l_betw",
+      "tipo": "traduzione",
+      "en": "It's between the café and the hotel.",
+      "it": "È tra il bar e l'albergo.",
+      "latency_ms": 300,
+      "status": 200,
+      "model": "jev-1.14.0",
+      "ok": 0.82,
+      "problema": "nessuno",
+      "problema_probs": {
+        "nessuno": 0.63,
+        "inglese_errato": 0.01,
+        "traduzione_errata": 0.35,
+        "innaturale": 0.01
+      }
+    },
+    {
+      "id": "frase_l_corner",
+      "tipo": "traduzione",
+      "en": "It's on the corner.",
+      "it": "È all'angolo.",
+      "latency_ms": 312,
+      "status": 200,
+      "model": "jev-1.14.0",
+      "ok": 0.96,
+      "problema": "nessuno",
+      "problema_probs": {
+        "nessuno": 0.99,
+        "inglese_errato": 0.0,
+        "traduzione_errata": 0.0,
+        "innaturale": 0.01
+      }
+    },
+    {
+      "id": "frase_l_dunno",
+      "tipo": "traduzione",
+      "en": "Sorry, I don't know.",
+      "it": "Mi dispiace, non lo so.",
+      "latency_ms": 297,
+      "status": 200,
+      "model": "jev-1.14.0",
+      "ok": 0.97,
+      "problema": "nessuno",
+      "problema_probs": {
+        "nessuno": 0.99,
+        "inglese_errato": 0.0,
+        "traduzione_errata": 0.0,
+        "innaturale": 0.01
+      }
+    },
+    {
+      "id": "frase_l_near",
+      "tipo": "traduzione",
+      "en": "It's near here.",
+      "it": "È qui vicino.",
+      "latency_ms": 273,
+      "status": 200,
+      "model": "jev-1.14.0",
+      "ok": 0.95,
+      "problema": "nessuno",
+      "problema_probs": {
+        "nessuno": 0.96,
+        "inglese_errato": 0.0,
+        "traduzione_errata": 0.0,
+        "innaturale": 0.04
+      }
+    },
+    {
+      "id": "frase_l_far",
+      "tipo": "traduzione",
+      "en": "It's far from here.",
+      "it": "È lontano da qui.",
+      "latency_ms": 291,
+      "status": 200,
+      "model": "jev-1.14.0",
+      "ok": 0.96,
+      "problema": "nessuno",
+      "problema_probs": {
+        "nessuno": 0.98,
+        "inglese_errato": 0.0,
+        "traduzione_errata": 0.0,
+        "innaturale": 0.02
+      }
+    },
+    {
+      "id": "frase_l_yourleft",
+      "tipo": "traduzione",
+      "en": "It's on your left.",
+      "it": "È alla tua sinistra.",
+      "latency_ms": 346,
+      "status": 200,
+      "model": "jev-1.14.0",
+      "ok": 0.96,
+      "problema": "nessuno",
+      "problema_probs": {
+        "nessuno": 0.99,
+        "inglese_errato": 0.0,
+        "traduzione_errata": 0.0,
+        "innaturale": 0.01
+      }
+    },
+    {
+      "id": "frase_d1",
+      "tipo": "traduzione",
+      "en": "Excuse me, is there a pharmacy near here?",
+      "it": "Scusi, c'è una farmacia qui vicino?",
+      "latency_ms": 284,
+      "status": 200,
+      "model": "jev-1.14.0",
+      "ok": 0.97,
+      "problema": "nessuno",
+      "problema_probs": {
+        "nessuno": 1.0,
+        "inglese_errato": 0.0,
+        "traduzione_errata": 0.0,
+        "innaturale": 0.0
+      }
+    },
+    {
+      "id": "frase_d2",
+      "tipo": "traduzione",
+      "en": "Yes, there is. Go straight on and turn right.",
+      "it": "Sì, c'è. Vai dritto e gira a destra.",
+      "latency_ms": 300,
+      "status": 200,
+      "model": "jev-1.14.0",
+      "ok": 0.92,
+      "problema": "nessuno",
+      "problema_probs": {
+        "nessuno": 0.92,
+        "inglese_errato": 0.02,
+        "traduzione_errata": 0.0,
+        "innaturale": 0.06
+      }
+    },
+    {
+      "id": "frase_d3",
+      "tipo": "traduzione",
+      "en": "Turn right?",
+      "it": "Girare a destra?",
+      "latency_ms": 285,
+      "status": 200,
+      "model": "jev-1.14.0",
+      "ok": 0.87,
+      "problema": "nessuno",
+      "problema_probs": {
+        "nessuno": 0.73,
+        "inglese_errato": 0.04,
+        "traduzione_errata": 0.02,
+        "innaturale": 0.21
+      }
+    },
+    {
+      "id": "frase_d4",
+      "tipo": "traduzione",
+      "en": "Yes. The pharmacy is on your left, opposite the hotel.",
+      "it": "Sì. La farmacia è alla tua sinistra, di fronte all'albergo.",
+      "latency_ms": 286,
+      "status": 200,
+      "model": "jev-1.14.0",
+      "ok": 0.95,
+      "problema": "nessuno",
+      "problema_probs": {
+        "nessuno": 0.95,
+        "inglese_errato": 0.01,
+        "traduzione_errata": 0.0,
+        "innaturale": 0.04
+      }
+    },
+    {
+      "id": "frase_d5",
+      "tipo": "traduzione",
+      "en": "Thank you very much!",
+      "it": "Grazie mille!",
+      "latency_ms": 324,
+      "status": 200,
+      "model": "jev-1.14.0",
+      "ok": 0.97,
+      "problema": "nessuno",
+      "problema_probs": {
+        "nessuno": 1.0,
+        "inglese_errato": 0.0,
+        "traduzione_errata": 0.0,
+        "innaturale": 0.0
+      }
+    },
+    {
+      "id": "frase_d6",
+      "tipo": "traduzione",
+      "en": "You're welcome!",
+      "it": "Prego!",
+      "latency_ms": 295,
+      "status": 200,
+      "model": "jev-1.14.0",
+      "ok": 0.9,
+      "problema": "nessuno",
+      "problema_probs": {
+        "nessuno": 0.89,
+        "inglese_errato": 0.01,
+        "traduzione_errata": 0.08,
+        "innaturale": 0.02
+      }
+    },
+    {
+      "id": "frase_a_cafe",
+      "tipo": "traduzione",
+      "en": "Go straight on. The café is on your left.",
+      "it": "Vai dritto. Il bar è alla tua sinistra.",
+      "latency_ms": 301,
+      "status": 200,
+      "model": "jev-1.14.0",
+      "ok": 0.88,
+      "problema": "nessuno",
+      "problema_probs": {
+        "nessuno": 0.67,
+        "inglese_errato": 0.01,
+        "traduzione_errata": 0.29,
+        "innaturale": 0.03
+      }
+    },
+    {
+      "id": "frase_a_hotel",
+      "tipo": "traduzione",
+      "en": "Go straight on. The hotel is on your right.",
+      "it": "Vai dritto. L'albergo è alla tua destra.",
+      "latency_ms": 286,
+      "status": 200,
+      "model": "jev-1.14.0",
+      "ok": 0.95,
+      "problema": "nessuno",
+      "problema_probs": {
+        "nessuno": 0.96,
+        "inglese_errato": 0.01,
+        "traduzione_errata": 0.0,
+        "innaturale": 0.03
+      }
+    },
+    {
+      "id": "frase_a_supermarket",
+      "tipo": "traduzione",
+      "en": "Go straight on and turn left. The supermarket is on your right.",
+      "it": "Vai dritto e gira a sinistra. Il supermercato è alla tua destra.",
+      "latency_ms": 334,
+      "status": 200,
+      "model": "jev-1.14.0",
+      "ok": 0.95,
+      "problema": "nessuno",
+      "problema_probs": {
+        "nessuno": 0.95,
+        "inglese_errato": 0.01,
+        "traduzione_errata": 0.01,
+        "innaturale": 0.03
+      }
+    },
+    {
+      "id": "frase_a_pharmacy",
+      "tipo": "traduzione",
+      "en": "Go straight on and turn right. The pharmacy is on your left.",
+      "it": "Vai dritto e gira a destra. La farmacia è alla tua sinistra.",
+      "latency_ms": 384,
+      "status": 200,
+      "model": "jev-1.14.0",
+      "ok": 0.88,
+      "problema": "nessuno",
+      "problema_probs": {
+        "nessuno": 0.87,
+        "inglese_errato": 0.03,
+        "traduzione_errata": 0.07,
+        "innaturale": 0.03
+      }
+    },
+    {
+      "id": "frase_a_church",
+      "tipo": "traduzione",
+      "en": "Go straight on, past the traffic lights. The church is on your left.",
+      "it": "Vai dritto, oltre il semaforo. La chiesa è alla tua sinistra.",
+      "latency_ms": 279,
+      "status": 200,
+      "model": "jev-1.14.0",
+      "ok": 0.87,
+      "problema": "nessuno",
+      "problema_probs": {
+        "nessuno": 0.82,
+        "inglese_errato": 0.04,
+        "traduzione_errata": 0.07,
+        "innaturale": 0.07
+      }
+    },
+    {
+      "id": "frase_a_bank",
+      "tipo": "traduzione",
+      "en": "Take the second right. The bank is on your left.",
+      "it": "Prendi la seconda a destra. La banca è alla tua sinistra.",
+      "latency_ms": 346,
+      "status": 200,
+      "model": "jev-1.14.0",
+      "ok": 0.95,
+      "problema": "nessuno",
+      "problema_probs": {
+        "nessuno": 0.99,
+        "inglese_errato": 0.0,
+        "traduzione_errata": 0.0,
+        "innaturale": 0.01
+      }
+    },
+    {
+      "id": "frase_a_postoffice",
+      "tipo": "traduzione",
+      "en": "Take the first left. Then turn right. The post office is on your left.",
+      "it": "Prendi la prima a sinistra. Poi gira a destra. L'ufficio postale è alla tua sinistra.",
+      "latency_ms": 331,
+      "status": 200,
+      "model": "jev-1.14.0",
+      "ok": 0.94,
+      "problema": "nessuno",
+      "problema_probs": {
+        "nessuno": 0.95,
+        "inglese_errato": 0.01,
+        "traduzione_errata": 0.01,
+        "innaturale": 0.03
+      }
+    },
+    {
+      "id": "frase_a_restaurant",
+      "tipo": "traduzione",
+      "en": "Take the first right. Then turn left. The restaurant is on your right.",
+      "it": "Prendi la prima a destra. Poi gira a sinistra. Il ristorante è alla tua destra.",
+      "latency_ms": 303,
+      "status": 200,
+      "model": "jev-1.14.0",
+      "ok": 0.94,
+      "problema": "nessuno",
+      "problema_probs": {
+        "nessuno": 0.96,
+        "inglese_errato": 0.01,
+        "traduzione_errata": 0.01,
+        "innaturale": 0.02
+      }
+    },
+    {
+      "id": "frase_a_hospital",
+      "tipo": "traduzione",
+      "en": "Take the second left. Then turn right. The hospital is on your left.",
+      "it": "Prendi la seconda a sinistra. Poi gira a destra. L'ospedale è alla tua sinistra.",
+      "latency_ms": 300,
+      "status": 200,
+      "model": "jev-1.14.0",
+      "ok": 0.94,
+      "problema": "nessuno",
+      "problema_probs": {
+        "nessuno": 0.95,
+        "inglese_errato": 0.01,
+        "traduzione_errata": 0.01,
+        "innaturale": 0.03
+      }
+    },
+    {
+      "id": "frase_a_cinema",
+      "tipo": "traduzione",
+      "en": "Go straight on to the traffic lights and turn right. Then turn left. The cinema is on your right.",
+      "it": "Vai dritto fino al semaforo e gira a destra. Poi gira a sinistra. Il cinema è alla tua destra.",
+      "latency_ms": 302,
+      "status": 200,
+      "model": "jev-1.14.0",
+      "ok": 0.89,
+      "problema": "nessuno",
+      "problema_probs": {
+        "nessuno": 0.89,
+        "inglese_errato": 0.02,
+        "traduzione_errata": 0.01,
+        "innaturale": 0.08
+      }
+    },
+    {
+      "id": "frase_a_school",
+      "tipo": "traduzione",
+      "en": "Go straight on to the end of the road. Turn left. The school is on your right.",
+      "it": "Vai dritto fino alla fine della strada. Gira a sinistra. La scuola è alla tua destra.",
+      "latency_ms": 296,
+      "status": 200,
+      "model": "jev-1.14.0",
+      "ok": 0.91,
+      "problema": "nessuno",
+      "problema_probs": {
+        "nessuno": 0.89,
+        "inglese_errato": 0.01,
+        "traduzione_errata": 0.01,
+        "innaturale": 0.09
+      }
+    },
+    {
+      "id": "frase_a_park",
+      "tipo": "traduzione",
+      "en": "Go straight on to the end of the road. Turn right. The park is on your left.",
+      "it": "Vai dritto fino alla fine della strada. Gira a destra. Il parco è alla tua sinistra.",
+      "latency_ms": 285,
+      "status": 200,
+      "model": "jev-1.14.0",
+      "ok": 0.91,
+      "problema": "nessuno",
+      "problema_probs": {
+        "nessuno": 0.87,
+        "inglese_errato": 0.02,
+        "traduzione_errata": 0.01,
+        "innaturale": 0.1
+      }
+    },
+    {
+      "id": "lab1_pharmacy",
+      "tipo": "chiusa",
+      "domanda": "What is it? (icona: edificio bianco con insegna verde e croce verde)",
+      "opzioni": [
+        "pharmacy",
+        "police station",
+        "park"
+      ],
+      "corretta": "pharmacy",
+      "latency_ms": 308,
+      "status": 200,
+      "model": "jev-1.14.0",
+      "ok": 0.98,
+      "problema": "nessuno",
+      "problema_probs": {
+        "nessuno": 0.98,
+        "risposta_sbagliata": 0.01,
+        "piu_risposte_giuste": 0.0,
+        "ambigua": 0.01
+      }
+    },
+    {
+      "id": "lab1_church",
+      "tipo": "chiusa",
+      "domanda": "What is it? (icona: edificio con campanile a punta e croce)",
+      "opzioni": [
+        "school",
+        "church",
+        "cinema"
+      ],
+      "corretta": "church",
+      "latency_ms": 295,
+      "status": 200,
+      "model": "jev-1.14.0",
+      "ok": 0.99,
+      "problema": "nessuno",
+      "problema_probs": {
+        "nessuno": 0.99,
+        "risposta_sbagliata": 0.0,
+        "piu_risposte_giuste": 0.0,
+        "ambigua": 0.01
+      }
+    },
+    {
+      "id": "lab1_hospital",
+      "tipo": "chiusa",
+      "domanda": "What is it? (icona: edificio bianco con insegna blu H e croce rossa)",
+      "opzioni": [
+        "hotel",
+        "hospital",
+        "library"
+      ],
+      "corretta": "hospital",
+      "latency_ms": 318,
+      "status": 200,
+      "model": "jev-1.14.0",
+      "ok": 0.94,
+      "problema": "nessuno",
+      "problema_probs": {
+        "nessuno": 0.78,
+        "risposta_sbagliata": 0.12,
+        "piu_risposte_giuste": 0.03,
+        "ambigua": 0.07
+      }
+    },
+    {
+      "id": "lab1_bank",
+      "tipo": "chiusa",
+      "domanda": "What is it? (icona: edificio con una grande moneta d'oro con il simbolo dell'euro e un bancomat)",
+      "opzioni": [
+        "bank",
+        "bakery",
+        "bus stop"
+      ],
+      "corretta": "bank",
+      "latency_ms": 301,
+      "status": 200,
+      "model": "jev-1.14.0",
+      "ok": 0.97,
+      "problema": "nessuno",
+      "problema_probs": {
+        "nessuno": 0.86,
+        "risposta_sbagliata": 0.05,
+        "piu_risposte_giuste": 0.01,
+        "ambigua": 0.08
+      }
+    },
+    {
+      "id": "lab1_postoffice",
+      "tipo": "chiusa",
+      "domanda": "What is it? (icona: edificio con insegna rossa, una busta da lettere e una cassetta postale rossa)",
+      "opzioni": [
+        "supermarket",
+        "post office",
+        "museum"
+      ],
+      "corretta": "post office",
+      "latency_ms": 306,
+      "status": 200,
+      "model": "jev-1.14.0",
+      "ok": 0.98,
+      "problema": "nessuno",
+      "problema_probs": {
+        "nessuno": 0.9,
+        "risposta_sbagliata": 0.04,
+        "piu_risposte_giuste": 0.01,
+        "ambigua": 0.05
+      }
+    },
+    {
+      "id": "lab1_station",
+      "tipo": "chiusa",
+      "domanda": "What is it? (icona: edificio con orologio e il muso di un treno)",
+      "opzioni": [
+        "train station",
+        "police station",
+        "traffic lights"
+      ],
+      "corretta": "train station",
+      "latency_ms": 366,
+      "status": 200,
+      "model": "jev-1.14.0",
+      "ok": 0.95,
+      "problema": "nessuno",
+      "problema_probs": {
+        "nessuno": 0.86,
+        "risposta_sbagliata": 0.03,
+        "piu_risposte_giuste": 0.03,
+        "ambigua": 0.08
+      }
+    },
+    {
+      "id": "lab1_lights",
+      "tipo": "chiusa",
+      "domanda": "What is it? (icona: un semaforo rosso giallo verde)",
+      "opzioni": [
+        "zebra crossing",
+        "crossroads",
+        "traffic lights"
+      ],
+      "corretta": "traffic lights",
+      "latency_ms": 314,
+      "status": 200,
+      "model": "jev-1.14.0",
+      "ok": 0.98,
+      "problema": "nessuno",
+      "problema_probs": {
+        "nessuno": 0.99,
+        "risposta_sbagliata": 0.0,
+        "piu_risposte_giuste": 0.0,
+        "ambigua": 0.01
+      }
+    },
+    {
+      "id": "lab1_cafe",
+      "tipo": "chiusa",
+      "domanda": "What is it? (icona: edificio con tazzina di caffè fumante)",
+      "opzioni": [
+        "restaurant",
+        "café",
+        "hotel"
+      ],
+      "corretta": "café",
+      "latency_ms": 290,
+      "status": 200,
+      "model": "jev-1.14.0",
+      "ok": 0.95,
+      "problema": "nessuno",
+      "problema_probs": {
+        "nessuno": 0.87,
+        "risposta_sbagliata": 0.01,
+        "piu_risposte_giuste": 0.06,
+        "ambigua": 0.06
+      }
+    },
+    {
+      "id": "lab2_c_straight",
+      "tipo": "chiusa",
+      "domanda": "Ascolta la frase «Go straight on.» e scegli la freccia giusta.",
+      "opzioni": [
+        "freccia dritta in su (vai dritto)",
+        "freccia che gira a sinistra",
+        "freccia che gira a destra",
+        "il posto è a sinistra della strada",
+        "il posto è a destra della strada"
+      ],
+      "corretta": "freccia dritta in su (vai dritto)",
+      "latency_ms": 323,
+      "status": 200,
+      "model": "jev-1.14.0",
+      "ok": 0.98,
+      "problema": "nessuno",
+      "problema_probs": {
+        "nessuno": 1.0,
+        "risposta_sbagliata": 0.0,
+        "piu_risposte_giuste": 0.0,
+        "ambigua": 0.0
+      }
+    },
+    {
+      "id": "lab2_c_left",
+      "tipo": "chiusa",
+      "domanda": "Ascolta la frase «Turn left.» e scegli la freccia giusta.",
+      "opzioni": [
+        "freccia dritta in su (vai dritto)",
+        "freccia che gira a sinistra",
+        "freccia che gira a destra",
+        "il posto è a sinistra della strada",
+        "il posto è a destra della strada"
+      ],
+      "corretta": "freccia che gira a sinistra",
+      "latency_ms": 298,
+      "status": 200,
+      "model": "jev-1.14.0",
+      "ok": 0.93,
+      "problema": "nessuno",
+      "problema_probs": {
+        "nessuno": 0.89,
+        "risposta_sbagliata": 0.0,
+        "piu_risposte_giuste": 0.08,
+        "ambigua": 0.03
+      }
+    },
+    {
+      "id": "lab2_c_onright",
+      "tipo": "chiusa",
+      "domanda": "Ascolta la frase «It's on the right.» e scegli la freccia giusta.",
+      "opzioni": [
+        "freccia dritta in su (vai dritto)",
+        "freccia che gira a sinistra",
+        "freccia che gira a destra",
+        "il posto è a sinistra della strada",
+        "il posto è a destra della strada"
+      ],
+      "corretta": "il posto è a destra della strada",
+      "latency_ms": 298,
+      "status": 200,
+      "model": "jev-1.14.0",
+      "ok": 0.92,
+      "problema": "nessuno",
+      "problema_probs": {
+        "nessuno": 0.78,
+        "risposta_sbagliata": 0.01,
+        "piu_risposte_giuste": 0.16,
+        "ambigua": 0.05
+      }
+    },
+    {
+      "id": "lab2_c_right",
+      "tipo": "chiusa",
+      "domanda": "Ascolta la frase «Turn right.» e scegli la freccia giusta.",
+      "opzioni": [
+        "freccia dritta in su (vai dritto)",
+        "freccia che gira a sinistra",
+        "freccia che gira a destra",
+        "il posto è a sinistra della strada",
+        "il posto è a destra della strada"
+      ],
+      "corretta": "freccia che gira a destra",
+      "latency_ms": 288,
+      "status": 200,
+      "model": "jev-1.14.0",
+      "ok": 0.95,
+      "problema": "nessuno",
+      "problema_probs": {
+        "nessuno": 0.92,
+        "risposta_sbagliata": 0.0,
+        "piu_risposte_giuste": 0.07,
+        "ambigua": 0.01
+      }
+    },
+    {
+      "id": "lab2_l_first",
+      "tipo": "chiusa",
+      "domanda": "Ascolta la frase «Take the first left.» e scegli la freccia giusta.",
+      "opzioni": [
+        "freccia dritta in su (vai dritto)",
+        "freccia che gira a sinistra",
+        "freccia che gira a destra",
+        "il posto è a sinistra della strada",
+        "il posto è a destra della strada"
+      ],
+      "corretta": "freccia che gira a sinistra",
+      "latency_ms": 289,
+      "status": 200,
+      "model": "jev-1.14.0",
+      "ok": 0.94,
+      "problema": "nessuno",
+      "problema_probs": {
+        "nessuno": 0.93,
+        "risposta_sbagliata": 0.0,
+        "piu_risposte_giuste": 0.02,
+        "ambigua": 0.05
+      }
+    },
+    {
+      "id": "lab2_c_onleft",
+      "tipo": "chiusa",
+      "domanda": "Ascolta la frase «It's on the left.» e scegli la freccia giusta.",
+      "opzioni": [
+        "freccia dritta in su (vai dritto)",
+        "freccia che gira a sinistra",
+        "freccia che gira a destra",
+        "il posto è a sinistra della strada",
+        "il posto è a destra della strada"
+      ],
+      "corretta": "il posto è a sinistra della strada",
+      "latency_ms": 288,
+      "status": 200,
+      "model": "jev-1.14.0",
+      "ok": 0.8,
+      "problema": "nessuno",
+      "problema_probs": {
+        "nessuno": 0.48,
+        "risposta_sbagliata": 0.01,
+        "piu_risposte_giuste": 0.36,
+        "ambigua": 0.15
+      }
+    },
+    {
+      "id": "lab2_l_second",
+      "tipo": "chiusa",
+      "domanda": "Ascolta la frase «Take the second right.» e scegli la freccia giusta.",
+      "opzioni": [
+        "freccia dritta in su (vai dritto)",
+        "freccia che gira a sinistra",
+        "freccia che gira a destra",
+        "il posto è a sinistra della strada",
+        "il posto è a destra della strada"
+      ],
+      "corretta": "freccia che gira a destra",
+      "latency_ms": 342,
+      "status": 200,
+      "model": "jev-1.14.0",
+      "ok": 0.89,
+      "problema": "nessuno",
+      "problema_probs": {
+        "nessuno": 0.74,
+        "risposta_sbagliata": 0.01,
+        "piu_risposte_giuste": 0.11,
+        "ambigua": 0.14
+      }
+    },
+    {
+      "id": "lab2_l_yourleft",
+      "tipo": "chiusa",
+      "domanda": "Ascolta la frase «It's on your left.» e scegli la freccia giusta.",
+      "opzioni": [
+        "freccia dritta in su (vai dritto)",
+        "freccia che gira a sinistra",
+        "freccia che gira a destra",
+        "il posto è a sinistra della strada",
+        "il posto è a destra della strada"
+      ],
+      "corretta": "il posto è a sinistra della strada",
+      "latency_ms": 322,
+      "status": 200,
+      "model": "jev-1.14.0",
+      "ok": 0.76,
+      "problema": "nessuno",
+      "problema_probs": {
+        "nessuno": 0.52,
+        "risposta_sbagliata": 0.02,
+        "piu_risposte_giuste": 0.28,
+        "ambigua": 0.18
+      }
+    },
+    {
+      "id": "lab3_1",
+      "tipo": "chiusa",
+      "domanda": "Scena: bank, pharmacy* uno accanto all'altro sullo stesso lato della strada (* = il posto della frase). Completa: The pharmacy is ___ the bank.",
+      "opzioni": [
+        "next to",
+        "opposite",
+        "between"
+      ],
+      "corretta": "next to",
+      "latency_ms": 275,
+      "status": 200,
+      "model": "jev-1.14.0",
+      "ok": 0.97,
+      "problema": "nessuno",
+      "problema_probs": {
+        "nessuno": 0.98,
+        "risposta_sbagliata": 0.0,
+        "piu_risposte_giuste": 0.01,
+        "ambigua": 0.01
+      }
+    },
+    {
+      "id": "lab3_2",
+      "tipo": "chiusa",
+      "domanda": "Scena: church sopra la strada, school* esattamente di fronte dall'altro lato della strada (* = il posto della frase). Completa: The school is ___ the church.",
+      "opzioni": [
+        "next to",
+        "opposite",
+        "between"
+      ],
+      "corretta": "opposite",
+      "latency_ms": 292,
+      "status": 200,
+      "model": "jev-1.14.0",
+      "ok": 0.98,
+      "problema": "nessuno",
+      "problema_probs": {
+        "nessuno": 0.99,
+        "risposta_sbagliata": 0.0,
+        "piu_risposte_giuste": 0.0,
+        "ambigua": 0.01
+      }
+    },
+    {
+      "id": "lab3_3",
+      "tipo": "chiusa",
+      "domanda": "Scena: cafe, hotel*, cinema in fila sullo stesso lato, hotel in mezzo (* = il posto della frase). Completa: The hotel is ___ the café and the cinema.",
+      "opzioni": [
+        "next to",
+        "opposite",
+        "between"
+      ],
+      "corretta": "between",
+      "latency_ms": 313,
+      "status": 200,
+      "model": "jev-1.14.0",
+      "ok": 0.98,
+      "problema": "nessuno",
+      "problema_probs": {
+        "nessuno": 0.98,
+        "risposta_sbagliata": 0.0,
+        "piu_risposte_giuste": 0.01,
+        "ambigua": 0.01
+      }
+    },
+    {
+      "id": "lab3_4",
+      "tipo": "chiusa",
+      "domanda": "Scena: supermarket sopra la strada, post office* esattamente di fronte dall'altro lato (* = il posto della frase). Completa: The post office is ___ the supermarket.",
+      "opzioni": [
+        "next to",
+        "opposite",
+        "between"
+      ],
+      "corretta": "opposite",
+      "latency_ms": 311,
+      "status": 200,
+      "model": "jev-1.14.0",
+      "ok": 0.98,
+      "problema": "nessuno",
+      "problema_probs": {
+        "nessuno": 0.99,
+        "risposta_sbagliata": 0.0,
+        "piu_risposte_giuste": 0.0,
+        "ambigua": 0.01
+      }
+    },
+    {
+      "id": "lab3_5",
+      "tipo": "chiusa",
+      "domanda": "Scena: hospital, park* uno accanto all'altro sullo stesso lato (* = il posto della frase). Completa: The park is ___ the hospital.",
+      "opzioni": [
+        "next to",
+        "opposite",
+        "between"
+      ],
+      "corretta": "next to",
+      "latency_ms": 295,
+      "status": 200,
+      "model": "jev-1.14.0",
+      "ok": 0.94,
+      "problema": "nessuno",
+      "problema_probs": {
+        "nessuno": 0.97,
+        "risposta_sbagliata": 0.0,
+        "piu_risposte_giuste": 0.01,
+        "ambigua": 0.02
+      }
+    },
+    {
+      "id": "lab3_6",
+      "tipo": "chiusa",
+      "domanda": "Scena: bank, church*, school in fila sullo stesso lato, church in mezzo (* = il posto della frase). Completa: The church is ___ the bank and the school.",
+      "opzioni": [
+        "next to",
+        "opposite",
+        "between"
+      ],
+      "corretta": "between",
+      "latency_ms": 281,
+      "status": 200,
+      "model": "jev-1.14.0",
+      "ok": 0.98,
+      "problema": "nessuno",
+      "problema_probs": {
+        "nessuno": 0.96,
+        "risposta_sbagliata": 0.0,
+        "piu_risposte_giuste": 0.03,
+        "ambigua": 0.01
+      }
+    },
+    {
+      "id": "lab4_1",
+      "tipo": "chiusa",
+      "domanda": "Completa: ___ me, where is the bank?",
+      "opzioni": [
+        "Excuse",
+        "Thank",
+        "Please"
+      ],
+      "corretta": "Excuse",
+      "latency_ms": 297,
+      "status": 200,
+      "model": "jev-1.14.0",
+      "ok": 0.98,
+      "problema": "nessuno",
+      "problema_probs": {
+        "nessuno": 0.93,
+        "risposta_sbagliata": 0.0,
+        "piu_risposte_giuste": 0.06,
+        "ambigua": 0.01
+      }
+    },
+    {
+      "id": "lab4_2",
+      "tipo": "chiusa",
+      "domanda": "Completa: Go ___ on.",
+      "opzioni": [
+        "straight",
+        "street",
+        "stop"
+      ],
+      "corretta": "straight",
+      "latency_ms": 296,
+      "status": 200,
+      "model": "jev-1.14.0",
+      "ok": 0.99,
+      "problema": "nessuno",
+      "problema_probs": {
+        "nessuno": 1.0,
+        "risposta_sbagliata": 0.0,
+        "piu_risposte_giuste": 0.0,
+        "ambigua": 0.0
+      }
+    },
+    {
+      "id": "lab4_3",
+      "tipo": "chiusa",
+      "domanda": "Completa: Turn ___. (accanto c'è una freccia che gira a sinistra)",
+      "opzioni": [
+        "left",
+        "right",
+        "straight"
+      ],
+      "corretta": "left",
+      "latency_ms": 314,
+      "status": 200,
+      "model": "jev-1.14.0",
+      "ok": 0.97,
+      "problema": "nessuno",
+      "problema_probs": {
+        "nessuno": 0.99,
+        "risposta_sbagliata": 0.0,
+        "piu_risposte_giuste": 0.0,
+        "ambigua": 0.01
+      }
+    },
+    {
+      "id": "lab4_4",
+      "tipo": "chiusa",
+      "domanda": "Completa: Take the ___ right. (accanto c'è il cartellino 2ª)",
+      "opzioni": [
+        "first",
+        "second",
+        "third"
+      ],
+      "corretta": "second",
+      "latency_ms": 300,
+      "status": 200,
+      "model": "jev-1.14.0",
+      "ok": 0.92,
+      "problema": "nessuno",
+      "problema_probs": {
+        "nessuno": 0.88,
+        "risposta_sbagliata": 0.08,
+        "piu_risposte_giuste": 0.01,
+        "ambigua": 0.03
+      }
+    },
+    {
+      "id": "lab4_5",
+      "tipo": "chiusa",
+      "domanda": "Completa: It's ___ the left.",
+      "opzioni": [
+        "on",
+        "in",
+        "of"
+      ],
+      "corretta": "on",
+      "latency_ms": 300,
+      "status": 200,
+      "model": "jev-1.14.0",
+      "ok": 0.92,
+      "problema": "nessuno",
+      "problema_probs": {
+        "nessuno": 0.86,
+        "risposta_sbagliata": 0.02,
+        "piu_risposte_giuste": 0.08,
+        "ambigua": 0.04
+      }
+    },
+    {
+      "id": "lab4_6",
+      "tipo": "chiusa",
+      "domanda": "Completa: Is there a pharmacy ___ here?",
+      "opzioni": [
+        "near",
+        "next",
+        "far"
+      ],
+      "corretta": "near",
+      "latency_ms": 279,
+      "status": 200,
+      "model": "jev-1.14.0",
+      "ok": 0.88,
+      "problema": "nessuno",
+      "problema_probs": {
+        "nessuno": 0.82,
+        "risposta_sbagliata": 0.01,
+        "piu_risposte_giuste": 0.13,
+        "ambigua": 0.04
+      }
+    },
+    {
+      "id": "lab4_7",
+      "tipo": "chiusa",
+      "domanda": "Completa: Thank you! — You're ___!",
+      "opzioni": [
+        "welcome",
+        "please",
+        "sorry"
+      ],
+      "corretta": "welcome",
+      "latency_ms": 262,
+      "status": 200,
+      "model": "jev-1.14.0",
+      "ok": 0.94,
+      "problema": "nessuno",
+      "problema_probs": {
+        "nessuno": 0.95,
+        "risposta_sbagliata": 0.02,
+        "piu_risposte_giuste": 0.02,
+        "ambigua": 0.01
+      }
+    },
+    {
+      "id": "scheda5_1",
+      "tipo": "chiusa",
+      "domanda": "Completa: ___ me, where is the hotel?",
+      "opzioni": [
+        "on",
+        "next",
+        "Excuse",
+        "straight",
+        "welcome"
+      ],
+      "corretta": "Excuse",
+      "latency_ms": 314,
+      "status": 200,
+      "model": "jev-1.14.0",
+      "ok": 0.97,
+      "problema": "nessuno",
+      "problema_probs": {
+        "nessuno": 0.96,
+        "risposta_sbagliata": 0.02,
+        "piu_risposte_giuste": 0.01,
+        "ambigua": 0.01
+      }
+    },
+    {
+      "id": "scheda5_2",
+      "tipo": "chiusa",
+      "domanda": "Completa: Go ___ on.",
+      "opzioni": [
+        "on",
+        "next",
+        "Excuse",
+        "straight",
+        "welcome"
+      ],
+      "corretta": "straight",
+      "latency_ms": 292,
+      "status": 200,
+      "model": "jev-1.14.0",
+      "ok": 0.98,
+      "problema": "nessuno",
+      "problema_probs": {
+        "nessuno": 0.98,
+        "risposta_sbagliata": 0.0,
+        "piu_risposte_giuste": 0.02,
+        "ambigua": 0.0
+      }
+    },
+    {
+      "id": "scheda5_3",
+      "tipo": "chiusa",
+      "domanda": "Completa: It's ___ the right.",
+      "opzioni": [
+        "on",
+        "next",
+        "Excuse",
+        "straight",
+        "welcome"
+      ],
+      "corretta": "on",
+      "latency_ms": 344,
+      "status": 200,
+      "model": "jev-1.14.0",
+      "ok": 0.94,
+      "problema": "nessuno",
+      "problema_probs": {
+        "nessuno": 0.88,
+        "risposta_sbagliata": 0.04,
+        "piu_risposte_giuste": 0.04,
+        "ambigua": 0.04
+      }
+    },
+    {
+      "id": "scheda5_4",
+      "tipo": "chiusa",
+      "domanda": "Completa: The bakery is ___ to the bank. (accanto)",
+      "opzioni": [
+        "on",
+        "next",
+        "Excuse",
+        "straight",
+        "welcome"
+      ],
+      "corretta": "next",
+      "latency_ms": 300,
+      "status": 200,
+      "model": "jev-1.14.0",
+      "ok": 0.67,
+      "problema": "nessuno",
+      "problema_probs": {
+        "nessuno": 0.56,
+        "risposta_sbagliata": 0.41,
+        "piu_risposte_giuste": 0.01,
+        "ambigua": 0.02
+      }
+    },
+    {
+      "id": "scheda5_5",
+      "tipo": "chiusa",
+      "domanda": "Completa: Thank you! — You're ___!",
+      "opzioni": [
+        "on",
+        "next",
+        "Excuse",
+        "straight",
+        "welcome"
+      ],
+      "corretta": "welcome",
+      "latency_ms": 319,
+      "status": 200,
+      "model": "jev-1.14.0",
+      "ok": 0.98,
+      "problema": "nessuno",
+      "problema_probs": {
+        "nessuno": 0.95,
+        "risposta_sbagliata": 0.02,
+        "piu_risposte_giuste": 0.02,
+        "ambigua": 0.01
+      }
+    },
+    {
+      "id": "studio_1",
+      "tipo": "affermazione",
+      "testo": "«Excuse me» si usa per attirare l'attenzione di uno sconosciuto e chiedere qualcosa; «Sorry» si usa quando sbagli, per chiedere scusa (per esempio se urti qualcuno).",
+      "latency_ms": 323,
+      "status": 200,
+      "model": "jev-1.14.0",
+      "ok": 0.91,
+      "problema": "nessuno",
+      "problema_probs": {
+        "nessuno": 0.83,
+        "errore": 0.03,
+        "semplificazione_fuorviante": 0.14
+      }
+    },
+    {
+      "id": "studio_2",
+      "tipo": "affermazione",
+      "testo": "«Where is the…?» = Dov'è il / la…? Si dice anche «Where's the…?».",
+      "latency_ms": 301,
+      "status": 200,
+      "model": "jev-1.14.0",
+      "ok": 0.97,
+      "problema": "nessuno",
+      "problema_probs": {
+        "nessuno": 0.98,
+        "errore": 0.02,
+        "semplificazione_fuorviante": 0.0
+      }
+    },
+    {
+      "id": "studio_3",
+      "tipo": "affermazione",
+      "testo": "Per un posto preciso si usa «the» (il, lo, la): Where is the bank? = Dov'è la banca? Quando chiedi se ce n'è uno si usa «a» (un, una): Is there a bank near here? = C'è una banca qui vicino?",
+      "latency_ms": 440,
+      "status": 200,
+      "model": "jev-1.14.0",
+      "ok": 0.82,
+      "problema": "nessuno",
+      "problema_probs": {
+        "nessuno": 0.76,
+        "errore": 0.06,
+        "semplificazione_fuorviante": 0.18
+      }
+    },
+    {
+      "id": "studio_4",
+      "tipo": "affermazione",
+      "testo": "first = prima (1ª), second = seconda (2ª), third = terza (3ª). «Take the second right»: conti le strade a destra, passi la prima e giri alla seconda.",
+      "latency_ms": 278,
+      "status": 200,
+      "model": "jev-1.14.0",
+      "ok": 0.89,
+      "problema": "nessuno",
+      "problema_probs": {
+        "nessuno": 0.93,
+        "errore": 0.06,
+        "semplificazione_fuorviante": 0.01
+      }
+    },
+    {
+      "id": "studio_5",
+      "tipo": "affermazione",
+      "testo": "«It's on the left» e «It's on your left» vogliono dire la stessa cosa: è a sinistra.",
+      "latency_ms": 292,
+      "status": 200,
+      "model": "jev-1.14.0",
+      "ok": 0.93,
+      "problema": "nessuno",
+      "problema_probs": {
+        "nessuno": 0.95,
+        "errore": 0.02,
+        "semplificazione_fuorviante": 0.03
+      }
+    },
+    {
+      "id": "studio_6",
+      "tipo": "affermazione",
+      "testo": "next to = accanto a; opposite = di fronte a (dall'altra parte della strada); between = tra; on the corner = all'angolo.",
+      "latency_ms": 317,
+      "status": 200,
+      "model": "jev-1.14.0",
+      "ok": 0.89,
+      "problema": "nessuno",
+      "problema_probs": {
+        "nessuno": 0.91,
+        "errore": 0.07,
+        "semplificazione_fuorviante": 0.02
+      }
+    },
+    {
+      "id": "studio_7",
+      "tipo": "affermazione",
+      "testo": "Errore tipico: «Turn to left» o «Turn at left» sono sbagliati; si dice «Turn left».",
+      "latency_ms": 1295,
+      "status": 200,
+      "model": "jev-1.14.0",
+      "ok": 0.9,
+      "problema": "nessuno",
+      "problema_probs": {
+        "nessuno": 0.8,
+        "errore": 0.13,
+        "semplificazione_fuorviante": 0.07
+      }
+    },
+    {
+      "id": "studio_8",
+      "tipo": "affermazione",
+      "testo": "Errore tipico: «Go street on» è sbagliato; si dice «Go straight on». street = strada, straight = dritto.",
+      "latency_ms": 278,
+      "status": 200,
+      "model": "jev-1.14.0",
+      "ok": 0.94,
+      "problema": "nessuno",
+      "problema_probs": {
+        "nessuno": 0.96,
+        "errore": 0.04,
+        "semplificazione_fuorviante": 0.0
+      }
+    },
+    {
+      "id": "studio_9",
+      "tipo": "affermazione",
+      "testo": "Errore tipico: «Sorry me, where is the bank?» è sbagliato; si dice «Excuse me, where is the bank?».",
+      "latency_ms": 291,
+      "status": 200,
+      "model": "jev-1.14.0",
+      "ok": 0.91,
+      "problema": "nessuno",
+      "problema_probs": {
+        "nessuno": 0.82,
+        "errore": 0.16,
+        "semplificazione_fuorviante": 0.02
+      }
+    },
+    {
+      "id": "studio_10",
+      "tipo": "affermazione",
+      "testo": "Quando qualcuno ti dice «Thank you», rispondi «You're welcome» (prego). «Please» si usa per chiedere qualcosa (per favore).",
+      "latency_ms": 291,
+      "status": 200,
+      "model": "jev-1.14.0",
+      "ok": 0.94,
+      "problema": "nessuno",
+      "problema_probs": {
+        "nessuno": 0.87,
+        "errore": 0.03,
+        "semplificazione_fuorviante": 0.1
+      }
+    },
+    {
+      "id": "studio_11",
+      "tipo": "affermazione",
+      "testo": "Trucco: alza le due mani davanti a te con il dorso verso di te e apri pollice e indice: la mano che forma una L dritta è la sinistra (L = Left).",
+      "latency_ms": 290,
+      "status": 200,
+      "model": "jev-1.14.0",
+      "ok": 0.7,
+      "problema": "nessuno",
+      "problema_probs": {
+        "nessuno": 0.52,
+        "errore": 0.39,
+        "semplificazione_fuorviante": 0.09
+      }
+    },
+    {
+      "id": "studio_12",
+      "tipo": "affermazione",
+      "testo": "«right» vuol dire anche «giusto»: That's right! = Esatto!",
+      "latency_ms": 1287,
+      "status": 200,
+      "model": "jev-1.14.0",
+      "ok": 0.91,
+      "problema": "nessuno",
+      "problema_probs": {
+        "nessuno": 0.85,
+        "errore": 0.05,
+        "semplificazione_fuorviante": 0.1
+      }
+    },
+    {
+      "id": "studio_13",
+      "tipo": "affermazione",
+      "testo": "left e right sono la sinistra e la destra di chi cammina: se sulla mappa l'omino scende verso il basso, la sua destra è la tua sinistra.",
+      "latency_ms": 305,
+      "status": 200,
+      "model": "jev-1.14.0",
+      "ok": 0.64,
+      "problema": "nessuno",
+      "problema_probs": {
+        "nessuno": 0.5,
+        "errore": 0.33,
+        "semplificazione_fuorviante": 0.17
+      }
+    }
+  ],
+  "decisioni": {
+    "frase_w_lights": "Tenuto: traffic lights = semaforo e la traduzione da dizionario (in inglese il plurale indica anche un solo semaforo). Semplificazione corretta, non errore.",
+    "corretti_dopo_il_primo_giro": [
+      "studio_3: regola the/a riscritta (contraddiceva Is there a bank near here?)",
+      "w_cafe: bar -> bar (caffe)",
+      "scheda5_4: aggiunto aiuto (accanto)"
+    ],
+    "percorsi_mappa": "12/12 verificati dalla simulazione di js/citta.js (mosse + lato portano al posto giusto)"
+  }
+}

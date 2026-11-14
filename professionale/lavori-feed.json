@@ -1,5 +1,12 @@
 [
   {
+    "id": "directions-inglese",
+    "titolo": "Excuse me, where is…? Chiedere la strada",
+    "annoProf": 3,
+    "url": "directions-inglese/",
+    "materia": "Inglese"
+  },
+  {
     "id": "illuminismo",
     "titolo": "Da Luigi XIV all’Illuminismo",
     "annoProf": 4,
