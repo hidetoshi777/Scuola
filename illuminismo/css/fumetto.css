@@ -149,6 +149,54 @@
 }
 
 /* Schermo intero / fallback iOS .is-immersive */
+.fumetto-fs-arrow,
+.fumetto-fs-close {
+  display: none;
+  position: absolute;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  line-height: 1;
+  cursor: pointer;
+  border-radius: 999px;
+  color: rgba(255, 255, 255, 0.78);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  backdrop-filter: blur(2px);
+  z-index: 10;
+  transition: opacity 0.15s ease, background 0.15s ease;
+}
+
+.fumetto-fs-arrow {
+  top: 50%;
+  transform: translateY(-50%);
+  width: 2.5rem;
+  height: 2.5rem;
+  background: rgba(9, 14, 25, 0.35);
+  font-size: 1.5rem;
+}
+
+.fumetto-fs-arrow--prev {
+  left: 0.65rem;
+}
+
+.fumetto-fs-arrow--next {
+  right: 0.65rem;
+}
+
+.fumetto-fs-arrow:disabled {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.fumetto-fs-close {
+  top: 0.6rem;
+  right: 0.65rem;
+  width: 2.2rem;
+  height: 2.2rem;
+  background: rgba(9, 14, 25, 0.38);
+  font-size: 1.05rem;
+}
+
 .fumetto-reader.is-immersive,
 .fumetto-reader:fullscreen,
 .fumetto-reader:-webkit-full-screen {
@@ -158,26 +206,57 @@
   width: 100vw;
   height: 100dvh;
   max-width: none;
+  border: 0;
   border-radius: 0;
-  padding: 0.4rem;
+  padding: 0;
+  gap: 0;
   background: #090e19;
-  display: grid;
-  grid-template-rows: auto minmax(0, 1fr) auto;
+  display: block;
 }
 
 .fumetto-reader.is-immersive .fumetto-viewport,
 .fumetto-reader:fullscreen .fumetto-viewport,
 .fumetto-reader:-webkit-full-screen .fumetto-viewport {
+  width: 100%;
   max-height: none;
   height: 100%;
   aspect-ratio: auto;
+  border: 0;
+  border-radius: 0;
 }
 
+.fumetto-reader.is-immersive .fumetto-toolbar,
+.fumetto-reader:fullscreen .fumetto-toolbar,
+.fumetto-reader:-webkit-full-screen .fumetto-toolbar,
+.fumetto-reader.is-immersive .fumetto-caption,
+.fumetto-reader:fullscreen .fumetto-caption,
+.fumetto-reader:-webkit-full-screen .fumetto-caption,
 .fumetto-reader.is-immersive .fumetto-controls,
+.fumetto-reader:fullscreen .fumetto-controls,
+.fumetto-reader:-webkit-full-screen .fumetto-controls,
 .fumetto-reader.is-immersive .fumetto-hint,
 .fumetto-reader:fullscreen .fumetto-hint,
 .fumetto-reader:-webkit-full-screen .fumetto-hint {
-  display: none;
+  display: none !important;
+}
+
+.fumetto-reader.is-immersive .fumetto-fs-arrow,
+.fumetto-reader:fullscreen .fumetto-fs-arrow,
+.fumetto-reader:-webkit-full-screen .fumetto-fs-arrow,
+.fumetto-reader.is-immersive .fumetto-fs-close,
+.fumetto-reader:fullscreen .fumetto-fs-close,
+.fumetto-reader:-webkit-full-screen .fumetto-fs-close {
+  display: inline-flex;
+}
+
+.fumetto-reader.is-immersive .fumetto-fs-arrow:hover,
+.fumetto-reader:fullscreen .fumetto-fs-arrow:hover,
+.fumetto-reader:-webkit-full-screen .fumetto-fs-arrow:hover,
+.fumetto-reader.is-immersive .fumetto-fs-close:hover,
+.fumetto-reader:fullscreen .fumetto-fs-close:hover,
+.fumetto-reader:-webkit-full-screen .fumetto-fs-close:hover {
+  background: rgba(9, 14, 25, 0.62);
+  color: #fff;
 }
 
 @media (orientation: portrait) and (max-width: 900px) {
