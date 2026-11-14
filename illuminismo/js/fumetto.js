@@ -97,6 +97,39 @@
     },
     { passive: true }
   );
+  const stage = document.getElementById("fumetto-stage");
+  const fullBtn = document.getElementById("fumetto-fullscreen");
+
+  function stageIsFullscreen() {
+    const el = document.fullscreenElement || document.webkitFullscreenElement;
+    return el === stage || (stage && stage.classList.contains("is-immersive"));
+  }
+
+  function isRotatedPortrait() {
+    return stageIsFullscreen() && window.matchMedia("(orientation: portrait) and (max-width: 900px)").matches;
+  }
+
+  function lockLandscape() {
+    try {
+      if (screen.orientation && typeof screen.orientation.lock === "function") {
+        const p = screen.orientation.lock("landscape");
+        if (p && typeof p.catch === "function") p.catch(() => {});
+      }
+    } catch (err) {
+      /* ignore */
+    }
+  }
+
+  function unlockOrientation() {
+    try {
+      if (screen.orientation && typeof screen.orientation.unlock === "function") {
+        screen.orientation.unlock();
+      }
+    } catch (err) {
+      /* ignore */
+    }
+  }
+
   viewport.addEventListener(
     "touchend",
     (event) => {
@@ -105,8 +138,11 @@
       const t = event.changedTouches[0];
       const dx = t.clientX - startX;
       const dy = t.clientY - startY;
-      if (Math.abs(dx) < 40 || Math.abs(dx) < Math.abs(dy)) return;
-      if (dx < 0) go(index + 1);
+      const rotated = isRotatedPortrait();
+      const primary = rotated ? dy : dx;
+      const secondary = rotated ? dx : dy;
+      if (Math.abs(primary) < 40 || Math.abs(primary) < Math.abs(secondary)) return;
+      if (primary < 0) go(index + 1);
       else go(index - 1);
     },
     { passive: true }
@@ -116,24 +152,20 @@
     if (busy) return;
     if (zoom && zoom.blocksNav()) return;
     const rect = viewport.getBoundingClientRect();
-    const x = event.clientX - rect.left;
-    if (x > rect.width * 0.66) go(index + 1);
-    else if (x < rect.width * 0.33) go(index - 1);
+    const ratio = isRotatedPortrait()
+      ? (event.clientY - rect.top) / rect.height
+      : (event.clientX - rect.left) / rect.width;
+    if (ratio > 0.66) go(index + 1);
+    else if (ratio < 0.33) go(index - 1);
   });
-
-  const stage = document.getElementById("fumetto-stage");
-  const fullBtn = document.getElementById("fumetto-fullscreen");
-
-  function stageIsFullscreen() {
-    const el = document.fullscreenElement || document.webkitFullscreenElement;
-    return el === stage || (stage && stage.classList.contains("is-immersive"));
-  }
 
   function setImmersive(on) {
     if (!stage) return;
     stage.classList.toggle("is-immersive", on);
     document.documentElement.classList.toggle("fumetto-immersive-lock", on);
     document.body.classList.toggle("fumetto-immersive-lock", on);
+    if (on) lockLandscape();
+    else unlockOrientation();
   }
 
   function syncFullscreenLabel() {
@@ -145,16 +177,20 @@
 
   async function toggleFullscreen() {
     if (!stage) return;
+    if (zoom && zoom.isZoomed()) zoom.reset();
     try {
       if (stage.classList.contains("is-immersive")) {
         setImmersive(false);
       } else if (document.fullscreenElement === stage || document.webkitFullscreenElement === stage) {
         if (document.exitFullscreen) await document.exitFullscreen();
         else if (document.webkitExitFullscreen) document.webkitExitFullscreen();
+        unlockOrientation();
       } else if (stage.requestFullscreen && document.fullscreenEnabled !== false) {
         await stage.requestFullscreen();
+        lockLandscape();
       } else if (stage.webkitRequestFullscreen) {
         stage.webkitRequestFullscreen();
+        lockLandscape();
         window.setTimeout(() => {
           if (!document.fullscreenElement && !document.webkitFullscreenElement) {
             setImmersive(true);
@@ -183,8 +219,14 @@
       syncFullscreenLabel();
     }
   });
-  document.addEventListener("fullscreenchange", syncFullscreenLabel);
-  document.addEventListener("webkitfullscreenchange", syncFullscreenLabel);
+  function handleFullscreenChange() {
+    if (zoom && zoom.isZoomed()) zoom.reset();
+    if (stageIsFullscreen()) lockLandscape();
+    else unlockOrientation();
+    syncFullscreenLabel();
+  }
+  document.addEventListener("fullscreenchange", handleFullscreenChange);
+  document.addEventListener("webkitfullscreenchange", handleFullscreenChange);
 
   syncChrome();
 })();
