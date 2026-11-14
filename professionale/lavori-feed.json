@@ -1,5 +1,12 @@
 [
   {
+    "id": "illuminismo",
+    "titolo": "Da Luigi XIV all’Illuminismo",
+    "annoProf": 4,
+    "url": "illuminismo/",
+    "materia": "Storia"
+  },
+  {
     "id": "cavitazione-npsh",
     "titolo": "Cavitazione e NPSH",
     "annoProf": 4,

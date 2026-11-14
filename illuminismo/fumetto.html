@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="it" data-theme="dark">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="color-scheme" content="dark light">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <title>Fumetto · Da Luigi XIV all’Illuminismo | Scuola</title>
+  <meta name="description" content="Quattro tavole illustrate: dal Re Sole a Versailles ai diritti dell’uomo e alla legge toscana del 1786.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600;0,700;1,600&family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/fumetto.css">
+</head>
+<body>
+  <a class="skip-link visually-hidden" href="#contenuto">Salta al contenuto</a>
+
+  <header class="masthead">
+    <div class="masthead-inner">
+      <a class="brand" href="index.html">
+        <img class="brand-mark" src="favicon.svg" alt="" width="30" height="30">
+        <span>Dal Re Sole ai Lumi</span>
+      </a>
+      <div class="masthead-actions">
+        <nav class="top-nav" data-nav aria-label="Sezioni del percorso">
+          <a href="index.html">Lezione &amp; Video</a>
+          <a href="fumetto.html">Fumetto (4 tavole)</a>
+        </nav>
+        <button type="button" class="theme-toggle" data-theme-toggle aria-pressed="false">Tema chiaro</button>
+      </div>
+    </div>
+  </header>
+
+  <main id="contenuto" class="fumetto-wrap" tabindex="-1">
+    <header class="fumetto-intro">
+      <img src="img/og-share.jpg" alt="Luigi XIV e gli illuministi" width="1200" height="630">
+      <div>
+        <p class="kicker">Fumetto · 4 tavole · Storia IV AM</p>
+        <h1>Da Luigi XIV all’Illuminismo a fumetti</h1>
+        <p>Otto vignette grandi in quattro tavole: potere assoluto, Tre Ordini, Ragione, separazione dei poteri e Toscana 1786.</p>
+      </div>
+    </header>
+
+    <section class="fumetto-reader" id="fumetto-stage" aria-roledescription="fumetto" aria-label="Da Luigi XIV all’Illuminismo a fumetti">
+      <div class="fumetto-toolbar">
+        <p class="fumetto-status">Tavola <span id="fumetto-num">1</span> di 4</p>
+        <div class="fumetto-toolbar-actions">
+          <button type="button" class="btn btn-secondary" id="fumetto-print">Stampa tutto</button>
+          <button type="button" class="btn btn-secondary" id="fumetto-fullscreen" aria-pressed="false">Schermo intero</button>
+        </div>
+      </div>
+
+      <div class="fumetto-viewport" id="fumetto-viewport">
+        <figure class="fumetto-page is-active" data-page="1">
+          <img src="img/tavole/tavola-01.jpg" alt="Tavola 1: Luigi XIV sul trono dice Lo Stato sono io; i nobili a corte nella reggia di Versailles." width="1920" height="1080" fetchpriority="high">
+        </figure>
+        <figure class="fumetto-page" data-page="2" aria-hidden="true">
+          <img src="img/tavole/tavola-02.jpg" alt="Tavola 2: Clero e Nobiltà banchettano mentre il Terzo Stato lavora; gli illuministi attorno alla lanterna." width="1920" height="1080" loading="lazy">
+        </figure>
+        <figure class="fumetto-page" data-page="3" aria-hidden="true">
+          <img src="img/tavole/tavola-03.jpg" alt="Tavola 3: I tre poteri di Montesquieu, Voltaire per la tolleranza e Rousseau davanti al popolo." width="1920" height="1080" loading="lazy">
+        </figure>
+        <figure class="fumetto-page" data-page="4" aria-hidden="true">
+          <img src="img/tavole/tavola-04.jpg" alt="Tavola 4: Cesare Beccaria a Milano contro la tortura e Pietro Leopoldo nel 1786 abolisce la pena di morte in Toscana." width="1920" height="1080" loading="lazy">
+        </figure>
+      </div>
+
+      <p class="fumetto-caption" id="fumetto-caption" aria-live="polite"></p>
+
+      <div class="fumetto-controls">
+        <button type="button" class="btn btn-secondary" id="fumetto-prev" disabled>← Indietro</button>
+        <div class="fumetto-dots" id="fumetto-dots" role="tablist" aria-label="Tavole"></div>
+        <button type="button" class="btn btn-primary" id="fumetto-next">Avanti →</button>
+      </div>
+      <p class="fumetto-hint">Scorri o tocca i lati della tavola. Pizzica o doppio tap per ingrandire. «Schermo intero» sul telefono.</p>
+    </section>
+
+    <div class="btn-row">
+      <a class="btn btn-primary" href="media/illuminismo-fumetto.pdf" download>Scarica il fumetto (PDF)</a>
+      <a class="btn btn-secondary" href="index.html">Torna alla video-lezione e scheda</a>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <p>Realizzato dal Prof. Rossano Bella</p>
+      <p><a href="../professionale/">← Torna al Raccoglitore Professionale</a></p>
+    </div>
+  </footer>
+
+  <script src="js/common.js" defer></script>
+  <script src="../js/fumetto-zoom.js" defer></script>
+  <script src="../js/fumetto-print.js?v=3" defer></script>
+  <script src="js/fumetto.js" defer></script>
+</body>
+</html>
