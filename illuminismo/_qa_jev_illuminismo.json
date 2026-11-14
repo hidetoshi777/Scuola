@@ -1,0 +1,241 @@
+{
+  "items_checked": 8,
+  "review": [
+    {
+      "id": "faq_2_tre_ordini",
+      "tipo": "FAQ + Video Slide 3 + Tavola 2",
+      "domanda": "Com’era divisa la società nell’Antico Regime?",
+      "testo": "In tre ordini disuguali: 1° Clero e 2° Nobiltà (circa il 2%, hanno privilegi e non pagano tasse); 3° Terzo Stato (circa il 98%: contadini, artigiani e borghesi come medici, avvocati e mercanti), che lavora e paga tutte le tasse senza poter decidere.",
+      "status": 200,
+      "latency_ms": 271,
+      "model": "jev-1.14.0",
+      "usage": {
+        "input_tokens": 879,
+        "output_tokens": 135
+      },
+      "fattualmente_ok": 0.78,
+      "semplificazione_rischiosa": 0.29,
+      "gravita_score": 0.92,
+      "gravita_conf": 0.26,
+      "problema": "semplificazione_fuorviante",
+      "problema_conf": 0.36,
+      "problema_probs": {
+        "nessuno": 0.43,
+        "errore_fatto": 0.08,
+        "anacronismo": 0.0,
+        "semplificazione_fuorviante": 0.49,
+        "incoerente_domanda": 0.0
+      }
+    }
+  ],
+  "results": [
+    {
+      "id": "faq_1_luigi_xiv",
+      "tipo": "FAQ + Video + Fumetto Tavola 1",
+      "domanda": "Chi era Luigi XIV e perché si chiamava Re Sole?",
+      "testo": "È il re di Francia (1643–1715) simbolo della monarchia assoluta: scelse il sole come emblema perché tutta la corte e lo Stato dovevano ruotare attorno a lui. Governava per diritto divino concentrando leggi, tasse ed esercito senza convocare gli Stati Generali (gli è attribuito il motto «Lo Stato sono io») e trattenne l’alta nobiltà nella reggia di Versailles per toglierle peso politico.",
+      "status": 200,
+      "latency_ms": 319,
+      "model": "jev-1.14.0",
+      "usage": {
+        "input_tokens": 908,
+        "output_tokens": 129
+      },
+      "fattualmente_ok": 0.62,
+      "semplificazione_rischiosa": 0.38,
+      "gravita_score": 1.04,
+      "gravita_conf": 0.22,
+      "problema": "nessuno",
+      "problema_conf": 0.35,
+      "problema_probs": {
+        "nessuno": 0.48,
+        "errore_fatto": 0.14,
+        "anacronismo": 0.02,
+        "semplificazione_fuorviante": 0.36,
+        "incoerente_domanda": 0.0
+      }
+    },
+    {
+      "id": "faq_2_tre_ordini",
+      "tipo": "FAQ + Video Slide 3 + Tavola 2",
+      "domanda": "Com’era divisa la società nell’Antico Regime?",
+      "testo": "In tre ordini disuguali: 1° Clero e 2° Nobiltà (circa il 2%, hanno privilegi e non pagano tasse); 3° Terzo Stato (circa il 98%: contadini, artigiani e borghesi come medici, avvocati e mercanti), che lavora e paga tutte le tasse senza poter decidere.",
+      "status": 200,
+      "latency_ms": 271,
+      "model": "jev-1.14.0",
+      "usage": {
+        "input_tokens": 879,
+        "output_tokens": 135
+      },
+      "fattualmente_ok": 0.78,
+      "semplificazione_rischiosa": 0.29,
+      "gravita_score": 0.92,
+      "gravita_conf": 0.26,
+      "problema": "semplificazione_fuorviante",
+      "problema_conf": 0.36,
+      "problema_probs": {
+        "nessuno": 0.43,
+        "errore_fatto": 0.08,
+        "anacronismo": 0.0,
+        "semplificazione_fuorviante": 0.49,
+        "incoerente_domanda": 0.0
+      }
+    },
+    {
+      "id": "faq_3_illuminismo_kant",
+      "tipo": "FAQ + Video Slide 4 + Tavola 2",
+      "domanda": "Che cos’è l’Illuminismo e cosa dice Kant?",
+      "testo": "È un movimento culturale del Settecento che vede nella ragione umana una luce («lume») per combattere ignoranza, superstizioni e privilegi. Immanuel Kant (1784) lo riassume nel motto «Sapere aude»: abbi il coraggio di servirti della tua propria intelligenza.",
+      "status": 200,
+      "latency_ms": 302,
+      "model": "jev-1.14.0",
+      "usage": {
+        "input_tokens": 872,
+        "output_tokens": 129
+      },
+      "fattualmente_ok": 0.95,
+      "semplificazione_rischiosa": 0.07,
+      "gravita_score": 0.15,
+      "gravita_conf": 0.76,
+      "problema": "nessuno",
+      "problema_conf": 0.96,
+      "problema_probs": {
+        "nessuno": 0.97,
+        "errore_fatto": 0.02,
+        "anacronismo": 0.0,
+        "semplificazione_fuorviante": 0.01,
+        "incoerente_domanda": 0.0
+      }
+    },
+    {
+      "id": "faq_4_enciclopedia",
+      "tipo": "FAQ + Video Slide 5 + Tavola 2",
+      "domanda": "Cos’è l’Enciclopedia e dove circolavano le idee?",
+      "testo": "Opera in 28 volumi diretta da Diderot e d’Alembert (1751–1772): raccoglie scienza, filosofia e anche disegni sui mestieri pratici e sulle macchine, dando dignità al lavoro tecnico nonostante la censura. Le idee circolano nei salotti, nei caffè e sui primi giornali (opinione pubblica).",
+      "status": 200,
+      "latency_ms": 301,
+      "model": "jev-1.14.0",
+      "usage": {
+        "input_tokens": 889,
+        "output_tokens": 129
+      },
+      "fattualmente_ok": 0.91,
+      "semplificazione_rischiosa": 0.11,
+      "gravita_score": 0.31,
+      "gravita_conf": 0.53,
+      "problema": "nessuno",
+      "problema_conf": 0.9,
+      "problema_probs": {
+        "nessuno": 0.92,
+        "errore_fatto": 0.05,
+        "anacronismo": 0.01,
+        "semplificazione_fuorviante": 0.02,
+        "incoerente_domanda": 0.0
+      }
+    },
+    {
+      "id": "faq_5_montesquieu",
+      "tipo": "FAQ + Video Slide 6 + Tavola 3",
+      "domanda": "Che cosa propone Montesquieu contro la tirannia?",
+      "testo": "Ne Lo spirito delle leggi (1748) propone la separazione dei tre poteri: il potere legislativo (Parlamento, fa le leggi), il potere esecutivo (Governo, le applica) e il potere giudiziario (Giudici, puniscono chi le viola) devono restare separati per evitare che una sola persona diventi tiranno.",
+      "status": 200,
+      "latency_ms": 277,
+      "model": "jev-1.14.0",
+      "usage": {
+        "input_tokens": 885,
+        "output_tokens": 129
+      },
+      "fattualmente_ok": 0.93,
+      "semplificazione_rischiosa": 0.19,
+      "gravita_score": 0.26,
+      "gravita_conf": 0.62,
+      "problema": "nessuno",
+      "problema_conf": 0.82,
+      "problema_probs": {
+        "nessuno": 0.86,
+        "errore_fatto": 0.02,
+        "anacronismo": 0.01,
+        "semplificazione_fuorviante": 0.11,
+        "incoerente_domanda": 0.0
+      }
+    },
+    {
+      "id": "faq_6_voltaire_rousseau",
+      "tipo": "FAQ + Video Slide 7 + Tavola 3",
+      "domanda": "Cosa difendono Voltaire e Jean-Jacques Rousseau?",
+      "testo": "Voltaire (Trattato sulla tolleranza, 1763) combatte il fanatismo e chiede tolleranza religiosa e libertà di parola. Jean-Jacques Rousseau (Il contratto sociale, 1762) afferma che la sovranità appartiene al popolo e tutti i cittadini nascono uguali davanti alla legge.",
+      "status": 200,
+      "latency_ms": 309,
+      "model": "jev-1.14.0",
+      "usage": {
+        "input_tokens": 882,
+        "output_tokens": 129
+      },
+      "fattualmente_ok": 0.88,
+      "semplificazione_rischiosa": 0.15,
+      "gravita_score": 0.36,
+      "gravita_conf": 0.44,
+      "problema": "nessuno",
+      "problema_conf": 0.82,
+      "problema_probs": {
+        "nessuno": 0.86,
+        "errore_fatto": 0.07,
+        "anacronismo": 0.01,
+        "semplificazione_fuorviante": 0.06,
+        "incoerente_domanda": 0.0
+      }
+    },
+    {
+      "id": "faq_7_beccaria",
+      "tipo": "FAQ + Video Slide 7 + Tavola 4",
+      "domanda": "Perché Cesare Beccaria è famoso in tutto il mondo?",
+      "testo": "A Milano, nel libro Dei delitti e delle pene (1764), chiede di abolire la tortura e la pena di morte: le pene devono essere certe, giuste, rapide e proporzionate al reato per prevenire i crimini, non essere una vendetta crudele.",
+      "status": 200,
+      "latency_ms": 282,
+      "model": "jev-1.14.0",
+      "usage": {
+        "input_tokens": 863,
+        "output_tokens": 129
+      },
+      "fattualmente_ok": 0.94,
+      "semplificazione_rischiosa": 0.08,
+      "gravita_score": 0.2,
+      "gravita_conf": 0.72,
+      "problema": "nessuno",
+      "problema_conf": 0.94,
+      "problema_probs": {
+        "nessuno": 0.95,
+        "errore_fatto": 0.02,
+        "anacronismo": 0.0,
+        "semplificazione_fuorviante": 0.02,
+        "incoerente_domanda": 0.01
+      }
+    },
+    {
+      "id": "faq_8_toscana_rivoluzioni",
+      "tipo": "FAQ + Video Slide 8 + Tavola 4",
+      "domanda": "Quale Stato applicò per primo Beccaria nel 1786?",
+      "testo": "Il Granducato di Toscana, il 30 novembre 1786, con il codice del granduca Pietro Leopoldo (Codice leopoldino): fu il primo Stato al mondo ad abolire per legge sia la tortura sia la pena di morte. Le idee illuministe ispirarono anche la Rivoluzione americana (1776) e, poco dopo la riforma toscana, la Rivoluzione francese (1789), con la Dichiarazione dei diritti dell’uomo e del cittadino.",
+      "status": 200,
+      "latency_ms": 339,
+      "model": "jev-1.14.0",
+      "usage": {
+        "input_tokens": 921,
+        "output_tokens": 129
+      },
+      "fattualmente_ok": 0.69,
+      "semplificazione_rischiosa": 0.31,
+      "gravita_score": 0.88,
+      "gravita_conf": 0.13,
+      "problema": "nessuno",
+      "problema_conf": 0.46,
+      "problema_probs": {
+        "nessuno": 0.57,
+        "errore_fatto": 0.19,
+        "anacronismo": 0.02,
+        "semplificazione_fuorviante": 0.21,
+        "incoerente_domanda": 0.01
+      }
+    }
+  ]
+}

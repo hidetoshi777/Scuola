@@ -202,6 +202,25 @@ window.ATTIVITA_WEB = [
     ],
   },
   {
+    titolo: "Da Luigi XIV all’Illuminismo",
+    materia: "Storia",
+    classe: "Quarta superiore · professionale",
+    annoProf: 4,
+    pubblicato: "2026-11-14",
+    descrizione:
+      "Dal potere assoluto del Re Sole a Versailles fino ai Lumi di Kant, Montesquieu, Voltaire, Rousseau e Beccaria: video-lezione, fumetto in 4 tavole e scheda PDF.",
+    citazione: "Sapere aude: abbi il coraggio di usare la tua intelligenza.",
+    url: "illuminismo/",
+    copertina: "illuminismo/img/og-share.jpg",
+    tinta: "storia",
+    adesivo: "st-colonna",
+    extra: [
+      { label: "Fumetto", url: "illuminismo/fumetto.html" },
+      { label: "Fumetto PDF", url: "illuminismo/media/illuminismo-fumetto.pdf" },
+      { label: "Scheda PDF", url: "illuminismo/media/illuminismo-scheda.pdf" },
+    ],
+  },
+  {
     titolo: "Cavitazione e NPSH",
     materia: "Tecnologia",
     classe: "Quarta superiore · professionale",
