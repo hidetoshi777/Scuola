@@ -1,0 +1,2 @@
+/* Generato da _blender_citta.py: pianta (px) -> disegno della città (viewBox). Non modificare a mano. */
+window.CITTA_PROIEZIONE = {"w": 720, "h": 619.2, "ox": 10.0, "oy": 43.783, "ax": 1.0, "ay": 0.707107, "az": -70.7107, "altezze": {"bank": 0.62, "cafe": 0.68, "church": 1.14, "cinema": 0.72, "hospital": 0.625, "hotel": 0.64, "park": 0.567, "pharmacy": 0.5, "postoffice": 0.6, "restaurant": 0.628, "school": 1.0, "station": 0.66, "supermarket": 0.49}};

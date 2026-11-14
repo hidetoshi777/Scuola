@@ -99,7 +99,7 @@
 
   /* Disegna un'icona: <svg class="ico-posto"><use href="#ic-ID"></svg> */
   window.icona = function icona(id, cls) {
-    return `<svg class="${cls || "ico-posto"}" viewBox="0 0 64 64" aria-hidden="true" focusable="false"><use href="#ic-${id}"/></svg>`;
+    return `<img class="${cls || "ico-posto"}" src="${window.ICONE_BASE || ""}img/posti/${id}.webp" alt="" width="240" height="240" loading="lazy" decoding="async">`;
   };
 
   if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
