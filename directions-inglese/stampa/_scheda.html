@@ -113,7 +113,7 @@
     document.getElementById("icone").innerHTML = ordine.map((id, i) => `<div>${icona(id)}<b>${i + 1}.</b><div class="linea"></div></div>`).join("");
     document.getElementById("sol1").textContent = ordine.map((id, i) => `${i + 1}. ${POSTO(id).en}`).join(" · ");
     document.getElementById("frecce").innerHTML = ["F", "L", "R"].map((f, i) => `<div>${FRECCE[f]}<b>${i + 1}</b><span class="q"></span></div>`).join("");
-    CITTA.crea(document.getElementById("mappa"), { nomi: true, aiuto: false });
+    CITTA.crea(document.getElementById("mappa"), { aiuto: false, traffico: false });
     document.documentElement.dataset.theme = "light"; /* la stampa è sempre chiara */
   </script>
 </body>

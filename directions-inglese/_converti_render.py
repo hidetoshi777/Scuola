@@ -15,5 +15,7 @@ for d in "NSEW":
     f = IMG / f"_omino-{d}.png"
     if f.exists():
         Image.open(f).convert("RGBA").resize((160, 160), Image.LANCZOS).save(IMG / f"omino-{d}.webp", quality=90, method=6)
-tot = sum(p.stat().st_size for p in list(IMG.glob("citta.jpg")) + list(IMG.glob("omino-*.webp")) + list((IMG / "posti").glob("*.webp")))
+for f in (IMG / "veicoli").glob("_*.png"):
+    Image.open(f).convert("RGBA").save(f.with_name(f.stem[1:] + ".webp"), quality=88, method=6)
+tot = sum(p.stat().st_size for p in list(IMG.glob("citta.jpg")) + list(IMG.glob("omino-*.webp")) + list((IMG / "posti").glob("*.webp")) + list((IMG / "veicoli").glob("*.webp")))
 print("ok, peso totale", round(tot / 1024), "KB")
