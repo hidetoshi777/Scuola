@@ -2,45 +2,41 @@
    Gli stessi item sono controllati da _qa_jev_run.py. */
 (function () {
   const ES_POSTI = [
-    { id: "pharmacy", op: ["pharmacy", "police", "park"] },
+    { id: "pharmacy", op: ["pharmacy", "park", "cinema"] },
     { id: "church", op: ["school", "church", "cinema"] },
-    { id: "hospital", op: ["hotel", "hospital", "library"] },
-    { id: "bank", op: ["bank", "bakery", "busstop"] },
-    { id: "postoffice", op: ["supermarket", "postoffice", "museum"] },
-    { id: "station", op: ["station", "police", "lights"] },
-    { id: "lights", op: ["zebra", "crossroads", "lights"] },
+    { id: "hospital", op: ["hotel", "hospital", "bank"] },
+    { id: "bank", op: ["bank", "cafe", "park"] },
+    { id: "postoffice", op: ["supermarket", "postoffice", "restaurant"] },
+    { id: "station", op: ["station", "hotel", "lights"] },
+    { id: "lights", op: ["lights", "park", "school"] },
     { id: "cafe", op: ["restaurant", "cafe", "hotel"] },
   ];
 
-  const NOMI_FRECCIA = { F: "dritto", L: "gira a sinistra", R: "gira a destra", left: "è a sinistra", right: "è a destra" };
-  const CLASSE_FRECCIA = { F: "dritto", L: "sx", R: "dx", left: "sx", right: "dx" };
+  const NOMI_FRECCIA = { F: "dritto", L: "a sinistra", R: "a destra" };
+  const CLASSE_FRECCIA = { F: "dritto", L: "sx", R: "dx" };
   const ES_FRECCE = [
     { k: "c_straight", ok: "F" },
     { k: "c_left", ok: "L" },
-    { k: "c_onright", ok: "right" },
     { k: "c_right", ok: "R" },
     { k: "l_first", ok: "L" },
-    { k: "c_onleft", ok: "left" },
     { k: "l_second", ok: "R" },
-    { k: "l_yourleft", ok: "left" },
+    { k: "l_after", ok: "F" },
+    { k: "l_lights", ok: "L" },
+    { k: "l_end", ok: "R" },
   ];
 
   const ES_DOVE = [
     { scena: "bank,pharmacy*,|,,", frase: "The pharmacy is ___ the bank.", ok: "next to" },
-    { scena: ",church,|,school*,", frase: "The school is ___ the church.", ok: "opposite" },
-    { scena: "cafe,hotel*,cinema|,,", frase: "The hotel is ___ the café and the cinema.", ok: "between" },
+    { scena: ",cinema,|,bank*,", frase: "The bank is ___ the cinema.", ok: "opposite" },
     { scena: ",supermarket,|,postoffice*,", frase: "The post office is ___ the supermarket.", ok: "opposite" },
     { scena: "hospital,park*,|,,", frase: "The park is ___ the hospital.", ok: "next to" },
-    { scena: "bank,church*,school|,,", frase: "The church is ___ the bank and the school.", ok: "between" },
   ];
 
   const ES_DIALOGO = [
     { frase: "___ me, where is the bank?", op: ["Excuse", "Thank", "Please"], ok: "Excuse", it: "Scusi, dov’è la banca?" },
     { frase: "Go ___ on.", op: ["straight", "street", "stop"], ok: "straight", it: "Vai dritto." },
-    { frase: "Turn ___.", aiuto: "L", op: ["left", "right", "straight"], ok: "left", it: "Gira a sinistra." },
     { frase: "Take the ___ right.", aiuto: "2ª", op: ["first", "second", "third"], ok: "second", it: "Prendi la seconda a destra." },
-    { frase: "It’s ___ the left.", op: ["on", "in", "of"], ok: "on", it: "È a sinistra." },
-    { frase: "Is there a pharmacy ___ here?", op: ["near", "next", "far"], ok: "near", it: "C’è una farmacia qui vicino?" },
+    { frase: "The bank is ___ the cinema.", aiuto: "di fronte", op: ["opposite", "next", "between"], ok: "opposite", it: "La banca è di fronte al cinema." },
     { frase: "Thank you! — You’re ___!", op: ["welcome", "please", "sorry"], ok: "welcome", it: "Grazie! — Prego!" },
   ];
 
@@ -117,7 +113,7 @@
       e2.appendChild(d);
       const nascosto = d.querySelector(".testo-nascosto");
       d.querySelector(".leggi").addEventListener("click", (ev) => { nascosto.hidden = false; ev.currentTarget.remove(); });
-      domanda(d, ["L", "F", "R", "left", "right"], it.ok, (b, op) => {
+      domanda(d, ["L", "F", "R"], it.ok, (b, op) => {
         b.classList.add(CLASSE_FRECCIA[op]);
         b.innerHTML = window.FRECCE[op] + `<span>${NOMI_FRECCIA[op]}</span>`;
         b.setAttribute("aria-label", NOMI_FRECCIA[op]);
@@ -136,9 +132,9 @@
       d.className = "domanda-lab";
       d.innerHTML = `${scena(it.scena)}<p><strong>${n + 1}.</strong> <span class="en">${it.frase.replace("___", '<span class="buco">?</span>')}</span></p><div class="opzioni"></div><p class="esito" aria-live="polite"></p>`;
       e3.appendChild(d);
-      domanda(d, ["next to", "opposite", "between"], it.ok, (b, op) => { b.textContent = op; }, (ok, esito) => {
+      domanda(d, ["next to", "opposite"], it.ok, (b, op) => { b.textContent = op; }, (ok, esito) => {
         d.querySelector(".buco").textContent = it.ok;
-        const it2 = { "next to": "accanto a", opposite: "di fronte a", between: "tra" }[it.ok];
+        const it2 = { "next to": "accanto a", opposite: "di fronte a" }[it.ok];
         esito.textContent = (ok ? "✓ Yes! " : "✗ No. ") + `${it.ok} = ${it2}.`;
       });
     });
@@ -148,7 +144,7 @@
     ES_DIALOGO.forEach((it, n) => {
       const d = document.createElement("div");
       d.className = "domanda-lab";
-      const aiuto = it.aiuto === "L" ? `<span class="sx" style="display:inline-block;width:34px;vertical-align:middle">${window.FRECCE.L}</span>` : it.aiuto ? `<span class="pill" style="background:var(--yellow);color:#111;border-radius:8px;padding:2px 8px;font-weight:800">${it.aiuto}</span>` : "";
+      const aiuto = it.aiuto ?`<span class="pill" style="background:var(--yellow);color:#111;border-radius:8px;padding:2px 8px;font-weight:800">${it.aiuto}</span>` : "";
       d.innerHTML = `<p><strong>${n + 1}.</strong> ${aiuto} <span class="en">${it.frase.replace("___", '<span class="buco">?</span>')}</span></p><div class="opzioni"></div><p class="esito" aria-live="polite"></p>`;
       e4.appendChild(d);
       domanda(d, it.op, it.ok, (b, op) => { b.textContent = op; }, (ok, esito) => {

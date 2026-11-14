@@ -208,7 +208,7 @@ window.ATTIVITA_WEB = [
     annoProf: 3,
     pubblicato: "2026-11-14",
     descrizione:
-      "Chiedere e dare indicazioni: i posti della città con le icone, go straight on, turn left, turn right, on the left, next to. Voci in inglese, laboratorio autocorretto, gioco sulla mappa di Greenford e scheda da stampare.",
+      "Chiedere la strada: i posti della città con le icone, go straight on, take the second right, after the traffic lights, opposite the cinema. Voci in inglese, laboratorio, gioco sulla mappa in 4 livelli e scheda da stampare.",
     citazione: "Excuse me, where is the pharmacy?",
     url: "directions-inglese/",
     copertina: "directions-inglese/img/og-share.jpg",

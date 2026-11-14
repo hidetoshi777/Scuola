@@ -15,11 +15,11 @@
   </script>
   <link rel="icon" href="../favicon.svg" type="image/svg+xml">
   <title>Studio · Excuse me, where is…? | Scuola</title>
-  <meta name="description" content="Chiedere la strada in inglese: domande, i posti della città con le icone, go straight on, turn left, turn right, on the left, next to, opposite, between. Con la voce.">
+  <meta name="description" content="Chiedere la strada in inglese: i posti della città con le icone, go straight on, turn left, turn right, take the second right, opposite, next to. Con la voce.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=Overpass:wght@700;800;900&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/styles.css?v=1">
+  <link rel="stylesheet" href="css/styles.css?v=2">
 </head>
 <body class="page-studio">
   <a class="skip-link" href="#contenuto">Salta al contenuto</a>
@@ -38,165 +38,111 @@
   <main id="contenuto" tabindex="-1">
     <p class="kicker">Studio · chiedere la strada</p>
     <h1>Where is the pharmacy?</h1>
-    <p class="lead">Tocca 🔊 per sentire ogni frase. Prima ascolta, poi ripeti ad alta voce.</p>
+    <p class="lead">Tocca 🔊 e ascolta. Poi ripeti ad alta voce.</p>
 
     <ul class="indice" aria-label="Indice">
-      <li><a href="#chiedere">1. Chiedere</a></li>
+      <li><a href="#chiedere">1. La domanda</a></li>
       <li><a href="#posti">2. I posti</a></li>
-      <li><a href="#indicazioni">3. Le indicazioni</a></li>
+      <li><a href="#indicazioni">3. Le frecce</a></li>
       <li><a href="#dove">4. Dov’è?</a></li>
-      <li><a href="#grazie">5. Grazie, prego</a></li>
-      <li><a href="#dialogo">6. Un dialogo</a></li>
-      <li><a href="#errori">7. Errori tipici</a></li>
-      <li><a href="#ricorda">8. Ricorda così</a></li>
-      <li><a href="#in-breve">9. In breve</a></li>
-      <li><a href="#scheda">10. Scheda</a></li>
+      <li><a href="#dialogo">5. Il dialogo</a></li>
+      <li><a href="#ricorda">6. Ricorda</a></li>
+      <li><a href="#scheda">7. Scheda</a></li>
     </ul>
 
     <article class="capitolo" id="chiedere">
-      <h2><span class="num">1</span>Chiedere la strada</h2>
-      <p>Prima di tutto attiri l’attenzione con <span class="en">Excuse me</span> (scusi). Poi fai la domanda.</p>
+      <h2><span class="num">1</span>La domanda</h2>
+      <p>Prima dici <span class="en">Excuse me</span> (scusi). Poi chiedi.</p>
       <div class="frasi">
         <div class="frase"><button type="button" class="voce" data-voce="q_pharmacy" aria-label="Ascolta"></button><div><span class="en">Excuse me, where is the pharmacy?</span><span class="it">Scusi, dov’è la farmacia?</span></div></div>
         <div class="frase"><button type="button" class="voce" data-voce="t_near" aria-label="Ascolta"></button><div><span class="en">Excuse me, is there a bank near here?</span><span class="it">Scusi, c’è una banca qui vicino?</span></div></div>
-        <div class="frase"><button type="button" class="voce" data-voce="t_get" aria-label="Ascolta"></button><div><span class="en">Excuse me, how can I get to the train station?</span><span class="it">Scusi, come arrivo alla stazione dei treni?</span></div></div>
       </div>
       <div class="box">
-        <p><span class="en">Where is the…?</span> = Dov’è il / la…? Si dice anche <span class="en">Where’s the…?</span></p>
-        <p><span class="en">Is there a… near here?</span> = C’è un / una… qui vicino?</p>
-      </div>
-      <div class="box attenzione">
-        <p><span class="en">Excuse me</span> = scusi, <strong>per chiedere</strong> qualcosa a uno sconosciuto.</p>
-        <p><span class="en">Sorry</span> = scusa, mi dispiace, <strong>quando sbagli</strong> (per esempio se urti qualcuno).</p>
+        <p><span class="en">Where is…?</span> = Dov’è…?</p>
+        <p><span class="en">the</span> = il, la · <span class="en">a</span> = un, una</p>
       </div>
     </article>
 
     <article class="capitolo" id="posti">
       <h2><span class="num">2</span>I posti della città</h2>
-      <p>Tocca un’icona: senti la parola. Sotto c’è la traduzione.</p>
+      <p>Tocca l’icona: senti la parola.</p>
       <div class="griglia-posti" id="griglia-posti"></div>
-      <div class="box">
-        <p>Per un posto preciso usi <span class="en">the</span> (il, lo, la): <span class="en">Where is <b>the</b> bank?</span> = Dov’è <b>la</b> banca?</p>
-        <p>Quando chiedi se ce n’è uno usi <span class="en">a</span> (un, una): <span class="en">Is there <b>a</b> bank near here?</span> = C’è <b>una</b> banca qui vicino?</p>
-      </div>
     </article>
 
     <article class="capitolo" id="indicazioni">
-      <h2><span class="num">3</span>Le indicazioni</h2>
-      <p>Le frecce hanno sempre lo stesso colore: <span class="dritto">verde = dritto</span>, <span class="sx">blu = sinistra</span>, <span class="dx">arancione = destra</span>.</p>
+      <h2><span class="num">3</span>Le frecce</h2>
+      <p><span class="dritto">Verde = dritto</span> · <span class="sx">blu = sinistra</span> · <span class="dx">arancione = destra</span></p>
       <div class="frecce">
         <button type="button" class="freccia-carta dritto" data-voce="c_straight" data-freccia="F"><span class="en">Go straight on.</span><span class="it">Vai dritto.</span></button>
         <button type="button" class="freccia-carta sx" data-voce="c_left" data-freccia="L"><span class="en">Turn left.</span><span class="it">Gira a sinistra.</span></button>
         <button type="button" class="freccia-carta dx" data-voce="c_right" data-freccia="R"><span class="en">Turn right.</span><span class="it">Gira a destra.</span></button>
         <button type="button" class="freccia-carta sx" data-voce="l_first" data-freccia="L"><span class="en">Take the first left.</span><span class="it">Prendi la prima a sinistra.</span></button>
         <button type="button" class="freccia-carta dx" data-voce="l_second" data-freccia="R"><span class="en">Take the second right.</span><span class="it">Prendi la seconda a destra.</span></button>
-        <button type="button" class="freccia-carta dritto" data-voce="l_past" data-freccia="past"><span class="en">Go past the church.</span><span class="it">Supera la chiesa (vai oltre).</span></button>
-        <button type="button" class="freccia-carta neutra" data-voce="l_lights" data-freccia="lights"><span class="en">At the traffic lights, turn left.</span><span class="it">Al semaforo, gira a sinistra.</span></button>
-        <button type="button" class="freccia-carta neutra" data-voce="l_end" data-freccia="end"><span class="en">At the end of the road, turn right.</span><span class="it">Alla fine della strada, gira a destra.</span></button>
-        <button type="button" class="freccia-carta neutra" data-voce="l_cross" data-freccia="cross"><span class="en">Cross the road.</span><span class="it">Attraversa la strada.</span></button>
+        <button type="button" class="freccia-carta dritto" data-voce="l_after" data-freccia="lights"><span class="en">After the traffic lights, go straight on.</span><span class="it">Dopo il semaforo, vai dritto.</span></button>
+        <button type="button" class="freccia-carta sx" data-voce="l_lights" data-freccia="lights"><span class="en">At the traffic lights, turn left.</span><span class="it">Al semaforo, gira a sinistra.</span></button>
+        <button type="button" class="freccia-carta dx" data-voce="l_end" data-freccia="end"><span class="en">At the end of the road, turn right.</span><span class="it">Alla fine della strada, gira a destra.</span></button>
       </div>
       <div class="box">
-        <p><span class="en">first</span> = prima (1ª) · <span class="en">second</span> = seconda (2ª) · <span class="en">third</span> = terza (3ª)</p>
-        <p><span class="en">Take the second right</span>: conti le strade a destra. Passi la prima, giri alla seconda.</p>
+        <p><span class="en">first</span> = prima · <span class="en">second</span> = seconda</p>
+        <p><span class="en">Take the second right</span>: la prima strada a destra la salti, alla seconda giri.</p>
       </div>
     </article>
 
     <article class="capitolo" id="dove">
-      <h2><span class="num">4</span>Dov’è? Dove si trova il posto</h2>
+      <h2><span class="num">4</span>Dov’è?</h2>
       <div class="frasi">
         <div class="frase"><button type="button" class="voce" data-voce="c_onleft" aria-label="Ascolta"></button><div><span class="en">It’s on the <span class="sx">left</span>.</span><span class="it">È a sinistra.</span></div></div>
         <div class="frase"><button type="button" class="voce" data-voce="c_onright" aria-label="Ascolta"></button><div><span class="en">It’s on the <span class="dx">right</span>.</span><span class="it">È a destra.</span></div></div>
-        <div class="frase"><button type="button" class="voce" data-voce="l_yourleft" aria-label="Ascolta"></button><div><span class="en">It’s on your <span class="sx">left</span>.</span><span class="it">È alla tua sinistra. (Vuol dire la stessa cosa.)</span></div></div>
       </div>
-      <p>Il <strong>posto da trovare</strong> è quello col bordo giallo.</p>
+      <p>Il posto da trovare ha il bordo giallo.</p>
       <div class="dove-griglia">
+        <div class="dove-carta">
+          <div class="frase"><button type="button" class="voce" data-voce="l_opp" aria-label="Ascolta"></button><div><span class="en">It’s opposite the cinema.</span><span class="it">È di fronte al cinema (dall’altra parte della strada).</span></div></div>
+          <div class="scena" data-scena=",cinema,|,bank*,"></div>
+        </div>
         <div class="dove-carta">
           <div class="frase"><button type="button" class="voce" data-voce="l_next" aria-label="Ascolta"></button><div><span class="en">It’s next to the bank.</span><span class="it">È accanto alla banca.</span></div></div>
           <div class="scena" data-scena="bank,pharmacy*,|,,"></div>
         </div>
-        <div class="dove-carta">
-          <div class="frase"><button type="button" class="voce" data-voce="l_opp" aria-label="Ascolta"></button><div><span class="en">It’s opposite the church.</span><span class="it">È di fronte alla chiesa (dall’altra parte della strada).</span></div></div>
-          <div class="scena" data-scena=",church,|,cafe*,"></div>
-        </div>
-        <div class="dove-carta">
-          <div class="frase"><button type="button" class="voce" data-voce="l_betw" aria-label="Ascolta"></button><div><span class="en">It’s between the café and the hotel.</span><span class="it">È tra il bar e l’albergo.</span></div></div>
-          <div class="scena" data-scena="cafe,bakery*,hotel|,,"></div>
-        </div>
-        <div class="dove-carta">
-          <div class="frase"><button type="button" class="voce" data-voce="l_corner" aria-label="Ascolta"></button><div><span class="en">It’s on the corner.</span><span class="it">È all’angolo (dove due strade si incontrano).</span></div></div>
-          <div class="scena" data-scena="angolo"></div>
-        </div>
-      </div>
-      <div class="frasi">
-        <div class="frase"><button type="button" class="voce" data-voce="l_near" aria-label="Ascolta"></button><div><span class="en">It’s near here.</span><span class="it">È qui vicino.</span></div></div>
-        <div class="frase"><button type="button" class="voce" data-voce="l_far" aria-label="Ascolta"></button><div><span class="en">It’s far from here.</span><span class="it">È lontano da qui.</span></div></div>
-      </div>
-    </article>
-
-    <article class="capitolo" id="grazie">
-      <h2><span class="num">5</span>Grazie, prego</h2>
-      <div class="frasi">
-        <div class="frase"><button type="button" class="voce" data-voce="t_thanks" aria-label="Ascolta"></button><div><span class="en">Thank you!</span><span class="it">Grazie!</span></div></div>
-        <div class="frase"><button type="button" class="voce" data-voce="t_thanks2" aria-label="Ascolta"></button><div><span class="en">Thank you very much!</span><span class="it">Grazie mille!</span></div></div>
-        <div class="frase"><button type="button" class="voce" data-voce="l_welcome" aria-label="Ascolta"></button><div><span class="en">You’re welcome!</span><span class="it">Prego! (la risposta a «grazie»)</span></div></div>
-        <div class="frase"><button type="button" class="voce" data-voce="l_dunno" aria-label="Ascolta"></button><div><span class="en">Sorry, I don’t know.</span><span class="it">Mi dispiace, non lo so.</span></div></div>
       </div>
     </article>
 
     <article class="capitolo" id="dialogo">
-      <h2><span class="num">6</span>Un dialogo intero</h2>
-      <p>Una turista cerca la farmacia. Ascolta tutto, poi leggi con un compagno: uno fa la turista, uno il passante.</p>
-      <div class="azioni"><button type="button" class="btn btn-primary" data-voce="d1 d2 d3 d4 d5 d6">▶ Ascolta tutto</button></div>
+      <h2><span class="num">5</span>Il dialogo</h2>
+      <p>Ascolta. Poi leggi con un compagno: uno chiede, uno risponde.</p>
+      <div class="azioni"><button type="button" class="btn btn-primary" data-voce="d1 d2 d3 d4">▶ Ascolta tutto</button></div>
       <div class="dialogo">
-        <div class="nuvola turista"><button type="button" class="voce" data-voce="d1" aria-label="Ascolta"></button><p><span class="chi">Turista</span><span class="en">Excuse me, is there a pharmacy near here?</span><br><span class="it">Scusi, c’è una farmacia qui vicino?</span></p></div>
-        <div class="nuvola passante"><button type="button" class="voce" data-voce="d2" aria-label="Ascolta"></button><p><span class="chi">Passante</span><span class="en">Yes, there is. Go straight on and turn right.</span><br><span class="it">Sì, c’è. Vai dritto e gira a destra.</span></p></div>
-        <div class="nuvola turista"><button type="button" class="voce" data-voce="d3" aria-label="Ascolta"></button><p><span class="chi">Turista</span><span class="en">Turn right?</span><br><span class="it">Girare a destra?</span></p></div>
-        <div class="nuvola passante"><button type="button" class="voce" data-voce="d4" aria-label="Ascolta"></button><p><span class="chi">Passante</span><span class="en">Yes. The pharmacy is on your left, opposite the hotel.</span><br><span class="it">Sì. La farmacia è alla tua sinistra, di fronte all’albergo.</span></p></div>
-        <div class="nuvola turista"><button type="button" class="voce" data-voce="d5" aria-label="Ascolta"></button><p><span class="chi">Turista</span><span class="en">Thank you very much!</span><br><span class="it">Grazie mille!</span></p></div>
-        <div class="nuvola passante"><button type="button" class="voce" data-voce="d6" aria-label="Ascolta"></button><p><span class="chi">Passante</span><span class="en">You’re welcome!</span><br><span class="it">Prego!</span></p></div>
+        <div class="nuvola turista"><button type="button" class="voce" data-voce="d1" aria-label="Ascolta"></button><p><span class="chi">Turista</span><span class="en">Excuse me, where is the pharmacy?</span><br><span class="it">Scusi, dov’è la farmacia?</span></p></div>
+        <div class="nuvola passante"><button type="button" class="voce" data-voce="d2" aria-label="Ascolta"></button><p><span class="chi">Passante</span><span class="en">Take the first right. It’s on the left, opposite the hotel.</span><br><span class="it">Prendi la prima a destra. È a sinistra, di fronte all’albergo.</span></p></div>
+        <div class="nuvola turista"><button type="button" class="voce" data-voce="d3" aria-label="Ascolta"></button><p><span class="chi">Turista</span><span class="en">Thank you!</span><br><span class="it">Grazie!</span></p></div>
+        <div class="nuvola passante"><button type="button" class="voce" data-voce="d4" aria-label="Ascolta"></button><p><span class="chi">Passante</span><span class="en">You’re welcome!</span><br><span class="it">Prego!</span></p></div>
       </div>
-      <p>Nel gioco trovi questa strada sulla mappa: parti dalla stazione, vai dritto e giri a destra.</p>
-    </article>
-
-    <article class="capitolo" id="errori">
-      <h2><span class="num">7</span>Errori tipici</h2>
-      <div class="errore"><span class="no">Turn to left. · Turn at left.</span><span class="si">Turn left.</span><span class="it">Dopo turn non serve niente: turn left, turn right.</span></div>
-      <div class="errore"><span class="no">Go street on.</span><span class="si">Go straight on.</span><span class="it">street = strada · straight = dritto. Si somigliano, ma sono due parole diverse.</span></div>
-      <div class="errore"><span class="no">Where is pharmacy?</span><span class="si">Where is the pharmacy?</span><span class="it">Non dimenticare the.</span></div>
-      <div class="errore"><span class="no">Sorry me, where is the bank?</span><span class="si">Excuse me, where is the bank?</span><span class="it">«Excuse me» è un blocco unico.</span></div>
-      <div class="errore"><span class="no">Thank you! — Please!</span><span class="si">Thank you! — You’re welcome!</span><span class="it">Quando qualcuno ti dice grazie, rispondi You’re welcome. Please si usa per chiedere (per favore).</span></div>
     </article>
 
     <article class="capitolo" id="ricorda">
-      <h2><span class="num">8</span>Ricorda così</h2>
+      <h2><span class="num">6</span>Ricorda</h2>
       <div class="mani">
         <svg viewBox="0 0 160 110" role="img" aria-label="La mano sinistra con pollice e indice forma una L">
           <path d="M30 100 V22 Q30 12 40 12 Q50 12 50 22 V64 H96 Q106 64 106 74 Q106 84 96 84 H50 V100 Z" fill="var(--left)"/>
           <text x="66" y="56" font-family="Overpass, sans-serif" font-weight="900" font-size="34" fill="var(--left)">L</text>
           <text x="80" y="104" font-family="Overpass, sans-serif" font-weight="800" font-size="13" fill="var(--ink)">LEFT</text>
         </svg>
-        <p>Alza le due mani davanti a te, dorso verso di te. Apri pollice e indice. La mano che fa una <strong>L</strong> dritta è la <span class="sx">sinistra: L = Left</span>. L’altra è la <span class="dx">destra: Right</span>.</p>
+        <p>Alza le mani, dorso verso di te. Apri pollice e indice. La mano che fa la <strong>L</strong> è la <span class="sx">sinistra: L = Left</span>.</p>
       </div>
-      <div class="box">
-        <p><span class="en">right</span> vuol dire anche «giusto»: <span class="en">That’s right!</span> = Esatto!</p>
-        <p>Attenzione: <span class="sx">left</span> e <span class="dx">right</span> sono la sinistra e la destra di <strong>chi cammina</strong>. Se sulla mappa l’omino scende verso il basso, la sua destra è la tua sinistra.</p>
-      </div>
-    </article>
-
-    <article class="capitolo" id="in-breve">
-      <h2><span class="num">9</span>In breve</h2>
+      <div class="errore"><span class="no">Turn to left.</span><span class="si">Turn left.</span></div>
+      <div class="errore"><span class="no">Go street on.</span><span class="si">Go straight on.</span><span class="it">street = strada · straight = dritto</span></div>
+      <div class="errore"><span class="no">Thank you! — Please!</span><span class="si">Thank you! — You’re welcome!</span><span class="it">You’re welcome = prego</span></div>
       <div class="scroll-x">
         <table class="tabella">
           <thead><tr><th>Inglese</th><th>Italiano</th></tr></thead>
           <tbody>
-            <tr><td class="en">Excuse me, where is the…?</td><td>Scusi, dov’è il / la…?</td></tr>
-            <tr><td class="en">Is there a… near here?</td><td>C’è un / una… qui vicino?</td></tr>
+            <tr><td class="en">Excuse me, where is the…?</td><td>Scusi, dov’è…?</td></tr>
             <tr><td class="en"><span class="dritto">Go straight on.</span></td><td>Vai dritto.</td></tr>
             <tr><td class="en"><span class="sx">Turn left.</span> · <span class="dx">Turn right.</span></td><td>Gira a sinistra. · Gira a destra.</td></tr>
-            <tr><td class="en">Take the first / second left.</td><td>Prendi la prima / seconda a sinistra.</td></tr>
-            <tr><td class="en">at the traffic lights · at the end of the road</td><td>al semaforo · alla fine della strada</td></tr>
-            <tr><td class="en">It’s on the <span class="sx">left</span> / on the <span class="dx">right</span>.</td><td>È a sinistra / a destra.</td></tr>
-            <tr><td class="en">next to · opposite · between · on the corner</td><td>accanto a · di fronte a · tra · all’angolo</td></tr>
+            <tr><td class="en">Take the second right.</td><td>Prendi la seconda a destra.</td></tr>
+            <tr><td class="en">after / at the traffic lights</td><td>dopo il / al semaforo</td></tr>
+            <tr><td class="en">It’s on the <span class="sx">left</span> / <span class="dx">right</span>.</td><td>È a sinistra / a destra.</td></tr>
+            <tr><td class="en">opposite · next to</td><td>di fronte a · accanto a</td></tr>
             <tr><td class="en">Thank you! — You’re welcome!</td><td>Grazie! — Prego!</td></tr>
           </tbody>
         </table>
@@ -204,8 +150,8 @@
     </article>
 
     <article class="capitolo" id="scheda">
-      <h2><span class="num">10</span>Scheda da stampare</h2>
-      <p>Due pagine: i posti con le icone e le indicazioni sulla mappa. In fondo ci sono le soluzioni.</p>
+      <h2><span class="num">7</span>Scheda da stampare</h2>
+      <p>Due pagine di esercizi. Le soluzioni sono alla fine.</p>
       <div class="azioni"><a class="btn btn-primary" href="stampa/scheda-directions.pdf">🖨️ Apri la scheda PDF</a></div>
     </article>
   </main>
@@ -215,10 +161,10 @@
     <p>Scuola · Inglese · terza professionale AM · Voci in inglese: ElevenLabs</p>
   </footer>
 
-  <script src="js/frasi.js?v=1" defer></script>
-  <script src="js/icone.js?v=1" defer></script>
-  <script src="js/frecce.js?v=1" defer></script>
-  <script src="js/common.js?v=1" defer></script>
-  <script src="js/imparare.js?v=1" defer></script>
+  <script src="js/frasi.js?v=2" defer></script>
+  <script src="js/icone.js?v=2" defer></script>
+  <script src="js/frecce.js?v=2" defer></script>
+  <script src="js/common.js?v=2" defer></script>
+  <script src="js/imparare.js?v=2" defer></script>
 </body>
 </html>
