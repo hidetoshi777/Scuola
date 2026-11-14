@@ -1,7 +1,8 @@
 /* Tutte le frasi con la voce (ElevenLabs).
    Sorgente unica: _voce_directions.py legge questo file e crea audio/<chiave>.mp3.
    v = chi parla: teacher (le parole), tourist (chi chiede), local (chi risponde).
-   Tenere il blocco fra le graffe in JSON valido: lo script lo legge con json.loads. */
+   Tenere il blocco fra le graffe in JSON valido: lo script lo legge con json.loads.
+   Le risposte a_* NON dicono il nome del posto: nel gioco «Dove arrivi?» lo devi trovare tu. */
 window.FRASI = {
   "w_pharmacy": { "v": "teacher", "en": "pharmacy", "it": "farmacia" },
   "w_church": { "v": "teacher", "en": "church", "it": "chiesa" },
@@ -16,14 +17,7 @@ window.FRASI = {
   "w_cafe": { "v": "teacher", "en": "café", "it": "bar (caffè)" },
   "w_hotel": { "v": "teacher", "en": "hotel", "it": "albergo" },
   "w_station": { "v": "teacher", "en": "train station", "it": "stazione dei treni" },
-  "w_police": { "v": "teacher", "en": "police station", "it": "stazione di polizia" },
-  "w_busstop": { "v": "teacher", "en": "bus stop", "it": "fermata dell'autobus" },
   "w_lights": { "v": "teacher", "en": "traffic lights", "it": "semaforo" },
-  "w_zebra": { "v": "teacher", "en": "zebra crossing", "it": "strisce pedonali" },
-  "w_bakery": { "v": "teacher", "en": "bakery", "it": "panetteria" },
-  "w_museum": { "v": "teacher", "en": "museum", "it": "museo" },
-  "w_library": { "v": "teacher", "en": "library", "it": "biblioteca" },
-  "w_crossroads": { "v": "teacher", "en": "crossroads", "it": "incrocio" },
 
   "q_pharmacy": { "v": "tourist", "en": "Excuse me, where is the pharmacy?", "it": "Scusi, dov'è la farmacia?" },
   "q_church": { "v": "tourist", "en": "Excuse me, where is the church?", "it": "Scusi, dov'è la chiesa?" },
@@ -35,7 +29,7 @@ window.FRASI = {
   "q_postoffice": { "v": "tourist", "en": "Excuse me, where is the post office?", "it": "Scusi, dov'è l'ufficio postale?" },
   "q_supermarket": { "v": "tourist", "en": "Excuse me, where is the supermarket?", "it": "Scusi, dov'è il supermercato?" },
   "q_restaurant": { "v": "tourist", "en": "Excuse me, where is the restaurant?", "it": "Scusi, dov'è il ristorante?" },
-  "q_cafe": { "v": "tourist", "en": "Excuse me, where is the café?", "it": "Scusi, dov'è il bar?" },
+  "q_cafe": { "v": "tourist", "en": "Excuse me, where is the café?", "it": "Scusi, dov'è il bar (caffè)?" },
   "q_hotel": { "v": "tourist", "en": "Excuse me, where is the hotel?", "it": "Scusi, dov'è l'albergo?" },
 
   "t_thanks": { "v": "tourist", "en": "Thank you!", "it": "Grazie!" },
@@ -43,7 +37,6 @@ window.FRASI = {
   "t_noroad": { "v": "tourist", "en": "Oh no! There's no road here!", "it": "Oh no! Qui non c'è una strada!" },
   "t_wrong": { "v": "tourist", "en": "Hmm... this is the wrong place.", "it": "Mmm... questo è il posto sbagliato." },
   "t_near": { "v": "tourist", "en": "Excuse me, is there a bank near here?", "it": "Scusi, c'è una banca qui vicino?" },
-  "t_get": { "v": "tourist", "en": "Excuse me, how can I get to the train station?", "it": "Scusi, come arrivo alla stazione dei treni?" },
 
   "c_straight": { "v": "local", "en": "Go straight on.", "it": "Vai dritto." },
   "c_left": { "v": "local", "en": "Turn left.", "it": "Gira a sinistra." },
@@ -53,36 +46,27 @@ window.FRASI = {
   "l_welcome": { "v": "local", "en": "You're welcome!", "it": "Prego!" },
   "l_first": { "v": "local", "en": "Take the first left.", "it": "Prendi la prima a sinistra." },
   "l_second": { "v": "local", "en": "Take the second right.", "it": "Prendi la seconda a destra." },
-  "l_past": { "v": "local", "en": "Go past the church.", "it": "Supera la chiesa (vai oltre)." },
+  "l_after": { "v": "local", "en": "After the traffic lights, go straight on.", "it": "Dopo il semaforo, vai dritto." },
   "l_lights": { "v": "local", "en": "At the traffic lights, turn left.", "it": "Al semaforo, gira a sinistra." },
   "l_end": { "v": "local", "en": "At the end of the road, turn right.", "it": "Alla fine della strada, gira a destra." },
-  "l_cross": { "v": "local", "en": "Cross the road.", "it": "Attraversa la strada." },
+  "l_opp": { "v": "local", "en": "It's opposite the cinema.", "it": "È di fronte al cinema." },
   "l_next": { "v": "local", "en": "It's next to the bank.", "it": "È accanto alla banca." },
-  "l_opp": { "v": "local", "en": "It's opposite the church.", "it": "È di fronte alla chiesa." },
-  "l_betw": { "v": "local", "en": "It's between the café and the hotel.", "it": "È tra il bar e l'albergo." },
-  "l_corner": { "v": "local", "en": "It's on the corner.", "it": "È all'angolo." },
-  "l_dunno": { "v": "local", "en": "Sorry, I don't know.", "it": "Mi dispiace, non lo so." },
-  "l_near": { "v": "local", "en": "It's near here.", "it": "È qui vicino." },
-  "l_far": { "v": "local", "en": "It's far from here.", "it": "È lontano da qui." },
-  "l_yourleft": { "v": "local", "en": "It's on your left.", "it": "È alla tua sinistra." },
 
-  "d1": { "v": "tourist", "en": "Excuse me, is there a pharmacy near here?", "it": "Scusi, c'è una farmacia qui vicino?" },
-  "d2": { "v": "local", "en": "Yes, there is. Go straight on and turn right.", "it": "Sì, c'è. Vai dritto e gira a destra." },
-  "d3": { "v": "tourist", "en": "Turn right?", "it": "Girare a destra?" },
-  "d4": { "v": "local", "en": "Yes. The pharmacy is on your left, opposite the hotel.", "it": "Sì. La farmacia è alla tua sinistra, di fronte all'albergo." },
-  "d5": { "v": "tourist", "en": "Thank you very much!", "it": "Grazie mille!" },
-  "d6": { "v": "local", "en": "You're welcome!", "it": "Prego!" },
+  "d1": { "v": "tourist", "en": "Excuse me, where is the pharmacy?", "it": "Scusi, dov'è la farmacia?" },
+  "d2": { "v": "local", "en": "Take the first right. It's on the left, opposite the hotel.", "it": "Prendi la prima a destra. È a sinistra, di fronte all'albergo." },
+  "d3": { "v": "tourist", "en": "Thank you!", "it": "Grazie!" },
+  "d4": { "v": "local", "en": "You're welcome!", "it": "Prego!" },
 
-  "a_cafe": { "v": "local", "en": "Go straight on. The café is on your left.", "it": "Vai dritto. Il bar è alla tua sinistra." },
-  "a_hotel": { "v": "local", "en": "Go straight on. The hotel is on your right.", "it": "Vai dritto. L'albergo è alla tua destra." },
-  "a_supermarket": { "v": "local", "en": "Go straight on and turn left. The supermarket is on your right.", "it": "Vai dritto e gira a sinistra. Il supermercato è alla tua destra." },
-  "a_pharmacy": { "v": "local", "en": "Go straight on and turn right. The pharmacy is on your left.", "it": "Vai dritto e gira a destra. La farmacia è alla tua sinistra." },
-  "a_church": { "v": "local", "en": "Go straight on, past the traffic lights. The church is on your left.", "it": "Vai dritto, oltre il semaforo. La chiesa è alla tua sinistra." },
-  "a_bank": { "v": "local", "en": "Take the second right. The bank is on your left.", "it": "Prendi la seconda a destra. La banca è alla tua sinistra." },
-  "a_postoffice": { "v": "local", "en": "Take the first left. Then turn right. The post office is on your left.", "it": "Prendi la prima a sinistra. Poi gira a destra. L'ufficio postale è alla tua sinistra." },
-  "a_restaurant": { "v": "local", "en": "Take the first right. Then turn left. The restaurant is on your right.", "it": "Prendi la prima a destra. Poi gira a sinistra. Il ristorante è alla tua destra." },
-  "a_hospital": { "v": "local", "en": "Take the second left. Then turn right. The hospital is on your left.", "it": "Prendi la seconda a sinistra. Poi gira a destra. L'ospedale è alla tua sinistra." },
-  "a_cinema": { "v": "local", "en": "Go straight on to the traffic lights and turn right. Then turn left. The cinema is on your right.", "it": "Vai dritto fino al semaforo e gira a destra. Poi gira a sinistra. Il cinema è alla tua destra." },
-  "a_school": { "v": "local", "en": "Go straight on to the end of the road. Turn left. The school is on your right.", "it": "Vai dritto fino alla fine della strada. Gira a sinistra. La scuola è alla tua destra." },
-  "a_park": { "v": "local", "en": "Go straight on to the end of the road. Turn right. The park is on your left.", "it": "Vai dritto fino alla fine della strada. Gira a destra. Il parco è alla tua sinistra." }
+  "a_cafe": { "v": "local", "en": "Go straight on. It's on the left, opposite the hotel.", "it": "Vai dritto. È a sinistra, di fronte all'albergo." },
+  "a_hotel": { "v": "local", "en": "Go straight on. It's on the right, opposite the café.", "it": "Vai dritto. È a destra, di fronte al bar." },
+  "a_supermarket": { "v": "local", "en": "Take the first left. It's on the right, opposite the café.", "it": "Prendi la prima a sinistra. È a destra, di fronte al bar." },
+  "a_pharmacy": { "v": "local", "en": "Take the first right. It's on the left, opposite the hotel.", "it": "Prendi la prima a destra. È a sinistra, di fronte all'albergo." },
+  "a_church": { "v": "local", "en": "Go straight on. After the traffic lights, go straight on. It's on the left, opposite the bank.", "it": "Vai dritto. Dopo il semaforo, vai dritto. È a sinistra, di fronte alla banca." },
+  "a_bank": { "v": "local", "en": "Take the second right. It's on the left, opposite the pharmacy.", "it": "Prendi la seconda a destra. È a sinistra, di fronte alla farmacia." },
+  "a_postoffice": { "v": "local", "en": "Take the first left. Then take the first right. It's on the left, opposite the supermarket.", "it": "Prendi la prima a sinistra. Poi prendi la prima a destra. È a sinistra, di fronte al supermercato." },
+  "a_restaurant": { "v": "local", "en": "Take the first right. Then take the first left. It's on the right, opposite the pharmacy.", "it": "Prendi la prima a destra. Poi prendi la prima a sinistra. È a destra, di fronte alla farmacia." },
+  "a_hospital": { "v": "local", "en": "Take the second left. Then take the first right. It's on the left, opposite the church.", "it": "Prendi la seconda a sinistra. Poi prendi la prima a destra. È a sinistra, di fronte alla chiesa." },
+  "a_cinema": { "v": "local", "en": "Go straight on. At the traffic lights, turn right. Then take the first left. It's on the right, opposite the bank.", "it": "Vai dritto. Al semaforo, gira a destra. Poi prendi la prima a sinistra. È a destra, di fronte alla banca." },
+  "a_school": { "v": "local", "en": "Go straight on to the end of the road. Turn left. It's on the right, opposite the church.", "it": "Vai dritto fino alla fine della strada. Gira a sinistra. È a destra, di fronte alla chiesa." },
+  "a_park": { "v": "local", "en": "Go straight on to the end of the road. Turn right. It's on the left, opposite the bank.", "it": "Vai dritto fino alla fine della strada. Gira a destra. È a sinistra, di fronte alla banca." }
 };

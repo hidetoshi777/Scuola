@@ -34,10 +34,10 @@ CONTESTO = (
 FRASI = json.loads(re.search(r"window\.FRASI\s*=\s*(\{.*\})\s*;", (HERE / "js" / "frasi.js").read_text(encoding="utf-8"), re.S).group(1))
 NOMI = {k[2:]: v["en"] for k, v in FRASI.items() if k.startswith("w_")}
 
-LAB_POSTI = [("pharmacy", ["pharmacy", "police", "park"]), ("church", ["school", "church", "cinema"]),
-             ("hospital", ["hotel", "hospital", "library"]), ("bank", ["bank", "bakery", "busstop"]),
-             ("postoffice", ["supermarket", "postoffice", "museum"]), ("station", ["station", "police", "lights"]),
-             ("lights", ["zebra", "crossroads", "lights"]), ("cafe", ["restaurant", "cafe", "hotel"])]
+LAB_POSTI = [("pharmacy", ["pharmacy", "park", "cinema"]), ("church", ["school", "church", "cinema"]),
+             ("hospital", ["hotel", "hospital", "bank"]), ("bank", ["bank", "cafe", "park"]),
+             ("postoffice", ["supermarket", "postoffice", "restaurant"]), ("station", ["station", "hotel", "lights"]),
+             ("lights", ["lights", "park", "school"]), ("cafe", ["restaurant", "cafe", "hotel"])]
 DESCR_ICONA = {
     "pharmacy": "edificio bianco con insegna verde e croce verde",
     "church": "edificio con campanile a punta e croce",
@@ -48,45 +48,35 @@ DESCR_ICONA = {
     "lights": "un semaforo rosso giallo verde",
     "cafe": "edificio con tazzina di caffè fumante",
 }
-FRECCE = {"F": "freccia dritta in su (vai dritto)", "L": "freccia che gira a sinistra", "R": "freccia che gira a destra",
-          "left": "il posto è a sinistra della strada", "right": "il posto è a destra della strada"}
-LAB_FRECCE = [("c_straight", "F"), ("c_left", "L"), ("c_onright", "right"), ("c_right", "R"),
-              ("l_first", "L"), ("c_onleft", "left"), ("l_second", "R"), ("l_yourleft", "left")]
+FRECCE = {"F": "freccia dritta (vai dritto)", "L": "freccia che gira a sinistra", "R": "freccia che gira a destra"}
+LAB_FRECCE = [("c_straight", "F"), ("c_left", "L"), ("c_right", "R"), ("l_first", "L"),
+              ("l_second", "R"), ("l_after", "F"), ("l_lights", "L"), ("l_end", "R")]
 LAB_DOVE = [
     ("bank, pharmacy* uno accanto all'altro sullo stesso lato della strada", "The pharmacy is ___ the bank.", "next to"),
-    ("church sopra la strada, school* esattamente di fronte dall'altro lato della strada", "The school is ___ the church.", "opposite"),
-    ("cafe, hotel*, cinema in fila sullo stesso lato, hotel in mezzo", "The hotel is ___ the café and the cinema.", "between"),
+    ("cinema sopra la strada, bank* esattamente di fronte dall'altro lato della strada", "The bank is ___ the cinema.", "opposite"),
     ("supermarket sopra la strada, post office* esattamente di fronte dall'altro lato", "The post office is ___ the supermarket.", "opposite"),
     ("hospital, park* uno accanto all'altro sullo stesso lato", "The park is ___ the hospital.", "next to"),
-    ("bank, church*, school in fila sullo stesso lato, church in mezzo", "The church is ___ the bank and the school.", "between"),
 ]
 LAB_DIALOGO = [
     ("___ me, where is the bank?", ["Excuse", "Thank", "Please"], "Excuse", ""),
     ("Go ___ on.", ["straight", "street", "stop"], "straight", ""),
-    ("Turn ___.", ["left", "right", "straight"], "left", "accanto c'è una freccia che gira a sinistra"),
     ("Take the ___ right.", ["first", "second", "third"], "second", "accanto c'è il cartellino 2ª"),
-    ("It's ___ the left.", ["on", "in", "of"], "on", ""),
-    ("Is there a pharmacy ___ here?", ["near", "next", "far"], "near", ""),
+    ("The bank is ___ the cinema.", ["opposite", "next", "between"], "opposite", "accanto c'è l'aiuto «di fronte»"),
     ("Thank you! — You're ___!", ["welcome", "please", "sorry"], "welcome", ""),
 ]
 SCHEDA_COMPLETA = [
-    ("___ me, where is the hotel?", "Excuse"), ("Go ___ on.", "straight"), ("It's ___ the right.", "on"),
+    ("___ me, where is the hotel?", "Excuse"), ("Go ___ on.", "straight"), ("The bank is ___ the cinema. (di fronte)", "opposite"),
     ("The bakery is ___ to the bank. (accanto)", "next"), ("Thank you! — You're ___!", "welcome"),
 ]
 AFFERMAZIONI = [
-    "«Excuse me» si usa per attirare l'attenzione di uno sconosciuto e chiedere qualcosa; «Sorry» si usa quando sbagli, per chiedere scusa (per esempio se urti qualcuno).",
-    "«Where is the…?» = Dov'è il / la…? Si dice anche «Where's the…?».",
-    "Per un posto preciso si usa «the» (il, lo, la): Where is the bank? = Dov'è la banca? Quando chiedi se ce n'è uno si usa «a» (un, una): Is there a bank near here? = C'è una banca qui vicino?",
-    "first = prima (1ª), second = seconda (2ª), third = terza (3ª). «Take the second right»: conti le strade a destra, passi la prima e giri alla seconda.",
-    "«It's on the left» e «It's on your left» vogliono dire la stessa cosa: è a sinistra.",
-    "next to = accanto a; opposite = di fronte a (dall'altra parte della strada); between = tra; on the corner = all'angolo.",
-    "Errore tipico: «Turn to left» o «Turn at left» sono sbagliati; si dice «Turn left».",
+    "Prima dici «Excuse me» (scusi). Poi chiedi: «Where is…?» = Dov'è…?",
+    "the = il, la · a = un, una (Where is the bank? / Is there a bank near here?)",
+    "first = prima · second = seconda. «Take the second right»: la prima strada a destra la salti, alla seconda giri.",
+    "«It's opposite the cinema» = è di fronte al cinema (dall'altra parte della strada). «It's next to the bank» = è accanto alla banca.",
+    "Errore tipico: «Turn to left» è sbagliato; si dice «Turn left».",
     "Errore tipico: «Go street on» è sbagliato; si dice «Go straight on». street = strada, straight = dritto.",
-    "Errore tipico: «Sorry me, where is the bank?» è sbagliato; si dice «Excuse me, where is the bank?».",
-    "Quando qualcuno ti dice «Thank you», rispondi «You're welcome» (prego). «Please» si usa per chiedere qualcosa (per favore).",
-    "Trucco: alza le due mani davanti a te con il dorso verso di te e apri pollice e indice: la mano che forma una L dritta è la sinistra (L = Left).",
-    "«right» vuol dire anche «giusto»: That's right! = Esatto!",
-    "left e right sono la sinistra e la destra di chi cammina: se sulla mappa l'omino scende verso il basso, la sua destra è la tua sinistra.",
+    "Quando qualcuno ti dice «Thank you», rispondi «You're welcome» (prego), non «Please».",
+    "Trucco: alza le mani, dorso verso di te, apri pollice e indice: la mano che fa la L è la sinistra (L = Left).",
 ]
 
 
@@ -108,7 +98,7 @@ def costruisci_items() -> list[dict]:
                       "opzioni": ops, "corretta": ok})
     for n, (frase, ok) in enumerate(SCHEDA_COMPLETA, 1):
         items.append({"id": f"scheda5_{n}", "tipo": "chiusa", "domanda": f"Completa: {frase}",
-                      "opzioni": ["on", "next", "Excuse", "straight", "welcome"], "corretta": ok})
+                      "opzioni": ["opposite", "next", "Excuse", "straight", "welcome"], "corretta": ok})
     for n, a in enumerate(AFFERMAZIONI, 1):
         items.append({"id": f"studio_{n}", "tipo": "affermazione", "testo": a})
     return items

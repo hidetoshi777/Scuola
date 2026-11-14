@@ -355,7 +355,8 @@ main:focus { outline: none; }
 @keyframes trema { 20%, 60% { transform: translateX(-5px); } 40%, 80% { transform: translateX(5px); } }
 
 /* ---------- Gioco ---------- */
-.livelli { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; margin: 8px 0 12px; }
+.livelli { display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; margin: 8px 0 12px; }
+@media (max-width: 620px) { .livelli { grid-template-columns: repeat(2, 1fr); } }
 .livelli .btn { padding: 6px 6px; min-height: 52px; font-size: .9rem; line-height: 1.15; flex-direction: column; gap: 0; }
 .livelli .btn small { font-family: "Atkinson Hyperlegible", sans-serif; font-weight: 400; font-size: .78rem; opacity: .85; }
 .campo { display: grid; gap: 12px; grid-template-columns: minmax(0, 1fr); grid-template-areas: "su" "mappa" "giu"; align-items: start; }
