@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="color-scheme" content="dark" id="color-scheme">
+  <script>
+    {
+      let t = null;
+      try { t = localStorage.getItem("tema-directions"); } catch (e) {}
+      const tema = t === "light" || t === "dark" ? t : "dark";
+      document.documentElement.dataset.theme = tema;
+      document.getElementById("color-scheme").content = tema;
+    }
+  </script>
+  <link rel="icon" href="../favicon.svg" type="image/svg+xml">
+  <title>Gioco · Excuse me, where is…? | Scuola</title>
+  <meta name="description" content="La mappa di Greenford: trova i posti, segui le indicazioni in inglese guidando l’omino, aiuta il turista con go straight on, turn left, turn right.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=Overpass:wght@700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css?v=1">
+</head>
+<body class="page-gioco">
+  <a class="skip-link" href="#contenuto">Salta al contenuto</a>
+
+  <header class="testata">
+    <p class="targa"><b>Where is…? Road</b><small>GREENFORD · INGLESE</small></p>
+    <button type="button" class="theme-toggle" data-theme-toggle aria-pressed="false">☀ Chiaro</button>
+  </header>
+  <nav class="cartelli" aria-label="Sezioni">
+    <a href="index.html"><span class="ico" aria-hidden="true">⌂</span>Home</a>
+    <a href="imparare.html"><span class="ico" aria-hidden="true">✎</span>Studio</a>
+    <a href="laboratorio.html"><span class="ico" aria-hidden="true">⚙</span>Lab</a>
+    <a href="gioco.html" aria-current="page"><span class="ico" aria-hidden="true">★</span>Gioco</a>
+  </nav>
+
+  <main id="contenuto" tabindex="-1">
+    <p class="kicker">Gioco · la mappa di Greenford</p>
+    <h1>Find your way!</h1>
+    <p class="lead" id="spiega-livello">Scegli un livello. Parti sempre dalla stazione, in basso.</p>
+
+    <div class="livelli" role="group" aria-label="Livello">
+      <button type="button" class="btn" data-livello="1" aria-pressed="true">1 · Trova il posto<small>ascolta e tocca</small></button>
+      <button type="button" class="btn" data-livello="2" aria-pressed="false">2 · Segui la strada<small>guida l’omino</small></button>
+      <button type="button" class="btn" data-livello="3" aria-pressed="false">3 · Aiuta il turista<small>dai tu le indicazioni</small></button>
+    </div>
+
+    <div class="campo" id="campo">
+      <div class="pannello pannello-su">
+        <div class="hud" aria-live="polite">
+          <span class="pill">Turno <strong id="hud-n">1</strong>/<span id="hud-tot">8</span></span>
+          <span class="pill">Punti <strong id="hud-punti">0</strong></span>
+        </div>
+        <div id="dialogo" class="dialogo"></div>
+        <div class="strumenti">
+          <button type="button" class="btn" id="btn-ascolta">🔊 Ascolta</button>
+          <button type="button" class="btn" id="btn-lento" aria-pressed="false">🐢 Lento</button>
+          <button type="button" class="btn" id="btn-it" aria-pressed="false">IT Traduzione</button>
+          <button type="button" class="btn" id="btn-aiuto" aria-pressed="true">↔ left / right</button>
+        </div>
+        <p class="messaggio" id="msg" aria-live="polite"></p>
+      </div>
+
+      <div class="mappa-box" id="mappa"></div>
+
+      <div class="pannello pannello-giu">
+        <div class="programma" id="programma" hidden aria-label="Le tue indicazioni"><span class="vuoto">Le tue indicazioni: tocca le frecce qui sotto.</span></div>
+        <div class="pad" id="pad">
+          <div class="riga" id="riga-mosse">
+            <button type="button" class="m-L" data-mossa="L"><span data-freccia="L"></span>Turn left<small>gira a sinistra</small></button>
+            <button type="button" class="m-F" data-mossa="F"><span data-freccia="F"></span>Go straight on<small>vai dritto</small></button>
+            <button type="button" class="m-R" data-mossa="R"><span data-freccia="R"></span>Turn right<small>gira a destra</small></button>
+          </div>
+          <div class="riga due" id="riga-lati">
+            <button type="button" class="s-left" data-lato="left"><span data-freccia="left"></span>It’s on the left<small>è a sinistra</small></button>
+            <button type="button" class="s-right" data-lato="right"><span data-freccia="right"></span>It’s on the right<small>è a destra</small></button>
+          </div>
+          <div class="riga due" id="riga-prog" hidden>
+            <button type="button" class="btn" id="btn-cancella" style="color:var(--ink)">⌫ Cancella</button>
+            <button type="button" class="btn btn-primary" id="btn-vai">▶ Go!</button>
+          </div>
+          <div class="riga due" id="riga-next" hidden>
+            <button type="button" class="btn btn-primary" id="btn-next" style="grid-column:1 / -1">Avanti ▶</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <section class="fine-gioco" id="fine" hidden>
+      <h2 id="fine-titolo">Well done!</h2>
+      <p class="stelle" id="stelle"></p>
+      <p id="fine-testo"></p>
+      <div class="azioni" style="justify-content:center">
+        <button type="button" class="btn" id="btn-ancora">↻ Rigioca</button>
+        <button type="button" class="btn btn-primary" id="btn-livello-dopo">Livello successivo ▶</button>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p class="firma">Realizzato dal Prof. Rossano Bella</p>
+    <p>Scuola · Inglese · terza professionale AM · Voci in inglese: ElevenLabs</p>
+  </footer>
+
+  <script src="js/frasi.js?v=1" defer></script>
+  <script src="js/icone.js?v=1" defer></script>
+  <script src="js/frecce.js?v=1" defer></script>
+  <script src="js/common.js?v=1" defer></script>
+  <script src="js/citta.js?v=1" defer></script>
+  <script src="js/gioco.js?v=1" defer></script>
+</body>
+</html>

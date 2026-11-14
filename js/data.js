@@ -202,6 +202,26 @@ window.ATTIVITA_WEB = [
     ],
   },
   {
+    titolo: "Excuse me, where is…? Chiedere la strada",
+    materia: "Inglese",
+    classe: "Terza superiore · professionale",
+    annoProf: 3,
+    pubblicato: "2026-11-14",
+    descrizione:
+      "Chiedere e dare indicazioni: i posti della città con le icone, go straight on, turn left, turn right, on the left, next to. Voci in inglese, laboratorio autocorretto, gioco sulla mappa di Greenford e scheda da stampare.",
+    citazione: "Excuse me, where is the pharmacy?",
+    url: "directions-inglese/",
+    copertina: "directions-inglese/img/og-share.jpg",
+    tinta: "inglese",
+    adesivo: "st-globo",
+    extra: [
+      { label: "Studio", url: "directions-inglese/imparare.html" },
+      { label: "Laboratorio", url: "directions-inglese/laboratorio.html" },
+      { label: "Gioco", url: "directions-inglese/gioco.html" },
+      { label: "Scheda PDF", url: "directions-inglese/stampa/scheda-directions.pdf" },
+    ],
+  },
+  {
     titolo: "Da Luigi XIV all’Illuminismo",
     materia: "Storia",
     classe: "Quarta superiore · professionale",

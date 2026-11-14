@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="color-scheme" content="dark" id="color-scheme">
+  <script>
+    {
+      let t = null;
+      try { t = localStorage.getItem("tema-directions"); } catch (e) {}
+      const tema = t === "light" || t === "dark" ? t : "dark";
+      document.documentElement.dataset.theme = tema;
+      document.getElementById("color-scheme").content = tema;
+    }
+  </script>
+  <link rel="icon" href="../favicon.svg" type="image/svg+xml">
+  <title>Laboratorio · Excuse me, where is…? | Scuola</title>
+  <meta name="description" content="Esercizi autocorretti: riconosci i posti della città, ascolta e scegli la freccia, next to / opposite / between, completa il dialogo.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=Overpass:wght@700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css?v=1">
+</head>
+<body class="page-lab">
+  <a class="skip-link" href="#contenuto">Salta al contenuto</a>
+
+  <header class="testata">
+    <p class="targa"><b>Where is…? Road</b><small>GREENFORD · INGLESE</small></p>
+    <button type="button" class="theme-toggle" data-theme-toggle aria-pressed="false">☀ Chiaro</button>
+  </header>
+  <nav class="cartelli" aria-label="Sezioni">
+    <a href="index.html"><span class="ico" aria-hidden="true">⌂</span>Home</a>
+    <a href="imparare.html"><span class="ico" aria-hidden="true">✎</span>Studio</a>
+    <a href="laboratorio.html" aria-current="page"><span class="ico" aria-hidden="true">⚙</span>Lab</a>
+    <a href="gioco.html"><span class="ico" aria-hidden="true">★</span>Gioco</a>
+  </nav>
+
+  <main id="contenuto" tabindex="-1">
+    <p class="kicker">Laboratorio · si corregge da solo</p>
+    <h1>Allenati prima di partire</h1>
+    <p class="lead">Quattro esercizi. Conta la prima risposta: se sbagli, vedi subito quella giusta.</p>
+
+    <section class="esercizio" aria-labelledby="e1">
+      <h2 id="e1"><span class="num"><span>1</span></span>Che posto è?</h2>
+      <p class="consegna">Guarda l’icona e scegli la parola inglese.</p>
+      <div id="es-posti"></div>
+    </section>
+
+    <section class="esercizio" aria-labelledby="e2">
+      <h2 id="e2"><span class="num"><span>2</span></span>Ascolta e scegli la freccia</h2>
+      <p class="consegna">Tocca 🔊, ascolta la frase e tocca la freccia giusta. Non hai l’audio? Tocca «Leggi».</p>
+      <div id="es-frecce"></div>
+    </section>
+
+    <section class="esercizio" aria-labelledby="e3">
+      <h2 id="e3"><span class="num"><span>3</span></span>Dov’è?</h2>
+      <p class="consegna">Il posto col bordo giallo è quello della frase. Scegli: <span class="en">next to</span> (accanto a), <span class="en">opposite</span> (di fronte a) o <span class="en">between</span> (tra).</p>
+      <div id="es-dove"></div>
+    </section>
+
+    <section class="esercizio" aria-labelledby="e4">
+      <h2 id="e4"><span class="num"><span>4</span></span>Completa il dialogo</h2>
+      <p class="consegna">Scegli la parola che manca.</p>
+      <div id="es-dialogo"></div>
+    </section>
+
+    <section class="fine-gioco" id="fine-lab" hidden>
+      <h2>Laboratorio finito!</h2>
+      <p class="stelle" id="stelle-lab"></p>
+      <p id="fine-lab-testo"></p>
+      <div class="azioni" style="justify-content:center">
+        <button type="button" class="btn" id="rifai-lab">↻ Rifai tutto</button>
+        <a class="btn btn-primary" href="gioco.html">★ Vai al gioco</a>
+      </div>
+    </section>
+
+    <p class="punteggio-lab" id="punteggio-lab" aria-live="polite">Punti 0 · risposte 0 / 0</p>
+  </main>
+
+  <footer class="site-footer">
+    <p class="firma">Realizzato dal Prof. Rossano Bella</p>
+    <p>Scuola · Inglese · terza professionale AM · Voci in inglese: ElevenLabs</p>
+  </footer>
+
+  <script src="js/frasi.js?v=1" defer></script>
+  <script src="js/icone.js?v=1" defer></script>
+  <script src="js/frecce.js?v=1" defer></script>
+  <script src="js/common.js?v=1" defer></script>
+  <script src="js/laboratorio.js?v=1" defer></script>
+</body>
+</html>

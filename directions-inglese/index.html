@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="color-scheme" content="dark" id="color-scheme">
+  <script>
+    {
+      let t = null;
+      try { t = localStorage.getItem("tema-directions"); } catch (e) {}
+      const tema = t === "light" || t === "dark" ? t : "dark";
+      document.documentElement.dataset.theme = tema;
+      document.getElementById("color-scheme").content = tema;
+    }
+  </script>
+  <link rel="icon" href="../favicon.svg" type="image/svg+xml">
+  <title>Excuse me, where is…? Chiedere la strada | Scuola</title>
+  <meta name="description" content="Chiedere e dare indicazioni in inglese: i posti della città con le icone, go straight on, turn left, turn right. Voci in inglese, laboratorio e gioco sulla mappa.">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="it_IT">
+  <meta property="og:site_name" content="Scuola">
+  <meta property="og:title" content="Excuse me, where is…? Chiedere la strada">
+  <meta property="og:description" content="Go straight on, turn left, turn right: chiedi dov’è la farmacia e guida l’omino sulla mappa.">
+  <meta property="og:url" content="https://hidetoshi777.github.io/Scuola/directions-inglese/">
+  <meta property="og:image" content="https://hidetoshi777.github.io/Scuola/directions-inglese/img/og-share.jpg">
+  <meta property="og:image:alt" content="La mappa della città di Greenford con chiesa, farmacia, banca, semaforo e l’omino alla stazione">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Excuse me, where is…? Chiedere la strada">
+  <meta name="twitter:description" content="Go straight on, turn left, turn right: chiedi dov’è la farmacia e guida l’omino sulla mappa.">
+  <meta name="twitter:image" content="https://hidetoshi777.github.io/Scuola/directions-inglese/img/og-share.jpg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=Overpass:wght@700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css?v=1">
+</head>
+<body class="page-home">
+  <a class="skip-link" href="#contenuto">Salta al contenuto</a>
+
+  <header class="testata">
+    <p class="targa"><b>Where is…? Road</b><small>GREENFORD · INGLESE</small></p>
+    <button type="button" class="theme-toggle" data-theme-toggle aria-pressed="false">☀ Chiaro</button>
+  </header>
+  <nav class="cartelli" aria-label="Sezioni">
+    <a href="index.html" aria-current="page"><span class="ico" aria-hidden="true">⌂</span>Home</a>
+    <a href="imparare.html"><span class="ico" aria-hidden="true">✎</span>Studio</a>
+    <a href="laboratorio.html"><span class="ico" aria-hidden="true">⚙</span>Lab</a>
+    <a href="gioco.html"><span class="ico" aria-hidden="true">★</span>Gioco</a>
+  </nav>
+
+  <main id="contenuto" tabindex="-1">
+    <p class="kicker">Inglese · Terza professionale AM</p>
+    <div class="incrocio">
+      <div>
+        <h1>Excuse me, where is…?</h1>
+        <p class="lead">Sei in una città inglese. Devi trovare la farmacia. Chiedi la strada e capisci la risposta: <span class="dritto">dritto</span>, <span class="sx">a sinistra</span>, <span class="dx">a destra</span>.</p>
+        <div class="dialogo" aria-label="Esempio di dialogo">
+          <div class="nuvola turista"><button type="button" class="voce" data-voce="d1" aria-label="Ascolta"></button><p><span class="chi">Turista</span><span class="en">Excuse me, is there a pharmacy near here?</span><br><span class="it">Scusi, c’è una farmacia qui vicino?</span></p></div>
+          <div class="nuvola passante"><button type="button" class="voce" data-voce="d2" aria-label="Ascolta"></button><p><span class="chi">Passante</span><span class="en">Yes, there is. Go <span class="dritto">straight on</span> and turn <span class="dx">right</span>.</span><br><span class="it">Sì, c’è. Vai dritto e gira a destra.</span></p></div>
+        </div>
+        <div class="azioni">
+          <button type="button" class="btn btn-primary" data-voce="d1 d2 d3 d4 d5 d6">▶ Ascolta tutto il dialogo</button>
+        </div>
+      </div>
+      <div>
+        <div class="vetrina" id="vetrina" aria-label="Tocca un posto per sentire il nome"></div>
+        <p class="vetrina-nota">Tocca un posto: senti come si dice in inglese.</p>
+      </div>
+    </div>
+
+    <blockquote class="citazione">
+      <span>“Excuse me, where is the pharmacy?”</span>
+      <span class="risposta">“Go straight on and turn right.”</span>
+    </blockquote>
+
+    <h2>Da dove parto?</h2>
+    <div class="porte">
+      <a class="porta" href="imparare.html"><span class="ico" aria-hidden="true">✎</span><span><b>Studio</b><span class="desc">I posti della città, le frecce, le domande e le risposte. Con la voce.</span></span></a>
+      <a class="porta" href="laboratorio.html"><span class="ico" aria-hidden="true">⚙</span><span><b>Laboratorio</b><span class="desc">Quattro esercizi che si correggono da soli.</span></span></a>
+      <a class="porta" href="gioco.html"><span class="ico" aria-hidden="true">★</span><span><b>Gioco</b><span class="desc">La mappa di Greenford: ascolta, guida l’omino, aiuta il turista.</span></span></a>
+      <a class="porta" href="stampa/scheda-directions.pdf"><span class="ico" aria-hidden="true">🖨️</span><span><b>Scheda PDF</b><span class="desc">Due pagine da stampare, con le soluzioni.</span></span></a>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <p class="firma">Realizzato dal Prof. Rossano Bella</p>
+    <p>Scuola · Inglese · terza professionale AM · Voci in inglese: ElevenLabs</p>
+  </footer>
+
+  <script src="js/frasi.js?v=1" defer></script>
+  <script src="js/icone.js?v=1" defer></script>
+  <script src="js/common.js?v=1" defer></script>
+  <script src="js/home.js?v=1" defer></script>
+</body>
+</html>
