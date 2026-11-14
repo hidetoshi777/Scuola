@@ -23,4 +23,6 @@ Quando si crea o rifà una **video-lezione** (stile trigonometria / cavitazione-
 
 ## Formato tipico
 
-Homepage = video + (opzionale) FAQ breve + scheda PDF da stampare. Non inventare Studio/Lab/Gioco se non chiesti.
+Homepage = video + (opzionale) FAQ breve + scheda PDF da stampare (+ eventuale fumetto se chiesto). Non inventare Studio/Lab/Gioco se non chiesti.
+
+- **Menu solo in alto, una parte alla volta**: evitare sidebar/menu laterali o collegamenti ripetuti ovunque; quando la lezione ha più sezioni (Video, Fumetto, Domande, Scheda PDF), usare un **menu unico in alto a schede (tab)** che mostri una sola sezione per volta (con `?v=N` su CSS/JS ad ogni aggiornamento).
