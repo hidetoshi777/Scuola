@@ -19,7 +19,7 @@
     .nome-riga span { flex: 1; border-bottom: 1px solid #333; }
     .icone { display: grid; grid-template-columns: repeat(4, 1fr); gap: 3mm; }
     .icone div { border: 1.5px solid #ccc; border-radius: 3mm; padding: 2mm; text-align: center; }
-    .icone svg { width: 18mm; height: 18mm; }
+    .icone svg, .icone img { width: 24mm; height: 24mm; display: block; margin: 0 auto; }
     .icone .linea { border-bottom: 1px solid #333; height: 7mm; margin: 1mm 3mm 0; }
     .banca-parole { margin: 2mm 0; padding: 2mm 3mm; border: 1.5px dashed #999; border-radius: 3mm; font-weight: 700; word-spacing: 3mm; }
     .abbina { display: grid; grid-template-columns: 1fr 1fr; gap: 4mm; align-items: start; }
@@ -101,7 +101,8 @@
   </section>
 
   <script src="../js/frasi.js"></script>
-  <script src="../js/icone.js"></script>
+  <script>window.ICONE_BASE = "../";</script>
+  <script src="../js/citta-proiezione.js"></script>
   <script src="../js/frecce.js"></script>
   <script src="../js/common.js"></script>
   <script src="../js/citta.js"></script>

@@ -10,7 +10,6 @@
   const X = [152, 350, 548];
   const Y = [150, 350, 550];
   const S = { x: 350, y: 668 };
-  const W = 700, H = 800, STRADA = 46;
 
   const COL = [[6, 126], [176, 326], [374, 524], [574, 694]];
   const RIG = [[6, 124], [176, 326], [374, 524], [576, 690]];
@@ -120,138 +119,91 @@
     return null;
   }
 
-  /* ---------------- Disegno ---------------- */
-  const NS = "http://www.w3.org/2000/svg";
+  /* ---------------- Disegno ----------------
+     Sfondo = render 3D di Blender (img/citta.jpg, da _blender_citta.py).
+     Sopra, in SVG: zone cliccabili, targhe coi nomi, scia, omino.
+     CITTA_PROIEZIONE porta un punto della pianta (px) sul disegno. */
+  const PR = window.CITTA_PROIEZIONE || { w: 720, h: 620, ox: 10, oy: 44, ax: 1, ay: 0.7071, az: -70.71 };
+  const P = (x, y, z) => ({ x: PR.ox + PR.ax * x, y: PR.oy + PR.ay * y + PR.az * (z || 0) });
+  const DIRS = ["N", "E", "S", "W"];
+  const SPRITE = 96;       /* lato dello sprite dell'omino nel disegno */
+  const PIEDI = 0.741;     /* dove stanno i piedi nello sprite (frazione dall'alto) */
 
-  function strade() {
-    let s = "";
-    const seg = (x1, y1, x2, y2) => {
-      s += `<line class="marciapiede" x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}" stroke-width="${STRADA + 14}" stroke-linecap="square"/>`;
-    };
-    const asf = (x1, y1, x2, y2) => {
-      s += `<line class="asfalto" x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}" stroke-width="${STRADA}" stroke-linecap="square"/>`;
-    };
-    const mez = (x1, y1, x2, y2) => {
-      s += `<line class="mezzeria" x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}"/>`;
-    };
-    const tutti = [];
-    X.forEach((x) => tutti.push([x, Y[0], x, Y[2]]));
-    Y.forEach((y) => tutti.push([X[0], y, X[2], y]));
-    tutti.push([S.x, Y[2], S.x, 712]);
-    tutti.forEach((t) => seg(...t));
-    tutti.forEach((t) => asf(...t));
-    /* mezzeria a tratti, interrotta agli incroci */
-    X.forEach((x) => { for (let k = 0; k < 2; k += 1) mez(x, Y[k] + 30, x, Y[k + 1] - 30); });
-    Y.forEach((y) => { for (let k = 0; k < 2; k += 1) mez(X[k] + 30, y, X[k + 1] - 30, y); });
-    mez(S.x, Y[2] + 30, S.x, 604);
-    /* strisce pedonali sul tratto della stazione */
-    for (let k = 0; k < 5; k += 1) s += `<rect class="zebra" x="${S.x - 20 + k * 8.8}" y="618" width="5.5" height="24"/>`;
-    return s;
-  }
-
-  function decorazioni() {
-    const albero = (x, y, r) => `<g class="albero"><circle cx="${x}" cy="${y}" r="${r}"/><circle cx="${x - r * 0.35}" cy="${y - r * 0.35}" r="${r * 0.5}" class="luce"/></g>`;
-    const casa = (x, y, c) => `<g class="casetta"><rect x="${x - 13}" y="${y - 6}" width="26" height="20" rx="2" fill="${c}"/><path d="M${x - 16} ${y - 4} L${x} ${y - 18} L${x + 16} ${y - 4} Z" fill="#7a4b33"/><rect x="${x - 3}" y="${y + 5}" width="6" height="9" fill="#5b3a24"/></g>`;
-    return [
-      albero(34, 36, 18), albero(86, 78, 15), albero(32, 104, 11),
-      casa(612, 44, "#f1c27d"), casa(662, 94, "#a5d8ff"), albero(664, 32, 12),
-      casa(42, 622, "#ffc9c9"), albero(92, 680, 15), albero(34, 742, 13), casa(90, 770, "#d0bfff"),
-      `<use href="#ic-busstop" x="600" y="596" width="58" height="58"/>`,
-      albero(660, 700, 15), albero(614, 752, 12), albero(672, 772, 10),
-      `<use href="#ic-lights" x="376" y="284" width="42" height="42" class="semaforo"/>`,
-      `<use href="#ic-lights" x="282" y="376" width="42" height="42" class="semaforo"/>`,
-    ].join("");
-  }
-
-  function isolati() {
-    let s = "";
-    for (let c = 0; c < 4; c += 1) {
-      for (let r = 0; r < 4; r += 1) {
-        const [x1, x2] = COL[c], [y1, y2] = RIG[r];
-        const angolo = (c === 0 || c === 3) && (r === 0 || r === 3);
-        if (angolo) continue;
-        s += `<rect class="isolato" x="${x1}" y="${y1}" width="${x2 - x1}" height="${y2 - y1}" rx="10"/>`;
-      }
-    }
-    return s;
-  }
-
-  function posti() {
+  function zone() {
     let s = "";
     Object.entries(POSTI_MAPPA).forEach(([id, [c, r]]) => {
       const p = window.POSTO(id);
-      const [x1, x2] = COL[c], [y1, y2] = RIG[r];
-      const w = x2 - x1, h = y2 - y1;
-      const cx = (x1 + x2) / 2;
-      const stretto = w < 140;
-      /* nelle colonne strette i nomi di due parole vanno su due righe */
-      const righe = stretto && p.en.includes(" ") ? p.en.split(" ") : [p.en];
-      const fs = stretto ? 21 : 24;
-      const alto = righe.length * (fs + 1) + 20;
-      const size = r === 0 || r === 3 ? 62 : stretto ? 70 - (righe.length - 1) * 12 : 92;
-      const iy = y1 + (h - size - alto) / 2;
-      const itTxt = p.it;
+      const a = P(COL[c][0], RIG[r][0]), b = P(COL[c][1], RIG[r][1]);
+      const top = r === 0 ? 4 : a.y - 4;
+      const cx = (a.x + b.x) / 2;
+      const ly = a.y + 18;
+      const larg = Math.max(64, p.en.length * 12.5 + 22);
       s += `<g class="posto" data-posto="${id}" tabindex="0" role="button" aria-label="${p.en}, ${p.it}">
-        <rect class="zona" x="${x1}" y="${y1}" width="${w}" height="${h}" rx="10"/>
-        <use href="#ic-${id}" x="${cx - size / 2}" y="${iy}" width="${size}" height="${size}"/>
+        <rect class="zona" x="${a.x}" y="${top}" width="${b.x - a.x}" height="${b.y - top}" rx="10"/>
         <g class="nome">
-          ${righe.map((t, k) => `<text class="en" x="${cx}" y="${iy + size + fs - 2 + k * (fs + 1)}" text-anchor="middle" font-size="${fs}">${t}</text>`).join("")}
-          <text class="it" x="${cx}" y="${iy + size + alto - 2}" text-anchor="middle">${itTxt}</text>
+          <rect class="targa" x="${cx - larg / 2}" y="${ly - 15}" width="${larg}" height="28" rx="8"/>
+          <text class="en" x="${cx}" y="${ly + 6}" text-anchor="middle">${p.en}</text>
+          <text class="it" x="${cx}" y="${ly + 29}" text-anchor="middle">${p.it}</text>
         </g>
       </g>`;
     });
-    /* la stazione: punto di partenza */
-    s += `<g class="stazione">
-      <use href="#ic-station" x="${S.x - 40}" y="712" width="80" height="80"/>
-      <text class="en" x="${S.x + 48}" y="752" font-size="20">train station</text>
-      <text class="it" x="${S.x + 48}" y="772">stazione</text>
-    </g>`;
+    const st = P(S.x, 742);
+    s += `<g class="stazione"><rect class="targa" x="${st.x + 64}" y="${st.y - 34}" width="118" height="24" rx="7"/>
+      <text class="en" x="${st.x + 123}" y="${st.y - 16}" text-anchor="middle" style="font-size:16px">train station</text></g>`;
     return s;
   }
 
   function omino() {
     return `<g class="omino" id="omino">
+      <polygon class="freccia" points="0,0 0,0 0,0"/>
       <g class="aiuto-lati">
-        <g class="tag-lato tag-left"><rect x="-32" y="-14" width="64" height="26" rx="13"/><text y="5" text-anchor="middle">left</text></g>
-        <g class="tag-lato tag-right"><rect x="-35" y="-14" width="70" height="26" rx="13"/><text y="5" text-anchor="middle">right</text></g>
+        <g class="tag-lato tag-left"><rect x="-30" y="-13" width="60" height="24" rx="12"/><text y="5" text-anchor="middle">left</text></g>
+        <g class="tag-lato tag-right"><rect x="-33" y="-13" width="66" height="24" rx="12"/><text y="5" text-anchor="middle">right</text></g>
       </g>
-      <g class="freccia"><path d="M0 -46 L14 -28 L-14 -28 Z"/></g>
-      <ellipse cx="0" cy="22" rx="17" ry="6" class="ombra"/>
-      <g class="corpo" transform="scale(1.3)">
-        <rect x="-11" y="-6" width="9" height="15" rx="3" fill="#f08c00"/>
-        <rect x="-7" y="-8" width="14" height="18" rx="5" fill="#1c7ed6"/>
-        <rect x="-6" y="9" width="5" height="9" rx="2" fill="#343a40"/><rect x="1" y="9" width="5" height="9" rx="2" fill="#343a40"/>
-        <circle cx="0" cy="-15" r="8" fill="#f1c27d"/>
-        <path d="M-8 -17 Q0 -27 8 -17 Q4 -21 -8 -17 Z" fill="#5c3b1e"/>
-        <circle cx="-2.6" cy="-15" r="1.1" fill="#222"/><circle cx="2.6" cy="-15" r="1.1" fill="#222"/>
-      </g>
-      <g class="qui"><rect x="-56" y="-62" width="112" height="22" rx="11"/><text y="-46" text-anchor="middle">YOU ARE HERE</text></g>
+      <image class="sprite" href="${window.ICONE_BASE || ""}img/omino-N.webp" width="${SPRITE}" height="${SPRITE}"/>
+      <g class="qui"><rect x="-58" y="${-SPRITE * PIEDI - 26}" width="116" height="22" rx="11"/><text y="${-SPRITE * PIEDI - 10}" text-anchor="middle">YOU ARE HERE</text></g>
     </g>`;
   }
 
   function crea(contenitore, opzioni) {
     const opt = Object.assign({ nomi: true, aiuto: true, onPosto: null }, opzioni || {});
-    contenitore.innerHTML = `<svg class="mappa" viewBox="0 0 ${W} ${H}" role="img" aria-label="Mappa della città di Greenford">
-      <rect class="prato" x="0" y="0" width="${W}" height="${H}" rx="18"/>
-      ${isolati()}${strade()}${decorazioni()}${posti()}
+    contenitore.innerHTML = `<svg class="mappa" viewBox="0 0 ${PR.w} ${PR.h}" role="img" aria-label="Mappa della città di Greenford">
+      <image href="${window.ICONE_BASE || ""}img/citta.jpg" x="0" y="0" width="${PR.w}" height="${PR.h}" preserveAspectRatio="none"/>
       <g class="scia" id="scia"></g>
+      ${zone()}
       ${omino()}
     </svg>`;
     const svg = contenitore.querySelector("svg");
     const om = svg.querySelector("#omino");
+    const sprite = om.querySelector(".sprite");
+    const freccia = om.querySelector(".freccia");
     const scia = svg.querySelector("#scia");
     let st = { pos: "S", dir: "N", ultimo: null };
     let xy = { ...S };
     let ang = 0;
+    let passo_anim = 0;
+
+    /* precarica le quattro pose, così il cambio di direzione non lampeggia */
+    DIRS.forEach((d) => { const i = new Image(); i.src = `${window.ICONE_BASE || ""}img/omino-${d}.webp`; });
 
     const disegna = () => {
-      om.setAttribute("transform", `translate(${xy.x} ${xy.y})`);
-      om.querySelector(".freccia").setAttribute("transform", `rotate(${ang})`);
-      /* i cartellini left/right restano dritti ma si mettono ai lati veri dell'omino */
+      const p = P(xy.x, xy.y);
+      const salto = passo_anim ? Math.abs(Math.sin(passo_anim)) * 5 : 0;
+      om.setAttribute("transform", `translate(${p.x} ${p.y})`);
+      const posa = DIRS[((Math.round(ang / 90) % 4) + 4) % 4];
+      if (sprite.dataset.posa !== posa) { sprite.setAttribute("href", `${window.ICONE_BASE || ""}img/omino-${posa}.webp`); sprite.dataset.posa = posa; }
+      sprite.setAttribute("x", -SPRITE / 2);
+      sprite.setAttribute("y", -SPRITE * PIEDI - salto);
+      /* freccia a terra davanti all'omino (nella pianta, poi schiacciata dalla prospettiva) */
       const rad = (ang * Math.PI) / 180;
-      const sx = -Math.cos(rad), sy = -Math.sin(rad); /* sinistra dell'omino */
-      om.querySelector(".tag-left").setAttribute("transform", `translate(${sx * 62} ${sy * 58 - 4})`);
-      om.querySelector(".tag-right").setAttribute("transform", `translate(${-sx * 66} ${-sy * 58 - 4})`);
+      const avanti = { x: Math.sin(rad), y: -Math.cos(rad) }, lato = { x: Math.cos(rad), y: Math.sin(rad) };
+      const pt = (f, l) => { const q = P(xy.x + avanti.x * f + lato.x * l, xy.y + avanti.y * f + lato.y * l); return `${q.x - p.x},${q.y - p.y}`; };
+      freccia.setAttribute("points", `${pt(58, 0)} ${pt(36, 16)} ${pt(36, -16)}`);
+      /* cartellini left/right ai lati veri dell'omino, all'altezza della vita */
+      const sx = -Math.cos(rad), sy = -Math.sin(rad);
+      const q1 = P(xy.x + sx * 64, xy.y + sy * 64, 0.28), q2 = P(xy.x - sx * 64, xy.y - sy * 64, 0.28);
+      om.querySelector(".tag-left").setAttribute("transform", `translate(${q1.x - p.x} ${q1.y - p.y})`);
+      om.querySelector(".tag-right").setAttribute("transform", `translate(${q2.x - p.x} ${q2.y - p.y})`);
     };
     disegna();
 
@@ -268,26 +220,29 @@
 
     function anima(da, a, ang0, ang1, ms) {
       return new Promise((resolve) => {
-        if (veloce()) { xy = { ...a }; ang = ang1; disegna(); resolve(); return; }
+        if (veloce()) { xy = { ...a }; ang = ang1; passo_anim = 0; disegna(); resolve(); return; }
         let d = ang1 - ang0;
         if (d > 180) d -= 360;
         if (d < -180) d += 360;
         const t0 = performance.now();
-        const rot = d === 0 ? 0 : 0.3;
+        const rot = d === 0 ? 0 : 0.25;
+        const muove = da.x !== a.x || da.y !== a.y;
         const tick = (t) => {
           const k = Math.min(1, (t - t0) / ms);
           if (k < rot) {
             ang = ang0 + d * (k / rot);
             xy = { ...da };
+            passo_anim = 0;
           } else {
             ang = ang0 + d;
             const q = (k - rot) / (1 - rot);
             const e = q < 0.5 ? 2 * q * q : 1 - Math.pow(-2 * q + 2, 2) / 2;
             xy = { x: da.x + (a.x - da.x) * e, y: da.y + (a.y - da.y) * e };
+            passo_anim = muove && k < 1 ? q * Math.PI * 6 : 0;
           }
           disegna();
           if (k < 1) requestAnimationFrame(tick);
-          else resolve();
+          else { passo_anim = 0; disegna(); resolve(); }
         };
         requestAnimationFrame(tick);
       });
@@ -297,29 +252,22 @@
       get stato() { return st; },
       reset() {
         st = { pos: "S", dir: "N", ultimo: null };
-        xy = { ...S }; ang = 0;
+        xy = { ...S }; ang = 0; passo_anim = 0;
         scia.innerHTML = "";
         svg.classList.remove("in-cammino");
         svg.querySelectorAll(".posto").forEach((g) => g.classList.remove("giusto", "sbagliato", "trovato", "meta", "lampeggia"));
         disegna();
       },
-      /* Prova una mossa: {ok:false} se non c'è strada (l'omino trema). */
       async muovi(m) {
         const n = passo(st, m);
         if (!n) { await api.trema(); return { ok: false, err: "noroad" }; }
         const da = punto(st.pos), a = punto(n.pos);
-        scia.insertAdjacentHTML("beforeend", `<line x1="${da.x}" y1="${da.y}" x2="${a.x}" y2="${a.y}"/>`);
+        const p1 = P(da.x, da.y), p2 = P(a.x, a.y);
+        scia.insertAdjacentHTML("beforeend", `<line x1="${p1.x}" y1="${p1.y}" x2="${p2.x}" y2="${p2.y}"/>`);
         svg.classList.add("in-cammino");
-        await anima(da, a, ang, ANGOLO[n.dir], 900);
+        await anima(da, a, ang, ANGOLO[n.dir], 1000);
         st = n;
         return { ok: true };
-      },
-      async gira(m) {
-        /* solo rotazione, per mostrare dove guarderebbe (usato per «no road») */
-        const dir = m === "L" ? SX[st.dir] : DX[st.dir];
-        await anima(xy, xy, ang, ANGOLO[dir], 350);
-        await attendi(250);
-        await anima(xy, xy, ang, ANGOLO[st.dir], 300);
       },
       trema() {
         return new Promise((r) => {

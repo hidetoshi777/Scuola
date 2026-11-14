@@ -339,7 +339,7 @@ main:focus { outline: none; }
 .mappa .posto.sbagliato .zona { stroke: var(--ko); fill: #ff5c5c30; }
 .mappa .posto.meta .zona { stroke: var(--yellow); fill: #f2c23026; stroke-dasharray: 10 6; }
 .mappa .posto.lampeggia .zona { animation: lampo .5s ease-in-out 4 alternate; }
-@keyframes lampo { to { fill: #f2c23066; } }
+@keyframes lampo { to { fill: #ffd43b88; } }
 .mappa .scia line { stroke: #f2c230; stroke-width: 8; stroke-linecap: round; opacity: .45; }
 .mappa .omino { pointer-events: none; }
 .mappa .omino .freccia path { fill: #f2c230; stroke: #111; stroke-width: 2; }
@@ -433,3 +433,32 @@ main:focus { outline: none; }
   body { background: #fff; color: #000; }
 }
 .reduced-motion * { animation: none !important; transition: none !important; }
+
+/* ---------- Mappa 3D (render di Blender) e icone-immagine ---------- */
+img.ico-posto { display: block; object-fit: contain; }
+.carta-posto .ico-posto { width: 84px; height: 84px; }
+.vetrina .ico-posto { width: 66px; height: 66px; }
+.domanda-lab .testa .ico-posto { width: 96px; height: 96px; }
+.scena .lotto .ico-posto { width: 62px; height: 62px; }
+.campo .mappa-box { background: #5d9e45; padding: 4px; }
+.mappa .posto .nome .targa, .mappa .stazione .targa { fill: rgba(18, 22, 27, .82); stroke: #ffffff55; stroke-width: 1.5; }
+.mappa .posto .nome .en, .mappa .stazione .en { fill: #fff; font: 800 21px "Overpass", sans-serif; }
+.mappa .posto .nome .it { fill: #fff; font: italic 700 14px "Atkinson Hyperlegible", sans-serif; paint-order: stroke; stroke: #000000b0; stroke-width: 3.5px; }
+.mappa .posto .zona { fill: transparent; stroke: transparent; stroke-width: 5; }
+.mappa .posto:hover .zona, .mappa .posto:focus-visible .zona { stroke: #ffd43b; fill: #ffd43b22; }
+.mappa .posto.giusto .zona, .mappa .posto.trovato .zona { stroke: #2fbf71; fill: #2fbf7133; }
+.mappa .posto.sbagliato .zona { stroke: #ff5c5c; fill: #ff5c5c33; }
+.mappa .posto.meta .zona { stroke: #ffd43b; fill: #ffd43b2e; stroke-dasharray: 12 7; }
+.mappa .scia line { stroke: #ffd43b; stroke-width: 12; stroke-linecap: round; opacity: .55; }
+.mappa .omino .freccia { fill: #ffd43b; stroke: #1b1b1b; stroke-width: 2; }
+.mappa .omino .qui text { font-size: 13px; }
+@media (max-width: 640px) {
+  .mappa .posto .nome .it { display: none; }
+}
+.mappa .omino.trema .sprite { animation: trema .5s; transform-box: fill-box; }
+@media (min-width: 900px) {
+  .campo { grid-template-columns: minmax(0, 1.45fr) minmax(0, .8fr); }
+}
+@media (max-width: 520px) {
+  .campo .mappa-box { margin: 0 -12px; border-radius: 0; border-left: 0; border-right: 0; padding: 2px 0; }
+}
