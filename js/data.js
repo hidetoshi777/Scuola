@@ -214,11 +214,7 @@ window.ATTIVITA_WEB = [
     copertina: "illuminismo/img/og-share.jpg",
     tinta: "storia",
     adesivo: "st-colonna",
-    extra: [
-      { label: "Fumetto", url: "illuminismo/fumetto.html" },
-      { label: "Fumetto PDF", url: "illuminismo/media/illuminismo-fumetto.pdf" },
-      { label: "Scheda PDF", url: "illuminismo/media/illuminismo-scheda.pdf" },
-    ],
+    extra: [{ label: "Scheda PDF", url: "illuminismo/media/illuminismo-scheda.pdf" }],
   },
   {
     titolo: "Cavitazione e NPSH",

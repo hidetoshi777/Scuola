@@ -33,6 +33,56 @@
     }
   });
 
+  const tabBtns = Array.from(document.querySelectorAll("[data-tab-target]"));
+  const tabPanels = Array.from(document.querySelectorAll("[data-tab-panel]"));
+
+  if (tabBtns.length && tabPanels.length) {
+    const valid = new Set(tabPanels.map((p) => p.getAttribute("data-tab-panel")));
+
+    const activateTab = (name, updateHash) => {
+      const target = valid.has(name) ? name : tabPanels[0].getAttribute("data-tab-panel");
+      tabPanels.forEach((panel) => {
+        panel.hidden = panel.getAttribute("data-tab-panel") !== target;
+      });
+      tabBtns.forEach((btn) => {
+        const active = btn.getAttribute("data-tab-target") === target;
+        btn.classList.toggle("is-active", active);
+        btn.setAttribute("aria-selected", String(active));
+      });
+      if (target !== "video") {
+        document.querySelectorAll("video").forEach((v) => {
+          if (!v.paused) v.pause();
+        });
+      }
+      if (updateHash && history.replaceState) {
+        history.replaceState(null, "", "#" + target);
+      }
+    };
+
+    tabBtns.forEach((btn, idx) => {
+      btn.addEventListener("click", () => {
+        activateTab(btn.getAttribute("data-tab-target"), true);
+      });
+      btn.addEventListener("keydown", (event) => {
+        if (event.key === "ArrowRight" || event.key === "ArrowLeft") {
+          event.preventDefault();
+          const dir = event.key === "ArrowRight" ? 1 : -1;
+          const next = tabBtns[(idx + dir + tabBtns.length) % tabBtns.length];
+          next.focus();
+          activateTab(next.getAttribute("data-tab-target"), true);
+        }
+      });
+    });
+
+    const initialHash = location.hash.replace("#", "");
+    activateTab(valid.has(initialHash) ? initialHash : "video", false);
+
+    window.addEventListener("hashchange", () => {
+      const h = location.hash.replace("#", "");
+      if (valid.has(h)) activateTab(h, false);
+    });
+  }
+
   if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
     document.body.classList.add("reduced-motion");
   }

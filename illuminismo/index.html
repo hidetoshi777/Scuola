@@ -23,6 +23,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600;0,700;1,600&family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/fumetto.css">
 </head>
 <body>
   <a class="skip-link visually-hidden" href="#contenuto">Salta al contenuto</a>
@@ -31,195 +32,176 @@
     <div class="masthead-inner">
       <a class="brand" href="index.html">
         <img class="brand-mark" src="favicon.svg" alt="" width="30" height="30">
-        <span>Dal Re Sole ai Lumi</span>
+        <span>Da Luigi XIV all’Illuminismo</span>
       </a>
       <div class="masthead-actions">
-        <nav class="top-nav" data-nav aria-label="Sezioni del percorso">
-          <a href="index.html">Lezione &amp; Video</a>
-          <a href="fumetto.html">Fumetto (4 tavole)</a>
+        <nav class="top-nav" role="tablist" aria-label="Sezioni della lezione">
+          <button type="button" class="tab-btn is-active" role="tab" aria-selected="true" aria-controls="video" data-tab-target="video">1 · Video-lezione</button>
+          <button type="button" class="tab-btn" role="tab" aria-selected="false" aria-controls="fumetto" data-tab-target="fumetto">2 · Fumetto</button>
+          <button type="button" class="tab-btn" role="tab" aria-selected="false" aria-controls="ripasso" data-tab-target="ripasso">3 · 8 domande</button>
+          <button type="button" class="tab-btn" role="tab" aria-selected="false" aria-controls="scheda" data-tab-target="scheda">4 · Scheda PDF</button>
         </nav>
         <button type="button" class="theme-toggle" data-theme-toggle aria-pressed="false">Tema chiaro</button>
       </div>
     </div>
   </header>
 
-  <div class="gazette-shell">
-    <aside class="index-rail" aria-label="Indice rapido della lezione">
-      <p class="rail-title">Indice lezione</p>
-      <ul class="rail-links">
-        <li><a href="#video"><span>01</span> Video-lezione</a></li>
-        <li><a href="#fumetto"><span>02</span> Fumetto</a></li>
-        <li><a href="#ripasso"><span>03</span> 8 domande</a></li>
-        <li><a href="#scheda"><span>04</span> Scheda PDF</a></li>
-      </ul>
-      <div class="rail-box">
-        <p><strong>Storia · Quarta professionale</strong></p>
-        <p>Dall’assolutismo di Versailles alla legge toscana del 1786.</p>
-        <p><strong>Materiali su misura:</strong></p>
-        <div class="btn-row">
-          <a class="btn btn-secondary" href="media/illuminismo-scheda.pdf" download style="width:100%;font-size:.86rem;">Scheda PDF (4 pp.)</a>
-          <a class="btn btn-secondary" href="media/illuminismo-fumetto.pdf" download style="width:100%;font-size:.86rem;">Fumetto PDF (4 pp.)</a>
-          <a class="btn btn-secondary" href="https://www.canva.com/design/DAFm6tHXpxE/view" target="_blank" rel="noopener" style="width:100%;font-size:.86rem;">Slide Canva del Prof. ↗</a>
-        </div>
+  <main id="contenuto" class="page-wrap" tabindex="-1">
+    <header class="hero-compact">
+      <p class="kicker">Storia · Quarta professionale</p>
+      <h1>Da Luigi XIV all’Illuminismo</h1>
+      <blockquote class="kant-quote">
+        «Sapere aude! Abbi il coraggio di servirti della tua propria intelligenza!»
+        <cite>Immanuel Kant, 1784</cite>
+      </blockquote>
+    </header>
+
+    <section class="section-card" id="video" role="tabpanel" data-tab-panel="video" aria-labelledby="tit-video">
+      <div class="section-head">
+        <h2 id="tit-video"><span class="num-pill" aria-hidden="true">01</span> La video-lezione</h2>
+        <span class="badge-info">~4 min · 8 slide</span>
       </div>
-    </aside>
+      <div class="video-wrap">
+        <video controls preload="metadata" playsinline poster="img/poster.jpg">
+          <source src="media/illuminismo-video.mp4" type="video/mp4">
+          Il tuo browser non riesce a mostrare il video.
+          <a href="media/illuminismo-video.mp4">Scaricalo qui</a>.
+        </video>
+      </div>
+      <ul class="chip-list">
+        <li>Luigi XIV &amp; Versailles</li>
+        <li>3 ordini (2% vs 98%)</li>
+        <li>Enciclopedia</li>
+        <li>Montesquieu · Voltaire · Rousseau · Beccaria</li>
+        <li>Toscana 1786 &amp; Rivoluzioni</li>
+      </ul>
+    </section>
 
-    <main id="contenuto" class="gazette-main" tabindex="-1">
-      <section class="broadsheet-hero">
-        <div>
-          <p class="kicker">Storia · Quarta professionale</p>
-          <h1>Da Luigi XIV all’Illuminismo</h1>
-          <p class="lead">Come cambia l’Europa tra Seicento e Settecento: dal potere totale del Re Sole alle idee su ragione, diritti, tolleranza e giustizia.</p>
-          <blockquote class="kant-quote">
-            «Sapere aude! Abbi il coraggio di servirti della tua propria intelligenza!»
-            <cite>Immanuel Kant, 1784</cite>
-          </blockquote>
-          <div class="btn-row">
-            <a class="btn btn-primary" href="#video">Guarda il video</a>
-            <a class="btn btn-secondary" href="fumetto.html">Leggi il fumetto</a>
+    <section class="section-card fumetto-panel" id="fumetto" role="tabpanel" data-tab-panel="fumetto" aria-labelledby="tit-fumetto" hidden>
+      <div class="section-head">
+        <h2 id="tit-fumetto"><span class="num-pill" aria-hidden="true">02</span> Il fumetto in 4 tavole</h2>
+        <span class="badge-info">8 grandi vignette</span>
+      </div>
+
+      <div class="fumetto-reader" id="fumetto-stage" aria-roledescription="fumetto" aria-label="Da Luigi XIV all’Illuminismo a fumetti">
+        <div class="fumetto-toolbar">
+          <p class="fumetto-status">Tavola <span id="fumetto-num">1</span> di 4</p>
+          <div class="fumetto-toolbar-actions">
+            <button type="button" class="btn btn-secondary" id="fumetto-print">Stampa tutto</button>
+            <button type="button" class="btn btn-secondary" id="fumetto-fullscreen" aria-pressed="false">Schermo intero</button>
           </div>
         </div>
-        <figure class="hero-figure">
-          <img src="img/og-share.jpg" alt="Luigi XIV a Versailles e filosofi illuministi attorno alla lanterna" width="1200" height="630" fetchpriority="high">
+
+        <div class="fumetto-viewport" id="fumetto-viewport">
+          <figure class="fumetto-page is-active" data-page="1">
+            <img src="img/tavole/tavola-01.jpg" alt="Tavola 1: Luigi XIV sul trono dice Lo Stato sono io; i nobili a corte nella reggia di Versailles." width="1920" height="1080" loading="lazy">
+          </figure>
+          <figure class="fumetto-page" data-page="2" aria-hidden="true">
+            <img src="img/tavole/tavola-02.jpg" alt="Tavola 2: Clero e Nobiltà banchettano mentre il Terzo Stato lavora; gli illuministi attorno alla lanterna." width="1920" height="1080" loading="lazy">
+          </figure>
+          <figure class="fumetto-page" data-page="3" aria-hidden="true">
+            <img src="img/tavole/tavola-03.jpg" alt="Tavola 3: I tre poteri di Montesquieu, Voltaire per la tolleranza e Rousseau davanti al popolo." width="1920" height="1080" loading="lazy">
+          </figure>
+          <figure class="fumetto-page" data-page="4" aria-hidden="true">
+            <img src="img/tavole/tavola-04.jpg" alt="Tavola 4: Cesare Beccaria a Milano contro la tortura e Pietro Leopoldo nel 1786 abolisce la pena di morte in Toscana." width="1920" height="1080" loading="lazy">
+          </figure>
+        </div>
+
+        <p class="fumetto-caption" id="fumetto-caption" aria-live="polite"></p>
+
+        <div class="fumetto-controls">
+          <button type="button" class="btn btn-secondary" id="fumetto-prev" disabled>← Indietro</button>
+          <div class="fumetto-dots" id="fumetto-dots" role="tablist" aria-label="Tavole"></div>
+          <button type="button" class="btn btn-primary" id="fumetto-next">Avanti →</button>
+        </div>
+        <p class="fumetto-hint">Scorri o tocca i lati della tavola. Pizzica o doppio tap per ingrandire. «Schermo intero» sul telefono.</p>
+      </div>
+
+      <div class="btn-row">
+        <a class="btn btn-secondary" href="media/illuminismo-fumetto.pdf" download>Scarica il fumetto (PDF)</a>
+      </div>
+    </section>
+
+    <section class="section-card" id="ripasso" role="tabpanel" data-tab-panel="ripasso" aria-labelledby="tit-ripasso" hidden>
+      <div class="section-head">
+        <h2 id="tit-ripasso"><span class="num-pill" aria-hidden="true">03</span> Otto domande per l’interrogazione</h2>
+        <span class="badge-info">Tocca per aprire la risposta</span>
+      </div>
+      <div class="faq-list">
+        <details>
+          <summary>1. Chi era Luigi XIV e perché si chiamava Re Sole?</summary>
+          <p class="faq-ans">È il re di Francia (1643–1715) simbolo della <strong>monarchia assoluta</strong>: scelse il sole come emblema perché tutta la corte e lo Stato dovevano ruotare attorno a lui. Governava per diritto divino concentrando leggi, tasse ed esercito senza convocare gli Stati Generali (gli è attribuito il motto «Lo Stato sono io») e trattenne l’alta nobiltà nella reggia di <strong>Versailles</strong> per toglierle peso politico.</p>
+        </details>
+        <details>
+          <summary>2. Com’era divisa la società nell’Antico Regime?</summary>
+          <p class="faq-ans">In tre ordini disuguali: <strong>1° Clero</strong> e <strong>2° Nobiltà</strong> (circa il 2%, hanno privilegi e non pagano tasse); <strong>3° Terzo Stato</strong> (98%: contadini, artigiani e borghesi come medici e mercanti), che lavora e paga tutte le tasse senza poter decidere.</p>
+        </details>
+        <details>
+          <summary>3. Che cos’è l’Illuminismo e cosa dice Kant?</summary>
+          <p class="faq-ans">È un movimento culturale del Settecento nato in Francia: la <strong>ragione</strong> è come una luce («lume») per combattere ignoranza, superstizioni e privilegi. Kant (1784) lo riassume nel motto <strong>Sapere aude</strong>: «Abbi il coraggio di usare la tua intelligenza».</p>
+        </details>
+        <details>
+          <summary>4. Cos’è l’Enciclopedia e dove circolavano le idee?</summary>
+          <p class="faq-ans">Opera in 28 volumi diretta da <strong>Diderot e d’Alembert</strong> (1751–1772): raccoglie scienza, filosofia e anche disegni sui <strong>mestieri pratici</strong>, dando dignità al lavoro tecnico. Le nuove idee si discutono nei <strong>salotti</strong>, nei <strong>caffè</strong> e sui primi <strong>giornali</strong>.</p>
+        </details>
+        <details>
+          <summary>5. Che cosa propone Montesquieu contro la tirannia?</summary>
+          <p class="faq-ans">La <strong>separazione dei tre poteri</strong> (1748): chi fa le leggi (<strong>legislativo</strong>, Parlamento), chi le applica (<strong>esecutivo</strong>, Governo) e chi punisce chi le viola (<strong>giudiziario</strong>, Giudici) devono essere diversi e controllarsi a vicenda.</p>
+        </details>
+        <details>
+          <summary>6. Cosa difendono Voltaire e Jean-Jacques Rousseau?</summary>
+          <p class="faq-ans"><strong>Voltaire</strong> combatte il fanatismo e chiede <strong>tolleranza religiosa</strong> e <strong>libertà di parola</strong>. <strong>Rousseau</strong> (<em>Il contratto sociale</em>, 1762) afferma che la <strong>sovranità appartiene al popolo</strong> e tutti i cittadini sono uguali davanti alla legge.</p>
+        </details>
+        <details>
+          <summary>7. Perché Cesare Beccaria è famoso in tutto il mondo?</summary>
+          <p class="faq-ans">Nel libro <strong>Dei delitti e delle pene</strong> (Milano, 1764) chiede di abolire la <strong>tortura</strong> e la <strong>pena di morte</strong>: lo Stato deve applicare pene certe, giuste e proporzionate al reato per prevenire i crimini, non per vendicarsi.</p>
+        </details>
+        <details>
+          <summary>8. Quale Stato applicò per primo Beccaria nel 1786?</summary>
+          <p class="faq-ans">Il <strong>Granducato di Toscana</strong>, il <strong>30 novembre 1786</strong>, con il codice del granduca <strong>Pietro Leopoldo</strong> (Codice leopoldino): fu il primo Stato al mondo ad abolire per legge tortura e pena di morte. Le idee illuministe ispirarono anche la Rivoluzione americana (1776) e, poco dopo la riforma toscana, la Rivoluzione francese (1789).</p>
+        </details>
+      </div>
+    </section>
+
+    <section class="section-card" id="scheda" role="tabpanel" data-tab-panel="scheda" aria-labelledby="tit-scheda" hidden>
+      <div class="section-head">
+        <h2 id="tit-scheda"><span class="num-pill" aria-hidden="true">04</span> Scheda di studio da stampare</h2>
+        <span class="badge-info">4 pagine A4 · alto contrasto</span>
+      </div>
+      <div class="btn-row" style="margin-top:0">
+        <a class="btn btn-primary" href="media/illuminismo-scheda.pdf" download>Scarica la scheda (PDF, 4 pagine)</a>
+        <a class="btn btn-secondary" href="https://www.canva.com/design/DAFm6tHXpxE/view" target="_blank" rel="noopener">Slide Canva del Prof. ↗</a>
+      </div>
+      <div class="scheda-grid">
+        <figure>
+          <img src="img/scheda-1.png" alt="Pagina 1: Luigi XIV e i tre ordini dell’Antico Regime" width="1654" height="2341" loading="lazy">
+          <figcaption>Pag. 1 · Re Sole e Tre Ordini</figcaption>
         </figure>
-        <div class="milestones" aria-label="Tappe principali">
-          <div class="milestone">
-            <strong>1643–1715 · Francia</strong>
-            <span>Luigi XIV, Re Sole, chiude i nobili a Versailles</span>
-          </div>
-          <div class="milestone">
-            <strong>1751 · Parigi</strong>
-            <span>L’Enciclopedia diffonde scienza e mestieri</span>
-          </div>
-          <div class="milestone">
-            <strong>1786 · Toscana</strong>
-            <span>1° Stato al mondo senza tortura né pena di morte</span>
-          </div>
-        </div>
-      </section>
-
-      <section class="section-card" id="video" aria-labelledby="tit-video">
-        <div class="section-head">
-          <h2 id="tit-video"><span class="num-pill" aria-hidden="true">01</span> La video-lezione</h2>
-          <span class="badge-info">~4 min · 8 slide</span>
-        </div>
-        <div class="video-wrap">
-          <video controls preload="metadata" playsinline poster="img/poster.jpg">
-            <source src="media/illuminismo-video.mp4" type="video/mp4">
-            Il tuo browser non riesce a mostrare il video.
-            <a href="media/illuminismo-video.mp4">Scaricalo qui</a>.
-          </video>
-        </div>
-        <ul class="chip-list">
-          <li>Luigi XIV &amp; Versailles</li>
-          <li>3 ordini (2% vs 98%)</li>
-          <li>Enciclopedia</li>
-          <li>Montesquieu · Voltaire · Rousseau · Beccaria</li>
-          <li>Toscana 1786 &amp; Rivoluzioni</li>
-        </ul>
-        <div class="btn-row">
-          <a class="btn btn-secondary" href="media/illuminismo-video.mp4" download>Scarica il video (MP4)</a>
-        </div>
-      </section>
-
-      <section class="section-card" id="fumetto" aria-labelledby="tit-fumetto">
-        <div class="section-head">
-          <h2 id="tit-fumetto"><span class="num-pill" aria-hidden="true">02</span> Il fumetto in 4 tavole</h2>
-          <span class="badge-info">8 grandi vignette</span>
-        </div>
-        <div class="comic-spotlight">
-          <a class="comic-preview-img" href="fumetto.html">
-            <img src="img/tavole/tavola-01.jpg" alt="Anteprima Tavola 1: Luigi XIV sul trono e la corte a Versailles" width="1920" height="1080" loading="lazy">
-          </a>
-          <div class="comic-copy">
-            <p>Quattro tavole illustrate con poche parole e immagini grandi per fissare i passaggi chiave: dalla gabbia dorata di Versailles fino alla legge di Pietro Leopoldo.</p>
-            <div class="btn-row">
-              <a class="btn btn-primary" href="fumetto.html">Sfoglia il fumetto</a>
-              <a class="btn btn-secondary" href="media/illuminismo-fumetto.pdf" download>Scarica il fumetto (PDF)</a>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section class="section-card" id="ripasso" aria-labelledby="tit-ripasso">
-        <div class="section-head">
-          <h2 id="tit-ripasso"><span class="num-pill" aria-hidden="true">03</span> Otto domande per l’interrogazione</h2>
-          <span class="badge-info">Tocca per aprire la risposta</span>
-        </div>
-        <div class="faq-list">
-          <details>
-            <summary>1. Chi era Luigi XIV e perché si chiamava Re Sole?</summary>
-            <p class="faq-ans">È il re di Francia (1643–1715) simbolo della <strong>monarchia assoluta</strong>: scelse il sole come emblema perché tutta la corte e lo Stato dovevano ruotare attorno a lui. Governava per diritto divino concentrando leggi, tasse ed esercito senza convocare gli Stati Generali (gli è attribuito il motto «Lo Stato sono io») e trattenne l’alta nobiltà nella reggia di <strong>Versailles</strong> per toglierle peso politico.</p>
-          </details>
-          <details>
-            <summary>2. Com’era divisa la società nell’Antico Regime?</summary>
-            <p class="faq-ans">In tre ordini disuguali: <strong>1° Clero</strong> e <strong>2° Nobiltà</strong> (circa il 2%, hanno privilegi e non pagano tasse); <strong>3° Terzo Stato</strong> (98%: contadini, artigiani e borghesi come medici e mercanti), che lavora e paga tutte le tasse senza poter decidere.</p>
-          </details>
-          <details>
-            <summary>3. Che cos’è l’Illuminismo e cosa dice Kant?</summary>
-            <p class="faq-ans">È un movimento culturale del Settecento nato in Francia: la <strong>ragione</strong> è come una luce («lume») per combattere ignoranza, superstizioni e privilegi. Kant (1784) lo riassume nel motto <strong>Sapere aude</strong>: «Abbi il coraggio di usare la tua intelligenza».</p>
-          </details>
-          <details>
-            <summary>4. Cos’è l’Enciclopedia e dove circolavano le idee?</summary>
-            <p class="faq-ans">Opera in 28 volumi diretta da <strong>Diderot e d’Alembert</strong> (1751–1772): raccoglie scienza, filosofia e anche disegni sui <strong>mestieri pratici</strong>, dando dignità al lavoro tecnico. Le nuove idee si discutono nei <strong>salotti</strong>, nei <strong>caffè</strong> e sui primi <strong>giornali</strong>.</p>
-          </details>
-          <details>
-            <summary>5. Che cosa propone Montesquieu contro la tirannia?</summary>
-            <p class="faq-ans">La <strong>separazione dei tre poteri</strong> (1748): chi fa le leggi (<strong>legislativo</strong>, Parlamento), chi le applica (<strong>esecutivo</strong>, Governo) e chi punisce chi le viola (<strong>giudiziario</strong>, Giudici) devono essere diversi e controllarsi a vicenda.</p>
-          </details>
-          <details>
-            <summary>6. Cosa difendono Voltaire e Jean-Jacques Rousseau?</summary>
-            <p class="faq-ans"><strong>Voltaire</strong> combatte il fanatismo e chiede <strong>tolleranza religiosa</strong> e <strong>libertà di parola</strong>. <strong>Rousseau</strong> (<em>Il contratto sociale</em>, 1762) afferma che la <strong>sovranità appartiene al popolo</strong> e tutti i cittadini sono uguali davanti alla legge.</p>
-          </details>
-          <details>
-            <summary>7. Perché Cesare Beccaria è famoso in tutto il mondo?</summary>
-            <p class="faq-ans">Nel libro <strong>Dei delitti e delle pene</strong> (Milano, 1764) chiede di abolire la <strong>tortura</strong> e la <strong>pena di morte</strong>: lo Stato deve applicare pene certe, giuste e proporzionate al reato per prevenire i crimini, non per vendicarsi.</p>
-          </details>
-          <details>
-            <summary>8. Quale Stato applicò per primo Beccaria nel 1786?</summary>
-            <p class="faq-ans">Il <strong>Granducato di Toscana</strong>, il <strong>30 novembre 1786</strong>, con il codice del granduca <strong>Pietro Leopoldo</strong> (Codice leopoldino): fu il primo Stato al mondo ad abolire per legge tortura e pena di morte. Le idee illuministe ispirarono anche la Rivoluzione americana (1776) e, poco dopo la riforma toscana, la Rivoluzione francese (1789).</p>
-          </details>
-        </div>
-      </section>
-
-      <section class="section-card" id="scheda" aria-labelledby="tit-scheda">
-        <div class="section-head">
-          <h2 id="tit-scheda"><span class="num-pill" aria-hidden="true">04</span> Scheda di studio da stampare</h2>
-          <span class="badge-info">4 pagine A4 · alto contrasto</span>
-        </div>
-        <div class="btn-row" style="margin-top:0">
-          <a class="btn btn-primary" href="media/illuminismo-scheda.pdf" download>Scarica la scheda (PDF, 4 pagine)</a>
-          <a class="btn btn-secondary" href="media/illuminismo-scheda.pdf" target="_blank" rel="noopener">Apri il PDF</a>
-        </div>
-        <div class="scheda-grid">
-          <figure>
-            <a href="img/scheda-1.png" target="_blank" rel="noopener"><img src="img/scheda-1.png" alt="Pagina 1: Luigi XIV e i tre ordini dell’Antico Regime" width="1654" height="2341" loading="lazy"></a>
-            <figcaption>Pag. 1 · Re Sole e Tre Ordini</figcaption>
-          </figure>
-          <figure>
-            <a href="img/scheda-2.png" target="_blank" rel="noopener"><img src="img/scheda-2.png" alt="Pagina 2: Illuminismo, Kant ed Enciclopedia" width="1654" height="2341" loading="lazy"></a>
-            <figcaption>Pag. 2 · Lumi, Kant ed Enciclopedia</figcaption>
-          </figure>
-          <figure>
-            <a href="img/scheda-3.png" target="_blank" rel="noopener"><img src="img/scheda-3.png" alt="Pagina 3: Montesquieu, Voltaire, Rousseau, Beccaria e Toscana 1786" width="1654" height="2341" loading="lazy"></a>
-            <figcaption>Pag. 3 · I quattro pensatori e Toscana 1786</figcaption>
-          </figure>
-          <figure>
-            <a href="img/scheda-4.png" target="_blank" rel="noopener"><img src="img/scheda-4.png" alt="Pagina 4: Tabella di confronto e otto domande di ripasso" width="1654" height="2341" loading="lazy"></a>
-            <figcaption>Pag. 4 · Tabella Prima/Dopo e domande</figcaption>
-          </figure>
-        </div>
-      </section>
-    </main>
-  </div>
+        <figure>
+          <img src="img/scheda-2.png" alt="Pagina 2: Illuminismo, Kant ed Enciclopedia" width="1654" height="2341" loading="lazy">
+          <figcaption>Pag. 2 · Lumi, Kant ed Enciclopedia</figcaption>
+        </figure>
+        <figure>
+          <img src="img/scheda-3.png" alt="Pagina 3: Montesquieu, Voltaire, Rousseau, Beccaria e Toscana 1786" width="1654" height="2341" loading="lazy">
+          <figcaption>Pag. 3 · I quattro pensatori e Toscana 1786</figcaption>
+        </figure>
+        <figure>
+          <img src="img/scheda-4.png" alt="Pagina 4: Tabella di confronto e otto domande di ripasso" width="1654" height="2341" loading="lazy">
+          <figcaption>Pag. 4 · Tabella Prima/Dopo e domande</figcaption>
+        </figure>
+      </div>
+    </section>
+  </main>
 
   <footer class="site-footer">
-    <div class="footer-inner">
+    <div class="footer-inner footer-inner--center">
       <p>Realizzato dal Prof. Rossano Bella</p>
-      <p><a href="../professionale/">← Torna al Raccoglitore Professionale</a></p>
     </div>
   </footer>
 
   <script src="js/common.js" defer></script>
+  <script src="../js/fumetto-zoom.js" defer></script>
+  <script src="../js/fumetto-print.js?v=3" defer></script>
+  <script src="js/fumetto.js" defer></script>
 </body>
 </html>
