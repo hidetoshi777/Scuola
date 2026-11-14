@@ -45,7 +45,7 @@
     <div class="nome-riga">Nome <span></span> Classe <span style="flex:.35"></span> Data <span style="flex:.45"></span></div>
 
     <h2><span class="n">1</span>I posti della città. Scrivi il nome in inglese.</h2>
-    <p class="banca-parole">church · pharmacy · bank · hospital · supermarket · school · post&nbsp;office · traffic&nbsp;lights</p>
+    <p class="banca-parole">church · pharmacy · bank · hospital · bakery · school · post&nbsp;office · library</p>
     <div class="icone" id="icone"></div>
 
     <h2><span class="n">2</span>Frecce e frasi. Scrivi la lettera giusta nel quadratino.</h2>
@@ -73,16 +73,16 @@
     <div class="mappa-stampa" id="mappa"></div>
     <h2><span class="n">4</span><span>Parti dalla stazione (YOU ARE HERE). Segui le indicazioni. Dove arrivi?</span></h2>
     <ol class="righe">
-      <li>Take the first right. It’s on the left, opposite the hotel.<br>→ the <span class="vuoto"></span></li>
-      <li>Take the second right. It’s on the left, opposite the pharmacy.<br>→ the <span class="vuoto"></span></li>
-      <li>Take the first left. It’s on the right, opposite the café.<br>→ the <span class="vuoto"></span></li>
-      <li>Go straight on to the end of the road. Turn left. It’s on the right, opposite the church.<br>→ the <span class="vuoto"></span></li>
+      <li>Go along Station Road. After the traffic lights, go straight on. It’s on the right, opposite the bakery.<br>→ the <span class="vuoto"></span></li>
+      <li>At the traffic lights, turn left into King Street. It’s on the right, next to the bakery.<br>→ the <span class="vuoto"></span></li>
+      <li>Take the second right into High Street. It’s on the left, between the bank and the cinema.<br>→ the <span class="vuoto"></span></li>
+      <li>Take the second left into High Street. Then take the first right into Green Street. It’s on the left, opposite the church.<br>→ the <span class="vuoto"></span></li>
     </ol>
     <h2 style="clear:none"><span class="n">5</span><span>Completa con: <i>opposite · next · Excuse · straight · welcome</i></span></h2>
     <ol class="righe">
       <li><span class="vuoto" style="min-width:22mm"></span> me, where is the hotel?</li>
       <li>Go <span class="vuoto" style="min-width:22mm"></span> on.</li>
-      <li>The bank is <span class="vuoto" style="min-width:20mm"></span> the cinema. <i>(di fronte)</i></li>
+      <li>The police station is <span class="vuoto" style="min-width:20mm"></span> the cinema. <i>(di fronte)</i></li>
       <li>The bakery is <span class="vuoto" style="min-width:16mm"></span> to the bank. <i>(accanto)</i></li>
       <li>Thank you! — You’re <span class="vuoto" style="min-width:22mm"></span>!</li>
     </ol>
@@ -95,20 +95,21 @@
     <h2>2. Frecce e frasi</h2><p>1 – b (Go straight on) · 2 – c (Turn left) · 3 – a (Turn right)</p>
     <h2>3. Traduci</h2>
     <p>1. Scusi, dov’è la banca? · 2. Prendi la seconda a destra. · 3. È di fronte al cinema. · 4. Grazie! — Prego!</p>
-    <h2>4. La mappa</h2><p>1. the pharmacy (farmacia) · 2. the bank (banca) · 3. the supermarket (supermercato) · 4. the school (scuola)</p>
+    <h2>4. La mappa</h2><p>1. the pharmacy (farmacia) · 2. the supermarket (supermercato) · 3. the café (bar) · 4. the hospital (ospedale)</p>
     <h2>5. Completa</h2><p>1. Excuse · 2. straight · 3. opposite · 4. next · 5. welcome</p>
     <p class="credito"><span>Realizzato dal Prof. Rossano Bella</span><span>Excuse me, where is…? · 3/3</span></p>
   </section>
 
   <script src="../js/frasi.js"></script>
   <script>window.ICONE_BASE = "../";</script>
+  <script src="../js/pianta.js"></script>
   <script src="../js/citta-proiezione.js"></script>
   <script src="../js/frecce.js"></script>
   <script src="../js/common.js"></script>
   <script src="../js/citta.js"></script>
   <script>
     const ids = ["church", "pharmacy", "hospital", "bank", "supermarket", "postoffice", "school", "lights"];
-    const ordine = ["hospital", "school", "pharmacy", "lights", "bank", "postoffice", "church", "supermarket"];
+    const ordine = ["hospital", "school", "pharmacy", "library", "bank", "postoffice", "church", "bakery"];
     document.getElementById("icone").innerHTML = ordine.map((id, i) => `<div>${icona(id)}<b>${i + 1}.</b><div class="linea"></div></div>`).join("");
     document.getElementById("sol1").textContent = ordine.map((id, i) => `${i + 1}. ${POSTO(id).en}`).join(" · ");
     document.getElementById("frecce").innerHTML = ["F", "L", "R"].map((f, i) => `<div>${FRECCE[f]}<b>${i + 1}</b><span class="q"></span></div>`).join("");

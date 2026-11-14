@@ -19,7 +19,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=Overpass:wght@700;800;900&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/styles.css?v=3">
+  <link rel="stylesheet" href="css/styles.css?v=4">
 </head>
 <body class="page-studio">
   <a class="skip-link" href="#contenuto">Salta al contenuto</a>
@@ -80,7 +80,12 @@
         <button type="button" class="freccia-carta dx" data-voce="l_second" data-freccia="R"><span class="en">Take the second right.</span><span class="it">Prendi la seconda a destra.</span></button>
         <button type="button" class="freccia-carta dritto" data-voce="l_after" data-freccia="lights"><span class="en">After the traffic lights, go straight on.</span><span class="it">Dopo il semaforo, vai dritto.</span></button>
         <button type="button" class="freccia-carta sx" data-voce="l_lights" data-freccia="lights"><span class="en">At the traffic lights, turn left.</span><span class="it">Al semaforo, gira a sinistra.</span></button>
-        <button type="button" class="freccia-carta dx" data-voce="l_end" data-freccia="end"><span class="en">At the end of the road, turn right.</span><span class="it">Alla fine della strada, gira a destra.</span></button>
+      </div>
+      <h3>Con i nomi delle vie</h3>
+      <div class="frecce">
+        <button type="button" class="freccia-carta dritto" data-voce="l_along" data-freccia="F"><span class="en">Go along Station Road.</span><span class="it">Vai lungo Station Road.</span></button>
+        <button type="button" class="freccia-carta sx" data-voce="l_into" data-freccia="L"><span class="en">Turn left into King Street.</span><span class="it">Gira a sinistra in King Street.</span></button>
+        <button type="button" class="freccia-carta dritto" data-voce="l_crossst" data-freccia="cross"><span class="en">Cross High Street.</span><span class="it">Attraversa High Street.</span></button>
       </div>
       <div class="box">
         <p><span class="en">first</span> = prima · <span class="en">second</span> = seconda</p>
@@ -91,6 +96,8 @@
     <article class="capitolo" id="dove">
       <h2><span class="num">4</span>Dov’è?</h2>
       <div class="frasi">
+        <div class="frase"><button type="button" class="voce" data-voce="l_near" aria-label="Ascolta"></button><div><span class="en">It’s near the station.</span><span class="it">È vicino alla stazione.</span></div></div>
+        <div class="frase"><button type="button" class="voce" data-voce="l_corner" aria-label="Ascolta"></button><div><span class="en">It’s on the corner.</span><span class="it">È all’angolo (dove due strade si incontrano).</span></div></div>
         <div class="frase"><button type="button" class="voce" data-voce="c_onleft" aria-label="Ascolta"></button><div><span class="en">It’s on the <span class="sx">left</span>.</span><span class="it">È a sinistra.</span></div></div>
         <div class="frase"><button type="button" class="voce" data-voce="c_onright" aria-label="Ascolta"></button><div><span class="en">It’s on the <span class="dx">right</span>.</span><span class="it">È a destra.</span></div></div>
       </div>
@@ -98,11 +105,15 @@
       <div class="dove-griglia">
         <div class="dove-carta">
           <div class="frase"><button type="button" class="voce" data-voce="l_opp" aria-label="Ascolta"></button><div><span class="en">It’s opposite the cinema.</span><span class="it">È di fronte al cinema (dall’altra parte della strada).</span></div></div>
-          <div class="scena" data-scena=",cinema,|,bank*,"></div>
+          <div class="scena" data-scena=",cinema,|,police*,"></div>
         </div>
         <div class="dove-carta">
           <div class="frase"><button type="button" class="voce" data-voce="l_next" aria-label="Ascolta"></button><div><span class="en">It’s next to the bank.</span><span class="it">È accanto alla banca.</span></div></div>
-          <div class="scena" data-scena="bank,pharmacy*,|,,"></div>
+          <div class="scena" data-scena="bank,cafe*,|,,"></div>
+        </div>
+        <div class="dove-carta">
+          <div class="frase"><button type="button" class="voce" data-voce="l_betw" aria-label="Ascolta"></button><div><span class="en">It’s between the bank and the cinema.</span><span class="it">È tra la banca e il cinema.</span></div></div>
+          <div class="scena" data-scena="bank,cafe*,cinema|,,"></div>
         </div>
       </div>
     </article>
@@ -113,7 +124,7 @@
       <div class="azioni"><button type="button" class="btn btn-primary" data-voce="d1 d2 d3 d4">▶ Ascolta tutto</button></div>
       <div class="dialogo">
         <div class="nuvola turista"><button type="button" class="voce" data-voce="d1" aria-label="Ascolta"></button><p><span class="chi">Turista</span><span class="en">Excuse me, where is the pharmacy?</span><br><span class="it">Scusi, dov’è la farmacia?</span></p></div>
-        <div class="nuvola passante"><button type="button" class="voce" data-voce="d2" aria-label="Ascolta"></button><p><span class="chi">Passante</span><span class="en">Take the first right. It’s on the left, opposite the hotel.</span><br><span class="it">Prendi la prima a destra. È a sinistra, di fronte all’albergo.</span></p></div>
+        <div class="nuvola passante"><button type="button" class="voce" data-voce="d2" aria-label="Ascolta"></button><p><span class="chi">Passante</span><span class="en">Go straight on along Station Road. After the traffic lights, go straight on. It’s on the right, opposite the bakery.</span><br><span class="it">Vai dritto lungo Station Road. Dopo il semaforo, vai dritto. È a destra, di fronte alla panetteria.</span></p></div>
         <div class="nuvola turista"><button type="button" class="voce" data-voce="d3" aria-label="Ascolta"></button><p><span class="chi">Turista</span><span class="en">Thank you!</span><br><span class="it">Grazie!</span></p></div>
         <div class="nuvola passante"><button type="button" class="voce" data-voce="d4" aria-label="Ascolta"></button><p><span class="chi">Passante</span><span class="en">You’re welcome!</span><br><span class="it">Prego!</span></p></div>
       </div>
@@ -141,8 +152,9 @@
             <tr><td class="en"><span class="sx">Turn left.</span> · <span class="dx">Turn right.</span></td><td>Gira a sinistra. · Gira a destra.</td></tr>
             <tr><td class="en">Take the second right.</td><td>Prendi la seconda a destra.</td></tr>
             <tr><td class="en">after / at the traffic lights</td><td>dopo il / al semaforo</td></tr>
+            <tr><td class="en">Go along Station Road. · Turn left into King Street.</td><td>Vai lungo Station Road. · Gira a sinistra in King Street.</td></tr>
             <tr><td class="en">It’s on the <span class="sx">left</span> / <span class="dx">right</span>.</td><td>È a sinistra / a destra.</td></tr>
-            <tr><td class="en">opposite · next to</td><td>di fronte a · accanto a</td></tr>
+            <tr><td class="en">opposite · next to · between · near · on the corner</td><td>di fronte a · accanto a · tra · vicino a · all’angolo</td></tr>
             <tr><td class="en">Thank you! — You’re welcome!</td><td>Grazie! — Prego!</td></tr>
           </tbody>
         </table>
@@ -161,9 +173,9 @@
     <p>Scuola · Inglese · terza professionale AM · Voci in inglese: ElevenLabs</p>
   </footer>
 
-  <script src="js/frasi.js?v=3" defer></script>
-  <script src="js/frecce.js?v=3" defer></script>
-  <script src="js/common.js?v=3" defer></script>
-  <script src="js/imparare.js?v=3" defer></script>
+  <script src="js/frasi.js?v=4" defer></script>
+  <script src="js/frecce.js?v=4" defer></script>
+  <script src="js/common.js?v=4" defer></script>
+  <script src="js/imparare.js?v=4" defer></script>
 </body>
 </html>

@@ -334,7 +334,7 @@ main:focus { outline: none; }
 .mappa .posto .en { fill: var(--ink-mappa); font-family: "Overpass", sans-serif; font-weight: 800; }
 .mappa .posto .it, .mappa .stazione .it { fill: var(--muted-mappa); font-size: 17px; font-style: italic; }
 .mappa .stazione .en { fill: var(--ink-mappa); font-family: "Overpass", sans-serif; font-weight: 800; }
-.mappa.senza-nomi .posto:not(.trovato):not(.sbagliato) .nome { display: none; }
+.mappa.senza-nomi .posto:not(.trovato):not(.sbagliato):not(.giusto) .nome { display: none; }
 .mappa .posto.giusto .zona, .mappa .posto.trovato .zona { stroke: var(--ok); fill: #2fbf7130; }
 .mappa .posto.sbagliato .zona { stroke: var(--ko); fill: #ff5c5c30; }
 .mappa .posto.meta .zona { stroke: var(--yellow); fill: #f2c23026; stroke-dasharray: 10 6; }
@@ -462,3 +462,6 @@ img.ico-posto { display: block; object-fit: contain; }
 @media (max-width: 520px) {
   .campo .mappa-box { margin: 0 -12px; border-radius: 0; border-left: 0; border-right: 0; padding: 2px 0; }
 }
+
+.mappa .via { fill: #fff; font: 800 19px "Overpass", sans-serif; letter-spacing: .02em; paint-order: stroke; stroke: #1d2228; stroke-width: 4px; pointer-events: none; }
+.nuvola .leggi-frase { margin-top: 4px; }

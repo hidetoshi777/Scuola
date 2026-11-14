@@ -7,8 +7,9 @@
     { id: "hospital", op: ["hotel", "hospital", "bank"] },
     { id: "bank", op: ["bank", "cafe", "park"] },
     { id: "postoffice", op: ["supermarket", "postoffice", "restaurant"] },
-    { id: "station", op: ["station", "hotel", "lights"] },
-    { id: "lights", op: ["lights", "park", "school"] },
+    { id: "bakery", op: ["bakery", "bank", "library"] },
+    { id: "police", op: ["hospital", "police", "school"] },
+    { id: "library", op: ["church", "cinema", "library"] },
     { id: "cafe", op: ["restaurant", "cafe", "hotel"] },
   ];
 
@@ -22,21 +23,23 @@
     { k: "l_second", ok: "R" },
     { k: "l_after", ok: "F" },
     { k: "l_lights", ok: "L" },
-    { k: "l_end", ok: "R" },
+    { k: "l_into", ok: "L" },
   ];
 
   const ES_DOVE = [
-    { scena: "bank,pharmacy*,|,,", frase: "The pharmacy is ___ the bank.", ok: "next to" },
-    { scena: ",cinema,|,bank*,", frase: "The bank is ___ the cinema.", ok: "opposite" },
+    { scena: "bank,cafe*,cinema|,,", frase: "The café is ___ the bank and the cinema.", ok: "between" },
+    { scena: ",cinema,|,police*,", frase: "The police station is ___ the cinema.", ok: "opposite" },
+    { scena: "church,library*,|,,", frase: "The library is ___ the church.", ok: "next to" },
     { scena: ",supermarket,|,postoffice*,", frase: "The post office is ___ the supermarket.", ok: "opposite" },
-    { scena: "hospital,park*,|,,", frase: "The park is ___ the hospital.", ok: "next to" },
+    { scena: "supermarket,bakery*,|,,", frase: "The bakery is ___ the supermarket.", ok: "next to" },
   ];
 
   const ES_DIALOGO = [
     { frase: "___ me, where is the bank?", op: ["Excuse", "Thank", "Please"], ok: "Excuse", it: "Scusi, dov’è la banca?" },
     { frase: "Go ___ on.", op: ["straight", "street", "stop"], ok: "straight", it: "Vai dritto." },
     { frase: "Take the ___ right.", aiuto: "2ª", op: ["first", "second", "third"], ok: "second", it: "Prendi la seconda a destra." },
-    { frase: "The bank is ___ the cinema.", aiuto: "di fronte", op: ["opposite", "next", "between"], ok: "opposite", it: "La banca è di fronte al cinema." },
+    { frase: "The police station is ___ the cinema.", aiuto: "di fronte", op: ["opposite", "next", "between"], ok: "opposite", it: "La stazione di polizia è di fronte al cinema." },
+    { frase: "Turn left ___ King Street.", aiuto: "in", op: ["into", "of", "from"], ok: "into", it: "Gira a sinistra in King Street." },
     { frase: "Thank you! — You’re ___!", op: ["welcome", "please", "sorry"], ok: "welcome", it: "Grazie! — Prego!" },
   ];
 
@@ -132,9 +135,9 @@
       d.className = "domanda-lab";
       d.innerHTML = `${scena(it.scena)}<p><strong>${n + 1}.</strong> <span class="en">${it.frase.replace("___", '<span class="buco">?</span>')}</span></p><div class="opzioni"></div><p class="esito" aria-live="polite"></p>`;
       e3.appendChild(d);
-      domanda(d, ["next to", "opposite"], it.ok, (b, op) => { b.textContent = op; }, (ok, esito) => {
+      domanda(d, ["next to", "opposite", "between"], it.ok, (b, op) => { b.textContent = op; }, (ok, esito) => {
         d.querySelector(".buco").textContent = it.ok;
-        const it2 = { "next to": "accanto a", opposite: "di fronte a" }[it.ok];
+        const it2 = { "next to": "accanto a", opposite: "di fronte a", between: "tra" }[it.ok];
         esito.textContent = (ok ? "✓ Yes! " : "✗ No. ") + `${it.ok} = ${it2}.`;
       });
     });

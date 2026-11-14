@@ -2,7 +2,7 @@
   const griglia = document.getElementById("griglia-posti");
   if (griglia) {
     const ids = ["pharmacy", "church", "hospital", "bank", "school", "park", "cinema", "postoffice", "supermarket",
-      "restaurant", "cafe", "hotel", "station", "lights"];
+      "restaurant", "cafe", "hotel", "library", "bakery", "police", "station", "lights"];
     griglia.innerHTML = ids.map((id) => {
       const p = window.POSTO(id);
       return `<button type="button" class="carta-posto" data-voce="w_${id}" aria-label="${p.en}, ${p.it}">${window.icona(id)}<b>${p.en}</b><i>${p.it}</i></button>`;

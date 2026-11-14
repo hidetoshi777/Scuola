@@ -35,11 +35,19 @@
   const posto = (id) => window.POSTO(id);
   const puzzle = (id) => C.PUZZLE.find((p) => p.id === id);
 
-  function nuvola(tipo, chi, key) {
+  /* nascondi = la frase non è scritta: prima si ascolta (bottone «Leggi», o dopo due errori) */
+  function nuvola(tipo, chi, key, nascondi) {
     const f = F[key];
     const it = $("btn-it").getAttribute("aria-pressed") === "true";
-    return `<div class="nuvola ${tipo}"><button type="button" class="voce" data-voce="${key}" aria-label="Ascolta"></button><p><span class="chi">${chi}</span><span class="en">${f.en}</span><span class="traduzione"${it ? "" : " hidden"}><br>${f.it}</span></p></div>`;
+    const leggi = nascondi ? `<button type="button" class="btn leggi-frase" style="min-height:34px;padding:2px 10px">📝 Leggi</button>` : "";
+    return `<div class="nuvola ${tipo}"><button type="button" class="voce" data-voce="${key}" aria-label="Ascolta"></button><p><span class="chi">${chi}</span><span class="en"${nascondi ? " hidden" : ""}>${f.en}</span>${leggi}<span class="traduzione"${it && !nascondi ? "" : " hidden"}><br>${f.it}</span></p></div>`;
   }
+  function mostraTesto() {
+    document.querySelectorAll("#dialogo .en[hidden]").forEach((e) => { e.hidden = false; });
+    document.querySelectorAll("#dialogo .leggi-frase").forEach((b) => b.remove());
+    if ($("btn-it").getAttribute("aria-pressed") === "true") mostraTraduzione(true);
+  }
+  $("dialogo").addEventListener("click", (e) => { if (e.target.closest(".leggi-frase")) mostraTesto(); });
 
   function mostraPad(cosa) {
     $("pannello-giu").hidden = !cosa.mosse && !cosa.next;
@@ -59,9 +67,9 @@
     $("fine").hidden = true;
     $("campo").hidden = false;
     punti = 0; n = 0;
-    const ids = Object.keys(C.POSTI_MAPPA);
+    const ids = Object.keys(C.EDIFICI);
     if (liv === 1) turni = window.mescola(ids);
-    else if (liv === 4) turni = window.mescola(ids.filter((id) => id !== "cafe" && id !== "hotel"));
+    else if (liv === 4) turni = window.mescola(ids.filter((id) => id !== "hotel"));
     else {
       /* prima i percorsi corti, poi i lunghi */
       const per = (k) => window.mescola(C.PUZZLE.filter((p) => p.liv === k).map((p) => p.id));
@@ -69,7 +77,6 @@
     }
     turni = turni.slice(0, NTURNI[liv]);
     $("hud-tot").textContent = turni.length;
-    mappa.nomi(liv !== 1);
     mappa.aiuto(liv >= 3 && $("btn-aiuto").getAttribute("aria-pressed") === "true");
     $("btn-aiuto").hidden = liv < 3;
     turno();
@@ -96,12 +103,12 @@
       msg("Tocca il posto sulla mappa.");
       T.audio = ["q_" + id];
     } else if (livello === 2) {
-      $("dialogo").innerHTML = nuvola("passante", "Passante", "a_" + id);
+      $("dialogo").innerHTML = nuvola("passante", "Passante", "a_" + id, true);
       mostraPad({});
       msg("Dove arrivi? Tocca il posto.");
       T.audio = ["a_" + id];
     } else if (livello === 3) {
-      $("dialogo").innerHTML = nuvola("turista", "Tu", "q_" + id) + nuvola("passante", "Passante", "a_" + id);
+      $("dialogo").innerHTML = nuvola("turista", "Tu", "q_" + id) + nuvola("passante", "Passante", "a_" + id, true);
       mostraPad({ mosse: true });
       abilita("#riga-mosse button", true);
       msg("Guida l’omino. Primo incrocio: cosa fai?");
@@ -111,7 +118,7 @@
       mappa.evidenzia(id, "meta");
       mostraPad({ mosse: true, prog: true, programma: true });
       disegnaProgramma();
-      msg(`Porta il turista al posto giallo: the ${posto(id).en}.`);
+      msg("Porta il turista al posto giallo.");
       T.audio = ["q_" + id];
     }
     V.sequenza(T.audio, 300);
@@ -162,6 +169,7 @@
       return;
     }
     if (T.errori === 2) {
+      mostraTesto();
       occupato = true;
       msg(`✗ No, this is the ${p.en}. Aiuto: guarda dove va l’omino.`, "ko");
       mostraTraduzione(true);
@@ -197,7 +205,7 @@
       await mappa.trema();
       if (!C.passo(mappa.stato, m)) msg("✗ Lì non c’è una strada. Riascolta.", "ko");
       else msg("✗ No, non è questa la strada. Riascolta.", "ko");
-      if (T.errori >= 2) mostraTraduzione(true);
+      if (T.errori >= 2) { mostraTesto(); mostraTraduzione(true); }
       if (T.errori >= 3) msg(`Aiuto: adesso «${MOSSA[attesa].en}» (${MOSSA[attesa].it}).`, "ko");
     }
     occupato = false;
@@ -243,7 +251,7 @@
         return riprova();
       }
     }
-    const lato = mappa.postoAlLato("left") === T.id ? "left" : mappa.postoAlLato("right") === T.id ? "right" : null;
+    const lato = mappa.postiAlLato("left").includes(T.id) ? "left" : mappa.postiAlLato("right").includes(T.id) ? "right" : null;
     if (lato) {
       mappa.togli(T.id, "meta");
       await V.play(lato === "left" ? "c_onleft" : "c_onright");
@@ -288,7 +296,10 @@
 
   function mostraTraduzione(v) {
     $("btn-it").setAttribute("aria-pressed", String(v));
-    document.querySelectorAll("#dialogo .traduzione").forEach((t) => { t.hidden = !v; });
+    document.querySelectorAll("#dialogo .nuvola").forEach((n) => {
+      const en = n.querySelector(".en"), tr = n.querySelector(".traduzione");
+      if (tr) tr.hidden = !v || (en && en.hidden);
+    });
   }
 
   /* ---------------- comandi ---------------- */
