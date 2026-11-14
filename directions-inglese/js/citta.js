@@ -196,10 +196,144 @@
     </g>`;
   }
 
+  /* ---------------- Traffico: solo decorazione ----------------
+     Macchine e treno sono sprite di Blender (img/veicoli/). Si guida a SINISTRA (città inglese).
+     Ogni giro passa per incroci adiacenti; ai semafori ogni tanto la macchina si ferma. */
+  const CORSIA = 11;
+  const AUTO_LATO = 52;                     /* lato dello sprite (0,5 m) */
+  const TRENO = { w: 190, h: 50, y: 798, vel: 24, attesa: 5 };
+  const GIRI = [
+    { col: "rossa", vel: 30, parte: 0.0, nodi: [[0, 2], [0, 1], [0, 0], [1, 0], [2, 0], [2, 1], [2, 2], [1, 2]] },
+    { col: "bianca", vel: 24, parte: 0.45, nodi: [[2, 2], [2, 1], [2, 0], [1, 0], [0, 0], [0, 1], [0, 2], [1, 2]] },
+    { col: "blu", vel: 26, parte: 0.2, nodi: [[1, 1], [2, 1], [2, 0], [1, 0]] },
+    { col: "gialla", vel: 27, parte: 0.7, nodi: [[0, 1], [1, 1], [1, 2], [0, 2]] },
+  ];
+  const SEM = new Set(PI.semafori.map((s) => s.join(",")));
+
+  function percorsoAuto(nodi) {
+    const n = nodi.length;
+    const dir = (a, b) => [Math.sign(X[b[0]] - X[a[0]]), Math.sign(Y[b[1]] - Y[a[1]])];
+    const pts = nodi.map((nd, k) => {
+      const din = dir(nodi[(k - 1 + n) % n], nd), dout = dir(nd, nodi[(k + 1) % n]);
+      const nin = [din[1], -din[0]], nout = [dout[1], -dout[0]];
+      const dritto = din[0] === dout[0] && din[1] === dout[1];
+      const ox = dritto ? nin[0] : nin[0] + nout[0], oy = dritto ? nin[1] : nin[1] + nout[1];
+      return { x: X[nd[0]] + ox * CORSIA, y: Y[nd[1]] + oy * CORSIA, sem: SEM.has(nd.join(",")), jx: X[nd[0]], jy: Y[nd[1]] };
+    });
+    const segs = pts.map((p, k) => {
+      const q = pts[(k + 1) % n];
+      const dx = q.x - p.x, dy = q.y - p.y;
+      const d = Math.abs(dx) > Math.abs(dy) ? (dx > 0 ? "E" : "W") : (dy > 0 ? "S" : "N");
+      return { p, q, len: Math.hypot(dx, dy), d };
+    });
+    return segs;
+  }
+
+  function avviaTraffico(svg, animato) {
+    const strato = svg.querySelector(".traffico");
+    const auto = GIRI.map((g) => {
+      const segs = percorsoAuto(g.nodi);
+      const tot = segs.reduce((s, x) => s + x.len, 0);
+      let k = 0, t = g.parte * tot;
+      while (t >= segs[k].len) { t -= segs[k].len; k = (k + 1) % segs.length; }
+      const img = document.createElementNS("http://www.w3.org/2000/svg", "image");
+      img.setAttribute("width", AUTO_LATO);
+      img.setAttribute("height", AUTO_LATO);
+      strato.appendChild(img);
+      return { g, segs, k, t, pausa: 0, img, dir: "" };
+    });
+    const treno = document.createElementNS("http://www.w3.org/2000/svg", "image");
+    treno.setAttribute("href", `${BASE()}img/veicoli/treno.webp`);
+    treno.setAttribute("width", TRENO.w);
+    treno.setAttribute("height", TRENO.h);
+    strato.appendChild(treno);
+    let tx = 120, tAttesa = 0;
+
+    const posAuto = (a) => {
+      const s = a.segs[a.k];
+      const f = s.len ? a.t / s.len : 0;
+      return { x: s.p.x + (s.q.x - s.p.x) * f, y: s.p.y + (s.q.y - s.p.y) * f, d: s.d };
+    };
+    const VERSO = { N: [0, -1], S: [0, 1], E: [1, 0], W: [-1, 0] };
+    /* c'è un'altra macchina davanti, nella stessa direzione, troppo vicina? */
+    const bloccata = (a) => {
+      const me = posAuto(a), v = VERSO[me.d];
+      return auto.some((b) => {
+        if (b === a) return false;
+        const o = posAuto(b);
+        if (o.d !== me.d) return false;
+        const dx = o.x - me.x, dy = o.y - me.y;
+        const avanti = dx * v[0] + dy * v[1], lato = Math.abs(dx * v[1] - dy * v[0]);
+        return avanti > 0 && avanti < 58 && lato < 8;
+      }) || incrocioOccupato(a, me);
+    };
+    /* un incrocio alla volta: chi arriva aspetta che sia libero.
+       Gli incroci distano 190+ unità e la zona è 40: nessuno può tenerne due, quindi niente stalli. */
+    const ZONA = 40;
+    const occupante = new Map();
+    const incrocioOccupato = (a, me) => {
+      occupante.forEach((chi, chiave) => {
+        if (chi !== a) return;
+        const [jx, jy] = chiave.split(",").map(Number);
+        if (Math.hypot(jx - me.x, jy - me.y) > ZONA) occupante.delete(chiave);
+      });
+      const q = a.segs[a.k].q;
+      if (Math.hypot(q.jx - me.x, q.jy - me.y) > ZONA) return false;
+      const chiave = q.jx + "," + q.jy;
+      const chi = occupante.get(chiave);
+      if (chi && chi !== a) return true;
+      occupante.set(chiave, a);
+      return false;
+    };
+    const disegnaAuto = (a) => {
+      const s = a.segs[a.k];
+      const f = s.len ? a.t / s.len : 0;
+      const p = P(s.p.x + (s.q.x - s.p.x) * f, s.p.y + (s.q.y - s.p.y) * f, 0.1);
+      if (a.dir !== s.d) { a.img.setAttribute("href", `${BASE()}img/veicoli/auto-${a.g.col}-${s.d}.webp`); a.dir = s.d; }
+      a.img.setAttribute("x", p.x - AUTO_LATO / 2);
+      a.img.setAttribute("y", p.y - AUTO_LATO / 2);
+    };
+    const disegnaTreno = () => {
+      const p = P(tx, TRENO.y, 0.12);
+      treno.setAttribute("x", p.x - TRENO.w / 2);
+      treno.setAttribute("y", p.y - TRENO.h / 2);
+    };
+    auto.forEach(disegnaAuto);
+    disegnaTreno();
+    if (!animato) return;
+
+    let prima = performance.now();
+    const tick = (ora) => {
+      if (!svg.isConnected) return;
+      const dt = Math.min(0.1, (ora - prima) / 1000);
+      prima = ora;
+      auto.forEach((a) => {
+        if (a.pausa > 0) { a.pausa -= dt; return; }
+        if (bloccata(a)) return;
+        a.t += a.g.vel * dt;
+        while (a.t >= a.segs[a.k].len) {
+          a.t -= a.segs[a.k].len;
+          a.k = (a.k + 1) % a.segs.length;
+          if (a.segs[a.k].p.sem && Math.random() < 0.5) { a.pausa = 1.4 + Math.random(); a.t = 0; break; }
+        }
+        disegnaAuto(a);
+      });
+      if (tAttesa > 0) tAttesa -= dt;
+      else {
+        tx += TRENO.vel * dt;
+        if (tx > PR.w + TRENO.w) { tx = -TRENO.w; tAttesa = TRENO.attesa; }
+      }
+      disegnaTreno();
+      requestAnimationFrame(tick);
+    };
+    requestAnimationFrame(tick);
+  }
+
   function crea(contenitore, opzioni) {
-    const opt = Object.assign({ aiuto: true, onPosto: null }, opzioni || {});
+    const opt = Object.assign({ aiuto: true, onPosto: null, traffico: true }, opzioni || {});
     contenitore.innerHTML = `<svg class="mappa senza-nomi" viewBox="0 0 ${PR.w} ${PR.h}" role="img" aria-label="Mappa della città di Greenford">
       <image href="${BASE()}img/citta.jpg" x="0" y="0" width="${PR.w}" height="${PR.h}" preserveAspectRatio="none"/>
+      <g class="traffico" aria-hidden="true"></g>
       <g class="vie">${vie()}</g>
       <g class="scia" id="scia"></g>
       ${zone()}
@@ -237,6 +371,7 @@
     disegna();
 
     svg.classList.toggle("senza-aiuto", !opt.aiuto);
+    avviaTraffico(svg, opt.traffico && !document.body.classList.contains("reduced-motion"));
 
     svg.querySelectorAll(".posto").forEach((g) => {
       const scegli = () => opt.onPosto && opt.onPosto(g.dataset.posto, g);

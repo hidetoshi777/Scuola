@@ -465,3 +465,4 @@ img.ico-posto { display: block; object-fit: contain; }
 
 .mappa .via { fill: #fff; font: 800 19px "Overpass", sans-serif; letter-spacing: .02em; paint-order: stroke; stroke: #1d2228; stroke-width: 4px; pointer-events: none; }
 .nuvola .leggi-frase { margin-top: 4px; }
+.mappa .traffico { pointer-events: none; }

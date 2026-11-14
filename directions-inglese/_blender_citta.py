@@ -430,11 +430,8 @@ for (lx, ly) in [(X[0] / 100 - 0.3, -2.3), (X[0] / 100 - 0.3, -4.6), (X[1] / 100
     lampione(lx, ly)
 
 # macchine parcheggiate a bordo strada
-auto(2.2, -Y[0] / 100 - 0.12, M("auto_r", hexc("#e8483b"), 0.35))
-auto(4.6, -3.36 - 0.15, M("auto_b", hexc("#3b82f6"), 0.35))
-auto(X[2] / 100 + 0.12, -2.55, M("auto_v", hexc("#2fbf71"), 0.35), asse="y")
-auto(X[0] / 100 + 0.12, -4.6, M("auto_g", hexc("#f2c230"), 0.35), asse="y")
-auto(4.3, -5.65, M("auto_w", hexc("#f1f3f5"), 0.35))
+# le macchine sulle strade e il treno NON sono nello sfondo: sono sprite che si muovono (--solo veicoli)
+AUTO_COLORI = {"rossa": "#e8483b", "blu": "#3b82f6", "gialla": "#f2c230", "bianca": "#f1f3f5"}
 
 # ---------------------------------------------------------------- stazione e binari
 CUR = nuova_collezione("posto_station")
@@ -455,10 +452,17 @@ for dy in (-0.035, 0.035):
     box(3.5, -7.98 + dy, 0.0, 9.0, 0.012, 0.012, C["grigio"], 0)
 for i in range(40):
     box(-1 + i * 0.24, -7.98, -0.004, 0.04, 0.14, 0.008, C["legno"], 0)
-for k, colx in enumerate([4.55, 5.08, 5.61]):
-    colr = C["rosso"] if k == 0 else C["blu"]
-    box(colx, -7.98, 0.02, 0.5, 0.17, 0.2, colr, 0.03)
-    finestre(colx - 0.2, colx + 0.2, -8.065, [0.12], 0.06, 0.06, n=3, telaio=False)
+def treno(x0, y0):
+    """Locomotiva rossa davanti (verso est) e due carrozze blu; x0 = centro del treno."""
+    for k, dx in enumerate([0.53, 0.0, -0.53]):
+        colr = C["rosso"] if k == 0 else C["blu"]
+        box(x0 + dx, y0, 0.02, 0.5, 0.17, 0.2, colr, 0.03)
+        finestre(x0 + dx - 0.2, x0 + dx + 0.2, y0 - 0.085, [0.12], 0.06, 0.06, n=3, telaio=False)
+        for wx in (-0.17, 0.17):
+            for wy in (-0.08, 0.08):
+                cil(x0 + dx + wx, y0 + wy, 0.035, 0.03, 0.02, C["scuro"], 12, asse="y")
+    box(x0 + 0.8, y0, 0.02, 0.05, 0.15, 0.12, C["scuro"], 0.01)
+    sfera(x0 + 0.83, y0, 0.12, 0.022, LUCE)
 
 # ---------------------------------------------------------------- i dodici posti
 def facciata(cx, cy, lw, ld, bw, bd, avanti=0.1):
@@ -958,6 +962,42 @@ if SOLO in ("tutto", "posti"):
     mostra_solo(["posto_lights", "ombra"])
     inquadra(10, 10 * math.cos(TILT) + 0.3 * math.sin(TILT), 0.5, 0.5, 160 if ANTEPRIMA else 360)
     render(os.path.join(HERE, "img", "posti", "_lights.png"), trasparente=True)
+
+# --- macchine (4 colori x 4 direzioni) e treno, da animare nel gioco
+if SOLO in ("tutto", "veicoli"):
+    os.makedirs(os.path.join(HERE, "img", "veicoli"), exist_ok=True)
+    CUR = nuova_collezione("ombra3")
+    bpy.ops.mesh.primitive_plane_add(size=12, location=(40, 40, 0.0))
+    o3 = _link(bpy.context.active_object)
+    o3.is_shadow_catcher = True
+    for nome, colore in AUTO_COLORI.items():
+        CUR = nuova_collezione("auto_" + nome)
+        auto(40, 40, M("auto_" + nome, hexc(colore), 0.35))
+        objs = list(CUR.objects)
+        perno_a = bpy.data.objects.new("perno_auto", None)
+        perno_a.location = (40, 40, 0)
+        CUR.objects.link(perno_a)
+        bpy.context.view_layer.update()
+        for o_ in objs:
+            o_.parent = perno_a
+            o_.matrix_parent_inverse = perno_a.matrix_world.inverted()
+        mostra_solo(["auto_" + nome, "ombra3"])
+        # il cofano (parte senza abitacolo) è verso +x: E = verso est
+        for d, rz in [("E", 0), ("W", math.pi), ("N", math.pi / 2), ("S", -math.pi / 2)]:
+            perno_a.rotation_euler = (0, 0, rz)
+            bpy.context.view_layer.update()
+            inquadra(40, 40 * math.cos(TILT) + 0.1 * math.sin(TILT), 0.5, 0.5, 64 if ANTEPRIMA else 128)
+            render(os.path.join(HERE, "img", "veicoli", f"_auto-{nome}-{d}.png"), trasparente=True)
+    CUR = nuova_collezione("treno")
+    treno(50, 50)
+    CUR2 = nuova_collezione("ombra4")
+    CUR = CUR2
+    bpy.ops.mesh.primitive_plane_add(size=12, location=(50, 50, 0.0))
+    o4 = _link(bpy.context.active_object)
+    o4.is_shadow_catcher = True
+    mostra_solo(["treno", "ombra4"])
+    inquadra(50.03, 50 * math.cos(TILT) + 0.12 * math.sin(TILT), 1.9, 0.5, 190 if ANTEPRIMA else 380)
+    render(os.path.join(HERE, "img", "veicoli", "_treno.png"), trasparente=True)
 
 # --- l'omino nelle quattro direzioni
 if SOLO in ("tutto", "omino"):
