@@ -36,43 +36,49 @@ NOMI = {k[2:]: v["en"] for k, v in FRASI.items() if k.startswith("w_")}
 
 LAB_POSTI = [("pharmacy", ["pharmacy", "park", "cinema"]), ("church", ["school", "church", "cinema"]),
              ("hospital", ["hotel", "hospital", "bank"]), ("bank", ["bank", "cafe", "park"]),
-             ("postoffice", ["supermarket", "postoffice", "restaurant"]), ("station", ["station", "hotel", "lights"]),
-             ("lights", ["lights", "park", "school"]), ("cafe", ["restaurant", "cafe", "hotel"])]
+             ("postoffice", ["supermarket", "postoffice", "restaurant"]), ("bakery", ["bakery", "bank", "library"]),
+             ("police", ["hospital", "police", "school"]), ("library", ["church", "cinema", "library"]),
+             ("cafe", ["restaurant", "cafe", "hotel"])]
 DESCR_ICONA = {
-    "pharmacy": "edificio bianco con insegna verde e croce verde",
+    "pharmacy": "edificio bianco e verde con una grande croce verde luminosa",
     "church": "edificio con campanile a punta e croce",
-    "hospital": "edificio bianco con insegna blu H e croce rossa",
-    "bank": "edificio con una grande moneta d'oro con il simbolo dell'euro e un bancomat",
+    "hospital": "edificio bianco con grande croce rossa e un'ambulanza davanti",
+    "bank": "edificio con colonne e una grande moneta d'oro con il simbolo dell'euro",
     "postoffice": "edificio con insegna rossa, una busta da lettere e una cassetta postale rossa",
-    "station": "edificio con orologio e il muso di un treno",
-    "lights": "un semaforo rosso giallo verde",
-    "cafe": "edificio con tazzina di caffè fumante",
+    "bakery": "negozio con tenda gialla e una grande pagnotta e un cornetto sull'insegna",
+    "police": "edificio blu con lampada blu sul tetto, distintivo con stella e una macchina della polizia",
+    "library": "edificio con un grande libro aperto sulla facciata e una pila di libri davanti",
+    "cafe": "edificio con una tazzina di caffè gigante sul tetto e tavolini fuori",
 }
 FRECCE = {"F": "freccia dritta (vai dritto)", "L": "freccia che gira a sinistra", "R": "freccia che gira a destra"}
 LAB_FRECCE = [("c_straight", "F"), ("c_left", "L"), ("c_right", "R"), ("l_first", "L"),
-              ("l_second", "R"), ("l_after", "F"), ("l_lights", "L"), ("l_end", "R")]
+              ("l_second", "R"), ("l_after", "F"), ("l_lights", "L"), ("l_into", "L")]
 LAB_DOVE = [
-    ("bank, pharmacy* uno accanto all'altro sullo stesso lato della strada", "The pharmacy is ___ the bank.", "next to"),
-    ("cinema sopra la strada, bank* esattamente di fronte dall'altro lato della strada", "The bank is ___ the cinema.", "opposite"),
+    ("bank, cafe*, cinema in fila sullo stesso lato della strada, il cafe in mezzo", "The café is ___ the bank and the cinema.", "between"),
+    ("cinema sopra la strada, police station* esattamente di fronte dall'altro lato della strada", "The police station is ___ the cinema.", "opposite"),
+    ("church, library* uno accanto all'altro sullo stesso lato", "The library is ___ the church.", "next to"),
     ("supermarket sopra la strada, post office* esattamente di fronte dall'altro lato", "The post office is ___ the supermarket.", "opposite"),
-    ("hospital, park* uno accanto all'altro sullo stesso lato", "The park is ___ the hospital.", "next to"),
+    ("supermarket, bakery* uno accanto all'altro sullo stesso lato", "The bakery is ___ the supermarket.", "next to"),
 ]
 LAB_DIALOGO = [
     ("___ me, where is the bank?", ["Excuse", "Thank", "Please"], "Excuse", ""),
     ("Go ___ on.", ["straight", "street", "stop"], "straight", ""),
     ("Take the ___ right.", ["first", "second", "third"], "second", "accanto c'è il cartellino 2ª"),
-    ("The bank is ___ the cinema.", ["opposite", "next", "between"], "opposite", "accanto c'è l'aiuto «di fronte»"),
+    ("The police station is ___ the cinema.", ["opposite", "next", "between"], "opposite", "accanto c'è l'aiuto «di fronte»"),
+    ("Turn left ___ King Street.", ["into", "of", "from"], "into", "accanto c'è l'aiuto «in»; King Street è il nome di una via"),
     ("Thank you! — You're ___!", ["welcome", "please", "sorry"], "welcome", ""),
 ]
 SCHEDA_COMPLETA = [
-    ("___ me, where is the hotel?", "Excuse"), ("Go ___ on.", "straight"), ("The bank is ___ the cinema. (di fronte)", "opposite"),
+    ("___ me, where is the hotel?", "Excuse"), ("Go ___ on.", "straight"), ("The police station is ___ the cinema. (di fronte)", "opposite"),
     ("The bakery is ___ to the bank. (accanto)", "next"), ("Thank you! — You're ___!", "welcome"),
 ]
 AFFERMAZIONI = [
     "Prima dici «Excuse me» (scusi). Poi chiedi: «Where is…?» = Dov'è…?",
     "the = il, la · a = un, una (Where is the bank? / Is there a bank near here?)",
     "first = prima · second = seconda. «Take the second right»: la prima strada a destra la salti, alla seconda giri.",
-    "«It's opposite the cinema» = è di fronte al cinema (dall'altra parte della strada). «It's next to the bank» = è accanto alla banca.",
+    "«Go along Station Road» = vai lungo Station Road. «Turn left into King Street» = gira a sinistra in King Street. «Cross High Street» = attraversa High Street.",
+    "«It's opposite the cinema» = è di fronte al cinema (dall'altra parte della strada). «It's next to the bank» = è accanto alla banca. «It's between the bank and the cinema» = è tra la banca e il cinema.",
+    "«It's near the station» = è vicino alla stazione. «It's on the corner» = è all'angolo (dove due strade si incontrano).",
     "Errore tipico: «Turn to left» è sbagliato; si dice «Turn left».",
     "Errore tipico: «Go street on» è sbagliato; si dice «Go straight on». street = strada, straight = dritto.",
     "Quando qualcuno ti dice «Thank you», rispondi «You're welcome» (prego), non «Please».",

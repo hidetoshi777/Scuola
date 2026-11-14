@@ -26,17 +26,14 @@ SOLO = ARGV[ARGV.index("--solo") + 1] if "--solo" in ARGV else "tutto"
 HERE = os.path.dirname(os.path.abspath(__file__))
 
 # ---- pianta (uguale a js/citta.js) ----
-X = [152, 350, 548]
-Y = [150, 350, 550]
-S = (350, 668)
-COL = [[6, 126], [176, 326], [374, 524], [574, 694]]
-RIG = [[6, 124], [176, 326], [374, 524], [576, 690]]
-POSTI = {
-    "school": (1, 0), "park": (2, 0),
-    "hospital": (0, 1), "church": (1, 1), "bank": (2, 1), "cinema": (3, 1),
-    "postoffice": (0, 2), "supermarket": (1, 2), "pharmacy": (2, 2), "restaurant": (3, 2),
-    "cafe": (1, 3), "hotel": (2, 3),
-}
+import re as _re
+_PIANTA = json.loads(_re.search(r"window\.PIANTA\s*=\s*(\{.*\})\s*;",
+                                open(os.path.join(HERE, "js", "pianta.js"), encoding="utf-8").read(), _re.S).group(1))
+X, Y, S = _PIANTA["X"], _PIANTA["Y"], tuple(_PIANTA["S"])
+COL, RIG = _PIANTA["COL"], _PIANTA["RIG"]
+ISOLATI = {tuple(int(v) for v in k.split(",")): ids for k, ids in _PIANTA["isolati"].items()}
+SEMAFORI = [tuple(j) for j in _PIANTA["semafori"]]
+POSTI = [pid for ids in ISOLATI.values() for pid in ids]
 STRADA = 0.46
 TILT = math.radians(45)   # inclinazione della camera dalla verticale
 
@@ -355,7 +352,7 @@ def zebra(cx, cy, verso):
             box(cx, cy + off, 0.012, 0.16, 0.04, 0.003, C["bianco"], 0)
 
 
-for (jx, jy) in [(1, 1), (1, 2)]:
+for (jx, jy) in SEMAFORI:
     cx, cy = X[jx] / 100, -Y[jy] / 100
     zebra(cx, cy + 0.36, "x")
     zebra(cx, cy - 0.36, "x")
@@ -385,9 +382,10 @@ def semaforo(x, y, guarda="y"):
         sfera(x, y - 0.031, 0.51 - k * 0.055, 0.019, m)
 
 
-jx, jy = X[1] / 100, -Y[1] / 100
-for dx, dy in [(-0.3, -0.3), (0.3, -0.3), (-0.3, 0.3), (0.3, 0.3)]:
-    semaforo(jx + dx, jy + dy)
+for (si, sj) in SEMAFORI:
+    jx, jy = X[si] / 100, -Y[sj] / 100
+    for dx, dy in [(-0.3, -0.3), (0.3, -0.3), (-0.3, 0.3), (0.3, 0.3)]:
+        semaforo(jx + dx, jy + dy)
 
 # angoli: casette, alberi
 def casetta(x, y, colore, tetto_c):
@@ -399,6 +397,17 @@ def casetta(x, y, colore, tetto_c):
 
 
 casetta(0.48, -0.55, M("c1", hexc("#ffd8a8")), C["tetto_rosso"])
+# isolato vuoto a est fra High Street e King Street: due casette
+casetta(6.3, -4.05, M("c4", hexc("#ffe066")), C["tetto_grigio"])
+casetta(6.55, -4.75, M("c5", hexc("#b2f2bb")), C["tetto_rosso"])
+albero(6.85, -4.2, 0.11)
+# parcheggio a destra della stazione (isolato 2,3)
+_pcx, _pcy = (COL[2][0] + COL[2][1]) / 200, -(RIG[3][0] + RIG[3][1]) / 200
+box(_pcx, _pcy, 0.036, (COL[2][1] - COL[2][0]) / 100 - 0.2, (RIG[3][1] - RIG[3][0]) / 100 - 0.24, 0.004, C["asfalto"], 0)
+for _k in range(7):
+    box(_pcx - 0.84 + _k * 0.28, _pcy + 0.1, 0.04, 0.02, 0.4, 0.002, C["bianco"], 0)
+auto(_pcx - 0.56, _pcy + 0.1, M("auto_p1", hexc("#9b5de5"), 0.35), asse="y")
+auto(_pcx + 0.28, _pcy + 0.1, M("auto_p2", hexc("#f15bb5"), 0.35), asse="y")
 albero(0.18, -0.25, 0.14)
 albero(1.05, -0.95, 0.12)
 casetta(6.45, -0.6, M("c2", hexc("#a5d8ff")), C["tetto_grigio"])
@@ -416,20 +425,20 @@ cil(6.42, -7.08, 0.0, 0.01, 0.34, C["grigio"], 8)
 cil(6.42, -7.1, 0.34, 0.05, 0.012, C["rosso"], 20, asse="y")
 
 # lampioni lungo le strade
-for (lx, ly) in [(1.25, -2.3), (1.25, -4.6), (3.75, -2.5), (5.75, -2.4), (5.75, -4.5), (2.5, -1.25), (4.5, -1.25),
-                 (2.5, -5.75), (4.5, -5.75), (3.25, -6.4)]:
+for (lx, ly) in [(X[0] / 100 - 0.3, -2.3), (X[0] / 100 - 0.3, -4.6), (X[1] / 100 + 0.3, -2.0), (X[2] / 100 + 0.3, -2.6),
+                 (X[2] / 100 + 0.3, -4.6), (2.25, -Y[0] / 100 + 0.3), (4.5, -Y[0] / 100 + 0.3), (X[1] / 100 + 0.3, -6.2)]:
     lampione(lx, ly)
 
 # macchine parcheggiate a bordo strada
-auto(2.45, -1.62, M("auto_r", hexc("#e8483b"), 0.35))
+auto(2.2, -Y[0] / 100 - 0.12, M("auto_r", hexc("#e8483b"), 0.35))
 auto(4.6, -3.36 - 0.15, M("auto_b", hexc("#3b82f6"), 0.35))
-auto(5.33, -2.6, M("auto_v", hexc("#2fbf71"), 0.35), asse="y")
-auto(1.68, -4.6, M("auto_g", hexc("#f2c230"), 0.35), asse="y")
+auto(X[2] / 100 + 0.12, -2.55, M("auto_v", hexc("#2fbf71"), 0.35), asse="y")
+auto(X[0] / 100 + 0.12, -4.6, M("auto_g", hexc("#f2c230"), 0.35), asse="y")
 auto(4.3, -5.65, M("auto_w", hexc("#f1f3f5"), 0.35))
 
 # ---------------------------------------------------------------- stazione e binari
 CUR = nuova_collezione("posto_station")
-sx0, sy0 = 3.5, -7.62
+sx0, sy0 = S[0] / 100, -7.62
 box(sx0, sy0, 0.0, 1.6, 0.42, 0.34, C["crema"])
 tetto(sx0, sy0, 0.34, 1.6, 0.42, 0.14, C["tetto_grigio"], "x")
 box(sx0, sy0 - 0.05, 0.0, 0.48, 0.4, 0.5, C["crema"])
@@ -752,10 +761,106 @@ def p_hotel(cx, cy, lw, ld):
     albero(bx - bw / 2 - 0.16, yf + 0.05, 0.11)
 
 
+def p_library(cx, cy, lw, ld):
+    bw, bd = 0.9, 0.5
+    bx, by, yf = facciata(cx, cy, lw, ld, bw, bd, 0.36)
+    box(bx, by, 0.03, bw, bd, 0.42, M("bib", hexc("#e7d8c4")))
+    box(bx, by, 0.45, bw + 0.03, bd + 0.03, 0.04, M("viola_scuro", hexc("#6741d9"), 0.5))
+    box(bx, yf - 0.05, 0.03, 0.36, 0.1, 0.03, C["grigio_chiaro"], 0.005)
+    box(bx, yf - 0.012, 0.06, 0.14, 0.02, 0.2, C["marrone"], 0.005)
+    for dx in (-0.12, 0.12):
+        cil(bx + dx, yf - 0.06, 0.06, 0.025, 0.24, C["bianco"], 14)
+    finestre(bx - bw / 2 + 0.05, bx - 0.2, yf, [0.12], 0.14, 0.08, n=1)
+    finestre(bx + 0.2, bx + bw / 2 - 0.05, yf, [0.12], 0.14, 0.08, n=1)
+    # libro aperto gigante sulla facciata
+    box(bx, yf - 0.02, 0.3, 0.42, 0.03, 0.14, M("viola_scuro", hexc("#6741d9"), 0.5), 0.01)
+    for s in (-1, 1):
+        o = box(bx + s * 0.075, yf - 0.05, 0.31, 0.15, 0.012, 0.11, C["bianco"], 0.003)
+        o.rotation_euler = (0, 0, s * 0.35)
+        for k in range(3):
+            box(bx + s * 0.075, yf - 0.06, 0.34 + k * 0.022, 0.1, 0.004, 0.006, C["grigio"], 0)
+    # pila di libri colorati davanti
+    for k, m in enumerate([C["rosso"], C["blu"], C["giallo"], C["verde"]]):
+        box(bx + 0.33, yf - 0.16, 0.03 + k * 0.035, 0.14 - k * 0.012, 0.1, 0.03, m, 0.004)
+
+
+def p_bakery(cx, cy, lw, ld):
+    bw, bd = 0.9, 0.48
+    bx, by, yf = facciata(cx, cy, lw, ld, bw, bd, 0.36)
+    box(bx, by, 0.03, bw, bd, 0.4, M("forno", hexc("#fff0c2")))
+    tetto(bx, by, 0.43, bw, bd, 0.14, C["tetto_rosso"], "x")
+    box(bx, yf - 0.012, 0.03, 0.15, 0.02, 0.2, C["marrone"], 0.005)
+    finestre(bx - bw / 2 + 0.05, bx - 0.12, yf, [0.07], 0.15, 0.14, n=1)
+    finestre(bx + 0.12, bx + bw / 2 - 0.05, yf, [0.07], 0.15, 0.14, n=1)
+    for i in range(9):
+        m = C["giallo"] if i % 2 == 0 else C["bianco"]
+        x = bx - bw / 2 + 0.04 + (i + 0.5) * (bw - 0.08) / 9
+        mesh([(x - 0.046, yf, 0.28), (x + 0.046, yf, 0.28), (x + 0.046, yf - 0.14, 0.23), (x - 0.046, yf - 0.14, 0.23)],
+             [(0, 1, 2, 3)], m, "tenda")
+    # pagnotta e cornetto giganti sull'insegna
+    box(bx, yf - 0.02, 0.31, 0.46, 0.03, 0.12, C["marrone"], 0.01)
+    sfera(bx - 0.08, yf - 0.06, 0.375, 0.09, M("pane", hexc("#d08a3c"), 0.6), 1.0, 0.6, 0.55)
+    for k in range(3):
+        box(bx - 0.13 + k * 0.05, yf - 0.115, 0.39, 0.012, 0.006, 0.05, M("taglio", hexc("#f6e7c8"), 0.6), 0)
+    for k, (dx, r) in enumerate([(0.06, 0.035), (0.11, 0.045), (0.16, 0.035)]):
+        sfera(bx + dx, yf - 0.06, 0.37, r, M("cornetto", hexc("#e0a04a"), 0.5), 1, 0.7, 0.8)
+    # vetrina col pane
+    for k in range(4):
+        sfera(bx - 0.3 + k * 0.05, yf - 0.03, 0.12, 0.022, M("pane", hexc("#d08a3c"), 0.6), 1.3, 0.8, 0.8)
+
+
+def p_police(cx, cy, lw, ld):
+    bw, bd = 0.9, 0.5
+    bx, by, yf = facciata(cx, cy, lw, ld, bw, bd, 0.36)
+    box(bx, by, 0.03, bw, bd, 0.46, M("pol", hexc("#d0dcf0")))
+    box(bx, by, 0.49, bw + 0.03, bd + 0.03, 0.04, M("blu_pol", hexc("#1c3f8f"), 0.5))
+    box(bx, yf - 0.02, 0.33, bw - 0.04, 0.03, 0.1, M("blu_pol", hexc("#1c3f8f"), 0.5), 0.008)
+    # distintivo (stella d'oro) e lampada blu
+    cil(bx, yf - 0.04, 0.38, 0.075, 0.02, M("blu_pol", hexc("#1c3f8f"), 0.5), 24, asse="y")
+    stella(bx, yf - 0.055, 0.38, 0.06, C["oro"])
+    box(bx, by - 0.1, 0.53, 0.05, 0.05, 0.06, C["scuro"], 0.005)
+    sfera(bx, by - 0.1, 0.62, 0.045, LUCE_BLU)
+    box(bx, yf - 0.012, 0.03, 0.15, 0.02, 0.2, M("blu_pol", hexc("#1c3f8f"), 0.5), 0.005)
+    finestre(bx - bw / 2 + 0.05, bx - 0.12, yf, [0.1], 0.13, 0.08, n=1)
+    finestre(bx + 0.12, bx + bw / 2 - 0.05, yf, [0.1], 0.13, 0.08, n=1)
+    # macchina della polizia
+    ax, ay = bx, yf - 0.3
+    box(ax, ay, 0.045, 0.36, 0.17, 0.08, C["bianco"], 0.025)
+    box(ax, ay - 0.086, 0.07, 0.34, 0.004, 0.03, M("blu_pol", hexc("#1c3f8f"), 0.5), 0)
+    box(ax - 0.02, ay, 0.115, 0.2, 0.156, 0.07, C["cielo_vetro"], 0.02)
+    box(ax - 0.02, ay, 0.18, 0.18, 0.15, 0.012, C["bianco"], 0.006)
+    box(ax - 0.02, ay, 0.195, 0.1, 0.05, 0.025, LUCE_BLU, 0.006)
+    for dx in (-0.115, 0.115):
+        for dy in (-0.085, 0.085):
+            cil(ax + dx, ay + dy, 0.045, 0.042, 0.03, C["scuro"], 14, asse="y")
+
+
 BUILD = {k: globals()["p_" + k] for k in POSTI}
-for pid, (c, r) in POSTI.items():
-    CUR = nuova_collezione("posto_" + pid)
-    BUILD[pid](*LOTTI[(c, r)])
+for (c, r), ids in ISOLATI.items():
+    lcx, lcy, llw, lld = LOTTI[(c, r)]
+    n = len(ids)
+    sw = llw / n
+    for k, pid in enumerate(ids):
+        scx = lcx - llw / 2 + sw * (k + 0.5)
+        CUR = nuova_collezione("posto_" + pid)
+        BUILD[pid](scx, lcy, sw if n > 1 else llw, lld)
+        objs = list(CUR.objects)
+        bpy.context.view_layer.update()
+        pts = [o_.matrix_world @ Vector(v) for o_ in objs if o_.type in ("MESH", "FONT") for v in o_.bound_box]
+        minx, maxx, miny = min(p.x for p in pts), max(p.x for p in pts), min(p.y for p in pts)
+        s = min(1.0, (sw - (0.05 if n > 1 else 0.02)) / (maxx - minx))
+        if s < 0.995 or n > 1:
+            perno_b = bpy.data.objects.new("perno_" + pid, None)
+            perno_b.location = ((minx + maxx) / 2, miny, 0.03)
+            CUR.objects.link(perno_b)
+            bpy.context.view_layer.update()
+            for o_ in objs:
+                o_.parent = perno_b
+                o_.matrix_parent_inverse = perno_b.matrix_world.inverted()
+            sz = min(1.0, s * 1.4)  # più stretto che basso: in fila restano riconoscibili
+            perno_b.scale = (s, sz, sz)
+            perno_b.location = (scx, lcy - lld / 2 + 0.05, 0.03)
+            print("SCALA", pid, round(s, 2))
 
 # ---------------------------------------------------------------- camera
 cam = bpy.data.objects.new("camera", bpy.data.cameras.new("camera"))
@@ -837,7 +942,7 @@ if SOLO in ("tutto", "posti"):
     bpy.ops.mesh.primitive_plane_add(size=30, location=(0, 0, 0.031))
     ombra = _link(bpy.context.active_object)
     ombra.is_shadow_catcher = True
-    for pid in list(POSTI) + ["station"]:
+    for pid in POSTI + ["station"]:
         coll = bpy.data.collections["posto_" + pid]
         mostra_solo(["posto_" + pid, "ombra"])
         pts = [o_.matrix_world @ Vector(v) for o_ in coll.objects if o_.type in ("MESH", "FONT") for v in o_.bound_box]
