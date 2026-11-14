@@ -9,7 +9,7 @@ Quando si crea o rifà una **video-lezione** (stile trigonometria / cavitazione-
 
 ## Cosa fare
 
-- **Poco testo a schermo**: titolo corto o una sola frase-chiave, non elenchi lunghi.
+- **Testo a schermo equilibrato (poco ≠ zero)**: ogni slide deve avere titolo chiaro, etichette su schemi/assi/frecce e 1–3 punti-chiave o formule essenziali sincronizzate alla voce (non elenchi lunghi presi pari pari dal PDF, ma nemmeno sole immagini mute).
 - **Immagini al centro**: schemi, illustrazioni, foto di contesto, vignette didattiche — la slide deve far *vedere* il concetto.
 - **Voce ≠ testo**: la narrazione ElevenLabs **spiega**, non legge pedissequamente quanto scritto sulla slide. Se basta leggere, il video non serve.
 - Voce chiara, terra terra (professionale AM); stessa pipeline ElevenLabs già usata nei lavori Scuola quando possibile.
