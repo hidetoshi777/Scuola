@@ -24,6 +24,35 @@
 
   const zoom = window.FumettoZoom ? window.FumettoZoom.attach(viewport) : null;
 
+  function makeFsButton(className, label, text) {
+    const btn = document.createElement("button");
+    btn.type = "button";
+    btn.className = className;
+    btn.setAttribute("aria-label", label);
+    btn.textContent = text;
+    ["pointerdown", "touchstart", "touchend"].forEach((ev) => {
+      btn.addEventListener(ev, (event) => event.stopPropagation(), { passive: true });
+    });
+    viewport.appendChild(btn);
+    return btn;
+  }
+
+  const fsPrev = makeFsButton("fumetto-fs-arrow fumetto-fs-arrow--prev", "Tavola precedente", "‹");
+  const fsNext = makeFsButton("fumetto-fs-arrow fumetto-fs-arrow--next", "Tavola successiva", "›");
+  const fsClose = makeFsButton("fumetto-fs-close", "Esci da schermo intero", "✕");
+  fsPrev.addEventListener("click", (event) => {
+    event.stopPropagation();
+    go(index - 1);
+  });
+  fsNext.addEventListener("click", (event) => {
+    event.stopPropagation();
+    go(index + 1);
+  });
+  fsClose.addEventListener("click", (event) => {
+    event.stopPropagation();
+    toggleFullscreen();
+  });
+
   pages.forEach((_, i) => {
     const dot = document.createElement("button");
     dot.type = "button";
@@ -43,6 +72,8 @@
     if (caption) caption.textContent = captions[index] || "";
     prevBtn.disabled = index === 0 || busy;
     nextBtn.disabled = index === total - 1 || busy;
+    fsPrev.disabled = index === 0 || busy;
+    fsNext.disabled = index === total - 1 || busy;
   }
 
   function settle(next) {
