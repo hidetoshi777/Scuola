@@ -89,7 +89,7 @@
     ],
     fakeoutWin: [
       'Ma dai?! Davvero sotto casa?!',
-      'Aspetta a stappare lo spumante…'
+      'Aspetta… com’è possibile?!'
     ],
     rettifica: [
       'ECCOLA LA RETTIFICA! Ahahaha!',
@@ -105,11 +105,11 @@
   };
 
   const CHUTES = [
-    { id: 0, code: '18H SOTTO CASA', short: '18h SOTTO CASA', sub: 'Sabato libero', color: '#e6c36a', dark: '#544016', text: '#fff0bd' },
-    { id: 1, code: 'SPEZZONE 4+6+8h', short: 'SPEZZONE', sub: '4+6+8h · 3 comuni', color: '#f0ad5e', dark: '#5a3610', text: '#ffe3bf' },
-    { id: 2, code: '115 KM DI CURVE', short: '115 KM CURVE', sub: 'Catene a bordo', color: '#ef7b8d', dark: '#5b1c29', text: '#ffd7de' },
-    { id: 3, code: 'SUPPLENZA 2 GG', short: 'SUPPLENZA 2 GG', sub: 'Con Consiglio', color: '#74c5ee', dark: '#173f56', text: '#d8f3ff' },
-    { id: 4, code: 'SALTA IL TURNO', short: 'SALTA TURNO', sub: 'Bug algoritmo', color: '#b49ce8', dark: '#352654', text: '#eadfff' }
+    { id: 0, code: '18H SOTTO CASA', short: '18h SOTTO CASA', sub: 'Sabato libero', color: '#e6c36a', dark: '#4d3912', text: '#fff0bd' },
+    { id: 1, code: 'SPEZZONE 4+6+8h', short: 'SPEZZONE', sub: '4+6+8h · 3 comuni', color: '#f0ad5e', dark: '#54310f', text: '#ffe3bf' },
+    { id: 2, code: '115 KM DI CURVE', short: '115 KM CURVE', sub: 'Catene a bordo', color: '#ef7b8d', dark: '#541825', text: '#ffd7de' },
+    { id: 3, code: 'SUPPLENZA 2 GG', short: 'SUPPLENZA 2 GG', sub: 'Con Consiglio', color: '#74c5ee', dark: '#153a4f', text: '#d8f3ff' },
+    { id: 4, code: 'SALTA IL TURNO', short: 'SALTA TURNO', sub: 'Bug algoritmo', color: '#b49ce8', dark: '#30224c', text: '#eadfff' }
   ];
 
   const OUTCOMES = [
@@ -228,7 +228,6 @@
     } catch (_) {}
   }
 
-  // Elements
   const canvas = $('claw-world');
   let ctx = canvas.getContext('2d');
   const toastEl = $('toast');
@@ -243,6 +242,12 @@
   const nominaForm = $('nomina-form');
   const colleagueInput = $('colleague-name');
   const btnClearNomina = $('btn-clear-nomina');
+
+  const backdrop = new Image();
+  backdrop.onload = () => {
+    if (COVER_MODE) draw();
+  };
+  backdrop.src = 'scenario.webp';
 
   let W = 1000;
   let H = 620;
@@ -259,24 +264,28 @@
   let sirenTimer = 0;
   let coffeeSteamPhase = 0;
   let profBubble = { text: PROF_LINES.idle[0], timer: 4.5 };
-  let tankWhisper = { personId: null, text: '', timer: 1.5 };
+  let profMood = 'relaxed'; // relaxed | amused | shocked | evilLaugh
+  let profMoodTimer = 0;
+  let tankWhisper = { personId: null, text: '', timer: 1.8 };
   let confetti = [];
+  let sparks = [];
+  let gags = [];
+  let binProps = [];
+  let chuteBounce = [0, 0, 0, 0, 0];
   let flashComoda = 0;
 
-  // Input flags
   const input = { left: false, right: false };
   let dragActive = false;
   let dragStartX = 0;
   let dragMoved = false;
 
-  // Claw & game state
   const state = {
-    phase: 'aim', // aim | descend | grab | ascend | carry | pauseSiren | slip | fakeoutPause | fakeoutEject | result
+    phase: 'aim', // aim | descend | grab | ascend | carry | sirenFreeze | pauseSiren | slip | fakeoutPause | fakeoutEject | settle
     timer: 0,
     clawX: 500,
     clawY: 100,
     clawAngle: 0,
-    clawOpen: 0.72,
+    clawOpen: 0.78,
     autoAimX: null,
     grabbed: null,
     targetChute: 1,
@@ -286,6 +295,8 @@
     slipStartX: 0,
     slipStartY: 0,
     slipRot: 0,
+    slipBounced: false,
+    clackPlayed: false,
     ejectBootProgress: 0,
     dropStartX: 0,
     dropStartY: 0,
@@ -313,7 +324,30 @@
   function setProfBubble(category) {
     const list = PROF_LINES[category] || PROF_LINES.idle;
     profBubble.text = list[Math.floor(Math.random() * list.length)];
-    profBubble.timer = 4.2;
+    profBubble.timer = 4.6;
+  }
+
+  function setProfMood(mood, duration = 2.4) {
+    profMood = mood;
+    profMoodTimer = duration;
+  }
+
+  function addGag(text, x, y, color = '#d9f482', duration = 0.85) {
+    gags.push({ text, x, y, color, life: duration, maxLife: duration });
+  }
+
+  function emitSparks(x, y, count = 10) {
+    for (let i = 0; i < count; i++) {
+      const a = Math.random() * Math.PI * 2;
+      const spd = 70 + Math.random() * 140;
+      sparks.push({
+        x, y,
+        vx: Math.cos(a) * spd,
+        vy: Math.sin(a) * spd - 40,
+        life: 0.35 + Math.random() * 0.3,
+        color: i % 2 ? '#fef08a' : '#ff7b82'
+      });
+    }
   }
 
   function layout() {
@@ -322,9 +356,9 @@
       H = 800;
       isMobile = false;
       const vip = { x: 24, y: 122, w: 268, h: 646 };
-      const cab = { x: 312, y: 22, w: 866, h: 756 };
-      const marquee = { x: cab.x + 14, y: cab.y + 12, w: cab.w - 28, h: 66 };
-      const glass = { x: cab.x + 22, y: marquee.y + marquee.h + 10, w: cab.w - 44, h: cab.h - 216 };
+      const cab = { x: 312, y: 36, w: 866, h: 740 };
+      const marquee = { x: cab.x + 16, y: cab.y + 14, w: cab.w - 32, h: 64 };
+      const glass = { x: cab.x + 22, y: marquee.y + marquee.h + 12, w: cab.w - 44, h: cab.h - 208 };
       const railY = glass.y + 24;
       const chuteY = glass.y + glass.h - 92;
       const chuteW = (glass.w - 32) / 5;
@@ -332,16 +366,16 @@
         vip, cab, marquee, glass, railY, chuteY, chuteW,
         minX: glass.x + 48,
         maxX: glass.x + glass.w - 48,
-        pileFloorY: chuteY - 6,
+        pileFloorY: chuteY - 12,
         chuteXs: Array.from({ length: 5 }, (_, i) => glass.x + 16 + chuteW * (i + 0.5))
       };
     }
 
     if (isMobile) {
       const vip = { x: 14, y: 12, w: W - 28, h: 124 };
-      const cab = { x: 14, y: 146, w: W - 28, h: H - 160 };
-      const marquee = { x: cab.x + 10, y: cab.y + 10, w: cab.w - 20, h: 52 };
-      const glass = { x: cab.x + 14, y: marquee.y + marquee.h + 8, w: cab.w - 28, h: cab.h - 154 };
+      const cab = { x: 14, y: 158, w: W - 28, h: H - 172 };
+      const marquee = { x: cab.x + 10, y: cab.y + 12, w: cab.w - 20, h: 52 };
+      const glass = { x: cab.x + 14, y: marquee.y + marquee.h + 10, w: cab.w - 28, h: cab.h - 150 };
       const railY = glass.y + 22;
       const chuteY = glass.y + glass.h - 86;
       const chuteW = (glass.w - 20) / 5;
@@ -349,15 +383,15 @@
         vip, cab, marquee, glass, railY, chuteY, chuteW,
         minX: glass.x + 36,
         maxX: glass.x + glass.w - 36,
-        pileFloorY: chuteY - 6,
+        pileFloorY: chuteY - 10,
         chuteXs: Array.from({ length: 5 }, (_, i) => glass.x + 10 + chuteW * (i + 0.5))
       };
     }
 
-    const vip = { x: 18, y: 18, w: 224, h: H - 36 };
-    const cab = { x: 256, y: 18, w: W - 274, h: H - 36 };
-    const marquee = { x: cab.x + 14, y: cab.y + 12, w: cab.w - 28, h: 58 };
-    const glass = { x: cab.x + 18, y: marquee.y + marquee.h + 10, w: cab.w - 36, h: cab.h - 168 };
+    const vip = { x: 18, y: 20, w: 224, h: H - 38 };
+    const cab = { x: 256, y: 30, w: W - 274, h: H - 48 };
+    const marquee = { x: cab.x + 14, y: cab.y + 14, w: cab.w - 28, h: 56 };
+    const glass = { x: cab.x + 18, y: marquee.y + marquee.h + 10, w: cab.w - 36, h: cab.h - 162 };
     const railY = glass.y + 22;
     const chuteY = glass.y + glass.h - 84;
     const chuteW = (glass.w - 28) / 5;
@@ -365,7 +399,7 @@
       vip, cab, marquee, glass, railY, chuteY, chuteW,
       minX: glass.x + 42,
       maxX: glass.x + glass.w - 42,
-      pileFloorY: chuteY - 6,
+      pileFloorY: chuteY - 10,
       chuteXs: Array.from({ length: 5 }, (_, i) => glass.x + 14 + chuteW * (i + 0.5))
     };
   }
@@ -397,7 +431,7 @@
       y: 400,
       homeX: 500,
       homeY: 400,
-      tilt: (Math.random() - 0.5) * 0.18,
+      tilt: (Math.random() - 0.5) * 0.16,
       bobOffset: Math.random() * 6.28,
       dangling: false,
       startled: false,
@@ -406,22 +440,34 @@
     };
   }
 
+  function buildBinProps(g) {
+    const types = ['briefcase', 'diploma', 'phone', 'folder', 'books', 'briefcase'];
+    const left = g.glass.x + 44;
+    const usable = g.glass.w - 88;
+    binProps = types.map((kind, i) => ({
+      kind,
+      x: left + (usable * (i + 0.35)) / types.length + Math.sin(i * 4.2) * 14,
+      y: g.pileFloorY - (i % 2 === 0 ? 8 : 22),
+      rot: Math.sin(i * 2.3) * 0.22
+    }));
+  }
+
   function populateTank(preserveTarget = false) {
     const g = layout();
-    const rows = [7, 6, 5]; // bottom 7, middle 6, top 5 -> 18 precari
-    const leftPad = g.glass.x + 56;
-    const usableW = g.glass.w - 112;
+    const rows = isMobile ? [8, 7, 6] : [9, 8, 7];
+    const leftPad = g.glass.x + 48;
+    const usableW = g.glass.w - 96;
     const list = [];
     let idx = 0;
     for (let r = 0; r < rows.length; r++) {
       const cols = rows[r];
-      const rowY = g.pileFloorY - 22 - r * (isMobile ? 42 : 38);
+      const rowY = g.pileFloorY - 12 - r * (isMobile ? 28 : 26);
       for (let c = 0; c < cols; c++) {
         const p = makePerson();
         const frac = cols === 1 ? 0.5 : c / (cols - 1);
-        const jitter = Math.sin((idx + 1) * 3.1) * 14;
-        const hx = Math.max(g.minX, Math.min(g.maxX, leftPad + frac * usableW + (r % 2 ? 12 : -8) + jitter));
-        const hy = rowY + Math.cos((idx + 2) * 2.7) * 5;
+        const jitter = Math.sin((idx + 1) * 3.1) * 11;
+        const hx = Math.max(g.minX, Math.min(g.maxX, leftPad + frac * usableW + (r % 2 ? 10 : -8) + jitter));
+        const hy = rowY + Math.cos((idx + 2) * 2.7) * 4;
         p.homeX = hx;
         p.homeY = hy;
         p.x = hx;
@@ -432,6 +478,7 @@
       }
     }
     tankPeople = list;
+    buildBinProps(g);
     if (!preserveTarget) {
       targetedId = null;
       if (customColleague) {
@@ -468,7 +515,6 @@
       return;
     }
 
-    // Clear previous custom tag
     tankPeople.forEach(p => {
       if (p.customName) {
         p.customName = '';
@@ -476,7 +522,6 @@
       }
     });
 
-    // Pick a prominent upper-row precario near center
     const sorted = [...tankPeople].sort((a, b) => {
       const aScore = (a.layer || 0) * 100 - Math.abs(a.homeX - (layout().minX + layout().maxX) * 0.5) * 0.25;
       const bScore = (b.layer || 0) * 100 - Math.abs(b.homeX - (layout().minX + layout().maxX) * 0.5) * 0.25;
@@ -500,10 +545,9 @@
       W = 1200;
       H = 800;
       isMobile = false;
-      const dpr = 1;
-      canvas.width = W * dpr;
-      canvas.height = H * dpr;
-      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      canvas.width = W;
+      canvas.height = H;
+      ctx.setTransform(1, 0, 0, 1, 0, 0);
       populateTank(false);
       setupCoverShowcase();
       return;
@@ -534,7 +578,8 @@
     const g = layout();
     sirenTimer = 999;
     profBubble = { text: 'Io il 31 agosto dormo sereno.', timer: 999 };
-    tankWhisper = { personId: tankPeople[3]?.id, text: 'Ho fatto pure il CLIL!', timer: 999 };
+    profMood = 'relaxed';
+    tankWhisper = { personId: tankPeople[4]?.id, text: 'Ho fatto pure il CLIL!', timer: 999 };
     const dangling = makePerson('Concetta Russo');
     dangling.woman = true;
     dangling.color = '#ef9aad';
@@ -543,8 +588,8 @@
     dangling.x = g.chuteXs[2] + 35;
     dangling.y = g.glass.y + 235;
     state.clawX = dangling.x;
-    state.clawY = dangling.y - 52;
-    state.clawOpen = 0.25;
+    state.clawY = dangling.y - 54;
+    state.clawOpen = 0.24;
     state.clawAngle = 0.08;
     state.grabbed = dangling;
     state.phase = 'carry';
@@ -572,10 +617,70 @@
     c.textAlign = 'left';
   }
 
-  function drawPrecario(c, p, scale = 1, rotation = 0) {
-    const startled = Boolean(p.startled || p.dangling);
+  function drawWrappedText(c, text, x, y, maxWidth, lineHeight, fontSize, color, font, weight = 600) {
+    c.fillStyle = color;
+    c.font = `${weight} ${fontSize}px ${font}`;
+    const words = String(text).split(/\s+/);
+    let line = '';
+    let curY = y;
+    for (let i = 0; i < words.length; i++) {
+      const test = line ? line + ' ' + words[i] : words[i];
+      if (c.measureText(test).width > maxWidth && line) {
+        c.fillText(line, x, curY);
+        line = words[i];
+        curY += lineHeight;
+      } else {
+        line = test;
+      }
+    }
+    if (line) c.fillText(line, x, curY);
+    return curY;
+  }
+
+  function drawProp(c, prop) {
     c.save();
-    c.translate(p.x, p.y);
+    c.translate(prop.x, prop.y);
+    c.rotate(prop.rot);
+    if (prop.kind === 'briefcase') {
+      round(c, -11, -7, 22, 13, 2.5, '#6a442a', '#2e1a0d', 1.2);
+      round(c, -4, -10, 8, 4, 1.5, null, '#472a16', 1.6);
+      c.fillStyle = '#e6c36a';
+      c.fillRect(-3, -2, 6, 3);
+    } else if (prop.kind === 'diploma') {
+      round(c, -12, -3, 24, 6, 3, '#f3ebd3', '#8c7d5b', 1);
+      c.fillStyle = '#c83b4a';
+      c.fillRect(-2, -3.5, 4, 7);
+    } else if (prop.kind === 'phone') {
+      round(c, -5, -8, 10, 15, 2, '#1d2734', '#70849c', 1);
+      round(c, -3.5, -6, 7, 10, 1, '#9be5ff');
+    } else if (prop.kind === 'folder') {
+      round(c, -10, -6, 20, 12, 2, '#b93f4b', '#5d1820', 1.2);
+      c.fillStyle = '#f4efe2';
+      c.fillRect(-7, -4, 14, 2.5);
+    } else {
+      round(c, -10, -4, 20, 5, 1.5, '#3b6a82', '#172e3a', 1);
+      round(c, -9, -9, 18, 5, 1.5, '#c6933d', '#5c4114', 1);
+    }
+    c.restore();
+  }
+
+  function drawPrecario(c, p, scale = 1, rotation = 0, showShadow = false, hovered = false) {
+    const startled = Boolean(p.startled || p.dangling || hovered);
+    const tremble = hovered ? Math.sin(time * 38) * 1.2 : 0;
+    const px = p.x + tremble;
+    const py = p.y;
+
+    if (showShadow) {
+      c.save();
+      c.fillStyle = '#0903087a';
+      c.beginPath();
+      c.ellipse(px, py + 2, 13 * scale, 4.5 * scale, 0, 0, Math.PI * 2);
+      c.fill();
+      c.restore();
+    }
+
+    c.save();
+    c.translate(px, py);
     c.rotate(rotation);
     c.scale(scale * (p.dir || 1), scale);
     const kick = p.dangling ? Math.sin(time * 22) * 5.5 : 0;
@@ -737,15 +842,21 @@
     }
     c.restore();
 
-    // Target badge above colleague (offset aside if dangling from claw so prongs don't cover it)
+    // Fear '!' badge when hovered directly under crane
+    if (hovered && !p.dangling) {
+      round(c, px - 8, py - 66 * scale, 16, 18, 5, '#f6e8bc', '#bb8053', 1.4);
+      txt(c, '!', px, py - 52.5 * scale, 13, '#9a3c2b', 'center', 'ui-monospace, monospace', 900);
+    }
+
+    // Target badge above colleague
     if (p.id === targetedId || p.customName) {
       const pulse = Math.sin(time * 6) * 2;
       const badgeLabel = p.customName ? p.customName.toUpperCase() : 'NEL MIRINO';
       c.save();
       c.font = '800 10px ui-monospace, monospace';
       const tw = Math.min(148, Math.max(66, c.measureText(badgeLabel).width + 16));
-      const bx = p.dangling ? p.x + 34 : p.x - tw / 2;
-      const by = p.dangling ? p.y - 34 : p.y - 68 * scale + pulse;
+      const bx = p.dangling ? px + 34 : px - tw / 2;
+      const by = p.dangling ? py - 34 : py - (hovered ? 86 : 68) * scale + pulse;
       round(c, bx, by, tw, 18, 5, '#d9f482', '#172318', 1.5);
       c.fillStyle = '#141d11';
       c.textAlign = 'center';
@@ -761,47 +872,122 @@
   function drawVipLounge(g) {
     const v = g.vip;
     ctx.save();
-    // Gold VIP panel
+
+    // Rich dark walnut wood-paneled lounge wall
     const bg = ctx.createLinearGradient(v.x, v.y, v.x, v.y + v.h);
-    bg.addColorStop(0, '#1e2736');
-    bg.addColorStop(1, '#121927');
+    bg.addColorStop(0, '#231c1a');
+    bg.addColorStop(0.6, '#1a1922');
+    bg.addColorStop(1, '#12151f');
     round(ctx, v.x, v.y, v.w, v.h, 14, bg, '#e6c36a', 2.2);
+
+    ctx.save();
+    round(ctx, v.x, v.y, v.w, v.h, 14);
+    ctx.clip();
+    ctx.strokeStyle = '#33262066';
+    ctx.lineWidth = 1.5;
+    for (let pxLine = v.x + 18; pxLine < v.x + v.w; pxLine += 26) {
+      ctx.beginPath();
+      ctx.moveTo(pxLine, v.y);
+      ctx.lineTo(pxLine, v.y + v.h);
+      ctx.stroke();
+    }
+
+    // Framed wall diploma on desktop/cover
+    if (!isMobile) {
+      const dx = v.x + v.w * 0.5;
+      const dy = v.y + 178;
+      round(ctx, dx - 34, dy - 20, 68, 42, 4, '#f3ebd3', '#c89b44', 2.5);
+      ctx.fillStyle = '#5c4b32';
+      ctx.fillRect(dx - 24, dy - 10, 48, 3);
+      ctx.fillRect(dx - 20, dy - 3, 40, 2);
+      ctx.fillRect(dx - 16, dy + 3, 32, 2);
+      ctx.fillStyle = '#c93a47';
+      ctx.beginPath();
+      ctx.arc(dx + 20, dy + 11, 5, 0, Math.PI * 2);
+      ctx.fill();
+    }
+    ctx.restore();
 
     // Top golden badge
     const badgeW = isMobile ? 168 : v.w - 24;
-    const badgeX = isMobile ? v.x + 12 : v.x + 12;
+    const badgeX = v.x + 12;
     const badgeY = v.y + 10;
-    round(ctx, badgeX, badgeY, badgeW, 38, 8, '#362c16', '#e6c36a', 1.5);
+    round(ctx, badgeX, badgeY, badgeW, 38, 8, '#3a2b14', '#e6c36a', 1.6);
     txt(ctx, '★ ZONA VIP', badgeX + badgeW / 2, badgeY + 15, 10, '#e6c36a', 'center', 'ui-monospace, monospace', 800);
     txt(ctx, 'DI RUOLO · FUORI CONCORSO', badgeX + badgeW / 2, badgeY + 30, 9.5, '#fff0bd', 'center', 'ui-monospace, monospace', 800);
 
-    // Position armchair + Prof depending on desktop/cover vs mobile
-    const px = isMobile ? v.x + 104 : v.x + v.w * 0.48;
-    const py = isMobile ? v.y + 108 : v.y + v.h * 0.56;
-    const scale = isMobile ? 1.15 : 1.62;
+    const px = isMobile ? v.x + 96 : v.x + v.w * 0.44;
+    const py = isMobile ? v.y + 108 : v.y + v.h * 0.62;
+    const scale = isMobile ? 1.12 : 1.56;
 
-    // Cozy rug / floor lamp glow
+    // Warm overhead lamp spotlight in VIP lounge
     if (!isMobile) {
-      const glow = ctx.createRadialGradient(px, py - 24, 12, px, py - 24, 110);
-      glow.addColorStop(0, '#e6c36a28');
-      glow.addColorStop(1, '#e6c36a00');
-      ctx.fillStyle = glow;
-      ctx.fillRect(v.x + 6, v.y + 54, v.w - 12, v.h - 140);
+      const cone = ctx.createRadialGradient(px, py - 35, 12, px, py - 24, 130);
+      cone.addColorStop(0, '#ffd88933');
+      cone.addColorStop(1, '#ffd88900');
+      ctx.fillStyle = cone;
+      ctx.fillRect(v.x + 4, v.y + 52, v.w - 8, v.h - 150);
+
+      // Side wooden coffee table + miniature silver Moka pot
+      const tx = px + 62;
+      const ty = py + 2;
+      round(ctx, tx - 18, ty - 22, 36, 6, 2, '#6b4228', '#2c190d', 1.4);
+      round(ctx, tx - 3, ty - 16, 6, 20, 2, '#51311c', '#2c190d', 1.2);
+      round(ctx, tx - 12, ty + 2, 24, 4, 2, '#51311c');
+      // Moka pot silhouette
+      ctx.fillStyle = '#c9d5e2';
+      ctx.strokeStyle = '#334457';
+      ctx.lineWidth = 1.2;
+      ctx.beginPath();
+      ctx.moveTo(tx - 8, ty - 22);
+      ctx.lineTo(tx - 6, ty - 33);
+      ctx.lineTo(tx - 8, ty - 42);
+      ctx.lineTo(tx + 8, ty - 42);
+      ctx.lineTo(tx + 6, ty - 33);
+      ctx.lineTo(tx + 8, ty - 22);
+      ctx.closePath();
+      ctx.fill();
+      ctx.stroke();
+      round(ctx, tx - 9, ty - 45, 18, 4, 2, '#344150');
+      round(ctx, tx - 2, ty - 49, 4, 4, 1.5, '#19222d');
+      ctx.strokeStyle = '#1f2936';
+      ctx.lineWidth = 2.4;
+      ctx.beginPath();
+      ctx.moveTo(tx + 7, ty - 39);
+      ctx.quadraticCurveTo(tx + 15, ty - 35, tx + 8, ty - 29);
+      ctx.stroke();
     }
 
-    // Leather armchair behind Prof
+    // Tufted Chesterfield armchair + Prof
+    const laughBounce = (profMood === 'amused' || profMood === 'evilLaugh') ? Math.abs(Math.sin(time * 14)) * 2.5 : 0;
+    const shockJitter = profMood === 'shocked' ? Math.sin(time * 42) * 1.5 : 0;
+
     ctx.save();
-    ctx.translate(px, py);
+    ctx.translate(px + shockJitter, py - laughBounce * 0.4);
     ctx.scale(scale, scale);
+
+    // Armchair shadow
+    ctx.fillStyle = '#0906097a';
+    ctx.beginPath();
+    ctx.ellipse(0, 8, 32, 8, 0, 0, Math.PI * 2);
+    ctx.fill();
+
     round(ctx, -28, -42, 56, 40, 10, '#6e2831', '#3b1116', 2);
+    // Brass tuft buttons
+    ctx.fillStyle = '#e6c36a';
+    [[-14, -30], [0, -30], [14, -30], [-7, -21], [7, -21]].forEach(([bx, by]) => {
+      ctx.beginPath();
+      ctx.arc(bx, by, 1.3, 0, Math.PI * 2);
+      ctx.fill();
+    });
     round(ctx, -32, -22, 12, 24, 5, '#84343e', '#3b1116', 1.6);
     round(ctx, 20, -22, 12, 24, 5, '#84343e', '#3b1116', 1.6);
     round(ctx, -24, -12, 48, 16, 6, '#84343e', '#3b1116', 1.6);
 
-    // Prof di Ruolo (calm, smug grin, sunglasses or glasses, coffee cup)
     // Trousers & loafers
     round(ctx, -12, -6, 10, 12, 3, '#1d2d3a', '#0c151d', 1.2);
     round(ctx, 2, -6, 10, 12, 3, '#1d2d3a', '#0c151d', 1.2);
+
     // Jacket & tie
     round(ctx, -12, -30, 24, 24, 6, '#2f5e53', '#152c26', 1.6);
     round(ctx, -3, -29, 6, 15, 2, '#f5f0df');
@@ -811,34 +997,66 @@
     ctx.lineTo(-2.5, -17);
     ctx.lineTo(2.5, -17);
     ctx.fill();
+
     // Head
     ctx.fillStyle = '#f2c394';
     ctx.strokeStyle = '#754d37';
     ctx.lineWidth = 1.2;
     ctx.beginPath();
-    ctx.ellipse(0, -41, 10, 11, 0, 0, Math.PI * 2);
+    ctx.ellipse(0, -41 - laughBounce * 0.4, 10, 11, 0, 0, Math.PI * 2);
     ctx.fill();
-    ctx.stroke();
-    // Neat dark hair with distinguished silver temples
-    ctx.fillStyle = '#38362f';
-    ctx.beginPath();
-    ctx.ellipse(0, -49, 10, 5, 0, Math.PI, Math.PI * 2);
-    ctx.fill();
-    ctx.fillStyle = '#b4b8bf';
-    ctx.fillRect(-10, -46, 3, 6);
-    ctx.fillRect(7, -46, 3, 6);
-    // Smug glasses & big relaxed smile
-    ctx.fillStyle = '#182430';
-    round(ctx, -7, -44, 6, 4.5, 1.2, '#1e2c3a', '#e6c36a', 1);
-    round(ctx, 1, -44, 6, 4.5, 1.2, '#1e2c3a', '#e6c36a', 1);
-    ctx.strokeStyle = '#6c3e2b';
-    ctx.lineWidth = 1.4;
-    ctx.beginPath();
-    ctx.arc(0, -37, 4, 0.15, Math.PI - 0.15);
     ctx.stroke();
 
+    // Neat hair with silver temples
+    ctx.fillStyle = '#38362f';
+    ctx.beginPath();
+    ctx.ellipse(0, -49 - laughBounce * 0.4, 10, 5, 0, Math.PI, Math.PI * 2);
+    ctx.fill();
+    ctx.fillStyle = '#b4b8bf';
+    ctx.fillRect(-10, -46 - laughBounce * 0.4, 3, 6);
+    ctx.fillRect(7, -46 - laughBounce * 0.4, 3, 6);
+
+    // Expressions by profMood
+    const headOff = -laughBounce * 0.4;
+    if (profMood === 'shocked') {
+      ctx.fillStyle = '#fff9e7';
+      ctx.strokeStyle = '#182430';
+      ctx.lineWidth = 1.2;
+      ctx.beginPath();
+      ctx.arc(-4, -42 + headOff, 3.6, 0, Math.PI * 2);
+      ctx.arc(4, -42 + headOff, 3.6, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.stroke();
+      ctx.fillStyle = '#182430';
+      ctx.beginPath();
+      ctx.arc(-4, -42 + headOff, 1.3, 0, Math.PI * 2);
+      ctx.arc(4, -42 + headOff, 1.3, 0, Math.PI * 2);
+      ctx.fill();
+      // Open O mouth
+      ctx.fillStyle = '#6e2d2d';
+      ctx.beginPath();
+      ctx.ellipse(0, -35 + headOff, 2.8, 3.4, 0, 0, Math.PI * 2);
+      ctx.fill();
+    } else {
+      // Gold-rimmed glasses
+      round(ctx, -7, -44 + headOff, 6, 4.5, 1.2, '#1e2c3a', '#e6c36a', 1);
+      round(ctx, 1, -44 + headOff, 6, 4.5, 1.2, '#1e2c3a', '#e6c36a', 1);
+      if (profMood === 'amused' || profMood === 'evilLaugh') {
+        ctx.fillStyle = '#6e2d2d';
+        ctx.beginPath();
+        ctx.arc(0, -37 + headOff, 4.4, 0, Math.PI);
+        ctx.fill();
+      } else {
+        ctx.strokeStyle = '#6c3e2b';
+        ctx.lineWidth = 1.4;
+        ctx.beginPath();
+        ctx.arc(0, -37 + headOff, 4, 0.15, Math.PI - 0.15);
+        ctx.stroke();
+      }
+    }
+
     // Raised right arm holding steaming espresso cup
-    const sip = Math.sin(coffeeSteamPhase * 1.4) * 1.6;
+    const sip = profMood === 'shocked' ? Math.sin(time * 40) * 2.2 : Math.sin(coffeeSteamPhase * 1.4) * 1.6;
     ctx.strokeStyle = '#2f5e53';
     ctx.lineWidth = 5.5;
     ctx.lineCap = 'round';
@@ -847,11 +1065,9 @@
     ctx.lineTo(20, -18);
     ctx.lineTo(24, -27 + sip);
     ctx.stroke();
-    // Cup & saucer
     round(ctx, 18, -28 + sip, 12, 3, 1.5, '#e5dfd0', '#8f8470', 1);
     round(ctx, 20, -36 + sip, 8, 8, 2, '#fff9ee', '#8f8470', 1);
-    // Steam
-    ctx.strokeStyle = '#ffffff70';
+    ctx.strokeStyle = '#ffffff78';
     ctx.lineWidth = 1.4;
     for (let s = 0; s < 2; s++) {
       const sx = 22 + s * 4;
@@ -876,11 +1092,10 @@
         drawWrappedText(ctx, `“${profBubble.text}”`, bx + 12, by + 40, bw - 22, 17, 13, '#18222e', 'system-ui, sans-serif', 700);
       } else {
         const bx = v.x + 14;
-        const by = v.y + 62;
+        const by = v.y + 58;
         const bw = v.w - 28;
         const bh = 62;
         round(ctx, bx, by, bw, bh, 10, '#f4efe2', '#e6c36a', 1.8);
-        // Little triangle pointer
         ctx.fillStyle = '#f4efe2';
         ctx.beginPath();
         ctx.moveTo(px - 8, by + bh - 1);
@@ -889,74 +1104,142 @@
         ctx.fill();
         drawWrappedText(ctx, `“${profBubble.text}”`, bx + 12, by + 24, bw - 24, 18, 13.5, '#18222e', 'system-ui, sans-serif', 700);
 
-        // Bottom brass plaque inside VIP lounge
-        const plaqueY = v.y + v.h - 104;
-        const brass = ctx.createLinearGradient(v.x + 18, plaqueY, v.x + v.w - 18, plaqueY + 86);
+        const plaqueY = v.y + v.h - 98;
+        const brass = ctx.createLinearGradient(v.x + 18, plaqueY, v.x + v.w - 18, plaqueY + 82);
         brass.addColorStop(0, '#f0d48a');
         brass.addColorStop(0.5, '#c4963e');
         brass.addColorStop(1, '#8d6424');
-        round(ctx, v.x + 16, plaqueY, v.w - 32, 86, 9, brass, '#5c4216', 2);
-        txt(ctx, 'POSTO FISSO', v.x + v.w / 2, plaqueY + 24, 10, '#2a1c08', 'center', 'ui-monospace, monospace', 800);
-        txt(ctx, 'AL SICURO', v.x + v.w / 2, plaqueY + 47, 19, '#1c1204', 'center', 'system-ui, sans-serif', 900);
-        txt(ctx, 'Tu guardi. Loro sgomitano.', v.x + v.w / 2, plaqueY + 69, 10.5, '#3b280b', 'center', 'system-ui, sans-serif', 700);
+        round(ctx, v.x + 16, plaqueY, v.w - 32, 82, 9, brass, '#5c4216', 2);
+        txt(ctx, 'POSTO FISSO', v.x + v.w / 2, plaqueY + 23, 10, '#2a1c08', 'center', 'ui-monospace, monospace', 800);
+        txt(ctx, 'AL SICURO', v.x + v.w / 2, plaqueY + 46, 19, '#1c1204', 'center', 'system-ui, sans-serif', 900);
+        txt(ctx, 'Tu guardi. Loro sgomitano.', v.x + v.w / 2, plaqueY + 67, 10.5, '#3b280b', 'center', 'system-ui, sans-serif', 700);
       }
     }
 
     ctx.restore();
   }
 
-  function drawWrappedText(c, text, x, y, maxWidth, lineHeight, fontSize, color, font, weight = 600) {
+  function drawChuteIcon(c, index, x, y, color) {
+    c.save();
+    c.translate(x, y);
+    c.strokeStyle = color;
     c.fillStyle = color;
-    c.font = `${weight} ${fontSize}px ${font}`;
-    const words = String(text).split(/\s+/);
-    let line = '';
-    let curY = y;
-    for (let i = 0; i < words.length; i++) {
-      const test = line ? line + ' ' + words[i] : words[i];
-      if (c.measureText(test).width > maxWidth && line) {
-        c.fillText(line, x, curY);
-        line = words[i];
-        curY += lineHeight;
-      } else {
-        line = test;
+    c.lineWidth = 1.6;
+    c.lineCap = 'round';
+    c.lineJoin = 'round';
+    if (index === 0) {
+      // Gold star
+      c.beginPath();
+      for (let i = 0; i < 10; i++) {
+        const r = i % 2 === 0 ? 6 : 2.6;
+        const a = (i * Math.PI) / 5 - Math.PI / 2;
+        if (i === 0) c.moveTo(Math.cos(a) * r, Math.sin(a) * r);
+        else c.lineTo(Math.cos(a) * r, Math.sin(a) * r);
       }
+      c.closePath();
+      c.fill();
+    } else if (index === 1) {
+      // 3 little school roofs
+      [-7, 0, 7].forEach(ox => {
+        c.beginPath();
+        c.moveTo(ox - 3.5, 2);
+        c.lineTo(ox, -3);
+        c.lineTo(ox + 3.5, 2);
+        c.stroke();
+      });
+    } else if (index === 2) {
+      // Winding mountain road
+      c.beginPath();
+      c.moveTo(-7, 4);
+      c.lineTo(-2, -4);
+      c.lineTo(2, 1);
+      c.lineTo(7, -5);
+      c.stroke();
+    } else if (index === 3) {
+      // Calendar 2G badge
+      round(c, -6, -5, 12, 10, 2, null, color, 1.3);
+      txt(c, '2G', 0, 3, 7, color, 'center', 'ui-monospace, monospace', 900);
+    } else {
+      // Glitch X
+      c.beginPath();
+      c.moveTo(-4, -4);
+      c.lineTo(4, 4);
+      c.moveTo(4, -4);
+      c.lineTo(-4, 4);
+      c.stroke();
     }
-    if (line) c.fillText(line, x, curY);
-    return curY;
+    c.restore();
   }
 
   function drawCabinet(g) {
     const cab = g.cab;
     const mq = g.marquee;
     const gl = g.glass;
+    const sirenActive = sirenTimer > 0;
 
-    // Outer arcade cabinet frame
+    // Outer beveled arcade cabinet frame + rivets
     const frameGrad = ctx.createLinearGradient(cab.x, cab.y, cab.x, cab.y + cab.h);
-    frameGrad.addColorStop(0, '#28364c');
-    frameGrad.addColorStop(1, '#141c2b');
-    round(ctx, cab.x, cab.y, cab.w, cab.h, 16, frameGrad, '#5d7392', 2.5);
+    frameGrad.addColorStop(0, '#314059');
+    frameGrad.addColorStop(0.5, '#1e293c');
+    frameGrad.addColorStop(1, '#121927');
+    round(ctx, cab.x, cab.y, cab.w, cab.h, 16, frameGrad, '#786e58', 2.6);
 
-    // Top marquee header
+    // Corner brass bolts
+    [[cab.x + 9, cab.y + 9], [cab.x + cab.w - 9, cab.y + 9], [cab.x + 9, cab.y + cab.h - 9], [cab.x + cab.w - 9, cab.y + cab.h - 9]].forEach(([rx, ry]) => {
+      ctx.fillStyle = '#c8a65a';
+      ctx.beginPath();
+      ctx.arc(rx, ry, 3, 0, Math.PI * 2);
+      ctx.fill();
+    });
+
+    // Physical Rotating Alarm Beacon Dome on top edge of cabinet
+    const beaconX = cab.x + cab.w / 2;
+    const beaconY = cab.y + 2;
+    round(ctx, beaconX - 18, beaconY - 12, 36, 14, 5, '#3b485c', '#889bb5', 1.4);
+    const domeGrad = ctx.createRadialGradient(beaconX - 3, beaconY - 16, 2, beaconX, beaconY - 14, 14);
+    domeGrad.addColorStop(0, sirenActive ? '#fff2f2' : '#ff949b');
+    domeGrad.addColorStop(0.5, sirenActive ? '#ff3144' : '#9c2d38');
+    domeGrad.addColorStop(1, '#581219');
+    ctx.fillStyle = domeGrad;
+    ctx.beginPath();
+    ctx.arc(beaconX, beaconY - 11, 11, Math.PI, 0);
+    ctx.fill();
+    if (sirenActive) {
+      ctx.save();
+      const pulse = 0.55 + Math.sin(time * 24) * 0.35;
+      ctx.fillStyle = `rgba(255, 64, 80, ${pulse})`;
+      ctx.beginPath();
+      ctx.arc(beaconX, beaconY - 14, 24, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.restore();
+    }
+
+    // Marquee header
     const mqGrad = ctx.createLinearGradient(mq.x, mq.y, mq.x, mq.y + mq.h);
-    mqGrad.addColorStop(0, '#36213e');
-    mqGrad.addColorStop(1, '#1c162b');
+    mqGrad.addColorStop(0, '#3a2344');
+    mqGrad.addColorStop(1, '#1a152a');
     round(ctx, mq.x, mq.y, mq.w, mq.h, 10, mqGrad, '#d9f482', 2);
 
-    // Marquee chase bulbs
-    const bulbCount = Math.floor(mq.w / 26);
+    // Warm chase bulbs
+    const bulbCount = Math.floor(mq.w / 28);
     for (let i = 0; i < bulbCount; i++) {
       const bx = mq.x + 14 + i * ((mq.w - 28) / Math.max(1, bulbCount - 1));
       const lit = (Math.floor(time * 5) + i) % 3 === 0;
+      if (lit) {
+        ctx.fillStyle = '#fef08a38';
+        ctx.beginPath();
+        ctx.arc(bx, mq.y + 8, 6, 0, Math.PI * 2);
+        ctx.fill();
+      }
       ctx.fillStyle = lit ? '#fef08a' : '#574e38';
       ctx.beginPath();
       ctx.arc(bx, mq.y + 8, 2.5, 0, Math.PI * 2);
       ctx.fill();
     }
 
-    const sirenActive = sirenTimer > 0;
     if (sirenActive) {
-      const blink = Math.sin(time * 24) > 0;
-      round(ctx, mq.x + 10, mq.y + 14, mq.w - 20, mq.h - 20, 7, blink ? '#851d2a' : '#4a141d', '#ff9b9b', 2);
+      const blink = Math.sin(time * 22) > 0;
+      round(ctx, mq.x + 10, mq.y + 14, mq.w - 20, mq.h - 20, 7, blink ? '#8f1d2c' : '#4f141e', '#ff9b9b', 2);
       txt(
         ctx,
         state.phase === 'fakeoutEject' || state.phase === 'fakeoutPause'
@@ -984,48 +1267,176 @@
       );
     }
 
-    // Inner Glass Tank backdrop
-    const tankGrad = ctx.createLinearGradient(gl.x, gl.y, gl.x, gl.y + gl.h);
-    tankGrad.addColorStop(0, '#0f1c2e');
-    tankGrad.addColorStop(0.65, '#15273e');
-    tankGrad.addColorStop(1, '#101b2a');
-    round(ctx, gl.x, gl.y, gl.w, gl.h, 10, tankGrad, '#4d6580', 2);
-
-    // Subtle school windows / lockers inside backdrop
+    // Glass tank with illustrated Sala Professori twilight backdrop
     ctx.save();
-    round(ctx, gl.x, gl.y, gl.w, gl.h, 10);
+    round(ctx, gl.x, gl.y, gl.w, gl.h, 10, '#0d192b', '#4d6580', 2);
     ctx.clip();
-    ctx.fillStyle = '#1b314d66';
-    for (let wx = gl.x + 28; wx < gl.x + gl.w - 40; wx += 110) {
-      ctx.fillRect(wx, gl.y + 44, 64, 96);
-      ctx.fillStyle = '#26446855';
-      ctx.fillRect(wx + 6, gl.y + 50, 24, 38);
-      ctx.fillRect(wx + 34, gl.y + 50, 24, 38);
-      ctx.fillStyle = '#1b314d66';
-    }
-    // Overhead rail track
-    round(ctx, gl.x + 14, g.railY - 7, gl.w - 28, 12, 4, '#51637a', '#8aa0bd', 1.5);
-    ctx.restore();
 
-    // 5 Chutes at bottom of tank
+    if (backdrop.complete && backdrop.naturalWidth) {
+      const s = Math.max(gl.w / backdrop.width, gl.h / backdrop.height);
+      const dw = backdrop.width * s;
+      const dh = backdrop.height * s;
+      ctx.drawImage(backdrop, gl.x + (gl.w - dw) / 2, gl.y + (gl.h - dh) * 0.42, dw, dh);
+    }
+
+    // Dark-blue atmospheric overlay so crane & plushies pop
+    const shade = ctx.createLinearGradient(0, gl.y, 0, gl.y + gl.h);
+    shade.addColorStop(0, '#0c182c92');
+    shade.addColorStop(0.55, '#0e1d32a8');
+    shade.addColorStop(1, '#08101ee6');
+    ctx.fillStyle = shade;
+    ctx.fillRect(gl.x, gl.y, gl.w, gl.h);
+
+    // Sweeping crimson alarm beam inside tank during siren
+    if (sirenActive) {
+      const sweepX = gl.x + gl.w * 0.5 + Math.sin(time * 9) * gl.w * 0.45;
+      const beam = ctx.createLinearGradient(beaconX, gl.y, sweepX, gl.y + gl.h);
+      beam.addColorStop(0, 'rgba(255, 65, 82, 0.34)');
+      beam.addColorStop(1, 'rgba(255, 65, 82, 0.03)');
+      ctx.fillStyle = beam;
+      ctx.beginPath();
+      ctx.moveTo(beaconX - 24, gl.y);
+      ctx.lineTo(beaconX + 24, gl.y);
+      ctx.lineTo(sweepX + 120, gl.y + gl.h);
+      ctx.lineTo(sweepX - 120, gl.y + gl.h);
+      ctx.closePath();
+      ctx.fill();
+    }
+
+    // Volumetric spotlight cone from crane during aim & descend
+    if (state.phase === 'aim' || state.phase === 'descend' || state.phase === 'grab') {
+      const spot = ctx.createLinearGradient(state.clawX, g.railY, state.clawX, g.pileFloorY);
+      spot.addColorStop(0, 'rgba(217, 244, 130, 0.22)');
+      spot.addColorStop(0.75, 'rgba(217, 244, 130, 0.08)');
+      spot.addColorStop(1, 'rgba(217, 244, 130, 0.02)');
+      ctx.fillStyle = spot;
+      ctx.beginPath();
+      ctx.moveTo(state.clawX - 16, g.railY + 8);
+      ctx.lineTo(state.clawX + 16, g.railY + 8);
+      ctx.lineTo(state.clawX + 95, g.pileFloorY + 6);
+      ctx.lineTo(state.clawX - 95, g.pileFloorY + 6);
+      ctx.closePath();
+      ctx.fill();
+    }
+
+    // Grounded Plushie Bin Bed (warm crimson-velvet pit sitting above the chutes)
+    const bedTop = g.pileFloorY - 82;
+    const bedGrad = ctx.createLinearGradient(0, bedTop, 0, g.chuteY);
+    bedGrad.addColorStop(0, '#361523');
+    bedGrad.addColorStop(0.22, '#542032');
+    bedGrad.addColorStop(1, '#280d18');
+    ctx.fillStyle = bedGrad;
+    ctx.fillRect(gl.x, bedTop, gl.w, g.chuteY - bedTop + 4);
+    ctx.strokeStyle = '#9b4a6266';
+    ctx.lineWidth = 2;
+    ctx.beginPath();
+    ctx.moveTo(gl.x, bedTop);
+    ctx.lineTo(gl.x + gl.w, bedTop);
+    ctx.stroke();
+
+    // Spotlight oval pool on the velvet floor
+    if (state.phase === 'aim' || state.phase === 'descend') {
+      const pool = ctx.createRadialGradient(state.clawX, g.pileFloorY - 12, 8, state.clawX, g.pileFloorY - 12, 74);
+      pool.addColorStop(0, 'rgba(255, 246, 178, 0.26)');
+      pool.addColorStop(1, 'rgba(255, 246, 178, 0)');
+      ctx.fillStyle = pool;
+      ctx.beginPath();
+      ctx.ellipse(state.clawX, g.pileFloorY - 12, 74, 24, 0, 0, Math.PI * 2);
+      ctx.fill();
+    }
+
+    // Scattered miniature school props
+    for (const pr of binProps) {
+      drawProp(ctx, pr);
+    }
+
+    // Overhead double I-beam crane rail + rivets + brass bumper stops
+    round(ctx, gl.x + 12, g.railY - 10, gl.w - 24, 15, 4, '#566982', '#97adc9', 1.6);
+    ctx.fillStyle = '#334257';
+    ctx.fillRect(gl.x + 14, g.railY - 5, gl.w - 28, 5);
+    for (let rx = gl.x + 32; rx < gl.x + gl.w - 28; rx += 64) {
+      ctx.fillStyle = '#b4c5d9';
+      ctx.beginPath();
+      ctx.arc(rx, g.railY - 7.5, 1.5, 0, Math.PI * 2);
+      ctx.fill();
+    }
+    round(ctx, gl.x + 10, g.railY - 12, 10, 19, 3, '#c89b44', '#5c4216', 1.4);
+    round(ctx, gl.x + gl.w - 20, g.railY - 12, 10, 19, 3, '#c89b44', '#5c4216', 1.4);
+
+    // Determine closest precario under crane for scared hover reaction
+    let hoveredId = null;
+    if ((state.phase === 'aim' || state.phase === 'descend') && !COVER_MODE) {
+      const cand = pickTargetPerson();
+      if (cand && Math.abs(cand.x - state.clawX) < 34) hoveredId = cand.id;
+    }
+
+    // Draw tank pile (back layer to front layer) with drop shadows
+    const sortedPile = [...tankPeople].sort((a, b) => (a.layer || 0) - (b.layer || 0) || a.y - b.y);
+    const spriteScale = isMobile ? 0.92 : 1.05;
+    for (const p of sortedPile) {
+      const bob = p.droppingIn ? 0 : Math.sin(time * 2.2 + p.bobOffset) * 1.1;
+      drawPrecario(ctx, { ...p, y: p.y + bob }, spriteScale, p.tilt, !p.droppingIn, p.id === hoveredId);
+    }
+
+    // Translucent beveled acrylic retaining rail across front of plushie bin
+    const railTop = g.pileFloorY - 2;
+    const railH = g.chuteY - railTop;
+    const acrylic = ctx.createLinearGradient(0, railTop, 0, g.chuteY);
+    acrylic.addColorStop(0, 'rgba(205, 232, 255, 0.20)');
+    acrylic.addColorStop(1, 'rgba(120, 165, 210, 0.12)');
+    ctx.fillStyle = acrylic;
+    ctx.fillRect(gl.x, railTop, gl.w, railH);
+    ctx.strokeStyle = 'rgba(218, 240, 255, 0.45)';
+    ctx.lineWidth = 1.6;
+    ctx.beginPath();
+    ctx.moveTo(gl.x, railTop);
+    ctx.lineTo(gl.x + gl.w, railTop);
+    ctx.stroke();
+
+    // Occasional hopeful whisper bubble from a random precario in tank
+    if (tankWhisper.timer > 0 && tankWhisper.text) {
+      const speaker = tankPeople.find(p => p.id === tankWhisper.personId) || tankPeople[0];
+      if (speaker) {
+        ctx.save();
+        ctx.font = '700 10.5px system-ui, sans-serif';
+        const bw = Math.min(180, ctx.measureText(tankWhisper.text).width + 18);
+        const bx = Math.max(gl.x + 8, Math.min(gl.x + gl.w - bw - 8, speaker.x - bw / 2));
+        const by = speaker.y - 72;
+        round(ctx, bx, by, bw, 22, 7, '#f4efe2f5', '#607891', 1.4);
+        txt(ctx, tankWhisper.text, bx + bw / 2, by + 14.5, 10.5, '#192432', 'center', 'system-ui, sans-serif', 700);
+        ctx.restore();
+      }
+    }
+
+    // 5 Chunky Illuminated Chutes at bottom of tank
     for (let i = 0; i < CHUTES.length; i++) {
       const ch = CHUTES[i];
       const cx = g.chuteXs[i];
       const cw = g.chuteW - 6;
+      const bounceOffset = Math.sin(Math.min(1, chuteBounce[i]) * Math.PI) * 5;
       const x = cx - cw / 2;
-      const y = g.chuteY;
-      const h = gl.y + gl.h - y - 8;
+      const y = g.chuteY + bounceOffset;
+      const h = gl.y + gl.h - g.chuteY - 6;
 
-      const isTargetHighlight = (state.phase === 'carry' || state.phase === 'slip' || state.phase === 'fakeoutPause' || state.phase === 'fakeoutEject') && state.targetChute === i;
-      round(ctx, x, y, cw, h, 8, ch.dark, isTargetHighlight ? '#ffffff' : ch.color, isTargetHighlight ? 2.5 : 1.8);
+      const isTargetHighlight = (state.phase === 'carry' || state.phase === 'sirenFreeze' || state.phase === 'pauseSiren' || state.phase === 'slip' || state.phase === 'fakeoutPause' || state.phase === 'fakeoutEject') && state.targetChute === i;
+      const glowActive = isTargetHighlight || chuteBounce[i] > 0;
 
-      // Chute mouth opening
-      round(ctx, x + 5, y + 4, cw - 10, 14, 4, '#080e17', ch.color, 1);
+      if (glowActive) {
+        ctx.save();
+        ctx.shadowColor = ch.color;
+        ctx.shadowBlur = 16;
+        round(ctx, x, y, cw, h, 8, ch.dark, '#ffffff', 2.4);
+        ctx.restore();
+      } else {
+        round(ctx, x, y, cw, h, 8, ch.dark, ch.color, 1.8);
+      }
 
-      // Golden barred hatch on Chute 0 (18h sotto casa)
+      // Inner bevel & recessed funnel opening
+      round(ctx, x + 5, y + 4, cw - 10, 14, 4, '#070c14', ch.color, 1);
+
       if (i === 0) {
         ctx.save();
-        ctx.strokeStyle = '#e6c36a88';
+        ctx.strokeStyle = '#e6c36a99';
         ctx.lineWidth = 2;
         ctx.beginPath();
         ctx.moveTo(x + 12, y + 6);
@@ -1036,73 +1447,72 @@
         ctx.restore();
       }
 
-      // Chute labels
-      const labelFont = isMobile ? 8.5 : 10.5;
-      txt(ctx, ch.short, cx, y + 34, labelFont, ch.text, 'center', 'ui-monospace, monospace', 900);
-      txt(ctx, ch.sub, cx, y + 49, isMobile ? 7.5 : 9, '#c7d3df', 'center', 'system-ui, sans-serif', 600);
-    }
-
-    // Draw tank pile (back layer to front layer)
-    const sortedPile = [...tankPeople].sort((a, b) => (a.layer || 0) - (b.layer || 0) || a.y - b.y);
-    const spriteScale = isMobile ? 0.92 : 1.05;
-    for (const p of sortedPile) {
-      const bob = p.droppingIn ? 0 : Math.sin(time * 2.2 + p.bobOffset) * 1.4;
-      drawPrecario(ctx, { ...p, y: p.y + bob }, spriteScale, p.tilt);
-    }
-
-    // Occasional hopeful whisper bubble from a random precario in tank
-    if (tankWhisper.timer > 0 && tankWhisper.text) {
-      const speaker = tankPeople.find(p => p.id === tankWhisper.personId) || tankPeople[0];
-      if (speaker) {
-        ctx.save();
-        ctx.font = '700 10.5px system-ui, sans-serif';
-        const bw = Math.min(180, ctx.measureText(tankWhisper.text).width + 18);
-        const bx = Math.max(gl.x + 8, Math.min(gl.x + gl.w - bw - 8, speaker.x - bw / 2));
-        const by = speaker.y - 74;
-        round(ctx, bx, by, bw, 22, 7, '#f4efe2f0', '#607891', 1.4);
-        txt(ctx, tankWhisper.text, bx + bw / 2, by + 14.5, 10.5, '#192432', 'center', 'system-ui, sans-serif', 700);
-        ctx.restore();
-      }
+      // Mini icon & labels
+      drawChuteIcon(ctx, i, cx, y + 29, ch.color);
+      const labelFont = isMobile ? 8.2 : 10;
+      txt(ctx, ch.short, cx, y + 48, labelFont, ch.text, 'center', 'ui-monospace, monospace', 900);
+      txt(ctx, ch.sub, cx, y + 62, isMobile ? 7.2 : 8.8, '#c7d3df', 'center', 'system-ui, sans-serif', 600);
     }
 
     // Dangling / falling grabbed precario
     if (state.grabbed) {
-      drawPrecario(ctx, state.grabbed, spriteScale * 1.06, state.grabbed.dangling ? state.clawAngle * 1.5 : state.slipRot);
+      drawPrecario(ctx, state.grabbed, spriteScale * 1.06, state.grabbed.dangling ? state.clawAngle * 1.5 : state.slipRot, false, false);
     }
 
-    // Spring boot animation during Rettifica d'Ufficio
+    // Shaded Spring Boot / Piston during Rettifica d'Ufficio
     if (state.phase === 'fakeoutEject' && state.ejectBootProgress > 0) {
       const bx = g.chuteXs[0];
-      const by = g.chuteY + 8 - Math.sin(Math.min(1, state.ejectBootProgress) * Math.PI) * 52;
+      const by = g.chuteY + 8 - Math.sin(Math.min(1, state.ejectBootProgress) * Math.PI) * 58;
       ctx.save();
+      ctx.strokeStyle = '#d8e3ee';
+      ctx.lineWidth = 4;
+      ctx.beginPath();
+      ctx.moveTo(bx, g.chuteY + 20);
+      ctx.lineTo(bx - 12, by + 10);
+      ctx.stroke();
       ctx.translate(bx, by);
       ctx.rotate(-0.35);
-      round(ctx, -18, -12, 36, 20, 6, '#d94a56', '#fff2d8', 2);
-      txt(ctx, 'NO!', 0, 3, 11, '#fff', 'center', 'ui-monospace, monospace', 900);
+      round(ctx, -20, -13, 40, 22, 6, '#d94a56', '#fff2d8', 2);
+      txt(ctx, 'NO!', 0, 3, 12, '#fff', 'center', 'ui-monospace, monospace', 900);
       ctx.restore();
     }
 
     // Aiming dashed line when in 'aim'
     if (state.phase === 'aim' && !COVER_MODE) {
       ctx.save();
-      ctx.strokeStyle = '#d9f48244';
+      ctx.strokeStyle = '#d9f48248';
       ctx.lineWidth = 2;
       ctx.setLineDash([6, 6]);
       ctx.beginPath();
-      ctx.moveTo(state.clawX, state.clawY + 26);
+      ctx.moveTo(state.clawX, state.clawY + 28);
       ctx.lineTo(state.clawX, g.pileFloorY - 22);
       ctx.stroke();
       ctx.restore();
     }
 
-    // Draw Trolley, Cable & 3-Prong Claw
+    // Detailed Chrome Crane
     drawClaw(g);
 
+    // Electrical sparks when siren fires
+    for (const sp of sparks) {
+      ctx.fillStyle = sp.color;
+      ctx.fillRect(sp.x - 1.5, sp.y - 1.5, 3, 3);
+    }
+
+    // Cartoon Impact Puffs
+    for (const gg of gags) {
+      const alpha = Math.min(1, (gg.life / gg.maxLife) * 2.2);
+      ctx.save();
+      ctx.globalAlpha = alpha;
+      ctx.font = '900 11px ui-monospace, monospace';
+      const tw = Math.max(54, ctx.measureText(gg.text).width + 18);
+      round(ctx, gg.x - tw / 2, gg.y - 12, tw, 22, 7, '#f6ebd0', '#2b2016', 2);
+      txt(ctx, gg.text, gg.x, gg.y + 3, 11, '#8c222e', 'center', 'ui-monospace, monospace', 900);
+      ctx.restore();
+    }
+
     // Subtle glass glare reflection on top
-    ctx.save();
-    round(ctx, gl.x, gl.y, gl.w, gl.h, 10);
-    ctx.clip();
-    ctx.strokeStyle = '#ffffff16';
+    ctx.strokeStyle = '#ffffff14';
     ctx.lineWidth = 24;
     ctx.beginPath();
     ctx.moveTo(gl.x + 20, gl.y + 120);
@@ -1110,23 +1520,6 @@
     ctx.moveTo(gl.x + gl.w - 130, gl.y + gl.h);
     ctx.lineTo(gl.x + gl.w + 20, gl.y + gl.h - 150);
     ctx.stroke();
-    ctx.restore();
-
-    // Bottom cabinet bezel label
-    const footY = gl.y + gl.h + 12;
-    const footH = cab.y + cab.h - footY - 10;
-    round(ctx, cab.x + 18, footY, cab.w - 36, footH, 8, '#1a2434', '#394b63', 1.5);
-    txt(
-      ctx,
-      COVER_MODE ? 'SCELTA CASUALE MA SEMPRE PEGGIORE' : 'GETTONI: ∞ (SEI DI RUOLO)  ·  CLICCA UN PRECARIO PER IL DOSSIER',
-      cab.x + cab.w / 2,
-      footY + footH * 0.62,
-      isMobile ? 9.5 : 11,
-      '#99adc4',
-      'center',
-      'ui-monospace, monospace',
-      700
-    );
 
     // Confetti particles
     for (const c of confetti) {
@@ -1135,6 +1528,27 @@
       ctx.arc(c.x, c.y, 3, 0, Math.PI * 2);
       ctx.fill();
     }
+
+    ctx.restore(); // end glass clip
+
+    // Outer glass border crisp stroke
+    round(ctx, gl.x, gl.y, gl.w, gl.h, 10, null, '#5a7594', 2);
+
+    // Bottom cabinet bezel label
+    const footY = gl.y + gl.h + 10;
+    const footH = cab.y + cab.h - footY - 10;
+    round(ctx, cab.x + 18, footY, cab.w - 36, footH, 8, '#172130', '#41536d', 1.6);
+    txt(
+      ctx,
+      COVER_MODE ? 'SCELTA CASUALE MA SEMPRE PEGGIORE' : 'GETTONI: ∞ (SEI DI RUOLO)  ·  CLICCA UN PRECARIO PER IL DOSSIER',
+      cab.x + cab.w / 2,
+      footY + footH * 0.62,
+      isMobile ? 9.5 : 11,
+      '#9eb3cb',
+      'center',
+      'ui-monospace, monospace',
+      700
+    );
   }
 
   function drawClaw(g) {
@@ -1142,65 +1556,123 @@
     const y = state.clawY;
     const railY = g.railY;
 
-    // Trolley on rail
-    round(ctx, x - 24, railY - 12, 48, 20, 6, '#b8c8db', '#394b63', 2);
-    round(ctx, x - 8, railY - 5, 16, 8, 3, '#e6c36a', '#5c4216', 1.2);
+    // Trolley carriage with brass pulley wheel & status LED
+    const trolleyGrad = ctx.createLinearGradient(x - 28, railY - 14, x - 28, railY + 10);
+    trolleyGrad.addColorStop(0, '#d5e0ec');
+    trolleyGrad.addColorStop(0.5, '#9cb0c7');
+    trolleyGrad.addColorStop(1, '#687b92');
+    round(ctx, x - 28, railY - 14, 56, 24, 6, trolleyGrad, '#2b394d', 2);
 
-    // Cable
-    ctx.strokeStyle = '#c8d6e5';
-    ctx.lineWidth = 3;
+    // Side rail rollers
+    ctx.fillStyle = '#38465a';
     ctx.beginPath();
-    ctx.moveTo(x, railY + 8);
-    ctx.lineTo(x, y);
+    ctx.arc(x - 19, railY - 2, 4, 0, Math.PI * 2);
+    ctx.arc(x + 19, railY - 2, 4, 0, Math.PI * 2);
+    ctx.fill();
+
+    // Rotating brass pulley wheel
+    ctx.save();
+    ctx.translate(x, railY - 2);
+    ctx.rotate((y - railY) * 0.08);
+    ctx.fillStyle = '#e6c36a';
+    ctx.strokeStyle = '#5c4216';
+    ctx.lineWidth = 1.5;
+    ctx.beginPath();
+    ctx.arc(0, 0, 8, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.stroke();
+    ctx.beginPath();
+    ctx.moveTo(-6, 0);
+    ctx.lineTo(6, 0);
+    ctx.moveTo(0, -6);
+    ctx.lineTo(0, 6);
+    ctx.stroke();
+    ctx.restore();
+
+    // Trolley status LED
+    const ledColor = sirenTimer > 0
+      ? (Math.sin(time * 24) > 0 ? '#ff4252' : '#58121a')
+      : state.phase === 'aim'
+        ? '#d9f482'
+        : '#f0ad5e';
+    ctx.fillStyle = ledColor;
+    ctx.beginPath();
+    ctx.arc(x + 19, railY - 9, 2.8, 0, Math.PI * 2);
+    ctx.fill();
+
+    // Braided metallic cable
+    ctx.strokeStyle = '#5c7088';
+    ctx.lineWidth = 4.2;
+    ctx.beginPath();
+    ctx.moveTo(x, railY + 10);
+    ctx.lineTo(x, y - 4);
+    ctx.stroke();
+    ctx.strokeStyle = '#dce8f5';
+    ctx.lineWidth = 1.6;
+    ctx.beginPath();
+    ctx.moveTo(x - 0.8, railY + 10);
+    ctx.lineTo(x - 0.8, y - 4);
     ctx.stroke();
 
-    // Claw head & swinging prongs
+    // Claw head & 3 shaded pincers
     ctx.save();
     ctx.translate(x, y);
     ctx.rotate(state.clawAngle);
 
-    // Hub
-    round(ctx, -14, -8, 28, 16, 5, '#d8e3ee', '#314256', 2);
-    ctx.fillStyle = sirenTimer > 0 ? '#ff6470' : '#d9f482';
+    // Spring coil collar
+    round(ctx, -6, -16, 12, 9, 2, '#92a6bd', '#2d3b4d', 1.4);
+
+    // Back center prong (subtle depth)
+    ctx.strokeStyle = '#6c7f96';
+    ctx.lineWidth = 4;
+    ctx.lineCap = 'round';
     ctx.beginPath();
-    ctx.arc(0, 0, 4, 0, Math.PI * 2);
+    ctx.moveTo(0, 4);
+    ctx.lineTo(0, 26);
+    ctx.stroke();
+
+    // Chrome swivel hub
+    const hubGrad = ctx.createLinearGradient(-15, -9, 15, 9);
+    hubGrad.addColorStop(0, '#eef5fc');
+    hubGrad.addColorStop(0.5, '#b6c7da');
+    hubGrad.addColorStop(1, '#7589a1');
+    round(ctx, -16, -9, 32, 18, 6, hubGrad, '#2c3a4c', 2);
+    ctx.fillStyle = ledColor;
+    ctx.beginPath();
+    ctx.arc(0, 0, 4.2, 0, Math.PI * 2);
     ctx.fill();
 
-    const spread = 0.25 + state.clawOpen * 0.55;
-    // Left prong
-    ctx.save();
-    ctx.translate(-9, 6);
-    ctx.rotate(spread);
-    ctx.strokeStyle = '#dbe6f2';
-    ctx.lineWidth = 5;
-    ctx.lineCap = 'round';
-    ctx.lineJoin = 'round';
-    ctx.beginPath();
-    ctx.moveTo(0, 0);
-    ctx.lineTo(-14, 18);
-    ctx.lineTo(-4, 34);
-    ctx.stroke();
-    ctx.restore();
-
-    // Right prong
-    ctx.save();
-    ctx.translate(9, 6);
-    ctx.rotate(-spread);
-    ctx.strokeStyle = '#dbe6f2';
-    ctx.lineWidth = 5;
-    ctx.lineCap = 'round';
-    ctx.lineJoin = 'round';
-    ctx.beginPath();
-    ctx.moveTo(0, 0);
-    ctx.lineTo(14, 18);
-    ctx.lineTo(4, 34);
-    ctx.stroke();
-    ctx.restore();
+    const spread = 0.22 + state.clawOpen * 0.56;
+    [-1, 1].forEach(side => {
+      ctx.save();
+      ctx.translate(side * 10, 6);
+      ctx.rotate(-side * spread);
+      ctx.lineCap = 'round';
+      ctx.lineJoin = 'round';
+      // Outer dark steel outline
+      ctx.strokeStyle = '#2c3a4c';
+      ctx.lineWidth = 8.5;
+      ctx.beginPath();
+      ctx.moveTo(0, 0);
+      ctx.lineTo(side * 15, 19);
+      ctx.lineTo(side * 4, 36);
+      ctx.stroke();
+      // Inner brushed silver
+      ctx.strokeStyle = '#e1ebf5';
+      ctx.lineWidth = 4.6;
+      ctx.stroke();
+      // Red rubber grip tip
+      ctx.fillStyle = '#d94a56';
+      ctx.beginPath();
+      ctx.arc(side * 4, 36, 3.6, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.restore();
+    });
 
     ctx.restore();
   }
 
-  function drawCoverOverlay(g) {
+  function drawCoverOverlay() {
     if (!COVER_MODE) return;
     ctx.save();
     round(ctx, 22, 18, 272, 92, 12, '#131d2ee8', '#d9f482', 2);
@@ -1221,7 +1693,7 @@
     const g = layout();
     drawCabinet(g);
     drawVipLounge(g);
-    drawCoverOverlay(g);
+    drawCoverOverlay();
   }
 
   function chooseOutcome(chuteIndex) {
@@ -1237,7 +1709,7 @@
     state.autoAimX = null;
     state.phase = 'descend';
     state.timer = 0;
-    state.clawOpen = 0.85;
+    state.clawOpen = 0.90;
     setStatus('● ALGORITMO MIM · DISCESA IN CORSO…');
     setProfBubble('aim');
     if (btnDrop) btnDrop.disabled = true;
@@ -1248,17 +1720,13 @@
     let bestDist = Infinity;
     for (const p of tankPeople) {
       const dist = Math.abs(p.x - state.clawX);
-      // Prioritize tagged custom colleague if fairly close
       const bonus = p.id === targetedId ? 42 : 0;
       if (dist - bonus < bestDist) {
         bestDist = dist - bonus;
         best = p;
       }
     }
-    if (best && Math.abs(best.x - state.clawX) <= 78) {
-      return best;
-    }
-    // Generous magnet: grab the nearest top precario
+    if (best && Math.abs(best.x - state.clawX) <= 78) return best;
     if (tankPeople.length) {
       return [...tankPeople].sort((a, b) => Math.abs(a.x - state.clawX) - Math.abs(b.x - state.clawX))[0];
     }
@@ -1270,7 +1738,7 @@
     const isRettifica = state.isFakeout;
     state.phase = 'aim';
     state.grabbed = null;
-    state.clawOpen = 0.72;
+    state.clawOpen = 0.78;
     sirenTimer = 0;
     if (btnDrop) btnDrop.disabled = false;
 
@@ -1283,7 +1751,6 @@
     renderScoreboard();
     renderAlbum();
 
-    // Update decree
     const protNum = String(100 + stats.infrante * 17 + ((p?.id || 1) % 89)).padStart(5, '0');
     lastDecree = {
       person: p || makePerson(),
@@ -1294,12 +1761,12 @@
     };
     renderDecree();
     setStatus('● ALGORITMO MIM v0.9b · PRONTO');
+    setProfMood(isRettifica ? 'evilLaugh' : 'amused', 2.8);
     setProfBubble(isRettifica ? 'rettifica' : 'afterDrop');
     toast(isRettifica
       ? `RETTIFICA D'UFFICIO! ${lastDecree.person.name} spedito a ${lastDecree.chute.code}!`
       : `${lastDecree.person.name} → ${lastDecree.chute.code}! Decreto pronto sotto.`);
 
-    // If that was the tagged custom colleague, clear active colleague tag for next random grabs
     if (p && p.customName) {
       customColleague = '';
       targetedId = null;
@@ -1311,12 +1778,20 @@
     time += dt;
     coffeeSteamPhase += dt;
     if (sirenTimer > 0) sirenTimer = Math.max(0, sirenTimer - dt);
+    if (profMoodTimer > 0) {
+      profMoodTimer = Math.max(0, profMoodTimer - dt);
+      if (profMoodTimer === 0) profMood = 'relaxed';
+    }
     if (flashComoda > 0) {
       flashComoda = Math.max(0, flashComoda - dt);
       if (flashComoda === 0 && statComodeEl) {
         statComodeEl.classList.remove('flash-comoda', 'flash-rettifica');
         statComodeEl.textContent = '0';
       }
+    }
+
+    for (let i = 0; i < 5; i++) {
+      if (chuteBounce[i] > 0) chuteBounce[i] = Math.max(0, chuteBounce[i] - dt * 2.4);
     }
 
     profBubble.timer -= dt;
@@ -1328,14 +1803,13 @@
       tankWhisper = {
         personId: rp.id,
         text: TANK_WHISPERS[Math.floor(Math.random() * TANK_WHISPERS.length)],
-        timer: 3.4
+        timer: 3.8
       };
     }
 
-    // Settle newly dropped replacements in tank
     for (const p of tankPeople) {
       if (p.droppingIn) {
-        p.vy += 680 * dt;
+        p.vy += 580 * dt;
         p.y += p.vy * dt;
         if (p.y >= p.homeY) {
           p.y = p.homeY;
@@ -1345,14 +1819,27 @@
       }
     }
 
-    // Confetti
     for (let i = confetti.length - 1; i >= 0; i--) {
       const c = confetti[i];
       c.life -= dt;
       c.x += c.vx * dt;
       c.y += c.vy * dt;
-      c.vy += 320 * dt;
+      c.vy += 280 * dt;
       if (c.life <= 0) confetti.splice(i, 1);
+    }
+    for (let i = sparks.length - 1; i >= 0; i--) {
+      const sp = sparks[i];
+      sp.life -= dt;
+      sp.x += sp.vx * dt;
+      sp.y += sp.vy * dt;
+      sp.vy += 240 * dt;
+      if (sp.life <= 0) sparks.splice(i, 1);
+    }
+    for (let i = gags.length - 1; i >= 0; i--) {
+      const gg = gags[i];
+      gg.life -= dt;
+      gg.y -= 18 * dt;
+      if (gg.life <= 0) gags.splice(i, 1);
     }
 
     if (COVER_MODE) return;
@@ -1366,19 +1853,19 @@
       if (input.right) moveDir += 1;
       if (moveDir !== 0) {
         state.autoAimX = null;
-        state.clawX = Math.max(g.minX, Math.min(g.maxX, state.clawX + moveDir * (isMobile ? 250 : 320) * dt));
-        state.clawAngle = Math.max(-0.18, Math.min(0.18, state.clawAngle * 0.85 - moveDir * 0.06));
+        state.clawX = Math.max(g.minX, Math.min(g.maxX, state.clawX + moveDir * (isMobile ? 195 : 235) * dt));
+        state.clawAngle = Math.max(-0.15, Math.min(0.15, state.clawAngle * 0.85 - moveDir * 0.05));
         window.ClawAudio?.play('move');
       } else if (state.autoAimX !== null) {
         const dx = state.autoAimX - state.clawX;
-        if (Math.abs(dx) < 4) {
+        if (Math.abs(dx) < 3) {
           state.clawX = state.autoAimX;
           state.autoAimX = null;
           state.clawAngle *= 0.85;
         } else {
-          const step = Math.sign(dx) * Math.min(Math.abs(dx), 420 * dt);
+          const step = Math.sign(dx) * Math.min(Math.abs(dx), 290 * dt);
           state.clawX += step;
-          state.clawAngle = -Math.sign(dx) * 0.08;
+          state.clawAngle = -Math.sign(dx) * 0.06;
         }
       } else {
         state.clawAngle *= Math.pow(0.05, dt);
@@ -1389,13 +1876,14 @@
     state.timer += dt;
 
     if (state.phase === 'descend') {
-      const targetY = g.pileFloorY - 56;
-      state.clawY = Math.min(targetY, state.clawY + 340 * dt);
-      // Slight homing onto nearest precario during descent
+      const targetY = g.pileFloorY - 52;
+      const easeIn = Math.min(1, 0.35 + state.timer * 2.6);
+      const nearSlow = state.clawY > targetY - 60 ? 0.65 : 1;
+      state.clawY = Math.min(targetY, state.clawY + 165 * easeIn * nearSlow * dt);
       const candidate = pickTargetPerson();
       if (candidate) {
         const dx = candidate.x - state.clawX;
-        state.clawX += dx * Math.min(1, 5 * dt);
+        state.clawX += dx * Math.min(1, 3.8 * dt);
       }
       if (state.clawY >= targetY || (candidate && state.clawY >= candidate.y - 42)) {
         const caught = candidate || makePerson();
@@ -1407,7 +1895,6 @@
         caught.dangling = true;
         caught.startled = true;
         state.grabbed = caught;
-        state.clawOpen = 0.22;
         state.phase = 'grab';
         state.timer = 0;
 
@@ -1417,9 +1904,12 @@
         state.targetChute = state.isFakeout ? (Math.random() < 0.5 ? 1 : 2) : 1 + Math.floor(Math.random() * 4);
         state.plannedOutcome = chooseOutcome(state.targetChute);
         state.carriedToGoal = false;
+        state.clackPlayed = false;
+        state.slipBounced = false;
 
         window.ClawAudio?.play('grab');
         haptic([25, 20]);
+        addGag('PRESO!', caught.x + 24, state.clawY - 12, '#d9f482', 0.85);
         setProfBubble('grab');
         toast(`Preso ${caught.name}! Direzione: 18h sotto casa…`);
       }
@@ -1427,11 +1917,13 @@
     }
 
     if (state.phase === 'grab') {
+      const tClose = Math.min(1, state.timer / 0.36);
+      state.clawOpen = 0.90 - 0.70 * tClose;
       if (state.grabbed) {
         state.grabbed.x = state.clawX;
         state.grabbed.y = state.clawY + 52;
       }
-      if (state.timer >= 0.28) {
+      if (state.timer >= 0.68) {
         state.phase = 'ascend';
         state.timer = 0;
       }
@@ -1440,7 +1932,9 @@
 
     if (state.phase === 'ascend') {
       const topY = g.railY + 46;
-      state.clawY = Math.max(topY, state.clawY - 250 * dt);
+      const strain = Math.sin(state.timer * 18) * 0.12;
+      state.clawY = Math.max(topY, state.clawY - (128 + strain * 25) * dt);
+      state.clawAngle = Math.sin(time * 9) * 0.04;
       if (state.grabbed) {
         state.grabbed.x = state.clawX;
         state.grabbed.y = state.clawY + 52;
@@ -1448,6 +1942,7 @@
       if (state.clawY <= topY) {
         state.phase = 'carry';
         state.timer = 0;
+        toast('Ci siamo quasi… 18 ore sotto casa?!');
       }
       return;
     }
@@ -1461,10 +1956,10 @@
           : goalX;
 
       const dx = destX - state.clawX;
-      const speed = state.carriedToGoal ? 290 : 210;
+      const speed = state.carriedToGoal ? 155 : 120;
       const step = Math.sign(dx) * Math.min(Math.abs(dx), speed * dt);
       state.clawX += step;
-      state.clawAngle = Math.sin(time * 12) * 0.08 - Math.sign(dx) * 0.07;
+      state.clawAngle = Math.sin(time * 8) * 0.06 - Math.sign(dx) * 0.05;
 
       if (state.grabbed) {
         state.grabbed.x = state.clawX;
@@ -1472,10 +1967,13 @@
       }
 
       if (!state.isFakeout && !state.carriedToGoal) {
-        // Head toward Chute 0 first until passing near Chute 1 or 0.55s elapsed, then trigger siren!
-        if (Math.abs(state.clawX - goalX) < g.chuteW * 0.72 || state.timer > 0.75) {
+        if (Math.abs(state.clawX - goalX) < g.chuteW * 0.48 || state.timer > 1.35) {
           state.carriedToGoal = true;
-          sirenTimer = 2.1;
+          state.phase = 'sirenFreeze';
+          state.timer = 0;
+          sirenTimer = 2.6;
+          emitSparks(state.clawX, g.railY + 4, 12);
+          addGag('BZZT!', state.clawX + 26, state.clawY - 8, '#ff8d96', 0.85);
           window.ClawAudio?.play('siren');
           setStatus('⚠ ANOMALIA: TROPPA FORTUNA RILEVATA!', true);
           setProfBubble('siren');
@@ -1495,17 +1993,18 @@
             statComodeEl.textContent = '1';
             statComodeEl.classList.add('flash-comoda');
           }
-          for (let k = 0; k < 22; k++) {
+          for (let k = 0; k < 24; k++) {
             confetti.push({
               x: goalX,
               y: g.chuteY + 10,
-              vx: (Math.random() - 0.5) * 240,
+              vx: (Math.random() - 0.5) * 230,
               vy: -90 - Math.random() * 140,
-              life: 1.0,
+              life: 1.2,
               color: k % 2 ? '#d9f482' : '#e6c36a'
             });
           }
           window.ClawAudio?.play('coffee');
+          setProfMood('shocked', 1.8);
           setProfBubble('fakeoutWin');
           toast('INCREDIBILE! 18 ORE SOTTO CASA?!');
         } else {
@@ -1516,19 +2015,40 @@
       return;
     }
 
-    if (state.phase === 'pauseSiren') {
-      // Shudder above bad chute before slipping
-      state.clawAngle = Math.sin(time * 42) * 0.14;
+    if (state.phase === 'sirenFreeze') {
+      state.clawAngle = Math.sin(time * 36) * 0.1;
       if (state.grabbed) {
-        state.grabbed.x = state.clawX + Math.sin(time * 40) * 3;
+        state.grabbed.x = state.clawX + Math.sin(time * 34) * 2;
         state.grabbed.y = state.clawY + 52;
       }
-      if (state.timer >= 0.42) {
+      if (state.timer >= 0.85) {
+        state.phase = 'carry';
+        state.timer = 0;
+      }
+      return;
+    }
+
+    if (state.phase === 'pauseSiren') {
+      state.clawAngle = Math.sin(time * 38) * 0.14;
+      // Prongs visibly slip open slightly mid-pause
+      if (state.timer > 0.42) {
+        state.clawOpen = 0.20 + Math.min(1, (state.timer - 0.42) / 0.35) * 0.28;
+        if (!state.clackPlayed) {
+          state.clackPlayed = true;
+          window.ClawAudio?.play('clack');
+          addGag('CLACK…', state.clawX + 26, state.clawY + 18, '#ffd485', 0.7);
+        }
+      }
+      if (state.grabbed) {
+        state.grabbed.x = state.clawX + Math.sin(time * 36) * 3;
+        state.grabbed.y = state.clawY + 52 + (state.timer > 0.42 ? 4 : 0);
+      }
+      if (state.timer >= 0.95) {
         state.phase = 'slip';
         state.timer = 0;
-        state.clawOpen = 0.92;
+        state.clawOpen = 0.95;
         state.slipStartX = state.clawX;
-        state.slipStartY = state.clawY + 52;
+        state.slipStartY = state.clawY + 56;
         state.slipRot = 0;
         window.ClawAudio?.play('slip');
       }
@@ -1536,19 +2056,37 @@
     }
 
     if (state.phase === 'slip') {
-      const dur = 0.52;
+      const dur = 0.95;
       const t = Math.min(1, state.timer / dur);
-      const targetY = g.chuteY + 36;
+      const targetY = g.chuteY + 34;
       const targetX = g.chuteXs[state.targetChute];
-      if (state.grabbed) {
-        state.grabbed.x = state.slipStartX + (targetX - state.slipStartX) * t;
-        state.grabbed.y = state.slipStartY + (targetY - state.slipStartY) * (t * t);
-        state.slipRot = t * (state.targetChute % 2 ? 1.8 : -1.8);
-      }
-      if (t >= 1) {
+      // Eased gravity drop with brief rim bounce around t = 0.72
+      let yFrac = t < 0.72 ? Math.pow(t / 0.72, 1.85) : 1 - Math.sin(((t - 0.72) / 0.28) * Math.PI) * 0.14;
+      if (t >= 0.72 && !state.slipBounced) {
+        state.slipBounced = true;
+        chuteBounce[state.targetChute] = 1;
+        addGag('OPS!', targetX + 18, g.chuteY - 8, CHUTES[state.targetChute].color, 0.75);
         window.ClawAudio?.play('chute');
         haptic([35, 30, 50]);
-        finishCatch(state.plannedOutcome);
+        for (let k = 0; k < 10; k++) {
+          confetti.push({
+            x: targetX,
+            y: g.chuteY + 12,
+            vx: (Math.random() - 0.5) * 160,
+            vy: -70 - Math.random() * 90,
+            life: 0.75,
+            color: CHUTES[state.targetChute].color
+          });
+        }
+      }
+      if (state.grabbed) {
+        state.grabbed.x = state.slipStartX + (targetX - state.slipStartX) * t;
+        state.grabbed.y = state.slipStartY + (targetY - state.slipStartY) * yFrac;
+        state.slipRot = t * (state.targetChute % 2 ? 2.2 : -2.2);
+      }
+      if (t >= 1) {
+        state.phase = 'settle';
+        state.timer = 0;
       }
       return;
     }
@@ -1556,24 +2094,26 @@
     if (state.phase === 'fakeoutPause') {
       const p = state.grabbed;
       if (p) {
-        const dropT = Math.min(1, state.timer / 0.35);
+        const dropT = Math.min(1, state.timer / 0.55);
         p.x = state.dropStartX;
         p.y = state.dropStartY + (state.dropTargetY - state.dropStartY) * (dropT * dropT);
       }
-      if (state.timer >= 0.95) {
+      if (state.timer >= 1.65) {
         state.phase = 'fakeoutEject';
         state.timer = 0;
-        sirenTimer = 2.0;
+        sirenTimer = 2.4;
         state.ejectBootProgress = 0;
         if (statComodeEl) {
           statComodeEl.classList.remove('flash-comoda');
           statComodeEl.classList.add('flash-rettifica');
           statComodeEl.textContent = '0';
-          flashComoda = 1.2;
+          flashComoda = 1.4;
         }
+        addGag('RETTIFICA!', g.chuteXs[0] + 24, g.chuteY - 18, '#ff8d96', 1.1);
         window.ClawAudio?.play('rettifica');
         haptic([60, 40, 90]);
         setStatus('⚠ RETTIFICA D’UFFICIO MIM IN CORSO!', true);
+        setProfMood('evilLaugh', 2.4);
         setProfBubble('rettifica');
         toast('⚠ RETTIFICA D’UFFICIO! Troppo bello per essere vero!');
       }
@@ -1581,19 +2121,28 @@
     }
 
     if (state.phase === 'fakeoutEject') {
-      const dur = 0.72;
+      const dur = 1.25;
       const t = Math.min(1, state.timer / dur);
-      state.ejectBootProgress = t * 2.2;
+      state.ejectBootProgress = t * 2.1;
       const startX = g.chuteXs[0];
       const endX = g.chuteXs[state.targetChute];
       const baseY = g.chuteY + 34;
       if (state.grabbed) {
         state.grabbed.x = startX + (endX - startX) * t;
-        state.grabbed.y = baseY - Math.sin(t * Math.PI) * 180;
-        state.slipRot = t * 6.2;
+        state.grabbed.y = baseY - Math.sin(t * Math.PI) * 200;
+        state.slipRot = t * 6.4;
       }
       if (t >= 1) {
+        chuteBounce[state.targetChute] = 1;
         window.ClawAudio?.play('chute');
+        state.phase = 'settle';
+        state.timer = 0;
+      }
+      return;
+    }
+
+    if (state.phase === 'settle') {
+      if (state.timer >= 0.30) {
         finishCatch(state.plannedOutcome);
       }
     }
@@ -1687,12 +2236,10 @@
     off.height = cardH;
     const o = off.getContext('2d');
 
-    // Dark framing + Cream parchment slip
     o.fillStyle = '#101726';
     o.fillRect(0, 0, cardW, cardH);
     round(o, 24, 24, cardW - 48, cardH - 48, 18, '#f4efe2', '#d2c5a6', 3);
 
-    // Header band
     o.fillStyle = '#5e5544';
     o.font = '800 14px ui-monospace, monospace';
     o.fillText("MINISTERO DELL'ISTRUZIONE E DEL MERITO (MOLTO PROVVISORIO)", 54, 68);
@@ -1700,7 +2247,6 @@
     o.font = '700 14px ui-monospace, monospace';
     o.fillText(`${prot} · ALGORITMO MIM v0.9b`, 54, 94);
 
-    // Divider
     o.strokeStyle = '#d3c6ab';
     o.lineWidth = 2;
     o.beginPath();
@@ -1708,7 +2254,6 @@
     o.lineTo(cardW - 54, 114);
     o.stroke();
 
-    // Red Slanted Rubber Stamp
     o.save();
     o.translate(cardW - 180, 92);
     o.rotate(-0.12);
@@ -1719,11 +2264,9 @@
     o.fillText(isRettifica ? 'RETTIFICATO D’UFFICIO' : 'ASSEGNATO D’UFFICIO', 0, 6);
     o.restore();
 
-    // Avatar card
     round(o, 54, 140, 128, 142, 14, '#e7dec8', '#c6b898', 2);
     drawPrecario(o, { ...person, x: 118, y: 248, dir: 1, dangling: false, startled: true, customName: '' }, 2.35, 0);
 
-    // Name & class (auto-scale name so long colleague names never clip)
     o.fillStyle = '#161d26';
     let nameSize = 36;
     o.font = `900 ${nameSize}px system-ui, sans-serif`;
@@ -1741,7 +2284,6 @@
     o.font = '700 16px system-ui, sans-serif';
     o.fillText(`Punteggio GPS: ${person.score} (${person.pos})`, 206, 254);
 
-    // Decree body box
     round(o, 54, 306, cardW - 108, 198, 14, '#ece4cf', '#cbbda0', 2);
     round(o, 76, 326, 230, 32, 7, '#1c2838');
     o.fillStyle = '#d9f482';
@@ -1765,7 +2307,6 @@
 
     drawWrappedText(o, outcome.decreeText, 76, 426, cardW - 152, 26, 18, '#2f3742', 'system-ui, sans-serif', 600);
 
-    // Sign-off & Footer
     o.fillStyle = '#5b513e';
     o.font = 'italic 700 16px system-ui, sans-serif';
     o.fillText('Con affetto, il collega di ruolo · Posto fisso al sicuro.', 54, 536);
@@ -1848,7 +2389,6 @@
     if (modal && typeof modal.showModal === 'function') modal.showModal();
   }
 
-  // Controls binding (holdable buttons)
   function bindHoldButton(btn, key) {
     if (!btn) return;
     const down = e => {
@@ -1923,7 +2463,6 @@
     selectedPerson = null;
   });
 
-  // Canvas tap (dossier) + horizontal drag (aim)
   canvas.addEventListener('pointerdown', e => {
     if (COVER_MODE || state.phase !== 'aim') return;
     const rect = canvas.getBoundingClientRect();
@@ -1960,7 +2499,6 @@
     const clickX = (e.clientX - rect.left) * (W / rect.width);
     const clickY = (e.clientY - rect.top) * (H / rect.height);
 
-    // Check click on a precario inside tank
     let hit = null;
     for (let i = tankPeople.length - 1; i >= 0; i--) {
       const p = tankPeople[i];
@@ -1972,7 +2510,6 @@
     if (hit) {
       openDossier(hit);
     } else {
-      // Tapping empty space in upper tank slides claw horizontally
       const g = layout();
       if (clickX >= g.glass.x && clickX <= g.glass.x + g.glass.w && clickY < g.chuteY) {
         window.ClawAudio?.arm();
@@ -1981,7 +2518,6 @@
     }
   });
 
-  // Keyboard support
   window.addEventListener('keydown', e => {
     if (document.activeElement && (document.activeElement.tagName === 'INPUT' || document.activeElement.tagName === 'TEXTAREA')) return;
     if (e.key === 'ArrowLeft' || e.key === 'a' || e.key === 'A') {

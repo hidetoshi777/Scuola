@@ -98,20 +98,24 @@
   function play(kind) {
     if (!enabled || !context || context.state !== 'running') return;
     const now = context.currentTime;
-    const cooldowns = { move: 0.14, chute: 0.2, siren: 0.35, rettifica: 0.5, coffee: 0.3 };
+    const cooldowns = { move: 0.16, clack: 0.18, chute: 0.2, siren: 0.35, rettifica: 0.5, coffee: 0.3 };
     const cooldown = cooldowns[kind] ?? 0.12;
     if (now - (lastPlayed.get(kind) ?? -10) < cooldown) return;
     lastPlayed.set(kind, now);
 
     if (kind === 'move') {
-      tone(145, 165, 0.06, 0.12, 'triangle');
-      noise(0.04, 0.05, 650);
+      tone(125, 145, 0.055, 0.085, 'triangle');
+      noise(0.035, 0.035, 520);
     } else if (kind === 'drop') {
-      tone(420, 140, 0.34, 0.28, 'triangle');
-      noise(0.18, 0.12, 950);
+      tone(360, 120, 0.45, 0.24, 'triangle');
+      noise(0.24, 0.09, 780);
     } else if (kind === 'grab') {
       noise(0.08, 0.32, 1600);
       tone(220, 520, 0.14, 0.32, 'square');
+    } else if (kind === 'clack') {
+      noise(0.045, 0.34, 2400);
+      tone(940, 420, 0.075, 0.28, 'triangle');
+      tone(620, 310, 0.06, 0.2, 'square', 0.07);
     } else if (kind === 'siren') {
       tone(760, 540, 0.16, 0.34, 'sawtooth', 0);
       tone(540, 760, 0.16, 0.34, 'sawtooth', 0.16);

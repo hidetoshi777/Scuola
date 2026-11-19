@@ -162,10 +162,10 @@ h1 span { color: var(--lime); }
 .arcade-stage {
   position: relative;
   overflow: hidden;
-  border: 2px solid #495d75;
-  border-radius: 16px 16px 6px 6px;
+  border: 2px solid #6b6352;
+  border-radius: 18px 18px 6px 6px;
   background: #0d1522;
-  box-shadow: 0 18px 60px #0006, inset 0 0 0 3px #e6c36a1a;
+  box-shadow: 0 22px 64px #0007, inset 0 0 0 3px #e6c36a26;
 }
 #claw-world {
   width: 100%;
@@ -177,13 +177,14 @@ h1 span { color: var(--lime); }
 .toast {
   margin: 0;
   text-align: center;
-  background: #0c1422;
-  border-top: 1px solid #354760;
+  background: linear-gradient(180deg, #0d1624, #09101a);
+  border-top: 1px solid #4d5f78;
   color: var(--lime);
   padding: 10px 14px;
   font-size: 13px;
   font-weight: 600;
   line-height: 1.35;
+  box-shadow: inset 0 2px 6px #0006;
 }
 
 .console-deck {
@@ -191,11 +192,11 @@ h1 span { color: var(--lime); }
   grid-template-columns: 1fr minmax(170px, 1.8fr) 1fr;
   gap: 12px;
   padding: 14px;
-  border: 2px solid #495d75;
-  border-top: none;
-  border-radius: 0 0 18px 18px;
-  background: linear-gradient(180deg, #243044, #141d2c);
-  box-shadow: 0 14px 32px #0007;
+  border: 2px solid #6b6352;
+  border-top: 1px solid #8a7852;
+  border-radius: 0 0 20px 20px;
+  background: linear-gradient(180deg, #2b384d, #1b2537 55%, #121927);
+  box-shadow: 0 16px 36px #0008, inset 0 1px 0 #ffffff1a;
 }
 .pad-btn, .drop-btn {
   border-radius: 14px;
