@@ -1,0 +1,156 @@
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#101726">
+  <meta name="robots" content="noindex, nofollow">
+  <title>MIM CLAW · Pesca il Precario</title>
+  <meta name="description" content="Tu sei di ruolo col caffè in mano. Manovra l'artiglio dell'Algoritmo MIM, pesca i precari dalla teca e stampa il loro finto decreto di nomina.">
+  <meta property="og:title" content="MIM CLAW · Pesca il Precario">
+  <meta property="og:description" content="Tu sei di ruolo col caffè in mano. Manovra l'artiglio dell'Algoritmo MIM, pesca i precari dalla teca e stampa il loro finto decreto di nomina.">
+  <meta property="og:url" content="https://hidetoshi777.github.io/Scuola/meucci-giochi/pesca-precario/">
+  <meta property="og:image" content="https://hidetoshi777.github.io/Scuola/meucci-giochi/pesca-precario/copertina.jpg?v=1">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" href="../../favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="claw.css?v=1">
+</head>
+<body>
+  <main class="cabinet">
+    <header class="masthead">
+      <a class="back" href="../../professionale/admin/stats.html" aria-label="Torna all'area del Prof.">←</a>
+      <div class="title-block">
+        <p class="eyebrow">MEUCCI / PASSATEMPI DEL PROF.</p>
+        <h1>MIM <span>CLAW</span></h1>
+      </div>
+      <div class="stamp">PESCA IL<br>PRECARIO</div>
+    </header>
+
+    <p class="intro">Tu sei di ruolo, col caffè in mano. Manovra l'artiglio dell'Algoritmo MIM: la cattedra comoda è lì a un passo… quasi.</p>
+
+    <section class="scoreboard" aria-label="Contatori dell'algoritmo">
+      <div><span>CATTEDRE COMODE</span><strong id="stat-comode">0</strong></div>
+      <div><span>SPERANZE INFRANTE</span><strong id="stat-infrante">0</strong></div>
+      <div><span>IL TUO POSTO FISSO</span><strong id="stat-ruolo">AL SICURO</strong></div>
+    </section>
+
+    <div class="mode-line">
+      <span id="machine-status">● ALGORITMO MIM v0.9b · PRONTO</span>
+      <div class="mode-actions">
+        <button id="sound" type="button" aria-pressed="false">♫ Suoni: spenti</button>
+        <button id="refill" type="button">↻ Riempi teca</button>
+      </div>
+    </div>
+
+    <section class="arcade-stage" aria-label="Macchinetta a gancio dell'Algoritmo MIM">
+      <canvas id="claw-world" role="img" aria-label="Macchinetta a gancio dell'Algoritmo MIM con precari cartoon in vetrina e il Prof. di ruolo che osserva col caffè."></canvas>
+      <p class="toast" id="toast" role="status">Muovi l'artiglio e premi PESCA. Clicca un precario per il suo dossier.</p>
+    </section>
+
+    <section class="console-deck" aria-label="Comandi della macchinetta">
+      <button id="btn-left" class="pad-btn" type="button" aria-label="Sposta artiglio a sinistra">◀</button>
+      <button id="btn-drop" class="drop-btn" type="button"><span>PESCA!</span><small>Aziona l'Algoritmo</small></button>
+      <button id="btn-right" class="pad-btn" type="button" aria-label="Sposta artiglio a destra">▶</button>
+    </section>
+
+    <form id="nomina-form" class="nomina-bar">
+      <label for="colleague-name">Nomina un collega (per fargli lo scherzo su WhatsApp)</label>
+      <div class="nomina-inputs">
+        <input id="colleague-name" type="text" maxlength="34" placeholder="es. Prof. Marco, Concetta…" autocomplete="off">
+        <button type="submit" id="btn-nomina">🎯 Metti in vetrina</button>
+        <button type="button" id="btn-clear-nomina" aria-label="Rimuovi nome collega" hidden>✕</button>
+      </div>
+    </form>
+
+    <section id="decreto-panel" class="decreto-panel" aria-live="polite">
+      <div id="decreto-empty" class="decreto-empty">
+        <span class="decreto-eyebrow">STAMPANTE MINISTERIALE IN ATTESA</span>
+        <p>Fai la prima pescata per stampare il <strong>Decreto Provvisorissimo MIM</strong> da scaricare e girare ai colleghi su WhatsApp.</p>
+      </div>
+
+      <article id="decreto-card" class="decreto-card" hidden>
+        <div class="decreto-head">
+          <div>
+            <span class="decreto-ministry">MINISTERO DELL'ISTRUZIONE E DEL MERITO (MOLTO PROVVISORIO)</span>
+            <span id="decreto-prot" class="decreto-prot">PROT. GPS-2026/00104</span>
+          </div>
+          <span id="decreto-stamp" class="decreto-stamp">ASSEGNATO D'UFFICIO</span>
+        </div>
+
+        <div class="decreto-body">
+          <canvas id="decreto-avatar" width="64" height="72" aria-hidden="true"></canvas>
+          <div class="decreto-meta">
+            <h2 id="decreto-name">—</h2>
+            <p id="decreto-class" class="decreto-class">—</p>
+            <p id="decreto-score" class="decreto-score">—</p>
+          </div>
+        </div>
+
+        <div class="decreto-assignment">
+          <div class="decreto-badges">
+            <span id="decreto-chute" class="decreto-chute">—</span>
+            <span id="decreto-rarity" class="decreto-rarity">—</span>
+          </div>
+          <h3 id="decreto-title">—</h3>
+          <p id="decreto-text">—</p>
+        </div>
+
+        <p class="decreto-signoff">Con affetto, il collega di ruolo · Posto fisso al sicuro.</p>
+
+        <div class="decreto-actions">
+          <button id="btn-share-decreto" type="button">📤 Scarica / Condividi Decreto</button>
+          <button id="btn-copy-wa" type="button">📋 Copia per WhatsApp</button>
+        </div>
+      </article>
+    </section>
+
+    <details class="album">
+      <summary>Album delle Cattedre &amp; Trofei (<span id="album-count">0 / 12</span>)</summary>
+      <div id="album-grid" class="album-grid"></div>
+    </details>
+
+    <footer>
+      <p>Satira da sala professori. Algoritmo rigorosamente inventato: nessun collegamento alle GPS vere.</p>
+      <p>Realizzato dal Prof. Rossano Bella</p>
+    </footer>
+
+    <noscript>Attiva JavaScript per manovrare l'artiglio dell'Algoritmo MIM.</noscript>
+
+    <dialog id="dossier-modal" class="dossier-dialog" aria-labelledby="dossier-name">
+      <div class="dossier-card">
+        <button type="button" id="dossier-close" class="dossier-close" aria-label="Chiudi dossier">✕</button>
+        <div class="dossier-stamp">DOSSIER PRECARIO · TECA MIM</div>
+        <div class="dossier-profile">
+          <canvas id="dossier-canvas" width="70" height="80" aria-hidden="true"></canvas>
+          <div class="dossier-info">
+            <h3 id="dossier-name" class="dossier-name">—</h3>
+            <p id="dossier-class" class="dossier-class">—</p>
+            <div class="dossier-points">Punteggio GPS: <strong id="dossier-score">—</strong></div>
+          </div>
+        </div>
+        <div class="dossier-details">
+          <div class="dossier-row">
+            <span class="dossier-tag">TITOLI SPECIALI</span>
+            <p id="dossier-title-desc">—</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-tag">PENDOLARISMO</span>
+            <p id="dossier-logistics">—</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-tag">SPERANZA RESIDUA</span>
+            <p id="dossier-hope">—</p>
+          </div>
+        </div>
+        <button type="button" id="dossier-target" class="dossier-target">🎯 Punta l'artiglio qui</button>
+        <div class="dossier-footer">
+          <span>Ministero dell'Istruzione e del Merito (Molto Provvisorio)</span>
+        </div>
+      </div>
+    </dialog>
+  </main>
+
+  <script src="claw-audio.js?v=1" defer></script>
+  <script src="claw.js?v=1" defer></script>
+</body>
+</html>
