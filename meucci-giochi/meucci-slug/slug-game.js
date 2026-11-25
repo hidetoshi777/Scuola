@@ -9,7 +9,63 @@
   const canvas = $('slug-canvas');
   const ctx = canvas.getContext('2d');
   const W = 960, H = 540;
-  canvas.width = W; canvas.height = H;
+  // il gioco ragiona in 960x540, ma il canvas e' a 1,5x: i fondali resi in Blender restano nitidi
+  const RES = 1.5;
+  canvas.width = W * RES; canvas.height = H * RES;
+  ctx.setTransform(RES, 0, 0, RES, 0, 0);
+  ctx.imageSmoothingQuality = 'high';
+
+  // Scenari resi in Blender Cycles (_blender/scenari.py): fondale con parallasse + striscia del livello.
+  // Finche' non sono caricati il gioco usa gli scenari disegnati qui sotto.
+  // etna = pixel della cima nel fondale (lo scrive scenari.py in fondale<n>.json)
+  const RESA = {
+    1: { scena: 'assets/scena1.webp', fondale: 'assets/fondale1.webp', larg: 1373, farF: 0.12, etna: { x: 589.8, y: 197.6 } },
+    2: { scena: 'assets/scena2.webp', fondale: 'assets/fondale2.webp', larg: 1373, farF: 0.12, etna: { x: 487.2, y: 197.6 } }
+  };
+  Object.values(RESA).forEach(r => {
+    ['scena', 'fondale'].forEach(k => { const im = new Image(); im.decoding = 'async'; im.src = r[k]; r[k] = im; });
+  });
+  const pronta = r => r && [r.scena, r.fondale].every(im => im.complete && im.naturalWidth > 0);
+  let etnaFx = null; // cima dell'Etna da animare (fumo, lava) quando c'e' il fondale reso
+
+  // Scritte nel gioco: carattere di sistema con contorno scuro, leggibili sopra i fondali resi
+  function scrivi(c, testo, x, y, size, colore, allinea = 'left') {
+    c.save();
+    c.font = `800 ${size}px system-ui, -apple-system, "Segoe UI", sans-serif`;
+    c.textAlign = allinea;
+    c.lineJoin = 'round';
+    c.lineWidth = Math.max(3, size * 0.28);
+    c.strokeStyle = 'rgba(8, 10, 15, 0.8)';
+    c.strokeText(testo, x, y);
+    c.fillStyle = colore;
+    c.fillText(testo, x, y);
+    c.restore();
+  }
+  // Fumetto a pillola, come i pulsanti dell'interfaccia
+  function pillola(c, testo, cx, y, size = 12) {
+    c.save();
+    c.font = `700 ${size}px system-ui, -apple-system, "Segoe UI", sans-serif`;
+    const w = c.measureText(testo).width + size * 1.6, h = size * 2;
+    c.fillStyle = 'rgba(18, 22, 29, 0.82)';
+    c.strokeStyle = 'rgba(246, 196, 83, 0.6)';
+    c.lineWidth = 1.2;
+    c.beginPath();
+    c.roundRect(cx - w / 2, y - h / 2, w, h, h / 2);
+    c.fill(); c.stroke();
+    c.fillStyle = '#f8fafc';
+    c.textAlign = 'center';
+    c.textBaseline = 'middle';
+    c.fillText(testo, cx, y + 0.5);
+    c.restore();
+  }
+  // Sbuffo morbido (fumo dell'Etna sul fondale reso)
+  function sbuffo(c, x, y, r, rgb, a) {
+    const g = c.createRadialGradient(x, y, 0, x, y, r);
+    g.addColorStop(0, `rgba(${rgb}, ${a})`);
+    g.addColorStop(1, `rgba(${rgb}, 0)`);
+    c.fillStyle = g;
+    c.fillRect(x - r, y - r, r * 2, r * 2);
+  }
 
   // Audio helper shorthand
   const audio = window.MeucciSlugAudio;
@@ -23,9 +79,9 @@
     items: new Image()
   };
   sprites.prof.src = 'assets/prof-sheet.png';
-  sprites.moke.src = 'assets/moke-slug.png';
-  sprites.precari.src = 'assets/precari-sheet.png';
-  sprites.boss.src = 'assets/boss-copier.png';
+  sprites.moke.src = 'assets/moke-3d.png';
+  sprites.precari.src = 'assets/precari-3d.png';
+  sprites.boss.src = 'assets/boss-3d.png';
   sprites.items.src = 'assets/items-sheet.png';
 
   // Input State
@@ -1747,9 +1803,12 @@
     const now = Date.now() / 1000;
     for (let k = 0; k < 10; k++) {
       const t = (now * 0.04 + k / 10) % 1;
+      const E = etnaFx || ETNA;
+      const sx = farX + E.x + 8 + t * 230, sy = E.y - 8 - t * 110 + Math.sin(t * 6 + k) * 6;
+      if (etnaFx) { sbuffo(c, sx, sy, 14 + t * 60, '150, 128, 138', 0.42 * (1 - t)); continue; }
       c.fillStyle = `rgba(80, 60, 85, ${0.4 * (1 - t)})`;
       c.beginPath();
-      c.arc(farX + ETNA.x + 8 + t * 230, ETNA.y - 8 - t * 110 + Math.sin(t * 6 + k) * 6, 8 + t * 40, 0, Math.PI * 2);
+      c.arc(sx, sy, 8 + t * 40, 0, Math.PI * 2);
       c.fill();
     }
   }
@@ -1791,7 +1850,8 @@
   }
   function drawFarFx2(c, farX) {
     const t = Date.now() / 1000;
-    const cx = farX + ETNA2.x + 2, cy = ETNA2.y + 2;
+    const E = etnaFx || ETNA2;
+    const cx = farX + E.x + 2, cy = E.y + 2;
     const pulse = 0.35 + 0.15 * Math.sin(t * 2.2);
     const glow = c.createRadialGradient(cx, cy, 2, cx, cy, 70);
     glow.addColorStop(0, `rgba(253, 186, 116, ${pulse + 0.3})`);
@@ -1801,9 +1861,11 @@
     c.fillRect(cx - 80, cy - 80, 160, 160);
     for (let k = 0; k < 9; k++) {
       const s = (t * 0.035 + k / 9) % 1;
+      const sx = cx + 6 + s * 200, sy = cy - 10 - s * 100 + Math.sin(s * 6 + k) * 6;
+      if (etnaFx) { sbuffo(c, sx, sy, 14 + s * 54, '95, 52, 60', 0.5 * (1 - s)); continue; }
       c.fillStyle = `rgba(120, 50, 55, ${0.45 * (1 - s)})`;
       c.beginPath();
-      c.arc(cx + 6 + s * 200, cy - 10 - s * 100 + Math.sin(s * 6 + k) * 6, 8 + s * 36, 0, Math.PI * 2);
+      c.arc(sx, sy, 8 + s * 36, 0, Math.PI * 2);
       c.fill();
     }
   }
@@ -1820,13 +1882,15 @@
   function drawBossCopier(c) {
     if (sprites.boss.complete && sprites.boss.naturalWidth > 0) {
       const isFiring = boss.state === 'attack' || (boss.phase % 2 > 1.2);
-      c.drawImage(sprites.boss, (isFiring ? 1 : 0) * 220, 0, 220, 170, -110, -165, 220, 170);
+      c.drawImage(sprites.boss, (isFiring ? 1 : 0) * 440, 0, 440, 340, -110, -165, 220, 170);
+      // bagliore dello scanner che scorre sul fianco della copiatrice
       const scanOffset = Math.sin(Date.now() * 0.008) * 45;
-      c.fillStyle = 'rgba(56, 189, 248, 0.2)';
-      c.fillRect(-60 + scanOffset, -150, 25, 140);
-      c.strokeStyle = '#38bdf8';
-      c.lineWidth = 2;
-      c.strokeRect(-60 + scanOffset, -150, 25, 140);
+      const g = c.createLinearGradient(-72 + scanOffset, 0, -36 + scanOffset, 0);
+      g.addColorStop(0, 'rgba(56, 189, 248, 0)');
+      g.addColorStop(0.5, 'rgba(125, 211, 252, 0.28)');
+      g.addColorStop(1, 'rgba(56, 189, 248, 0)');
+      c.fillStyle = g;
+      c.fillRect(-72 + scanOffset, -120, 36, 95);
     } else {
       c.fillStyle = '#1e293b';
       c.fillRect(-boss.w / 2, -boss.h, boss.w, boss.h);
@@ -2784,17 +2848,30 @@
       ctx.translate(dx, dy);
     }
 
-    // 1. CIELO del livello
-    const L = layersOf(level);
-    level.drawSky(ctx);
+    const R = RESA[level.id];
+    const resa = pronta(R);
+    const L = resa ? null : layersOf(level);
+    if (resa) {
+      // 1-3. FONDALE reso (cielo, Etna, citta'), con la sua parallasse
+      const farX = -camera.x * R.farF;
+      const k = R.fondale.naturalWidth / R.larg;
+      const sx = Math.max(0, -farX - 2);
+      ctx.drawImage(R.fondale, sx * k, 0, (W + 4) * k, R.fondale.naturalHeight, sx + farX, 0, W + 4, H);
+      etnaFx = R.etna;
+      level.drawFarFx(ctx, farX);
+      etnaFx = null;
+    } else {
+      // 1. CIELO del livello
+      level.drawSky(ctx);
 
-    // 2. STRATO LONTANO (Etna)
-    const farX = -camera.x * FAR_F;
-    ctx.drawImage(L.far, Math.round(farX), 0);
-    level.drawFarFx(ctx, farX);
+      // 2. STRATO LONTANO (Etna)
+      const farX = -camera.x * FAR_F;
+      ctx.drawImage(L.far, Math.round(farX), 0);
+      level.drawFarFx(ctx, farX);
 
-    // 3. STRATO MEDIO (la citta')
-    ctx.drawImage(L.mid, Math.round(-camera.x * MID_F), 0);
+      // 3. STRATO MEDIO (la citta')
+      ctx.drawImage(L.mid, Math.round(-camera.x * MID_F), 0);
+    }
 
     // 4. MAIN ACTION LAYER (Camera space)
     ctx.save();
@@ -2803,8 +2880,13 @@
     // Scenografia del livello (pre-renderizzata), con margine per lo scuotimento
     const sx0 = Math.max(0, Math.floor(camera.x) - 20);
     const sw = Math.min(STAGE_LENGTH - sx0, W + 40);
-    ctx.drawImage(L.stage, sx0, 0, sw, H, sx0, 0, sw, H);
-    level.drawWorldFx(ctx);
+    if (resa) {
+      const k = R.scena.naturalWidth / STAGE_LENGTH;
+      ctx.drawImage(R.scena, sx0 * k, 0, sw * k, R.scena.naturalHeight, sx0, 0, sw, H);
+    } else {
+      ctx.drawImage(L.stage, sx0, 0, sw, H, sx0, 0, sw, H);
+      level.drawWorldFx(ctx);
+    }
     platforms.forEach(p => { if (p.moving) PLATFORM_DRAW[p.type](ctx, p); });
 
     // Draw Pickups (Using items-sheet.png)
@@ -2854,12 +2936,10 @@
       }
     });
 
-    // Draw Moke Slug Vehicle (Using moke-slug.png)
+    // Draw Moke Slug Vehicle (moke-3d.png, resa in Blender)
     if (!moke.occupied) {
       // Prompt banner above Moke
-      ctx.fillStyle = '#d9f482';
-      ctx.font = '900 12px ui-monospace, monospace';
-      ctx.fillText('▼ PREMI [E] PER SALIRE SULLA MOKE SLUG', moke.x - 110, moke.y - 88);
+      pillola(ctx, '▼ Premi E per salire sulla Moke', moke.x, moke.y - 96 + Math.sin(Date.now() * 0.005) * 3, 12);
     }
 
     ctx.save();
@@ -2879,7 +2959,7 @@
       else if (Math.abs(moke.vx) > 260) mokeFrame = 2;
       else if (moke.occupied && input.fire) mokeFrame = 1;
 
-      ctx.drawImage(sprites.moke, mokeFrame * 160, 0, 160, 96, -74, -82, 148, 88);
+      ctx.drawImage(sprites.moke, mokeFrame * 320, 0, 320, 192, -74, -82, 148, 88);
     } else {
       // Procedural Fallback
       ctx.fillStyle = '#065f46';
@@ -2898,7 +2978,7 @@
     }
     ctx.restore();
 
-    // Draw Enemies (Precari using precari-sheet.png)
+    // Draw Enemies (precari-3d.png, resi in Blender)
     enemies.forEach(en => {
       ctx.save();
       ctx.translate(en.x, en.y);
@@ -2921,7 +3001,7 @@
         } else { // shielder
           col = Math.floor(en.phase) % 4;
         }
-        ctx.drawImage(sprites.precari, col * 64, row * 64, 64, 64, -30, -58, 60, 60);
+        ctx.drawImage(sprites.precari, col * 128, row * 128, 128, 128, -30, -58, 60, 60);
       } else {
         // Fallback
         const stride = Math.sin(en.phase) * 6;
@@ -2941,7 +3021,7 @@
       ctx.restore();
     });
 
-    // Draw Boss (La Fotocopiatrice & Il Super-Ricorrista using boss-copier.png)
+    // Draw Boss (La Fotocopiatrice & Il Super-Ricorrista, boss-3d.png)
     if (!boss.defeated) {
       ctx.save();
       ctx.translate(boss.x, boss.y);
@@ -2954,20 +3034,20 @@
 
       level.boss.draw(ctx);
 
-      // Boss HP Bar with Arcade Metal Frame
+      // Barra della vita del boss: pillola di vetro come l'HUD
       const hpRatio = Math.max(0, boss.health / boss.maxHealth);
-      ctx.fillStyle = '#0f172a';
-      ctx.fillRect(-112, -boss.h - 22, 224, 18);
-      ctx.strokeStyle = '#facc15';
-      ctx.lineWidth = 2;
-      ctx.strokeRect(-112, -boss.h - 22, 224, 18);
-      // Red fill
-      ctx.fillStyle = '#ef4444';
-      ctx.fillRect(-110, -boss.h - 20, 220 * hpRatio, 14);
+      ctx.fillStyle = 'rgba(18, 22, 29, 0.82)';
+      ctx.strokeStyle = 'rgba(255, 255, 255, 0.22)';
+      ctx.lineWidth = 1.2;
+      ctx.beginPath(); ctx.roundRect(-112, -boss.h - 22, 224, 16, 8); ctx.fill(); ctx.stroke();
+      if (hpRatio > 0) {
+        const hg = ctx.createLinearGradient(-109, 0, 109, 0);
+        hg.addColorStop(0, '#ef4444'); hg.addColorStop(1, '#f6c453');
+        ctx.fillStyle = hg;
+        ctx.beginPath(); ctx.roundRect(-109, -boss.h - 19, Math.max(10, 218 * hpRatio), 10, 5); ctx.fill();
+      }
       // Boss Name Plaque
-      ctx.fillStyle = '#fde047';
-      ctx.font = '900 11px ui-monospace, monospace';
-      ctx.fillText(level.boss.name, -105, -boss.h - 27);
+      scrivi(ctx, level.boss.name, -110, -boss.h - 28, 12, '#fde047');
 
       ctx.restore();
     }
@@ -3107,9 +3187,7 @@
 
     // Draw Floating Texts
     floatingTexts.forEach(ft => {
-      ctx.fillStyle = ft.color;
-      ctx.font = '900 14px ui-monospace, monospace';
-      ctx.fillText(ft.text, ft.x, ft.y);
+      scrivi(ctx, ft.text, ft.x, ft.y, 15, ft.color);
     });
 
     ctx.restore(); // Exit camera space
@@ -3117,9 +3195,7 @@
     // 5. STAGE BOUNDARY WARNING OR GO ARROW
     if (state === 'playing' && Math.floor(Date.now() / 300) % 2 === 0) {
       if (enemies.length === 0 && player.x < level.arenaX) {
-        ctx.fillStyle = '#d9f482';
-        ctx.font = '900 24px ui-monospace, monospace';
-        ctx.fillText('AVANTI! ▶▶', W - 180, 140);
+        scrivi(ctx, 'AVANTI! ▶▶', W - 40, 140, 26, '#f6c453', 'right');
       }
     }
 
@@ -3196,5 +3272,6 @@
 
   // Start loop on initial state; la Missione 2 si prepara in sottofondo
   requestAnimationFrame(gameLoop);
-  setTimeout(() => layersOf(LEVELS[1]), 1200);
+  // gli scenari disegnati servono solo se le immagini rese non arrivano
+  setTimeout(() => { if (!pronta(RESA[2])) layersOf(LEVELS[1]); }, 4000);
 })();
