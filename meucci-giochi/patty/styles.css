@@ -1,0 +1,325 @@
+:root {
+  color-scheme: dark;
+  --bg-deep: #12151a;
+  --panel-bg: rgba(18, 22, 29, 0.86);
+  --panel-border: rgba(255, 255, 255, 0.16);
+  --accent-gold: #f6c453;
+  --accent-pink: #f472b6;
+  --accent-brown: #5a3825;
+  --text-main: #f8fafc;
+  --text-muted: #cbd5e1;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100dvh;
+  background: radial-gradient(circle at top, #1f2633 0%, var(--bg-deep) 70%);
+  color: var(--text-main);
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  display: grid;
+  place-items: center;
+  padding: clamp(0.4rem, 1vw, 1rem);
+}
+
+.app-shell {
+  width: 100%;
+  max-width: min(1440px, 100dvw);
+  display: grid;
+  place-items: center;
+}
+
+.game-stage {
+  position: relative;
+  width: min(100%, calc((100dvh - 1.5rem) * 16 / 9));
+  aspect-ratio: 16 / 9;
+  border-radius: 16px;
+  overflow: hidden;
+  background: #0d1015;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(255, 255, 255, 0.1);
+  content-visibility: auto;
+  contain-intrinsic-size: auto 720px;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+#game-canvas {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.hud {
+  position: absolute;
+  inset: 0 0 auto 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.5rem;
+  padding: clamp(0.45rem, 1vw, 0.9rem);
+  pointer-events: none;
+}
+
+.hud-left,
+.hud-right {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  flex-wrap: wrap;
+  pointer-events: auto;
+}
+
+.pill-btn,
+.hud-stat,
+.icon-btn {
+  background: var(--panel-bg);
+  border: 1px solid var(--panel-border);
+  backdrop-filter: blur(8px);
+  color: var(--text-main);
+  border-radius: 999px;
+  padding: 0.35rem 0.78rem;
+  font-size: clamp(0.8rem, 0.65rem + 0.5vw, 1rem);
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  line-height: 1.2;
+}
+
+.pill-btn,
+.icon-btn {
+  cursor: pointer;
+  transition: transform 0.12s ease, border-color 0.15s ease;
+}
+
+.pill-btn:hover,
+.icon-btn:hover {
+  border-color: var(--accent-gold);
+  transform: translateY(-1px);
+}
+
+.icon-btn {
+  padding: 0.35rem 0.62rem;
+}
+
+.stage-dot {
+  width: 0.55rem;
+  height: 0.55rem;
+  border-radius: 50%;
+  background: var(--accent-gold);
+  box-shadow: 0 0 8px var(--accent-gold);
+}
+
+.elefantino-stat.is-found {
+  border-color: var(--accent-pink);
+  color: #fbcfe8;
+}
+
+.touch-controls {
+  position: absolute;
+  inset: auto 0 0 0;
+  display: none;
+  justify-content: space-between;
+  align-items: flex-end;
+  padding: 0.85rem;
+  pointer-events: none;
+}
+
+@media (pointer: coarse) {
+  .touch-controls {
+    display: flex;
+  }
+}
+
+.touch-pad,
+.touch-actions {
+  display: flex;
+  gap: 0.55rem;
+  pointer-events: auto;
+}
+
+.touch-btn {
+  min-width: 3.1rem;
+  min-height: 3.1rem;
+  padding: 0 0.9rem;
+  border-radius: 14px;
+  border: 1px solid rgba(255, 255, 255, 0.28);
+  background: rgba(18, 22, 29, 0.72);
+  color: var(--text-main);
+  font-size: 1rem;
+  font-weight: 700;
+  touch-action: manipulation;
+}
+
+.touch-jump {
+  background: rgba(246, 196, 83, 0.88);
+  color: #1f1408;
+}
+
+.touch-bark {
+  background: rgba(244, 114, 182, 0.85);
+  color: #210716;
+}
+
+/* Native <dialog> modal handling */
+dialog {
+  border: none;
+  padding: 0;
+  background: transparent;
+  color: var(--text-main);
+  max-width: min(560px, calc(100dvw - 2rem));
+  width: 100%;
+  margin: auto;
+}
+
+dialog[open] {
+  display: grid;
+}
+
+dialog:modal {
+  overscroll-behavior: contain;
+}
+
+dialog::backdrop {
+  background: rgba(8, 10, 15, 0.72);
+  backdrop-filter: blur(5px);
+  overflow: hidden;
+  overscroll-behavior: contain;
+}
+
+.dialog-card {
+  background: linear-gradient(165deg, rgba(28, 34, 46, 0.97), rgba(16, 20, 27, 0.98));
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 20px;
+  padding: clamp(1.1rem, 2.5vw, 1.8rem);
+  box-shadow: 0 28px 64px rgba(0, 0, 0, 0.65);
+  display: grid;
+  gap: 0.95rem;
+}
+
+.dialog-badge {
+  justify-self: start;
+  font-size: clamp(0.75rem, 0.65rem + 0.35vw, 0.9rem);
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  padding: 0.25rem 0.65rem;
+  border-radius: 999px;
+  background: rgba(246, 196, 83, 0.18);
+  color: var(--accent-gold);
+  border: 1px solid rgba(246, 196, 83, 0.35);
+}
+
+.dialog-card h1 {
+  margin: 0;
+  font-size: clamp(1.3rem, 1rem + 1.2vw, 1.95rem);
+  line-height: 1.15;
+}
+
+.dialog-lead {
+  margin: 0;
+  color: var(--text-muted);
+  font-size: clamp(0.9rem, 0.8rem + 0.4vw, 1.05rem);
+  line-height: 1.5;
+}
+
+.controls-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+  gap: 0.45rem 0.8rem;
+  padding: 0.75rem;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.05);
+  font-size: clamp(0.8rem, 0.72rem + 0.3vw, 0.92rem);
+  color: var(--text-muted);
+}
+
+kbd {
+  display: inline-block;
+  padding: 0.1rem 0.4rem;
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.14);
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  color: var(--text-main);
+  font-family: inherit;
+  font-size: 0.85em;
+  font-weight: 700;
+}
+
+.stage-picker {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+}
+
+.stage-chip {
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.06);
+  color: var(--text-main);
+  border-radius: 10px;
+  padding: 0.45rem 0.75rem;
+  font-size: clamp(0.82rem, 0.74rem + 0.3vw, 0.95rem);
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.stage-chip.is-active {
+  border-color: var(--accent-gold);
+  background: rgba(246, 196, 83, 0.2);
+  color: var(--accent-gold);
+}
+
+.dialog-actions {
+  display: flex;
+  gap: 0.65rem;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+  margin-top: 0.25rem;
+}
+
+.primary-btn,
+.secondary-btn {
+  border: none;
+  border-radius: 12px;
+  padding: 0.65rem 1.25rem;
+  font-size: clamp(0.92rem, 0.84rem + 0.35vw, 1.05rem);
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.primary-btn {
+  background: linear-gradient(135deg, #fcd34d, #f59e0b);
+  color: #1c1205;
+}
+
+.secondary-btn {
+  background: rgba(255, 255, 255, 0.12);
+  color: var(--text-main);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.back-link {
+  text-decoration: none;
+}
+
+.game-credit {
+  margin-top: 0.45rem;
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  text-align: center;
+}
+
+@media (max-width: 640px) {
+  .pill-btn,
+  .hud-stat,
+  .icon-btn {
+    padding: 0.25rem 0.52rem;
+    font-size: 0.72rem;
+    gap: 0.28rem;
+  }
+}
