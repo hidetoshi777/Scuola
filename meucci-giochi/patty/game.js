@@ -108,8 +108,9 @@ const STAGES = [
     bgSrc: "assets/bg_03_cucina.webp",
     pattyDrawSize: 256,
     sunSkew: -0.32,
-    spawn: { x: 130, y: 740 },
-    groundY: 740,
+    minX: 435,
+    spawn: { x: 465, y: 765 },
+    groundY: 765,
     sunBeams: [
       { x: 1180, w: 320, angle: -0.25, alpha: 0.22 },
       { x: 760, w: 190, angle: -0.2, alpha: 0.11 },
@@ -122,23 +123,23 @@ const STAGES = [
       { x: 1365, y: 605, w: 220, label: "Bracciolo divano" },
     ],
     treats: [
-      { x: 310, y: 675 },
-      { x: 520, y: 675 },
+      { x: 615, y: 700 },
+      { x: 790, y: 700 },
       { x: 515, y: 428 },
       { x: 740, y: 428 },
       { x: 920, y: 428 },
       { x: 1065, y: 428 },
       { x: 560, y: 145 },
       { x: 710, y: 145 },
-      { x: 1220, y: 675 },
+      { x: 1220, y: 700 },
       { x: 1460, y: 550 },
     ],
     elefantino: { x: 635, y: 264 },
     hazards: [
-      { type: "roomba", x: 720, y: 740, minX: 340, maxX: 1180, speed: 165 },
+      { type: "roomba", x: 880, y: 765, minX: 540, maxX: 1180, speed: 165 },
       { type: "bee", x: 900, y: 380, minX: 640, maxX: 1140, speed: 140 },
     ],
-    goal: { x: 1315, y: 740, label: "Verso il Giardino" },
+    goal: { x: 1315, y: 765, label: "Verso il Giardino" },
   },
   {
     id: 3,
@@ -183,11 +184,27 @@ const STAGES = [
   },
 ];
 
-// --- Procedural Web Audio ---
+// --- Procedural Web Audio + Real Bark SFX ---
 class SoundFX {
   constructor() {
     this.ctx = null;
     this.muted = false;
+    this.barkBuffer = null;
+    this.barkRawPromise = null;
+    this.barkFallbackAudio = null;
+    this.decodingBark = false;
+  }
+
+  preloadBark() {
+    if (!this.barkRawPromise && typeof fetch === "function") {
+      this.barkRawPromise = fetch("assets/patty_bark.mp3")
+        .then((r) => (r.ok ? r.arrayBuffer() : null))
+        .catch(() => null);
+    }
+    if (!this.barkFallbackAudio && typeof Audio !== "undefined") {
+      this.barkFallbackAudio = new Audio("assets/patty_bark.mp3");
+      this.barkFallbackAudio.preload = "auto";
+    }
   }
 
   ensureCtx() {
@@ -198,6 +215,21 @@ class SoundFX {
     }
     if (this.ctx && this.ctx.state === "suspended") {
       this.ctx.resume().catch(() => {});
+    }
+    if (this.ctx && !this.barkBuffer && !this.decodingBark) {
+      this.decodingBark = true;
+      this.preloadBark();
+      if (this.barkRawPromise) {
+        this.barkRawPromise
+          .then((ab) => (ab && this.ctx ? this.ctx.decodeAudioData(ab.slice(0)) : null))
+          .then((decoded) => {
+            if (decoded) this.barkBuffer = decoded;
+          })
+          .catch(() => {})
+          .finally(() => {
+            this.decodingBark = false;
+          });
+      }
     }
     return this.ctx;
   }
@@ -229,8 +261,28 @@ class SoundFX {
   }
 
   bark() {
-    this.tone(480, 310, 0.09, "sawtooth", 0.09, 0);
-    this.tone(540, 340, 0.1, "triangle", 0.1, 0.08);
+    if (this.muted) return;
+    const ctx = this.ensureCtx();
+    if (ctx && this.barkBuffer) {
+      const src = ctx.createBufferSource();
+      src.buffer = this.barkBuffer;
+      src.playbackRate.value = 0.96 + Math.random() * 0.08;
+      const g = ctx.createGain();
+      g.gain.value = 0.85;
+      src.connect(g);
+      g.connect(ctx.destination);
+      src.start();
+      return;
+    }
+    if (this.barkFallbackAudio) {
+      try {
+        this.barkFallbackAudio.currentTime = 0;
+        this.barkFallbackAudio.volume = 0.85;
+        this.barkFallbackAudio.play().catch(() => {});
+        return;
+      } catch (_) {}
+    }
+    this.tone(240, 140, 0.06, "sine", 0.08);
   }
 
   treat(combo) {
@@ -268,6 +320,8 @@ const hudTreats = document.getElementById("hud-treats");
 const hudElefantino = document.getElementById("hud-elefantino");
 const elefantinoStat = hudElefantino.closest(".elefantino-stat");
 const btnMute = document.getElementById("btn-mute");
+const btnFs = document.getElementById("btn-fs");
+const fsExitBtn = document.getElementById("fs-exit");
 const btnPause = document.getElementById("btn-pause");
 const btnStageMenu = document.getElementById("btn-stage-menu");
 
@@ -355,6 +409,7 @@ const state = {
     animTimer: 0,
     invulnTimer: 0,
     barkCooldown: 0,
+    barkAnimTimer: 0,
     squashX: 1,
     squashY: 1,
     currentPlatform: null,
@@ -403,6 +458,7 @@ function loadStage(idx) {
     animTimer: 0,
     invulnTimer: 0,
     barkCooldown: 0,
+    barkAnimTimer: 0,
     squashX: 1,
     squashY: 1,
     currentPlatform: null,
@@ -476,14 +532,16 @@ function triggerJump() {
 
 function triggerBark() {
   const p = state.patty;
-  if (p.barkCooldown > 0 || paused) return;
+  if (p.barkCooldown > 0 || paused || pausedByRotation()) return;
   p.barkCooldown = 0.55;
+  p.barkAnimTimer = 0.26;
   p.squashX = 1.15;
   p.squashY = 0.88;
   sfx.bark();
   state.shockwaves.push({
-    x: p.x + p.facing * 46,
-    y: p.y - STAGES[currentStageIdx].pattyDrawSize * 0.42,
+    x: p.x + p.facing * 56,
+    y: p.y - STAGES[currentStageIdx].pattyDrawSize * 0.48,
+    facing: p.facing,
     r: 18,
     maxR: 255,
     life: 0.36,
@@ -628,8 +686,56 @@ document.querySelectorAll("#pause-stage-picker .stage-chip").forEach((btn) => {
   });
 });
 
+const portraitMedia = window.matchMedia("(orientation: portrait)");
+const isTouchDevice = () => window.matchMedia("(pointer: coarse)").matches || "ontouchstart" in window;
+let fsActive = false;
+const fsElement = () => document.fullscreenElement || document.webkitFullscreenElement;
+const pausedByRotation = () => fsActive && portraitMedia.matches;
+
+function setFsUi(on) {
+  fsActive = on;
+  stageEl.classList.toggle("is-fs", on);
+}
+
+function enterFullscreen() {
+  if (fsActive) return;
+  setFsUi(true);
+  const rootEl = document.documentElement;
+  const req = rootEl.requestFullscreen || rootEl.webkitRequestFullscreen;
+  if (!req) return;
+  try {
+    Promise.resolve(req.call(rootEl, { navigationUI: "hide" }))
+      .then(() => screen.orientation?.lock?.("landscape"))
+      .catch(() => {});
+  } catch (_) {}
+}
+
+function exitFullscreen() {
+  setFsUi(false);
+  try {
+    screen.orientation?.unlock?.();
+  } catch (_) {}
+  if (fsElement()) {
+    const exit = document.exitFullscreen || document.webkitExitFullscreen;
+    exit?.call(document);
+  }
+}
+
+["fullscreenchange", "webkitfullscreenchange"].forEach((ev) => {
+  document.addEventListener(ev, () => {
+    if (!fsElement() && fsActive) setFsUi(false);
+  });
+});
+
+menuDialog.querySelector('button[value="play"]')?.addEventListener("click", () => {
+  sfx.ensureCtx();
+  if (isTouchDevice()) enterFullscreen();
+});
+
 btnPause.addEventListener("click", openPauseDialog);
 btnStageMenu.addEventListener("click", openPauseDialog);
+btnFs?.addEventListener("click", () => (fsActive ? exitFullscreen() : enterFullscreen()));
+fsExitBtn?.addEventListener("click", exitFullscreen);
 btnMute.addEventListener("click", () => {
   sfx.muted = !sfx.muted;
   btnMute.textContent = sfx.muted ? "🔇" : "🔊";
@@ -680,13 +786,14 @@ function update(dt) {
     if (m.y > WORLD_H * 0.88) m.y = 40;
   }
 
-  if (paused || stageCleared) return;
+  if (paused || stageCleared || pausedByRotation()) return;
 
   const cfg = STAGES[currentStageIdx];
   const p = state.patty;
 
   p.invulnTimer = Math.max(0, p.invulnTimer - dt);
   p.barkCooldown = Math.max(0, p.barkCooldown - dt);
+  p.barkAnimTimer = Math.max(0, p.barkAnimTimer - dt);
   p.coyoteTimer = Math.max(0, p.coyoteTimer - dt);
   p.jumpBuffer = Math.max(0, p.jumpBuffer - dt);
 
@@ -711,7 +818,18 @@ function update(dt) {
 
   const prevY = p.y;
   p.vy = Math.min(1150, p.vy + 1950 * dt);
-  p.x = Math.max(54, Math.min(WORLD_W - 54, p.x + p.vx * dt));
+  const minX = cfg.minX ?? 54;
+  const maxX = cfg.maxX ?? WORLD_W - 54;
+  const nextX = p.x + p.vx * dt;
+  if (nextX <= minX) {
+    p.x = minX;
+    if (p.vx < 0) p.vx = 0;
+  } else if (nextX >= maxX) {
+    p.x = maxX;
+    if (p.vx > 0) p.vx = 0;
+  } else {
+    p.x = nextX;
+  }
   p.y += p.vy * dt;
 
   let landed = false;
@@ -1128,6 +1246,8 @@ function render() {
   let frameIdx = 0;
   if (!p.grounded) {
     frameIdx = p.vy < 0 ? 4 : 5;
+  } else if (p.barkAnimTimer > 0.12) {
+    frameIdx = 4;
   } else if (Math.abs(p.vx) > 35) {
     frameIdx = 1 + (Math.floor(p.animTimer) % 3);
   }
@@ -1143,6 +1263,9 @@ function render() {
       ctx.save();
       ctx.translate(p.x, p.y);
       ctx.scale(p.facing * p.squashX, p.squashY);
+      if (p.barkAnimTimer > 0) {
+        ctx.rotate(-0.13 * (p.barkAnimTimer / 0.26));
+      }
       const sx = frameIdx * SPRITE_CELL;
       const footOffset = drawS * SPRITE_FOOT_RATIO;
       ctx.drawImage(
@@ -1160,17 +1283,26 @@ function render() {
     }
   }
 
-  // 8. Bark Sonic Shockwaves & Particles
+  // 8. Expressive Comic Sound-Arcs ))) & Particles
   for (const sw of state.shockwaves) {
+    const progress = 1 - sw.life / sw.maxLife;
+    const baseAlpha = Math.max(0, sw.life / sw.maxLife);
     ctx.save();
-    ctx.strokeStyle = `rgba(244, 114, 182, ${(sw.life / sw.maxLife) * 0.85})`;
-    ctx.lineWidth = 4;
-    ctx.beginPath();
-    ctx.arc(sw.x, sw.y, sw.r, 0, Math.PI * 2);
-    ctx.stroke();
-    ctx.font = "800 18px system-ui, sans-serif";
-    ctx.fillStyle = `rgba(255, 255, 255, ${sw.life / sw.maxLife})`;
-    ctx.fillText("BAU!", sw.x - 18, sw.y - sw.r * 0.45);
+    ctx.translate(sw.x, sw.y);
+    ctx.scale(sw.facing || 1, 1);
+    ctx.lineCap = "round";
+    for (let ring = 0; ring < 3; ring++) {
+      const delay = ring * 0.16;
+      const localP = Math.max(0, Math.min(1, (progress - delay) / (1 - delay)));
+      if (localP <= 0) continue;
+      const arcR = 16 + localP * 54 + ring * 12;
+      const alpha = baseAlpha * (1 - ring * 0.2);
+      ctx.strokeStyle = `rgba(255, 245, 205, ${(alpha * 0.92).toFixed(3)})`;
+      ctx.lineWidth = 4.2 - ring * 0.7;
+      ctx.beginPath();
+      ctx.arc(0, 0, arcR, -0.58, 0.58);
+      ctx.stroke();
+    }
     ctx.restore();
   }
 
@@ -1229,6 +1361,7 @@ function loop(timestamp) {
 }
 
 // Init
+sfx.preloadBark();
 loadStage(0);
 menuDialog.showModal();
 animFrameId = requestAnimationFrame(loop);

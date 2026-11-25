@@ -323,3 +323,85 @@ kbd {
     gap: 0.28rem;
   }
 }
+
+/* Mobile & desktop fullscreen + landscape lock hint */
+.fs-exit,
+.rotate-hint {
+  display: none;
+}
+
+.game-stage.is-fs {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  width: 100dvw;
+  height: 100dvh;
+  max-width: none;
+  aspect-ratio: auto;
+  border-radius: 0;
+  background: #000;
+  display: grid;
+  place-items: center;
+}
+
+.game-stage.is-fs #game-canvas {
+  width: min(100dvw, 177.78dvh);
+  height: min(100dvh, 56.25dvw);
+}
+
+.game-stage.is-fs .hud {
+  padding-right: calc(max(8px, env(safe-area-inset-right)) + 44px);
+}
+
+.game-stage.is-fs .touch-controls {
+  padding: 0 max(14px, env(safe-area-inset-right)) max(12px, env(safe-area-inset-bottom)) max(14px, env(safe-area-inset-left));
+}
+
+.game-stage.is-fs .fs-exit {
+  display: grid;
+  place-items: center;
+  position: absolute;
+  top: max(8px, env(safe-area-inset-top));
+  right: max(8px, env(safe-area-inset-right));
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: rgba(15, 23, 42, 0.85);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  color: var(--text-main);
+  font-size: 1rem;
+  cursor: pointer;
+  z-index: 25;
+}
+
+@media (orientation: portrait) {
+  .game-stage.is-fs .rotate-hint {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.65rem;
+    position: absolute;
+    inset: 0;
+    z-index: 24;
+    background: rgba(5, 8, 14, 0.95);
+    color: var(--text-main);
+    text-align: center;
+    padding: 1.5rem;
+  }
+
+  .rotate-icon {
+    font-size: 3.2rem;
+    animation: gira 1.6s ease-in-out infinite;
+  }
+
+  .rotate-hint small {
+    color: var(--text-muted);
+    font-weight: 600;
+  }
+}
+
+@keyframes gira {
+  0%, 20% { transform: rotate(0deg); }
+  55%, 100% { transform: rotate(-90deg); }
+}

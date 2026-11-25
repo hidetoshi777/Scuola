@@ -17,7 +17,7 @@
   <meta name="twitter:description" content="Platformer 2.5D con fondali in Blender Cycles e sprite animato tra le stanze di Casa di Silvia.">
   <meta name="twitter:image" content="https://hidetoshi777.github.io/Scuola/meucci-giochi/patty/copertina.jpg">
   <link rel="icon" href="../../favicon.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="styles.css?v=1">
+  <link rel="stylesheet" href="styles.css?v=2">
 </head>
 <body>
   <main class="app-shell">
@@ -44,9 +44,17 @@
             <span id="hud-elefantino">0 / 1</span>
           </div>
           <button type="button" class="icon-btn" id="btn-mute" aria-label="Attiva o disattiva audio" title="Audio">🔊</button>
+          <button type="button" class="icon-btn" id="btn-fs" aria-label="Schermo intero" title="Schermo intero">⛶</button>
           <button type="button" class="icon-btn" id="btn-pause" aria-label="Metti in pausa" title="Pausa">⏸</button>
         </div>
       </header>
+
+      <button type="button" class="fs-exit" id="fs-exit" aria-label="Esci dallo schermo intero" title="Esci da schermo intero">✕</button>
+      <div class="rotate-hint" aria-live="polite">
+        <span class="rotate-icon" aria-hidden="true">📱</span>
+        <strong>Gira il telefono in orizzontale</strong>
+        <small>Il gioco riparte da solo</small>
+      </div>
 
       <div class="touch-controls" id="touch-controls" aria-label="Controlli touch">
         <div class="touch-pad">
@@ -120,6 +128,6 @@
     </div>
   </dialog>
 
-  <script type="module" src="game.js?v=1"></script>
+  <script type="module" src="game.js?v=3"></script>
 </body>
 </html>
