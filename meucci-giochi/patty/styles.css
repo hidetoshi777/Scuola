@@ -126,7 +126,7 @@ body {
   display: none;
   justify-content: space-between;
   align-items: flex-end;
-  padding: 0.85rem;
+  padding: 1rem;
   pointer-events: none;
 }
 
@@ -134,35 +134,53 @@ body {
   .touch-controls {
     display: flex;
   }
+
+  .icon-btn {
+    min-width: 2.6rem;
+    min-height: 2.6rem;
+    justify-content: center;
+  }
 }
 
 .touch-pad,
 .touch-actions {
   display: flex;
-  gap: 0.55rem;
+  gap: 0.85rem;
   pointer-events: auto;
 }
 
 .touch-btn {
-  min-width: 3.1rem;
-  min-height: 3.1rem;
-  padding: 0 0.9rem;
-  border-radius: 14px;
-  border: 1px solid rgba(255, 255, 255, 0.28);
-  background: rgba(18, 22, 29, 0.72);
+  min-width: 4.5rem;
+  min-height: 4.5rem;
+  padding: 0 1.25rem;
+  border-radius: 18px;
+  border: 2px solid rgba(255, 255, 255, 0.34);
+  background: rgba(18, 22, 29, 0.78);
   color: var(--text-main);
-  font-size: 1rem;
+  font-size: 1.35rem;
   font-weight: 700;
-  touch-action: manipulation;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.42);
+  touch-action: none;
+  opacity: 0.9;
+  transition: transform 0.08s ease, filter 0.08s ease;
+}
+
+.touch-btn:active {
+  transform: scale(0.94);
+  filter: brightness(1.12);
 }
 
 .touch-jump {
-  background: rgba(246, 196, 83, 0.88);
+  min-width: 5.2rem;
+  font-size: 1.15rem;
+  background: rgba(246, 196, 83, 0.92);
   color: #1f1408;
 }
 
 .touch-bark {
-  background: rgba(244, 114, 182, 0.85);
+  min-width: 5.2rem;
+  font-size: 1.15rem;
+  background: rgba(244, 114, 182, 0.90);
   color: #210716;
 }
 
@@ -350,11 +368,11 @@ kbd {
 }
 
 .game-stage.is-fs .hud {
-  padding-right: calc(max(8px, env(safe-area-inset-right)) + 44px);
+  padding-right: calc(max(10px, env(safe-area-inset-right)) + 52px);
 }
 
 .game-stage.is-fs .touch-controls {
-  padding: 0 max(14px, env(safe-area-inset-right)) max(12px, env(safe-area-inset-bottom)) max(14px, env(safe-area-inset-left));
+  padding: 0 max(18px, env(safe-area-inset-right)) max(18px, env(safe-area-inset-bottom)) max(18px, env(safe-area-inset-left));
 }
 
 .game-stage.is-fs .fs-exit {
@@ -363,13 +381,13 @@ kbd {
   position: absolute;
   top: max(8px, env(safe-area-inset-top));
   right: max(8px, env(safe-area-inset-right));
-  width: 36px;
-  height: 36px;
+  width: 44px;
+  height: 44px;
   border-radius: 50%;
   background: rgba(15, 23, 42, 0.85);
   border: 1px solid rgba(255, 255, 255, 0.25);
   color: var(--text-main);
-  font-size: 1rem;
+  font-size: 1.2rem;
   cursor: pointer;
   z-index: 25;
 }
