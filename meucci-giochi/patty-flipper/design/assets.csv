@@ -1,0 +1,5 @@
+path,kind,source,notes
+assets/Patty_HF_3D.glb,model-3d,local-blender,Modello 3D di Patty normalizzato in Blender
+assets/playfield_art.webp,texture,image-generator,Grafica playfield top-down illustrata Casa di Silvia
+assets/patty_bark.mp3,audio,elevenlabs,Abbaio di Patty per eventi speciali
+assets/icon.svg,icon,starter,Icona favicon

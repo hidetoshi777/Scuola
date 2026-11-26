@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="theme-color" content="#1a110b">
+  <title>Flipper di Patty: Casa di Silvia</title>
+  <meta name="description" content="Flipper 3D con il modello di Patty sul tavolo, bumper Elefantino Fucsia, corsie P-A-T fino a 5× ed Elefantino Fever.">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Flipper di Patty: Casa di Silvia">
+  <meta property="og:description" content="Flipper 3D con il modello di Patty sul tavolo, bumper Elefantino Fucsia, corsie P-A-T fino a 5× ed Elefantino Fever.">
+  <meta property="og:url" content="https://hidetoshi777.github.io/Scuola/meucci-giochi/patty-flipper/">
+  <meta property="og:image" content="https://hidetoshi777.github.io/Scuola/meucci-giochi/patty-flipper/copertina.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Flipper di Patty: Casa di Silvia">
+  <meta name="twitter:description" content="Flipper 3D con Patty a Casa di Silvia.">
+  <meta name="twitter:image" content="https://hidetoshi777.github.io/Scuola/meucci-giochi/patty-flipper/copertina.jpg">
+  <link rel="icon" href="../../favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+  <main class="cabinet-shell">
+    <section class="stage" id="game-stage" aria-label="Tavolo del flipper di Patty">
+      <canvas id="pinball-canvas" aria-label="Campo da gioco 3D del flipper di Patty"></canvas>
+
+      <header class="hud" aria-label="Punteggio e stato partita">
+        <div class="hud-score-box">
+          <span class="hud-label">Punteggio</span>
+          <strong class="hud-score" id="hud-score">000,000</strong>
+        </div>
+
+        <div class="hud-badges">
+          <div class="hud-chip" title="Moltiplicatore P-A-T">
+            <span class="hud-label">Molt.</span>
+            <strong id="hud-mult">1×</strong>
+          </div>
+          <div class="hud-chip" title="Palline rimaste">
+            <span class="hud-label">Palline</span>
+            <strong id="hud-balls">●●●</strong>
+          </div>
+          <div class="hud-chip fever-chip" id="hud-fever" hidden>
+            <span>ELEFANTINO FEVER 2×</span>
+          </div>
+          <div class="hud-chip save-chip" id="hud-ballsave" hidden>
+            <span>ZAMPA SALVA</span>
+          </div>
+        </div>
+
+        <div class="hud-actions">
+          <a class="icon-btn back-link" href="../" aria-label="Torna ai Giochi del Meucci" title="Torna ai Giochi">←</a>
+          <button type="button" class="icon-btn" id="btn-mute" aria-label="Attiva o disattiva audio" title="Audio">🔊</button>
+          <button type="button" class="icon-btn" id="btn-fs" aria-label="Schermo intero" title="Schermo intero">⛶</button>
+          <button type="button" class="icon-btn" id="btn-pause" aria-label="Metti in pausa" title="Pausa">⏸</button>
+        </div>
+      </header>
+
+      <div class="pat-strip" aria-label="Corsie P A T">
+        <span class="pat-led" id="led-P">P</span>
+        <span class="pat-led" id="led-A">A</span>
+        <span class="pat-led" id="led-T">T</span>
+        <span class="pat-divider" aria-hidden="true">·</span>
+        <span class="biscuit-led" id="led-B0" title="Biscotto 1">🦴</span>
+        <span class="biscuit-led" id="led-B1" title="Biscotto 2">🦴</span>
+        <span class="biscuit-led" id="led-B2" title="Biscotto 3">🦴</span>
+      </div>
+
+      <div class="callout" id="callout" aria-live="polite"></div>
+
+      <div class="plunger-meter" id="plunger-meter" hidden>
+        <div class="plunger-fill" id="plunger-fill"></div>
+      </div>
+
+      <div class="touch-controls" aria-label="Controlli flipper">
+        <button type="button" class="flip-btn flip-left" id="touch-left" aria-label="Flipper sinistro">◀ SX</button>
+        <div class="touch-right-group">
+          <button type="button" class="nudge-btn" id="touch-nudge" aria-label="Spinta tavolo">⚡</button>
+          <button type="button" class="launch-btn" id="touch-launch" aria-label="Tira e lancia pallina">LANCIA</button>
+          <button type="button" class="flip-btn flip-right" id="touch-right" aria-label="Flipper destro">DX ▶</button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <dialog id="start-dialog" aria-labelledby="start-title" closedby="closerequest">
+    <div class="dialog-card">
+      <div class="dialog-badge">3D Pinball · Casa di Silvia</div>
+      <h1 id="start-title">Flipper di Patty</h1>
+      <p class="dialog-lead">
+        Tira la molla e aiuta Patty a conquistare i bumper <strong>Elefantino Fucsia</strong>, accendere le corsie <strong>P-A-T</strong> (fino a 5×) e abbattere i <strong>3 Biscotti</strong> per scatenare <strong>Elefantino Fever</strong>!
+      </p>
+      <div class="high-score-pill">Record locale: <strong id="start-best">0</strong></div>
+      <div class="controls-list">
+        <div><kbd>A</kbd> / <kbd>←</kbd> / <kbd>Z</kbd> — Flipper sinistro</div>
+        <div><kbd>D</kbd> / <kbd>→</kbd> / <kbd>/</kbd> — Flipper destro</div>
+        <div><kbd>Spazio</kbd> / <kbd>↓</kbd> — Carica e lancia pallina</div>
+        <div><kbd>T</kbd> / <kbd>↑</kbd> — Spinta tavolo (Nudge)</div>
+      </div>
+      <form method="dialog" class="dialog-actions">
+        <button type="submit" id="start" value="play" class="primary-btn" autofocus>Gioca ora</button>
+      </form>
+    </div>
+  </dialog>
+
+  <dialog id="pause-dialog" aria-labelledby="pause-title" closedby="closerequest">
+    <div class="dialog-card">
+      <div class="dialog-badge">Pausa Merenda</div>
+      <h1 id="pause-title">Partita in pausa</h1>
+      <p class="dialog-lead">Patty ti aspetta davanti al tavolo di Casa di Silvia.</p>
+      <form method="dialog" class="dialog-actions">
+        <button type="submit" value="resume" class="primary-btn" autofocus>Riprendi</button>
+        <button type="submit" value="restart" class="secondary-btn">Ricomincia</button>
+      </form>
+    </div>
+  </dialog>
+
+  <dialog id="gameover-dialog" aria-labelledby="gameover-title" closedby="closerequest">
+    <div class="dialog-card">
+      <div class="dialog-badge" id="gameover-badge">Partita Terminata</div>
+      <h1 id="gameover-title">Brava Patty!</h1>
+      <p class="dialog-lead" id="gameover-summary"></p>
+      <form method="dialog" class="dialog-actions">
+        <button type="submit" value="replay" class="primary-btn" autofocus>Gioca ancora</button>
+      </form>
+    </div>
+  </dialog>
+
+  <script type="module" src="./src/main.js"></script>
+</body>
+</html>
