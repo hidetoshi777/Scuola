@@ -24,48 +24,53 @@
     <section class="stage" id="game-stage" aria-label="Tavolo del flipper di Patty">
       <canvas id="pinball-canvas" aria-label="Campo da gioco 3D del flipper di Patty"></canvas>
 
-      <header class="hud" aria-label="Punteggio e stato partita">
-        <div class="hud-score-box">
-          <span class="hud-label">Punteggio</span>
-          <strong class="hud-score" id="hud-score">000,000</strong>
-        </div>
-
-        <div class="hud-badges">
-          <div class="hud-chip" title="Moltiplicatore P-A-T">
-            <span class="hud-label">Molt.</span>
-            <strong id="hud-mult">1×</strong>
+      <div class="hud-top">
+        <header class="hud" aria-label="Punteggio e stato partita">
+          <div class="hud-score-box">
+            <span class="hud-label">Punteggio</span>
+            <strong class="hud-score" id="hud-score">000,000</strong>
           </div>
-          <div class="hud-chip" title="Palline rimaste">
-            <span class="hud-label">Palline</span>
-            <strong id="hud-balls">●●●</strong>
+
+          <div class="hud-badges">
+            <div class="hud-chip" title="Moltiplicatore P-A-T">
+              <span class="hud-label">Molt.</span>
+              <strong id="hud-mult">1×</strong>
+            </div>
+            <div class="hud-chip" title="Palline rimaste">
+              <span class="hud-label">Palline</span>
+              <strong id="hud-balls">●●●</strong>
+            </div>
+          </div>
+
+          <div class="hud-actions">
+            <a class="icon-btn back-link" href="../" aria-label="Torna ai Giochi del Meucci" title="Torna ai Giochi">←</a>
+            <button type="button" class="icon-btn" id="btn-mute" aria-label="Attiva o disattiva audio" title="Audio">🔊</button>
+            <button type="button" class="icon-btn" id="btn-fs" aria-label="Schermo intero" title="Schermo intero">⛶</button>
+            <button type="button" class="icon-btn" id="btn-pause" aria-label="Metti in pausa" title="Pausa">⏸</button>
+          </div>
+        </header>
+
+        <div class="hud-subrow">
+          <div class="pat-strip" aria-label="Corsie P A T">
+            <span class="pat-led" id="led-P">P</span>
+            <span class="pat-led" id="led-A">A</span>
+            <span class="pat-led" id="led-T">T</span>
+            <span class="pat-divider" aria-hidden="true">·</span>
+            <span class="biscuit-led" id="led-B0" title="Biscotto 1">🦴</span>
+            <span class="biscuit-led" id="led-B1" title="Biscotto 2">🦴</span>
+            <span class="biscuit-led" id="led-B2" title="Biscotto 3">🦴</span>
           </div>
           <div class="hud-chip fever-chip" id="hud-fever" hidden>
-            <span>ELEFANTINO FEVER 2×</span>
+            <span>FEVER 2×</span>
           </div>
           <div class="hud-chip save-chip" id="hud-ballsave" hidden>
             <span>ZAMPA SALVA</span>
           </div>
         </div>
-
-        <div class="hud-actions">
-          <a class="icon-btn back-link" href="../" aria-label="Torna ai Giochi del Meucci" title="Torna ai Giochi">←</a>
-          <button type="button" class="icon-btn" id="btn-mute" aria-label="Attiva o disattiva audio" title="Audio">🔊</button>
-          <button type="button" class="icon-btn" id="btn-fs" aria-label="Schermo intero" title="Schermo intero">⛶</button>
-          <button type="button" class="icon-btn" id="btn-pause" aria-label="Metti in pausa" title="Pausa">⏸</button>
-        </div>
-      </header>
-
-      <div class="pat-strip" aria-label="Corsie P A T">
-        <span class="pat-led" id="led-P">P</span>
-        <span class="pat-led" id="led-A">A</span>
-        <span class="pat-led" id="led-T">T</span>
-        <span class="pat-divider" aria-hidden="true">·</span>
-        <span class="biscuit-led" id="led-B0" title="Biscotto 1">🦴</span>
-        <span class="biscuit-led" id="led-B1" title="Biscotto 2">🦴</span>
-        <span class="biscuit-led" id="led-B2" title="Biscotto 3">🦴</span>
       </div>
 
       <div class="callout" id="callout" aria-live="polite"></div>
+      <div class="floating-popups" id="floating-popups" aria-hidden="true"></div>
 
       <div class="plunger-meter" id="plunger-meter" hidden>
         <div class="plunger-fill" id="plunger-fill"></div>

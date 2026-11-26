@@ -17,7 +17,7 @@ body {
   margin: 0;
   width: 100%;
   height: 100%;
-  background: radial-gradient(circle at 50% 25%, #341d12 0%, #140d08 75%);
+  background: radial-gradient(circle at 50% 25%, #231209 0%, #0d0705 78%);
   color: var(--cream);
   font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
   user-select: none;
@@ -57,17 +57,31 @@ body {
   touch-action: none;
 }
 
-.hud {
+.hud-top {
   position: absolute;
   inset: 0 0 auto;
   z-index: 4;
   display: flex;
-  align-items: flex-start;
+  flex-direction: column;
+  gap: 5px;
+  padding: max(10px, env(safe-area-inset-top)) 12px 10px;
+  background: linear-gradient(180deg, rgba(16, 9, 5, 0.92) 0%, rgba(16, 9, 5, 0.45) 75%, transparent 100%);
+  pointer-events: none;
+}
+
+.hud {
+  display: flex;
+  align-items: center;
   justify-content: space-between;
   gap: 8px;
-  padding: max(10px, env(safe-area-inset-top)) 12px 10px;
-  background: linear-gradient(180deg, rgba(16, 9, 5, 0.9) 0%, rgba(16, 9, 5, 0.45) 70%, transparent 100%);
-  pointer-events: none;
+}
+
+.hud-subrow {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
 }
 
 .hud-score-box {
@@ -162,7 +176,6 @@ body {
   place-items: center;
   cursor: pointer;
   touch-action: manipulation;
-  text-decoration: none;
 }
 
 .icon-btn:hover {
@@ -170,17 +183,12 @@ body {
 }
 
 .pat-strip {
-  position: absolute;
-  top: 56px;
-  left: 50%;
-  transform: translateX(-50%);
-  z-index: 4;
   display: flex;
   align-items: center;
   gap: 5px;
   padding: 4px 10px;
   border-radius: 999px;
-  background: rgba(20, 11, 6, 0.78);
+  background: rgba(20, 11, 6, 0.82);
   border: 1px solid rgba(255, 190, 59, 0.28);
   pointer-events: none;
 }
@@ -224,7 +232,7 @@ body {
 
 .callout {
   position: absolute;
-  top: 102px;
+  top: 98px;
   left: 50%;
   transform: translateX(-50%) scale(0.95);
   z-index: 5;
@@ -245,6 +253,30 @@ body {
 .callout.is-visible {
   opacity: 1;
   transform: translateX(-50%) scale(1);
+}
+
+.floating-popups {
+  position: absolute;
+  inset: 0;
+  z-index: 4;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.score-popup {
+  position: absolute;
+  font-size: 13px;
+  font-weight: 900;
+  color: #fff6c9;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.9), 0 0 10px rgba(255, 62, 165, 0.85);
+  transform: translate(-50%, -50%);
+  animation: floatUpPopup 0.85s ease-out forwards;
+  white-space: nowrap;
+}
+
+@keyframes floatUpPopup {
+  0% { opacity: 1; transform: translate(-50%, -50%) scale(0.9); }
+  100% { opacity: 0; transform: translate(-50%, -145%) scale(1.12); }
 }
 
 .plunger-meter {

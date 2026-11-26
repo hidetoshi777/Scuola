@@ -12,6 +12,7 @@ const hudBalls = document.getElementById('hud-balls');
 const hudFever = document.getElementById('hud-fever');
 const hudBallSave = document.getElementById('hud-ballsave');
 const calloutEl = document.getElementById('callout');
+const floatingPopups = document.getElementById('floating-popups');
 const plungerMeter = document.getElementById('plunger-meter');
 const plungerFill = document.getElementById('plunger-fill');
 const startBest = document.getElementById('start-best');
@@ -55,6 +56,22 @@ function showCallout(text) {
   calloutEl.classList.add('is-visible');
   clearTimeout(calloutTimer);
   calloutTimer = setTimeout(() => calloutEl.classList.remove('is-visible'), 1250);
+}
+
+function spawnScorePopup(x, z, text, color = '#fff6c9') {
+  if (!floatingPopups) return;
+  const pt = scene3d.projectToScreen(x, 0.6, z);
+  const el = document.createElement('span');
+  el.className = 'score-popup';
+  el.textContent = text;
+  el.style.left = `${Math.round(pt.x)}px`;
+  el.style.top = `${Math.round(pt.y)}px`;
+  el.style.color = color;
+  floatingPopups.appendChild(el);
+  if (floatingPopups.childElementCount > 10) {
+    floatingPopups.firstElementChild?.remove();
+  }
+  el.addEventListener('animationend', () => el.remove(), { once: true });
 }
 
 function saveHighScore() {
@@ -256,6 +273,7 @@ function handleEvents(events) {
       audio.bumper(ev.combo);
       const colors = [0xff3ea5, 0xffbe3b, 0x4fd1c5];
       scene3d.spawnSparks(ev.x, ev.z, colors[ev.index] ?? 0xffbe3b, 12);
+      spawnScorePopup(ev.x, ev.z, `+${ev.points}`, ev.index === 0 ? '#ff9ee0' : '#ffe494');
       if (ev.combo >= 3) {
         scene3d.triggerPattyJump(0.65);
         showCallout(`${ev.label} ×${ev.combo}! +${ev.points}`);
@@ -263,6 +281,7 @@ function handleEvents(events) {
     } else if (ev.type === 'slingshot') {
       audio.slingshot();
       scene3d.spawnSparks(ev.x, ev.z, 0xff9f2e, 8);
+      spawnScorePopup(ev.x, ev.z, `+${ev.points}`, '#ffb86b');
     } else if (ev.type === 'launch') {
       audio.launch(ev.power);
       scene3d.spawnSparks(ev.x, ev.z, 0x4fd1c5, 10);
@@ -270,6 +289,7 @@ function handleEvents(events) {
     } else if (ev.type === 'rollover') {
       audio.rollover(ev.index);
       scene3d.spawnSparks(ev.x, ev.z, 0xffbe3b, 6);
+      spawnScorePopup(ev.x, ev.z, `${ev.letter} +${ev.points}`, '#ffe066');
     } else if (ev.type === 'multiplierUp') {
       audio.multiplierUp();
       scene3d.triggerPattyJump(0.95);
@@ -278,15 +298,18 @@ function handleEvents(events) {
     } else if (ev.type === 'dropTarget') {
       audio.dropTarget();
       scene3d.spawnSparks(ev.x, ev.z, 0xffd166, 9);
+      spawnScorePopup(ev.x, ev.z, `+${ev.points}`, '#ffd166');
       showCallout(`Biscotto! +${ev.points}`);
     } else if (ev.type === 'feverStart') {
       audio.feverStart();
       scene3d.triggerPattyJump(1.25);
       scene3d.spawnSparks(ev.x, ev.z, 0xff3ea5, 22);
+      spawnScorePopup(ev.x, ev.z, 'FEVER 2×!', '#ff70c8');
       showCallout('ELEFANTINO FEVER 2×!');
     } else if (ev.type === 'spinner') {
       audio.spinner();
       scene3d.spawnSparks(ev.x, ev.z, 0x4fd1c5, 8);
+      spawnScorePopup(ev.x, ev.z, `+${ev.points}`, '#81f0e6');
     } else if (ev.type === 'ballSave') {
       audio.ballSave();
       scene3d.triggerPattyJump(0.9);
@@ -377,6 +400,8 @@ window.__omGame = {
       rollovers: [...sim.rolloverLit],
       dropDown: [...sim.dropDown],
       pattyLoaded: scene3d.pattyLoaded,
+      toysLoaded: scene3d.toysLoaded,
+      ready: scene3d.pattyLoaded && scene3d.toysLoaded,
       result: sim.phase === 'gameover' ? 'ended' : null,
     };
   },

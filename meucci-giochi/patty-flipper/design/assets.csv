@@ -1,5 +1,8 @@
 path,kind,source,notes
 assets/Patty_HF_3D.glb,model-3d,local-blender,Modello 3D di Patty normalizzato in Blender
+assets/pinball_toys.glb,model-3d,local-blender,Bumper Elefantino/Biscotto/Ciotola + flipper + slingshot + drop target scolpiti in Blender 5.2
 assets/playfield_art.webp,texture,image-generator,Grafica playfield top-down illustrata Casa di Silvia
 assets/patty_bark.mp3,audio,elevenlabs,Abbaio di Patty per eventi speciali
 assets/icon.svg,icon,starter,Icona favicon
+design/target_look.png,reference,image-generator,Target picture 3D di riferimento per LOOK.md
+design/LOOK.md,doc,author,Specifiche numeriche luci, bloom e framing v2
