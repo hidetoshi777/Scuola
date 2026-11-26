@@ -401,7 +401,8 @@ window.__omGame = {
       dropDown: [...sim.dropDown],
       pattyLoaded: scene3d.pattyLoaded,
       toysLoaded: scene3d.toysLoaded,
-      ready: scene3d.pattyLoaded && scene3d.toysLoaded,
+      cabinetLoaded: scene3d.cabinetLoaded,
+      ready: scene3d.pattyLoaded && scene3d.toysLoaded && scene3d.cabinetLoaded,
       result: sim.phase === 'gameover' ? 'ended' : null,
     };
   },

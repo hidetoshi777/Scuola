@@ -161,12 +161,12 @@ export const ORBIT_SPINNER = {
   score: 350,
 };
 
-// Posizione del piedistallo 3D di Patty nell'angolo alto sinistro fuori dall'arco giocabile
+// Posizione del piedistallo 3D di Patty seduta nell'angolo alto sinistro fuori dall'arco giocabile
 export const PATTY_STATUE_SPOT = {
-  x: -3.48,
-  y: 0.34,
-  z: -6.78,
-  targetHeight: 2.25,
-  yaw: 0.78,
-  pitch: 0.08,
+  x: -3.95,
+  y: 0.36,
+  z: -7.85,
+  targetHeight: 2.58,
+  yaw: 0.34,
+  pitch: 0.0,
 };
